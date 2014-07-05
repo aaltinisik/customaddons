@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="view_web_shortcut_config_form" model="ir.ui.view">
+            <field name="name">web.shortcut.config</field>
+            <field name="model">web.shortcut.wizard.config</field>
+            <field name="arch" type="xml">
+                <form string="Web Shortcut Configuration" version="7.0">
+                    <group name="shop" colspan="4" col="5">
+                        <field name="menu_id" colspan="1" nolabel="1" domain="[('action', '!=', False)]"/>
+                        <div class="shotcut_config_label">
+                            <label string="=" colspan="1"/>
+                        </div>
+                        <field name="modifier_key" colspan="1" nolabel="1"/>
+                        <div class="shotcut_config_label">
+                            <label string="+" colspan="1"/>
+                        </div>
+                        <field name="other_keys" colspan="1" nolabel="1"/>
+                    </group>
+                </form>
+           </field>
+        </record>
+        
+        <record id="view_web_shortcut_config_tree" model="ir.ui.view">
+            <field name="name">web.shortcut.config.tree</field>
+            <field name="model">web.shortcut.wizard.config</field>
+            <field name="arch" type="xml">
+                <tree string="Web Shortcut Configuration" version="7.0">
+                    <field name="menu_id"/>
+                    <field name="modifier_key"/>
+                    <field name="other_keys"/>
+                </tree>
+           </field>
+        </record>
+        
+        <record id="view_web_shortcut_form" model="ir.ui.view">
+            <field name="name">web.shortcut</field>
+            <field name="model">web.shorcut.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Web Shortcut" version="7.0">
+                    <header>
+                        <button string="Apply" type="object" name="save_record" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="Web Shortcuts"/>
+                    <group colspan="4">
+                        <field name="shortcut_ids" nolabel="1"/>
+                    </group>
+                </form>
+           </field>
+        </record>
+        
+        <record id="action_web_shortcut_form_view" model="ir.actions.act_window">
+            <field name="name">Web Shortcut</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">web.shorcut.wizard</field>
+            <field name="view_id" ref="view_web_shortcut_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+        
+        <menuitem id="web_shortcut_root" name="Web Shortcut" parent="base.menu_administration"/>
+        
+        <menuitem id="web_shortcut_config" name="Web Shortcut Configuration" sequence="100" parent="web_shortcut_root" action="action_web_shortcut_form_view"/>
+    </data>
+</openerp>

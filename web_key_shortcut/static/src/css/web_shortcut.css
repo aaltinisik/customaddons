@@ -1,0 +1,22 @@
+.openerp .shotcut_config_label{
+    text-align: center;
+}
+.oe_key_shortcuts_toggle {
+    height: 30px;
+    margin-top: 3px;
+    padding: 0;
+    width: 24px;
+    cursor: pointer;
+    display: block;
+    background: url(/web_key_shortcut/static/src/img/keyboard.png) no-repeat center center;
+    float: left;
+}
+.oe_key_shortcuts_toggle:hover {
+    background: url(/web_key_shortcut/static/src/img/keyboard_hover.png) no-repeat center center;
+}
+.oe_shortcut_popup_window {
+    border-radius: 25px 25px 25px 25px;
+}
+.dialog_box {
+    background-color : #FF0033 ;
+}

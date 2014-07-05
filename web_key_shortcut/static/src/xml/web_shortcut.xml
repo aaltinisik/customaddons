@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vim:fdl=1:
+-->
+<templates id="key_shortcut_template" xml:space="preserve">
+    <t t-name="web_shortcut_create_icon">
+        <div id="shortcut_icon">
+            <span class="oe_key_shortcuts_toggle"/>
+        </div>
+    </t>
+    <t t-name="web_shortcut_create" class="oe_shortcut_popup_window">
+        <div id="prompt" title="Create Keyboard Shortcut" class="oe_shortcut_popup_window">
+            <table class="oe_shortcut_popup_window">
+                <tr>
+                    <td>Modifier Key *</td>
+                    <td>
+                        <select id="modifier_key">
+                            <option value="ctrl">Ctrl</option>
+                            <option value="shift">Shift</option>
+                            <option value="alt">Alt</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Other Key *</td>
+                    <td><input type="text" id="other_key"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>*Required Fields</td>
+                </tr>
+            </table>
+        </div>
+    </t>
+</templates>

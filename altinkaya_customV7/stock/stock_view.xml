@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- altinkaya_customV7 Stock Picking Out Form View -->
+
+        <record id="altinkaya_customV7_stock_picking_out_form" model="ir.ui.view">
+              <field name="name">Altinkaya CustomV7 Stock Picking Out Form</field>
+              <field name="model">stock.picking.out</field>
+              <field name="inherit_id" ref="stock.view_picking_out_form"></field>
+              <field name="priority" eval="1"></field>
+              <field name="arch" type="xml">
+                  <button string='Cancel Transfer' position="after">
+                    <button name="open_sales_order" string="Open Sales Order" type="object" class="oe_highlight"/>
+                  </button>
+              </field>
+        </record>
+
+    </data>
+</openerp>
