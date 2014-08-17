@@ -5,6 +5,7 @@
 #    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
 #    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
 #    Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#    Banxico implemented by Agustin Cruz openpyme.mx
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,11 +22,11 @@
 #
 ##############################################################################
 {
-    "name" : "Currency Rate Update",
-    "version" : "0.7",
-    "author" : "Camptocamp",
-    "website" : "http://camptocamp.com",
-    "category" : "Financial Management/Configuration",
+    "name": "Currency Rate Update",
+    "version": "0.7",
+    "author": "Camptocamp",
+    "website": "http://camptocamp.com",
+    "category": "Financial Management/Configuration",
     "description": """Import exchange rates from the Internet.
 
 The module is able to use 4 different sources:
@@ -48,6 +49,9 @@ The module is able to use 4 different sources:
    change the update hour in schedule settings because in OpenERP they apply from
    date of update (date - no hours).
 
+5. Banxico for USD & MXN (created by Agustín Cruz)
+   Updated daily
+
 In the roadmap : Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
    This is parsed from an HTML page, so it may be broken at anytime.
@@ -60,7 +64,7 @@ The module uses internal ir_cron feature from OpenERP, so the job is launched on
 the server starts if the 'first execute date' is before the current day.
 The module supports multi-company currency in two ways:
 
-*    the currencies are shared, you can set currency update only on one 
+*    the currencies are shared, you can set currency update only on one
     company
 *    the currency are separated, you can set currency on every company
     separately
@@ -72,16 +76,16 @@ found in database.
 
 Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
 """,
-    "depends" : [
+    "depends": [
         "base",
-        "account", #Added to ensure account security groups are present
-        ],
-    "data" : [
+        "account",  # Added to ensure account security groups are present
+    ],
+    "data": [
         "currency_rate_update.xml",
         "company_view.xml",
         "security/security.xml",
-        ],
-    "demo" : [],
+    ],
+    "demo": [],
     "active": False,
     'installable': True
 }
