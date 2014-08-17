@@ -17,7 +17,5 @@ class account_invoice(osv.Model):
             'res.partner',
             'Shipping Address'
             ),
-        'x_comment_export': fields.text('ihracaat fatura notu'),
-        'z_tevkifatli_mi': fields.boolean('TEVKiFATLI',help="Eger fatura tevkifatli fatura ise bu alan secilmeli Sadece zirve programi transferinde kullanilmaktadir."),
-        }
+                }
 account_invoice()
