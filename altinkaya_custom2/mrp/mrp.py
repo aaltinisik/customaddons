@@ -18,7 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import partner
-import product
-import mrp
+from openerp.osv import osv, fields
+from openerp.tools.translate import _
 
+
+class mrp_production(osv.osv):
+
+    _name = 'mrp.production'
+    _inherit = 'mrp.production'
+
+    _columns = {
+      'date_planned': fields.datetime('Scheduled Date'),
+      }
+
+mrp_production()
