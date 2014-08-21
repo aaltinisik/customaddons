@@ -29,6 +29,8 @@ class mrp_production(osv.osv):
 
     _columns = {
       'date_planned': fields.datetime('Scheduled Date'),
+      'date_start': fields.datetime('Start Date', select=True),
+      'date_finished': fields.datetime('End Date', select=True),
       }
 
 mrp_production()
