@@ -32,8 +32,9 @@
 			<field name="name">mrp.production.inherit_altinkaya_483</field>
 			<field eval="[(6,0,[])]" name="groups_id" />
 			<field name="arch" type="xml">
-				<field name="date_planned" position="after">
+				<field name="date_planned" position="replace">
 				    <field name="priority" />
+				    <field name="date_planned" />
                     <field name="date_start" />
 					<field name="date_finished" />
 					<field name="x_note" colspan="8" />
