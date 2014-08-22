@@ -8,7 +8,8 @@
 			<field name="inherit_id" ref="product.product_normal_form_view" />
 			<field name="arch" type="xml">
 				<field name="list_price" position="after">
-					<field name="x_fiyat_dolar"></field>
+                    <field name="z_guncel_fiyat"></field>
+                    <field name="x_fiyat_dolar"></field>
 					<field name="x_fiyat_euro"></field>
 					<field name="x_iscilik"></field>
 					<field name="x_min_iscilik"></field>
