@@ -1,21 +1,22 @@
+# -*- coding: utf-8 -*-
 from openerp.osv import osv, fields
-
 
 class stock_picking_out(osv.osv):
     _inherit = "stock.picking.out"
     _columns = {
-        'x_durum': fields.selection(
-                                    [('0','Not urgent'),
-                                     ('1','Normal'),
-                                     ('2','Urgent'),
-                                     ('3','Very Urgent')],
-                                     'Durum', select=True),
-      'x_hazirlayan': fields.selection(
-                                    [('0','Not urgent'),
-                                     ('1','Normal'),
-                                     ('2','Urgent'),
-                                     ('3','Very Urgent')],
-                                     'Siparisi Hazirlayan', select=True),
-
+                'x_durum': fields.selection(
+                                    [('1',u'İthal Eksik'),
+                                     ('2',u'Kesimde'),
+                                     ('3',u'Üretimde'),
+                                     ('4',u'Montajda'),
+                                     ('5',u'Çıkacak'),
+                                     ('6',u'ACİL'),
+                                     ('7',u'Müsteriyi Bekliyor')],
+                                     'Durumu', select=True),
+                'x_hazirlayan': fields.selection(
+                                    [("Serkan","Serkan"),
+                                     ("Harun","Harun"),
+                                     ("Can","Can")],
+                                     u'Siparişi Hazırlayan', select=True),
                 }
 stock_picking_out()

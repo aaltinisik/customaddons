@@ -18,5 +18,6 @@ class product_product(osv.Model):
              'Minimum iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="En Az Toplam iscilik Fiyati"),
+        'z_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
     }
 product_product()
