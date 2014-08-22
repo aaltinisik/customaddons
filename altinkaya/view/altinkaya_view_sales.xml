@@ -21,17 +21,18 @@
 
 
 	</data>
-	
+
 		<data>
 		<record id="ir_ui_view_accountinvoice_altinkaya_inherit0" model="ir.ui.view">
 			<field name="inherit_id" ref="account.invoice_form"/>
 			<field name="name">account.invoice.inherit_612</field>
-			<field name="arch" type="xml"><field name="partner_id" position="before"> 
+			<field name="arch" type="xml"><field name="partner_id" position="before">
 <field name="address_contact_id" string="Teslimat Adresi" on_change="onchange_partner_in(partner_id)" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}"/> </field>
 </field>
 			<field eval="17" name="priority"/>
 			<field name="model">account.invoice</field>
 			<field name="type">form</field>
 		</record>
-	</data>
+    </data>
+
 </openerp>

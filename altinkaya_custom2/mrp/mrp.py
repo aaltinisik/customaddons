@@ -31,6 +31,8 @@ class mrp_production(osv.osv):
       'date_planned': fields.datetime('Scheduled Date'),
       'date_start': fields.datetime('Start Date', select=True),
       'date_finished': fields.datetime('End Date', select=True),
+      'priority': fields.selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority',
+            select=True),
       }
 
 mrp_production()
