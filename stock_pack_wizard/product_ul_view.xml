@@ -11,6 +11,7 @@
             <field name='long'/>
             <field name='width'/>
             <field name='high'/>
+            <field name='tare'/>
             <field name='cbm'/>
         </xpath>
     </field>
@@ -26,6 +27,7 @@
             <field name='long'/>
             <field name='width'/>
             <field name='high'/>
+            <field name='tare'/>
             <field name='cbm'/>
           </group>
         </xpath>

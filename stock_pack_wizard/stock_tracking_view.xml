@@ -11,6 +11,9 @@
            <group string="Customer Info" col="4">
 				<field name="pack_address" colspan="4"/>
 				<field name="pack_note"    colspan="4"/>
+				<field name="pack_lineorder"    colspan="4"/>
+				<field name="picking_out_id"    colspan="4"/>
+				<field name="invoice_id"    colspan="4"/>
           	</group>
           	<newline/>
         	<group string="Pack Dimensions" col="4">
@@ -24,12 +27,14 @@
 					<field name="pack_h" colspan="2"/>
 					<field name="pack_w" colspan="2"/>
 					<field name="pack_l" colspan="2"/>
+					<field name="pack_tare" colspan="2"/>
+
 	           </group>
            </group>
         </xpath>
     </field>
 </record>
-		
+
 
 <!-- stock.tracking tree jon.chow#elico-corp.com Jun 20, 2013 -->
 <record id="inherit_view_tracking_tree" model="ir.ui.view">
@@ -38,16 +43,21 @@
     <field name="inherit_id" ref="stock.view_tracking_tree"/>
     <field name="arch" type="xml">
         <xpath expr="//tree/field[@name='serial']" position="after">
+            <field name="pack_lineorder"/>
 			<field name="pack_h"/>
 			<field name="pack_w"/>
 			<field name="pack_l"/>
-			<field name="net_weight"/>
+			<field name="pack_tare"/>
+            <field name="net_weight"/>
 			<field name="gross_weight"/>
+			<field name="picking_out_id"/>
+            <field name="invoice_id"/>
+
         </xpath>
     </field>
 </record>
-	    
-<!-- 	 -->	
+
+<!-- 	 -->
 <record id='act_pack_open_stock_moves' model='ir.actions.act_window'>
 	<field name="domain">[('tracking_id','in',active_ids)]</field>
 	<field name="name">Open Stock Move</field>
@@ -61,6 +71,6 @@
 	<field name="value_unpickle" eval="'ir.actions.act_window,' + str(ref('act_pack_open_stock_moves'))"/>
 </record>
 
-    	 
+
 </data>
 </openerp>
