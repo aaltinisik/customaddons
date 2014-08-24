@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution    
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Financed and Planified by Vauxoo
 #    developed by: nhomar@vauxoo.com
@@ -22,14 +22,14 @@
 ##############################################################################
 
 {
-    'name': "Web Url Alternative",
+    'name': "Web Hide Left Menu",
     'author': "Vauxoo",
     'category': "Hidden",
     'description': """
 Hide Left menu:
 ===============
 
-This module just add a button un User Menu to hide the left menu specially useful 
+This module just add a button un User Menu to hide the left menu specially useful
 when you are analysing a bunch of data.
 
 #TODO: It should be cool if menus stay dropdown after hide the left menu as V6.1
@@ -38,7 +38,7 @@ when you are analysing a bunch of data.
     'version': "1.0",
     'depends': ['web'],
     'js': [
-        'static/src/js/lib.js', 
+        'static/src/js/lib.js',
     ],
     'css': [
         'static/src/css/lib.css',
