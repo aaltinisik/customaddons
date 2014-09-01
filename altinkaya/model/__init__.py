@@ -1,3 +1,5 @@
+import res_company
+import sale_order
 import res_partner
 import product_product
 import product_template
