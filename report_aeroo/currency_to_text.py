@@ -343,7 +343,7 @@ def dtowords(sum_integers, language):
         if len(diginwords) > 0 :
             spacer = ' '
         diginwords = wordified + spacer + diginwords
-    return diginwords
+    return ' '.join(diginwords.split()).lstrip().rstrip()
 
 def wordify(chunk, chunknr, language):
     #print 'chunk '+str(chunk)
@@ -493,7 +493,7 @@ def wordify(chunk, chunknr, language):
         if len(words) > 0: spacer = u' '
         if language == 'lv_LV' or language == 'en_US' or language == 'tr_TR':
             if int(digit3) > 0:
-                if language == 'tr_TR' and int(chunknr) == 1 and digit2 == '' and digit3 == '1':
+                if language == 'tr_TR' and int(chunknr) == 1  and ((digit1 == '0' and digit2 == '0' and digit3 == '1') or (digit2 == '' and digit3 == '1')):
                     onethousandflag = 1
                 else:
                     words += spacer + skaitli[int(digit3)]
