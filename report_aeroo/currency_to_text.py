@@ -16,7 +16,7 @@ supported_language = ['lv_LV','en_US','ru_RU', 'uk_UA', 'tr_TR']
 
 def currency_to_text(sum, currency, language):
     """
-    
+
     first some simple tests
 
     >>> currency_to_text(123, 'EUR', 'en_US')
@@ -42,12 +42,12 @@ def currency_to_text(sum, currency, language):
 
 
     """
-    if sum < 0 or sum > 999999999999.99 : 
+    if sum < 0 or sum > 999999999999.99 :
         raise Exception('Sum out of bounds: must be from 0 to 999999999999.99')
-    if currency not in supported_currency: 
+    if currency not in supported_currency:
         raise Exception("""Unsupported or no currency: must be one of (%s)""" % \
             string.join(supported_currency,','))
-    if language not in supported_language: 
+    if language not in supported_language:
         raise Exception("""Unsupported or no language: must be one of (%s)""" % \
             string.join(supported_language,','))
 #--------------for currencies with 100 fractions
@@ -81,7 +81,7 @@ def currency_to_text(sum, currency, language):
                 cur_in_words += u' dolāri'
             elif currency == 'UAH':
                 cur_in_words += u' grivnas'
-        
+
         if sum_frc == 1 or (str(sum_frc)[-1] == '1' and str(sum_frc)[-2] != '1'): # is the fraction sum one
             if currency == 'LVL':
                 frc_in_words += u' santīms'
@@ -190,7 +190,7 @@ def currency_to_text(sum, currency, language):
                 cur_in_words += u' евро'
             elif currency == 'USD' :
                 cur_in_words += u' долларов США'
-        
+
         if sum_frc == 1 or (str(sum_frc)[-1] == '1' and str(sum_frc)[-2] != '1') : # is the fraction one
             if currency == 'LVL' :
                 frc_in_words += u' сантим'
@@ -235,7 +235,7 @@ def currency_to_text(sum, currency, language):
                 cur_in_words += u' долларов США'
             elif currency == 'UAH' :
                 cur_in_words += u' гривень'
-                        
+
         if sum_frc == 1 or (str(sum_frc)[-1] == '1' and str(sum_frc)[-2] != '1') : # is the fraction one
             if currency == 'LVL' :
                 frc_in_words += u' сантим'
@@ -493,17 +493,17 @@ def wordify(chunk, chunknr, language):
         if len(words) > 0: spacer = u' '
         if language == 'lv_LV' or language == 'en_US' or language == 'tr_TR':
             if int(digit3) > 0:
-                if language == 'tr_TR' and int(chunknr) == 1 and digit3 == '1':
+                if language == 'tr_TR' and int(chunknr) == 1 and digit2 == '' and digit3 == '1':
                     onethousandflag = 1
-                else:                      
+                else:
                     words += spacer + skaitli[int(digit3)]
         elif language == 'ru_RU':
             if chunknr == 1:
                 if int(digit3) == 1:
                     words += spacer + u'одна'
-                elif int(digit3) == 2: 
+                elif int(digit3) == 2:
                     words += spacer + u'две'
-                elif int(digit3) >= 3 and int(digit3) != 0: 
+                elif int(digit3) >= 3 and int(digit3) != 0:
                     words += spacer + skaitli[int(digit3)]
             else:
                 if int(digit3) > 0: words += spacer + skaitli[int(digit3)]
@@ -516,7 +516,7 @@ def wordify(chunk, chunknr, language):
                 if int(digit3) > 0 : words += spacer + skaitli[int(digit3)]
     # end processing
     if len(words) > 0 or onethousandflag == 1:
-        
+
         if digit3 == '1' and chunknr > 0:
             return words + daudzums[chunknr]
         elif digit3 != '1' and chunknr > 0:
@@ -551,4 +551,3 @@ def wordify(chunk, chunknr, language):
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
-    
