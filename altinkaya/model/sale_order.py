@@ -25,7 +25,7 @@ class sale_order(osv.Model):
                     "lang": unicode(order.partner_id.lang),
                     "hashtr": hashlib.sha1(unicode(order.currency_id.name) + unicode(order.partner_id.commercial_partner_id.ref) + unicode(eposta) + unicode(tutar) + unicode(order.name) + unicode(order.company_id.hash_code)).hexdigest().upper(),
                     }
-            res[order.id] = "https://www.altinkaya.eu/payment/paymentform.php?" + url_encode(params)
+            res[order.id] = "?" + url_encode(params)
         return res
 
     _columns = {
