@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2009-2013 Alistek Ltd (http://www.alistek.com) All Rights Reserved.
 #                    General contacts <info@alistek.com>
-# Copyright (C) 2009  Domsense s.r.l.                                   
+# Copyright (C) 2009  Domsense s.r.l.
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -393,9 +393,9 @@ class Aeroo_report(report_sxw):
         basic = NewTextTemplate(source=base64.decodestring(file_data))
         #try:
         if genshi_version<='0.6':
-            data = preprocess(basic.generate(**oo_parser.localcontext).render().decode('utf8').encode(report_xml.charset), aeroo_print)
+            data = preprocess(basic.generate(**oo_parser.localcontext).render().decode('utf8').encode(report_xml.charset,'ignore'), aeroo_print)
         else:
-            data = preprocess(basic.generate(**oo_parser.localcontext).render().encode(report_xml.charset), aeroo_print)
+            data = preprocess(basic.generate(**oo_parser.localcontext).render().encode(report_xml.charset,'ignore'), aeroo_print)
         #except Exception, e:
         #    self.logger(str(e), logging.ERROR)
         #    return False, output
@@ -442,7 +442,7 @@ class Aeroo_report(report_sxw):
         if self.name=='report.printscreen.list':
             context['model'] = data['model']
             context['ids'] = ids
-        
+
         print_id = context.get('print_id', False)
         aeroo_print = self.active_prints[print_id] # Aeroo print object
         aeroo_print.subreports = []
