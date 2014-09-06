@@ -16,6 +16,8 @@ class account_invoice(osv.Model):
         'address_contact_id': fields.many2one(
             'res.partner',
             'Shipping Address'
+
             ),
                 }
+
 account_invoice()

@@ -35,6 +35,8 @@ class account_invoice(osv.osv):
         'currency_at_date': fields.float('Currency Rate'),
         'carrier_id':fields.many2one('delivery.carrier', "Carrier"),
         'total_num_pack': fields.integer('Total Packages'),
+        'time_invoice': fields.datetime('Invoice Confirm Time', readonly=True, states={'draft':[('readonly',False)]}, select=True, help="Keep empty to use the current time"),
+
     }
 
     def _get_currency_rate(self, cr, uid, ids, context=None):
@@ -70,6 +72,7 @@ class account_invoice(osv.osv):
     def action_date_assign(self, cr, uid, ids, *args):
         res = super(account_invoice, self).action_date_assign(cr, uid, ids, *args)
         self.btn_calc_weight_inv(cr, uid, ids)
+        self.write(cr, uid, ids, {'time_invoice': fields.datetime.now()})
         return res
 
 account_invoice()
