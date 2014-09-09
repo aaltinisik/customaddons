@@ -1,5 +1,6 @@
 from openerp.osv import osv, fields
-
+from werkzeug import url_encode
+import hashlib
 
 class account_invoice(osv.Model):
     _inherit = 'account.invoice'
@@ -8,7 +9,7 @@ class account_invoice(osv.Model):
         res = dict.fromkeys(ids, False)
         for invoice in self.browse(cr, uid, ids, context=context):
 
-            tutar = '%d' % (int)(100*order.amount_total)
+            tutar = '%d' % (int)(100*invoice.amount_total)
             eposta = invoice.partner_id.email
             if eposta is False:
                 eposta = ""
@@ -22,7 +23,7 @@ class account_invoice(osv.Model):
                     "lang": unicode(invoice.partner_id.lang),
                     "hashtr": hashlib.sha1(unicode(invoice.currency_id.name) + unicode(invoice.partner_id.commercial_partner_id.ref) + unicode(eposta) + unicode(tutar) + unicode(invoice.number) + unicode(invoice.company_id.hash_code)).hexdigest().upper(),
                     }
-            res[order.id] = "?" + url_encode(params)
+            res[invoice.id] = "?" + url_encode(params)
         return res
 
 
