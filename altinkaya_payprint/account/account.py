@@ -34,13 +34,7 @@ class account_voucher(osv.osv):
             wf_service.trg_validate(uid, 'account.voucher', vid, 'proforma_voucher', cr)
         # custom code from here
 
-#        report_action_id = 558
-#        context['report_action_id'] = report_action_id
-#        print_actions_obj = self.pool.get('aeroo.print_actions')
-#        printer = print_actions_obj._get_default_printer(cr, uid, context)
-#        print_actions_obj.report_to_printer(cr, uid, ids, report_action_id, printer, context=context)
-
-        server_action_ids = [843]
+        server_action_ids = [845]
         server_action_ids = map(int, server_action_ids)
         action_server_obj = self.pool.get('ir.actions.server')
         ctx = dict(context, active_model='account.voucher', active_ids=ids, active_id=ids[0])
