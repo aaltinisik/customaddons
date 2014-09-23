@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record model="ir.ui.view" id="hscode_form">
+            <field name="name">GTIP Form</field>
+            <field name="model">hscode</field>
+            <field name="arch" type="xml">
+                <form string="GTIP" version="7.0">
+                    <sheet>
+                        <group>
+                             <group col="2">
+                                <field name="hscode" colspan="2"/>
+                                <field name="name" />
+                                <field name="nameen" />
+                                <field name="Kisa_aciklama" />
+                                <field name="short_desc" />
+                                <field name="Uzun_aciklama" />
+                                <field name="long_desc" />
+                            </group>
+                            <group>
+                                <field name="picture" widget="image" img_height="300" img_width="300"/>
+                            </group>
+                        </group>
+                        <separator string="Notlar"/>
+                        <field name="notes" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="action_hscode"
+            model="ir.actions.act_window">
+            <field name="name">Gümrük Tarifeleri</field>
+            <field name="res_model">hscode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            action="action_hscode"
+            id="menu_hscode"
+            parent="product.prod_config_main"/>
+
+
+
+    </data>
+</openerp>
