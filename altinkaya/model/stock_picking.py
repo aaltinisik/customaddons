@@ -14,9 +14,10 @@ class stock_picking_out(osv.osv):
                                      ('7',u'Müsteriyi Bekliyor')],
                                      'Durumu', select=True),
                 'x_hazirlayan': fields.selection(
-                                    [("Serkan","Serkan"),
+                                    [("Asım","Asım"),
+                                     ("Can","Can"),
                                      ("Harun","Harun"),
-                                     ("Can","Can")],
+                                     ("Sefer","Sefer")],
                                      u'Siparişi Hazırlayan', select=True),
                 }
 stock_picking_out()
