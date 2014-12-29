@@ -1,5 +1,5 @@
 """
-This module provides an API for accessing the InterFAX web service.
+This module provides an API for accessing the InterFAX web  service.
 """
 
 # Import our generated service stub classes.
