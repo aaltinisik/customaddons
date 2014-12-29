@@ -9,15 +9,15 @@
     'images': [],
     'depends': ['report_aeroo','report_aeroo_ooo',
     'report_aeroo_printscreen','resource','sale_crm','sale_mrp','sale_stock','change_invoice_number',
-    'altinkaya_customV7','altinkaya_packing','currency_rate_update','sale_order_dates','disable_openerp_online',
+    'altinkaya_customV7','currency_rate_update','sale_order_dates','disable_openerp_online',
     'web_export_view','web_filter_tabs','scheduler_error_mailer','note'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari Kullanilan moduller
 ===============================================================
 
     Kullanilan modulleri yukler
-    
-    
+
+
     """,
     'data': [
     ],

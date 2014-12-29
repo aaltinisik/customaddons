@@ -40,14 +40,14 @@ class stock_picking(osv.osv):
         invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
         invoice_vals.update({'address_contact_id': picking.partner_id.id })
 
-        if picking.move_ids:
-            tracking_ids = []
-            for move in picking.move_ids:
-                if move.tracking_id:
-                    if move.tracking_id not in tracking_ids:
-                        tracking_ids.append(move.tracking_id)
-            invoice_vals.update({'packing_tracking_ids': [(6, 0, picking_ids)],
-                                 'carrier_id': picking.carrier_id.id })
+#        if picking.move_ids:
+#            tracking_ids = []
+#            for move in picking.move_ids:
+#                if move.tracking_id:
+#                    if move.tracking_id not in tracking_ids:
+#                        tracking_ids.append(move.tracking_id)
+#            invoice_vals.update({'packing_tracking_ids': [(6, 0, picking_ids)],
+#                                 'carrier_id': picking.carrier_id.id })
 
         return invoice_vals
 
@@ -82,10 +82,10 @@ class stock_picking_out(osv.osv):
             if move.tracking_id:
                 if move.tracking_id not in tracking_ids:
                     tracking_ids.append(move.tracking_id)
-        vals = {
-           'packing_tracking_ids': [(6, 0, tracking_ids)],
-        }
-        self.write(cr, uid, ids, vals, context)
+#        vals = {
+#           'packing_tracking_ids': [(6, 0, tracking_ids)],
+#        }
+#        self.write(cr, uid, ids, vals, context)
 
         for pack in tracking_ids:
             total_g += pack.gross_weight
@@ -111,7 +111,7 @@ class  stock_tracking(osv.osv):
     _inherit ='stock.tracking'
 
     _columns={
-        'picking_out_id': fields.many2one('stock.picking.out', 'Picking Out', invisible=True),
+        'picking_out_id': fields.many2one('stock.picking.out', 'Picking Out'),
 
     }
 
