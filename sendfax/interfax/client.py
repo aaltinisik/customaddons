@@ -26,7 +26,7 @@ class InterFaxClient:
         username - Your InterFAX username.
         password - Your InterFAX password.
         """
-        
+
         if username is None:
             raise ValueError("Invalid username")
         self._username = username
@@ -46,13 +46,13 @@ class InterFaxClient:
         see http://www.interfax.net/en/dev/webservice/reference/sendcharfax
 
         Arguments:
-          faxNumber - The destination fax number in standard international 
+          faxNumber - The destination fax number in standard international
                       notation e.g. +44-207-3456789
                data - Data of the document (text documents only)
            fileType - e.g. DOC, HTML, PS, etc. Default is TXT
 
         Returns: int
-            In case of successful submission - the value contains the 
+            In case of successful submission - the value contains the
             TransactionID. In case of a failure, a negative value is returned.
             See the list of Web Service Return Codes:
             http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -74,14 +74,14 @@ class InterFaxClient:
         see http://www.interfax.net/en/dev/webservice/reference/sendfax
 
         Arguments:
-          faxNumber - The destination fax number in standard international 
+          faxNumber - The destination fax number in standard international
                       notation e.g. +44-207-3456789
            filename - The name of a local file to send (string).
-                      see list of supported file types: 
+                      see list of supported file types:
                       http://www.interfax.net/en/help/supported_file_types
 
         Returns: int
-            In case of successful submission - the value contains the 
+            In case of successful submission - the value contains the
             TransactionID. In case of a failure, a negative value is returned.
             See the list of Web Service Return Codes:
             http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -136,36 +136,36 @@ class InterFaxClient:
 
         Arguments:
          faxNumbers - A list of fax numbers (strings).
-           contacts - A list of contact names (strings). The entered string 
-                      will appear: (1) for reference in the outbound queue, 
+           contacts - A list of contact names (strings). The entered string
+                      will appear: (1) for reference in the outbound queue,
                       and (2) in the outbound fax header.
           filenames - A list of local filenames to send (string).
                       see list of supported file types:
                       http://www.interfax.net/en/help/supported_file_types
            postpone - Time to schedule the transmission. Defaults to ASAP.
-            retries - Number of transmission attempts to perform, in case 
+            retries - Number of transmission attempts to perform, in case
                       of fax transmission failure. Defaults to 3.
-               CSID - Sender CSID (up to 20 characters). Defaults to user's 
+               CSID - Sender CSID (up to 20 characters). Defaults to user's
                       default CSID.
          pageHeader - The fax header text to insert at the top of the page.
                       Defaults to no header.
             subject - Up to 60 characters, to be used as a reference only.
-       replyAddress - An optional e-mail address to which feedback messages 
+       replyAddress - An optional e-mail address to which feedback messages
                       will be sent. Defaults to user's default reply address.
            pageSize - A4, Letter, Legal, or B4. Defaults to user's default
                       page size.
-    pageOrientation - Portrait or Landscape. Defaults to user's default 
+    pageOrientation - Portrait or Landscape. Defaults to user's default
                       page orientation.
-   isHighResolution - A boolean value. True ==> Fine, False ==> Standard. 
-                      True renders documents more finely but takes longer to 
+   isHighResolution - A boolean value. True ==> Fine, False ==> Standard.
+                      True renders documents more finely but takes longer to
                       transmit (may therefore be more costly).
-    isFineRendering - A boolean value. True ==> Optimize for greyscale, 
-                      False ==> Optimize for B&W. "False" is recommended for 
-                      textual, black & white documents, while "True" is better 
+    isFineRendering - A boolean value. True ==> Optimize for greyscale,
+                      False ==> Optimize for B&W. "False" is recommended for
+                      textual, black & white documents, while "True" is better
                       for greyscale text and for images.
 
         Returns: int
-            In case of successful submission - the value contains the 
+            In case of successful submission - the value contains the
             TransactionID. In case of a failure, a negative value is returned.
             See the list of Web Service Return Codes:
             http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -215,8 +215,8 @@ class InterFaxClient:
         see http://www.interfax.net/en/dev/webservice/reference/faxstatus
 
         Arguments:
-        lastTransactionId - Only messages with TransactionID smaller than this 
-                            parameter will be returned. 
+        lastTransactionId - Only messages with TransactionID smaller than this
+                            parameter will be returned.
                             For all transactions use 999999999
                  maxItems - Maximum number of FaxItem elements to be returned.
 
@@ -286,7 +286,7 @@ class InterFaxClient:
                    transactionid
                    EQ <transactionid> transactions with id equal to the given transactionid
                    BETWEEN <transactionid1,transactionid2> transactions with id greater than or equal to transactionid1 and id smaller than or equal to transactionid2.
-                   IN <transactionid1,transactionid2> transactions in list. 
+                   IN <transactionid1,transactionid2> transactions in list.
         verbData - Place <transactionid> required above here. See Verb.
         maxItems - Maximum number of FaxItem elements to be returned. Use -1 for no limit.
 
@@ -527,12 +527,12 @@ class InterFaxClient:
 
         Arguments:
         transactionId - Id of the fax transaction to resend.
-            faxNumber - The destination fax number to which to resend this 
+            faxNumber - The destination fax number to which to resend this
                         transaction, in standard international notation
                         e.g. +44-207-3456789
 
         Returns: int
-            In case of successful submission - the value contains the 
+            In case of successful submission - the value contains the
             TransactionID. In case of a failure, a negative value is returned.
             See the list of Web Service Return Codes:
             http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -557,7 +557,7 @@ class InterFaxClient:
         Arguments:
         transactionId - TransactionID of transaction to hide from outbound queue.
 
-        Returns: 
+        Returns:
           resultCode of 0 means OK, negative number indicates an error.
           See the list of Web Service Return Codes:
           http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -581,7 +581,7 @@ class InterFaxClient:
         Arguments:
         transactionId - TransactionID of transaction to hide from outbound queue.
 
-        Returns: 
+        Returns:
           resultCode of 0 means OK, negative number indicates an error.
           See the list of Web Service Return Codes:
           http://www.interfax.net/en/dev/webservice/reference/web-service-return-codes
@@ -723,7 +723,7 @@ class InterFaxClient:
         else:
             # Default is now
             result._DateTo = datetime.datetime.now().timetuple()
-        
+
         if queryForm.has_key('UserId'):
             s = queryForm['UserId']
             result._UserID = self._buildQueryCond( s[0], s[1] )
