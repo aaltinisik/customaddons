@@ -38,17 +38,15 @@ Shortcuts:
     * **Ctrl + K** -  Switch to Kanban View.
     * **Ctrl + L** -  Switch to List View.
     * **Ctrl + ;** -  Switch to Form View.
-    * **Ctrl + F** -  Focus on Search view(Press This shortcut and start searching).
     * **Ctrl + D** -  Disable search view (Hide search view).
-    * **Ctrl + >** -  Display Next Page(In Form View).
-    * **Ctrl + <** -  Display Previous Page(In Form View).
+    * **Ctrl + →** -  Display Next Page(In Form View).
+    * **Ctrl + ←** -  Display Previous Page(In Form View).
     * **Ctrl + Backspace** -  Go in to on step back on breadcrumb (Example **Sales Orders / SO007 / Invoice** if you press this shortcut then you will come back at S0007).
     * **Ctrl + Esc** -  For Discard Current Change (Effect Like press Discard Link)
     * **Ctrl + ↓ (Down Arrow)** -  Expand lines(Need Group By in Tree View ).
     * **Ctrl + ↑ (Up Arrow)** -  Collapse All lines(Need Group By in Tree View ).
     * **Ctrl + 1 to Ctrl + 9** -  Change Main Menu according to Number Pressed.
     * **For Secondary Menu** -  Press **Ctrl + `** (Key above Tab) and then press ↑ or ↓ for movement and then Press Enter
-    * **Ctrl + P** -  Give Screenshots of Tree Or Form Or Graph ( Without Menus ).
     * **Ctrl + F11** -  Enable Full Screen Mode.
     * **Esc** -  Disable Full Screen Mode.
 

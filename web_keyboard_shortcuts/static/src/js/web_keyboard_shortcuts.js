@@ -171,34 +171,6 @@ $(document).ready(function(event) {
 
             }
 
-            if (d == 70) {
-
-                event.preventDefault();
-                var x = document.getElementsByTagName('div');
-                for (i = 0; i < x.length; i++) {
-                    y = x[i];
-                    if (y.className == "oe_searchview_facets") {
-                        y.click();
-                        if(fullscreen_toggle.fullscreen_toggle)
-                        	{
-                        	$('div.oe_searchview').animate({
-                                "top": "0px"
-                            },"fast");
-                        	fullscreen_toggle.search=1;
-                        	}
-                        	else{
-	                        $('div.oe_searchview').animate({
-	                            "top": "32px"
-	                        },"fast");
-	                        fullscreen_toggle.search=1;
-	                        }
-                        $("div.oe_searchview").animate({
-                            opacity: '1',
-                            }, "fast");
-                       
-                    }
-                }
-            }
             if (d == 68) {
             	event.preventDefault();
             	
@@ -374,7 +346,7 @@ $(document).ready(function(event) {
                 }
             }
 
-            if (d == 188) {
+            if (d == 37) {
                 event.preventDefault();
                 $('.oe_i[data-pager-action="previous"]').each(function() {
                     if ($(this).parents('div:hidden').length == 0) {
@@ -382,7 +354,7 @@ $(document).ready(function(event) {
                     }
                 });
             }
-            if (d == 190) {
+            if (d == 39) {
                 event.preventDefault();
                 $('.oe_i[data-pager-action="next"]').each(function() {
                     if ($(this).parents('div:hidden').length == 0) {
