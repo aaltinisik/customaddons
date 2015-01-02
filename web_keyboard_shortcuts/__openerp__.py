@@ -29,20 +29,19 @@ Shortcuts and GUI Improvement.
 ==============================
 An attractive GUI design for your interface gives you a smart look for main menus. A list of keyboard shortcuts provides you an easy way to handle the different operations. You can also search quickly on menus listed in shortcuts by simply pressing characters on the keyboard and get the filtered records on your list.
 
-Shortcuts: 
+Shortcuts:
 ----------
-    * **Ctrl + S** -  For Save Current Object(Require:form in edit mode)
-    * **Ctrl + E** -  For Edit Current Object(Require:form in saved mode)
+    * **Ctrl + s** -  For Save Current Object(Require:form in edit mode)
+    * **Ctrl + e** -  For Edit Current Object(Require:form in saved mode)
     * **Ctrl + space** -  For Create New Record(Open Form).
     * **Alt** -  In Form View Press Alt key and then press Access Key Passed from Button.
-    * **Ctrl + K** -  Switch to Kanban View.
-    * **Ctrl + L** -  Switch to List View.
-    * **Ctrl + ;** -  Switch to Form View.
-    * **Ctrl + D** -  Disable search view (Hide search view).
+    * **Ctrl + k** -  Switch to Kanban View.
+    * **Ctrl + l** -  Switch to List View.
+    * **Ctrl + ş** -  Switch to Form View.
     * **Ctrl + →** -  Display Next Page(In Form View).
     * **Ctrl + ←** -  Display Previous Page(In Form View).
     * **Ctrl + Backspace** -  Go in to on step back on breadcrumb (Example **Sales Orders / SO007 / Invoice** if you press this shortcut then you will come back at S0007).
-    * **Ctrl + Esc** -  For Discard Current Change (Effect Like press Discard Link)
+    * **Ctrl + Q** -  For Discard Current Change (Effect Like press Discard Link)
     * **Ctrl + ↓ (Down Arrow)** -  Expand lines(Need Group By in Tree View ).
     * **Ctrl + ↑ (Up Arrow)** -  Collapse All lines(Need Group By in Tree View ).
     * **Ctrl + 1 to Ctrl + 9** -  Change Main Menu according to Number Pressed.
@@ -50,13 +49,13 @@ Shortcuts:
     * **Ctrl + F11** -  Enable Full Screen Mode.
     * **Esc** -  Disable Full Screen Mode.
 
-Search Hint: 
+Search Hint:
 ------------
 After installing Search View supports hints. You can redirect to any menu from search view.
 
 **How to use**
     * Add any tree in to shortcut(with help of star)
-    * Now open search view and type first character of name of view. Ex.You added "Sales/Sales/Customers" shortcut then type "C"(case sensitive).this will shows a hint. 
+    * Now open search view and type first character of name of view. Ex.You added "Sales/Sales/Customers" shortcut then type "C"(case sensitive).this will shows a hint.
     * Now press right arrow key and then press enter, you will redirect to that view.
 
 You can also custom hints from Menu: **Setting > Technical > User Interface > Search Hint Setup**

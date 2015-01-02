@@ -38,7 +38,7 @@ openerp.web_keyboard_shortcuts = function (openerp) {
 		        									}
 		        							}
 		        						}
-		        					
+
 		        					}
 		        		      }
 		                  if(d==39 && match==1)
@@ -49,7 +49,7 @@ openerp.web_keyboard_shortcuts = function (openerp) {
 		                	  menu_id=fullscreen_toggle.menu_dict[str];
 		                  }
 		                  if(d==37 || d==8)
-		                  {   
+		                  {
 		                	  event.preventDefault();
 		                	  match=0;
 		                	  select=0;
@@ -71,11 +71,11 @@ openerp.web_keyboard_shortcuts = function (openerp) {
 			                  });
 		                	  }
 		                  }
-		                  
-		                  
+
+
 		        	});
 			 },
-			 
+
 		});
 
 };
@@ -92,24 +92,24 @@ $(document).ready(function(event) {
 	    	jQuery(".oe_menu").sortable({axis: "x",
 			cursor: "move",
 		});
-    	
+
     	$("#search_hint").remove();
         var n = String.fromCharCode(event.charCode);
         var d = event.keyCode;
         var alt_dict={}
         if (event.altKey) {
-        	$("header button:visible").attr("accesskey",function(index,currentvalue){ 
+        	$("header button:visible").attr("accesskey",function(index,currentvalue){
         																if(currentvalue){
-        																	
+
         																	var button_text = $(this).text();
         																	 $(this).html(button_text.replace(currentvalue,'<u class="alt_base"><span class="under_line">'+currentvalue+'</sapn></u>'));
         																	 alt_dict[currentvalue]=$(this);
         																	 $('.alt_base').addClass("alt_after");
 																			}
         															   });
-//        	$("button").attr("accesskey",function(index,currentvalue){ 
+//        	$("button").attr("accesskey",function(index,currentvalue){
 //				if(currentvalue){
-//					
+//
 //					var button_text = $(this).text();
 //					 $(this).html(button_text.replace(currentvalue,'<u><span class="under_line">'+currentvalue+'</sapn></u>'));
 //					 alt_dict[currentvalue]=$(this);
@@ -117,9 +117,9 @@ $(document).ready(function(event) {
 //					 $(this).attr("acckey",currentvalue);
 //					}
 //			   });
-        	
+
         }
-        
+
         if (event.keyCode && event.keyCode != 18 && event.altKey) {
         	event.preventDefault();
         	var pressed = String.fromCharCode(event.keyCode);
@@ -127,7 +127,7 @@ $(document).ready(function(event) {
         	{
 //    		if(alt_dict[pressed].is(":visible"))
 //    		{
-//    	
+//
 //    			alt_dict[pressed].click();
 //    		}
 
@@ -171,24 +171,6 @@ $(document).ready(function(event) {
 
             }
 
-            if (d == 68) {
-            	event.preventDefault();
-            	
-            	if(fullscreen_toggle.fullscreen_toggle)
-            	{
-            	$('div.oe_searchview').animate({
-                    "top": "-32px"
-                },"fast");
-            	fullscreen_toggle.search=0;
-            	}
-            	else{
-            		$('div.oe_searchview').animate({
-                        "top": "0px"
-                    },"fast");
-            		fullscreen_toggle.search=0;	
-            	}
-            }
-            
             if (d == 76) {
 
                 event.preventDefault();
@@ -201,7 +183,7 @@ $(document).ready(function(event) {
                 }
             }
 
-            if (d == 27) {
+            if (d == 81) {
 
                 event.preventDefault();
                 var x = document.getElementsByTagName('a');
@@ -240,7 +222,7 @@ $(document).ready(function(event) {
                 }
 
             }
-           
+
             if (d == 187) {
 
                 event.preventDefault();
@@ -320,7 +302,7 @@ $(document).ready(function(event) {
                         	$('div.oe_searchview').delay(500).animate({
                                 "top": "-32px"
                             },"fast");
-                        	
+
                         	}
                     }
 
@@ -411,7 +393,7 @@ $(document).ready(function(event) {
                         	$('div.oe_searchview').delay(500).animate({
                                 "top": "0px"
                             },"fast");
-                    	
+
                     	}
                     }
 
