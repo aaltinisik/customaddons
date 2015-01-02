@@ -22,6 +22,8 @@
                 <field name="date" position="after">
                     <field name="z_old_tel"></field>
                     <field name="z_old_fax"></field>
+                    <field name="z_old_cep"></field>
+
                 </field>
             </field>
         </record>

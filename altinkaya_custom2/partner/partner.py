@@ -28,6 +28,8 @@ class res_partner(osv.osv):
     _columns = {
     'z_old_tel': fields.char('Eski Tel', size=64, required=False),
     'z_old_fax': fields.char('Eski Faks', size=64, required=False),
+    'z_old_cep': fields.char('Eski Faks', size=64, required=False),
+
     }
 
 
