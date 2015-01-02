@@ -9,30 +9,6 @@ openerp.web_gui = function(openerp) {
         init: function() {
             this._super.apply(this, arguments);
             $(document).ready(function() {
-                if ($('div.oe_popup_search').offset()) {
-                    $('div.oe_searchview').css({
-                        "position": "relative","width":"40%","right":"0px","top":"5px"
-                    });
-                }
-                $(".oe_searchview_drawer").mouseenter(function() {
-                    $(".oe_searchview_drawer").animate({
-                        opacity: '1',
-                        }, "fast");
-                });
-
-                $("div.oe_searchview").mouseenter(function() {
-
-                    $("div.oe_searchview").animate({
-                        opacity: '1',
-                        }, "fast");
-                });
-
-                $("div.oe_searchview").mouseleave(function() {
-                	
-                    $("div.oe_searchview").animate({
-                        opacity: '0.6',
-                        }, "fast");
-                });
                 var size=$(".oe_systray_shortcuts_items li").size();
                 var tamp={};
                 for(i=0;i<size;i++)
@@ -44,7 +20,7 @@ openerp.web_gui = function(openerp) {
                 	if (words)
                 	{
                 	tamp[words[0]]=x.attr("data-id");
-                	}	
+                	}
                 	}
                 fullscreen_toggle["menu_dict"]=tamp;
                 });
@@ -91,12 +67,7 @@ openerp.web_gui = function(openerp) {
                         $("td.oe_topbar").delay(500).slideToggle("normal");
                         toggle = 1;
                         fullscreen_toggle.fullscreen_toggle = 1;
-                        if (fullscreen_toggle.search==1)
-                        {
-                        $('div.oe_searchview').delay(500).animate({
-                            "top": "0px"
-                        });
-                        }
+
                         $("div.fullscreen").addClass("fullscreentrue");
                         $("div.fullscreentrue").hide();
                         $("div.fullscreentrue").removeClass("fullscreen");
@@ -113,12 +84,7 @@ openerp.web_gui = function(openerp) {
                         $("div.oe_footer").delay(330).slideToggle("slow");
                         toggle = 0;
                         fullscreen_toggle.fullscreen_toggle = 0;
-                        if(fullscreen_toggle.search==1)
-                        {
-                        $('div.oe_searchview').animate({
-                            "top": "32px"
-                        });
-                        }
+
                         $("div.fullscreentrue").hide();
                         $("div.fullscreentrue").addClass("fullscreen");
                         $("div.fullscreen").removeClass("fullscreentrue");
