@@ -25,6 +25,14 @@ from openerp.tools.translate import _
 class res_partner(osv.osv):
     _inherit = "res.partner"
 
+    _columns = {
+    'z_old_tel': fields.char('Eski Tel', size=64, required=False),
+    'z_old_fax': fields.char('Eski Faks', size=64, required=False),
+    'z_old_cep': fields.char('Eski Cep', size=64, required=False),
+
+    }
+
+
     def create_accounts(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
@@ -53,6 +61,7 @@ class res_partner(osv.osv):
                'code': code,
                'name': partner.name,
                'parent_id': parent_rec_id,
+               'reconcile':True,
                'type':'receivable',
                'user_type': rec_type and rec_type[0] or False
             }
@@ -61,6 +70,7 @@ class res_partner(osv.osv):
                 'code': code_pay,
                 'name': partner.name,
                 'parent_id': parent_cre_id,
+                'reconcile':True,
                 'type':'payable',
                 'user_type': pay_type and pay_type[0] or False
             }
