@@ -7,8 +7,6 @@
     'author': 'ANYBOX',
     'website': 'www.anybox.fr',
     'depends': [
-        'base',
-        'web',
         'web_socketio',
     ],
     'data': [

@@ -32,8 +32,6 @@
     'author': 'Anybox',
     'website': 'http://anybox.fr',
     'depends': [
-        'base',
-        'web',
         'web_longpolling',
     ],
     'data': [
