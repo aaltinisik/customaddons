@@ -183,7 +183,7 @@ $(document).ready(function(event) {
                 }
             }
 
-            if (d == 81) {
+            if (d == 226) {
 
                 event.preventDefault();
                 var x = document.getElementsByTagName('a');

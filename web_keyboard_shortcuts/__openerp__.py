@@ -41,7 +41,7 @@ Shortcuts:
     * **Ctrl + →** -  Display Next Page(In Form View).
     * **Ctrl + ←** -  Display Previous Page(In Form View).
     * **Ctrl + Backspace** -  Go in to on step back on breadcrumb (Example **Sales Orders / SO007 / Invoice** if you press this shortcut then you will come back at S0007).
-    * **Ctrl + Q** -  For Discard Current Change (Effect Like press Discard Link)
+    * **Ctrl + <** -  For Discard Current Change (Effect Like press Discard Link)
     * **Ctrl + ↓ (Down Arrow)** -  Expand lines(Need Group By in Tree View ).
     * **Ctrl + ↑ (Up Arrow)** -  Collapse All lines(Need Group By in Tree View ).
     * **Ctrl + 1 to Ctrl + 9** -  Change Main Menu according to Number Pressed.
