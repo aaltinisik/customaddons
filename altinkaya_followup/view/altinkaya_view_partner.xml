@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+	<data>
+
+        <record id="ir_ui_view_followup_altinkaya_0" model="ir.ui.view">
+            <field name="inherit_id" ref="account_followup.view_partner_inherit_followup_form" />
+            <field name="name">altinkaya_followup.inherit_altinkaya0</field>
+            <field eval="[(6,0,[])]" name="groups_id" />
+            <field name="arch" type="xml">
+                <field name="payment_responsible_id" position="before">
+                    <field name="followup_name" />
+                    <field name="followup_phone" />
+                    <field name="followup_mobile" />
+                    <field name="followup_fax" />
+                    <field name="followup_use_fax" />
+                    <field name="followup_email" />
+                    <field name="followup_use_email" />
+                    <field name="followup_note" />
+                </field>
+            </field>
+            <field eval="5" name="priority" />
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+        </record>
+
+	</data>
+</openerp>
