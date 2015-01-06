@@ -18,38 +18,38 @@ msgstr ""
 #. module: altinkaya_followup
 #: field:res.partner,followup_email:0
 msgid "Email"
-msgstr "Email"
+msgstr "E-posta"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_emailaddres:0
 msgid "Email address to use in followups"
-msgstr "Email address to use in followups"
+msgstr "Ödeme E-postası"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_fax:0
 msgid "Fax"
-msgstr "Fax"
+msgstr "Ödeme Faksı"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_faxno:0
 msgid "Fax No to use in followups"
-msgstr "Fax No to use in followups"
+msgstr "Ödeme Faksı"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_faxaddres:0
 msgid "Fax email address to use in followups"
-msgstr "Fax email address to use in followups"
+msgstr "Ödeme takibi gönderilecek faks eposta adresi"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_mobile:0
 #: field:res.partner,followup_note:0
 msgid "Mobile"
-msgstr "Mobile"
+msgstr "Ödeme Cep"
 
 #. module: altinkaya_followup
 #: model:ir.model,name:altinkaya_followup.model_res_partner
 msgid "Partner"
-msgstr "Ortak"
+msgstr "Cari"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_name:0
@@ -59,15 +59,15 @@ msgstr "Payment Responsible"
 #. module: altinkaya_followup
 #: field:res.partner,followup_phone:0
 msgid "Phone"
-msgstr "Phone"
+msgstr "Ödeme Tel"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_use_email:0
 msgid "Use Email in followup"
-msgstr "Use Email in followup"
+msgstr "Takip e-postası gönder"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_use_fax:0
 msgid "Use Fax in followup"
-msgstr "Use Fax in followup"
+msgstr "Takip faksı gönder"
 

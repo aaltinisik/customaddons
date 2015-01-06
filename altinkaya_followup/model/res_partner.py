@@ -1,8 +1,22 @@
-from openerp.osv import osv, fields
+from openerp.osv import orm, osv, fields
 
 
-class res_partner(osv.Model):
-    _inherit = 'res.partner'
+class res_partner(orm.Model):
+    _inherit = ['res.partner', 'phone.common']
+    _name = 'res.partner'
+
+    def create(self, cr, uid, vals, context=None):
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(res_partner, self).create(
+            cr, uid, vals_reformated, context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(res_partner, self).write(
+            cr, uid, ids, vals_reformated, context=context)
+
 
     def _followup_faxno(self, cr, uid, ids, name, args, context=None):
         res = {}
@@ -97,3 +111,20 @@ class res_partner(osv.Model):
 
 
 res_partner()
+
+
+class phone_common(orm.AbstractModel):
+    _inherit = 'phone.common'
+
+    def _get_phone_fields(self, cr, uid, context=None):
+        '''Returns a dict with key = object name
+        and value = list of phone fields'''
+        res = {
+            'res.partner': {
+                'phonefields': ['phone', 'mobile','followup_phone','followup_mobile'],
+                'faxfields': ['fax','followup_fax'],
+                'get_name_sequence': 10,
+                },
+            }
+        return res
+
