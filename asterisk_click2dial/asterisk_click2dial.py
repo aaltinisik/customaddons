@@ -463,6 +463,7 @@ class phone_common(orm.AbstractModel):
             channel += '/%s' % user.dial_suffix
 
         try:
+            ast_number=ast_number.replace('(', '').replace(")", '').replace(" ", '').replace("+", "00")
             ast_manager.Originate(
                 channel,
                 context=ast_server.context,
