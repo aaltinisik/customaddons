@@ -121,17 +121,17 @@ $(document).ready(function(event) {
         }
 
         if (event.keyCode && event.keyCode != 18 && event.altKey) {
-        	event.preventDefault();
-        	var pressed = String.fromCharCode(event.keyCode);
-        	if (alt_dict.hasOwnProperty(pressed)!=false)
-        	{
-//    		if(alt_dict[pressed].is(":visible"))
-//    		{
+//                event.preventDefault();
+        	    var pressed = String.fromCharCode(event.keyCode);
+        	    if (alt_dict.hasOwnProperty(pressed)!=false)
+        	       {
+//    		            if(alt_dict[pressed].is(":visible"))
+//    		            {
 //
-//    			alt_dict[pressed].click();
-//    		}
+//          			alt_dict[pressed].click();
+//    	             	}
+        	       }
 
-        	}
         }
         if (event.keyCode && event.keyCode != 17 && event.ctrlKey) {
             if (d == 83) {
@@ -310,7 +310,7 @@ $(document).ready(function(event) {
 
             }
 
-            if (!fullscreen_toggle.fullscreen_toggle) {
+            if (!fullscreen_toggle.fullscreen_toggle && !event.altKey) {
                 if (d == 49 | d == 50 | d == 51 | d == 52 | d == 53 | d == 54 | d == 55 | d == 56 | d == 57) {
 
                     event.preventDefault();
