@@ -470,7 +470,7 @@ class phone_common(orm.AbstractModel):
                 extension=ast_number,
                 priority=str(ast_server.extension_priority),
                 timeout=str(ast_server.wait_time * 1000),
-                caller_id='Erp:'+ast_number,
+                caller_id='P:'+ast_number,
                 account=user.cdraccount,
                 variable=variable)
         except Exception, e:
