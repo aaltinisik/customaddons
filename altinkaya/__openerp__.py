@@ -17,8 +17,8 @@ Altinkaya Elektronik Cihaz Kutulari OpenERP V7 ozellestirmeleri
 
     Kullanilan modulleri yukler
     Gerekli goruntu degisikliklerini yapar.
-    
-    
+
+
     """,
     'data': [
     "view/altinkaya_view_sales.xml",
