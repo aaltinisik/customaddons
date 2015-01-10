@@ -65,8 +65,8 @@ class phone_common(orm.AbstractModel):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
         if phonefields is None:
             phonefields = [
-                'phone', 'partner_phone', 'work_phone', 'fax',
-                'mobile', 'partner_mobile', 'mobile_phone',
+                'phone', 'partner_phone', 'work_phone', 'fax','followup_phone','followup_mobile',
+                'mobile', 'partner_mobile', 'mobile_phone','followup_fax'
             ]
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
@@ -192,8 +192,8 @@ class phone_common(orm.AbstractModel):
         and value = list of phone fields'''
         res = {
             'res.partner': {
-                'phonefields': ['phone', 'mobile'],
-                'faxfields': ['fax'],
+                'phonefields': ['phone', 'mobile','followup_phone','followup_mobile'],
+                'faxfields': ['fax','followup_fax'],
                 'get_name_sequence': 10,
                 },
             }

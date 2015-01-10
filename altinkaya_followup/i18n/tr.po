@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:31+0000\n"
-"PO-Revision-Date: 2015-01-04 21:31+0000\n"
+"POT-Creation-Date: 2015-01-10 12:25+0000\n"
+"PO-Revision-Date: 2015-01-10 12:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_followup
-#: field:res.partner,followup_email:0
-msgid "Email"
-msgstr "E-posta"
-
-#. module: altinkaya_followup
 #: field:res.partner,followup_emailaddres:0
 msgid "Email address to use in followups"
 msgstr "Ödeme E-postası"
-
-#. module: altinkaya_followup
-#: field:res.partner,followup_fax:0
-msgid "Fax"
-msgstr "Ödeme Faksı"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_faxno:0
@@ -41,10 +31,34 @@ msgid "Fax email address to use in followups"
 msgstr "Ödeme takibi gönderilecek faks eposta adresi"
 
 #. module: altinkaya_followup
+#: field:res.partner,followup_email:0
+msgid "Follow up Email"
+msgstr "Ödeme Eposta"
+
+#. module: altinkaya_followup
+#: field:res.partner,followup_fax:0
+msgid "Follow up Fax"
+msgstr "Ödeme Faksı"
+
+#. module: altinkaya_followup
 #: field:res.partner,followup_mobile:0
-#: field:res.partner,followup_note:0
-msgid "Mobile"
+msgid "Follow up Mobile"
 msgstr "Ödeme Cep"
+
+#. module: altinkaya_followup
+#: field:res.partner,followup_phone:0
+msgid "Follow up Phone"
+msgstr "Ödeme Tel"
+
+#. module: altinkaya_followup
+#: field:res.partner,followup_note:0
+msgid "Follow up note"
+msgstr "Ödeme Not"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Kısa Not"
+msgstr "Kısa Not"
 
 #. module: altinkaya_followup
 #: model:ir.model,name:altinkaya_followup.model_res_partner
@@ -54,12 +68,17 @@ msgstr "Cari"
 #. module: altinkaya_followup
 #: field:res.partner,followup_name:0
 msgid "Payment Responsible"
-msgstr "Payment Responsible"
+msgstr "Ödeme Yetkili"
 
 #. module: altinkaya_followup
-#: field:res.partner,followup_phone:0
-msgid "Phone"
-msgstr "Ödeme Tel"
+#: view:res.partner:0
+msgid "Takip Faks Gönder"
+msgstr "Takip Faks Gönder"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Takip e-posta Gönder"
+msgstr "Takip e-posta Gönder"
 
 #. module: altinkaya_followup
 #: field:res.partner,followup_use_email:0
@@ -70,4 +89,39 @@ msgstr "Takip e-postası gönder"
 #: field:res.partner,followup_use_fax:0
 msgid "Use Fax in followup"
 msgstr "Takip faksı gönder"
+
+#. module: altinkaya_followup
+#: constraint:res.partner:0
+msgid "You cannot create recursive Partner hierarchies."
+msgstr "Özyinelemeli Partner hiyerarşileri oluşturamazsınız."
+
+#. module: altinkaya_followup
+#: model:ir.model,name:altinkaya_followup.model_phone_common
+msgid "phone.common"
+msgstr "phone.common"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Cep"
+msgstr "Ödeme Cep"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Faks"
+msgstr "Ödeme Faks"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Tel"
+msgstr "Ödeme Tel"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Yetkilisi adı"
+msgstr "Ödeme Yetkilisi adı"
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme e-posta"
+msgstr "Ödeme e-posta"
 

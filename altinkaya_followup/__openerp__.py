@@ -7,7 +7,7 @@
     'sequence': 1,
     'summary': 'Altinkaya Enclosures Account followup additions V7',
     'images': [],
-    'depends': ['account_followup'],
+    'depends': ['account_followup','base_phone'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari Account Followup eklentileri
 ===============================================================

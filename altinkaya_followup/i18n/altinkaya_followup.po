@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:33+0000\n"
-"PO-Revision-Date: 2015-01-04 21:33+0000\n"
+"POT-Creation-Date: 2015-01-10 12:25+0000\n"
+"PO-Revision-Date: 2015-01-10 12:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,18 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_followup
-#: field:res.partner,followup_email:0
-msgid "Email"
-msgstr ""
-
-#. module: altinkaya_followup
 #: field:res.partner,followup_emailaddres:0
 msgid "Email address to use in followups"
-msgstr ""
-
-#. module: altinkaya_followup
-#: field:res.partner,followup_fax:0
-msgid "Fax"
 msgstr ""
 
 #. module: altinkaya_followup
@@ -41,9 +31,33 @@ msgid "Fax email address to use in followups"
 msgstr ""
 
 #. module: altinkaya_followup
+#: field:res.partner,followup_email:0
+msgid "Follow up Email"
+msgstr ""
+
+#. module: altinkaya_followup
+#: field:res.partner,followup_fax:0
+msgid "Follow up Fax"
+msgstr ""
+
+#. module: altinkaya_followup
 #: field:res.partner,followup_mobile:0
+msgid "Follow up Mobile"
+msgstr ""
+
+#. module: altinkaya_followup
+#: field:res.partner,followup_phone:0
+msgid "Follow up Phone"
+msgstr ""
+
+#. module: altinkaya_followup
 #: field:res.partner,followup_note:0
-msgid "Mobile"
+msgid "Follow up note"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Kısa Not"
 msgstr ""
 
 #. module: altinkaya_followup
@@ -57,8 +71,13 @@ msgid "Payment Responsible"
 msgstr ""
 
 #. module: altinkaya_followup
-#: field:res.partner,followup_phone:0
-msgid "Phone"
+#: view:res.partner:0
+msgid "Takip Faks Gönder"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Takip e-posta Gönder"
 msgstr ""
 
 #. module: altinkaya_followup
@@ -69,5 +88,40 @@ msgstr ""
 #. module: altinkaya_followup
 #: field:res.partner,followup_use_fax:0
 msgid "Use Fax in followup"
+msgstr ""
+
+#. module: altinkaya_followup
+#: constraint:res.partner:0
+msgid "You cannot create recursive Partner hierarchies."
+msgstr ""
+
+#. module: altinkaya_followup
+#: model:ir.model,name:altinkaya_followup.model_phone_common
+msgid "phone.common"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Cep"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Faks"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Tel"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme Yetkilisi adı"
+msgstr ""
+
+#. module: altinkaya_followup
+#: view:res.partner:0
+msgid "Ödeme e-posta"
 msgstr ""
 

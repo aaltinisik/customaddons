@@ -112,19 +112,3 @@ class res_partner(orm.Model):
 
 res_partner()
 
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        '''Returns a dict with key = object name
-        and value = list of phone fields'''
-        res = {
-            'res.partner': {
-                'phonefields': ['phone', 'mobile','followup_phone','followup_mobile'],
-                'faxfields': ['fax','followup_fax'],
-                'get_name_sequence': 10,
-                },
-            }
-        return res
-
