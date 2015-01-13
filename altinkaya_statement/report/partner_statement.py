@@ -68,7 +68,7 @@ class partner_statement(report_sxw.rml_parse):
                 'debit': each_dict['debit'] or 0.0,
                 'credit': each_dict['credit'] or 0.0,
                 'balance': abs(balance) or 0.0,
-                'dc': balance > 0.01 and 'D' or 'C',
+                'dc': balance > 0.01 and 'B' or 'A',
                 'total': balance or 0.0,
             })
         if not statement_data:
