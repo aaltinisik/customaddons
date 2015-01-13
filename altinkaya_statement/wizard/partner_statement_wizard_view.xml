@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--  Partner statement Report -->
+        <record id="view_partner_statement_wizard" model="ir.ui.view">
+            <field name="name">Partner Statement</field>
+            <field name="model">partner.statement.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Partner Statement" version="7.0">
+                    <group string="Print Partner Statement">
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                    </group>
+                    <footer>
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+       <act_window name="Partner Statement"
+            res_model="partner.statement.wizard"
+            src_model="res.partner"
+            view_mode="form"
+            target="new"
+            key2="client_print_multi"
+            id="action_view_partner_statement_wizard"/>
+
+    </data>
+</openerp>

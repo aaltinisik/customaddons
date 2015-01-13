@@ -1,0 +1,202 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_statement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-13 13:52+0000\n"
+"PO-Revision-Date: 2015-01-13 13:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "- Page:"
+msgstr "- Page:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "1.2cm 2.65cm 19.9cm 2.65cm"
+msgstr "1.2cm 2.65cm 19.9cm 2.65cm"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "1.3cm 24.5cm 7cm 24.5cm"
+msgstr "1.3cm 24.5cm 7cm 24.5cm"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "1.3cm 27.7cm 20cm 27.7cm"
+msgstr "1.3cm 27.7cm 20cm 27.7cm"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Balance"
+msgstr "Balance"
+
+#. module: altinkaya_statement
+#: view:partner.statement.wizard:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Contact :"
+msgstr "Prepeared By :"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Credit"
+msgstr "Credit"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Date"
+msgstr "Date"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Date :"
+msgstr "Date :"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Debit"
+msgstr "Debit"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Description"
+msgstr "Description"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Due Date"
+msgstr "Due Date"
+
+#. module: altinkaya_statement
+#: field:partner.statement.wizard,date_end:0
+msgid "End Date"
+msgstr "End Date"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Fax:"
+msgstr "Fax:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Mail:"
+msgstr "Mail:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Müşteri Vergi Dairesi:"
+msgstr "Registry Office:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Müşteri Vergi No:"
+msgstr "Vat No:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "NO"
+msgstr "NO"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Number"
+msgstr "Number"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Partner :"
+msgstr "Partner :"
+
+#. module: altinkaya_statement
+#: model:ir.actions.act_window,name:altinkaya_statement.action_view_partner_statement_wizard
+#: model:ir.actions.report.xml,name:altinkaya_statement.partner_statement_altinkaya
+#: view:partner.statement.wizard:0
+msgid "Partner Statement"
+msgstr "Partner Statement"
+
+#. module: altinkaya_statement
+#: model:ir.actions.report.xml,name:altinkaya_statement.partner_statement2_altinkaya
+msgid "Partner Statement2"
+msgstr "Statement This Year"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Phone:"
+msgstr "Phone:"
+
+#. module: altinkaya_statement
+#: view:partner.statement.wizard:0
+msgid "Print"
+msgstr "Print"
+
+#. module: altinkaya_statement
+#: view:partner.statement.wizard:0
+msgid "Print Partner Statement"
+msgstr "Print Partner Statement"
+
+#. module: altinkaya_statement
+#: field:partner.statement.wizard,date_start:0
+msgid "Start Date"
+msgstr "Start Date"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Tel:"
+msgstr "Tel:"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "Total:"
+msgstr "Total:"
+
+#. module: altinkaya_statement
+#: view:partner.statement.wizard:0
+msgid "or"
+msgstr "or"
+
+#. module: altinkaya_statement
+#: model:ir.model,name:altinkaya_statement.model_partner_statement_wizard
+msgid "partner.statement.wizard"
+msgstr "partner.statement.wizard"
+
+#. module: altinkaya_statement
+#: report:partner.statement:0
+#: report:partner.statement2:0
+msgid "www.altinkaya.com.tr"
+msgstr "www.altinkaya.eu"
+
