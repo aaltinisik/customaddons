@@ -23,6 +23,8 @@ import time
 from datetime import date,datetime
 from dateutil import parser
 from openerp.report import report_sxw
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 
 class partner_statement(report_sxw.rml_parse):
@@ -38,6 +40,8 @@ class partner_statement(report_sxw.rml_parse):
     def _get_statement_data(self,partner,data=None):
         statement_data = []
         balance, seq = 0.0, 0
+        if partner.parent_id:
+            raise osv.except_osv(_('User Error!'), _('You can not print this report for a Contact'))
         if data:
             end_date = parser.parse(data['date_end']).date()
             start_date = parser.parse(data['date_start']).date()
@@ -60,13 +64,15 @@ class partner_statement(report_sxw.rml_parse):
                 'number': each_dict['state'] == 'draft' and '*'+str(each_dict['move_id']) or each_dict['name'],
                 'date': each_dict['date'] and datetime.strptime(each_dict['date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'due_date': each_dict['due_date'] and datetime.strptime(each_dict['due_date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(each_dict['journal']) >= 26 and each_dict['journal'][0:26] or each_dict['journal'],
+                'description': len(each_dict['journal']) >= 27 and each_dict['journal'][0:27] or each_dict['journal'],
                 'debit': each_dict['debit'] or 0.0,
                 'credit': each_dict['credit'] or 0.0,
-                'balance': abs(balance),
-                'dc': balance > 0.01 and 'B' or 'A',
-                'total': balance,
+                'balance': abs(balance) or 0.0,
+                'dc': balance > 0.01 and 'D' or 'C',
+                'total': balance or 0.0,
             })
+        if not statement_data:
+            raise osv.except_osv(_('User Error!'), _('No receivable or payable Move Lines for '+partner.name))
         return statement_data
 
 report_sxw.report_sxw('report.partner.statement', 'res.partner',
