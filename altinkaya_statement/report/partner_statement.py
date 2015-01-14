@@ -59,14 +59,21 @@ class partner_statement(report_sxw.rml_parse):
         for each_dict in self.cr.dictfetchall():
             seq += 1
             balance = (each_dict['debit'] - each_dict['credit']) + balance
+            if (each_dict['debit'] - each_dict['credit']) > 0.00:
+                debit = (each_dict['debit'] - each_dict['credit'])
+                credit = 0.0
+            else:
+                credit = (each_dict['credit'] - each_dict['debit'])
+                debit = 0.0
+
             statement_data.append({
                 'seq': seq,
                 'number': each_dict['state'] == 'draft' and '*'+str(each_dict['move_id']) or each_dict['name'],
                 'date': each_dict['date'] and datetime.strptime(each_dict['date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'due_date': each_dict['due_date'] and datetime.strptime(each_dict['due_date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict['journal'],
-                'debit': each_dict['debit'] or 0.0,
-                'credit': each_dict['credit'] or 0.0,
+                'debit': debit,
+                'credit': credit,
                 'balance': abs(balance) or 0.0,
                 'dc': balance > 0.01 and 'B' or 'A',
                 'total': balance or 0.0,
