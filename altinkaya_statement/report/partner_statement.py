@@ -64,7 +64,7 @@ class partner_statement(report_sxw.rml_parse):
                 'number': each_dict['state'] == 'draft' and '*'+str(each_dict['move_id']) or each_dict['name'],
                 'date': each_dict['date'] and datetime.strptime(each_dict['date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'due_date': each_dict['due_date'] and datetime.strptime(each_dict['due_date'], '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(each_dict['journal']) >= 27 and each_dict['journal'][0:27] or each_dict['journal'],
+                'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict['journal'],
                 'debit': each_dict['debit'] or 0.0,
                 'credit': each_dict['credit'] or 0.0,
                 'balance': abs(balance) or 0.0,

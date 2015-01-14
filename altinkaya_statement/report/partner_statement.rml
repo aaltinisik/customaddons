@@ -16,18 +16,26 @@
             <image x="1.3cm" y="27.7cm" height="40.0" >[[ company.logo or removeParentNode('image') ]]</image>
             <fill color="black"/>
             <stroke color="black"/>
+
             <!-- page header -->
-            <lines>1.3cm 27.7cm 20cm 27.7cm</lines>
             <drawRightString x="20cm" y="27.8cm">[[ company.rml_header1 ]]</drawRightString>
             <drawString x="1.3cm" y="27.3cm">[[ company.partner_id.name ]]</drawString>
             <place x="1.3cm" y="25.3cm" height="1.8cm" width="15.0cm">
                 <para style="main_header">[[ display_address(company.partner_id) or  '' ]]</para>
             </place>
-            <drawString x="1.3cm" y="25.0cm">Phone:</drawString>
-            <drawRightString x="7cm" y="25.0cm">[[ company.partner_id.phone or '' ]]</drawRightString>
-            <drawString x="1.3cm" y="24.6cm">Mail:</drawString>
-            <drawRightString x="7cm" y="24.6cm">[[ company.partner_id.email or '' ]]</drawRightString>
-            <lines>1.3cm 24.5cm 7cm 24.5cm</lines>
+            <setFont name="DejaVu Sans" size="18"/>
+            <drawRightString x="20.0cm" y="28.0cm">CARİ HESAP EKSTRESİ</drawRightString>
+            <setFont name="DejaVu Sans" size="8"/>
+            <drawString x="14.8cm" y="27.2cm">Ulus VD:</drawString>
+            <drawRightString x="20cm" y="27.2cm">0630013507</drawRightString>
+            <drawString x="14.8cm" y="26.8cm">Phone:</drawString>
+            <drawRightString x="20cm" y="26.8cm">+90 312 395 2768</drawRightString>
+            <drawString x="14.8cm" y="26.4cm">Faks:</drawString>
+            <drawRightString x="20cm" y="26.4cm">+90 312 395 2772</drawRightString>
+            <drawString x="14.8cm" y="26.0cm">Mail:</drawString>
+            <drawRightString x="20cm" y="26.0cm">muhasebe@altinkaya.com.tr</drawRightString>
+            <lines>1.3cm 25.8cm 20cm 25.8cm</lines>
+
 
             <!-- left margin -->
             <rotate degrees="90"/>
@@ -65,23 +73,22 @@
   </stylesheet>
   <story>
     <para style="terp_default_8">[[ repeatIn(objects,'o') ]]</para><para style="terp_default_8">[[ setLang(o.lang) ]]</para>
-    <blockTable colWidths="65.00,235.00,120.0,50.0" style="Table_Partner_Address">
-      <tr><td><para style="terp_default_8"><b>Partner : </b></para></td>
-        <td><para style="terp_default_8">[[ o.name ]]</para></td>
-        <td><para style="terp_default_8_right_align"><b>Date : </b></para></td>
+    <blockTable colWidths="139mm,25mm,20mm" style="Table_Partner_Address">
+      <tr><td><para style="terp_default_8"><b>Partner :[[ o.display_name ]]</b></para></td>
+        <td><para style="terp_default_8_right_align"><b>Date :</b></para></td>
         <td><para style="terp_default_8">[[ datetime.now().strftime("%d.%m.%Y") ]]</para></td></tr></blockTable>
-      <blockTable colWidths="300.00,120.0,50.0" style="Table_Partner_Address">
+      <blockTable colWidths="139mm,25mm,20mm" style="Table_Partner_Address">
       <tr><td><para style="terp_default_8">[[ o.street ]], [[ o.street2 ]],[[ o.city ]],[[ o.state_id.name ]]-[[ o.zip ]] [[ o.country_id.name ]]</para></td>
-      <td><para style="terp_default_8_right_align"><b>Müşteri Vergi Dairesi: </b></para></td>
-     <td><para style="terp_default_8"></para></td></tr>
+      <td><para style="terp_default_8_right_align"><b>Vergi Dairesi :</b></para></td>
+     <td><para style="terp_default_8">[[ o.x_vergidairesi ]]</para></td></tr>
     </blockTable>
-    <blockTable colWidths="50.00,140.00,40.00,70,120.0,50.0" style="Table_Partner_Address">
-    <tr><td><para style="terp_default_8"><b>Tel: </b></para></td>
-        <td><para style="terp_default_8">[[ o.phone ]]</para></td>
-        <td><para style="terp_default_8"><b>Fax: </b></para></td>
-        <td><para style="terp_default_8">[[ o.fax ]]</para></td>
-        <td><para style="terp_default_8_right_align"><b>Müşteri Vergi No:</b></para></td>
-        <td><para style="terp_default_8"></para></td></tr>
+    <blockTable colWidths="10mm,59mm,10mm,60mm,25mm,20mm" style="Table_Partner_Address">
+    <tr><td><para style="terp_default_8"><b>Tel :</b></para></td>
+        <td><para style="terp_default_8">[[ format(o.phone, phone=True, phone_format='national') or '' ]]</para></td>
+        <td><para style="terp_default_8"><b>Fax :</b></para></td>
+        <td><para style="terp_default_8">[[ format(o.fax, phone=True, phone_format='national') or '' ]]</para></td>
+        <td><para style="terp_default_8_right_align"><b>Vergi No :</b></para></td>
+        <td><para style="terp_default_8">[[ o.x_vergino ]]</para></td></tr>
     </blockTable>
     <!--<blockTable colWidths="20.00,80.00,50.00,50.00,100.00,60.00,60.00,60.00,10.00" style="Table111">-->
     <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">
