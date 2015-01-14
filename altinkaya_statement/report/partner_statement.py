@@ -59,12 +59,13 @@ class partner_statement(report_sxw.rml_parse):
         for each_dict in self.cr.dictfetchall():
             seq += 1
             balance = (each_dict['debit'] - each_dict['credit']) + balance
-            if (each_dict['debit'] - each_dict['credit']) > 0.00:
+            debit = 0.0
+            credit = 0.0
+
+            if  (each_dict['debit'] - each_dict['credit']) > 0.0:
                 debit = (each_dict['debit'] - each_dict['credit'])
-                credit = 0.0
             else:
                 credit = (each_dict['credit'] - each_dict['debit'])
-                debit = 0.0
 
             statement_data.append({
                 'seq': seq,
