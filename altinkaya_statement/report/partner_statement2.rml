@@ -54,6 +54,7 @@
             <drawRightString x="20cm" y="26.0cm">muhasebe@altinkaya.com.tr</drawRightString>
             <lines>1.3cm 25.8cm 20cm 25.8cm</lines>
 
+
             <!-- left margin -->
             <rotate degrees="90"/>
             <fill color="grey"/>
@@ -103,11 +104,8 @@
         <td><para style="terp_default_8"></para></td>
       </tr>
     </blockTable>
-   <section>
-   <para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt') ]]</para>
-   <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">
-      <tr>
-        <td><para style="terp_default_8_right_align">[[ partner_stmt['seq'] ]]</para></td>
+   <section><para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt') ]]</para><blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">
+      <tr><td><para style="terp_default_8_right_align">[[ partner_stmt['seq'] ]]</para></td>
         <td><para style="terp_default_8">[[ partner_stmt['number'] ]]</para></td>
         <td><para style="terp_default_8">[[ partner_stmt['date'] ]]</para></td>
         <td><para style="terp_default_8">[[ partner_stmt['due_date'] ]]</para></td>
@@ -115,21 +113,21 @@
         <td><para style="terp_default_8_right_align">[[ formatLang(partner_stmt['debit']) ]]</para></td>
         <td><para style="terp_default_8_right_align">[[ formatLang(partner_stmt['credit']) ]]</para></td>
         <td><para style="terp_default_8_right_align">[[ formatLang(partner_stmt['balance']) ]]</para></td>
-        <td><para style="terp_default_8">[[ partner_stmt['dc'] ]]</para></td>
-      </tr>
+        <td><para style="terp_default_8">[[ partner_stmt['dc'] ]]</para></td></tr>
     </blockTable>
     </section>
-    <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table_Partner_Address">
-      <tr>
+    <section><para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt1') ]]</para></section>
+<!--    <blockTable colWidths="20.00,80.00,50.00,50.00,100.00,60.00,60.00,60.00,10.00" style="Table_Partner_Address">-->
+    <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table_Partner_Address"><tr>
         <td><para style="terp_default_8_right_align"></para></td>
         <td><para style="terp_default_8"></para></td>
         <td><para style="terp_default_8"></para></td>
         <td><para style="terp_default_8"></para></td>
-        <td><para style="terp_default_8"></para></td>
+        <td><para style="terp_default_8"><b>Total: </b></para></td>
         <td><para style="terp_default_8_right_align"></para></td>
         <td><para style="terp_default_8_right_align"><b>Total: </b></para></td>
-        <td><para style="terp_default_8_right_align"><b>[[ formatLang(partner_stmt['balance']) or '' ]]</b></para></td>
-        <td><para style="terp_default_8"><b>[[ partner_stmt['dc'] ]]</b></para></td>
+        <td><para style="terp_default_8_right_align"><b>[[ formatLang(partner_stmt1['balance']) or '' ]]</b></para></td>
+        <td><para style="terp_default_8"><b>[[ partner_stmt1['dc'] ]]</b></para></td>
       </tr>
     </blockTable>
   </story>
