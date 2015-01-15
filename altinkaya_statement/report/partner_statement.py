@@ -40,8 +40,8 @@ class partner_statement(report_sxw.rml_parse):
     def _get_statement_data(self,partner,data=None):
         statement_data = []
         balance, seq = 0.0, 0
-        if partner.parent_id:
-            raise osv.except_osv(_('User Error!'), _('You can not print this report for a Contact'))
+#        if partner.parent_id:
+#            raise osv.except_osv(_('User Error!'), _('You can not print this report for a Contact'))
         if data:
             end_date = parser.parse(data['date_end']).date()
             start_date = parser.parse(data['date_start']).date()
@@ -80,7 +80,7 @@ class partner_statement(report_sxw.rml_parse):
                 'total': balance or 0.0,
             })
         if not statement_data:
-            raise osv.except_osv(_('User Error!'), _('No receivable or payable Move Lines for '+partner.name))
+            raise osv.except_osv(_('User Error!'), _('Bu Kayıda ait ilgili dönemde işlem yok aralıklı raporu deneyin '+partner.name))
         return statement_data
 
 report_sxw.report_sxw('report.partner.statement', 'res.partner',
