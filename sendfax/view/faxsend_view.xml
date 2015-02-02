@@ -102,31 +102,32 @@
                     <field name="state"/>
                     <field name="report"/>
                     <field name="subject"/>
-                    <field name="faxno"/>                                       
+                    <field name="faxno"/>
                 </search>
             </field>
         </record>
-        
+
         <record model="ir.actions.act_window" id="action_faxsend_account_list">
-            <field name="name">Send fax account</field>
+            <field name="name">Fax Account</field>
             <field name="res_model">faxsend.account</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="faxsend_account_list" />
             <field name="search_view_id" ref="view_faxsend_account_search"/>
         </record>
-        
+
     	<record model="ir.actions.act_window" id="action_faxsend_queue_list">
-            <field name="name">Send fax queue</field>
+            <field name="name">Fax Queue</field>
             <field name="res_model">faxsend.queue</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="faxsend_queue_list" />
             <field name="search_view_id" ref="view_faxsend_queue_search"/>
         </record>
-        
+
     	<menuitem id="menu_fax" name="Fax" parent="base.menu_config" />
     	<menuitem id="menu_fax_sendaccount" parent="menu_fax" action="action_faxsend_account_list" sequence="10"/>
     	<menuitem id="menu_fax_sendqueue" parent="menu_fax" action="action_faxsend_queue_list" sequence="15"/>
+
     </data>
 </openerp>
