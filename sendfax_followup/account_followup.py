@@ -48,6 +48,8 @@ class account_followup_print(osv.osv_memory):
         nbprints = 0
         resulttext = " "
         for partner in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, partner_ids, context=context):
+            if partner.amount_overdue <10:
+                continue
             if partner.max_followup_id.manual_action:
                 partner_obj.do_partner_manual_action(cr, uid, [partner.partner_id.id], context=context)
                 nbmanuals = nbmanuals + 1
