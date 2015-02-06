@@ -47,8 +47,11 @@ class account_followup_print(osv.osv_memory):
         nbunknownmails = 0
         nbprints = 0
         resulttext = " "
+        deneme=0.0
         for partner in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, partner_ids, context=context):
-            if partner.payment_amount_overdue < 10.0:
+            if partner.partner_id.payment_amount_due < 10.0:
+                continue
+            if partner.partner_id.lang == "en_US":
                 continue
             if partner.max_followup_id.manual_action:
                 partner_obj.do_partner_manual_action(cr, uid, [partner.partner_id.id], context=context)
