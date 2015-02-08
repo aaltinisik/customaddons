@@ -106,7 +106,7 @@ class InterFaxClient:
         result = self._outboundProxy.Sendfax(req)._SendfaxResult
         return result
 
-    def sendFaxStream(self,faxNumber,dataStream,dataType):
+    def sendFaxStream(self, faxNumber, dataStream, dataType):
         req = SendfaxSoapIn()
         req._Password = self._password
         req._Username = self._username
@@ -114,7 +114,7 @@ class InterFaxClient:
         req._FileData = dataStream
         req._FileType = dataType
         result = self._outboundProxy.Sendfax(req)._SendfaxResult
-	return result
+        return result
 
     def sendFaxEx2(self,
                    faxNumbers,
@@ -254,7 +254,6 @@ class InterFaxClient:
         returnVals = []
         if result._FaxItem:
             for currItem in result._FaxItem:
-                print( dir(currItem) )
                 returnVals.append( ( currItem._TransactionID,
                                      currItem._SubmitTime,
                                      currItem._PostponeTime,
@@ -339,7 +338,6 @@ class InterFaxClient:
         returnVals = []
         if result._FaxItemEx:
             for currItem in result._FaxItemEx:
-                print( dir(currItem) )
                 returnVals.append( ( currItem._ParentTransactionID,
                                      currItem._TransactionID,
                                      currItem._SubmitTime,
@@ -458,7 +456,6 @@ class InterFaxClient:
 
         if result._FaxItems:
             for currItem in result._FaxItems._FaxItemEx2:
-                print( dir(currItem) )
                 returnVals.append( ( currItem._ParentTransactionID,
                                      currItem._TransactionID,
                                      currItem._SubmitTime,
@@ -636,7 +633,6 @@ class InterFaxClient:
 
         if result._objMessageItem:
             for currItem in result._objMessageItem._MessageItem:
-                print( dir(currItem) )
                 returnVals.append( ( currItem._MessageID,
                                      currItem._PhoneNumber,
                                      currItem._RemoteCSID,
@@ -679,8 +675,6 @@ class InterFaxClient:
         req._From = readFrom
 
         result = self._inboundProxy.GetImageChunk(req)
-
-        print dir(result)
 
         if 0==result._GetImageChunkResult:
             outfile = open(outfilename,"wb")

@@ -22,6 +22,8 @@
 from openerp.osv import fields
 from openerp.osv import osv
 from openerp.tools.translate import _
+import netsvc
+import base64
 
 
 class followup_line(osv.osv):
@@ -31,14 +33,67 @@ class followup_line(osv.osv):
     }
 
 
+class res_partner(osv.osv):
+    _inherit = 'res.partner'
+
+    def do_partner_fax(self, cr, uid, wizard_partner_ids, data, context=None):
+        if context is None:
+            context = {}
+        attach_obj = self.pool.get('ir.attachment')
+        sendfax_obj = self.pool.get('faxsend.queue')
+        msg_obj = self.pool.get('mail.message')
+        faxacc_id = self.pool.get('faxsend.account').search(cr, uid, [])
+        if not faxacc_id:
+            return True
+        service = netsvc.LocalService('report.%s' % ('account_followup.followup.print'))
+        for record in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, wizard_partner_ids):
+            if not record.partner_id.fax:
+                message_body = _("Define faxno for sending fax for payment followup report.")
+                msg_obj.create(cr, uid, {
+                    'res_id': record.partner_id.id,
+                    'notified_partner_ids': [(6, 0, [record.partner_id.id])],
+                    'body': message_body,
+                    'model': 'res.partner',
+                    'subject': 'Regarding Fax Fail',
+                    'type': 'notification',
+                })
+                continue
+            data['partner_ids'] = [record.id]
+            report_datas = {
+                'ids': [],
+                'model': 'account_followup.followup',
+                'form': data
+            }
+            (report_file, format) = service.create(cr, uid, [], report_datas, {})
+            if not report_file:
+                continue
+            attachment_id = attach_obj.create(cr, uid, {'name': 'Followup',
+                                                        'datas': base64.b64encode(report_file),
+                                                        'datas_fname': 'Followup.pdf',
+                                                        })
+            fax_val = {
+                'report': 'account_followup.followup',
+                'faxno': record.partner_id.fax,
+                'object_type': 'attachment',
+                'obj_id': record.id,
+                'subject': 'Followup',
+                'account_id': faxacc_id[0],
+                'state': 'wait',
+                'attachment_id': attachment_id,
+            }
+            fax_id = sendfax_obj.create(cr, uid, fax_val)
+            sendfax_obj.process_faxes(cr, uid, [fax_id], context=context)
+        return True
+
+
 class account_followup_print(osv.osv_memory):
     _inherit = 'account_followup.print'
 
     def process_partners(self, cr, uid, partner_ids, data, context=None):
+        if context is None:
+            context = {}
         partner_obj = self.pool.get('res.partner')
-        msg_obj = self.pool.get('mail.message')
-        sendfax_obj = self.pool.get('faxsend.queue')
-        faxacc_obj = self.pool.get('faxsend.account')
+        partner_ids_to_fax = []
         partner_ids_to_print = []
         nbmanuals = 0
         manuals = {}
@@ -47,12 +102,7 @@ class account_followup_print(osv.osv_memory):
         nbunknownmails = 0
         nbprints = 0
         resulttext = " "
-        deneme=0.0
         for partner in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, partner_ids, context=context):
-            if partner.partner_id.payment_amount_due < 10.0:
-                continue
-            if partner.partner_id.lang == "en_US":
-                continue
             if partner.max_followup_id.manual_action:
                 partner_obj.do_partner_manual_action(cr, uid, [partner.partner_id.id], context=context)
                 nbmanuals = nbmanuals + 1
@@ -69,35 +119,10 @@ class account_followup_print(osv.osv_memory):
                 nbprints += 1
                 message = "%s<I> %s </I>%s" % (_("Follow-up letter of "), partner.partner_id.latest_followup_level_id_without_lit.name, _(" will be sent"))
                 partner_obj.message_post(cr, uid, [partner.partner_id.id], body=message, context=context)
-
+            #sending fax
             if partner.max_followup_id.send_fax:
-                faxacc_id = faxacc_obj.search(cr, uid, [])
-                if not faxacc_id:
-                    continue
-                if not partner.partner_id.fax:
-                    message_body = _("Define faxno for sending fax for payment followup report.")
-                    msg_obj.create(cr, uid, {
-                        'res_id': partner.partner_id.id,
-                        'notified_partner_ids': [(6, 0, [partner.partner_id.id])],
-                        'body': message_body,
-                        'model': 'res.partner',
-                        'subject': 'Regarding Fax Fail',
-                        'type': 'notification',
-                    })
-                    continue
-                fax_val = {
-                    'report': 'account_followup.followup.print',
-                    'faxno': partner.partner_id.fax,
-                    'object_type': 'report',
-                    'obj_id': partner.partner_id.id,
-                    'subject': 'followup',
-                    'account_id': faxacc_id[0],
-                    'state': 'wait',
-                }
-                fax_id = sendfax_obj.create(cr, uid, fax_val)
-                sendfax_obj.process_faxes(cr, uid, [fax_id], context=context)
+                partner_ids_to_fax.append(partner.id)
                 nbfax += 1
-
         if nbunknownmails == 0:
             resulttext += str(nbmails) + _(" email(s) sent")
         else:
@@ -114,6 +139,9 @@ class account_followup_print(osv.osv_memory):
             resulttext = resulttext + "<li>" + item + ":" + str(manuals[item]) + "\n </li>"
         resulttext += "</p>"
         result = {}
+        #send fax
+        if partner_ids_to_fax:
+            partner_obj.do_partner_fax(cr, uid, partner_ids_to_fax, data, context=context)
         action = partner_obj.do_partner_print(cr, uid, partner_ids_to_print, data, context=context)
         result['needprinting'] = needprinting
         result['resulttext'] = resulttext

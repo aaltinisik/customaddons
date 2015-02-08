@@ -86,6 +86,7 @@ class faxsend_queue(osv.osv):
        'trigger_method': fields.char('Trigger method', size=50, readonly=True, states={'draft': [('readonly', False)]}),
        'trigger_method_args': fields.char('Method args', size=50, readonly=True, states={'draft': [('readonly', False)]}),
        'retry_counter': fields.integer('Retry'),
+       'attachment_id': fields.many2one('ir.attachment', 'Attachment'),
     }
     _defaults = {
         'object_type': 'report',
@@ -141,7 +142,7 @@ class faxsend_queue(osv.osv):
         if not ids:
             return False
         # set state='draft' gives user chance to change data before sending fax
-        self.write(cr, uid, ids, {'state': 'draft', 'job_no':'' })
+        self.write(cr, uid, ids, {'retry_counter': 0,'state': 'draft', 'job_no': ''})
         wf_service = netsvc.LocalService("workflow")
         for id in ids:
             # Deleting the existing instance of workflow for faxsend.queue
@@ -206,7 +207,7 @@ class faxsend_queue(osv.osv):
                                         })
                                         self.write(cr, uid, list, {'state': 'error'})
                                 cr.commit()
-            except Exception:
+            except Exception, e:
                 logger.error('failed retrieving fax-status from interfax.net')
 
         # now let us fax the new ones
@@ -221,11 +222,12 @@ class faxsend_queue(osv.osv):
                     if matching_reports:
                         report = ir_actions_report.browse(cr, uid, matching_reports[0])
                         service = netsvc.LocalService('report.%s' % (report.report_name))
-                        (faxData, format) = service.create(cr, uid, [o.obj_id], {}, {})
+                        (faxData, format) = service.create(cr, uid, o.obj_id, {}, {})
+                        #faxData = base64.b64encode(faxData)
                         c = client.InterFaxClient(o.account_id.username, o.account_id.password)
                         result = c.sendFaxStream(o.faxno, faxData, report.report_type)
-
                         if (result > 0):
+                        #if True:
                             ir_attachment_pool = self.pool.get('ir.attachment')
                             faxData = base64.b64encode(faxData)
                             file_name = o.subject
@@ -275,7 +277,7 @@ class faxsend_queue(osv.osv):
                             })
                             self.write(cr, uid, [o.id], {'state': 'error',
                                                          'job_no': 'Report %s not found' % (o.report) })
-                except Exception:
+                except Exception, e:
                     logger.error('failed sending fax %s', o.name)
                     if o.retry_counter < 5:
                         self.write(cr, uid, [o.id], {'retry_counter': o.retry_counter + 1,
@@ -295,13 +297,9 @@ class faxsend_queue(osv.osv):
                         self.write(cr, uid, [o.id], {'state': 'error'})
             elif o.object_type == 'attachment':
                 try:
-                    ir_attachment = self.pool.get('ir.attachment')
-                    attachment_ids = ir_attachment.search(cr, uid, [('res_model', '=', o.report),
-                                                                    ('res_id', '=', o.obj_id)])
-                    if attachment_ids:
-                        attachment = ir_attachment.browse(cr, uid, attachment_ids[0], context=context)
-                        faxData = base64.b64decode(attachment.datas)
-                        docType = os.path.splitext(attachment.datas_fname)[1][1:]
+                    if o.attachment_id:
+                        faxData = base64.b64decode(o.attachment_id.datas)
+                        docType = os.path.splitext(o.attachment_id.datas_fname)[1][1:]
                         if not docType:
                             docType = "pdf"
 
@@ -365,5 +363,5 @@ class faxsend_queue(osv.osv):
                         })
                         self.write(cr, uid, [o.id], {'state': 'error'})
             # we must do this because scheduler is calling this method
-            # if an error occured we dont want the faxes send succesfully rolled back            
+            # if an error occured we dont want the faxes send succesfully rolled back
             cr.commit()

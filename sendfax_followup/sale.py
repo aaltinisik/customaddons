@@ -22,7 +22,8 @@
 from openerp.osv import fields
 from openerp.osv import osv
 from openerp.tools.translate import _
-
+import netsvc
+import base64
 
 class sale_order(osv.osv):
     _inherit = 'sale.order'
@@ -30,24 +31,41 @@ class sale_order(osv.osv):
     def send_fax(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
+        attach_obj = self.pool.get('ir.attachment')
         sendfax_obj = self.pool.get('faxsend.queue')
-        faxacc_obj = self.pool.get('faxsend.account')
-        faxacc_id = faxacc_obj.search(cr, uid, [])
+        faxacc_id = self.pool.get('faxsend.account').search(cr, uid, [])
         if not faxacc_id:
-            raise osv.except_osv(_('Error'),
-                                 _('Please configure fax account'))
+            return True
+        service = netsvc.LocalService('report.sale.order')
         for sale in self.browse(cr, uid, ids):
             if not sale.partner_id.fax:
                 raise osv.except_osv(_('Error'),
                                      _('Customer has no faxno'))
+            report_datas = {
+                'ids': [sale.id],
+                'model': 'sale.order',
+            }
+            (report_file, format) = service.create(cr, uid, [sale.id], report_datas, context)
+            if not report_file:
+                continue
+            attachment_id = attach_obj.create(cr, uid, {'name': sale.name,
+                                                        'res_model': 'sale.order',
+                                                        'res_id': sale.id,
+                                                        'res_name': sale.name,
+                                                        'partner_id': sale.partner_id.id,
+                                                        'datas': base64.b64encode(report_file),
+                                                        'datas_fname': sale.name+'_fax.pdf',
+                                                        })
             fax_val = {
                 'report': 'sale.order',
                 'faxno': sale.partner_id.fax,
-                'object_type': 'report',
+                'object_type': 'attachment',
                 'obj_id': sale.id,
                 'subject': sale.name,
                 'account_id': faxacc_id[0],
                 'state': 'wait',
+                'retry_counter':0,
+                'attachment_id': attachment_id,
             }
             fax_id = sendfax_obj.create(cr, uid, fax_val)
             sendfax_obj.process_faxes(cr, uid, [fax_id], context=context)
