@@ -25,10 +25,10 @@ from openerp.tools.translate import _
 import netsvc
 import base64
 
-class sale_order(osv.osv):
-    _inherit = 'sale.order'
+class res_partner(osv.osv):
+    _inherit = 'res.partner'
 
-    def send_fax(self, cr, uid, ids, context=None):
+    def send_statement_fax(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
         attach_obj = self.pool.get('ir.attachment')
@@ -36,36 +36,36 @@ class sale_order(osv.osv):
         faxacc_id = self.pool.get('faxsend.account').search(cr, uid, [])
         if not faxacc_id:
             return True
-        service = netsvc.LocalService('report.sale.order_fax')
-        for sale in self.browse(cr, uid, ids):
-            faxno = sale.partner_id.fax
+        service = netsvc.LocalService('report.partner.statement2')
+        for partner in self.browse(cr, uid, ids):
+            faxno = partner.fax
             if not faxno:
-                faxno = sale.partner_id.parent_id.fax
+                faxno = partner.parent_id.fax
                 if not faxno:
                     raise osv.except_osv(_('Error'),
                                          _('Customer has no faxno'))
 
             report_datas = {
-                'ids': [sale.id],
-                'model': 'sale.order',
+                'ids': [partner.id],
+                'model': 'res.partner',
             }
-            (report_file, format) = service.create(cr, uid, [sale.id], report_datas, context)
+            (report_file, format) = service.create(cr, uid, [partner.id], report_datas, context)
             if not report_file:
                 continue
-            attachment_id = attach_obj.create(cr, uid, {'name': sale.name,
-                                                        'res_model': 'sale.order',
-                                                        'res_id': sale.id,
-                                                        'res_name': sale.name,
-                                                        'partner_id': sale.partner_id.id,
+            attachment_id = attach_obj.create(cr, uid, {'name': partner.name,
+                                                        'res_model': 'res.partner',
+                                                        'res_id': partner.id,
+                                                        'res_name': partner.name,
+                                                        'partner_id': partner.id,
                                                         'datas': base64.b64encode(report_file),
-                                                        'datas_fname': sale.name+'_fax.pdf',
+                                                        'datas_fname': partner.ref+'_fax.pdf',
                                                         })
             fax_val = {
-                'report': 'sale.order',
+                'report': 'res.partner',
                 'faxno': faxno,
                 'object_type': 'attachment',
-                'obj_id': sale.id,
-                'subject': sale.name,
+                'obj_id': partner.id,
+                'subject': partner.name,
                 'account_id': faxacc_id[0],
                 'state': 'wait',
                 'retry_counter':0,
@@ -73,8 +73,8 @@ class sale_order(osv.osv):
             }
             fax_id = sendfax_obj.create(cr, uid, fax_val)
             sendfax_obj.process_faxes(cr, uid, [fax_id], context=context)
-            self.message_post(cr, uid, ids, _('Faks gönderilmek için sıraya eklendi'),_(""),context=context)
-
+            message = "Cari Ekstre Faks Gönderildi."
+            self.message_post(cr, uid, [partner.id], body=message, context=context)
 
         return True
 

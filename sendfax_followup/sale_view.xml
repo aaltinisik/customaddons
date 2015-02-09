@@ -9,8 +9,8 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="//button[@string='Cancel Quotation']" position="after">
-                        <button name="send_fax" string="Send Fax" type="object" 
-                                states="draft,sent,progress,manual" class="oe_highlight" groups="base.group_user"/>
+                        <button name="send_fax" string="Send Fax" type="object"
+                                 class="oe_highlight" groups="base.group_user"/>
                     </xpath>
                 </data>
             </field>

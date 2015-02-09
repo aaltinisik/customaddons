@@ -29,6 +29,7 @@
     'data': [
          'sale_view.xml',
          'account_followup_view.xml',
+         'partner_view.xml',
     ],
     'active': False,
     'installable': True,

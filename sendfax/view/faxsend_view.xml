@@ -131,6 +131,8 @@
         <menuitem id="menu_fax" name="Fax" parent="base.menu_config" />
         <menuitem id="menu_fax_sendaccount" parent="menu_fax" action="action_faxsend_account_list" sequence="10"/>
         <menuitem id="menu_fax_sendqueue" parent="menu_fax" action="action_faxsend_queue_list" sequence="15"/>
+        <menuitem id="menu_fax_sendqueue2" parent="crm.menu_crm_case_phone" action="action_faxsend_queue_list" sequence="15"/>
+
 
     </data>
 </openerp>
