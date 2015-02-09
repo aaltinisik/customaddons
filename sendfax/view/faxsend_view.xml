@@ -57,8 +57,9 @@
                     </header>
                     <sheet>
                         <group>
-                            <field name="account_id"/>
+                            <field name="account_id" invisible="True"/>
                             <field name="subject"/>
+                            <field name="name"/>
                             <field name="attachment_id"/>
                             <field name="report"/>
                             <field name="object_type"/>
@@ -85,7 +86,8 @@
             <field name="arch" type="xml">
                 <tree string="Send fax queue">
                     <field name="queue_date"/>
-                    <field name="name"/>
+                    <field name="name" invisible="True"/>
+                    <field name="subject"/>
                     <field name="state"/>
                     <field name="faxno"/>
                     <field name="job_no"/>

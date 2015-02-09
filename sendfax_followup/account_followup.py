@@ -67,16 +67,21 @@ class res_partner(osv.osv):
             (report_file, format) = service.create(cr, uid, [], report_datas, {})
             if not report_file:
                 continue
-            attachment_id = attach_obj.create(cr, uid, {'name': 'Followup',
+            attachment_id = attach_obj.create(cr, uid, {
+                                                        'name': 'Takip faks ' + record.partner_id.name,
+                                                        'res_model': 'res.partner',
+                                                        'res_id': record.partner_id.id,
+                                                        'res_name': record.partner_id.name,
+                                                        'partner_id': record.partner_id.id,
                                                         'datas': base64.b64encode(report_file),
-                                                        'datas_fname': 'Followup.pdf',
+                                                        'datas_fname': record.partner_id.ref+'_takip_faks.pdf',
                                                         })
             fax_val = {
                 'report': 'account_followup.followup',
                 'faxno': record.partner_id.fax,
                 'object_type': 'attachment',
                 'obj_id': record.id,
-                'subject': 'Followup',
+                'subject': 'Takip faks' + record.partner_id.name,
                 'account_id': faxacc_id[0],
                 'state': 'wait',
                 'attachment_id': attachment_id,
