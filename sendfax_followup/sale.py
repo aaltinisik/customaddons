@@ -38,9 +38,13 @@ class sale_order(osv.osv):
             return True
         service = netsvc.LocalService('report.sale.order')
         for sale in self.browse(cr, uid, ids):
-            if not sale.partner_id.fax:
-                raise osv.except_osv(_('Error'),
-                                     _('Customer has no faxno'))
+            faxno = sale.partner_id.fax
+            if not faxno:
+                faxno = sale.partner_id.parent_id.fax
+                if not faxno:
+                    raise osv.except_osv(_('Error'),
+                                         _('Customer has no faxno'))
+
             report_datas = {
                 'ids': [sale.id],
                 'model': 'sale.order',
@@ -58,7 +62,7 @@ class sale_order(osv.osv):
                                                         })
             fax_val = {
                 'report': 'sale.order',
-                'faxno': sale.partner_id.fax,
+                'faxno': faxno,
                 'object_type': 'attachment',
                 'obj_id': sale.id,
                 'subject': sale.name,
@@ -69,6 +73,9 @@ class sale_order(osv.osv):
             }
             fax_id = sendfax_obj.create(cr, uid, fax_val)
             sendfax_obj.process_faxes(cr, uid, [fax_id], context=context)
+            self.message_post(cr, uid, ids, _('Faks gönderilmek için sıraya eklendi'),_(""),context=context)
+
+
         return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
