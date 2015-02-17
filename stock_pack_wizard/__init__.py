@@ -24,4 +24,5 @@ import product_ul
 import stock_tracking
 import wizard
 import report
+import stock
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

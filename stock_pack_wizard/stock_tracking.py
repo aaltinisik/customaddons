@@ -33,8 +33,8 @@ class  stock_tracking(osv.osv):
 
     _columns={
         'pack_lineorder': fields.integer('Pack order in shipment'),
-        'picking_out_id': fields.many2one('stock.picking.out', 'Picking Out', invisible=True),
-        'invoice_id': fields.many2one('account.invoice', 'Invoice', invisible=True),
+        'picking_out_id': fields.many2one('stock.picking.out', 'Picking Out'),
+        'invoice_id': fields.many2one('account.invoice', 'Invoice'),
         'ul_id':    fields.many2one('product.ul','Pack Template'),
         'pack_h':   fields.related('ul_id', 'high', string='H (cm)', type='float', digits=(3,3), readonly=True),
         'pack_w':   fields.related('ul_id', 'width', string='W (cm)', type='float', digits=(3,3), readonly=True),

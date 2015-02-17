@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id = "view_altinkaya_packing_tracking_form" model = "ir.ui.view">
+            <field name = "name">view.stock.tracking.form</field>
+            <field name = "model">stock.tracking</field>
+            <field name ="arch" type = "xml">
+                <form string = "Create Packing" version = "7.0" >
+                    <sheet string="Packing Details">
+                        <div style = "color: #7c7bad;">
+                            <h2>
+                                <label string = "Create Packing" />
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pack_lineorder" />
+                                <field name="pack_h" />
+                                <field name="pack_w" />
+                                <field name="pack_l" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_altinkaya_packing_tracking_tree" model="ir.ui.view">
+            <field name="name">view.stock.tracking.tree</field>
+            <field name="model">stock.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="List of packs">
+                    <field name="pack_lineorder" />
+                    <field name="pack_h" />
+                    <field name="pack_w" />
+                    <field name="pack_l" />
+                    <field name="invoice_id" />
+                    <field name="gross_weight" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_picking_out_form_ace" model="ir.ui.view">
+            <field name="name">view.picking.out.form.ace</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page/group" position="after">
+                    <group>
+                        <group col='1' colspan="6">
+                            <group colspan="4">
+                                <label for="packing_ids" />
+                            </group>
+                            <group colspan="6">
+                                 <field mode="tree" name="packing_ids" select="1" nolabel='1' widget="one2many_list">
+                                    <tree string="Packing Details" editable="bottom">
+                                        <field name="pack_lineorder" widget="handle"/>
+                                        <field name="pack_h" string="En cm"/>
+                                        <field name="pack_w" string="boy cm"/>
+                                        <field name="pack_l" string="Yük cm"/>
+                                        <field name="gross_weight" string="Brüt Kg"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_grosswg" />
+                                <field name="total_netwg" />
+                                <field name="total_num_pack" />
+                                <button name="btn_calc_weight" string="Calculate" type="object" />
+                            </group>
+                            <group>
+                                <field name="total_volume" />
+                                <field name="total_air" />
+                                <field name="total_land" />
+                            </group>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
