@@ -79,30 +79,14 @@ class stock_picking_out(osv.osv):
 
         tracking_ids = []
         for move in self.browse(cr, uid, ids[0], context).move_lines:
-            if move.tracking_id:
-                if move.tracking_id not in tracking_ids:
-                    tracking_ids.append(move.tracking_id)
-#        vals = {
-#           'packing_tracking_ids': [(6, 0, tracking_ids)],
-#        }
-#        self.write(cr, uid, ids, vals, context)
-
-        for pack in tracking_ids:
-            total_g += pack.gross_weight
-            total_n += pack.net_weight
-            total_p += 1
-            total_vol += (((pack.pack_h * pack.pack_w * pack.pack_l) * 1.0) / 1000000)
-            total_air += math.ceil(((pack.pack_h * pack.pack_h * pack.pack_h) * 1.0) / 5000)
-            total_land += math.ceil(((pack.pack_h * pack.pack_h * pack.pack_h) * 1.0) / 3000)
+            if move.tracking_id.id:
+                if move.tracking_id.id not in tracking_ids:
+                    tracking_ids.append(move.tracking_id.id)
         vals = {
-           'total_grosswg': total_g,
-           'total_netwg': total_n,
-           'total_num_pack': total_p,
-           'total_volume': total_vol,
-           'total_air': total_air,
-           'total_land': total_land,
+           'packing_tracking_ids': [(6, 0, tracking_ids)],
         }
         self.write(cr, uid, ids, vals, context)
+
         return True
 
 stock_picking_out()

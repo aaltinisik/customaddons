@@ -31,6 +31,7 @@
             <field name="model">stock.tracking</field>
             <field name="arch" type="xml">
                 <tree string="List of packs">
+                    <field name="name" />
                     <field name="pack_lineorder" />
                     <field name="pack_h" />
                     <field name="pack_w" />
@@ -50,16 +51,19 @@
                     <group>
                         <group col='1' colspan="6">
                             <group colspan="4">
-                                <label for="packing_ids" />
+
                             </group>
                             <group colspan="6">
-                                 <field mode="tree" name="packing_ids" select="1" nolabel='1' widget="one2many_list">
+                                   <field mode="tree" name="packing_tracking_ids" select="1" nolabel='1' widget="one2many_list">
                                     <tree string="Packing Details" editable="bottom">
-                                        <field name="pack_lineorder" widget="handle"/>
+                                        <field name="name" />
+                                        <field name="pack_lineorder" />
                                         <field name="pack_h" string="En cm"/>
                                         <field name="pack_w" string="boy cm"/>
                                         <field name="pack_l" string="Yük cm"/>
                                         <field name="gross_weight" string="Brüt Kg"/>
+                                        <field name="net_weight" string="Net Kg"/>
+          
                                     </tree>
                                 </field>
                             </group>
@@ -72,9 +76,10 @@
                                 <button name="btn_calc_weight" string="Calculate" type="object" />
                             </group>
                             <group>
-                                <field name="total_volume" />
                                 <field name="total_air" />
                                 <field name="total_land" />
+                                <field name="total_volume" />
+
                             </group>
                         </group>
                     </group>

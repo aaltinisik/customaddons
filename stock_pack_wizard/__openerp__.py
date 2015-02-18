@@ -58,7 +58,7 @@
         'stock_tracking_view.xml',
         'wizard/wizard_picking_tracking_view.xml', 
         'stock_picking_view.xml',
-
+        'stock_view.xml',
         'stock_tracking_report.xml',
          'data/product.ul.csv',
         ],
