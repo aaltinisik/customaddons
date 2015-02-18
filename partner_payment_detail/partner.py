@@ -33,11 +33,10 @@ class account_invoice(osv.osv):
             context = {}
         partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
         balance = 0
-        if partner.is_company:
-            balance = partner.credit - partner.debit
+        if partner.parent_id:
+            balance = partner.parent_id.credit - partner.parent_id.debit
         else:
-            if partner.parent_id and partner.parent_id.is_company:
-                balance = partner.parent_id.credit - partner.parent_id.debit
+            balance = partner.credit - partner.debit
         return balance
 
     def create(self, cr, uid, vals, context=None):

@@ -12,7 +12,7 @@
 				<field name="type" position="after">
 					<field name="x_cek_no" />
 					<field name="x_cek_banka" />
-					<field name="x_cek_tarih" />
+					<field name="date_due" />
 					<field name="x_cek_vergi" />
 				</field>
 			</field>

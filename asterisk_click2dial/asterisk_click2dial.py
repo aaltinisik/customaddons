@@ -24,6 +24,7 @@ from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
+import urllib
 
 try:
     # Lib py-asterisk from http://code.google.com/p/py-asterisk/
@@ -464,15 +465,19 @@ class phone_common(orm.AbstractModel):
 
         try:
             ast_number=ast_number.replace('(', '').replace(")", '').replace(" ", '').replace("+", "00")
-            ast_manager.Originate(
-                channel,
-                context=ast_server.context,
-                extension=ast_number,
-                priority=str(ast_server.extension_priority),
-                timeout=str(ast_server.wait_time * 1000),
-                caller_id='P:'+ast_number,
-                account=user.cdraccount,
-                variable=variable)
+            params = urllib.urlencode({'phone': ast_number, 'exten': user.resource})
+            urllib.urlopen("http://"+user.asterisk_server_id.ip_address+"/click2call.php?%s" % params)
+
+#            ast_manager.Originate(
+#                channel,
+#                context=ast_server.context,
+#                extension=ast_number,
+#                priority=str(ast_server.extension_priority),
+#                timeout=str(ast_server.wait_time * 1000),
+#                caller_id='P:'+ast_number,
+#                account=user.cdraccount,
+#                variable=variable)
+
         except Exception, e:
             _logger.error(
                 "Error in the Originate request to Asterisk server %s"

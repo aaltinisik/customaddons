@@ -45,8 +45,15 @@ class res_partner(osv.osv):
             if not partner.ref:
                 raise osv.except_osv(_('No Reference!'),
                                      _("You must define reference for creating accounts!"))
-            code = '120.' + (partner.ref and str(partner.ref).strip() or '')
-            code_pay = '320.' + (partner.ref and str(partner.ref).strip() or '')
+            code_prefix = ""
+            turkey_code = u"TR"
+            if partner.parent_id:
+                if partner.parent_id.country_id.code != turkey_code:
+                    code_prefix = "Y"
+            if partner.country_id.code != turkey_code:
+                code_prefix = "Y"
+            code = '120.'+ code_prefix + (partner.ref and str(partner.ref).strip() or '')
+            code_pay = '320.'+ code_prefix + (partner.ref and str(partner.ref).strip() or '')
             acc_rec_id = account_obj.search(cr, uid, [('code', '=', code)])
             acc_pay_id = account_obj.search(cr, uid, [('code', '=', code_pay)])
             if acc_rec_id:
@@ -78,5 +85,5 @@ class res_partner(osv.osv):
             self.write(cr, uid, partner.id, {'property_account_receivable': acc_recievable,
                                              'property_account_payable': acc_payable})
         return True
-
+    
 res_partner()

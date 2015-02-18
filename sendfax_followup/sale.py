@@ -65,7 +65,7 @@ class sale_order(osv.osv):
                 'faxno': faxno,
                 'object_type': 'attachment',
                 'obj_id': sale.id,
-                'subject': sale.name,
+                'subject': sale.name +" "+sale.partner_id.name,
                 'account_id': faxacc_id[0],
                 'state': 'wait',
                 'retry_counter':0,
