@@ -62,6 +62,7 @@
                                         <field name="pack_w" string="boy cm"/>
                                         <field name="pack_l" string="Yük cm"/>
                                         <field name="gross_weight" string="Brüt Kg"/>
+                                        <field name="pack_tare" string="Darası"/>                  
                                         <field name="net_weight" string="Net Kg"/>
           
                                     </tree>

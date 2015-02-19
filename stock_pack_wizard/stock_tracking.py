@@ -30,17 +30,24 @@ class  stock_tracking(osv.osv):
         for pack in self.browse(cr, uid, ids, context=context):
             res[pack.id] = pack.gross_weight - pack.pack_tare
         return res
+    def _get_cbm(self, cr, uid, ids, fields, arg=None,  context=None):
+        res = {}
+        for ul in self.browse(cr, uid, ids, context=context):
+            cbm = ul.high * ul.width * ul.long
+            cbm = cbm != 0 and cbm/1000000
+            res[ul.id] = cbm
+        return res
 
     _columns={
         'pack_lineorder': fields.integer('Pack order in shipment'),
         'picking_out_id': fields.many2one('stock.picking.out', 'Picking Out'),
         'invoice_id': fields.many2one('account.invoice', 'Invoice'),
         'ul_id':    fields.many2one('product.ul','Pack Template'),
-        'pack_h':   fields.related('ul_id', 'high', string='H (cm)', type='float', digits=(3,3), readonly=True),
-        'pack_w':   fields.related('ul_id', 'width', string='W (cm)', type='float', digits=(3,3), readonly=True),
-        'pack_l':   fields.related('ul_id', 'long', string='L (cm)', type='float', digits=(3,3), readonly=True),
-        'pack_cbm': fields.related('ul_id', 'cbm', string='CBM',    type='float', digits=(3,3), readonly=True),
-        'pack_tare': fields.related('ul_id', 'tare', string='Tare Kg',    type='float', digits=(3,3), readonly=True),
+        'pack_h':   fields.float('H (cm)', digits=(3,3)),
+        'pack_w':   fields.float('W (cm)', digits=(3,3)),
+        'pack_l':   fields.float('L (cm)', digits=(3,3)),
+        'pack_cbm': fields.function(_get_cbm, arg=None, type='float', digits=(3,3), string='CBM'),
+        'pack_tare': fields.float('Tare Kg', digits=(3,3)),
 
         'pack_address': fields.char('Address', size=128),
         'pack_note':    fields.char('Note', size=128),

@@ -31,8 +31,8 @@ class product_ul(osv.osv):
             cbm = ul.high * ul.width * ul.long
             cbm = cbm != 0 and cbm/1000000
             res[ul.id] = cbm
-
         return res
+
     _columns = {
         'name': fields.char('name', size=32),
         'high': fields.float('H (cm)', digits=(3,3)),
