@@ -39,6 +39,8 @@ class stock_picking(osv.osv):
         self.pool.get('stock.picking.out').btn_calc_weight(cr, uid, po_id)
         invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
         invoice_vals.update({'address_contact_id': picking.partner_id.id })
+        
+        
 
         if picking.move_ids:
             tracking_ids = []

@@ -25,4 +25,6 @@ import stock_tracking
 import wizard
 import report
 import stock
+import account_invoice
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
