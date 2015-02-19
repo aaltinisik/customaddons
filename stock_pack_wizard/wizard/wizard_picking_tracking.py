@@ -161,6 +161,10 @@ class  wizard_picking_tracking(osv.osv_memory):
             'pack_address': wizard.pack_address,
             'pack_note':    wizard.pack_note,
             'gross_weight': wizard.gross_weight,
+            'pack_h': wizard.ul_id.high,
+            'pack_w': wizard.ul_id.width,
+            'pack_l': wizard.ul_id.long,
+            'pack_tare': wizard.ul_id.tare,
             'move_ids':     [],
          }
         

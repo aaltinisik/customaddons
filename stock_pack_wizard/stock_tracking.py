@@ -32,10 +32,10 @@ class  stock_tracking(osv.osv):
         return res
     def _get_cbm(self, cr, uid, ids, fields, arg=None,  context=None):
         res = {}
-        for ul in self.browse(cr, uid, ids, context=context):
-            cbm = ul.high * ul.width * ul.long
-            cbm = cbm != 0 and cbm/1000000
-            res[ul.id] = cbm
+        for pack in self.browse(cr, uid, ids, context=context):
+            cbm = pack.pack_h * pack.pack_l * pack.pack_w
+            cbm = cbm != 0 and cbm/1000000.0
+            res[pack.id] = cbm
         return res
 
     _columns={
@@ -48,10 +48,8 @@ class  stock_tracking(osv.osv):
         'pack_l':   fields.float('L (cm)', digits=(3,3)),
         'pack_cbm': fields.function(_get_cbm, arg=None, type='float', digits=(3,3), string='CBM'),
         'pack_tare': fields.float('Tare Kg', digits=(3,3)),
-
         'pack_address': fields.char('Address', size=128),
         'pack_note':    fields.char('Note', size=128),
-
         'gross_weight': fields.float('GW (Kg)'),
         'net_weight':   fields.function(_get_net_weight, arg=None, type='float', string='Net (Kg)'),
     }

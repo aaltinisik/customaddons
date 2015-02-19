@@ -82,11 +82,34 @@ class stock_picking_out(osv.osv):
             if move.tracking_id.id:
                 if move.tracking_id.id not in tracking_ids:
                     tracking_ids.append(move.tracking_id.id)
+                    total_g += move.tracking_id.gross_weight
+                    total_n += move.tracking_id.net_weight
+                    total_p += 1
+                    total_vol += (((move.tracking_id.pack_h * move.tracking_id.pack_w * move.tracking_id.pack_l) * 1.0) / 1000000)
+                    total_air += math.ceil(((move.tracking_id.pack_h * move.tracking_id.pack_h * move.tracking_id.pack_h) * 1.0) / 5000)
+                    total_land += math.ceil(((move.tracking_id.pack_h * move.tracking_id.pack_h * move.tracking_id.pack_h) * 1.0) / 3000)
         vals = {
            'packing_tracking_ids': [(6, 0, tracking_ids)],
+            'total_grosswg': total_g,
+           'total_netwg': total_n,
+           'total_num_pack': total_p,
+           'total_volume': total_vol,
+           'total_air': total_air,
+           'total_land': total_land,
         }
         self.write(cr, uid, ids, vals, context)
+        return True
 
+    def btn_print_pack(self, cr, uid, ids, context=None):
+        self.btn_calc_weight(cr, uid, ids, context)
+        
+        for pack in self.browse(cr, uid, ids[0], context).packing_tracking_ids:
+            denemepackname=pack.name
+            denemeids=pack.move_ids
+            for move in pack.move_ids:
+                produename = move.product_id.name
+                produeqty = move.product_qty 
+                        
         return True
 
 stock_picking_out()

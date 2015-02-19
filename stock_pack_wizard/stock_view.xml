@@ -16,9 +16,9 @@
                         <group>
                             <group>
                                 <field name="pack_lineorder" />
-                                <field name="pack_h" />
-                                <field name="pack_w" />
                                 <field name="pack_l" />
+                                <field name="pack_w" />
+                                <field name="pack_h" />
                             </group>
                         </group>
                     </sheet>
@@ -33,9 +33,9 @@
                 <tree string="List of packs">
                     <field name="name" />
                     <field name="pack_lineorder" />
-                    <field name="pack_h" />
-                    <field name="pack_w" />
-                    <field name="pack_l" />
+                    <field name="pack_w" string="en cm"/>
+                    <field name="pack_l" string="boy cm"/>
+                    <field name="pack_h" string="Yük cm"/>
                     <field name="invoice_id" />
                     <field name="gross_weight" />
                 </tree>
@@ -56,15 +56,17 @@
                             <group colspan="6">
                                    <field mode="tree" name="packing_tracking_ids" select="1" nolabel='1' widget="one2many_list">
                                     <tree string="Packing Details" editable="bottom">
+                                        <field name="pack_lineorder" widget="handle" />
                                         <field name="name" />
-                                        <field name="pack_lineorder" />
-                                        <field name="pack_h" string="En cm"/>
-                                        <field name="pack_w" string="boy cm"/>
-                                        <field name="pack_l" string="Yük cm"/>
+                                        <field name="pack_lineorder" string="#" />
+                                        <field name="pack_note" string="Not" />
+                                        <field name="pack_w" string="En cm"/>
+                                        <field name="pack_l" string="boy cm"/>
+                                        <field name="pack_h" string="Yük cm"/>
                                         <field name="gross_weight" string="Brüt Kg"/>
                                         <field name="pack_tare" string="Darası"/>                  
                                         <field name="net_weight" string="Net Kg"/>
-          
+                                        <field name="pack_cbm" string="m^3"/>
                                     </tree>
                                 </field>
                             </group>
@@ -75,6 +77,8 @@
                                 <field name="total_netwg" />
                                 <field name="total_num_pack" />
                                 <button name="btn_calc_weight" string="Calculate" type="object" />
+                                <button name="btn_print_pack" string="testt" type="object" />
+                                
                             </group>
                             <group>
                                 <field name="total_air" />
