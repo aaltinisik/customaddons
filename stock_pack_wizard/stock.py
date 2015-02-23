@@ -26,38 +26,33 @@ class stock_picking(osv.osv):
     _inherit = "stock.picking"
     _columns = {
         'packing_tracking_ids': fields.one2many('stock.tracking', 'picking_out_id', 'Packing Details'),
-        'total_grosswg': fields.float('Total Gross Weight'),
-        'total_netwg': fields.float('Total Net Weight'),
-        'total_num_pack': fields.integer('Total Packages'),
-        'total_volume': fields.float('Total Volume'),
-        'total_land': fields.integer('Total Land Weight'),
-        'total_air': fields.integer('Total Air Weight'),
+#        'total_grosswg': fields.float('Total Gross Weight'),
+#        'total_netwg': fields.float('Total Net Weight'),
+#        'total_num_pack': fields.integer('Total Packages'),
+#        'total_volume': fields.float('Total Volume'),
+#        'total_land': fields.integer('Total Land Weight'),
+#        'total_air': fields.integer('Total Air Weight'),
     }
 
     def _prepare_invoice(self, cr, uid, picking, partner, inv_type, journal_id, context=None):
         po_id = [picking.id]
         self.pool.get('stock.picking.out').btn_calc_weight(cr, uid, po_id)
-        invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
-        invoice_vals.update({'address_contact_id': picking.partner_id.id })
-        
-        
-
-        if picking.move_ids:
-            tracking_ids = []
-            for move in picking.move_ids:
-                if move.tracking_id:
-                    if move.tracking_id not in tracking_ids:
-                        tracking_ids.append(move.tracking_id)
-            invoice_vals.update({'packing_tracking_ids': [(6, 0, picking_ids)],
-                                 'carrier_id': picking.carrier_id.id })
-
+        invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context) 
+        invoice_tracking_ids = []
+        for pack in picking.packing_tracking_ids:
+            if pack.id:
+                invoice_tracking_ids.append(pack.id)
+        invoice_vals.update({'packing_tracking_ids': [(6, 0, invoice_tracking_ids)],
+                             'carrier_id': picking.carrier_id.id,
+                             'address_contact_id': picking.partner_id.id,
+                             })
         return invoice_vals
 
     def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
         res = super(stock_picking, self).action_invoice_create(cr, uid, ids, journal_id, group, type, context)
         invoice_id = int(res.values()[0])
-        if invoice_id:
-            self.pool.get('account.invoice').btn_calc_weight_inv(cr, uid, [invoice_id])
+#        if invoice_id:
+#            self.pool.get('account.invoice').btn_calc_weight_inv(cr, uid, [invoice_id])
         return res
 
 stock_picking()
@@ -67,12 +62,12 @@ class stock_picking_out(osv.osv):
     _inherit = "stock.picking.out"
     _columns = {
         'packing_tracking_ids': fields.one2many('stock.tracking', 'picking_out_id', 'Packing Details'),
-        'total_grosswg': fields.float('Total Gross Weight'),
-        'total_netwg': fields.float('Total Net Weight'),
-        'total_num_pack': fields.integer('Total Packages'),
-        'total_volume': fields.float('Total Volume'),
-        'total_land': fields.integer('Total Land Weight'),
-        'total_air': fields.integer('Total Air Weight'),
+#        'total_grosswg': fields.float('Total Gross Weight'),
+#        'total_netwg': fields.float('Total Net Weight'),
+#        'total_num_pack': fields.integer('Total Packages'),
+#        'total_volume': fields.float('Total Volume'),
+#        'total_land': fields.integer('Total Land Weight'),
+#        'total_air': fields.integer('Total Air Weight'),
     }
 
     def btn_calc_weight(self, cr, uid, ids, context=None):

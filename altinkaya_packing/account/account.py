@@ -46,28 +46,28 @@ class account_invoice(osv.osv):
             currency_rate = 1.00 / (rate + 0.0)
         return currency_rate
 
-    def btn_calc_weight_inv(self, cr, uid, ids, context=None):
-        total_g = total_n = total_c = 0
-        total_vol = total_air = total_land = 0
-        lines = self.browse(cr, uid, ids[0], context).packing_ids
-        for pick in lines:
-            total_g += (pick.grosswg * pick.no_of_cups)
-            total_n += (pick.netwg * pick.no_of_cups)
-            total_c += pick.no_of_cups
-            total_vol += pick.no_of_cups * (((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 1000000)
-            total_air += pick.no_of_cups * math.ceil(((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 5000)
-            total_land += pick.no_of_cups * math.ceil(((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 3000)
-        vals = {
-           'total_grosswg': total_g,
-           'total_netwg': total_n,
-           'total_volume': total_vol,
-           'total_air': total_air,
-           'total_land': total_land,
-           'currency_at_date': self._get_currency_rate(cr, uid, ids),
-           'total_num_pack': total_c
-        }
-        self.write(cr, uid, ids, vals, context)
-        return True
+#    def btn_calc_weight_inv(self, cr, uid, ids, context=None):
+#        total_g = total_n = total_c = 0
+#        total_vol = total_air = total_land = 0
+#        lines = self.browse(cr, uid, ids[0], context).packing_ids
+#        for pick in lines:
+#            total_g += (pick.grosswg * pick.no_of_cups)
+#            total_n += (pick.netwg * pick.no_of_cups)
+#            total_c += pick.no_of_cups
+#            total_vol += pick.no_of_cups * (((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 1000000)
+#            total_air += pick.no_of_cups * math.ceil(((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 5000)
+#            total_land += pick.no_of_cups * math.ceil(((pick.dimension_x * pick.dimension_y * pick.dimension_z) * 1.0) / 3000)
+#        vals = {
+#           'total_grosswg': total_g,
+#           'total_netwg': total_n,
+#           'total_volume': total_vol,
+#           'total_air': total_air,
+#           'total_land': total_land,
+#           'currency_at_date': self._get_currency_rate(cr, uid, ids),
+#           'total_num_pack': total_c
+#        }
+#        self.write(cr, uid, ids, vals, context)
+#        return True
 
     def action_date_assign(self, cr, uid, ids, *args):
         res = super(account_invoice, self).action_date_assign(cr, uid, ids, *args)

@@ -52,41 +52,7 @@
             <field name="model">stock.picking.out</field>
             <field name="inherit_id" ref="stock.view_picking_out_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form/sheet/notebook/page/group" position="after">
-                    <group>
-                        <group col='1' colspan="6">
-                            <group colspan="4">
-                                <label for="packing_ids" />
-                            </group>
-                            <group colspan="6">
-                                 <field mode="tree" name="packing_ids" select="1" nolabel='1' widget="one2many_list">
-                                    <tree string="Packing Details" editable="bottom">
-                                        <field name="pack_no" widget="handle"/>
-                                        <field name="no_of_cups" string="kap adedi"/>
-                                        <field name="dimension_x" string="En cm"/>
-                                        <field name="dimension_y" string="boy cm"/>
-                                        <field name="dimension_z" string="Yük cm"/>
-                                        <field name="grosswg" string="Brüt Kg"/>
-                                        <field name="netwg" string="Net Kg"/>
-                                    </tree>
-                                </field>
-                            </group>
-                        </group>
-                        <group>
-                            <group>
-                                <field name="total_grosswg" />
-                                <field name="total_netwg" />
-                                <field name="total_num_pack" />
-                                <button name="btn_calc_weight" string="Calculate" type="object" />
-                            </group>
-                            <group>
-                                <field name="total_volume" />
-                                <field name="total_air" />
-                                <field name="total_land" />
-                            </group>
-                        </group>
-                    </group>
-                </xpath>
+                
             </field>
         </record>
         
