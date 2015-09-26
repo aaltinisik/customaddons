@@ -414,6 +414,9 @@ sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
 echo -e "\n---- Install Other Dependencies ----"
 sudo pip install gevent_psycopg2 psycogreen
 
+sudo pip install phonenumbers
+sudo pip install py-Asterisk
+
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget -P Downloads http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 
