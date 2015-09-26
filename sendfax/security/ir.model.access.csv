@@ -1,3 +1,0 @@
-"id","group_id:id","name","model_id","perm_create","perm_unlink","perm_write","perm_read"
-"faxsend1","res_groups_faxsendmanager","Fax send manager","faxsend.queue",1,1,1,1
-"faxsend2","res_groups_faxsendmanager","Fax send manager","faxsend.account",1,1,1,1
