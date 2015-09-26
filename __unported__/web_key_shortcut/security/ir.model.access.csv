@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_web_shortcut_all,web_shortcut all,model_web_shortcut,,1,1,1,1
+access_web_shortcut_wizard_config_all,web_shortcut_wizard_config all,model_web_shortcut_wizard_config,,1,1,1,1
+access_web_shortcut_wizard_all,web_shortcut_wizard all,model_web_shorcut_wizard,,1,1,1,1

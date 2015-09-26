@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+	<data>
+
+		<record id="ir_ui_view_respartner_altinkaya2" model="ir.ui.view">
+			<field name="name">res.partner.altinkaya2</field>
+			<field name="model">res.partner</field>
+			<field name="type">form</field>
+			<field eval="2" name="priority" />
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<field name="ref" position="replace" />
+			</field>
+			
+			
+		</record>
+
+		<record id="ir_ui_view_respartner_altinkaya_0" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="name">res.partner.inherit_altinkaya0</field>
+			<field eval="[(6,0,[])]" name="groups_id" />
+			<field name="arch" type="xml">
+				<field name="email" position="after">
+					<field name="x_vergidairesi" />
+					<field name="x_vergino" />
+					<field name="ref" />
+				</field>
+			</field>
+			<field eval="5" name="priority" />
+			<field name="model">res.partner</field>
+			<field name="type">form</field>
+		</record>
+
+		<record id="ir_ui_view_respartner_altinkaya_1" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_partner_tree" />
+			<field name="name">res.partner.inherit_altinkaya1</field>
+			<field eval="[(6,0,[])]" name="groups_id" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="state_id" />
+				</field>
+			</field>
+			<field eval="9" name="priority" />
+			<field name="model">res.partner</field>
+			<field name="type">tree</field>
+		</record>
+
+	</data>
+</openerp>

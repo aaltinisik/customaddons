@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.rule" id="key_shortcut_user_rule">
+            <field name="name">Web Keyboard Shortcut</field>
+            <field name="model_id" ref="model_web_shortcut"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('user_id','=',False),('user_id','=',user.id)]</field>
+        </record>
+    </data>
+</openerp>
