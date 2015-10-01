@@ -198,7 +198,7 @@ sudo su root -c "echo 'db_port = False' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_password = False' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'admin_passwd = $OE_SUPERADMIN' >> /etc/$OE_CONFIG.conf"
 
-sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/cucustomaddons' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/customaddons' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
