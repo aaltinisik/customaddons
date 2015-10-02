@@ -438,8 +438,10 @@ echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
 while true; do
     read -p "Would you like to install custom altinkaya odoo 8 custom modules (y/n)?" yn
     case $yn in
-        [Yy]* ) cd /opt/odoo
+        [Yy]* ) cd $OE_HOME
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/customaddons.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/aeroo_reports"
+        sudo su $OE_USER -c "ln -s $OE_HOME/aeroo_reports/* $OE_HOME/custom/addons/"      
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
