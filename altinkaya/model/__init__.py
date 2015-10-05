@@ -1,0 +1,12 @@
+import res_company
+import sale_order
+import res_partner
+import product_product
+import product_template
+import account_invoice
+import mrp_production
+import account_voucher
+import product_category
+import product_pricelist_item
+import stock_picking
+

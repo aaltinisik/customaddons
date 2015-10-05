@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+	<data>
+
+		<record id="sale_order_altinkaya_sale_order_form1" model="ir.ui.view">
+			<field name="name">sale.order.altinkaya_sale_order_form1</field>
+			<field name="model">sale.order</field>
+			<field name="priority" eval="19" />
+			<field name="type">form</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<data>
+					<field name="project_id" position="after">
+						<field name="payment_term">
+						</field>
+					</field>
+				</data>
+			</field>
+			<field eval="9" name="priority" />
+		</record>
+
+
+	</data>
+
+		<data>
+		<record id="ir_ui_view_accountinvoice_altinkaya_inherit0" model="ir.ui.view">
+			<field name="inherit_id" ref="account.invoice_form"/>
+			<field name="name">account.invoice.inherit_612</field>
+			<field name="arch" type="xml"><field name="partner_id" position="before">
+			<field name="address_contact_id" string="Teslimat Adresi"/> </field>
+			</field>
+			<field eval="17" name="priority"/>
+			<field name="model">account.invoice</field>
+			<field name="type">form</field>
+		</record>
+    </data>
+
+        <data>
+        <record id="ir_ui_view_altinkaya_Paymentterm0" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="name">sale.order.inherit1</field>
+            <field name="arch" type="xml">
+                <field name='payment_term' position='replace'> </field>
+            </field>
+            <field eval="5" name="priority"/>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+        </record>
+    </data>
+
+
+</openerp>
