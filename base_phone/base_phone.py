@@ -242,7 +242,8 @@ class PhoneCommon(models.AbstractModel):
 class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'phone.common']
-    _phone_fields = ['phone', 'mobile', 'fax']
+    _phone_fields = ['phone', 'partner_phone', 'work_phone', 'fax','followup_phone','followup_mobile',
+            'mobile', 'partner_mobile', 'mobile_phone','followup_fax']
     _phone_name_sequence = 10
     _country_field = 'country_id'
     _partner_field = None
