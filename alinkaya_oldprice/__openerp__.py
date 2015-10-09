@@ -7,7 +7,7 @@
     'sequence': 1,
     'summary': 'Altinkaya add fields for old prices for V7',
     'images': [],
-    'depends': ['product'],
+    'depends': ['product','altinkaya'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari Eski fiyat alanlari Ekler
 ===============================================================
