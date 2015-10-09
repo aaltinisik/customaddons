@@ -31,5 +31,17 @@ class product_template(osv.Model):
              u"2014 Min İşçcilik Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
              help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı"),
+        'z_fiyat_2015a': fields.float(
+             u"2015 Ocak Fiyatı",
+             digits_compute=dp.get_precision('Product Price'),
+             help=u"2015 Ocakta kullanilan eski fiyatı"),
+        'z_2015a_iscilik': fields.float(
+             u"2015 Ocak işçilik Fiyatı",
+             digits_compute=dp.get_precision('Product Price'),
+             help=u"2015 Ocakta kullanılan birim işçilik fiyatı"),
+        'z_min_2015a_iscilik': fields.float(
+             u"2015 Ocak Min İşçcilik Fiyatı",
+             digits_compute=dp.get_precision('Product Price'),
+             help=u"2015 Ocakta kullanılan eski Minimum İşçilik fiyatı"),
     }
 product_template()
