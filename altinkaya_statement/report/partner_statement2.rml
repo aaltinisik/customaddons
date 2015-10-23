@@ -37,7 +37,7 @@
 
             <!-- page header -->
             <drawRightString x="20cm" y="27.8cm">[[ company.rml_header1 ]]</drawRightString>
-            <drawString x="1.3cm" y="27.3cm">[[ company.partner_id.name ]]</drawString>
+            <drawString x="1.3cm" y="27.3cm">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SANAYİ TİCARET A.Ş.</drawString>
             <place x="1.3cm" y="25.3cm" height="1.8cm" width="15.0cm">
                 <para style="main_header">[[ display_address(company.partner_id) or  '' ]]</para>
             </place>
@@ -45,7 +45,7 @@
             <drawRightString x="20.0cm" y="28.0cm">CARİ HESAP EKSTRESİ</drawRightString>
             <setFont name="DejaVu Sans" size="8"/>
             <drawString x="14.8cm" y="27.2cm">Ulus VD:</drawString>
-            <drawRightString x="20cm" y="27.2cm">0630013507</drawRightString>
+            <drawRightString x="20cm" y="27.2cm">0610422947</drawRightString>
             <drawString x="14.8cm" y="26.8cm">Phone:</drawString>
             <drawRightString x="20cm" y="26.8cm">+90 312 395 2768</drawRightString>
             <drawString x="14.8cm" y="26.4cm">Faks:</drawString>
