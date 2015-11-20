@@ -2,7 +2,7 @@ from openerp.osv import osv, fields
 
 
 class x_makine(osv.Model):
-    _name = 'x_makine'  
+    _name = 'x.makine'
     _columns = {
         'x_group': fields.char(
             'Bolum',

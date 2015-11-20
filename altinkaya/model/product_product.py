@@ -2,9 +2,9 @@ from openerp.osv import osv, fields
 import openerp.addons.decimal_precision as dp
 
 
-class product_product(osv.Model):
-    _inherit = 'product.product'
-    _name = 'product.product'
+class product_template(osv.Model):
+    _inherit = 'product.template'
+    _name = 'product.template'
     _columns = {
         'x_cari_urun': fields.many2one(
             'res.partner',
@@ -20,4 +20,4 @@ class product_product(osv.Model):
              help="En Az Toplam iscilik Fiyati"),
         'z_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
     }
-product_product()
+product_template()

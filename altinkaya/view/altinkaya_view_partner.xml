@@ -9,10 +9,10 @@
 			<field eval="2" name="priority" />
 			<field name="inherit_id" ref="base.view_partner_form" />
 			<field name="arch" type="xml">
-				<field name="ref" position="replace" />
+				<xpath expr="//page[@name='sales_purchases']/group/group/field[@name='ref']" position="replace">
+					<field name="ref" invisible="1"/>
+				</xpath>
 			</field>
-			
-			
 		</record>
 
 		<record id="ir_ui_view_respartner_altinkaya_0" model="ir.ui.view">

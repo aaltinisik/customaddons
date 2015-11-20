@@ -2,30 +2,30 @@
 <openerp>
 	<data>
 
-		<record id="product_product_altinkaya_form_fiyatlar" model="ir.ui.view">
-			<field name="name">product.product.altinkaya_form_fiyatlar</field>
-			<field name="model">product.product</field>
-			<field name="inherit_id" ref="product.product_normal_form_view" />
+		<record id="product_template_altinkaya_form_fiyatlar" model="ir.ui.view">
+			<field name="name">product.template.altinkaya_form_fiyatlar</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view" />
 			<field name="arch" type="xml">
-				<field name="lst_price" position="after">
-                    <field name="z_guncel_fiyat"></field>
+				<xpath expr="//page[@string='Information']/group/group/field[@name='list_price']" position="after">
+					<field name="z_guncel_fiyat"></field>
                     <field name="x_fiyat_dolar"></field>
 					<field name="x_fiyat_euro"></field>
 					<field name="x_iscilik"></field>
 					<field name="x_min_iscilik"></field>
 					<field name="x_cari_urun"></field>
-				</field>
+				</xpath>
 
 			</field>
 		</record>
 
 
-        <record id="product_product_altinkaya_form_eskifiyatlar" model="ir.ui.view">
-            <field name="name">product.product.altinkaya_form_eskifiyatlar</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_normal_form_view" />
+        <record id="product_template_altinkaya_form_eskifiyatlar" model="ir.ui.view">
+            <field name="name">product.template.altinkaya_form_eskifiyatlar</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
             <field name="arch" type="xml">
-            <xpath expr="//form/sheet/notebook/page[2]/group[@name='procurement']//group[@name='general']" position="after">
+           <xpath expr="//page[@string='Procurements']/group/group[@name='general']" position="after">
                 <group name="Old_price" string="Eski Fiyatlar">
                 <field name="z_fiyat_2014"> </field>
                 <field name="z_2014_iscilik"> </field>
@@ -35,11 +35,10 @@
             </field>
         </record>
 
-
-		<record id="product_product_altinkaya_tree_cari" model="ir.ui.view">
-			<field name="name">product.product.altinkaya_tree_cari</field>
-			<field name="model">product.product</field>
-			<field name="inherit_id" ref="product.product_product_tree_view" />
+		<record id="product_template_altinkaya_tree_cari" model="ir.ui.view">
+			<field name="name">product.template.altinkaya_tree_cari</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_tree_view" />
 			<field name="arch" type="xml">
 
 				<field name="name" position="after">
@@ -49,7 +48,6 @@
 
 			</field>
 		</record>
-
 
 	</data>
 </openerp>
