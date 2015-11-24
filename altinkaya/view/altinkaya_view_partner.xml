@@ -10,7 +10,7 @@
 			<field name="inherit_id" ref="base.view_partner_form" />
 			<field name="arch" type="xml">
 				<xpath expr="//page[@name='sales_purchases']/group/group/field[@name='ref']" position="replace">
-					<field name="ref" invisible="1"/>
+					<field name="ref"/>
 				</xpath>
 			</field>
 		</record>
@@ -23,7 +23,7 @@
 				<field name="email" position="after">
 					<field name="x_vergidairesi" />
 					<field name="x_vergino" />
-					<field name="ref" />
+				<!--	<field name="ref" />-->
 				</field>
 			</field>
 			<field eval="5" name="priority" />
