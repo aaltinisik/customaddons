@@ -154,7 +154,7 @@ sudo adduser odoo --home=/opt/odoo --group odoo
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql -y  
+sudo apt-get install postgresql postgresql-contrib -y  
 
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
 sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
@@ -197,12 +197,12 @@ sudo su root -c "echo 'db_user = $OE_USER' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_port = False' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_password = False' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'admin_passwd = $OE_SUPERADMIN' >> /etc/$OE_CONFIG.conf"
-
 sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/customaddons' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## XML-RPC / HTTP - XML-RPC Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'unaccent = True' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpc = True' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpc_interface  = ' >> /etc/$OE_CONFIG.conf"
