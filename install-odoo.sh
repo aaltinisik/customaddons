@@ -441,7 +441,9 @@ while true; do
         [Yy]* ) cd $OE_HOME
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/customaddons.git"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/aeroo_reports"
-        sudo su $OE_USER -c "ln -s $OE_HOME/aeroo_reports/* $OE_HOME/custom/addons/"      
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/connector-telephony.git"
+        sudo su $OE_USER -c "ln -s -f $OE_HOME/connector-telephony/* $OE_HOME/custom/addons/"
+        sudo su $OE_USER -c "ln -s -f $OE_HOME/aeroo_reports/* $OE_HOME/custom/addons/"      
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
