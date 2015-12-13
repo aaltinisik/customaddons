@@ -7,7 +7,7 @@
 OE_DATABASE="upgrade1"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
-OCA_HOME="/opt/odoo/OCA"
+
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
 OE_SERVERTYPE="openerp-server"
@@ -15,6 +15,7 @@ OE_VERSION="8.0"
 #set the superadmin password
 OE_CONFIG="odoo-server"
 
+OCA_HOME="$OE_HOME/OCA"
 
 # Install Aeroo Reports:
 echo -e "\n---- Install community   Modules: ----"
@@ -23,21 +24,21 @@ while true; do
     read -p "Would you like to clone git repos of community modules (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OE_HOME
-        git clone -b 8.0 https://github.com/aaltinisik/customaddons.git $OE_HOME/customaddons
+        git clone -b $OE_VERSION https://github.com/aaltinisik/customaddons.git $OE_HOME/customaddons
         mkdir $OCA_HOME
         cd $OCA_HOME
-        git clone -b 8.0 https://github.com/aaltinisik/aeroo_reports $OCA_HOME/aeroo_reports
-        git clone -b 8.0 https://github.com/aaltinisik/connector-telephony.git $OCA_HOME/connector-telephony    
-        git clone -b 8.0 https://github.com/OCA/web.git $OCA_HOME/web
-        git clone -b 8.0 https://github.com/yelizariev/addons-yelizariev.git $OCA_HOME/addons-yelizariev
-        git clone -b 8.0 https://github.com/OCA/server-tools.git $OCA_HOME/server-tools
-        git clone -b 8.0 https://github.com/OCA/knowledge.git $OCA_HOME/knowledge
-        git clone -b 8.0 https://github.com/OCA/purchase-workflow.git $OCA_HOME/purchase-workflow
-        git clone -b 8.0 https://github.com/OCA/product-attribute.git $OCA_HOME/product-attribute
-        git clone -b 8.0 https://github.com/OCA/sale-workflow.git $OCA_HOME/sale-workflow
-        git clone -b 8.0 https://github.com/OCA/account-invoicing.git $OCA_HOME/account-invoicing
-        git clone -b 8.0 https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking
-        git clone -b 8.0 https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact
+        git clone -b $OE_VERSION https://github.com/aaltinisik/aeroo_reports $OCA_HOME/aeroo_reports
+        git clone -b $OE_VERSION https://github.com/aaltinisik/connector-telephony.git $OCA_HOME/connector-telephony    
+        git clone -b $OE_VERSION https://github.com/OCA/web.git $OCA_HOME/web
+        git clone -b $OE_VERSION https://github.com/yelizariev/addons-yelizariev.git $OCA_HOME/addons-yelizariev
+        git clone -b $OE_VERSION https://github.com/OCA/server-tools.git $OCA_HOME/server-tools
+        git clone -b $OE_VERSION https://github.com/OCA/knowledge.git $OCA_HOME/knowledge
+        git clone -b $OE_VERSION https://github.com/OCA/purchase-workflow.git $OCA_HOME/purchase-workflow
+        git clone -b $OE_VERSION https://github.com/OCA/product-attribute.git $OCA_HOME/product-attribute
+        git clone -b $OE_VERSION https://github.com/OCA/sale-workflow.git $OCA_HOME/sale-workflow
+        git clone -b $OE_VERSION https://github.com/OCA/account-invoicing.git $OCA_HOME/account-invoicing
+        git clone -b $OE_VERSION https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking
+        git clone -b $OE_VERSION https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact
        
         break;;
         [Nn]* ) break;;
@@ -98,4 +99,5 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
 
