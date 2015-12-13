@@ -436,14 +436,27 @@ sudo apt-get -f install -y
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
 
 while true; do
-    read -p "Would you like to install custom altinkaya odoo 8 custom modules (y/n)?" yn
+    read -p "Would you like to install OCA 8 custom modules (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OE_HOME
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/customaddons.git"
+        sudo su $OE_USER -c "mkdir OCA"
+        sudo su $OE_USER -c "cd OCA"        
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/aeroo_reports"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/connector-telephony.git"
-        sudo su $OE_USER -c "ln -s -f $OE_HOME/connector-telephony/* $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OE_HOME/aeroo_reports/* $OE_HOME/custom/addons/"      
+        sudo su $OE_USER -c "ln -s -f $OE_HOME/OCA/connector-telephony/* $OE_HOME/custom/addons/"
+        sudo su $OE_USER -c "ln -s -f $OE_HOME/OCA/aeroo_reports/* $OE_HOME/custom/addons/"
+        
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/web.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/yelizariev/addons-yelizariev.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/server-tools.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/knowledge.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/purchase-workflow.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/product-attribute.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/sale-workflow.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/account-invoicing.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/stock-logistics-tracking.git"
+        
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
