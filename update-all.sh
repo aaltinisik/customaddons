@@ -60,7 +60,7 @@ while true; do
         [Yy]* ) cd $OE_HOME_EXT
         
         sudo /etc/init.d/odoo-server stop
-        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf        
+        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf
         sudo /etc/init.d/odoo-server start
     
         break;;

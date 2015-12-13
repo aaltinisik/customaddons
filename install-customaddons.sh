@@ -4,7 +4,7 @@
 ##fixed parameters
 #openerp
 
-OE_DATABASE="upgrade1"
+OE_DATABASE="migrated1"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 
@@ -50,7 +50,7 @@ while true; do
     read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OE_HOME
-        ln -s -f $OCA_HOME/connector-telephony/* $OE_HOME/custom/addons/
+        ln -s -f $OCaA_HOME/connector-telephony/* $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
@@ -101,3 +101,22 @@ while true; do
 done
 
 
+while true; do
+    read -p "Would you like to update odoo database all  modules  (y/n)?" yn
+    case $yn in
+        [Yy]* ) cd $OE_HOME_EXT
+        
+        sudo /etc/init.d/odoo-server stop
+        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf
+        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i web_widget_many2many_tags_multi_selection,web_translate_dialog,web_sheet_full_width,web_searchbar_full_width,web_last_viewed_records,auth_admin_passkey,base_concurrency,cron_run_manually,web_environment_ribbon,scheduler_error_mailer
+        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i base_optional_quick_create,base_report_auto_create_qweb,disable_openerp_online,fetchmail_notify_error_to_sender,language_path_mixin,module_prototyper,mass_editing,super_calendar,attachment_preview,attachments_to_filesystem,product_by_supplier
+        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i purchase_order_revision,partner_external_maps,product_dimension,product_weight,partner_prepayment,sale_automatic_workflow,sale_cancel_reason,sale_order_back2draft,partner_prepayment,sale_automatic_workflow,sale_cancel_reason,sale_order_back2draft
+        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i sale_order_price_recalculation,sale_order_revision,sale_partner_incoterm,sale_payment_method,sale_validity,account_invoice_partner,stock_barcode_reader
+        
+        sudo /etc/init.d/odoo-server start
+    
+        break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
