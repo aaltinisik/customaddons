@@ -39,6 +39,9 @@ while true; do
         git clone -b $OE_VERSION https://github.com/OCA/account-invoicing.git $OCA_HOME/account-invoicing
         git clone -b $OE_VERSION https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking
         git clone -b $OE_VERSION https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact
+        git clone -b $OE_VERSION https://github.com/OCA/report-print-send.git $OCA_HOME/report-print-send
+        
+        
        
         break;;
         [Nn]* ) break;;
@@ -93,6 +96,8 @@ while true; do
         ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/
+        ln -s -f $OCA_HOME/report-print-send/base_report_to_printer $OE_HOME/custom/addons/
+        
     
         break;;
         [Nn]* ) break;;
@@ -107,12 +112,7 @@ while true; do
         [Yy]* ) cd $OE_HOME_EXT
         
         sudo /etc/init.d/odoo-server stop
-        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf
-        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i web_widget_many2many_tags_multi_selection,web_translate_dialog,web_sheet_full_width,web_searchbar_full_width,web_last_viewed_records,auth_admin_passkey,base_concurrency,cron_run_manually,web_environment_ribbon,scheduler_error_mailer
-        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i base_optional_quick_create,base_report_auto_create_qweb,disable_openerp_online,fetchmail_notify_error_to_sender,language_path_mixin,module_prototyper,mass_editing,super_calendar,attachment_preview,attachments_to_filesystem,product_by_supplier
-        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i purchase_order_revision,partner_external_maps,product_dimension,product_weight,partner_prepayment,sale_automatic_workflow,sale_cancel_reason,sale_order_back2draft,partner_prepayment,sale_automatic_workflow,sale_cancel_reason,sale_order_back2draft
-        ./openerp-server -d $OE_DATABASE --stop-after-init --config=/etc/odoo-server.conf  -i sale_order_price_recalculation,sale_order_revision,sale_partner_incoterm,sale_payment_method,sale_validity,account_invoice_partner,stock_barcode_reader
-        
+        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf      
         sudo /etc/init.d/odoo-server start
     
         break;;
