@@ -4,7 +4,7 @@
 ##fixed parameters
 #openerp
 
-OE_DATABASE="migrated1"
+OE_DATABASE="upgrade1"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 
