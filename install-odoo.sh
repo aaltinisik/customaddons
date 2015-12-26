@@ -33,9 +33,10 @@
 # DESCRIPTION: This script is designed to install all the dependencies for the aeroo-reports modules from Alistek.
 # It also gives you the option of installing Odoo while you're running the script. If you don't want this just choose no when given the option.
 
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install open-vm-tools linux-virtual -y
+#sudo apt-get update
+#sudo apt-get upgrade -y
+# use below if machine is VM
+# sudo apt-get install open-vm-tools linux-virtual -y
 
 sudo aptitude update && sudo aptitude full-upgrade -y
 sudo apt-get build-dep build-essential -y
@@ -56,6 +57,7 @@ sudo python setup.py install
 
 #Create Init Script for OpenOffice (Headless Mode):
 echo -e "\n---- create init script for LibreOffice (Headless Mode) ----"
+sudo rm /etc/init.d/office
 sudo touch /etc/init.d/office
 sudo su root -c "echo '### BEGIN INIT INFO' >> /etc/init.d/office"
 sudo su root -c "echo '# Provides:          office' >> /etc/init.d/office"
@@ -80,6 +82,7 @@ echo -e "\n---- Install AerooDOCS (see: https://github.com/aeroo/aeroo_docs/wiki
 sudo pip3 install jsonrpc2 daemonize
 
 echo -e "\n---- create conf file for AerooDOCS ----"
+sudo rm /etc/aeroo-docs.conf
 sudo touch /etc/aeroo-docs.conf
 sudo su root -c "echo '[start]' >> /etc/aeroo-docs.conf"
 sudo su root -c "echo 'interface = localhost' >> /etc/aeroo-docs.conf"
@@ -98,6 +101,7 @@ cd /opt/aeroo
 sudo git clone https://github.com/aeroo/aeroo_docs.git
 sudo touch /etc/init.d/office
 sudo python3 /opt/aeroo/aeroo_docs/aeroo-docs start -c /etc/aeroo-docs.conf
+sudo rm /etc/init.d/aeroo-docs
 sudo ln -s /opt/aeroo/aeroo_docs/aeroo-docs /etc/init.d/aeroo-docs
 sudo update-rc.d aeroo-docs defaults
 sudo service aeroo-docs restart
@@ -185,6 +189,8 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
+
+sudo rm /etc/$OE_CONFIG.conf
 sudo touch /etc/$OE_CONFIG.conf
 sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
@@ -263,6 +269,7 @@ sudo su root -c "echo 'log_level = info' >> /etc/$OE_CONFIG.conf"
 
 
 echo -e "* Create startup file"
+sudo su root -c "rm $OE_HOME_EXT/start.sh"
 sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
 sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/$OE_SERVERTYPE --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
 sudo chmod 755 $OE_HOME_EXT/start.sh
@@ -362,14 +369,6 @@ sudo update-rc.d $OE_CONFIG defaults
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
-
-#--------------------------------------------------
-# Update Server
-#--------------------------------------------------
-echo -e "\n---- Update Server ----"
-sudo apt-get update -y
-sudo apt-get upgrade -y
-
 #--------------------------------------------------
 # Install SSH
 #--------------------------------------------------
@@ -435,10 +434,7 @@ sudo apt-get -f install -y
 # Install Aeroo Reports:
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
 
-while true; do
-    read -p "Would you like to install OCA 8 custom modules (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME
+        cd $OE_HOME
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/customaddons.git"
         sudo su $OE_USER -c "mkdir OCA"
         sudo su $OE_USER -c "cd OCA"        
@@ -457,22 +453,11 @@ while true; do
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/account-invoicing.git"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/stock-logistics-tracking.git"
         
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
 
 OCA_HOME="$OE_HOME/OCA"
 
-# Install Aeroo Reports:
-echo -e "\n---- Install community   Modules: ----"
-
-while true; do
-    read -p "Would you like to clone git repos of community modules (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME
+        cd $OE_HOME
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/aaltinisik/customaddons.git $OE_HOME/customaddons"
         sudo su $OE_USER -c "mkdir $OCA_HOME"
         sudo su $OE_USER -c "cd $OCA_HOME"
@@ -489,65 +474,51 @@ while true; do
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking"
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact"
        
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
-while true; do
-    read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/connector-telephony/* $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_sheet_full_width $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_searchbar_full_width $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_last_viewed_records $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/auth_admin_passkey $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_concurrency $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/cron_run_manually $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_optional_quick_create $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_report_auto_create_qweb $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/disable_openerp_online $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/fetchmail_notify_error_to_sender $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/language_path_mixin $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/module_prototyper $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/mass_editing $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/super_calendar $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachment_preview $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachments_to_filesystem $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/product_by_supplier $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/purchase_order_revision $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/partner-contact/partner_external_maps $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_dimension $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_weight $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_price_recalculation $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_revision $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_partner_incoterm $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_payment_method $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/"
-    
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+cd $OE_HOME
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/connector-telephony/* $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_sheet_full_width $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_searchbar_full_width $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_last_viewed_records $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/auth_admin_passkey $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_concurrency $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/cron_run_manually $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_optional_quick_create $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_report_auto_create_qweb $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/disable_openerp_online $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/fetchmail_notify_error_to_sender $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/language_path_mixin $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/module_prototyper $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/mass_editing $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/super_calendar $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachment_preview $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachments_to_filesystem $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/product_by_supplier $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/purchase_order_revision $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/partner-contact/partner_external_maps $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_dimension $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_weight $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_price_recalculation $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_revision $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_partner_incoterm $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_payment_method $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/"
 
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
