@@ -165,6 +165,8 @@ sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres --pwprompt $OE_USER" 
+echo -e "\n---- Creating postgres unaccent search extension  ----"
+sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
 sudo adduser --shell=/bin/bash --home=/opt/$OE_USER --gecos "Odoo" $OE_USER
 echo -e "\n---- Enter odoo system users password ----"
