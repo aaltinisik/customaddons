@@ -427,9 +427,11 @@ sudo dpkg -i Downloads/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
-sudo apt-get install cups lpr -y
+sudo apt-get install cups lpr phppgadmin -y
 sudo apt-get autoremove -y
 sudo apt-get -f install -y
+
+sudo cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
 
 # Install Aeroo Reports:
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
