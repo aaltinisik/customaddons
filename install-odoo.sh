@@ -38,7 +38,7 @@
 # use below if machine is VM
 # sudo apt-get install open-vm-tools linux-virtual -y
 
-echo -e "\n---- Decide system passwords ----"
+echo -e "---- Decide system passwords ----"
 read -e -s -p "Enter odoo system users password: " OE_USERPASS
 echo -e "\n"
 read -e -s -p "Enter the Database password: " DBPASS
@@ -486,7 +486,6 @@ OCA_HOME="$OE_HOME/OCA"
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/account-invoicing.git $OCA_HOME/account-invoicing"
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking"
         sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact"
-       
 
 cd $OE_HOME
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/connector-telephony/* $OE_HOME/custom/addons/"
@@ -499,6 +498,7 @@ sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_searchbar_full_width $OE_HOME/cu
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_last_viewed_records $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/auth_admin_passkey $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_concurrency $OE_HOME/custom/addons/"
+sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/admin_technical_features $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/cron_run_manually $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/"
