@@ -38,6 +38,14 @@
 # use below if machine is VM
 # sudo apt-get install open-vm-tools linux-virtual -y
 
+echo -e "\n---- Decide system passwords ----"
+read -e -s -p "Enter odoo system users password: " OE_USERPASS
+echo -e "\n"
+read -e -s -p "Enter the Database password: " DBPASS
+echo -e "\n"
+read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
+echo -e "\n"
+
 sudo aptitude update && sudo aptitude full-upgrade -y
 sudo apt-get build-dep build-essential -y
 
@@ -135,7 +143,6 @@ OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 OE_SERVERTYPE="openerp-server"
 OE_VERSION="8.0"
 #set the superadmin password
-OE_SUPERADMIN="superadminpassword"
 OE_CONFIG="odoo-server"
 
 #--------------------------------------------------
@@ -164,13 +171,15 @@ echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
 sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser --createdb --username postgres --pwprompt $OE_USER" 
+sudo su - postgres -c "createuser --createdb --username postgres $OE_USER" 
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
+sudo -u postgres psql -U postgres -d postgres -c "alter user $OE_USER with password '$DBPASS';"
+
 sudo adduser --shell=/bin/bash --home=/opt/$OE_USER --gecos "Odoo" $OE_USER
-echo -e "\n---- Enter odoo system users password ----"
-sudo passwd $OE_USER
+
+echo $OE_USER:$OE_USERPASS | chpasswd
 
 echo -e "\n---- Create Log directory ----"
 sudo mkdir /var/log/$OE_USER
@@ -203,7 +212,7 @@ sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_host = localhost' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_user = $OE_USER' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'db_port = False' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo 'db_password = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'db_password = $DBPASS' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'admin_passwd = $OE_SUPERADMIN' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/customaddons' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
