@@ -66,6 +66,7 @@ while true; do
         ln -s -f $OCA_HOME/server-tools/cron_run_manually $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/
+        ln -s -f $OCA_HOME/server-tools/admin_technical_features $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/server-tools/base_optional_quick_create $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/server-tools/base_report_auto_create_qweb $OE_HOME/custom/addons/
         ln -s -f $OCA_HOME/server-tools/disable_openerp_online $OE_HOME/custom/addons/
