@@ -5,7 +5,7 @@
     'website': 'http://www.altinkaya.eu',
     'category': 'altinkaya',
     'sequence': 1,
-    'summary': 'Altinkaya add fields for old prices for V7',
+    'summary': 'Altinkaya add fields for old prices for V8',
     'images': [],
     'depends': ['product','altinkaya'],
     'description': """

@@ -1,0 +1,140 @@
+<openerp>
+    <data>
+        <!-- faxsend.account -->
+        <record model="ir.ui.view" id="faxsend_account_form">
+            <field name="name">faxsend.account.form</field>
+            <field name="model">faxsend.account</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Send fax account" version="7.0">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="faxsend_account_list">
+            <field name="name">faxsend.account.list</field>
+            <field name="model">faxsend.account</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Send fax account">
+                    <field name="name"/>
+                    <field name="username"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_faxsend_account_search" model="ir.ui.view">
+            <field name="name">faxsend.account.search</field>
+            <field name="model">faxsend.account</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Send fax account">
+                    <field name="name"/>
+                    <field name="username"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- faxsend.queue -->
+        <record model="ir.ui.view" id="faxsend_queue_form">
+            <field name="name">faxsend.queue.form</field>
+            <field name="model">faxsend.queue</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Send fax queue" version="7.0">
+                    <header>
+                        <button name="action_send_fax" string="Send fax" states="draft" type="object" />
+                        <button name="action_send_fax_again" states="ok,cancel,error" string="Send again" type="object" />
+                        <button name="action_cancel_send_fax" string="Cancel send fax" states="draft,wait" type="object" />
+                        <field name="state" widget="statusbar" nolabel="1" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="account_id" invisible="True"/>
+                            <field name="subject"/>
+                            <field name="name"/>
+                            <field name="attachment_id"/>
+                            <field name="report"/>
+                            <field name="object_type"/>
+                            <field name="obj_id"/>
+                            <field name="faxno"/>
+                            <field name="job_no"/>
+                            <field name="retry_counter"/>
+                            <field name="pages"/>
+                            <field name="duration"/>
+                            <separator string="Trigger settings on Fax 'error' or 'success'" colspan="4"/>
+                            <field name="trigger_model"/>
+                            <field name="trigger_method"/>
+                            <field name="trigger_method_args"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="faxsend_queue_list">
+            <field name="name">faxsend.queue.list</field>
+            <field name="model">faxsend.queue</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Send fax queue">
+                    <field name="queue_date"/>
+                    <field name="name" invisible="True"/>
+                    <field name="subject"/>
+                    <field name="state"/>
+                    <field name="faxno"/>
+                    <field name="job_no"/>
+                    <field name="retry_counter"/>
+                    <field name="duration"/>
+                    <field name="pages"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_faxsend_queue_search" model="ir.ui.view">
+            <field name="name">faxsend.queue.search</field>
+            <field name="model">faxsend.queue</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Send fax queue">
+                    <field name="state"/>
+                    <field name="report"/>
+                    <field name="subject"/>
+                    <field name="faxno"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_faxsend_account_list">
+            <field name="name">Fax Account</field>
+            <field name="res_model">faxsend.account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="faxsend_account_list" />
+            <field name="search_view_id" ref="view_faxsend_account_search"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_faxsend_queue_list">
+            <field name="name">Fax Queue</field>
+            <field name="res_model">faxsend.queue</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="faxsend_queue_list" />
+            <field name="search_view_id" ref="view_faxsend_queue_search"/>
+        </record>
+
+        <menuitem id="menu_fax" name="Fax" parent="base.menu_config" />
+        <menuitem id="menu_fax_sendaccount" parent="menu_fax" action="action_faxsend_account_list" sequence="10"/>
+        <menuitem id="menu_fax_sendqueue" parent="menu_fax" action="action_faxsend_queue_list" sequence="15"/>
+        <menuitem id="menu_fax_sendqueue2" parent="crm.menu_crm_case_phone" action="action_faxsend_queue_list" sequence="15"/>
+
+
+    </data>
+</openerp>

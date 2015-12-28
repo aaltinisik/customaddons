@@ -19,17 +19,5 @@ class product_template(osv.Model):
              'Euro Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Euro ile satilirken kullanilan temel fiyat"),
-        'z_fiyat_2014': fields.float(
-             u"2014 Eski Fiyatı",
-             digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanilan eski fiyatı"),
-        'z_2014_iscilik': fields.float(
-             u"2014 işçilik Fiyatı",
-             digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanılan birim işçilik fiyatı"),
-        'z_min_2014_iscilik': fields.float(
-             u"2014 Min İşçcilik Fiyatı",
-             digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı"),
     }
 product_template()

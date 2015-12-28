@@ -5,7 +5,7 @@
         <frame id="first" x1="1.3cm" y1="3.0cm" height="21.7cm" width="19.0cm"/>
          <stylesheet>
             <!-- Set here the default font to use for all <para> tags -->
-            <paraStyle name='Normal' fontName="DejaVu Sans"/>
+            <paraStyle name='Normal' fontName="DejaVuSans"/>
             <paraStyle name="main_footer" fontSize="8.0" alignment="CENTER"/>
             <paraStyle name="main_header" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
       <blockTableStyle id="Table_Partner_Address">
@@ -29,7 +29,7 @@
          </stylesheet>
         <pageGraphics>
             <!-- Set here the default font to use for all <drawString> tags -->
-            <setFont name="DejaVu Sans" size="8"/>
+            <setFont name="DejaVuSans" size="8"/>
             <!-- You Logo - Change X,Y,Width and Height -->
             <image x="1.3cm" y="27.7cm" height="40.0" >[[ company.logo or removeParentNode('image') ]]</image>
             <fill color="black"/>
@@ -41,9 +41,9 @@
             <place x="1.3cm" y="25.3cm" height="1.8cm" width="15.0cm">
                 <para style="main_header">[[ display_address(company.partner_id) or  '' ]]</para>
             </place>
-            <setFont name="DejaVu Sans" size="18"/>
+            <setFont name="DejaVuSans" size="18"/>
             <drawRightString x="20.0cm" y="28.0cm">CAR&#x69; HESAP EKSTRES&#x69;</drawRightString>
-            <setFont name="DejaVu Sans" size="8"/>
+            <setFont name="DejaVuSans" size="8"/>
             <drawString x="14.8cm" y="27.2cm">Ulus VD:</drawString>
             <drawRightString x="20cm" y="27.2cm">0630013507</drawRightString>
             <drawString x="14.8cm" y="26.8cm">Phone:</drawString>

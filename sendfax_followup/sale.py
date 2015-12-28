@@ -22,7 +22,7 @@
 from openerp.osv import fields
 from openerp.osv import osv
 from openerp.tools.translate import _
-import netsvc
+from openerp import netsvc
 import base64
 
 class sale_order(osv.osv):
