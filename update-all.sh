@@ -4,7 +4,6 @@
 ##fixed parameters
 #openerp
 
-OE_DATABASE="migrated1"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OCA_HOME="/opt/odoo/OCA"
@@ -16,8 +15,8 @@ OE_VERSION="8.0"
 OE_CONFIG="odoo-server"
 
 
-# Install Aeroo Reports:
-echo -e "\n---- Install community   Modules: ----"
+
+echo -e "\n---- Install community Modules: ----"
 
 cd $OCA_HOME
 
@@ -48,9 +47,12 @@ while true; do
         [Yy]* )  cd $OE_HOME_EXT
         pwd
         git pull
+        cd $OE_HOME/customaddons
+        pwd
+        git pull
         break;;
         [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
+        * )  echo "Please answer yes or no.";;
     esac
 done
 
@@ -60,7 +62,7 @@ while true; do
         [Yy]* ) cd $OE_HOME_EXT
         
         sudo /etc/init.d/odoo-server stop
-        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf
+        /opt/odoo/odoo-server/odooupdate.sh
         sudo /etc/init.d/odoo-server start
     
         break;;
