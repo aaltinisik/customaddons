@@ -4,7 +4,6 @@
 ##fixed parameters
 #openerp
 
-OE_DATABASE="upgrade1"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 
@@ -17,9 +16,14 @@ OE_CONFIG="odoo-server"
 
 OCA_HOME="$OE_HOME/OCA"
 
-# Install Aeroo Reports:
-echo -e "\n---- Install community   Modules: ----"
 
+if [ "$(id -u)" = "0" ]; then
+   echo "This script must not be run as root" 1>&2
+   exit 1
+fi
+
+
+echo -e "\n---- Install community   Modules: ----"
 while true; do
     read -p "Would you like to clone git repos of community modules (y/n)?" yn
     case $yn in
@@ -113,7 +117,7 @@ while true; do
         [Yy]* ) cd $OE_HOME_EXT
         
         sudo /etc/init.d/odoo-server stop
-        ./openerp-server -d $OE_DATABASE -u all --stop-after-init --config=/etc/odoo-server.conf      
+        $OE_HOME_EXT/odooupdate.sh
         sudo /etc/init.d/odoo-server start
     
         break;;
