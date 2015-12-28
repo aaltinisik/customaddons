@@ -61,10 +61,7 @@ while true; do
     case $yn in
         [Yy]* ) cd $OE_HOME_EXT
         
-        sudo /etc/init.d/odoo-server stop
         /opt/odoo/odoo-server/odooupdate.sh
-        sudo /etc/init.d/odoo-server start
-    
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
