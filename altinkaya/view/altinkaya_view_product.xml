@@ -25,9 +25,11 @@
 			<field name="inherit_id" ref="product.product_template_tree_view" />
 			<field name="arch" type="xml">
 
-				<field name="name" position="after">
-					<field name="x_cari_urun">
-					</field>
+				<field name="name" position="replace">
+					<field name="default_code"></field>
+					<field name="name"></field>
+					<field name="x_cari_urun"></field>
+
 				</field>
 
 			</field>
