@@ -10,6 +10,7 @@
                 <field name="move_id" position="after">
                     <field name="waybillno" />
                     <field name="currency_at_date" />
+                    <field name="x_teslimat" />
                     <field name="carrier_id" />
                 </field>
                 <field name="tax_line" position="after">
