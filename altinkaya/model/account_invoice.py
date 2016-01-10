@@ -4,6 +4,7 @@ import hashlib
 
 class account_invoice(osv.Model):
     _inherit = 'account.invoice'
+    _order = 'id desc'
 
     def _altinkaya_payment_url(self, cr, uid, ids, field, arg, context=None):
         res = dict.fromkeys(ids, False)
