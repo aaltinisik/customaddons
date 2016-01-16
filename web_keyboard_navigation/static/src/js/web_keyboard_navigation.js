@@ -69,8 +69,9 @@ $.ctrl('N', function() {
 });*/
 
 //Previous object
-$.ctrl('38', function() {
-	$('.oe-pager-button[data-pager-action="previous"]').each(function() {
+$.ctrl('37', function() {
+
+	$('.oe_i[data-pager-action="previous"]').each(function() {
 		if($(this).parents('div:hidden').length == 0){
 			$(this).trigger('click');
 		}
@@ -78,8 +79,9 @@ $.ctrl('38', function() {
 });
 
 //Next object
-$.ctrl('40', function() {
-	$('.oe-pager-button[data-pager-action="next"]').each(function() {
+$.ctrl('39', function() {
+    event.preventDefault();
+	$('.oe_i[data-pager-action="next"]').each(function() {
 		if($(this).parents('div:hidden').length == 0){
 			$(this).trigger('click');
 		}
