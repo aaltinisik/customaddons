@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * web_shortcuts
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: web (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-23 13:46+0000\n"
+"PO-Revision-Date: 2015-11-07 11:29+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-web-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: web_shortcuts
+#. openerp-web
+#: code:addons/web_shortcuts/static/src/xml/web_shortcuts.xml:24
+#, python-format
+msgid "Add / Remove Shortcut..."
+msgstr "Añadir / Eliminar acceso directo..."
+
+#. module: web_shortcuts
+#: field:web.shortcut,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: web_shortcuts
+#: field:web.shortcut,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: web_shortcuts
+#: field:web.shortcut,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: web_shortcuts
+#: field:web.shortcut,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: web_shortcuts
+#: field:web.shortcut,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: web_shortcuts
+#: field:web.shortcut,menu_id:0
+msgid "Menu id"
+msgstr "ID del menú"
+
+#. module: web_shortcuts
+#: field:web.shortcut,name:0
+msgid "Shortcut Name"
+msgstr "Nombre del acceso directo"
+
+#. module: web_shortcuts
+#: sql_constraint:web.shortcut:0
+msgid "Shortcut for this menu already exists!"
+msgstr "Ya existe un acceso directo para este menú"
+
+#. module: web_shortcuts
+#: field:web.shortcut,user_id:0
+msgid "User Ref."
+msgstr "Ref. usuario"
