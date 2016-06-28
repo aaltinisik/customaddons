@@ -13,6 +13,17 @@
             </field>
         </record>
 
+        <record id="altinkaya_view_partner_property_form3" model="ir.ui.view">
+            <field name="name">altinkaya_contactname.partner.property.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="fax" position="after">
+                    <field name="z_contact_name"></field>
+                </field>
+            </field>
+        </record>
+
 <record id="acespritech_view_partner_property_form2" model="ir.ui.view">
             <field name="name">altinkaya_telfax.partner.form</field>
             <field name="model">res.partner</field>
