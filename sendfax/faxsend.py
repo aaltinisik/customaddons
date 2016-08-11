@@ -190,7 +190,7 @@ class faxsend_queue(osv.osv):
                                     self.write(cr, uid, list, {'state': 'ok', 'pages': i[6],
                                                                'duration': i[8]})
                                 else:
-                                    if o.retry_counter < 5:
+                                    if o.retry_counter < 1:
                                         self.write(cr, uid, [o.id], {'retry_counter': o.retry_counter + 1,
                                                                      'state': 'wait'})
                                     else:

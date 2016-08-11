@@ -13,7 +13,7 @@
             </field>
         </record>
 
-        <record id="altinkaya_view_partner_property_form3" model="ir.ui.view">
+            <record id="altinkaya_view_partner_property_form3" model="ir.ui.view">
             <field name="name">altinkaya_contactname.partner.property.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -31,7 +31,7 @@
             <field eval="2" name="priority" />
             <field name="arch" type="xml">
                 <field name="date" position="after">
-                    <field name="z_tel_kampanya"></field>
+                   <field name="z_tel_kampanya"></field>
                     <field name="z_kamp_2016A"></field>
                     <field name="z_kat_postala"></field>
                     <field name="z_kat_email"></field>

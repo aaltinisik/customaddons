@@ -29,12 +29,12 @@ class res_partner(osv.osv):
     'z_old_tel': fields.char('Eski Tel', size=64, required=False),
     'z_old_fax': fields.char('Eski Faks', size=64, required=False),
     'z_old_cep': fields.char('Eski Cep', size=64, required=False),
-    'z_contact_name': fields.char('İlgili Kişi', size=64, required=False),
-    'z_tel_kampanya': fields.boolean('Kampanyalarda Aranabilir', help="Seçili ise telefon kampanyalarında aranabilir müşteridir."),
-    'z_kamp_2016A': fields.boolean('2016 Katalog için arandı', help="2016 Temmuz Katalog gönderme kampanyası için arandı."),
-    'z_kat_postala': fields.boolean('Katalog Postala', help="Katalog Posta ile gönderilecek."),
-    'z_kat_email': fields.boolean('Katalog E-mail', help="Katalog email ile gönderilecek."),
-    
+    'z_contact_name': fields.char('ilgili kisi', size=64, required=False),
+    'z_tel_kampanya': fields.boolean('Kampanyalarda Aranmayacak',default=False, help="Secili ise telefon kampanyalarinda aranmayacak."),
+    'z_kamp_2016A': fields.boolean('2016 Katalog icin arandi', help="2016 Temmuz Katalog gonderme kampanyasi icin arandi."),
+    'z_kat_postala': fields.boolean('Katalog Postala', help="Katalog Posta ile gonderilecek."),
+    'z_kat_email': fields.boolean('Katalog E-mail', help="Katalog email ile gonderilecek."),
+
     }
 
 
