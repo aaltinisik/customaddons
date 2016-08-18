@@ -34,6 +34,7 @@
                     <field name="z_tel_kampanya"></field>
                     <field name="z_kamp_2016A"></field>
                     <field name="z_kat_postala"></field>
+                    <field name="z_kat_postalandi"></field>
                     <field name="z_kat_email"></field>
                     <field name="z_old_tel"></field>
                     <field name="z_old_fax"></field>
