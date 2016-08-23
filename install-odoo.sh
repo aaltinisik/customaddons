@@ -439,6 +439,7 @@ sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 sudo apt-get install cups lpr phppgadmin -y
+sudo apt-get install foomatic-db openprinting-ppds foomatic-db-gutenprint python-notify lm-sensors snmp-mibs-downloader psutils hannah-foo2zjs tix hpijs-ppds python-pexpect-doc unpaper tcl-tclreadline xfonts-cyrillic -y
 sudo apt-get autoremove -y
 sudo apt-get -f install -y
 
