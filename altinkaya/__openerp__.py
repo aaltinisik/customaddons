@@ -8,7 +8,7 @@
     'summary': 'Altinkaya Enclosures Customizations for V8',
     'images': [],
     'depends': ['crm','mail','account_voucher','account_accountant','sale','stock','mrp','purchase','hr','account',
-    'account_cancel','analytic','base','base_action_rule','base_setup','base_status','board','contacts',
+    'account_cancel','analytic','base','base_action_rule','base_setup','board','contacts',
     'decimal_precision','delivery','document','edi','email_template','fetchmail','knowledge','mrp_operations',
     'process','procurement','product','product_visible_discount'],
     'description': """
