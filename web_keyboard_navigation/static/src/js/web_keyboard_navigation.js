@@ -46,7 +46,7 @@ $.ctrl('Z', function() {
 });*/
 
 //New object
-$.ctrl('32', function() {
+$.ctrl('N', function() {
 	$('.oe_form_button_create').each(function() {
 		if($(this).parents('div:hidden').length == 0){
 			$(this).trigger('click');
@@ -67,26 +67,6 @@ $.ctrl('32', function() {
 		}
 	});
 });*/
-
-//Previous breadcrumb
-$.ctrl('8', function() {
-
- event.preventDefault();
- var x = document.getElementsByTagName('a');
-  f_list = []
-  for (i = 0; i < x.length; i++) {
-    y = x[i];
-    if (y.className == "oe_breadcrumb_item") {
-    f_list.push(y);
-    }
-       }
-    x = f_list.pop();
-    if (x) {
-    x.click();
-    }
-
-});
-
 
 //Previous object
 $.ctrl('37', function() {
