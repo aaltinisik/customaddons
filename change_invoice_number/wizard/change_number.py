@@ -1,4 +1,5 @@
-# coding: utf-8
+#!/usr/bin/python
+# -*- encoding: utf-8 -*-
 ###########################################################################
 #    Module Writen to OpenERP, Open Source Management Solution
 #    Copyright (C) OpenERP Venezuela (<http://openerp.com.ve>).
@@ -23,10 +24,15 @@
 ##########################################################################
 
 from openerp.osv import osv, fields
+import openerp.tools as tools
 from openerp.tools.translate import _
+# from tools import config
+# import openerp.netsvc as netsvc
+# import decimal_precision as dp
+# import time
 
 
-class ChangeNumber(osv.TransientModel):
+class change_number(osv.TransientModel):
 
     _name = 'change.number'
     _columns = {

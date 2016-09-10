@@ -1,10 +1,11 @@
-# coding: utf-8
+#!/usr/bin/python
+# -*- encoding: utf-8 -*-
 ###########################################################################
 #    Module Writen to OpenERP, Open Source Management Solution
 #    Copyright (C) Vauxoo (<http://vauxoo.com>).
 #    All Rights Reserved
 ###############Credits######################################################
-#    Coded by: Vauxoo C.A.
+#    Coded by: Vauxoo C.A.           
 #    Planified by: Nhomar Hernandez
 #    Audited by: Vauxoo C.A.
 #############################################################################
@@ -22,27 +23,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 {
-    "name": "Cost assigned in the account move",
-    "version": "0.6",
-    "author": "Vauxoo",
-    "category": "Generic Modules",
-    "website": "http://vauxoo.com",
-    "license": "",
-    "depends": [
-        "account"
+    "name" : "Change Invoice Number",
+    "version" : "0.1",
+    "depends" : ["account"],
+    "author" : "Vauxoo",
+    "description" : """
+    This module allows you to modify the control number of the invoice and the internal number is 
+    """,
+    "website" : "http://vauxoo.com",
+    "category" : "Generic Modules",
+    "init_xml" : [],
+    "demo_xml" : [],
+    "test": [ ],
+    "update_xml" : [
+    'security/change_number_security.xml',
+    'security/ir.model.access.csv',
+    'wizard/change_number_view.xml',
+    'view/invoice_view.xml'
     ],
-    "demo": [],
-    "data": [
-        "security/change_number_security.xml",
-        "security/ir.model.access.csv",
-        "wizard/change_number_view.xml",
-        "view/invoice_view.xml"
-    ],
-    "test": [],
-    "js": [],
-    "css": [],
-    "qweb": [],
+    "active": False,
     "installable": True,
-    "auto_install": False,
-    "active": False
 }
