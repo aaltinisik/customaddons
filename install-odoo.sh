@@ -53,6 +53,10 @@ sudo apt build-dep build-essential -y
 echo -e "\n---- Install Git ----"
 sudo apt-get install git -y
 
+# Install pip
+sudo curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+
 # Install AerooLib:
 echo -e "\n---- Install AerooLib ----"
 sudo apt install python-genshi python-cairo python-lxml libreoffice-script-provider-python libreoffice-base python-cups -y
@@ -432,7 +436,7 @@ sudo apt-get install graphviz mc bzr lptools make -y
 sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install gevent_psycopg2 psycogreen
+sudo pip install psycogreen
 
 echo -e "\n---- Install asterisk connector dependencies ----"
 sudo pip install phonenumbers
