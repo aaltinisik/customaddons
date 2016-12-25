@@ -33,8 +33,8 @@
 # DESCRIPTION: This script is designed to install all the dependencies for the aeroo-reports modules from Alistek.
 # It also gives you the option of installing Odoo while you're running the script. If you don't want this just choose no when given the option.
 
-#sudo apt-get update
-#sudo apt-get upgrade -y
+#sudo apt update
+#sudo apt upgrade -y
 # use below if machine is VM
 # sudo apt-get install open-vm-tools linux-virtual -y
 
@@ -45,9 +45,9 @@ read -e -s -p "Enter the Database password: " DBPASS
 echo -e "\n"
 read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
 echo -e "\n"
-
+sudo apt install aptitude -y
 sudo aptitude update && sudo aptitude full-upgrade -y
-sudo apt-get build-dep build-essential -y
+sudo apt build-dep build-essential -y
 
 # Install Git:
 echo -e "\n---- Install Git ----"
@@ -55,8 +55,8 @@ sudo apt-get install git -y
 
 # Install AerooLib:
 echo -e "\n---- Install AerooLib ----"
-sudo apt-get install python-genshi python-cairo python-lxml libreoffice-script-provider-python libreoffice-base python-cups -y
-sudo apt-get install python-setuptools python3-pip -yf
+sudo apt install python-genshi python-cairo python-lxml libreoffice-script-provider-python libreoffice-base python-cups -y
+sudo apt install python-setuptools python3-pip -yf
 sudo mkdir /opt/aeroo
 cd /opt/aeroo
 sudo git clone https://github.com/aeroo/aeroolib.git
@@ -114,16 +114,25 @@ sudo ln -s /opt/aeroo/aeroo_docs/aeroo-docs /etc/init.d/aeroo-docs
 sudo update-rc.d aeroo-docs defaults
 sudo service aeroo-docs restart
 
+### BEGIN INIT INFO
+# Provides: aeroo-docs
+# Required-Start:    $syslog $remote_fs
+# Required-Stop:     $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start aeroo-docs
+### END INIT INFO
+
 # If you encounter and error "Unable to lock on the pidfile while trying #16 just restart the service (sudo service aeroo-docs restart).
 ################################################################################
-# Script for Installation: ODOO Saas4/Trunk server on Ubuntu 14.04 LTS
+# Script for Installation: ODOO Saas4/Trunk server on Ubuntu 16.04 LTS
 # Author: André Schenkels, ICTSTUDIO 2014
 # Forked & Modified by: Luke Branch
 # LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
 #-------------------------------------------------------------------------------
 #  
 # This script will install ODOO Server on
-# clean Ubuntu 14.04 Server
+# clean Ubuntu 16.04 Server
 #-------------------------------------------------------------------------------
 # USAGE:
 #
@@ -165,10 +174,10 @@ sudo adduser odoo --home=/opt/odoo --group odoo
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql postgresql-contrib -y  
+sudo apt install postgresql postgresql-contrib -y  
 
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
-sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
+sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.5/main/postgresql.conf
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres $OE_USER" 
@@ -384,12 +393,12 @@ sudo update-rc.d $OE_CONFIG defaults
 # Install SSH
 #--------------------------------------------------
 echo -e "\n---- Install SSH Server ----"
-sudo apt-get install ssh -y
+sudo apt install ssh -y
 echo -e "\n---- Install tool packages ----"
-sudo apt-get install wget subversion git bzr bzrtools python-pip -y
+sudo apt install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
-sudo apt-get install python-dev build-essential -y
+sudo apt install python-dev build-essential -y
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 
@@ -401,7 +410,7 @@ echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos f
 sudo pip install --pre pyusb
 
 echo -e "\n---- Install python packages ----"
-sudo apt-get install -y -f poppler-utils postgresql-client python-cairo python-cups python-dateutil python-decorator python-docutils python-egenix-mxdatetime \
+sudo apt install -y -f poppler-utils postgresql-client python-cairo python-cups python-dateutil python-decorator python-docutils python-egenix-mxdatetime \
 python-feedparser python-gdata python-genshi python-geoip python-gevent python-imaging python-jinja2 python-ldap python-libxslt1 \
 python-lxml python-mako python-markupsafe python-matplotlib python-mock python-openid python-openssl python-passlib \
 python-pdftools python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-qrcode python-serial \
@@ -411,8 +420,9 @@ vim wkhtmltopdf curl ghostscript libpq-dev libreoffice libreoffice-script-provid
 
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
-wget -qO- https://deb.nodesource.com/setup | sudo -E bash -
-sudo apt-get install nodejs -y
+# wget -qO- https://deb.nodesource.com/setup | sudo -E bash -
+wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt install nodejs -y
 sudo npm install -g less -y
 sudo npm install node-odoo
 
@@ -443,7 +453,7 @@ sudo apt-get install foomatic-db openprinting-ppds foomatic-db-gutenprint python
 sudo apt-get autoremove -y
 sudo apt-get -f install -y
 
-sudo cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
+#sudo cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
 
 # Install Aeroo Reports:
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
