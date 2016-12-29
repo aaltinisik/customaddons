@@ -47,12 +47,12 @@ class stock_picking(osv.osv):
                                      'carrier_id': picking.carrier_id.id })
         return invoice_vals
 
-    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
-        res = super(stock_picking, self).action_invoice_create(cr, uid, ids, journal_id, group, type, context)
-        invoice_id = int(res.values()[0])
-        if invoice_id:
-            self.pool.get('account.invoice').btn_calc_weight_inv(cr, uid, [invoice_id])
-        return res
+#    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
+#        res = super(stock_picking, self).action_invoice_create(cr, uid, ids, journal_id, group, type, context)
+#        invoice_id = int(res.values()[0])
+#        if invoice_id:
+#            self.pool.get('account.invoice').btn_calc_weight_inv(cr, uid, [invoice_id])
+#        return res
 
     def btn_calc_weight(self, cr, uid, ids, context=None):
         total_g, total_n, total_p = 0, 0, 0
