@@ -185,6 +185,7 @@ sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres $OE_USER" 
+sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
