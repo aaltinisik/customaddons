@@ -2,6 +2,17 @@
 <openerp>
     <data>
 
+        <record id="aces_search_view_pos_order" model="ir.ui.view" >
+           <field name="name">aces.picking.order.search</field>
+           <field name="model">stock.picking</field>
+           <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+           <field name="arch" type="xml">
+               <filter name="backorder" position="after">
+                <filter string="Yapilacaklar" domain="['|', '|',('state','=','confirmed'), ('state','=','assigned'),('state','=','partially_available')]"/>
+               </filter>
+           </field>
+       </record>
+
         <record id = "view_altinkaya_packing_form" model = "ir.ui.view">
             <field name = "name">view.delivery.packaging.form</field>
             <field name = "model">delivery.packaging</field>

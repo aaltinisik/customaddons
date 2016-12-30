@@ -34,25 +34,42 @@ class stock_picking(osv.osv):
         'total_air': fields.integer('Total Air Weight'),
     }
 
-    def _prepare_invoice(self, cr, uid, picking, partner, inv_type, journal_id, context=None):
-        po_id = [picking.id]
-        self.pool.get('stock.picking.out').btn_calc_weight(cr, uid, po_id)
-        invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
-        invoice_vals.update({'address_contact_id': picking.partner_id.id })
-        if picking.packing_ids:
-            picking_ids = []
-            for pick in picking.packing_ids:
-                picking_ids.append(pick.id)
-                invoice_vals.update({'packing_ids': [(6, 0, picking_ids)],
-                                     'carrier_id': picking.carrier_id.id })
-        return invoice_vals
+#    def _prepare_invoice(self, cr, uid, picking, partner, inv_type, journal_id, context=None):
+#        po_id = [picking.id]
+#        self.pool.get('stock.picking.out').btn_calc_weight(cr, uid, po_id)
+#        invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
+#        invoice_vals.update({'address_contact_id': picking.partner_id.id })
+#        if picking.packing_ids:
+#            picking_ids = []
+#            for pick in picking.packing_ids:
+#                picking_ids.append(pick.id)
+#                invoice_vals.update({'packing_ids': [(6, 0, picking_ids)],
+#                                     'carrier_id': picking.carrier_id.id })
+#        return invoice_vals
 
-#    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
-#        res = super(stock_picking, self).action_invoice_create(cr, uid, ids, journal_id, group, type, context)
+    def _get_invoice_vals(self, cr, uid, key, inv_type, journal_id, move, context=None):
+        inv_vals = super(stock_picking, self)._get_invoice_vals(cr, uid, key, inv_type, journal_id, move,
+                                                                context=context)
+        sale = move.picking_id.sale_id
+        if sale and inv_type in ('out_invoice', 'out_refund'):
+            inv_vals.update({
+                'fiscal_position': sale.fiscal_position.id,
+                'payment_term': sale.payment_term.id,
+                'user_id': sale.user_id.id,
+                'section_id': sale.section_id.id,
+                'name': sale.client_order_ref or '',
+                'comment': sale.note,
+                'address_contact_id': move.picking_id.partner_id.id,
+            })
+        return inv_vals
+
+
+    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
+        res = super(stock_picking, self).action_invoice_create(cr, uid, ids, journal_id, group, type, context)
 #        invoice_id = int(res.values()[0])
 #        if invoice_id:
 #            self.pool.get('account.invoice').btn_calc_weight_inv(cr, uid, [invoice_id])
-#        return res
+        return res
 
     def btn_calc_weight(self, cr, uid, ids, context=None):
         total_g, total_n, total_p = 0, 0, 0
