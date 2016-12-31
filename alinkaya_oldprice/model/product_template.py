@@ -32,11 +32,11 @@ class product_template(osv.Model):
              digits_compute=dp.get_precision('Product Price'),
              help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı"),
         'z_fiyat_2016a': fields.float(
-            u"2014 Eski Fiyatı",
+            u"2015 Ekim Fiyatı",
             digits_compute=dp.get_precision('Product Price'),
             help=u"2015 Ekim fiyati"),
         'z_2016a_iscilik': fields.float(
-            u"2015 Ekim iscilik Fiyati",
+            u"2015 Ekim isçilik fiyatı",
             digits_compute=dp.get_precision('Product Price'),
             help=u"2015 Ekim birim işçilik fiyatı"),
         'z_min_2016a_iscilik': fields.float(
