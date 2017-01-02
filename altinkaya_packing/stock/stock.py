@@ -53,11 +53,6 @@ class stock_picking(osv.osv):
         sale = move.picking_id.sale_id
         if sale and inv_type in ('out_invoice', 'out_refund'):
             inv_vals.update({
-                'fiscal_position': sale.fiscal_position.id,
-                'payment_term': sale.payment_term.id,
-                'user_id': sale.user_id.id,
-                'section_id': sale.section_id.id,
-                'name': sale.client_order_ref or '',
                 'comment': sale.note,
                 'address_contact_id': move.picking_id.partner_id.id,
             })
