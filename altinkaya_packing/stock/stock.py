@@ -24,6 +24,7 @@ import math
 
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
+    _order = 'create_date desc'
     _columns = {
         'packing_ids': fields.one2many('delivery.packaging', 'picking_out_id', 'Packing Details'),
         'total_grosswg': fields.float('Total Gross Weight'),
