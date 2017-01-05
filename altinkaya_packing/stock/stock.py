@@ -19,7 +19,35 @@
 #
 ##############################################################################
 from openerp.osv import osv, fields
+from openerp import api
 import math
+
+
+class stock_move(osv.osv):
+    _inherit = "stock.move"
+
+    @api.cr_uid_ids_context
+    def _picking_assign(self, cr, uid, move_ids, procurement_group, location_from, location_to, context=None):
+        pick_obj = self.pool.get("stock.picking")
+        picks = pick_obj.search(cr, uid, [
+            ('group_id', '=', procurement_group),
+            ('location_id', '=', location_from),
+            ('location_dest_id', '=', location_to),
+            ('state', 'in', ['draft', 'confirmed', 'waiting'])], context=context)
+        if picks:
+            pick = picks[0]
+        else:
+            move = self.browse(cr, uid, move_ids, context=context)[0]
+            values = {
+                'note': move.procurement_id.sale_line_id.order_id.note,
+                'origin': move.origin,
+                'company_id': move.company_id and move.company_id.id or False,
+                'move_type': move.group_id and move.group_id.move_type or 'direct',
+                'partner_id': move.partner_id.id or False,
+                'picking_type_id': move.picking_type_id and move.picking_type_id.id or False,
+            }
+            pick = pick_obj.create(cr, uid, values, context=context)
+        return self.write(cr, uid, move_ids, {'picking_id': pick}, context=context)
 
 
 class stock_picking(osv.osv):
@@ -35,18 +63,33 @@ class stock_picking(osv.osv):
         'total_air': fields.integer('Total Air Weight'),
     }
 
-#    def _prepare_invoice(self, cr, uid, picking, partner, inv_type, journal_id, context=None):
-#        po_id = [picking.id]
-#        self.pool.get('stock.picking.out').btn_calc_weight(cr, uid, po_id)
-#        invoice_vals = super(stock_picking, self)._prepare_invoice(cr, uid, picking, partner, inv_type, journal_id, context)
-#        invoice_vals.update({'address_contact_id': picking.partner_id.id })
-#        if picking.packing_ids:
-#            picking_ids = []
-#            for pick in picking.packing_ids:
-#                picking_ids.append(pick.id)
-#                invoice_vals.update({'packing_ids': [(6, 0, picking_ids)],
-#                                     'carrier_id': picking.carrier_id.id })
-#        return invoice_vals
+    def action_invoice_create(self, cr, uid, ids, journal_id, group=False, type='out_invoice', context=None):
+        """ Creates invoice based on the invoice state selected for picking.
+        @param journal_id: Id of journal
+        @param group: Whether to create a group invoice or not
+        @param type: Type invoice to be created
+        @return: Ids of created invoices for the pickings
+        """
+        context = context or {}
+        todo = {}
+        for picking in self.browse(cr, uid, ids, context=context):
+
+            #partner = self._get_partner_to_invoice(cr, uid, picking, dict(context, type=type))
+            #grouping is based on the invoiced partner
+            partner = picking.partner_id
+            if group:
+                key = partner
+            else:
+                key = picking.id
+            for move in picking.move_lines:
+                if move.invoice_state == '2binvoiced':
+                    if (move.state != 'cancel') and not move.scrapped:
+                        todo.setdefault(key, [])
+                        todo[key].append(move)
+        invoices = []
+        for moves in todo.values():
+            invoices += self._invoice_create_line(cr, uid, moves, journal_id, type, context=context)
+        return invoices
 
     def _get_invoice_vals(self, cr, uid, key, inv_type, journal_id, move, context=None):
         inv_vals = super(stock_picking, self)._get_invoice_vals(cr, uid, key, inv_type, journal_id, move,
@@ -54,7 +97,7 @@ class stock_picking(osv.osv):
         sale = move.picking_id.sale_id
         if sale and inv_type in ('out_invoice', 'out_refund'):
             inv_vals.update({
-                'comment': sale.note,
+                'comment': move.picking_id.note,
                 'address_contact_id': move.picking_id.partner_id.id,
             })
         return inv_vals
