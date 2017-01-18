@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="stock_pickingaltinkaya"
+            model="stock.picking"
+            string="Picking Report"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkaya"
+            file="altinkaya_packing.report_picking_altinkaya"
+        />
+
+    </data>
+</openerp>

@@ -25,10 +25,14 @@
     'category': 'other',
     'author': 'Acespritech Solutions Pvt.Ltd.',
     'website': 'http://www.acespritech.com',
-    'depends': ['sale','account_accountant','stock','delivery'],
+    'depends': ['sale','account_accountant','stock','delivery','report'],
     'data': [
         'stock/stock_view.xml',
         'account/account_view.xml',
+        'view/layout.xml',
+        'view/picking_report.xml',
+        'report/reports.xml',
+
     ],
     'installable': True,
     'application': False,
