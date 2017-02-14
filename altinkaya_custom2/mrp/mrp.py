@@ -24,13 +24,13 @@ from openerp.tools.translate import _
 
 class mrp_production(osv.osv):
 
-    _name = 'mrp.production'
+    #_name = 'mrp.production'
     _inherit = 'mrp.production'
 
     _columns = {
       'date_planned': fields.datetime('Scheduled Date'),
-      'date_start': fields.datetime('Start Date', select=True),
-      'date_finished': fields.datetime('End Date', select=True),
+      'date_start2': fields.datetime('Start Date',),
+      'date_finished2': fields.datetime('End Date',),
       'priority': fields.selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority',
             select=True),
       }
