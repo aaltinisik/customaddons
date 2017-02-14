@@ -10,13 +10,15 @@
     'depends': ['account_followup','base_phone'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari Account Followup eklentileri
-===============================================================
+================================================================
 
 
 
     """,
     'data': [
     "view/altinkaya_view_partner.xml",
+    "view/report_followup.xml",
+
     ],
     'demo': [],
     'test': [],
