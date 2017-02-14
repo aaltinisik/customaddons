@@ -35,8 +35,8 @@
 				<field name="date_planned" position="replace">
 				    <field name="priority" />
 				    <field name="date_planned" />
-                    <field name="date_start" />
-					<field name="date_finished" />
+                    <field name="date_start2" />
+					<field name="date_finished2" />
 					<field name="x_note" colspan="8" />
 				</field>
 			</field>
@@ -45,6 +45,7 @@
 			<field name="type">form</field>
 		</record>
 	</data>
+
 	<data>
 		<record id="ir_ui_view_mrpproductioninherit_altinkaya3" model="ir.ui.view">
 			<field name="inherit_id" ref="mrp.mrp_production_form_view" />

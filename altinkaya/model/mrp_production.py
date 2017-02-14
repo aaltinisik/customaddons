@@ -40,3 +40,4 @@ class mrp_production(osv.Model):
             ),
     }
 mrp_production()
+

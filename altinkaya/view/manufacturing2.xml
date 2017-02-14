@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_mrp_cancel_more" model="ir.ui.view">
+            <field name="name">Cancel Manufactuing Orders in bulk</field>
+            <field name="model">mrp.cancel.more</field>
+            <field name="arch" type="xml">
+                <form string="Parameters">
+                    <footer>
+                        <button name="cancel_mrp_order" string="Cancel Orders" type="object"  class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Cancel Manufacturing Order"
+            res_model="mrp.cancel.more"
+            src_model="mrp.production"
+            view_mode="form"
+            multi="True"
+            view_type="form"
+            target="new"
+            id="action_mrp_cancel_more"/>
+
+    </data>
+</openerp>
