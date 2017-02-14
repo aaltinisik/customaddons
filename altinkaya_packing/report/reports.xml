@@ -6,9 +6,19 @@
             id="stock_pickingaltinkaya"
             model="stock.picking"
             string="Picking Report"
+            report_type="qweb-html"
+            name="altinkaya_packing.report_picking_altinkaya"
+            file="altinkaya_packing.report_picking_altinkaya"
+        />
+
+                <report
+            id="stock_pickingaltinkaya_pdf"
+            model="stock.picking"
+            string="Picking Report PDF"
             report_type="qweb-pdf"
             name="altinkaya_packing.report_picking_altinkaya"
             file="altinkaya_packing.report_picking_altinkaya"
+
         />
 
     </data>
