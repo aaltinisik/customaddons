@@ -22,8 +22,8 @@
 from openerp.osv import fields
 from openerp.osv import osv
 from openerp.tools.translate import _
-from openerp import netsvc
 import base64
+import openerp
 
 
 class followup_line(osv.osv):
@@ -45,7 +45,7 @@ class res_partner(osv.osv):
         faxacc_id = self.pool.get('faxsend.account').search(cr, uid, [])
         if not faxacc_id:
             return True
-        service = netsvc.LocalService('report.%s' % ('account_followup.followup.print'))
+
         for record in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, wizard_partner_ids):
             if not record.partner_id.fax:
                 message_body = _("Define faxno for sending fax for payment followup report.")
@@ -64,11 +64,11 @@ class res_partner(osv.osv):
                 'model': 'account_followup.followup',
                 'form': data
             }
-            (report_file, format) = service.create(cr, uid, [], report_datas, {})
+            report_file,format = openerp.report.render_report(cr, uid, [],'account_followup.report_followup', report_datas, {})
             if not report_file:
                 continue
             attachment_id = attach_obj.create(cr, uid, {
-                                                        'name': 'Takip faks ' + record.partner_id.name,
+                                                        'name': 'Takip_faks_' + record.partner_id.ref+'.pdf',
                                                         'res_model': 'res.partner',
                                                         'res_id': record.partner_id.id,
                                                         'res_name': record.partner_id.name,
