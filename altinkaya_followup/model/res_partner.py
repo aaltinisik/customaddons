@@ -62,7 +62,7 @@ class res_partner(orm.Model):
         :returns: show followup fax no if empty show partner fax
         :rtype: string
         '''
-        if partner.followup_use_fax:
+        if partner.followup_use_fax and partner.fax:
             if partner.followup_fax:
                 return partner.followup_fax + "@fax.tc"
             else:
