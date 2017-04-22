@@ -39,7 +39,11 @@ class wizard_partner_detail(osv.osv_memory):
     def print_report(self, cr, uid, ids, context=None):
         record = self.browse(cr, uid, ids[0], context=context)
         partner_obj = self.pool.get('res.partner')
-        #query = self.pool.get('account.move.line')._query_get(cr, uid, context=context)
+        query = self.pool.get('account.move.line')._query_get(cr, uid, context=context)
+        if context and context.get('active_ids'):
+            partner_ids = tuple(context['active_ids'])
+        else:
+            partner_ids = tuple(self.pool.get('res.partner').search(cr, uid, [], context=context))
         cr.execute("""SELECT l.partner_id, a.type, SUM(l.debit-l.credit)
                       FROM account_move_line l
                       LEFT JOIN account_account a ON (l.account_id=a.id)
@@ -49,7 +53,7 @@ class wizard_partner_detail(osv.osv_memory):
                       AND l.date <= %s
                       GROUP BY l.partner_id, a.type""", (tuple(context['active_ids']), record.start_date, record.end_date))
         result = {}
-        for id in context['active_ids']:
+        for id in partner_ids:
             result[id] = {'receivable': 0, 'payable': 0}
         for pid,type,val in cr.fetchall():
             for v in result:
@@ -83,11 +87,11 @@ class wizard_partner_detail(osv.osv_memory):
             sheet.write(row, 2, res[1]['payable'])
             sheet.write(row, 3, res[1]['receivable'])
             sheet.write(row, 4, res[1]['receivable'] - res[1]['payable'])
-            sheet.write(row, 5, partner.z_muhasebe_kodu or '')
+#             sheet.write(row, 5, partner.z_muhasebe_kodu or '')
             sheet.write(row, 6, partner.ref or '')
             sheet.write(row, 7, partner.fax or '')
-            sheet.write(row, 8, partner.x_vergino or '')
-            sheet.write(row, 9, partner.x_vergidairesi or '')
+#             sheet.write(row, 8, partner.x_vergino or '')
+#             sheet.write(row, 9, partner.x_vergidairesi or '')
             sheet.write(row, 10, partner.street or '')
             sheet.write(row, 11, partner.street2 or '')
             sheet.write(row, 12, partner.city or '')

@@ -18,39 +18,39 @@ msgstr ""
 #. module: partner_payment_detail
 #: field:wizard.partner.detail,end_date:0
 msgid "End Date"
-msgstr "End Date"
+msgstr "Bitiş"
 
 #. module: partner_payment_detail
 #: view:account.invoice:0
 #: field:account.invoice,total_balance:0
 msgid "Total Balance"
-msgstr "Total Balance"
+msgstr "Toplam Bakiye"
 
 #. module: partner_payment_detail
 #: field:customer.excel,file:0
 msgid "File"
-msgstr "File"
+msgstr "Dosya"
 
 #. module: partner_payment_detail
 #: model:ir.actions.act_window,name:partner_payment_detail.action_wizard_partner_detail_form
 #: model:ir.actions.act_window,name:partner_payment_detail.wizard_partner_detail_window
 msgid "Partner Payment Detail"
-msgstr "Partner Payment Detail"
+msgstr "Cari Borç/Alacak Dökümü"
 
 #. module: partner_payment_detail
 #: field:customer.excel,name:0
 msgid "File Name"
-msgstr "File Name"
+msgstr "Dosya Adı"
 
 #. module: partner_payment_detail
 #: view:wizard.partner.detail:0
 msgid "Partner Detail"
-msgstr "Partner Detail"
+msgstr "İş Ortağı Detayı"
 
 #. module: partner_payment_detail
 #: view:wizard.partner.detail:0
 msgid "Print"
-msgstr "Print"
+msgstr "Yazdır"
 
 #. module: partner_payment_detail
 #: model:ir.model,name:partner_payment_detail.model_wizard_partner_detail
@@ -65,7 +65,7 @@ msgstr "Fatura"
 #. module: partner_payment_detail
 #: view:customer.excel:0
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "İptal"
 
 #. module: partner_payment_detail
 #: model:ir.model,name:partner_payment_detail.model_customer_excel
@@ -75,7 +75,7 @@ msgstr "customer.excel"
 #. module: partner_payment_detail
 #: field:wizard.partner.detail,start_date:0
 msgid "Start Date"
-msgstr "Start Date"
+msgstr "Başlangıç"
 
 #. module: partner_payment_detail
 #: view:customer.excel:0

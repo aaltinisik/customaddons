@@ -13,6 +13,9 @@
           </field>
           </field>
     </record>
+    <menuitem id="menu_payment_detail" name="Partner Payment detail"
+              parent="account.menu_finance_receivables"
+              action="partner_payment_detail.action_wizard_partner_detail_form" sequence="101"/>
 
 </data>
 </openerp>

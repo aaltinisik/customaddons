@@ -44,7 +44,7 @@
             <field name="arch" type="xml">
                 <form string="Customer Excel" version="7.0">
                     <group>
-	                    <field name="file" filename="name" nolabel="1"/>
+	                    <field name="file" filename="name" nolabel="1" readonly="1"/>
 	                    <field name="name" invisible='1'/>
                     </group>
                     <footer>
