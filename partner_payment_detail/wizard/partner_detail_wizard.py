@@ -51,7 +51,7 @@ class wizard_partner_detail(osv.osv_memory):
                       AND l.partner_id IN %s
                       AND l.date >= %s
                       AND l.date <= %s
-                      GROUP BY l.partner_id, a.type""", (tuple(context['active_ids']), record.start_date, record.end_date))
+                      GROUP BY l.partner_id, a.type""", (partner_ids, record.start_date, record.end_date))
         result = {}
         for id in partner_ids:
             result[id] = {'receivable': 0, 'payable': 0}
