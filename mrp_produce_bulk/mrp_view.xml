@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_mrp_produce_more" model="ir.ui.view">
+            <field name="name">Produce Manufactuing Orders in bulk</field>
+            <field name="model">mrp.produce.more</field>
+            <field name="arch" type="xml">
+                <form string="Parameters">
+                    <footer>
+                        <button name="produce_mrp_order" string="Process Orders" type="object"  class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Mass Produce"
+            res_model="mrp.produce.more"
+            src_model="mrp.production"
+            view_mode="form"
+            multi="True"
+            view_type="form"
+            target="new"
+            id="action_mrp_produce_more"/>
+
+    </data>
+</openerp>
