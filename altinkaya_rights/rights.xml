@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+<data noupdate="1">
+
+<!-- New group dedicated to the "Get CallerID name from OpenERP" feature -->
+<record id="show_configuration" model="res.groups">
+    <field name="name">Show Configuration</field>
+</record>
+
+</data>
+</openerp>
