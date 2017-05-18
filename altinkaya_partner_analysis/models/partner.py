@@ -22,7 +22,8 @@ class res_partner(models.Model):
         context.update({'search_default_current':1,
                         'search_default_thisyear':1,
                         'group_by':'period_id',
-                        'search_default_partner_id':self.id})
+                        'search_default_partner_id': self.id
+                        })
         if self._context and self._context.get('customer'):
             context.update({'search_default_customer':1})
             return {

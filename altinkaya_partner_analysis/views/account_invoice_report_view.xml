@@ -16,6 +16,9 @@
                      <filter string="Turkey" name="turkey"
                             domain="[('country_id', '=','Turkey')]" />
                 </filter>
+                <xpath expr="//search/group/filter[@name='partner_id']" position="replace">
+                    <filter string="Partner" name="partner" context="{'group_by':'partner_id','residual_visible':True}"/>
+                </xpath>
                 <filter string="Supplier" position="attributes">
                     <attribute name="name">supplier</attribute>
                 </filter>
@@ -26,7 +29,7 @@
          <field name="name">account.invoice.report.graph</field>
          <field name="model">account.invoice.report</field>
          <field name="inherit_id"
-                ref="account.view_account_invoice_report_graph" />
+                    ref="account.view_account_invoice_report_graph" />
          <field name="arch" type="xml">
                  <field name="period_id" type="col" position="replace"/>
          </field>
