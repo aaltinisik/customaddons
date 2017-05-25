@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 
 class ResPartner(orm.Model):
@@ -29,12 +29,32 @@ class ResPartner(orm.Model):
 
     _inherit = 'res.partner'
 
+    _columns = {
+        'z_receivable_export': fields.char(string="Receivable Account Export Code"),
+        'z_payable_export': fields.char(string="Payable Account Export Code")
+    }
+
     def create(self, cr, uid, vals, context=None):
         context = context or {}
         if not vals.get('ref') and self._needsRef(cr, uid, vals=vals,
                                                   context=context):
-            vals['ref'] = self.pool.get('ir.sequence')\
+            gen_ref = self.pool.get('ir.sequence')\
                                    .next_by_code(cr, uid, 'res.partner')
+            if gen_ref and vals.get('country_id') and vals.get('customer') or vals.get('supplier'):
+                z_receivable_export = False
+                z_payable_export = False
+                code_prefix = "Y"
+                country_id = self.pool.get('res.country').browse(cr, uid, vals.get('country_id'), context)
+                if country_id.code != 'TR':
+                    z_receivable_export = '120.' + code_prefix + (
+                        gen_ref and str(gen_ref).strip() or '')
+                    z_payable_export = '320.' + code_prefix + (gen_ref and gen_ref.strip() or '')
+                else:
+                    z_receivable_export = '120.' + (gen_ref and str(gen_ref).strip() or '')
+                    z_payable_export = '320.' + (gen_ref and str(gen_ref).strip() or '')
+                vals.update({'ref': gen_ref,
+                            'z_receivable_export': z_receivable_export,
+                             'z_payable_export': z_payable_export})
         return super(ResPartner, self).create(cr, uid, vals, context)
 
     def copy(self, cr, uid, id, default=None, context=None):

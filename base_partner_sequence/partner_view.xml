@@ -15,6 +15,23 @@
             </field>
 
         </record>
+
+       <record id="inherit_view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form" />
+            <field name="arch" type="xml">
+                <field name='property_account_receivable'
+                       position="after">
+                    <field name="z_receivable_export"/>
+                </field>
+                <field name='property_account_payable'
+                       position="after">
+                    <field name="z_payable_export"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
 

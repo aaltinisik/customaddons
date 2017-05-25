@@ -26,7 +26,7 @@
     "author": "Tiny/initOS GmbH & Co. KG,Odoo Community Association (OCA)",
     "category": "Generic Modules/Base",
     "website": "http://www.initos.com",
-    "depends": ["base"],
+    "depends": ["base","account"],
     "summary": "Sets customer's code from a sequence",
     "description": """
         This module adds the possibility to define a sequence for
