@@ -27,7 +27,7 @@ class partner_account_wizard(models.TransientModel):
         account_ids_lst = []
         for partner_id in partner_ids:
 
-            if partner_id.property_account_receivable.id not in [31640, 15888]:
+            if partner_id.property_account_receivable.id not in [31732, 15888]:
                 if partner_id.ref and partner_id.country_id.code:
                     z_receivable_export = False
                     z_payable_export = False
@@ -43,33 +43,33 @@ class partner_account_wizard(models.TransientModel):
                                  'z_payable_export': z_payable_export})
 
 
-            if partner_id.property_account_receivable.id not in [31638,31640,15888]:
+            if partner_id.property_account_receivable.id not in [31730,31732,15888]:
 
-                if partner_id.property_account_receivable.id != 31638 and \
+                if partner_id.property_account_receivable.id != 31730 and \
                         partner_id.property_account_receivable.id:
                     if partner_id.property_account_receivable.id not in [53, 12007,8,13,25]:
                         account_ids_lst.append(partner_id.property_account_receivable.id)
-                    self._cr.execute('''update account_voucher_line set account_id=31638
+                    self._cr.execute('''update account_voucher_line set account_id=31730
                                              where account_id=%s
                                          ''' % (partner_id.property_account_receivable.id))
-                    self._cr.execute('''update account_move_line set account_id=31638
+                    self._cr.execute('''update account_move_line set account_id=31730
                                              where account_id=%s
                                          ''' % (partner_id.property_account_receivable.id))
-                    self._cr.execute('''update account_invoice set account_id=31638
+                    self._cr.execute('''update account_invoice set account_id=31730
                                              where account_id=%s
                                          ''' % (partner_id.property_account_receivable.id))
 
-                if partner_id.property_account_payable.id not in [31639] and \
+                if partner_id.property_account_payable.id not in [31731] and \
                         partner_id.property_account_payable.id:
                     if partner_id.property_account_receivable.id not in [53, 12007,8,13,25]:
                         account_ids_lst.append(partner_id.property_account_payable.id)
-                    self._cr.execute('''update account_voucher_line set account_id=31639
+                    self._cr.execute('''update account_voucher_line set account_id=31731
                                              where account_id=%s
                                          ''' % (partner_id.property_account_payable.id))
-                    self._cr.execute('''update account_move_line set account_id=31639
+                    self._cr.execute('''update account_move_line set account_id=31731
                                          where account_id=%s
                                          ''' % (partner_id.property_account_payable.id))
-                    self._cr.execute('''update account_invoice set account_id=31639
+                    self._cr.execute('''update account_invoice set account_id=31731
                                              where account_id=%s
                                          ''' % (partner_id.property_account_payable.id))
                 if account_ids_lst:
@@ -77,8 +77,8 @@ class partner_account_wizard(models.TransientModel):
                     ''' % (" (%s) " % ','.join(map(str, account_ids_lst))))
                     account_ids_lst=[]
 
-                partner_id.write({'property_account_receivable': 31638,
-                                  'property_account_payable': 31639})
+                partner_id.write({'property_account_receivable': 31730,
+                                  'property_account_payable': 31731})
 
         return True
 
@@ -96,29 +96,29 @@ class account_merge_wizard(models.TransientModel):
         for account_id in account_ids:
 
             if account_id.parent_id.id in [8]:
-                self._cr.execute('''update account_voucher_line set account_id=31638
+                self._cr.execute('''update account_voucher_line set account_id=31730
                                          where account_id=%s
                                      ''' % (account_id.id))
-                self._cr.execute('''update account_move_line set account_id=31638
+                self._cr.execute('''update account_move_line set account_id=31730
                                          where account_id=%s
                                      ''' % (account_id.id))
-                self._cr.execute('''update account_invoice set account_id=31638
+                self._cr.execute('''update account_invoice set account_id=31730
                                          where account_id=%s
                                      ''' % (account_id.id))
-                if account_id.id not in [31638,31639]:
+                if account_id.id not in [31730,31731]:
                     account_ids_lst.append(account_id.id)
 
             if account_id.parent_id.id in [13]:
-                self._cr.execute('''update account_voucher_line set account_id=31639
+                self._cr.execute('''update account_voucher_line set account_id=31731
                                          where account_id=%s
                                      ''' % (account_id.id))
-                self._cr.execute('''update account_move_line set account_id=31639
+                self._cr.execute('''update account_move_line set account_id=31731
                                          where account_id=%s
                                      ''' % (account_id.id))
-                self._cr.execute('''update account_invoice set account_id=31639
+                self._cr.execute('''update account_invoice set account_id=31731
                                          where account_id=%s
                                      ''' % (account_id.id))
-                if account_id.id not in [31638,31639]:
+                if account_id.id not in [31730,31731]:
                     account_ids_lst.append(account_id.id)
 
             if account_ids_lst:
