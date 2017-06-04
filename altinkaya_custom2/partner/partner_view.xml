@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="arch" type="xml">
                 <field name="credit_limit" position="after">
-                    <button name="create_accounts" string="Create Accounts" type="object"/>
+
                 </field>
             </field>
         </record>
