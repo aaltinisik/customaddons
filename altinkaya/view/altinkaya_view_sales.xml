@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_res_partner_filter" />
             <field name="arch" type="xml">
                 <field name="parent_id" position="after">
-                    <field name="x_vergino" filter_domain="[('x_vergino','like',self)]" />
+                    <field name="vat" filter_domain="[('vat','like',self)]" />
                 </field>
             </field>
         </record>

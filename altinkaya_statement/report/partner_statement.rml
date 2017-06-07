@@ -88,7 +88,7 @@
         <td><para style="terp_default_8"><b>Fax :</b></para></td>
         <td><para style="terp_default_8">[[ format(o.fax, phone=True, phone_format='national') or '' ]]</para></td>
         <td><para style="terp_default_8_right_align"><b>Vergi No :</b></para></td>
-        <td><para style="terp_default_8">[[ o.x_vergino ]]</para></td></tr>
+        <td><para style="terp_default_8">[[ o.vat ]]</para></td></tr>
     </blockTable>
     <!--<blockTable colWidths="20.00,80.00,50.00,50.00,100.00,60.00,60.00,60.00,10.00" style="Table111">-->
     <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">

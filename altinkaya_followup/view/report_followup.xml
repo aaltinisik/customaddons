@@ -56,7 +56,7 @@
                                         Müşteri Ref: <span t-field="o.partner_id.ref"/><br/>
                                         Tel: <span t-field="o.partner_id.phone"/><br/>
                                         Faks:<span t-field="o.partner_id.fax"/><br/>
-                                        <span t-field="o.partner_id.x_vergidairesi"/> VD: <span t-field="o.partner_id.x_vergino"/>
+                                        <span t-field="o.partner_id.x_vergidairesi"/> VD: <span t-field="o.partner_id.vat"/>
                                     </p>
                                 </td>
                             </tr>

@@ -1,0 +1,261 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-07 10:07+0000\n"
+"PO-Revision-Date: 2017-06-07 10:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya
+#: field:product.template,z_fiyat_2014:0
+msgid "2014 Eski Fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,z_min_2014_iscilik:0
+msgid "2014 Min İşçcilik Fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,z_2014_iscilik:0
+msgid "2014 işçilik Fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,z_fiyat_2014:0
+msgid "2014 yılında kullanilan eski fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,z_2014_iscilik:0
+msgid "2014 yılında kullanılan birim işçilik fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,z_min_2014_iscilik:0
+msgid "2014 yılında kullanılan eski Minimum İşçilik fiyatı"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_account_voucher
+msgid "Accounting Voucher"
+msgstr ""
+
+#. module: altinkaya
+#: field:account.invoice,altinkaya_payment_url:0
+#: field:sale.order,altinkaya_payment_url:0
+msgid "Altinkaya Payment Url"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,x_iscilik:0
+msgid "Birim iscilik Fiyati"
+msgstr ""
+
+#. module: altinkaya
+#: field:x.makine,x_group:0
+msgid "Bolum"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,z_guncel_fiyat:0
+msgid "Bu secenek secili ise fiyati yenidir."
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.actions.act_window,name:altinkaya.action_mrp_cancel_more
+msgid "Cancel Manufacturing Order"
+msgstr ""
+
+#. module: altinkaya
+#: view:mrp.cancel.more:altinkaya.view_mrp_cancel_more
+msgid "Cancel Orders"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,x_cari_urun:0
+msgid "Carinin Urunu"
+msgstr ""
+
+#. module: altinkaya
+#: help:account.voucher,x_cek_tarih:0
+msgid "Cekin Vade Tarihi"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,create_uid:0
+#: field:x.makine,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,create_date:0
+#: field:x.makine,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,display_name:0
+#: field:x.makine,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: altinkaya
+#: help:product.template,x_min_iscilik:0
+msgid "En Az Toplam iscilik Fiyati"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.production,date_finished2:0
+msgid "End Date"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,z_guncel_fiyat:0
+msgid "Fiyat Guncel"
+msgstr ""
+
+#. module: altinkaya
+#: field:res.company,hash_code:0
+msgid "Hash Comm Code"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,id:0
+#: field:x.makine,id:0
+msgid "ID"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: altinkaya
+#: field:account.voucher,x_cek_tarih:0
+msgid "Keside Tarihi"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,__last_update:0
+#: field:x.makine,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,write_uid:0
+#: field:x.makine,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.cancel.more,write_date:0
+#: field:x.makine,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: altinkaya
+#: field:x.makine,name:0
+#: field:x.makine,x_name:0
+msgid "Makine Adi"
+msgstr ""
+
+#. module: altinkaya
+#: field:x.makine,x_kod:0
+msgid "Makine Kodu"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_x_makine
+msgid "Makineler"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,x_min_iscilik:0
+msgid "Minimum iscilik Fiyati"
+msgstr ""
+
+#. module: altinkaya
+#: view:mrp.cancel.more:altinkaya.view_mrp_cancel_more
+msgid "Parameters"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_stock_picking
+msgid "Picking List"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_product_pricelist_item
+msgid "Pricelist item"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: altinkaya
+#: model:ir.model,name:altinkaya.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: altinkaya
+#: field:mrp.production,date_start2:0
+msgid "Start Date"
+msgstr ""
+
+#. module: altinkaya
+#: view:res.partner:altinkaya.ir_ui_view_respartner_altinkaya_0
+msgid "Tax Office Name"
+msgstr ""
+
+#. module: altinkaya
+#: view:account.invoice:altinkaya.ir_ui_view_accountinvoice_altinkaya_inherit0
+msgid "Teslimat Adresi"
+msgstr ""
+
+#. module: altinkaya
+#: help:res.company,hash_code:0
+msgid "Used in comm with ext services"
+msgstr ""
+
+#. module: altinkaya
+#: field:product.template,x_iscilik:0
+msgid "iscilik Fiyati"
+msgstr ""
+

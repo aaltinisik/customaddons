@@ -16,7 +16,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name or '' }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' }{%end%}
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 25 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-24)*-1)}{% end %}
@@ -43,7 +43,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name or '' }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' }{%end%} 
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 20 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-24)*-1)}/${((int(len(o.invoice_line.ids))/-24)*-1)}{% end %}
@@ -76,7 +76,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}								
@@ -103,7 +103,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-22)*-1)}/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}
@@ -140,7 +140,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}								
@@ -167,7 +167,7 @@
 
                                                                                                                      ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
   ${o.partner_id.display_name }
-  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.x_vergino or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
   ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
   ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
   Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-22)*-1)}/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}

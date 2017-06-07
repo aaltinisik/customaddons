@@ -20,9 +20,8 @@
 			<field name="name">res.partner.inherit_altinkaya0</field>
 			<field eval="[(6,0,[])]" name="groups_id" />
 			<field name="arch" type="xml">
-				<field name="email" position="after">
-					<field name="x_vergidairesi" />
-					<field name="x_vergino" />
+				<field name="property_account_position" position="after">
+					<field string="Tax Office Name" name="x_vergidairesi" />
 				<!--	<field name="ref" />-->
 				</field>
 			</field>

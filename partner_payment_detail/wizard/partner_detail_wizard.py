@@ -90,7 +90,7 @@ class wizard_partner_detail(osv.osv_memory):
 #             sheet.write(row, 5, partner.z_muhasebe_kodu or '')
             sheet.write(row, 6, partner.ref or '')
             sheet.write(row, 7, partner.fax or '')
-#             sheet.write(row, 8, partner.x_vergino or '')
+#             sheet.write(row, 8, partner.vat or '')
 #             sheet.write(row, 9, partner.x_vergidairesi or '')
             sheet.write(row, 10, partner.street or '')
             sheet.write(row, 11, partner.street2 or '')
