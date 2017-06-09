@@ -107,6 +107,7 @@ class res_partner(orm.Model):
     _defaults = {
         'followup_use_email': 1,
         'followup_use_fax': 1,
+        'vat_subjected': 1,
     }
 
 
