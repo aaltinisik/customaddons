@@ -33,8 +33,7 @@
 # DESCRIPTION: This script is designed to install all the dependencies for the aeroo-reports modules from Alistek.
 # It also gives you the option of installing Odoo while you're running the script. If you don't want this just choose no when given the option.
 
-#sudo apt update
-#sudo apt upgrade -y
+
 # use below if machine is VM
 # sudo apt-get install open-vm-tools linux-virtual -y
 
@@ -45,17 +44,26 @@ read -e -s -p "Enter the Database password: " DBPASS
 echo -e "\n"
 read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
 echo -e "\n"
+
+echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
+touch /etc/sysctl.d/disableipv6.conf
+echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.d/disableipv6.conf
+
+
+sudo apt update
+sudo apt upgrade -y
 sudo apt install aptitude -y
 sudo aptitude update && sudo aptitude full-upgrade -y
 sudo apt build-dep build-essential -y
 
 # Install Git:
 echo -e "\n---- Install Git ----"
-sudo apt-get install git -y
+sudo apt install git -y
 
 # Install pip
-sudo curl -O https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
+# sudo apt install python-pip -y
+
+
 
 # Install AerooLib:
 echo -e "\n---- Install AerooLib ----"
@@ -63,7 +71,7 @@ sudo apt install python-genshi python-cairo python-lxml libreoffice-script-provi
 sudo apt install python-setuptools python3-pip -yf
 sudo mkdir /opt/aeroo
 cd /opt/aeroo
-sudo git clone https://github.com/aeroo/aeroolib.git
+sudo git clone https://github.com/aaltinisik/aeroolib.git
 cd /opt/aeroo/aeroolib
 sudo python setup.py install
 
@@ -90,8 +98,9 @@ sudo update-rc.d office defaults
 
 # Install AerooDOCS
 echo -e "\n---- Install AerooDOCS (see: https://github.com/aeroo/aeroo_docs/wiki/Installation-example-for-Ubuntu-14.04-LTS for original post): ----"
+pip install --upgrade pip
 
-sudo pip3 install jsonrpc2 daemonize
+sudo pip install jsonrpc2 daemonize
 
 echo -e "\n---- create conf file for AerooDOCS ----"
 sudo rm /etc/aeroo-docs.conf
