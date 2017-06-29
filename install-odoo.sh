@@ -414,6 +414,7 @@ sudo ufw allow 8069
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
+read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
