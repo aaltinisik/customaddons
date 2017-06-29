@@ -182,28 +182,45 @@ sudo adduser odoo --home=/opt/odoo
 read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install PostgreSQL Server
+
+sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  sudo apt-key add -
+sudo apt-get update
+
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
 sudo apt install postgresql postgresql-contrib -y  
 
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
-sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.5/main/postgresql.conf
+sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.6/main/postgresql.conf
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres $OE_USER" 
-sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
+# sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
 sudo -u postgres psql -U postgres -d postgres -c "alter user $OE_USER with password '$DBPASS';"
 
-sudo adduser --shell=/bin/bash --home=/opt/$OE_USER --gecos "Odoo" $OE_USER
+# sudo adduser --shell=/bin/bash --home=/opt/$OE_USER --gecos "Odoo" $OE_USER
 
-echo $OE_USER:$OE_USERPASS | chpasswd
+# echo $OE_USER:$OE_USERPASS | chpasswd
 
 echo -e "\n---- Create Log directory ----"
 sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
+
+
+echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
+sudo wget -P Downloads https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
+
+sudo apt-get install -f -y
+sudo apt-get install wkhtmltox -y
+sudo dpkg -i Downloads/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+
+sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
+sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 
 #--------------------------------------------------
@@ -449,15 +466,7 @@ echo -e "\n---- Install asterisk connector dependencies ----"
 sudo pip install phonenumbers
 sudo pip install py-Asterisk
 
-echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
-sudo wget -P Downloads http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 
-sudo apt-get install -f -y
-sudo apt-get install wkhtmltox -y
-sudo dpkg -i Downloads/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-
-sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
-sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 sudo apt-get install cups lpr phppgadmin -y
 sudo apt-get install foomatic-db openprinting-ppds foomatic-db-gutenprint python-notify lm-sensors snmp-mibs-downloader psutils hannah-foo2zjs tix hpijs-ppds python-pexpect-doc unpaper tcl-tclreadline xfonts-cyrillic -y
