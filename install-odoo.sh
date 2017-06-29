@@ -61,7 +61,10 @@ echo -e "\n---- Install Git ----"
 sudo apt install git -y
 
 # Install pip
-# sudo apt install python-pip -y
+sudo apt install python-pip python3-pip -y
+
+# sudo curl -O https://bootstrap.pypa.io/get-pip.py
+# sudo python get-pip.py 
 
 
 
@@ -98,9 +101,9 @@ sudo update-rc.d office defaults
 
 # Install AerooDOCS
 echo -e "\n---- Install AerooDOCS (see: https://github.com/aeroo/aeroo_docs/wiki/Installation-example-for-Ubuntu-14.04-LTS for original post): ----"
-pip install --upgrade pip
+# pip install --upgrade pip
 
-sudo pip install jsonrpc2 daemonize
+sudo pip3 install jsonrpc2 daemonize
 
 echo -e "\n---- create conf file for AerooDOCS ----"
 sudo rm /etc/aeroo-docs.conf
@@ -119,22 +122,15 @@ sudo su root -c "echo 'username = anonymous' >> /etc/aeroo-docs.conf"
 sudo su root -c "echo 'password = anonymous' >> /etc/aeroo-docs.conf"
 
 cd /opt/aeroo
-sudo git clone https://github.com/aeroo/aeroo_docs.git
+sudo git clone https://github.com/aaltinisik/aeroo_docs.git
 sudo touch /etc/init.d/office
 sudo python3 /opt/aeroo/aeroo_docs/aeroo-docs start -c /etc/aeroo-docs.conf
-sudo rm /etc/init.d/aeroo-docs
-sudo ln -s /opt/aeroo/aeroo_docs/aeroo-docs /etc/init.d/aeroo-docs
-sudo update-rc.d aeroo-docs defaults
-sudo service aeroo-docs restart
 
-### BEGIN INIT INFO
-# Provides: aeroo-docs
-# Required-Start:    $syslog $remote_fs
-# Required-Stop:     $syslog $remote_fs
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: Start aeroo-docs
-### END INIT INFO
+sudo cp /opt/aeroo/aeroo_docs/aeroo-docs.service /etc/systemd/system/aeroo-docs.service
+sudo systemctl enable aeroo-docs.service
+sudo systemctl daemon-reload
+sudo systemctl start aeroo-docs.service
+
 
 # If you encounter and error "Unable to lock on the pidfile while trying #16 just restart the service (sudo service aeroo-docs restart).
 ################################################################################
@@ -181,8 +177,9 @@ sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
 #-----------------------
 # Odoo user 
 echo -e "\n---- Enter odoo system users password ----"
-sudo adduser odoo --home=/opt/odoo --group odoo
+sudo adduser odoo --home=/opt/odoo
 
+read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
