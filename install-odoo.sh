@@ -1,8 +1,10 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 ################################################################################
-#
-#  Custom Changes made by Ahmet Altinisik
+#wget https://raw.githubusercontent.com/aaltinisik/customaddons/8.0/install-odoo.sh
+#chmod +x install-odoo.sh
+#./install-odoo.sh
+#Custom Changes made by Ahmet Altinisik
 #
 # Copyright (c) 2015 Luke Branch ( https://github.com/odoocommunitywidgets ) 
 #               All Rights Reserved.
