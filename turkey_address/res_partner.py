@@ -1,6 +1,7 @@
 from openerp import models, fields, api
+#from openerp.osv import osv, fields
 
-class region_district(models.Model):
+class address_district(models.Model):
     _name = 'address.district'
 
     name = fields.Char(string='District')
@@ -38,10 +39,10 @@ class address_region(models.Model):
         return self.name_get(cr, user, ids, context=context)
 
 
-class addres_neighbour(models.Model):
-    _name = 'address.neighbour'
+class addres_neigbour(models.Model):
+    _name = 'address.neigbour'
 
-    name = fields.Char(string='Neighbour')
+    name = fields.Char(string='Neigbourhood')
     region_id = fields.Many2one('address.region', 'Region')
 
 
@@ -57,10 +58,21 @@ class addres_neighbour(models.Model):
         ids = self.search(cr, user, args, limit=limit, context=context)
         return self.name_get(cr, user, ids, context=context)
 
-class res_partner(models.Model):
-    _inherit = 'res.partner'
+#class res_partner(models.Model):
+#    _inherit = 'res.partner'
+#
+#    district_id = fields.Many2one('address.district', string='District')
+#    region_id = fields.Many2one('address.region', string='Region')
+#    neighbour_id = fields.Many2one('address.neighbour', string='Neighbourhood')
 
-    district_id = fields.Many2one('address.district', string='District')
-    region_id = fields.Many2one('address.region', string='Region')
-    neighbour_id = fields.Many2one('address.neighbour', string='Neighbourhood')
-
+# class res_partner(osv.osv):
+#     _inherit = "res.partner"
+#
+#     _columns = {
+#
+#         'district_id': fields.many2one('address.district', 'District'),
+#         'region_id': fields.many2one('address.region', 'Region'),
+#         'neigbour_id': fields.many2one('address.neigbour', 'Neighbourhood'),
+#     }
+#
+# res_partner()
