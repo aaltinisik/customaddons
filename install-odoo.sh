@@ -214,8 +214,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 cd /root
-sudo wget -P Downloads https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
-sudo cp Downloads/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb\?raw\=true wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
 sudo apt install -f -y
 sudo apt install wkhtmltox -y
 sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
