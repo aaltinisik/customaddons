@@ -214,13 +214,11 @@ sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 
-echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
-cd /root
-sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
+echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
 sudo apt install -f -y
-sudo apt install wkhtmltox -y
+cd /tmp
+sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
 sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-
 sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
@@ -447,7 +445,7 @@ python-lxml python-mako python-markupsafe python-matplotlib python-mock python-o
 python-pdftools python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-qrcode python-serial \
 python-pypdf python-reportlab python-reportlab-accel python-requests python-setuptools python-simplejson python-tz python-unicodecsv \
 python-unittest2 python-vatnumber python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi \
-vim wkhtmltopdf curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
+vim curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
 
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
