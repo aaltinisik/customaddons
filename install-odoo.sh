@@ -214,13 +214,6 @@ sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 
-echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
-sudo apt install -f -y
-cd /tmp
-sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
-sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
-sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 
 #--------------------------------------------------
@@ -468,13 +461,23 @@ sudo pip install phonenumbers
 sudo pip install py-Asterisk
 
 
-
+sudo apt-get -f install -y
 sudo apt-get install cups lpr phppgadmin -y
 sudo apt-get install foomatic-db openprinting-ppds foomatic-db-gutenprint python-notify lm-sensors snmp-mibs-downloader psutils hannah-foo2zjs tix hpijs-ppds python-pexpect-doc unpaper tcl-tclreadline xfonts-cyrillic -y
 sudo apt-get autoremove -y
 sudo apt-get -f install -y
 
 #sudo cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
+
+echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
+sudo apt install -f -y
+cd /tmp
+sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
+sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
+sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
+
+
 
 # Install Aeroo Reports:
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
