@@ -39,10 +39,10 @@ class address_region(models.Model):
         return self.name_get(cr, user, ids, context=context)
 
 
-class addres_neigbour(models.Model):
-    _name = 'address.neigbour'
+class addres_neighbour(models.Model):
+    _name = 'address.neighbour'
 
-    name = fields.Char(string='Neigbourhood')
+    name = fields.Char(string='Neighbourhood')
     region_id = fields.Many2one('address.region', 'Region')
 
 
@@ -58,21 +58,3 @@ class addres_neigbour(models.Model):
         ids = self.search(cr, user, args, limit=limit, context=context)
         return self.name_get(cr, user, ids, context=context)
 
-#class res_partner(models.Model):
-#    _inherit = 'res.partner'
-#
-#    district_id = fields.Many2one('address.district', string='District')
-#    region_id = fields.Many2one('address.region', string='Region')
-#    neighbour_id = fields.Many2one('address.neighbour', string='Neighbourhood')
-
-# class res_partner(osv.osv):
-#     _inherit = "res.partner"
-#
-#     _columns = {
-#
-#         'district_id': fields.many2one('address.district', 'District'),
-#         'region_id': fields.many2one('address.region', 'Region'),
-#         'neigbour_id': fields.many2one('address.neigbour', 'Neighbourhood'),
-#     }
-#
-# res_partner()
