@@ -1,102 +1,46 @@
-from openerp import models, fields, api
+from openerp import tools, api, SUPERUSER_ID
+from openerp.osv import osv, fields
 
-
-class region_district(models.Model):
-    _name = 'address.district'
-
-    name = fields.Char(string='District')
-    state_id = fields.Many2one('res.country.state', 'State', required=True)
-
-    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
-        if args is None:
-            args = []
-        if context is None:
-            context = {}
-        if name:
-            args += [('name', operator, name)]
-        if context.get('state_id'):
-            args += [('state_id', '=', context.get('state_id'))]
-        ids = self.search(cr, user, args, limit=limit, context=context)
-        return self.name_get(cr, user, ids, context=context)
-
-
-class address_region(models.Model):
-    _name = 'address.region'
-
-    name = fields.Char(string='Region')
-    district_id = fields.Many2one('address.district', 'District', required=True)
-
-    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
-        if args is None:
-            args = []
-        if context is None:
-            context = {}
-        if name:
-            args += [('name', operator, name)]
-        if context.get('district_id'):
-            args += [('district_id', '=', context.get('district_id'))]
-        ids = self.search(cr, user, args, limit=limit, context=context)
-        return self.name_get(cr, user, ids, context=context)
-
-
-class addres_neighbour(models.Model):
-    _name = 'address.neighbour'
-
-    name = fields.Char(string='Neighbour')
-    region_id = fields.Many2one('address.region', 'Region', required=True)
-    code = fields.Char('Postal Code')
-
-
-    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
-        if args is None:
-            args = []
-        if context is None:
-            context = {}
-        if name:
-            args += [('name', operator, name)]
-        if context.get('region_id'):
-            args += [('region_id', '=', context.get('region_id'))]
-        ids = self.search(cr, user, args, limit=limit, context=context)
-        return self.name_get(cr, user, ids, context=context)
-
-class res_partner(models.Model):
+class res_partner(osv.osv):
     _inherit = 'res.partner'
 
-    district_id = fields.Many2one('address.district', string='District')
-    region_id = fields.Many2one('address.region', string='Region')
-    neighbour_id = fields.Many2one('address.neighbour', string='Neighbourhood')
+    _columns = {
+        'district_id': fields.many2one('address.district', string='District'),
+        'region_id': fields.many2one('address.region', string='Region'),
+        'neighbour_id': fields.many2one('address.neighbour', string='Neighbourhood'),
+    }
 
     @api.multi
     def onchange_state(self, state_id):
         if state_id:
             district = self.env['address.district'].search([('state_id', '=', state_id)], limit=1)
-            print '::district', district and district.id
+            print '::district', district
             state = self.env['res.country.state'].browse(state_id)
             return {'value': {'country_id': state.country_id.id,
                               'district_id': district and district.id}}
         return {'value': {}}
 
-    @api.multi
-    def onchange_district(self, district_id):
+    def onchange_district(self, cr, uid, ids, district_id, context=None):
+        region_obj = self.pool.get('address.region')
         if district_id:
-            region = self.env['address.region'].search([('district_id', '=', district_id)], limit=1)
-            return {'value': {'region_id': region and region.id}}
+            region_ids = region_obj.search(cr, uid, [('district_id', '=', district_id)], limit=1, context=context)
+            region_rec = region_obj.browse(cr, uid, region_ids, context=context)
+            return {'value': {'region_id': region_rec and region_rec.id}}
         return {'value': {}}
 
-    @api.multi
-    def onchange_region(self, region_id):
+    def onchange_region(self, cr, uid, ids, region_id, context=None):
+        neighbour_obj = self.pool.get('address.neighbour')
         if region_id:
-            neighbour = self.env['address.neighbour'].search([('region_id', '=', region_id)], limit=1)
-#            code = (neighbour and neighbour.code) or self._context.get('zip')
-            return {'value': {'neighbour_id': neighbour and neighbour.id,
+            neighbour_ids = neighbour_obj.search(cr, uid, [('region_id', '=', region_id)], limit=1, context=context)
+            neighbour_rec = neighbour_obj.browse(cr, uid, neighbour_ids, context)
+            return {'value': {'neighbour_id': neighbour_rec and neighbour_rec.id,
                               }}
         return {'value': {}}
 
-    @api.multi
-    def onchange_neighbour(self, neighbour_id):
+    def onchange_neighbour(self, cr, uid, ids, neighbour_id, context=None):
+        neighbour_obj = self.pool.get('address.neighbour')
         if neighbour_id:
-            neighbour = self.env['address.neighbour'].search([('neighbour_id', '=', neighbour_id)], limit=1)
-           # code = (neighbour and neighbour.code) or self._context.get('zip')
-            return {'value': {'zip': neighbour and neighbour.code}}
+            neighbour_rec = neighbour_obj.browse(cr, uid, neighbour_id, context=context)
+            return {'value': {'zip': neighbour_rec and neighbour_rec.code}}
         return {'value': {}}
 
