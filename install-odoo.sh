@@ -1,6 +1,7 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 ################################################################################
+# To run with ubuntu 16.04 
 #wget https://raw.githubusercontent.com/aaltinisik/customaddons/8.0/install-odoo.sh
 #chmod +x install-odoo.sh
 #./install-odoo.sh
@@ -480,7 +481,8 @@ echo -e "* SystemD Init File"
 sudo cp /opt/odoo/odoo-server/debian/odoo.service /etc/systemd/system/odoo.service
 sudo chmod 755 /etc/systemd/system/odoo.service
 sudo chown root: /etc/systemd/system/odoo.service
-sudo systemctl enable odoo10.service 
+sudo systemctl enable odoo.service
+
 
 echo -e "* Open ports in UFW for openerp-gevent"
 sudo ufw allow 8072
