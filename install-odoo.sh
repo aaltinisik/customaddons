@@ -309,105 +309,6 @@ sudo su root -c "echo '#log_level = debug' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'log_level = info' >> /etc/$OE_CONFIG.conf"
 
 
-echo -e "* Create startup file"
-sudo su root -c "rm $OE_HOME_EXT/start.sh"
-sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
-sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/$OE_SERVERTYPE --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
-sudo chmod 755 $OE_HOME_EXT/start.sh
-
-#--------------------------------------------------
-# Adding ODOO as a deamon (initscript)
-#--------------------------------------------------
-
-echo -e "* Create init file"
-echo '#!/bin/sh' >> ~/$OE_CONFIG
-echo '### BEGIN INIT INFO' >> ~/$OE_CONFIG
-echo '# Provides: $OE_CONFIG' >> ~/$OE_CONFIG
-echo '# Required-Start: $remote_fs $syslog' >> ~/$OE_CONFIG
-echo '# Required-Stop: $remote_fs $syslog' >> ~/$OE_CONFIG
-echo '# Should-Start: $network' >> ~/$OE_CONFIG
-echo '# Should-Stop: $network' >> ~/$OE_CONFIG
-echo '# Default-Start: 2 3 4 5' >> ~/$OE_CONFIG
-echo '# Default-Stop: 0 1 6' >> ~/$OE_CONFIG
-echo '# Short-Description: Enterprise Business Applications' >> ~/$OE_CONFIG
-echo '# Description: ODOO Business Applications' >> ~/$OE_CONFIG
-echo '### END INIT INFO' >> ~/$OE_CONFIG
-echo 'PATH=/bin:/sbin:/usr/bin' >> ~/$OE_CONFIG
-echo "DAEMON=$OE_HOME_EXT/$OE_SERVERTYPE" >> ~/$OE_CONFIG
-echo "NAME=$OE_CONFIG" >> ~/$OE_CONFIG
-echo "DESC=$OE_CONFIG" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Specify the user name (Default: odoo).' >> ~/$OE_CONFIG
-echo "USER=$OE_USER" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Specify an alternate config file (Default: /etc/openerp-server.conf).' >> ~/$OE_CONFIG
-echo "CONFIGFILE=\"/etc/$OE_CONFIG.conf\"" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# pidfile' >> ~/$OE_CONFIG
-echo 'PIDFILE=/var/run/$NAME.pid' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Additional options that are passed to the Daemon.' >> ~/$OE_CONFIG
-echo 'DAEMON_OPTS="-c $CONFIGFILE"' >> ~/$OE_CONFIG
-echo '[ -x $DAEMON ] || exit 0' >> ~/$OE_CONFIG
-echo '[ -f $CONFIGFILE ] || exit 0' >> ~/$OE_CONFIG
-echo 'checkpid() {' >> ~/$OE_CONFIG
-echo '[ -f $PIDFILE ] || return 1' >> ~/$OE_CONFIG
-echo 'pid=`cat $PIDFILE`' >> ~/$OE_CONFIG
-echo '[ -d /proc/$pid ] && return 0' >> ~/$OE_CONFIG
-echo 'return 1' >> ~/$OE_CONFIG
-echo '}' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'case "${1}" in' >> ~/$OE_CONFIG
-echo 'start)' >> ~/$OE_CONFIG
-echo 'echo -n "Starting ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
-echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo 'stop)' >> ~/$OE_CONFIG
-echo 'echo -n "Stopping ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--oknodo' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'restart|force-reload)' >> ~/$OE_CONFIG
-echo 'echo -n "Restarting ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--oknodo' >> ~/$OE_CONFIG
-echo 'sleep 1' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
-echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '*)' >> ~/$OE_CONFIG
-echo 'N=/etc/init.d/${NAME}' >> ~/$OE_CONFIG
-echo 'echo "Usage: ${NAME} {start|stop|restart|force-reload}" >&2' >> ~/$OE_CONFIG
-echo 'exit 1' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'esac' >> ~/$OE_CONFIG
-echo 'exit 0' >> ~/$OE_CONFIG
-
-echo -e "* Security Init File"
-sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
-sudo chmod 755 /etc/init.d/$OE_CONFIG
-sudo chown root: /etc/init.d/$OE_CONFIG
-
-echo -e "* Create service   sudo service $OE_SERVERTYPE start"
-sudo update-rc.d $OE_SERVERTYPE defaults
-
-echo -e "* Open ports in UFW for openerp-gevent"
-sudo ufw allow 8072
-echo -e "* Open ports in UFW for openerp-server"
-sudo ufw allow 8069
-
-echo -e "* Start ODOO on Startup"
-sudo update-rc.d $OE_CONFIG defaults
-
-read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
@@ -567,6 +468,108 @@ sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_payment_method $OE_HO
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/"
+
+read -n 1 -s -p "Press any key to continue"
+
+echo -e "* Create startup file"
+sudo su root -c "rm $OE_HOME_EXT/start.sh"
+sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
+sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/$OE_SERVERTYPE --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
+sudo chmod 755 $OE_HOME_EXT/start.sh
+
+#--------------------------------------------------
+# Adding ODOO as a deamon (initscript)
+#--------------------------------------------------
+
+echo -e "* Create init file"
+echo '#!/bin/sh' >> ~/$OE_CONFIG
+echo '### BEGIN INIT INFO' >> ~/$OE_CONFIG
+echo '# Provides: $OE_CONFIG' >> ~/$OE_CONFIG
+echo '# Required-Start: $remote_fs $syslog' >> ~/$OE_CONFIG
+echo '# Required-Stop: $remote_fs $syslog' >> ~/$OE_CONFIG
+echo '# Should-Start: $network' >> ~/$OE_CONFIG
+echo '# Should-Stop: $network' >> ~/$OE_CONFIG
+echo '# Default-Start: 2 3 4 5' >> ~/$OE_CONFIG
+echo '# Default-Stop: 0 1 6' >> ~/$OE_CONFIG
+echo '# Short-Description: Enterprise Business Applications' >> ~/$OE_CONFIG
+echo '# Description: ODOO Business Applications' >> ~/$OE_CONFIG
+echo '### END INIT INFO' >> ~/$OE_CONFIG
+echo 'PATH=/bin:/sbin:/usr/bin' >> ~/$OE_CONFIG
+echo "DAEMON=$OE_HOME_EXT/$OE_SERVERTYPE" >> ~/$OE_CONFIG
+echo "NAME=$OE_CONFIG" >> ~/$OE_CONFIG
+echo "DESC=$OE_CONFIG" >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo '# Specify the user name (Default: odoo).' >> ~/$OE_CONFIG
+echo "USER=$OE_USER" >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo '# Specify an alternate config file (Default: /etc/openerp-server.conf).' >> ~/$OE_CONFIG
+echo "CONFIGFILE=\"/etc/$OE_CONFIG.conf\"" >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo '# pidfile' >> ~/$OE_CONFIG
+echo 'PIDFILE=/var/run/$NAME.pid' >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo '# Additional options that are passed to the Daemon.' >> ~/$OE_CONFIG
+echo 'DAEMON_OPTS="-c $CONFIGFILE"' >> ~/$OE_CONFIG
+echo '[ -x $DAEMON ] || exit 0' >> ~/$OE_CONFIG
+echo '[ -f $CONFIGFILE ] || exit 0' >> ~/$OE_CONFIG
+echo 'checkpid() {' >> ~/$OE_CONFIG
+echo '[ -f $PIDFILE ] || return 1' >> ~/$OE_CONFIG
+echo 'pid=`cat $PIDFILE`' >> ~/$OE_CONFIG
+echo '[ -d /proc/$pid ] && return 0' >> ~/$OE_CONFIG
+echo 'return 1' >> ~/$OE_CONFIG
+echo '}' >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo 'case "${1}" in' >> ~/$OE_CONFIG
+echo 'start)' >> ~/$OE_CONFIG
+echo 'echo -n "Starting ${DESC}: "' >> ~/$OE_CONFIG
+echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
+echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
+echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
+echo 'echo "${NAME}."' >> ~/$OE_CONFIG
+echo ';;' >> ~/$OE_CONFIG
+echo 'stop)' >> ~/$OE_CONFIG
+echo 'echo -n "Stopping ${DESC}: "' >> ~/$OE_CONFIG
+echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
+echo '--oknodo' >> ~/$OE_CONFIG
+echo 'echo "${NAME}."' >> ~/$OE_CONFIG
+echo ';;' >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo 'restart|force-reload)' >> ~/$OE_CONFIG
+echo 'echo -n "Restarting ${DESC}: "' >> ~/$OE_CONFIG
+echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
+echo '--oknodo' >> ~/$OE_CONFIG
+echo 'sleep 1' >> ~/$OE_CONFIG
+echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
+echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
+echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
+echo 'echo "${NAME}."' >> ~/$OE_CONFIG
+echo ';;' >> ~/$OE_CONFIG
+echo '*)' >> ~/$OE_CONFIG
+echo 'N=/etc/init.d/${NAME}' >> ~/$OE_CONFIG
+echo 'echo "Usage: ${NAME} {start|stop|restart|force-reload}" >&2' >> ~/$OE_CONFIG
+echo 'exit 1' >> ~/$OE_CONFIG
+echo ';;' >> ~/$OE_CONFIG
+echo '' >> ~/$OE_CONFIG
+echo 'esac' >> ~/$OE_CONFIG
+echo 'exit 0' >> ~/$OE_CONFIG
+
+echo -e "* Security Init File"
+sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
+sudo chmod 755 /etc/init.d/$OE_CONFIG
+sudo chown root: /etc/init.d/$OE_CONFIG
+
+echo -e "* Create service   sudo service $OE_SERVERTYPE start"
+sudo update-rc.d $OE_SERVERTYPE defaults
+
+echo -e "* Open ports in UFW for openerp-gevent"
+sudo ufw allow 8072
+echo -e "* Open ports in UFW for openerp-server"
+sudo ufw allow 8069
+
+echo -e "* Start ODOO on Startup"
+sudo update-rc.d $OE_CONFIG defaults
+
+
 
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
