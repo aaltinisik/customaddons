@@ -1,4 +1,3 @@
-from openerp import tools, api, SUPERUSER_ID
 from openerp.osv import osv, fields
 
 class res_partner(osv.osv):
@@ -10,32 +9,22 @@ class res_partner(osv.osv):
         'neighbour_id': fields.many2one('address.neighbour', string='Neighbourhood'),
     }
 
-    @api.multi
-    def onchange_state(self, state_id):
+    def onchange_state(self, cr, uid, ids, state_id, context=None):
         if state_id:
-            district = self.env['address.district'].search([('state_id', '=', state_id)], limit=1)
-            print '::district', district
-            state = self.env['res.country.state'].browse(state_id)
-            return {'value': {'country_id': state.country_id.id,
-                              'district_id': district and district.id}}
-        return {'value': {}}
+            country_id=self.pool.get('res.country.state').browse(cr, uid, state_id, context).country_id.id
+            return {'value':{'country_id':country_id,
+                             'district_id':False,
+                             'region_id': False,
+                             'neighbour_id': False,
+                             }}
+        return {}
 
     def onchange_district(self, cr, uid, ids, district_id, context=None):
-        region_obj = self.pool.get('address.region')
-        if district_id:
-            region_ids = region_obj.search(cr, uid, [('district_id', '=', district_id)], limit=1, context=context)
-            region_rec = region_obj.browse(cr, uid, region_ids, context=context)
-            return {'value': {'region_id': region_rec and region_rec.id}}
-        return {'value': {}}
+        return {'value': {'region_id': False,'neighbour_id': False,}}
+
 
     def onchange_region(self, cr, uid, ids, region_id, context=None):
-        neighbour_obj = self.pool.get('address.neighbour')
-        if region_id:
-            neighbour_ids = neighbour_obj.search(cr, uid, [('region_id', '=', region_id)], limit=1, context=context)
-            neighbour_rec = neighbour_obj.browse(cr, uid, neighbour_ids, context)
-            return {'value': {'neighbour_id': neighbour_rec and neighbour_rec.id,
-                              }}
-        return {'value': {}}
+        return {'value': {'neighbour_id': False,}}
 
     def onchange_neighbour(self, cr, uid, ids, neighbour_id, context=None):
         neighbour_obj = self.pool.get('address.neighbour')
