@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_res_partner_inherite_view" model="ir.ui.view">
+            <field name="name">res.partner.inherit.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <field name="district_id" placeholder="District"
+                        on_change="onchange_district(district_id)"
+                        context="{'state_id': state_id}"/>
+                    <field name="region_id" placeholder="Region"
+                        on_change="onchange_region(region_id)"
+                        context="{'district_id': district_id}"/>
+                    <field name="neighbour_id" placeholder="Neighbour"
+                        on_change="onchange_neighbour(neighbour_id)"
+                        context="{'region_id': region_id}"/>
+                </field>
+                <xpath expr="//form/sheet/notebook/page[1]/field/form/sheet/group[2]/div[2]/field[3]" position="after">
+                    <field name="district_id" placeholder="District"
+                        on_change="onchange_district(district_id)"
+                        context="{'state_id': state_id}"/>
+                    <field name="region_id" placeholder="Region"
+                        on_change="onchange_region(region_id)"
+                        context="{'district_id': district_id}"/>
+                    <field name="neighbour_id" placeholder="Neighbour"
+                        on_change="onchange_neighbour(neighbour_id)"
+                        context="{'region_id': region_id}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
