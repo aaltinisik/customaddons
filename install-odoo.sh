@@ -1,8 +1,11 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 ################################################################################
-#
-#  Custom Changes made by Ahmet Altinisik
+# To run with ubuntu 16.04 
+#wget https://raw.githubusercontent.com/aaltinisik/customaddons/8.0/install-odoo.sh
+#chmod +x install-odoo.sh
+#./install-odoo.sh
+#Custom Changes made by Ahmet Altinisik
 #
 # Copyright (c) 2015 Luke Branch ( https://github.com/odoocommunitywidgets ) 
 #               All Rights Reserved.
@@ -212,16 +215,6 @@ sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 
-echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
-cd /root
-sudo wget -P Downloads https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
-sudo cp Downloads/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb\?raw\=true wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-sudo apt install -f -y
-sudo apt install wkhtmltox -y
-sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-
-sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
-sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 
 #--------------------------------------------------
@@ -317,105 +310,6 @@ sudo su root -c "echo '#log_level = debug' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'log_level = info' >> /etc/$OE_CONFIG.conf"
 
 
-echo -e "* Create startup file"
-sudo su root -c "rm $OE_HOME_EXT/start.sh"
-sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
-sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/$OE_SERVERTYPE --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
-sudo chmod 755 $OE_HOME_EXT/start.sh
-
-#--------------------------------------------------
-# Adding ODOO as a deamon (initscript)
-#--------------------------------------------------
-
-echo -e "* Create init file"
-echo '#!/bin/sh' >> ~/$OE_CONFIG
-echo '### BEGIN INIT INFO' >> ~/$OE_CONFIG
-echo '# Provides: $OE_CONFIG' >> ~/$OE_CONFIG
-echo '# Required-Start: $remote_fs $syslog' >> ~/$OE_CONFIG
-echo '# Required-Stop: $remote_fs $syslog' >> ~/$OE_CONFIG
-echo '# Should-Start: $network' >> ~/$OE_CONFIG
-echo '# Should-Stop: $network' >> ~/$OE_CONFIG
-echo '# Default-Start: 2 3 4 5' >> ~/$OE_CONFIG
-echo '# Default-Stop: 0 1 6' >> ~/$OE_CONFIG
-echo '# Short-Description: Enterprise Business Applications' >> ~/$OE_CONFIG
-echo '# Description: ODOO Business Applications' >> ~/$OE_CONFIG
-echo '### END INIT INFO' >> ~/$OE_CONFIG
-echo 'PATH=/bin:/sbin:/usr/bin' >> ~/$OE_CONFIG
-echo "DAEMON=$OE_HOME_EXT/$OE_SERVERTYPE" >> ~/$OE_CONFIG
-echo "NAME=$OE_CONFIG" >> ~/$OE_CONFIG
-echo "DESC=$OE_CONFIG" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Specify the user name (Default: odoo).' >> ~/$OE_CONFIG
-echo "USER=$OE_USER" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Specify an alternate config file (Default: /etc/openerp-server.conf).' >> ~/$OE_CONFIG
-echo "CONFIGFILE=\"/etc/$OE_CONFIG.conf\"" >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# pidfile' >> ~/$OE_CONFIG
-echo 'PIDFILE=/var/run/$NAME.pid' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo '# Additional options that are passed to the Daemon.' >> ~/$OE_CONFIG
-echo 'DAEMON_OPTS="-c $CONFIGFILE"' >> ~/$OE_CONFIG
-echo '[ -x $DAEMON ] || exit 0' >> ~/$OE_CONFIG
-echo '[ -f $CONFIGFILE ] || exit 0' >> ~/$OE_CONFIG
-echo 'checkpid() {' >> ~/$OE_CONFIG
-echo '[ -f $PIDFILE ] || return 1' >> ~/$OE_CONFIG
-echo 'pid=`cat $PIDFILE`' >> ~/$OE_CONFIG
-echo '[ -d /proc/$pid ] && return 0' >> ~/$OE_CONFIG
-echo 'return 1' >> ~/$OE_CONFIG
-echo '}' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'case "${1}" in' >> ~/$OE_CONFIG
-echo 'start)' >> ~/$OE_CONFIG
-echo 'echo -n "Starting ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
-echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo 'stop)' >> ~/$OE_CONFIG
-echo 'echo -n "Stopping ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--oknodo' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'restart|force-reload)' >> ~/$OE_CONFIG
-echo 'echo -n "Restarting ${DESC}: "' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --stop --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--oknodo' >> ~/$OE_CONFIG
-echo 'sleep 1' >> ~/$OE_CONFIG
-echo 'start-stop-daemon --start --quiet --pidfile ${PIDFILE} \' >> ~/$OE_CONFIG
-echo '--chuid ${USER} --background --make-pidfile \' >> ~/$OE_CONFIG
-echo '--exec ${DAEMON} -- ${DAEMON_OPTS}' >> ~/$OE_CONFIG
-echo 'echo "${NAME}."' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '*)' >> ~/$OE_CONFIG
-echo 'N=/etc/init.d/${NAME}' >> ~/$OE_CONFIG
-echo 'echo "Usage: ${NAME} {start|stop|restart|force-reload}" >&2' >> ~/$OE_CONFIG
-echo 'exit 1' >> ~/$OE_CONFIG
-echo ';;' >> ~/$OE_CONFIG
-echo '' >> ~/$OE_CONFIG
-echo 'esac' >> ~/$OE_CONFIG
-echo 'exit 0' >> ~/$OE_CONFIG
-
-echo -e "* Security Init File"
-sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
-sudo chmod 755 /etc/init.d/$OE_CONFIG
-sudo chown root: /etc/init.d/$OE_CONFIG
-
-echo -e "* Create service   sudo service $OE_SERVERTYPE start"
-sudo update-rc.d $OE_SERVERTYPE defaults
-
-echo -e "* Open ports in UFW for openerp-gevent"
-sudo ufw allow 8072
-echo -e "* Open ports in UFW for openerp-server"
-sudo ufw allow 8069
-
-echo -e "* Start ODOO on Startup"
-sudo update-rc.d $OE_CONFIG defaults
-
-read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
@@ -446,7 +340,7 @@ python-lxml python-mako python-markupsafe python-matplotlib python-mock python-o
 python-pdftools python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-qrcode python-serial \
 python-pypdf python-reportlab python-reportlab-accel python-requests python-setuptools python-simplejson python-tz python-unicodecsv \
 python-unittest2 python-vatnumber python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi \
-vim wkhtmltopdf curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
+vim curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
 
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
@@ -469,13 +363,23 @@ sudo pip install phonenumbers
 sudo pip install py-Asterisk
 
 
-
+sudo apt-get -f install -y
 sudo apt-get install cups lpr phppgadmin -y
 sudo apt-get install foomatic-db openprinting-ppds foomatic-db-gutenprint python-notify lm-sensors snmp-mibs-downloader psutils hannah-foo2zjs tix hpijs-ppds python-pexpect-doc unpaper tcl-tclreadline xfonts-cyrillic -y
 sudo apt-get autoremove -y
 sudo apt-get -f install -y
 
 #sudo cp /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
+
+echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
+sudo apt install -f -y
+cd /tmp
+sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
+sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
+sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
+
+
 
 # Install Aeroo Reports:
 echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
@@ -566,8 +470,29 @@ sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/cus
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/"
 sudo su $OE_USER -c "ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/"
 
+read -n 1 -s -p "Press any key to continue"
 
-echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
+#--------------------------------------------------
+# Adding ODOO as a deamon (initscript)
+#--------------------------------------------------
+
+echo -e "* SystemD Init File"
+
+sudo cp /opt/odoo/odoo-server/debian/odoo.service /etc/systemd/system/odoo.service
+sudo chmod 755 /etc/systemd/system/odoo.service
+sudo chown root: /etc/systemd/system/odoo.service
+sudo systemctl enable odoo.service
+
+
+echo -e "* Open ports in UFW for openerp-gevent"
+sudo ufw allow 8072
+echo -e "* Open ports in UFW for openerp-server"
+sudo ufw allow 8069
+
+sudo systemctl start odoo.service
+
+
+echo "Done! The ODOO server can be started with sudo systemctl start odoo.service"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
 echo "Once you've rebooted you'll be able to access your Odoo instance by going to http://[your server's IP address]:8069"
 echo "For example, if your server's IP address is 192.168.1.123 you'll be able to access it on http://192.168.1.123:8069"
