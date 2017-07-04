@@ -25,6 +25,7 @@ class address_region(models.Model):
 
     name = fields.Char(string='Region')
     district_id = fields.Many2one('address.district', 'District', required=True)
+    state_id = fields.Many2one('res.country.state', 'State', related='district_id.state_id',store=True)
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
         if args is None:
@@ -41,10 +42,12 @@ class address_region(models.Model):
 
 class addres_neighbour(models.Model):
     _name = 'address.neighbour'
-
     name = fields.Char(string='Neighbour')
     region_id = fields.Many2one('address.region', 'Region', required=True)
     code = fields.Char('Postal Code')
+    state_id = fields.Many2one('res.country.state', 'State',  related='region_id.district_id.state_id',store=True)
+    district_id = fields.Many2one('address.district', 'District',  related='region_id.district_id',store=True)
+
 
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
@@ -56,5 +59,7 @@ class addres_neighbour(models.Model):
             args += [('name', operator, name)]
         if context.get('region_id'):
             args += [('region_id', '=', context.get('region_id'))]
+        if context.get('state_id'):
+            args += [('state_id', '=', context.get('state_id'))]
         ids = self.search(cr, user, args, limit=limit, context=context)
         return self.name_get(cr, user, ids, context=context)

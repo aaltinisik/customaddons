@@ -33,6 +33,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="district_id"/>
+                    <field name="state_id"/>
                 </tree>
             </field>
         </record>
@@ -45,6 +46,7 @@
                         <group col="4">
                             <field name="name" required="1"/>
                             <field name="district_id" required="1"/>
+                            <field name="state_id"/>
                         </group>
                     </sheet>
                 </form>
@@ -57,8 +59,11 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="region_id" />
                     <field name="code" />
+                    <field name="region_id" />
+                    <field name="district_id"/>
+                    <field name="state_id"/>
+
                 </tree>
             </field>
         </record>
@@ -71,6 +76,8 @@
                         <group col="4">
                             <field name="name" required="1"/>
                             <field name="region_id" required="1"/>
+                            <field name="district_id"/>
+                            <field name="state_id"/>
                             <field name="code"/>
                         </group>
                     </sheet>
@@ -125,9 +132,6 @@
 
    </data>
 </openerp>
-
-
-
 
 
 

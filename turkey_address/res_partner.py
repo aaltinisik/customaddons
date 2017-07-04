@@ -13,23 +13,30 @@ class res_partner(osv.osv):
         if state_id:
             country_id=self.pool.get('res.country.state').browse(cr, uid, state_id, context).country_id.id
             return {'value':{'country_id':country_id,
-                             'district_id':False,
-                             'region_id': False,
-                             'neighbour_id': False,
+#                             'district_id':False,
+#                             'region_id': False,
+#                             'neighbour_id': False,
                              }}
         return {}
 
     def onchange_district(self, cr, uid, ids, district_id, context=None):
-        return {'value': {'region_id': False,'neighbour_id': False,}}
-
+#        return {'value': {'region_id': False,'neighbour_id': False,}}
+        return {}
 
     def onchange_region(self, cr, uid, ids, region_id, context=None):
-        return {'value': {'neighbour_id': False,}}
+#        return {'value': {'neighbour_id': False,}}
+        return {}
+
 
     def onchange_neighbour(self, cr, uid, ids, neighbour_id, context=None):
         neighbour_obj = self.pool.get('address.neighbour')
         if neighbour_id:
             neighbour_rec = neighbour_obj.browse(cr, uid, neighbour_id, context=context)
-            return {'value': {'zip': neighbour_rec and neighbour_rec.code}}
+            return {'value': {'zip': neighbour_rec and neighbour_rec.code,
+                              'region_id':neighbour_rec and neighbour_rec.region_id,
+                              'district_id': neighbour_rec and neighbour_rec.region_id.district_id,
+                              'state_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id,
+                              'country_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id.country_id,
+                              }}
         return {'value': {}}
 
