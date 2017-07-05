@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-01 13:39+0000\n"
-"PO-Revision-Date: 2017-07-01 13:39+0000\n"
+"POT-Creation-Date: 2017-07-05 05:49+0000\n"
+"PO-Revision-Date: 2017-07-05 05:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,6 +62,7 @@ msgstr ""
 
 #. module: turkey_address
 #: field:address.district,name:0
+#: field:address.neighbour,district_id:0
 #: field:address.region,district_id:0
 #: view:res.partner:turkey_address.view_res_partner_inherite_view
 #: field:res.partner,district_id:0
@@ -145,6 +146,8 @@ msgstr ""
 
 #. module: turkey_address
 #: field:address.district,state_id:0
+#: field:address.neighbour,state_id:0
+#: field:address.region,state_id:0
 msgid "State"
 msgstr ""
 
