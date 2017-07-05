@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-01 13:39+0000\n"
-"PO-Revision-Date: 2017-07-01 13:39+0000\n"
+"POT-Creation-Date: 2017-07-05 05:49+0000\n"
+"PO-Revision-Date: 2017-07-05 05:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 #. module: turkey_address
 #: model:ir.actions.act_window,help:turkey_address.action_neighbour
 msgid "<p class=\"oe_view_nocontent_create\">\n"
-"                Click to add a Neighbourhood in your Neighbours list.\n"
+"                Click to add a Neighbour in your Neighbours list.\n"
 "              </p>\n"
 "            "
 msgstr "<p class=\"oe_view_nocontent_create\">\n"
@@ -71,6 +71,7 @@ msgstr "Görünen Adı"
 
 #. module: turkey_address
 #: field:address.district,name:0
+#: field:address.neighbour,district_id:0
 #: field:address.region,district_id:0
 #: view:res.partner:turkey_address.view_res_partner_inherite_view
 #: field:res.partner,district_id:0
@@ -131,7 +132,7 @@ msgstr "Mahalleler ve posta kodları"
 #. module: turkey_address
 #: model:ir.model,name:turkey_address.model_res_partner
 msgid "Partner"
-msgstr "İş Ortağı"
+msgstr "Ortak"
 
 #. module: turkey_address
 #: field:address.neighbour,code:0
@@ -154,6 +155,8 @@ msgstr "Semtler bucaklar beldeler"
 
 #. module: turkey_address
 #: field:address.district,state_id:0
+#: field:address.neighbour,state_id:0
+#: field:address.region,state_id:0
 msgid "State"
 msgstr "İl"
 
