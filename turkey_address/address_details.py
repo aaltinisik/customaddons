@@ -48,6 +48,14 @@ class addres_neighbour(models.Model):
     state_id = fields.Many2one('res.country.state', 'State',  related='region_id.district_id.state_id',store=True)
     district_id = fields.Many2one('address.district', 'District',  related='region_id.district_id',store=True)
 
+    def name_get(self, cr, uid, ids, context=None):
+        res = []
+        for inst in self.browse(cr, uid, ids, context=context):
+            name = inst.name or '/'
+            if name and name.district_id and name.state_id:
+                name=name+'/'+name.district_id.name+'/'+name.state_id.name
+            res.append((inst.id, name))
+        return res
 
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):

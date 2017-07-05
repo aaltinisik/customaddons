@@ -9,6 +9,7 @@
     'data': [
         'address_details_view.xml',
         'res_partner_view.xml',
+        'views/wizard_import_script.xml'
 #        'res_country_data.xml',
     ],
     'installable': True,
