@@ -48,12 +48,12 @@ class addres_neighbour(models.Model):
     state_id = fields.Many2one('res.country.state', 'State',  related='region_id.district_id.state_id',store=True)
     district_id = fields.Many2one('address.district', 'District',  related='region_id.district_id',store=True)
 
-    def name_get(self, cr, uid, ids, context=None):
+    def name_get2(self, cr, uid, ids, context=None):
         res = []
         for inst in self.browse(cr, uid, ids, context=context):
             name = inst.name or '/'
-            if name and name.district_id and name.state_id:
-                name=name+'/'+name.district_id.name+'/'+name.state_id.name
+            if name and inst.district_id and inst.state_id:
+                name=name+','+inst.district_id.name+','+inst.state_id.name
             res.append((inst.id, name))
         return res
 
@@ -70,4 +70,4 @@ class addres_neighbour(models.Model):
         if context.get('state_id'):
             args += [('state_id', '=', context.get('state_id'))]
         ids = self.search(cr, user, args, limit=limit, context=context)
-        return self.name_get(cr, user, ids, context=context)
+        return self.name_get2(cr, user, ids, context=context)
