@@ -394,7 +394,7 @@ echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
         sudo su $OE_USER -c "ln -s -f $OE_HOME/OCA/aeroo_reports/* $OE_HOME/custom/addons/"
         
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/web.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/yelizariev/addons-yelizariev.git"
+        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/addons-yelizariev.git"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/server-tools.git"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/knowledge.git"
         sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/purchase-workflow.git"
