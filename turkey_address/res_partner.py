@@ -41,6 +41,10 @@ class res_partner(osv.osv):
                               'country_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id.country_id,
                               }}
         return {'value': {}}
+    def _address_fields(self, cr, uid, context=None):
+        fields = super(res_partner, self
+                       )._address_fields(cr, uid, context=context)
+        return fields+['district_id','neighbour_id','region_id']
 
     def _display_address(self, cr, uid, address, without_company=False, context=None):
 

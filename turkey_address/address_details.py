@@ -57,7 +57,6 @@ class addres_neighbour(models.Model):
             res.append((inst.id, name))
         return res
 
-
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
         if args is None:
             args = []

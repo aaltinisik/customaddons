@@ -10,7 +10,7 @@
                 
                 <xpath expr="//form/sheet/group/group[1]/div[2]/field[1]" position="replace">
                     <field name="neighbour_id" placeholder="Neighbour"
-                        on_change="onchange_neighbour(neighbour_id)" class="oe_no_button" options="{'no_open': True}"
+                        on_change="onchange_neighbour(neighbour_id)" class="oe_no_button" attrs="{'readonly': [('use_parent_address','=',True)]}" options="{'no_open': True}"
                         context="{'region_id': region_id,'state_id': state_id}"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group[1]/div[2]/field[2]" position="replace">
@@ -21,10 +21,10 @@
                 <xpath expr="//form/sheet/group/group[1]/div[2]/div[2]" position="replace">
                     <div class="address_region_details">
                         <field name="region_id" placeholder="Region" nolabel="1" options="{'no_open': True}"
-                        style="width:120px;" class="oe_no_button"
+                        style="width:120px;" class="oe_no_button" attrs="{'readonly': [('use_parent_address','=',True)]}"
                         on_change="onchange_region(region_id)" context="{'district_id': district_id}"/>
                         <field name="district_id" placeholder="District" nolabel="1" options="{'no_open': True}"
-                        style="width:130px;" class="oe_no_button"
+                        style="width:130px;" class="oe_no_button" attrs="{'readonly': [('use_parent_address','=',True)]}"
                         on_change="onchange_district(district_id)" context="{'state_id': state_id}"/>
                      </div>
                     <div>
