@@ -39,6 +39,7 @@ class res_partner(osv.osv):
                               'district_id': neighbour_rec and neighbour_rec.region_id.district_id,
                               'state_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id,
                               'country_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id.country_id,
+                              'city': False,
                               }}
         return {'value': {}}
     def _address_fields(self, cr, uid, context=None):
