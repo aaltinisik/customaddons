@@ -29,7 +29,7 @@
                      </div>
                     <div>
                         <field name="zip" placeholder="ZIP" style="width:100px;" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                        <field name="city" placeholder="City" style="width:150px;" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                        <field name="city" placeholder="City" string="City" style="width:150px;" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                     </div>
                     <div>
                         <field name="state_id" class="oe_no_button" placeholder="State" style="width: 120px;" options='{"no_open": True}' on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>

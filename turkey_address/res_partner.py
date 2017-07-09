@@ -20,6 +20,7 @@ class res_partner(osv.osv):
                              }}
         return {}
 
+
     def onchange_district(self, cr, uid, ids, district_id, context=None):
 #        return {'value': {'region_id': False,'neighbour_id': False,}}
         return {}
@@ -76,3 +77,4 @@ class res_partner(osv.osv):
             address_format = '%(company_name)s\n' + address_format
         display_address = address_format % args
         return re.sub('\n[\s,]*\n+', '\n', display_address.strip())
+
