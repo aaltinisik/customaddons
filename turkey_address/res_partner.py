@@ -72,14 +72,16 @@ class res_partner(osv.osv):
             'neighbourhood_name': address.neighbour_id.name or '',
             'region_name': address.region_id.name or '',
             'district_name': address.district_id.name or '',
-
         }
+
         for field in self._address_fields(cr, uid, context=context):
             args[field] = getattr(address, field) or ''
         if without_company:
             args['company_name'] = ''
         elif address.parent_id:
             address_format = '%(company_name)s\n' + address_format
+        if args['region_name']==args['district_name']:
+            args['region_name']=''
         display_address = address_format % args
         return re.sub('\n[\s,]*\n+', '\n', display_address.strip())
 
