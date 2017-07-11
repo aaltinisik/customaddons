@@ -9,6 +9,7 @@
             <field name="inherit_id" ref=""/>
             <field name="arch" type="xml">
               <tree string="Paket Bilgileri" create="true" editable="top">
+                    <field name="default_code" readonly="True" options="{&quot;no_open&quot;:True}"/>
                     <field name="name" readonly="True" options="{&quot;no_open&quot;:True}"/>
                     <field name="width"/>
                     <field name="length"/>
