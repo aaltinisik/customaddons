@@ -32,6 +32,7 @@ class res_partner(osv.osv):
     'z_contact_name': fields.char('ilgili kişi', size=64, required=False),
     'z_tel_kampanya': fields.boolean('Kampanyalarda Aranmayacak',default=False, help=u"Seçili ise telefon kampanyalarında aranmayacak."),
     'z_kamp_2016A': fields.boolean('2016 Katalog için arandı', help=u"2016 Temmuz Katalog gönderme kampanyası icin arandi."),
+    'z_kamp_2017A': fields.boolean('2017 Adres güncelleme için arandı', help=u"2017 Temmuz Adres günceleme için arandı."),
     'z_kat_postala': fields.boolean('Katalog Postala', help=u"Katalog Posta ile gönderilecek."),
     'z_kat_postalandi': fields.boolean('Katalog Postalandi', help=u"Katalog Posta ile gönderildi."),
     'z_kat_email': fields.boolean('Katalog E-mail', help=u"Katalog email ile gönderilecek."),
