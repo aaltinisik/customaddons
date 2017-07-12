@@ -16,8 +16,15 @@ class res_partner(osv.osv):
             return {'value':{'country_id':country_id,
 #                             'district_id':False,
 #                             'region_id': False,
-#                             'neighbour_id': False,
+                             'neighbour_id': False,
                              }}
+        else:
+            return {'value': {'country_id': country_id,
+                              'district_id':False,
+                              'region_id': False,
+                              'neighbour_id': False,
+                              }}
+
         return {}
 
 
