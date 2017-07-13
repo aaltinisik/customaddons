@@ -18,6 +18,7 @@ echo -e "\n---- : ----"
 cd $OE_HOME
 mkdir $OE_HOME/custom
 cd $OE_HOME/custom
+mkdir $OE_HOME/custom/addons
 mkdir $OE_HOME/custom/repos
 cd $OE_HOME/custom/repos
 
@@ -53,8 +54,6 @@ while true; do
     case $yn in
         [Yy]* ) cd $OE_HOME
 
-mkdir $OE_HOME/custom
-mkdir $OE_HOME/custom/addons
 
 ln -s -f $OCA_HOME/bank-statement-import/account_bank_statement_import $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/bank-statement-import/account_bank_statement_import_camt $OE_HOME/custom/addons/
