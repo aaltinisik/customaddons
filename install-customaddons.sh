@@ -19,6 +19,7 @@ cd $OE_HOME
 mkdir $OE_HOME/custom
 cd $OE_HOME/custom
 mkdir $OE_HOME/custom/repos
+cd $OE_HOME/custom/repos
 
 git clone -b $OE_VERSION https://github.com/aaltinisik/access-addons
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-financial-tools
