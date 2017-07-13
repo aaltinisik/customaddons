@@ -51,7 +51,10 @@ while true; do
     read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OE_HOME
-mkdir $OE_HOME/custom/addons/
+
+mkdir $OE_HOME/custom
+mkdir $OE_HOME/custom/addons
+
 ln -s -f $OCA_HOME/bank-statement-import/account_bank_statement_import $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/bank-statement-import/account_bank_statement_import_camt $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/account-payment/account_due_list_days_overdue $OE_HOME/custom/addons/
