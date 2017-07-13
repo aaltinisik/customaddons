@@ -14,11 +14,11 @@ OE_VERSION="8.0"
 #set the superadmin password
 OE_CONFIG="odoo-server"
 
-
-
 echo -e "\n---- : ----"
-mkdir $OCA_HOME
-cd $OCA_HOME
+cd $OE_HOME
+mkdir $OE_HOME/custom
+cd $OE_HOME/custom
+mkdir $OE_HOME/custom/repos
 
 git clone -b $OE_VERSION https://github.com/aaltinisik/access-addons
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-financial-tools
