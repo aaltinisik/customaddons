@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='sales_purchases']" position="after">
-                    <page name="marketing" string="Marketing">
+                    <page name="marketing" string="Pazarlama">
                         <group string="Worksector">
                             <field name="worksector_ids" nolabel="1"/>
                         </group>

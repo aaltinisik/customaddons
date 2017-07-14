@@ -16,9 +16,16 @@ class res_partner(osv.osv):
             return {'value':{'country_id':country_id,
 #                             'district_id':False,
 #                             'region_id': False,
-#                             'neighbour_id': False,
+                             'neighbour_id': False,
                              }}
+        else:
+            return {'value': {'district_id':False,
+                              'region_id': False,
+                              'neighbour_id': False,
+                              }}
+
         return {}
+
 
     def onchange_district(self, cr, uid, ids, district_id, context=None):
 #        return {'value': {'region_id': False,'neighbour_id': False,}}
@@ -38,8 +45,13 @@ class res_partner(osv.osv):
                               'district_id': neighbour_rec and neighbour_rec.region_id.district_id,
                               'state_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id,
                               'country_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id.country_id,
+                              'city': False,
                               }}
         return {'value': {}}
+    def _address_fields(self, cr, uid, context=None):
+        fields = super(res_partner, self
+                       )._address_fields(cr, uid, context=context)
+        return fields+['district_id','neighbour_id','region_id']
 
     def _display_address(self, cr, uid, address, without_company=False, context=None):
 
@@ -66,13 +78,16 @@ class res_partner(osv.osv):
             'neighbourhood_name': address.neighbour_id.name or '',
             'region_name': address.region_id.name or '',
             'district_name': address.district_id.name or '',
-
         }
+
         for field in self._address_fields(cr, uid, context=context):
             args[field] = getattr(address, field) or ''
         if without_company:
             args['company_name'] = ''
         elif address.parent_id:
             address_format = '%(company_name)s\n' + address_format
+        if args['region_name']==args['district_name']:
+            args['region_name']=''
         display_address = address_format % args
         return re.sub('\n[\s,]*\n+', '\n', display_address.strip())
+

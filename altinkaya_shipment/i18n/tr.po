@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_shipment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 18:22+0000\n"
+"PO-Revision-Date: 2017-07-11 18:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:54
+#: field:product.template,height:0
+#, python-format
+msgid "Measured Height (cm)"
+msgstr "Yükseklik(cm)"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:42
+#: field:product.template,length:0
+#, python-format
+msgid "Measured Length (cm)"
+msgstr "Boy(cm)"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:36
+#: field:product.template,width:0
+#, python-format
+msgid "Measured Width (cm)"
+msgstr "En (cm)"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:60
+#: field:product.template,weight_measured:0
+#, python-format
+msgid "Measured weight (gr)"
+msgstr "Tartılan Ağırlık (gr)"
+
+#. module: altinkaya_shipment
+#: view:product.template:altinkaya_shipment.altinkaya_shipmenttree_view
+msgid "Paket Bilgileri"
+msgstr "Paket Bilgileri"
+
+#. module: altinkaya_shipment
+#: view:product.product:altinkaya_shipment.pack_size_view
+#: view:product.template:altinkaya_shipment.pack_size_view2
+msgid "Paketleme Bilgileri"
+msgstr "Paketleme Bilgileri"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:48
+#: field:product.template,pieces_in_pack:0
+#, python-format
+msgid "Pieces in related pack"
+msgstr "İlgili kolideki adedi"
+
+#. module: altinkaya_shipment
+#: model:ir.actions.act_window,name:altinkaya_shipment.action_Product Sizes_form_view
+#: model:ir.ui.menu,name:altinkaya_shipment.menu_action_Product Sizes_form
+msgid "Product Sizes"
+msgstr "Ürün Boyutları"
+
+#. module: altinkaya_shipment
+#: model:ir.model,name:altinkaya_shipment.model_product_template
+msgid "Product Template"
+msgstr "Ürün Şablonu"
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:30
+#: field:product.template,pack_product:0
+#, python-format
+msgid "Product of Package"
+msgstr "Kolinin Ürünü"
+

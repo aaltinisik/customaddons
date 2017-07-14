@@ -1,13 +1,13 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 ################################################################################
-# To run with ubuntu 16.04 
+# To run with ubuntu 16.04
 #wget https://raw.githubusercontent.com/aaltinisik/customaddons/8.0/install-odoo.sh
 #chmod +x install-odoo.sh
 #./install-odoo.sh
 #Custom Changes made by Ahmet Altinisik
 #
-# Copyright (c) 2015 Luke Branch ( https://github.com/odoocommunitywidgets ) 
+# Copyright (c) 2015 Luke Branch ( https://github.com/odoocommunitywidgets )
 #               All Rights Reserved.
 #               General Contact <odoocommunitywidgets@gmail.com>
 #
@@ -67,7 +67,7 @@ sudo apt install git -y
 sudo apt install python-pip python3-pip -y
 
 # sudo curl -O https://bootstrap.pypa.io/get-pip.py
-# sudo python get-pip.py 
+# sudo python get-pip.py
 
 
 
@@ -142,7 +142,7 @@ sudo systemctl start aeroo-docs.service
 # Forked & Modified by: Luke Branch
 # LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
 #-------------------------------------------------------------------------------
-#  
+#
 # This script will install ODOO Server on
 # clean Ubuntu 16.04 Server
 #-------------------------------------------------------------------------------
@@ -151,10 +151,10 @@ sudo systemctl start aeroo-docs.service
 # odoo-install
 #
 # EXAMPLE:
-# ./odoo-install 
+# ./odoo-install
 #
 ################################################################################
- 
+
 ##fixed parameters
 #openerp
 OE_USER="odoo"
@@ -178,7 +178,7 @@ sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
 
 #-----------------------
-# Odoo user 
+# Odoo user
 echo -e "\n---- Enter odoo system users password ----"
 sudo adduser odoo --home=/opt/odoo
 
@@ -193,13 +193,13 @@ sudo apt-get update
 
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt install postgresql postgresql-contrib -y  
+sudo apt install postgresql postgresql-contrib -y
 
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
 sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.6/main/postgresql.conf
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser --createdb --username postgres $OE_USER" 
+sudo su - postgres -c "createuser --createdb --username postgres $OE_USER"
 # sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
@@ -380,101 +380,18 @@ sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 
 
-
-# Install Aeroo Reports:
-echo -e "\n---- Install Aeroo Reports Odoo Modules: ----"
-
-        cd $OE_HOME
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/customaddons.git"
-        sudo su $OE_USER -c "mkdir OCA"
-        sudo su $OE_USER -c "cd OCA"        
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/aeroo_reports"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/aaltinisik/connector-telephony.git"
-        sudo su $OE_USER -c "ln -s -f $OE_HOME/OCA/connector-telephony/* $OE_HOME/custom/addons/"
-        sudo su $OE_USER -c "ln -s -f $OE_HOME/OCA/aeroo_reports/* $OE_HOME/custom/addons/"
-        
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/web.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/yelizariev/addons-yelizariev.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/server-tools.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/knowledge.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/purchase-workflow.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/product-attribute.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/sale-workflow.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/account-invoicing.git"
-        sudo su $OE_USER -c "git clone -b 8.0 https://github.com/OCA/stock-logistics-tracking.git"
-        
-
-
-OCA_HOME="$OE_HOME/OCA"
-
-        cd $OE_HOME
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/aaltinisik/customaddons.git $OE_HOME/customaddons"
-        sudo su $OE_USER -c "mkdir $OCA_HOME"
-        sudo su $OE_USER -c "cd $OCA_HOME"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/aaltinisik/aeroo_reports $OCA_HOME/aeroo_reports"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/aaltinisik/connector-telephony.git $OCA_HOME/connector-telephony"    
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/web.git $OCA_HOME/web"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/yelizariev/addons-yelizariev.git $OCA_HOME/addons-yelizariev"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/server-tools.git $OCA_HOME/server-tools"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/knowledge.git $OCA_HOME/knowledge"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/purchase-workflow.git $OCA_HOME/purchase-workflow"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/product-attribute.git $OCA_HOME/product-attribute"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/sale-workflow.git $OCA_HOME/sale-workflow"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/account-invoicing.git $OCA_HOME/account-invoicing"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/stock-logistics-tracking.git $OCA_HOME/stock-logistics-tracking"
-        sudo su $OE_USER -c "git clone -b $OE_VERSION https://github.com/OCA/partner-contact.git $OCA_HOME/partner-contact"
-
 cd $OE_HOME
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/connector-telephony/* $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/aeroo_reports/* $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_sheet_full_width $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_searchbar_full_width $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_last_viewed_records $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/auth_admin_passkey $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_concurrency $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/admin_technical_features $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/cron_run_manually $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_optional_quick_create $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/base_report_auto_create_qweb $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/disable_openerp_online $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/fetchmail_notify_error_to_sender $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/language_path_mixin $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/module_prototyper $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/mass_editing $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/server-tools/super_calendar $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachment_preview $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/knowledge/attachments_to_filesystem $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/product_by_supplier $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/purchase-workflow/purchase_order_revision $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/partner-contact/partner_external_maps $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_dimension $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/product-attribute/product_weight $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/partner_prepayment $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_automatic_workflow $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_cancel_reason $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_back2draft $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_price_recalculation $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_order_revision $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_partner_incoterm $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_payment_method $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/account-invoicing/account_invoice_partner $OE_HOME/custom/addons/"
-sudo su $OE_USER -c "ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/"
+
+git clone -b 8.0 https://github.com/aaltinisik/customaddons.git
+
+$OE_HOME/customaddons/install-customaddons.sh
 
 read -n 1 -s -p "Press any key to continue"
 
 #--------------------------------------------------
 # Adding ODOO as a deamon (initscript)
 #--------------------------------------------------
+
 
 echo -e "* SystemD Init File"
 

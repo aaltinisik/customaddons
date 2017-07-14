@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- TODO: put here a reminder on what to do at the first edition -->
+        <record id="pack_size_view" model="ir.ui.view">
+            <field name="name">pack_size.view</field>
+            <field name="model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+              <field name="weight_net" position="after">
+                  <group name="Package Info" string="Paketleme Bilgileri">
+                      <field name="width"/>
+                      <field name="length"/>
+                      <field name="height"/>
+                      <field name="weight_measured"/>
+                      <field name="pack_product"/>
+                      <field name="pieces_in_pack"/>
+                  </group>
+              </field>
+            </field>
+        </record>
+        <record id="pack_size_view2" model="ir.ui.view">
+            <field name="name">pack_size.view</field>
+            <field name="model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+              <field name="weight_net" position="after">
+                  <group name="Package Info" string="Paketleme Bilgileri">
+                      <field name="width"/>
+                      <field name="length"/>
+                      <field name="height"/>
+                      <field name="weight_measured"/>
+                      <field name="pack_product"/>
+                      <field name="pieces_in_pack"/>
+                  </group>
+              </field>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

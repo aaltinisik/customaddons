@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- TODO: put here a reminder on what to do at the first edition -->
+        <record id="altinkaya_shipmenttree_view" model="ir.ui.view">
+            <field name="name">altinkaya_shipmenttree.view</field>
+            <field name="model">product.template</field>
+            <field name="view_type">tree</field>
+            <field name="inherit_id" ref=""/>
+            <field name="arch" type="xml">
+              <tree string="Paket Bilgileri" create="true" editable="top">
+                    <field name="default_code" readonly="True" options="{&quot;no_open&quot;:True}"/>
+                    <field name="name" readonly="True" options="{&quot;no_open&quot;:True}"/>
+                    <field name="width"/>
+                    <field name="length"/>
+                    <field name="height"/>
+                    <field name="weight_measured"/>
+                    <field name="pack_product"/>
+                    <field name="pieces_in_pack"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
