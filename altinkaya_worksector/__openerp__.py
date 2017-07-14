@@ -1,7 +1,7 @@
 
 {
     'name': 'altinkaya_worksector',
-    'version': '8.0',
+    'version': '8.0.1',
     'website': 'https://www.odoo.com',
     'category': 'Sales',
     'summary': 'altinkaya_worksector',
