@@ -6,7 +6,7 @@
     'author': 'Kirankumar',
     'category': 'Invoice',
     'summary': 'This Module is used to calculate total invoice amount in turkey currency',
-    'description': """This Module is use to calculate invoice in turky currency""",
+    'description': """This Module is use to Export Invoice""",
     'depends': ['base', 'account_accountant'],
     'installable' : True,
     'auto_install' : False,
