@@ -10,11 +10,7 @@
                 <xpath expr="//page[@name='sales_purchases']" position="after">
                     <page name="marketing" string="Marketing">
                         <group string="Worksector">
-                            <field name="worksector_ids" nolabel="1">
-                                <tree editable="top">
-                                    <field name="worksector_id" required="1"/>
-                                    <field name="partner_id" invisible="1"/>
-                                </tree>
+                            <field name="worksector_ids" nolabel="1" >
                             </field>
                         </group>
                         <group string="Target Product Category">
@@ -26,8 +22,8 @@
         </record>
 
         <record id="res_partner_worksector_form_view" model="ir.ui.view">
-            <field name="name">res.partner.worksector.form</field>
-            <field name="model">res.partner.worksector</field>
+            <field name="name">worksector.form</field>
+            <field name="model">worksector</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -36,18 +32,14 @@
                             <field name="description"/>
                         </group>
                         <group string="Partner">
-                            <field name="partner_ids" readonly="1" nolabel="1">
-                                <tree>
-                                    <field name="partner_id"/>
-                                </tree>
+                            <field name="partner_ids"  nolabel="1">
+<!--                                 <tree> -->
+<!--                                     <field name="partner_id"/> -->
+<!--                                 </tree> -->
                             </field>
                         </group>
-                        <group string="Product Category">
-                            <field name="product_categ_ids" nolabel="1">
-                                <tree editable="top">
-                                    <field name="product_categ_id" required="1"/>
-                                </tree>
-                            </field>
+                        <group string="Product Category" col="4">
+                            <field name="product_categ_ids" nolabel="1" />
                         </group>
                     </sheet>
                 </form>
@@ -55,8 +47,8 @@
         </record>
 
         <record id="res_partner_worksector_tree_view" model="ir.ui.view">
-            <field name="name">res.partner.worksector.tree</field>
-            <field name="model">res.partner.worksector</field>
+            <field name="name">worksector.tree</field>
+            <field name="model">worksector</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" required="1"/>
@@ -67,7 +59,7 @@
 
         <record id="action_res_partner_worksector" model="ir.actions.act_window">
             <field name="name">Customer Sectors</field>
-            <field name="res_model">res.partner.worksector</field>
+            <field name="res_model">worksector</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
