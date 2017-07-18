@@ -10,20 +10,23 @@ class res_partner(osv.osv):
                 continue
             if not partner.vat:
                 continue
-            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id)],limit=1, context=context)
+            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id),('is_company', '=', 1)],limit=1, context=context)
             colliding_partner = self.browse(cr, uid, colliding_partner)
             if colliding_partner and colliding_partner.company_id.id == partner.company_id.id:
-                return False
+                if colliding_partner.id != partner.id:
+                    return False
         return super(res_partner, self).check_vat(cr, uid, ids, context=context)
 
     def _construct_constraint_msg(self, cr, uid, ids, context=None):
         for partner in self.browse(cr, uid, ids, context=context):
             if not partner.vat:
                 continue
-            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id)],limit=1, context=context)
+            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id),('is_company', '=', 1)],limit=1, context=context)
+#            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id)],limit=1, context=context)
             colliding_partner = self.browse(cr, uid, colliding_partner)
             if colliding_partner and colliding_partner.company_id.id == partner.company_id.id:
-                return '\n' + _('The VAT number [%s] for this partner is also registered with partner [%s] Each partner should have unique vat number.') % (colliding_partner[0].vat,colliding_partner[0].name)
-            return '\n' + _('The VAT number [%s] for partner [%s] does not seem to be valid. ') % (partner.vat, partner.name)
+                if colliding_partner.id != partner.id:
+                    return '\n' + _('The VAT number [%s] for this partner is also registered with partner [%s] Each partner should have unique vat number.') % (colliding_partner[0].vat,colliding_partner[0].name)
+            return '\n' + _('The VAT number [%s] for partner [%s] does not seem to be valid. ') % (partner.vat, partner.display_name)
 
     _constraints = [(check_vat, _construct_constraint_msg, ["vat"])]
