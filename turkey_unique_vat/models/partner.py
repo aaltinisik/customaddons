@@ -13,8 +13,7 @@ class res_partner(osv.osv):
             colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id),('is_company', '=', 1)],limit=1, context=context)
             colliding_partner = self.browse(cr, uid, colliding_partner)
             if colliding_partner and colliding_partner.company_id.id == partner.company_id.id:
-                if colliding_partner.id != partner.id:
-                    return False
+                return False
         return super(res_partner, self).check_vat(cr, uid, ids, context=context)
 
     def _construct_constraint_msg(self, cr, uid, ids, context=None):
@@ -22,7 +21,6 @@ class res_partner(osv.osv):
             if not partner.vat:
                 continue
             colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id),('is_company', '=', 1)],limit=1, context=context)
-#            colliding_partner = self.search(cr, uid, [('sanitized_vat', '=', partner.sanitized_vat),('id', '!=', partner.id)],limit=1, context=context)
             colliding_partner = self.browse(cr, uid, colliding_partner)
             if colliding_partner and colliding_partner.company_id.id == partner.company_id.id:
                 if colliding_partner.id != partner.id:
