@@ -3,8 +3,8 @@
     <data>
 		<template id="assets_backend_inh" name="stock assets" inherit_id="web.assets_backend">
 		    <xpath expr="." position="inside">
-		        <link rel="stylesheet" href="/warehouse_barcode_interface/static/src/css/stock_barcode.css"/>
 		        <script type="text/javascript" src="/warehouse_barcode_interface/static/src/js/widget.js"/>
+		        <link rel="stylesheet" href="/warehouse_barcode_interface/static/src/css/stock_barcode.css"/>
 		    </xpath>
 		</template>
 	</data>

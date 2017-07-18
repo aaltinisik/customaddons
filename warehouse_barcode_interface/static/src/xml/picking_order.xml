@@ -76,16 +76,16 @@
                             <select id="js_packconf_select" class="form-control">
                                 <option class="js_packing_option" data-ul-id="false"></option>
                                 <t t-foreach="widget.get_logisticunit()" t-as="ul">
-                                    <option class="js_packing_option" t-att-data-ul-id="ul.id" t-att-value="ul.id"><t t-esc="ul.name"/></option>
+                                    <option class="js_packing_option" t-att-width="ul.width" t-att-height="ul.height" t-att-length="ul.length" t-att-data-ul-id="ul.id" t-att-value="ul.id"><t t-esc="ul.name"/></option>
                                 </t>
                             </select>
-                            <div class="modal-header">
+                            <div class="modal-header o_pack_data">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        Width : <input type="text" class="form-control" id="width"/>
+                                        Heigth : <input type="text" class="form-control" id="height"/>
                                     </div>
                                     <div class="col-sm-4">
-                                        Heigth : <input type="text" class="form-control" id="height"/>
+                                        Width : <input type="text" class="form-control" id="width"/>
                                     </div>
                                     <div class="col-sm-4">
                                         Length : <input type="text" class="form-control" id="length"/>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
+                            <!-- <input type="hidden" class="form-control" id="package_id"/> -->
                             <input type="hidden" class="form-control" id="current_url"/>
                         </div>
                         <div class="modal-footer">

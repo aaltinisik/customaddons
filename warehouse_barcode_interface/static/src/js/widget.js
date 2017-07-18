@@ -19,6 +19,15 @@ function openerp_picking_order_widgets(instance){
                     $('#gross_weight').attr('value',pack_datas[0].gross_weight);
             });
         },
+        get_logisticunit: function(){
+            var model = this.getParent();
+            var ul = [];
+            var self = this;
+            _.each(model.uls, function(ulog){
+                ul.push({name: ulog.name, id: ulog.id, width: ulog.width, height: ulog.height, length: ulog.length,});
+            });
+            return ul;
+        },
         get_rows: function(){
             var model = this.getParent();
             this.rows = [];
@@ -104,6 +113,16 @@ function openerp_picking_order_widgets(instance){
             var self = this;
             this._super();
             self.get_partner();
+            self.$('#js_packconf_select').change(function(){
+                var ul_id = self.$('#js_packconf_select option:selected').data('ul-id');
+                var width = self.$('#js_packconf_select option:selected').attr('width');
+                var height = self.$('#js_packconf_select option:selected').attr('height');
+                var length = self.$('#js_packconf_select option:selected').attr('length');
+                self.$('.o_pack_data #width').val(width);
+                self.$('.o_pack_data #height').val(height);
+                self.$('.o_pack_data #length').val(length);
+
+            });
             this.$('.js_validate_pack').click(function(){
                 //get current selection
                 var select_dom_element = self.$('#js_packconf_select');
