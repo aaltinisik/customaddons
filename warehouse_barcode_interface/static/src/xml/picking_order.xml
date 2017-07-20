@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend='PickingEditorWidget'>
+
+        <t t-jquery="div:nth-child(4)" t-operation="replace">
+            <div class="row">
+                <div>
+                    <div class="col-sm-3 col-xs-6">
+                        <h2 class="oe_pick_app_header" />
+                    </div>
+                    <div class="col-sm-1 col-xs-6" style="padding:15px; text-align:right">
+                        <b>Partner</b>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <h2 class="oe_pick_app_partner" />
+                    </div>
+                    <div class="col-sm-4 col-xs⁻6 text-right">
+
+                    <button type="button" class='btn btn-default js_pick_done'> Create backorder </button>
+                    <button type="button" class='btn btn-default js_pick_print'> Print </button>
+
+                    </div>
+                </div>
+        </div>
+        </t>
+        <t t-jquery="div:nth-child(5)" t-operation="replace">
+            <div class="row">
+                <div>
+                    <div class="col-md-3 col-sm-4 col-xs-6">
+                        <h3><strong>
+                            <select id="js_select" class="form-control">
+                                <option value="ToDo" id="js_select_todo">Operations ToDo</option>
+                                <option value="Processed" id="js_select_processed">Operations Processed</option>
+                            </select>
+                        </strong>
+                        </h3>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6">
+                        <h2>
+                            <div class="input-group">
+                                <input type="text" class="form-control oe_searchbox" placeholder="Filter by location..."/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger js_clear_search" type="button">x</button>
+                                </span>
+                            </div>
+                        </h2>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6">
+                        <h2>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger hidden" type="button">Force Availability</button>
+                                </span>
+                            </div>
+                        </h2>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12 text-right">
+                        <h3>
+                            <button type="button" class='btn btn-default js_pick_pack js_putinpack'> Put in Pack </button>
+                            <button type="button" class='btn btn-danger js_drop_down fa fa-download'> Put in Cart </button>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </t>
+        <t t-jquery="#js_PackConfModal" t-operation="replace">
+            <div class="modal fade" id="js_PackConfModal" tabindex="-1" role="dialog" aria-labelledby="PackConfModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                            <h4 class="modal-title" id="myModalLabel">Configure package</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Package type</p>
+                            <select id="js_packconf_select" class="form-control">
+                                <option class="js_packing_option" data-ul-id="false"></option>
+                                <t t-foreach="widget.get_logisticunit()" t-as="ul">
+                                    <option class="js_packing_option" t-att-width="ul.width" t-att-height="ul.height" t-att-length="ul.length" t-att-data-ul-id="ul.id" t-att-value="ul.id"><t t-esc="ul.name"/></option>
+                                </t>
+                            </select>
+                            <div class="modal-header o_pack_data">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Heigth : <input type="text" class="form-control" id="height"/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        Width : <input type="text" class="form-control" id="width"/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        Length : <input type="text" class="form-control" id="length"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Net Weigth : <input type="text" class="form-control" id="net_weight"/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        Gross Weigth : <input type="text" class="form-control" id="gross_weight"/>       
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <input type="hidden" class="form-control" id="package_id"/> -->
+                            <input type="hidden" class="form-control" id="current_url"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary js_validate_pack">Validate package</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>
