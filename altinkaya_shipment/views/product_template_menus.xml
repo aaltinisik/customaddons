@@ -12,7 +12,8 @@
         <menuitem action="action_Product Sizes_form_view"
                   name="Product Sizes"
                   id="menu_action_Product Sizes_form"
-parent="stock.menu_stock_product"                  sequence="10"
+                  parent="stock.menu_stock_product"
+                  sequence="10"
                   groups=""
                   />
     </data>
