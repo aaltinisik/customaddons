@@ -14,10 +14,10 @@ class stock_package(models.Model):
     def name_get(self):
         res = []
         for record in self:
-            if record.name and record.width and record.length and record.height and record.net_weight and record.gross_weight:
+            if record.name or record.width or record.length or record.height or record.net_weight or record.gross_weight:
                 name = record.name + '(' + str(record.width) + ' x ' + str(record.length) + ' x ' + str(record.height) + ' cm  Net: ' + str(record.net_weight) + ' Kg Gross: ' + str(record.gross_weight) + 'Kg' + ')'
             else:
-                name = record.name + '(' + '' + ' x ' + '' + ' x ' + '' + ' cm  Net: ' + '' + ' Kg Gross: ' + '' + 'Kg' + ')'             
+                name = record.name
             res.append((record.id, name))
         return res
 

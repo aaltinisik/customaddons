@@ -16,6 +16,8 @@
                       <field name="weight_measured"/>
                       <field name="pack_product"/>
                       <field name="pieces_in_pack"/>
+                      <field name="weight_ground"/>
+                      <field name="weight_air"/>
                   </group>
               </field>
             </field>
@@ -34,6 +36,8 @@
                       <field name="weight_measured"/>
                       <field name="pack_product"/>
                       <field name="pieces_in_pack"/>
+                      <field name="weight_ground"/>
+                      <field name="weight_air"/>
                   </group>
               </field>
             </field>

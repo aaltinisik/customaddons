@@ -95,6 +95,7 @@ Contributors
     # any module necessary for this one to work correctly
     'depends': [
             'sale',
+            'stock',
     ],
     'external_dependencies': {
         'python': [],
