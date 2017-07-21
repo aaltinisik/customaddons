@@ -21,7 +21,7 @@
 {
     'name': 'Altinkaya Shipment',
     'version': '8.0.1.0.0',
-    'author': 'Ahmet Altinisik',
+    'author': 'Ahmet Altinisik,Kiran',
     'maintainer': 'False',
     'website': 'http://www.altinkaya.com.tr',
     'license': '',
