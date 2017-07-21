@@ -89,5 +89,7 @@ class res_partner(osv.osv):
         if args['region_name']==args['district_name']:
             args['region_name']=''
         display_address = address_format % args
-        return re.sub('\n[\s,]*\n+', '\n', display_address.strip())
+        display_address = re.sub('\n[\s,]*\n+', '\n', display_address.strip())
+        return re.sub(r'^\s+', '', display_address,flags=re.M)
+
 

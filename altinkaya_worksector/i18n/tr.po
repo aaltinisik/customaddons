@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-08 05:26+0000\n"
-"PO-Revision-Date: 2017-07-08 05:26+0000\n"
+"POT-Creation-Date: 2017-07-16 17:12+0000\n"
+"PO-Revision-Date: 2017-07-16 17:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,21 +16,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_worksector
-#: field:res.partner.worksector,product_categ_ids:0
+#: field:worksector,product_categ_ids:0
 msgid "Category"
 msgstr "Ürün Kategorileri"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,create_uid:0
-#: field:res.partner.worksector,create_uid:0
-#: field:worksector.line,create_uid:0
+#: field:worksector,create_uid:0
 msgid "Created by"
 msgstr "Oluşturan"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,create_date:0
-#: field:res.partner.worksector,create_date:0
-#: field:worksector.line,create_date:0
+#: field:worksector,create_date:0
 msgid "Created on"
 msgstr "Oluşturuldu"
 
@@ -38,79 +34,63 @@ msgstr "Oluşturuldu"
 #: model:ir.actions.act_window,name:altinkaya_worksector.action_res_partner_worksector
 #: model:ir.ui.menu,name:altinkaya_worksector.menuitem_res_partner_worksector
 msgid "Customer Sectors"
-msgstr "Müşteri Faaliyet Alanları"
+msgstr "Faaliyet Alanları"
 
 #. module: altinkaya_worksector
-#: field:res.partner.worksector,description:0
+#: field:worksector,description:0
 msgid "Description"
 msgstr "Açıklama"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,display_name:0
-#: field:res.partner.worksector,display_name:0
-#: field:worksector.line,display_name:0
+#: field:worksector,display_name:0
 msgid "Display Name"
-msgstr "Görünen Ad"
+msgstr "Sektör Adı"
 
 #. module: altinkaya_worksector
-#: field:res.partner,target_product_categ_ids:0
-msgid "Entry Lines"
-msgstr "Girdi kalemleri"
-
-#. module: altinkaya_worksector
-#: field:product.category.line,id:0
-#: field:res.partner.worksector,id:0
-#: field:worksector.line,id:0
+#: field:worksector,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,__last_update:0
-#: field:res.partner.worksector,__last_update:0
-#: field:worksector.line,__last_update:0
+#: field:worksector,__last_update:0
 msgid "Last Modified on"
-msgstr "Son değiştirilme"
+msgstr "Son güncelleme"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,write_uid:0
-#: field:res.partner.worksector,write_uid:0
-#: field:worksector.line,write_uid:0
+#: field:worksector,write_uid:0
 msgid "Last Updated by"
 msgstr "Son güncelleyen"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,write_date:0
-#: field:res.partner.worksector,write_date:0
-#: field:worksector.line,write_date:0
+#: field:worksector,write_date:0
 msgid "Last Updated on"
 msgstr "Son güncelleme"
 
 #. module: altinkaya_worksector
 #: view:res.partner:altinkaya_worksector.res_partner_form_view
 msgid "Marketing"
-msgstr "Marketing"
+msgstr "Pazarlama"
 
 #. module: altinkaya_worksector
-#: field:res.partner.worksector,name:0
+#: field:worksector,name:0
 msgid "Name"
 msgstr "Adı"
 
 #. module: altinkaya_worksector
 #: model:ir.model,name:altinkaya_worksector.model_res_partner
-#: view:res.partner.worksector:altinkaya_worksector.res_partner_worksector_form_view
-#: field:res.partner.worksector,partner_ids:0
-#: field:worksector.line,partner_id:0
+#: view:worksector:altinkaya_worksector.res_partner_worksector_form_view
+#: field:worksector,partner_ids:0
 msgid "Partner"
-msgstr "İş Ortağı"
+msgstr "Ortak"
 
 #. module: altinkaya_worksector
-#: field:product.category.line,product_categ_id:0
-#: view:res.partner.worksector:altinkaya_worksector.res_partner_worksector_form_view
+#: view:worksector:altinkaya_worksector.res_partner_worksector_form_view
 msgid "Product Category"
-msgstr "İlgili Ürün Kategorileri"
+msgstr "Ürün Kategorileri"
 
 #. module: altinkaya_worksector
 #: view:res.partner:altinkaya_worksector.res_partner_form_view
+#: field:res.partner,target_product_categ_ids:0
 msgid "Target Product Category"
 msgstr "Hedef Ürün Kategorileri"
 
@@ -120,8 +100,3 @@ msgstr "Hedef Ürün Kategorileri"
 msgid "Worksector"
 msgstr "Faaliyet Alanları"
 
-#. module: altinkaya_worksector
-#: field:product.category.line,worksector_id:0
-#: field:worksector.line,worksector_id:0
-msgid "worksector"
-msgstr "Faaliyet Alanları"

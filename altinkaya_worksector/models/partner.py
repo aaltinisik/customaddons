@@ -32,21 +32,3 @@ class res_partner(osv.osv):
         'worksector_ids': fields.many2many('worksector', 'table_worksector_partner_rel', 'partid', 'wid', string="Worksector"),
         'target_product_categ_ids': fields.function(_get_product_categ, type="many2many", relation='product.category', string="Target Product Category")
     }
-
-
-
-
-
-
-# class worksector_line(models.Model):
-#     _name = 'worksector.line'
-# 
-#     partner_id = fields.Many2one('res.partner', string="Partner")
-#     worksector_id = fields.Many2one('worksector', string="worksector")
-
-
-# class product_category_line(models.Model):
-#     _name = 'product.category.line'
-# 
-#     product_categ_id = fields.Many2one('product.category', string="Product Category")
-#     worksector_id = fields.Many2one('worksector', string="worksector")
