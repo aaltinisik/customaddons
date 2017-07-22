@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/notebook/page[1]/field[1]/tree/field[@name='discount']" position="after">
                     <field name="discount_unit_price" readonly="1"/>
+                    <button name="%(action_update_discount)d" string="Update" type="action" icon="gtk-jump-to"/>
                 </xpath>
                 <xpath expr="//form/sheet/notebook/page[1]/field[1]/form/group/group[1]/div[3]/field[@name='discount']" position="after">
                     <field name="discount_unit_price" readonly="1"/>

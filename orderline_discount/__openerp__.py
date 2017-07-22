@@ -1,7 +1,7 @@
 
 {
     'name': 'Order Line Discount',
-    'version': '8.0.1',
+    'version': '8.0.2',
     'website': 'https://www.odoo.com',
     'category': 'Sales',
     'summary': 'Sale Order Line Discount',
@@ -11,6 +11,7 @@
         'sale', 'product_visible_discount'
     ],
     'data': [
+            'wizard/update_discount_view.xml',
             'views/sale_order_view.xml',
     ],
     'installable' : True,
