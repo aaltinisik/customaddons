@@ -9,6 +9,12 @@ class AccountInvoice(models.Model):
     amount_total_tl = fields.Float(string='Amount Total TRY',
                                     compute='_compute_amount_tl',
                                     store=False)
+    amount_untaxed_tl = fields.Float(string='Amount Untaxed TRY',
+                                   compute='_compute_amount_tl',
+                                   store=False)
+    amount_tax_tl = fields.Float(string='Amount tax TRY',
+                                     compute='_compute_amount_tl',
+                                     store=False)
 
     @api.one
     @api.depends('currency_id', 'amount_total', 'date_export', 'date_invoice')
@@ -20,9 +26,9 @@ class AccountInvoice(models.Model):
         currency_try = self.env['res.currency'].search([('name', '=', 'TRY')])
         ctx = context.copy()
         ctx['date'] = self.date_export or self.date_invoice
-        self.amount_total_tl = currency_obj.compute(cr,
-                                                     uid,
-                                                     self.currency_id.id,
-                                                     currency_try.id,
-                                                     self.amount_total,
-                                                     context=ctx)
+        self.amount_total_tl = currency_obj.compute(cr, uid, self.currency_id.id, currency_try.id,
+                                                    self.amount_total, context=ctx)
+        self.amount_tax_tl = currency_obj.compute(cr, uid, self.currency_id.id, currency_try.id,
+                                                    self.amount_tax, context=ctx)
+        self.amount_untaxed_tl = currency_obj.compute(cr, uid, self.currency_id.id, currency_try.id,
+                                                    self.amount_untaxed, context=ctx)
