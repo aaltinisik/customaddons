@@ -9,7 +9,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/div[@groups='base.group_multi_currency']" position="after">
                     <field name="date_export"/>
-                    <field name="amount_total_try" widget="monetary" invisible="0"/>
+                    <field name="amount_untaxed_tl" invisible="0"/>
+                    <field name="amount_tax_tl" invisible="0"/>
+                    <field name="amount_total_tl" invisible="0"/>
                 </xpath>
             </field>
         </record>
