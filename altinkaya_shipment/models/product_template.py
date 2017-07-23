@@ -27,52 +27,53 @@ class product_template(models.Model):
 
     @api.one
     def _calculate_weight_air(self):
-        product = self
-        pack_volume = 0.0
+        packed_volume = 0.0
         pack_weight = 0.0  # in gr
         air_weight = 0.0  # in gr
         item_weight = 0.0  # in gr
-        weight_net = 0.0
-        if self.weight_measured == 0:
-            item_weight = weight_net * 1000  # weight_net in Kg
-        else:
-            item_weight = self.weight_measured
-        if self.pack_product and self.pack_product.weight != 0 and self.pack_product.length != 0 and self.pack_product.width != 0 and self.pack_product.weight_measured != 0:
-            pack_volume = self.pack_product.length * self.pack_product.width * self.pack_product.height / product.pieces_in_pack
-            pack_weight = self.pack_product.weight_measured
-            air_weight = (pack_weight + (product.pieces_in_pack * item_weight)) / product.pieces_in_pack
-        else:
-            air_weight = item_weight * 1.15
-            pack_volume = product.width * product.height * product.length * 1.15
-        if pack_volume / 5 > air_weight:  # if volume is important
-            product.weight_air = pack_volume / 5.0
-        else:
-            product.weight_air = air_weight
-
-    @api.one
-    def _calculate_weight_ground(self):
-        product = self
-        pack_volume = 0.0
-        pack_weight = 0.0  # in gr
-        ground_weight = 0.0  # in gr
-        item_weight = 0.0  # in gr
+        volume = self.width * self.height * self.length
         weight_net = 0.0
         air_weight = 0.0
         if self.weight_measured == 0:
-            item_weight = weight_net * 1000  # weight_net in Kg
+            item_weight = weight_net * 1000  # weight_net in gr
         else:
             item_weight = self.weight_measured
         if self.pack_product and self.pack_product.weight != 0 and self.pack_product.length != 0 and self.pack_product.width != 0 and self.pack_product.weight_measured != 0:
-            pack_volume = self.pack_product.length * self.pack_product.width * self.pack_product.height / product.pieces_in_pack
-            pack_weight = self.pack_product.weight_measured
-            ground_weight = (pack_weight + (product.pieces_in_pack * item_weight)) / product.pieces_in_pack
+            packed_volume = self.pack_product.length * self.pack_product.width * self.pack_product.height / self.pieces_in_pack
+            air_weight = (self.pack_product.weight_measured + (self.pieces_in_pack * item_weight)) / self.pieces_in_pack
+        else:
+            air_weight = item_weight * 1.15
+            packed_volume = volume * 1.15
+
+        if (packed_volume / 5.0) > air_weight:  # if volume is important
+            self.weight_air = packed_volume / 5.0
+        else:
+            self.weight_air = air_weight
+
+    @api.one
+    def _calculate_weight_ground(self):
+        packed_volume = 0.0
+        pack_weight = 0.0  # in gr
+        ground_weight = 0.0  # in gr
+        item_weight = 0.0  # in gr
+        volume = self.width * self.height * self.length
+        weight_net = 0.0
+        ground_weight = 0.0
+        if self.weight_measured == 0:
+            item_weight = weight_net * 1000  # weight_net in gr
+        else:
+            item_weight = self.weight_measured
+        if self.pack_product and self.pack_product.weight != 0 and self.pack_product.length != 0 and self.pack_product.width != 0 and self.pack_product.weight_measured != 0:
+            packed_volume = self.pack_product.length * self.pack_product.width * self.pack_product.height / self.pieces_in_pack
+            ground_weight = (self.pack_product.weight_measured + (self.pieces_in_pack * item_weight)) / self.pieces_in_pack
         else:
             ground_weight = item_weight * 1.15
-            pack_volume = product.width * product.height * product.length * 1.15
-        if (pack_volume / 3.0) > air_weight:  # if volume is important
-            product.weight_ground = pack_volume / 3.0
+            packed_volume = volume * 1.15
+
+        if (packed_volume / 3.0) > ground_weight:  # if volume is important
+            self.weight_ground = packed_volume / 3.0
         else:
-            product.weight_ground = ground_weight
+            self.weight_ground = ground_weight
  
     pack_product = fields.Many2one(
         "product.product",
