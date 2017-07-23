@@ -7,7 +7,7 @@ import openerp.addons.decimal_precision as dp
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    unit_discounted = fields.Float('Discounted Unit Price',
+    unit_discounted = fields.Float('Disc. Unit',
                                    digits_compute=dp.get_precision('Product Price'),
                                    compute='_compute_unit_discounted',
                                    readonly=True, states={'draft': [('readonly', False)]},
