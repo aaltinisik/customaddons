@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 06:06+0000\n"
-"PO-Revision-Date: 2017-07-23 06:06+0000\n"
+"POT-Creation-Date: 2017-07-23 16:35+0000\n"
+"PO-Revision-Date: 2017-07-23 16:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,81 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: orderline_discount
+#: view:update.discount:orderline_discount.view_update_discount_form
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: orderline_discount
+#: field:update.discount,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: orderline_discount
+#: field:update.discount,create_date:0
+msgid "Created on"
+msgstr "Oluşturuldu"
+
+#. module: orderline_discount
 #: field:sale.order.line,unit_discounted:0
 msgid "Disc. Unit"
 msgstr "İnd. Birim"
+
+#. module: orderline_discount
+#: field:update.discount,unit_discounted:0
+msgid "Discount Price"
+msgstr "İndirmli Fiyat"
+
+#. module: orderline_discount
+#: view:update.discount:orderline_discount.view_update_discount_form
+msgid "Discount Price Update"
+msgstr "İndirimli Fiyatı Güncelle"
+
+#. module: orderline_discount
+#: field:update.discount,display_name:0
+msgid "Display Name"
+msgstr "Adı"
+
+#. module: orderline_discount
+#: field:update.discount,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: orderline_discount
+#: field:update.discount,__last_update:0
+msgid "Last Modified on"
+msgstr "Son güncellenme"
+
+#. module: orderline_discount
+#: field:update.discount,write_uid:0
+msgid "Last Updated by"
+msgstr "Son güncelleyen"
+
+#. module: orderline_discount
+#: field:update.discount,write_date:0
+msgid "Last Updated on"
+msgstr "Son güncellendi"
 
 #. module: orderline_discount
 #: model:ir.model,name:orderline_discount.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Satış Siparişi Kalemi"
 
+#. module: orderline_discount
+#: view:update.discount:orderline_discount.view_update_discount_form
+msgid "Submit"
+msgstr "Değiştir"
+
+#. module: orderline_discount
+#: field:update.discount,price_unit:0
+msgid "Unit Price"
+msgstr "Birim Fiyat"
+
+#. module: orderline_discount
+#: view:sale.order:orderline_discount.view_sale_order_form_inherit
+msgid "Update"
+msgstr "Güncelle"
+
+#. module: orderline_discount
+#: model:ir.actions.act_window,name:orderline_discount.action_update_discount
+msgid "Update Discount Price"
+msgstr "İndirimli Fiyatı Güncelle"

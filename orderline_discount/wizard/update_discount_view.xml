@@ -7,10 +7,11 @@
             <field name="arch" type="xml">
             <form string="Discount Price Update">
                 <group col="4">
-                    <field name="discount_price" required="1"/>
+                    <field name="unit_discounted" required="1"/>
                 </group>
                 <footer>
                     <button name="update_discount_price" string="Submit" type="object" class="oe_highlight"/>
+
                     <button string="Cancel" special="cancel" class="oe_highlight"/>
                 </footer>
             </form>
