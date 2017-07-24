@@ -16,4 +16,6 @@ class SaleOrderLine(models.Model):
     @api.one
     @api.depends('price_unit', 'discount')
     def _compute_unit_discounted(self):
-        self.unit_discounted = round((self.price_unit * ((100.0 -self.discount) / 100.0)),4)
+        self.unit_discounted = self.price_unit * ((100.0 -self.discount) / 100.0)
+
+
