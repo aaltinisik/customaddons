@@ -29,31 +29,27 @@ class Partner(models.Model):
         today_date = datetime.now().date()
         prev_year = (today_date.year) - 1
         prev_year_date = str(prev_year) + "-01-01"
-        self._cr.execute('''SELECT partner_id, COALESCE(sum(amount_total), 0) FROM account_invoice
-                            WHERE state not in ('draft', 'cancel', 'proforma', 'proforma2')
-                            AND type = 'out_invoice'
-                            AND date_invoice >= '%s'
-                            GROUP BY partner_id
+        self._cr.execute('''
+                            SELECT commercial_partner_id, row_number() OVER(ORDER BY total DESC)
+                            AS ranking,total FROM 
+                            (SELECT commercial_partner_id, SUM(price_total) as total FROM
+                            account_invoice_report WHERE 
+                            state not in ('draft', 'cancel','proforma','proforma2') AND
+                            type in('out_refund', 'out_invoice') AND
+                            date >= '%s'
+                            GROUP BY commercial_partner_id) as Rank ORDER BY total DESC
                         ''' %(prev_year_date))
+
+        # Please run query above and see all work is done on sql level.
+        # currency calculation + return calculation etc.
+        # just clear ranking of all partners and write result of query with a multi write
+        # please do not iterate since we have 20K partners it takes too long.
+
         out_inv_datas = self._cr.fetchall()
         res_out_inv_dict = dict(out_inv_datas)
-        self._cr.execute('''SELECT partner_id, COALESCE(sum(amount_total), 0) FROM account_invoice
-                            WHERE state not in ('draft', 'cancel', 'proforma', 'proforma2')
-                            AND type = 'out_refund'
-                            AND date_invoice >= '%s'
-                            GROUP BY partner_id
-                        ''' %(prev_year_date))
-        out_refund_datas = self._cr.fetchall()
-        res_out_refund_dict = dict(out_refund_datas)
         result_dict = res_out_inv_dict
-        for k,v in res_out_refund_dict.iteritems():
-            if k in result_dict.keys():
-                result_dict.update({k: result_dict.get(k) - v})
         result_dict = dict((y,x) for x,y in result_dict.iteritems())
         partner_inv_data = []
-        if result_dict:
-            res_dict = dict(result_dict)
-            partner_inv_data = sorted(res_dict.iteritems(), key=lambda (k,v): (k,v),reverse=True)
         all_partner_lst = self.search([]).ids
         inv_partner_lst = []
         rank_number = 1
