@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="email" position="after">
+                    <field name="ranking"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="res_partner_form_view" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="altinkaya_worksector.res_partner_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='marketing']" position="before">
+                    <page name="worksectors" string="Worksectors">
+                        <group string="Worksectors">
+                            <field name="ranking"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
