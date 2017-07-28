@@ -43,22 +43,31 @@ class Partner(models.Model):
         # Please run query above and see all work is done on sql level.
         # currency calculation + return calculation etc.
         # just clear ranking of all partners and write result of query with a multi write
-        # please do not iterate since we have 20K partners it takes too long.
+        # please do not iterate because we have 20K partners it takes too long.
 
         out_inv_datas = self._cr.fetchall()
-        res_out_inv_dict = dict(out_inv_datas)
-        result_dict = res_out_inv_dict
-        result_dict = dict((y,x) for x,y in result_dict.iteritems())
-        partner_inv_data = []
-        all_partner_lst = self.search([]).ids
-        inv_partner_lst = []
-        rank_number = 1
-        for datas_inv_partner in partner_inv_data:
-            partner_rec = self.browse(datas_inv_partner[1])
-            partner_rec.ranking = rank_number
-            rank_number += 1
-            inv_partner_lst.append(datas_inv_partner[1])
-        remain_partner_lst = list(set(all_partner_lst) - set(inv_partner_lst))
+        all_partners = self.env['res.partner'].search([]).ids
+        invoice_partner_list = []
+        remain_partner_lst = []
+        for info in out_inv_datas:
+            partner_id = info[0]
+            partner = self.env['res.partner'].search([('id', '=', partner_id)])
+            partner.write({'ranking': info[1]})
+            invoice_partner_list.append(info[0])
+        # res_out_inv_dict = dict(out_inv_datas)
+        # result_dict = res_out_inv_dict
+        # result_dict = dict((y,x) for x,y in result_dict.iteritems())
+        # partner_inv_data = []
+        # all_partner_lst = self.search([]).ids
+        # inv_partner_lst = []
+        # rank_number = 1
+        # for datas_inv_partner in partner_inv_data:
+        #     partner_rec = self.browse(datas_inv_partner[1])
+        #     partner_rec.ranking = rank_number
+        #     rank_number += 1
+        #     inv_partner_lst.append(datas_inv_partner[1])
+
+        remain_partner_lst = list(set(all_partners) - set(invoice_partner_list))
         if remain_partner_lst:
             self.browse(remain_partner_lst).write({'ranking': 999999})
         return True
