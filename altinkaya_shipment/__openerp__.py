@@ -96,6 +96,7 @@ Contributors
     'depends': [
             'sale',
             'stock',
+            'delivery',
     ],
     'external_dependencies': {
         'python': [],
