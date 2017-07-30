@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <report 
+            id="report_id_report_new_stock_picking"
+            model="stock.picking"
+            string="Print PDF Report"
+            report_type="qweb-pdf"
+            name="altinkaya_warehouse.report_new_stock_picking_temp"
+            file="altinkaya_warehouse.report_new_stock_picking_temp"
+        />
+
+    </data>
+</openerp>
