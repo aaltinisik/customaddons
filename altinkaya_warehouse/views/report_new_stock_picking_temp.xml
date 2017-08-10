@@ -107,9 +107,9 @@
                                             <t t-if="len(move.product_id.bom_ids) &gt;= 1 ">
                                                 <tr t-foreach="move.product_id.bom_ids[0]" t-as="l">
                                                     <t t-if="l.routing_id.name">
-                                                        <td style="padding-left: 110px;"><span t-field="l.routing_id.name"/></td>
+                                                        <td style="padding-left:30px;"><span t-field="l.routing_id.name"/></td>
                                                     </t>
-                                                    <td style="padding-left: 110px;">
+                                                    <td style="text-align:right;">
                                                         <t t-if="l.product_tmpl_id.default_code">
                                                             [<span t-field="l.product_tmpl_id.default_code"/>]
                                                         </t>
@@ -175,10 +175,10 @@
                                             <tr t-foreach="pack_operation.product_id.bom_ids[0]" t-as="l">
                                                 <t t-if="l.routing_id.name">
                                                     <thead>
-                                                        <td style="padding-left: 110px;"><span t-field="l.routing_id.name"/></td>
+                                                        <td style="padding-left:30px;"><span t-field="l.routing_id.name"/></td>
                                                     </thead>
                                                 </t>
-                                                <td style="padding-left: 110px;">
+                                                <td style="text-align:right;">
                                                     <t t-if="l.product_tmpl_id.default_code">
                                                         [<span t-field="l.product_tmpl_id.default_code"/>]
                                                     </t>
@@ -203,7 +203,7 @@
                             </table>
                     </div>
 
-                    <div class="footer" style="font-size:12px;">
+                    <div class="footer" style="font-size:10px;">
                         <div class="text-center" style="border-top: 1px solid black;">
                             <ul class="list-inline">
                                 <li t-if="o.name"><span t-field="o.name"/></li>
