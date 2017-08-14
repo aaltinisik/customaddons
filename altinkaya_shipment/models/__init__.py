@@ -19,4 +19,5 @@
 ##############################################################################
 
 from . import product_template
-from . import delivery
+from . import producttemplate
+
