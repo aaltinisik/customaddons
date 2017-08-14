@@ -8,9 +8,13 @@ _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
-    _order = 'ranking'
+    _order = 'ranking,name'
 
     ranking = fields.Integer('Ranking')
+
+    _defaults = {
+        'ranking': 999999,
+    }
 
     @api.model
     def evaluate_ranking(self):
@@ -40,15 +44,20 @@ class Partner(models.Model):
         out_inv_datas = self._cr.fetchall()
         all_partners = self.env['res.partner'].search([]).ids
         invoice_partner_list = []
+
         remain_partner_lst = []
         for info in out_inv_datas:
             partner_id = info[0]
             partner = self.env['res.partner'].search([('id', '=', partner_id)])
             partner.write({'ranking': info[1]})
             invoice_partner_list.append(info[0])
-
-
         remain_partner_lst = list(set(all_partners) - set(invoice_partner_list))
         if remain_partner_lst:
             self.browse(remain_partner_lst).write({'ranking': 999999})
+
+        for info in self.env['res.partner'].search([]).ids:
+            partner_id = info
+            partner = self.env['res.partner'].search([('id', '=', partner_id)])
+            if partner.commercial_partner_id:
+                partner.write({'ranking': partner.commercial_partner_id.ranking})
         return True
