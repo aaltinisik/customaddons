@@ -3,16 +3,16 @@
     <data>
 
         <report 
-            id="report_id_report_new_stock_picking"
+            id="report_id_report_picking_altinkaya"
             model="stock.picking"
-            string="Picking Report PDF"
-            report_type="qweb-pdf"
-            name="altinkaya_warehouse.report_new_stock_picking_temp"
-            file="altinkaya_warehouse.report_new_stock_picking_temp"
+            string="Picking Report NEW"
+            report_type="qweb-html"
+            name="altinkaya_warehouse.report_stock_picking_altinkaya"
+            file="altinkaya_warehouse.report_stock_picking_altinkaya"
         />
 
         <record id="paperformat_custom_module" model="report.paperformat">
-            <field name="name">pickingA4(copy)</field>
+            <field name="name">pickingA4(tight)</field>
             <field name="default" eval="True"/>
             <field name="format">A4</field>
             <field name="page_height">0</field>
@@ -25,7 +25,8 @@
             <field name="header_line" eval="False" />
             <field name="header_spacing">25</field>
             <field name="dpi">144</field>
-            <field name="report_ids" eval="[(6,0,[ref('altinkaya_warehouse.report_id_report_new_stock_picking')])]"/>
+          <field name="report_ids" eval="[(6,0,[ref('altinkaya_warehouse.report_id_report_picking_altinkaya')])]"/>
+
         </record>
 
     </data>
