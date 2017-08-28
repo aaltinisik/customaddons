@@ -8,7 +8,13 @@
            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
            <field name="arch" type="xml">
                <filter name="backorder" position="after">
-                <filter string="Yapilacaklar" domain="['|', '|',('state','=','confirmed'), ('state','=','assigned'),('state','=','partially_available')]"/>
+                         <filter string="Yapılacaklar" domain="['|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
+               <filter string="Gidecekler" domain="[['picking_type_id', '=', 2], '|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
+               <separator/>
+ <filter string="Asım" domain="[['x_hazirlayan', '=', 'Asim']]"/>
+<filter string="Harun" domain="[['x_hazirlayan', '=', 'Harun']]"/>
+<filter string="Muhammet" domain="[['x_hazirlayan', '=', 'Muhammet']]"/>
+<separator/>
                </filter>
            </field>
        </record>
