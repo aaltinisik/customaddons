@@ -170,6 +170,8 @@
                                         <span t-if="pack_operation.result_package_id">:</span>
                                         <span t-field="pack_operation.result_package_id"/>
                                     </td></t>
+
+                                    asa
                                     <t t-if="pack_operation.product_id.pop_bom_in_reports">
                                         <t t-if="len(pack_operation.product_id.bom_ids) &gt;= 1 ">
                                             <tr t-foreach="pack_operation.product_id.bom_ids[0]" t-as="l">
@@ -198,6 +200,7 @@
                                             </tr>
                                         </t>
                                     </t>
+                                    asa
                                 </tr>
                               </tbody>
                             </table>
@@ -221,7 +224,7 @@
                         </div>
                     </div>
                  </t>
-             </t>   
+             </t>
         </template>
 
         <template id="report_new_stock_picking_temp">
