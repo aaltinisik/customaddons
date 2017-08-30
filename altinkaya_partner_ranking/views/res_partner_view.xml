@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
                 <field name="email" position="after">
-                    <field name="ranking"/>
+                    <field name="ranking" invisible="True"/>
                 </field>
             </field>
         </record>
@@ -18,13 +18,9 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="altinkaya_worksector.res_partner_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='marketing']" position="before">
-                    <page name="worksectors" string="Worksectors">
-                        <group string="Worksectors">
-                            <field name="ranking"/>
-                        </group>
-                    </page>
-                </xpath>
+               <field name="title" position="after">
+                    <field name="ranking" readonly="1"/>
+                </field>
             </field>
         </record>
     </data>

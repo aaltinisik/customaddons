@@ -22,7 +22,7 @@ from openerp import models, fields, api
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
-class product_template(models.Model):
+class producttemplate(models.Model):
     _inherit = "product.template"
 
     @api.one
@@ -74,7 +74,9 @@ class product_template(models.Model):
             self.weight_ground = packed_volume / 3.0
         else:
             self.weight_ground = ground_weight
- 
+
+
+
     pack_product = fields.Many2one(
         "product.product",
         string=_("Product of Package"),

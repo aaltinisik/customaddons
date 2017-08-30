@@ -6,12 +6,11 @@
             <field name="name">res.partner.inherit.view</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">14</field>
             <field name="arch" type="xml">
-                
-
             <field name="country_id" position="replace"/>
-                <xpath expr="//form/sheet/group/group[1]/div[2]/div[2]" position="replace">
-                    <div class="address_region_details">
+                <xpath expr="//sheet/group/group/div/div[@class='address_format']" position="replace">
+                    <div class="address_format">
                         <field name="region_id" placeholder="Region" nolabel="1" options="{'no_open': True}"
                         style="width:120px;" class="oe_no_button" attrs="{'readonly': [('use_parent_address','=',True)]}"
                         on_change="onchange_region(region_id)" context="{'district_id': district_id}"/>
@@ -33,20 +32,7 @@
                     </div>
                 </xpath>
 
-                <!--
-                <field name="country_id" position="after">
-                    <field name="district_id" placeholder="District"
-                        on_change="onchange_district(district_id)"
-                           class="oe_no_button"
-                        context="{'state_id': state_id}"/>
-                    <field name="region_id" placeholder="Region" class="oe_no_button"
-                        on_change="onchange_region(region_id)"
-                        context="{'district_id': district_id}"/>
-                    <field name="neighbour_id" placeholder="Neighbour" class="oe_no_button"
-                        on_change="onchange_neighbour(neighbour_id)"
-                        context="{'region_id': region_id,'state_id': state_id}"/>
-                </field>
-                -->
+
                 <xpath expr="//form/sheet/notebook/page[1]/field/form/sheet/group[2]/div[2]/field[3]" position="after">
                     <field name="district_id" placeholder="District" class="oe_no_button"
                         on_change="onchange_district(district_id)"
