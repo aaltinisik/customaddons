@@ -104,9 +104,8 @@
 						</div>
 					</div>
 
-					<div t-if="o.carrier_id">
-						<span style="font-size:14px;" t-field="o.carrier_id" />
-					</div>
+					<!-- <div t-if="o.carrier_id"> <span style="font-size:14px;" t-field="o.carrier_id" 
+						/> </div> -->
 					<div t-if="o.note" style="font-size:14px;">
 						Not:
 						<span style="font-size:14px;" t-field="o.note" />
@@ -134,7 +133,7 @@
 									<span t-field="o.origin" />
 								</td>
 								<td>
-									<span t-field="o.x_hazirlayan" />
+									<!-- <span t-field="o.x_hazirlayan" /> -->
 								</td>
 								<td>
 									<span t-field="o.date" />
@@ -235,31 +234,33 @@
 									</t>
 									<t t-if="move.product_id.pop_bom_in_reports">
 										<t t-if="len(move.product_id.bom_ids) >= 1 ">
-											<tr t-foreach="move.product_id.bom_ids" t-as="l">
-												<td style="padding-left:30px;">
-													<span t-field="l.routing_id.name" />
-												</td>
-												<td style="text-align:right;">
-													<t t-if="l.product_tmpl_id.default_code">
-														[
-														<span t-field="l.product_tmpl_id.default_code" />
-														]
-													</t>
-												</td>
-												<td>
-													<span t-field="l.product_tmpl_id.name" />
-												</td>
-												<td>
-													Location:
-													<span t-field="move.location_id.name" />
-												</td>
-												<td>
-													<span t-field="l.product_tmpl_id.qty_available" />
-												</td>
-												<td>
-													<span t-field="l.product_tmpl_id.uom_id.name" />
-												</td>
-											</tr>
+											<t t-foreach="move.product_id.bom_ids" t-as="line">
+												<tr t-foreach="line.bom_line_ids" t-as="l">
+													<td style="padding-left:30px;">
+														<span t-field="line.routing_id.name" />
+													</td>
+													<td style="text-align:right;">
+														<t t-if="l.product_id.default_code">
+															[
+															<span t-field="l.product_id.default_code" />
+															]
+														</t>
+													</td>
+													<td>
+														<span t-field="l.product_id.name" />
+													</td>
+													<td>
+														Location:
+														<span t-field="move.location_id.name" />
+													</td>
+													<td>
+														<span t-field="l.product_qty" />
+													</td>
+													<td>
+														<span t-field="l.product_uom.name" />
+													</td>
+												</tr>
+											</t>
 										</t>
 									</t>
 								</t>
