@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--  Run Schedulers -->
+        <record id="view_reconfirm_procurement_wizard" model="ir.ui.view">
+            <field name="name">ReConfirm Procurements</field>
+            <field name="model">procurement.reconfirm.wiz</field>
+            <field name="arch" type="xml">
+                <form string="ReConfirm Procurements">
+                    <p>
+                        ReConfirm all selected procurements.
+                    </p>
+                    <footer>
+                        <button name="reconfirm_procurement" string="ReConfirm Procurements" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="ReConfirm Procurements"
+            res_model="procurement.reconfirm.wiz"
+            src_model="procurement.order"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            groups="procurement_mass_manage.mass_edit_procurement_order"
+            id="wiz_action_reconfirm_procurement"/>
+
+    </data>
+</openerp>

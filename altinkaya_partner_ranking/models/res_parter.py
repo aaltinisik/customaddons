@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import timedelta
@@ -11,9 +8,13 @@ _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
-    _order = 'ranking'
+    _order = 'ranking,name'
 
     ranking = fields.Integer('Ranking')
+
+    _defaults = {
+        'ranking': 999999,
+    }
 
     @api.model
     def evaluate_ranking(self):
@@ -40,34 +41,23 @@ class Partner(models.Model):
                             GROUP BY commercial_partner_id) as Rank ORDER BY total DESC
                         ''' %(prev_year_date))
 
-        # Please run query above and see all work is done on sql level.
-        # currency calculation + return calculation etc.
-        # just clear ranking of all partners and write result of query with a multi write
-        # please do not iterate because we have 20K partners it takes too long.
-
         out_inv_datas = self._cr.fetchall()
         all_partners = self.env['res.partner'].search([]).ids
         invoice_partner_list = []
+
         remain_partner_lst = []
         for info in out_inv_datas:
             partner_id = info[0]
             partner = self.env['res.partner'].search([('id', '=', partner_id)])
             partner.write({'ranking': info[1]})
             invoice_partner_list.append(info[0])
-        # res_out_inv_dict = dict(out_inv_datas)
-        # result_dict = res_out_inv_dict
-        # result_dict = dict((y,x) for x,y in result_dict.iteritems())
-        # partner_inv_data = []
-        # all_partner_lst = self.search([]).ids
-        # inv_partner_lst = []
-        # rank_number = 1
-        # for datas_inv_partner in partner_inv_data:
-        #     partner_rec = self.browse(datas_inv_partner[1])
-        #     partner_rec.ranking = rank_number
-        #     rank_number += 1
-        #     inv_partner_lst.append(datas_inv_partner[1])
-
         remain_partner_lst = list(set(all_partners) - set(invoice_partner_list))
         if remain_partner_lst:
             self.browse(remain_partner_lst).write({'ranking': 999999})
+
+        for info in self.env['res.partner'].search([]).ids:
+            partner_id = info
+            partner = self.env['res.partner'].search([('id', '=', partner_id)])
+            if partner.commercial_partner_id:
+                partner.write({'ranking': partner.commercial_partner_id.ranking})
         return True
