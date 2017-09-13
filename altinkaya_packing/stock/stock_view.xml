@@ -11,9 +11,11 @@
                          <filter string="Yapılacaklar" domain="['|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
                <filter string="Gidecekler" domain="[['picking_type_id', '=', 2], '|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
                <separator/>
- <filter string="Asım" domain="[['x_hazirlayan', '=', 'Asim']]"/>
+                   <filter string="Asım" domain="[['x_hazirlayan', '=', 'Asim']]"/>
 <filter string="Harun" domain="[['x_hazirlayan', '=', 'Harun']]"/>
 <filter string="Muhammet" domain="[['x_hazirlayan', '=', 'Muhammet']]"/>
+<filter string="Muharrem" domain="[['x_hazirlayan', '=', 'Muharrem']]"/>
+
 <separator/>
                </filter>
            </field>
