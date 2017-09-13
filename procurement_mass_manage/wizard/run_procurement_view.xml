@@ -4,15 +4,15 @@
 
         <!--  Run Schedulers -->
         <record id="view_run_procurement_wizard" model="ir.ui.view">
-            <field name="name">Run Procurement</field>
+            <field name="name">Run Procurements</field>
             <field name="model">procurement.run.wiz</field>
             <field name="arch" type="xml">
-                <form string="Run Parameters">
+                <form string="Run Procurements">
                     <p>
-                        Run all procurements in the background.
+                        Run all selected procurements.
                     </p>
                     <footer>
-                        <button name="run_procurement" string="Run Procurement" type="object"  class="oe_highlight"  />
+                        <button name="run_procurement" string="Run Procurements" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>

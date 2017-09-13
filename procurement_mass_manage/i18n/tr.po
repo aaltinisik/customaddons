@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 06:28+0000\n"
-"PO-Revision-Date: 2017-09-11 06:28+0000\n"
+"POT-Creation-Date: 2017-09-13 06:45+0000\n"
+"PO-Revision-Date: 2017-09-13 06:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,38 +24,36 @@ msgid "Cancel"
 msgstr "İptal"
 
 #. module: procurement_mass_manage
-#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
-msgid "Cancel Parameters"
-msgstr "Tadarik Emirlerini İptal Et"
-
-#. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_cancel_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_cancel_wiz
-#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
 msgid "Cancel Procurement"
-msgstr "Tadarik Emirlerini İptal Et"
+msgstr "Tedarik Emirlerini İptal Et"
 
 #. module: procurement_mass_manage
 #: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
-msgid "Cancel all procurements in the background."
-msgstr "Seçili Tadarik Emirlerini İptal Et."
+msgid "Cancel Procurements"
+msgstr "Tedarik Emirlerini İptal Et"
 
 #. module: procurement_mass_manage
-#: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
-msgid "Check Parameters"
-msgstr "Tadarik Emirlerini Kontrol Et"
+#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
+msgid "Cancel all selected procurements."
+msgstr "Seçili tedarik emirlerini iptal et."
+
+#. module: procurement_mass_manage
+#: model:ir.model,name:procurement_mass_manage.model_procurement_check_wiz
+msgid "Check Procurement"
+msgstr "Tedarik Emirlerini Kontrol Et"
 
 #. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_check_procurement
-#: model:ir.model,name:procurement_mass_manage.model_procurement_check_wiz
 #: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
-msgid "Check Procurement"
-msgstr "Tadarik Emirlerini Kontrol Et"
+msgid "Check Procurements"
+msgstr "Tedarik Emirlerini Kontrol Et"
 
 #. module: procurement_mass_manage
 #: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
-msgid "Check all procurements in the background."
-msgstr "Seçili Tadarik Emirlerini Kontrol Et."
+msgid "Check all selected procurements."
+msgstr "Seçili tedarik emirlerini kontrol et."
 
 #. module: procurement_mass_manage
 #: field:procurement.cancel.wiz,create_uid:0
@@ -79,7 +77,7 @@ msgstr "Oluşturuldu"
 #: field:procurement.reconfirm.wiz,display_name:0
 #: field:procurement.run.wiz,display_name:0
 msgid "Display Name"
-msgstr "Görünen Adı"
+msgstr "Adı"
 
 #. module: procurement_mass_manage
 #: field:procurement.cancel.wiz,id:0
@@ -95,7 +93,7 @@ msgstr "ID"
 #: field:procurement.reconfirm.wiz,__last_update:0
 #: field:procurement.run.wiz,__last_update:0
 msgid "Last Modified on"
-msgstr "Son güncelleme"
+msgstr "Son Güncelleme"
 
 #. module: procurement_mass_manage
 #: field:procurement.cancel.wiz,write_uid:0
@@ -111,46 +109,44 @@ msgstr "Son Güncelleyen"
 #: field:procurement.reconfirm.wiz,write_date:0
 #: field:procurement.run.wiz,write_date:0
 msgid "Last Updated on"
-msgstr "Son güncelleme"
+msgstr "Son Güncelleme"
 
 #. module: procurement_mass_manage
 #: model:res.groups,name:procurement_mass_manage.mass_edit_procurement_order
 msgid "Mass Edit Procurement Orders"
-msgstr "Tedarik Emirlerini Toplu yönetme"
+msgstr "Tedarik Emirlerini Toplu Yönet"
 
 #. module: procurement_mass_manage
-#: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
-msgid "ReConfirm Parameters"
-msgstr "Tedarik Emirlerini Tekrar İşleme Al"
+#: model:ir.model,name:procurement_mass_manage.model_procurement_reconfirm_wiz
+msgid "ReConfirm Procurement"
+msgstr "Tedarik Emrini Tekrar Aktif et"
 
 #. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_reconfirm_procurement
-#: model:ir.model,name:procurement_mass_manage.model_procurement_reconfirm_wiz
 #: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
-msgid "ReConfirm Procurement"
-msgstr "Tedarik Emirlerini Tekrar İşleme Al"
+msgid "ReConfirm Procurements"
+msgstr "Tedrik Emirlerini tekrar Aktif et"
 
 #. module: procurement_mass_manage
 #: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
-msgid "ReConfirm all procurements in the background."
-msgstr "ReConfirm all procurements in the background."
-
-#. module: procurement_mass_manage
-#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
-msgid "Run Parameters"
-msgstr "Tedarik Emirlerini tekrar işle"
+msgid "ReConfirm all selected procurements."
+msgstr "Seçili tedarik emirlerini tekrar aktif edelim mi (iptal durumda olanları tekrar çalıştıralım mı)."
 
 #. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_run_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_run_wiz
-#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
 msgid "Run Procurement"
-msgstr "Tedarik Emirlerini Tekrar işle"
+msgstr "Tedarik Emirlerini Çalıştır"
 
 #. module: procurement_mass_manage
 #: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
-msgid "Run all procurements in the background."
-msgstr "Seçili tedarik Emirlerini tekrar işlensin mi."
+msgid "Run Procurements"
+msgstr "Tedarik Emirlerini Çalıştır"
+
+#. module: procurement_mass_manage
+#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
+msgid "Run all selected procurements."
+msgstr "Seçili tüm tedarik emirlerini çalıştır."
 
 #. module: procurement_mass_manage
 #: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard

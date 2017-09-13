@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 06:28+0000\n"
-"PO-Revision-Date: 2017-09-11 06:28+0000\n"
+"POT-Creation-Date: 2017-09-13 06:45+0000\n"
+"PO-Revision-Date: 2017-09-13 06:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,37 +24,35 @@ msgid "Cancel"
 msgstr ""
 
 #. module: procurement_mass_manage
-#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
-msgid "Cancel Parameters"
-msgstr ""
-
-#. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_cancel_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_cancel_wiz
-#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
 msgid "Cancel Procurement"
 msgstr ""
 
 #. module: procurement_mass_manage
 #: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
-msgid "Cancel all procurements in the background."
+msgid "Cancel Procurements"
 msgstr ""
 
 #. module: procurement_mass_manage
-#: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
-msgid "Check Parameters"
+#: view:procurement.cancel.wiz:procurement_mass_manage.view_cancel_procurement_wizard
+msgid "Cancel all selected procurements."
 msgstr ""
 
 #. module: procurement_mass_manage
-#: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_check_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_check_wiz
-#: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
 msgid "Check Procurement"
 msgstr ""
 
 #. module: procurement_mass_manage
+#: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_check_procurement
 #: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
-msgid "Check all procurements in the background."
+msgid "Check Procurements"
+msgstr ""
+
+#. module: procurement_mass_manage
+#: view:procurement.check.wiz:procurement_mass_manage.view_check_procurement_wizard
+msgid "Check all selected procurements."
 msgstr ""
 
 #. module: procurement_mass_manage
@@ -119,37 +117,35 @@ msgid "Mass Edit Procurement Orders"
 msgstr ""
 
 #. module: procurement_mass_manage
-#: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
-msgid "ReConfirm Parameters"
-msgstr ""
-
-#. module: procurement_mass_manage
-#: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_reconfirm_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_reconfirm_wiz
-#: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
 msgid "ReConfirm Procurement"
 msgstr ""
 
 #. module: procurement_mass_manage
+#: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_reconfirm_procurement
 #: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
-msgid "ReConfirm all procurements in the background."
+msgid "ReConfirm Procurements"
 msgstr ""
 
 #. module: procurement_mass_manage
-#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
-msgid "Run Parameters"
+#: view:procurement.reconfirm.wiz:procurement_mass_manage.view_reconfirm_procurement_wizard
+msgid "ReConfirm all selected procurements."
 msgstr ""
 
 #. module: procurement_mass_manage
 #: model:ir.actions.act_window,name:procurement_mass_manage.wiz_action_run_procurement
 #: model:ir.model,name:procurement_mass_manage.model_procurement_run_wiz
-#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
 msgid "Run Procurement"
 msgstr ""
 
 #. module: procurement_mass_manage
 #: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
-msgid "Run all procurements in the background."
+msgid "Run Procurements"
+msgstr ""
+
+#. module: procurement_mass_manage
+#: view:procurement.run.wiz:procurement_mass_manage.view_run_procurement_wizard
+msgid "Run all selected procurements."
 msgstr ""
 
 #. module: procurement_mass_manage

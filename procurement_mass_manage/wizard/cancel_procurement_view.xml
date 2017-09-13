@@ -4,15 +4,15 @@
 
         <!--  Run Schedulers -->
         <record id="view_cancel_procurement_wizard" model="ir.ui.view">
-            <field name="name">Cancel Procurement</field>
+            <field name="name">Cancel Procurements</field>
             <field name="model">procurement.cancel.wiz</field>
             <field name="arch" type="xml">
-                <form string="Cancel Parameters">
+                <form string="Cancel Procurements">
                     <p>
-                        Cancel all procurements in the background.
+                        Cancel all selected procurements.
                     </p>
                     <footer>
-                        <button name="cancel_procurement" string="Cancel Procurement" type="object"  class="oe_highlight"  />
+                        <button name="cancel_procurement" string="Cancel Procurements" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>

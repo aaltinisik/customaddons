@@ -4,15 +4,15 @@
 
         <!--  Run Schedulers -->
         <record id="view_check_procurement_wizard" model="ir.ui.view">
-            <field name="name">Check Procurement</field>
+            <field name="name">Check Procurements</field>
             <field name="model">procurement.check.wiz</field>
             <field name="arch" type="xml">
-                <form string="Check Parameters">
+                <form string="Check Procurements">
                     <p>
-                        Check all procurements in the background.
+                        Check all selected procurements.
                     </p>
                     <footer>
-                        <button name="check_procurement" string="Check Procurement" type="object"  class="oe_highlight"  />
+                        <button name="check_procurement" string="Check Procurements" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
@@ -20,7 +20,7 @@
             </field>
         </record>
 
-        <act_window name="Check Procurement"
+        <act_window name="Check Procurements"
             res_model="procurement.check.wiz"
             src_model="procurement.order"
             view_mode="form"
