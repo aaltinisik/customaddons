@@ -361,6 +361,8 @@ sudo pip install psycogreen
 echo -e "\n---- Install asterisk connector dependencies ----"
 sudo pip install phonenumbers
 sudo pip install py-Asterisk
+sudo pip install xlrd
+sudo pip install pysftp
 
 
 sudo apt-get -f install -y
