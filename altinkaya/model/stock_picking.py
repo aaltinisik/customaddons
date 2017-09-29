@@ -17,6 +17,7 @@ class stock_picking(osv.osv):
                                     [("Asim",u"Asım"),
                                      ("Muhammet","Muhammet"),
                                      ("Harun","Harun"),
+                                     ("Muharrem", "Muharrem"),
                                      ("Sefer","Sefer")],
                                      u'Siparişi Hazırlayan', select=True),
                 }
