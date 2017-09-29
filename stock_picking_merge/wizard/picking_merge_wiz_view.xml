@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_picking_merge_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.merge.form</field>
+            <field name="model">stock.picking.merge</field>
+            <field name="arch" type="xml">
+                <form string="Automatic Picking Merge">
+                    <header>
+                        <button name="merge_picking" type="object" string="Merge Picking" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </header>
+                    <sheet>
+                        <separator string="Merge the following pickings"/>
+                        <p class="oe_grey">
+                            Please note that destination picking and picking list, picking type, partner, invoice control, source location, destination location are must be same for merging.
+                        </p>
+                        <group colspan="8">
+                            <field name="destination_picking_id" required="1"/>
+                        </group>
+                        <group colspan="8">
+                            <field name="source_picking_ids" nolabel="1" >
+                                <tree>
+                                     <field name="name"/>
+                                     <field name="partner_id"/>
+                                     <field name="min_date"/>
+                                     <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+           id="action_stock_picking_merge_wiz"
+           name="Picking Merge"
+           target="new"
+           key2="client_action_multi"
+           view_mode="form"
+           res_model="stock.picking.merge"
+           src_model="stock.picking"/>
+
+    </data>
+</openerp>
