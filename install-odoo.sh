@@ -361,6 +361,8 @@ sudo pip install psycogreen
 echo -e "\n---- Install asterisk connector dependencies ----"
 sudo pip install phonenumbers
 sudo pip install py-Asterisk
+sudo pip install xlrd
+sudo pip install pysftp
 
 
 sudo apt-get -f install -y
@@ -385,6 +387,8 @@ cd $OE_HOME
 git clone -b 8.0 https://github.com/aaltinisik/customaddons.git
 
 $OE_HOME/customaddons/install-customaddons.sh
+
+sudo chown odoo:odoo -R $OE_HOME
 
 read -n 1 -s -p "Press any key to continue"
 
