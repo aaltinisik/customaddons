@@ -42,16 +42,19 @@
     <data noupdate="1">
 
         <record id="aeroo_product_label_print_id" model="ir.actions.report.xml">
-            <field name="name">Product_label1</field>
+            <field name="name">Print Product Label</field>
             <field name="type">ir.actions.report.xml</field>
-            <field name="model">product.product</field>
+            <field name="model">print.pack.barcode.wiz</field>
             <field name="report_name">product_label_print</field>
+            <field name="copies">1</field>
             <field name="report_type">aeroo</field>
-            <field name="in_format">oo-odt</field>
-<!--             <field name="parser_loc">report_aeroo_sample/report/parser.py</field>
-            <field name="report_rml">report_aeroo_sample/report/template.odt</field>
- -->            <field name="parser_state">loc</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="report_rml">/product_label_print/Output.prn</field>
+            <field name="parser_state">default</field>
             <field name="tml_source">file</field>
+            <field name="charset">cp1254</field>
+            <field name="usage">default</field>
+
         </record>
 
         <ir_set>
