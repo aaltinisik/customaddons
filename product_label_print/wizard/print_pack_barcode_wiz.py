@@ -21,3 +21,8 @@ class print_pack_barcode_wiz(models.TransientModel):
     @api.multi
     def print_label(self):
         print "\n\n CALL print_label"
+
+
+    # @api.multi
+    # def print_label(self):
+    #     return self.env['report'].get_action(self, 'product_label_print.aeroo_product_label_print_id')
