@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_print_pack_barcode_form" model="ir.ui.view">
+            <field name="name">view.print.pack.barcode.wiz.form</field>
+            <field name="model">print.pack.barcode.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Product Label Print">
+                    <sheet>
+                        <group colspan="8">
+                            <field name="product_ids" nolabel="1" >
+                                <tree editable="true">
+                                     <field name="default_code" readonly="1"/>
+                                     <field name="name" readonly="1"/>
+                                     <field name="description" readonly="1"/>
+                                     <field name="pieces_in_pack"/>
+                                     <field name="label_to_print"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_label" type="object" string="Print" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+           id="action_print_pack_barcode_wiz"
+           name="Product Label Print"
+           target="new"
+           key2="client_action_multi"
+           view_mode="form"
+           res_model="print.pack.barcode.wiz"
+           src_model="product.product"/>
+
+    </data>
+</openerp>
