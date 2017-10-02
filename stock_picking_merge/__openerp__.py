@@ -13,8 +13,9 @@
         'stock_account', 'document'
     ],
     'data': [
-        'wizard/picking_merge_wiz_view.xml'
-               ],
+        'wizard/picking_merge_wiz_view.xml',
+        'views/stock_view.xml'
+    ],
     'installable' : True,
     'auto_install' : False,
 }
