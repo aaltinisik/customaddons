@@ -11,11 +11,11 @@ class product_template(osv.Model):
             'Carinin Urunu'
             ),
         'x_iscilik': fields.float(
-             'iscilik Fiyati',
+             'x iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Birim iscilik Fiyati"),
         'x_min_iscilik': fields.float(
-             'Minimum iscilik Fiyati',
+             'x Minimum iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="En Az Toplam iscilik Fiyati"),
         'z_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),

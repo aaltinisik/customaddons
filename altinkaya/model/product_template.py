@@ -12,11 +12,11 @@ class product_template(osv.Model):
             size=64,
             required=False),
         'x_fiyat_dolar': fields.float(
-             'Dolar Fiyati',
+             'x Dolar Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Dolarla satilan urunlerin fiyati bu alana gore yapilir"),
         'x_fiyat_euro': fields.float(
-             'Euro Fiyati',
+             'x Euro Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Euro ile satilirken kullanilan temel fiyat"),
     }

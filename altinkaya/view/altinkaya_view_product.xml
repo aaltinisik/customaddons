@@ -22,6 +22,23 @@
 			</field>
 		</record>
 
+				<record id="product_product_altinkaya_form_fiyatlar" model="ir.ui.view">
+			<field name="name">product.product.altinkaya_form_fiyatlar</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Information']/group/group/field[@name='lst_price']" position="after">
+					<field name="z_guncel_fiyat"></field>
+                    <field name="fiyat_dolar"></field>
+					<field name="fiyat_euro"></field>
+					<field name="iscilik_fiyat"></field>
+					<field name="min_iscilik_fiy"></field>
+					<field name="cari_urun"></field>
+				</xpath>
+			</field>
+		</record>
+
+
 		<record id="product_template_altinkaya_tree_cari" model="ir.ui.view">
 			<field name="name">product.template.altinkaya_tree_cari</field>
 			<field name="model">product.template</field>
