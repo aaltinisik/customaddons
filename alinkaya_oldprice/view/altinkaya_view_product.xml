@@ -2,7 +2,7 @@
 <openerp>
 	<data>
 
-        <record id="product_template_altinkaya_form_eskifiyat" model="ir.ui.view">
+  <!--      <record id="product_template_altinkaya_form_eskifiyat" model="ir.ui.view">
             <field name="name">product.template.altinkaya_form_eskifiyat</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view" />
@@ -22,7 +22,7 @@
              </xpath>
             </field>
         </record>
-
+-->
                 <record id="product_product_altinkaya_form_eskifiyat" model="ir.ui.view">
             <field name="name">product.product.altinkaya_form_eskifiyat</field>
             <field name="model">product.product</field>
@@ -30,17 +30,17 @@
             <field name="arch" type="xml">
            <xpath expr="//page[@string='Procurements']/group/group[@name='general']" position="after">
                 <group name="Old_price" string="Eski Fiyatlar">
-                    <field name="fiyat_2016a"> </field>
-                <field name="z_2016a_iscilik"> </field>
-                <field name="min_2016a_iscilik"> </field>
+                    <field name="v_fiyat_2016a"> </field>
+                <field name="v_2016a_iscilik"> </field>
+                <field name="v_min_2016a_iscilik"> </field>
 
-                <field name="fiyat_2015a"> </field>
-                <field name="z_2015a_iscilik"> </field>
-                <field name="min_2015a_iscilik"> </field>
+                <field name="v_fiyat_2015a"> </field>
+                <field name="v_2015a_iscilik"> </field>
+                <field name="v_min_2015a_iscilik"> </field>
 
-                <field name="fiyat_2014"> </field>
-                <field name="z_2014_iscilik"> </field>
-                <field name="min_2014_iscilik"> </field>
+                <field name="v_fiyat_2014"> </field>
+                <field name="v_2014_iscilik"> </field>
+                <field name="v_min_2014_iscilik"> </field>
                 </group>
              </xpath>
             </field>

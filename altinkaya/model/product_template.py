@@ -24,11 +24,11 @@ product_template()
 class productProduct(osv.Model):
     _inherit = 'product.product'
     _columns = {
-        'fiyat_dolar': fields.float(
+        'v_fiyat_dolar': fields.float(
              'Dolar Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Dolarla satilan urunlerin fiyati bu alana gore yapilir"),
-        'fiyat_euro': fields.float(
+        'v_fiyat_euro': fields.float(
              'Euro Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Euro ile satilirken kullanilan temel fiyat"),

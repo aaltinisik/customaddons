@@ -3,7 +3,7 @@
     <data>
 
 <!-- Product View -->
-
+<!--
         <record id="product_form_view_acespritech" model="ir.ui.view">
             <field name="name">product.template.form.inherit</field>
             <field name="model">product.template</field>
@@ -16,7 +16,7 @@
                 </xpath>
             </field>
         </record>
-
+-->
                 <record id="product_Productform_view" model="ir.ui.view">
             <field name="name">product.product.form.inherit</field>
             <field name="model">product.product</field>

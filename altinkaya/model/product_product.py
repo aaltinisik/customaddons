@@ -26,19 +26,19 @@ class productProduct(osv.Model):
     _inherit = 'product.product'
     _name = 'product.product'
     _columns = {
-        'cari_urun': fields.many2one(
+        'v_cari_urun': fields.many2one(
             'res.partner',
             'Carinin Urunu'
             ),
-        'iscilik_fiyat': fields.float(
+        'v_iscilik_fiyat': fields.float(
              'iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Birim iscilik Fiyati"),
-        'min_iscilik_fiy': fields.float(
+        'v_min_iscilik_fiy': fields.float(
              'Minimum iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="En Az Toplam iscilik Fiyati"),
-        'z_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
+        'v_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
     }
 productProduct()
 
