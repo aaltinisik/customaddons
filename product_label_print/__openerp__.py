@@ -10,7 +10,7 @@
     'description': """
      """,
     'depends': [
-        'product', 'altinkaya_shipment'
+        'report_aeroo', 'product', 'altinkaya_shipment'
     ],
     'data': [
         'wizard/print_pack_barcode_wiz_view.xml',
