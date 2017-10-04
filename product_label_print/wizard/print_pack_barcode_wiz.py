@@ -7,15 +7,31 @@ class print_pack_barcode_wiz(models.TransientModel):
     _name = 'print.pack.barcode.wiz'
     _description = 'Product Label Print'
 
-    product_ids = fields.Many2many('product.product', string="Products")
+    # product_ids = fields.Many2many('product.product', string="Products")
+    product_label_ids = fields.Many2many('product.product.label', string="Products")
 
     @api.model
     def default_get(self, fields):
         ''' 
         To get default values for the object.
         '''
+        product_label_obj = self.env['product.product.label']
         res = super(print_pack_barcode_wiz, self).default_get(fields)
-        res.update({'product_ids': [(6, 0, self.env.context.get('active_ids'))] or []})
+        product_ids = []
+        for product in self.env.context.get('active_ids'):
+            product_label_id = product_label_obj.search([('product_id','=',product)], limit=1)
+            if not product_label_id:
+                product_id = self.env['product.product'].browse(product)
+                product_label_id = product_label_obj.create({
+                        'name': product_id.name,
+                        'default_code': product_id.default_code,
+                        'note': product_id.description,
+                        'pieces_in_pack': product_id.pieces_in_pack,
+                        'label_to_print': 1,
+                        'product_id': product_id.id
+                    })
+            product_ids.append(product_label_id.id)
+        res.update({'product_label_ids': [(6, 0, product_ids)] or []})
         return res
 
     # @api.multi

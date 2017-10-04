@@ -8,11 +8,11 @@
                 <form string="Product Label Print">
                     <sheet>
                         <group colspan="8">
-                            <field name="product_ids" nolabel="1" >
+                            <field name="product_label_ids" nolabel="1" >
                                 <tree editable="true">
                                      <field name="default_code" readonly="1"/>
                                      <field name="name" readonly="1"/>
-                                     <field name="description" readonly="1"/>
+                                     <field name="note" readonly="1"/>
                                      <field name="pieces_in_pack"/>
                                      <field name="label_to_print"/>
                                 </tree>

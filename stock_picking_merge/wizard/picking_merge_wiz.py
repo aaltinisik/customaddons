@@ -43,9 +43,15 @@ class StockPickingMerge(models.TransientModel):
             for pack_operation in picking.pack_operation_ids:
                 pack_operation.copy(default={'picking_id': self.destination_picking_id.id})
             if picking.note:
-                self.destination_picking_id.note += "\n\n" + picking.note
+                if self.destination_picking_id.note:
+                    self.destination_picking_id.note += "\n\n" + picking.note
+                else:
+                    self.destination_picking_id.note = picking.note
             if picking.origin:
-                self.destination_picking_id.origin += "," + picking.origin
+                if self.destination_picking_id.origin:
+                    self.destination_picking_id.origin += "," + picking.origin
+                else:
+                    self.destination_picking_id.origin = picking.origin
             attachments = self.env['ir.attachment'].search([('res_model','=',picking._name), ('res_id','=',picking.id)])
             for attachment in attachments:
                 attachment.copy(default={'res_id': self.destination_picking_id.id, 'res_name': self.destination_picking_id.name})
