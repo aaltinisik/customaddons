@@ -3,13 +3,7 @@
 from openerp import api, fields, models, _
 
 
-class product_product(models.Model):
-    _inherit = "product.product"
-
-    label_to_print = fields.Integer(string='# of label to be printed', default=1)
-
-
-class product_product(models.Model):
+class productproductLabel(models.Model):
     _name = "product.product.label"
 
     name = fields.Char(string="Name")

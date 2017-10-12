@@ -14,7 +14,6 @@
     ],
     'data': [
         'wizard/print_pack_barcode_wiz_view.xml',
-        'views/product_view.xml'
     ],
     'installable' : True,
     'auto_install' : False,

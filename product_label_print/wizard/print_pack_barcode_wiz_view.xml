@@ -39,7 +39,7 @@
 
     </data>
 
-    <data noupdate="1">
+    <data noupdate="0">
 
         <record id="aeroo_product_label_print_id" model="ir.actions.report.xml">
             <field name="name">Print Product Label</field>

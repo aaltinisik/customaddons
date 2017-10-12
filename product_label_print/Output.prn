@@ -13,10 +13,10 @@ GG730,340,"cicek"
 A730,390,2,n,1,1,N,"SE-2020-PC3"
 LO423,333,384,2
 A805,335,2,o,1,1,N,"[SE-2020-PC-AV-RT-ASA]"
-A805,295,2,p,1,1,N,"SE-2020 contalý koyu gri menteþ"
-A805,263,2,p,1,1,N,"IP-65 kutu (þeffaf)sd gri"
-A805,231,2,p,1,1,N,"100x123x33mm menteþeli"
-A805,195,2,c,1,1,N,"ÖZEL NOT ÝÇÝN BIRAKILDI"
+A805,295,2,p,1,1,N,"SE-2020 contalÄ± koyu gri menteÅŸ"
+A805,263,2,p,1,1,N,"IP-65 kutu (ÅŸeffaf)sd gri"
+A805,231,2,p,1,1,N,"100x123x33mm menteÅŸeli"
+A805,195,2,c,1,1,N,"Ã–ZEL NOT Ä°Ã‡Ä°N BIRAKILDI"
 A805,155,2,q,1,1,N,"100 0000 Adet"
 B788,100,2,E30,3,6,89,B,"211234567891"
 
@@ -26,13 +26,13 @@ GG340,340,"cicek"
 A330,390,2,n,1,1,N,"SE-2020-PC3"
 LO23,333,384,2
 A405,335,2,o,1,1,N,"[SE-2020-PC-AV-RT-ASA]"
-A405,295,2,p,1,1,N,"SE-2020 contalý koyu gri menteþ"
-A405,263,2,p,1,1,N,"IP-65 kutu (þeffaf)sd gri"
-A405,231,2,p,1,1,N,"100x123x33mm menteþeli"
-A405,195,2,c,1,1,N,"ÖZEL NOT ÝÇÝN BIRAKILDI"
+A405,295,2,p,1,1,N,"SE-2020 contalÄ± koyu gri menteÅŸ"
+A405,263,2,p,1,1,N,"IP-65 kutu (ÅŸeffaf)sd gri"
+A405,231,2,p,1,1,N,"100x123x33mm menteÅŸeli"
+A405,195,2,c,1,1,N,"Ã–ZEL NOT Ä°Ã‡Ä°N BIRAKILDI"
 A405,155,2,q,1,1,N,"100 0000 Adet"
 B388,100,2,E30,3,6,89,B,"211234567891"
 
 
 
-P1,5
+P1,1

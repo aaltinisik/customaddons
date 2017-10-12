@@ -38,17 +38,34 @@ class print_pack_barcode_wiz(models.TransientModel):
     # def print_label(self):
     #     print "\n\n CALL print_label"
 
+    #
+    # @api.multi
+    # def print_label(self):
+    #     datas = {
+    #             'ids': self.env.context.get('active_ids'),
+    #             'model': 'product.product'
+    #         }
+    #     res = {
+    #         'type' : 'ir.actions.report.xml',
+    #         'report_name': 'product_label_print',
+    #         'datas' : datas,
+    #     }
+    #     return self.env['report'].get_action(self, 'product_label_print')
+    #     #return res
+
 
     @api.multi
     def print_label(self):
-        datas = {
-                'ids': self.env.context.get('active_ids'),
-                'model': 'product.product'
-            }
-        res = {
-            'type' : 'ir.actions.report.xml',
-            'report_name': 'Print Product Label',
-            'datas' : datas,
-        }
-        # return self.env['report'].get_action(self, 'product_label_print.aeroo_product_label_print_id')
-        return res
+        cr  = self.env.cr
+        uid = self.env.uid
+        ids = self.ids
+        context = self.env.context
+
+        # custom code from here
+        server_action_ids = [1142]
+        server_action_ids = map(int, server_action_ids)
+        action_server_obj = self.pool.get('ir.actions.server')
+        ctx = dict(context, active_model='print.pack.barcode.wiz', active_ids=ids, active_id=ids[0])
+        action_server_obj.run(cr, uid, server_action_ids, context=ctx)
+
+        return {'type': 'ir.actions.act_window_close'}
