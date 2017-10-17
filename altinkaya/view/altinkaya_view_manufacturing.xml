@@ -104,18 +104,5 @@
 			<field name="type">form</field>
 		</record>
 	</data>
-		<data>
-
-		<record id="manuf_search1" model="ir.ui.view">
-			<field name="inherit_id" ref="mrp.production.select" />
-			<field eval="17" name="priority" />
-			<field name="model">mrp.production</field>
-			<field name="type">search</field>
-			<field name="name">manufacture_search_inherit1</field>
-			<field name="arch" type="xml">
-			</field>
-
-		</record>
-	</data>
 
 </openerp>
