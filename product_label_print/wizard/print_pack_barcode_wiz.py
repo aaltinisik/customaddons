@@ -19,39 +19,36 @@ class print_pack_barcode_wiz(models.TransientModel):
         res = super(print_pack_barcode_wiz, self).default_get(fields)
         product_ids = []
         for product in self.env.context.get('active_ids'):
-            product_label_id = product_label_obj.search([('product_id','=',product)], limit=1)
-            if not product_label_id:
-                product_id = self.env['product.product'].browse(product)
-                product_label_id = product_label_obj.create({
-                        'name': product_id.name,
-                        'default_code': product_id.default_code,
-                        'note': product_id.description,
-                        'pieces_in_pack': product_id.pieces_in_pack,
-                        'label_to_print': 1,
-                        'product_id': product_id.id
-                    })
+#            product_label_id = product_label_obj.search([('product_id','=',product)], limit=1)
+#            if not product_label_id:
+            product_id = self.env['product.product'].browse(product)
+            
+            product_label_id = product_label_obj.create({
+                    'name': product_id.name,
+                    'default_code': product_id.default_code,
+                    'short_code': product_id.default_code,
+                    'note': product_id.description,
+                    'pieces_in_pack': product_id.pieces_in_pack,
+                    'label_to_print': 1,
+                    'barcode': product_id.ean13,
+                    'product_id': product_id.id
+            })
             product_ids.append(product_label_id.id)
         res.update({'product_label_ids': [(6, 0, product_ids)] or []})
         return res
 
-    # @api.multi
-    # def print_label(self):
-    #     print "\n\n CALL print_label"
-
-    #
-    # @api.multi
-    # def print_label(self):
-    #     datas = {
-    #             'ids': self.env.context.get('active_ids'),
-    #             'model': 'product.product'
-    #         }
-    #     res = {
-    #         'type' : 'ir.actions.report.xml',
-    #         'report_name': 'product_label_print',
-    #         'datas' : datas,
-    #     }
-    #     return self.env['report'].get_action(self, 'product_label_print')
-    #     #return res
+    @api.multi
+    def show_label(self):
+        datas = {
+                'ids': self.env.context.get('active_ids'),
+                'model': 'print.pack.barcode.wiz'
+            }
+        res = {
+            'type' : 'ir.actions.report.xml',
+            'report_name': 'product_label_print',
+            'datas' : datas,
+        }
+        return self.env['report'].get_action(self, 'product_label_print')
 
 
     @api.multi
@@ -61,7 +58,6 @@ class print_pack_barcode_wiz(models.TransientModel):
         ids = self.ids
         context = self.env.context
 
-        # custom code from here
         server_action_ids = [1142]
         server_action_ids = map(int, server_action_ids)
         action_server_obj = self.pool.get('ir.actions.server')
