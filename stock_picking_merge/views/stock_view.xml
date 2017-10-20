@@ -14,12 +14,21 @@
                         id="merged_picking_button"
                         icon="fa-th-list"
                         name="show_merged_pickings"
-                        attrs="{'invisible': [('merge_picking_ids', '=', [])]}">
+                        attrs="{'invisible': [('total_merged_pickings', '=', 0)]}">
                         <div><strong><field name="total_merged_pickings" widget="monetary"/></strong><br/>Merged Pickings</div>
+                    </button>
+                    <button type="object" 
+                        class="oe_stat_button"
+                        id="skipped_picking_button"
+                        icon="fa-th-list"
+                        name="show_skipped_pickings"
+                        attrs="{'invisible': [('total_skipped_pickings', '=', 0)]}">
+                        <div><strong><field name="total_skipped_pickings" widget="monetary"/></strong><br/>Skipped Pickings</div>
                     </button>
                 </div>
                 <field name="origin" position="after">
                     <field name="merge_picking_ids" invisible="1"/>
+                    <field name="skipped_picking_ids" invisible="1"/>
                 </field>
             </field>
         </record>
