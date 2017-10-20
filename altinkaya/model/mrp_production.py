@@ -38,6 +38,14 @@ class mrp_production(osv.Model):
             'x_makine',
             'Uretim Yapilan Makine'
             ),
+        'x_makine_kod': fields.related(
+            'x_makine',
+            'x_kod',
+            type='char',
+            string='Makine',
+            readonly=1),
     }
 mrp_production()
+
+
 
