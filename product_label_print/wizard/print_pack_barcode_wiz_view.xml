@@ -19,6 +19,9 @@
                                 </tree>
                             </field>
                         </group>
+                        <group>
+                          <field name="skip_first" string="Do not print first label"></field>
+                        </group>
                     </sheet>
                     <footer>
                         <button name="print_label" type="object" string="Print" class="oe_highlight"/>
@@ -48,11 +51,21 @@
             <field name="model">print.pack.barcode.wiz</field>
             <field name="report_name">product_label_print</field>
             <field name="copies">1</field>
+
             <field name="report_type">aeroo</field>
             <field name="in_format">genshi-raw</field>
+            <field name="out_format">3</field>
+
             <field name="parser_state">default</field>
-            <field name="charset">cp1254</field>
+            <field name="charset">utf_8</field>
             <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">product_label_print/Output.prn</field>
+            <field name="report_file">product_label_print/Output.prn</field>
+            <field name="content_fname">TXT</field>
+
+
+
 
         </record>
 

@@ -6,9 +6,9 @@ from openerp import api, fields, models, _
 class print_pack_barcode_wiz(models.TransientModel):
     _name = 'print.pack.barcode.wiz'
     _description = 'Product Label Print'
-
-    # product_ids = fields.Many2many('product.product', string="Products")
     product_label_ids = fields.Many2many('product.product.label', string="Products")
+    label_ids = fields.Many2many('label.twoinrow', string="Labels")
+    skip_first = fields.Boolean('Skip First Label')
 
     @api.model
     def default_get(self, fields):
@@ -19,8 +19,6 @@ class print_pack_barcode_wiz(models.TransientModel):
         res = super(print_pack_barcode_wiz, self).default_get(fields)
         product_ids = []
         for product in self.env.context.get('active_ids'):
-#            product_label_id = product_label_obj.search([('product_id','=',product)], limit=1)
-#            if not product_label_id:
             product_id = self.env['product.product'].browse(product)
             
             product_label_id = product_label_obj.create({
@@ -34,15 +32,80 @@ class print_pack_barcode_wiz(models.TransientModel):
                     'product_id': product_id.id
             })
             product_ids.append(product_label_id.id)
-        res.update({'product_label_ids': [(6, 0, product_ids)] or []})
+        res.update({'product_label_ids': [(6, 0, product_ids)] or [],
+                    'skip_first': False
+                    })
         return res
 
     @api.multi
+    def generate_labels(self):
+        last_label = self.product_label_ids[0]
+        leap_label = False
+        Label_Res = []
+        label_template_obj = self.env['label.twoinrow']
+        for product_label in self.product_label_ids:
+            labels_to_print = product_label.label_to_print
+            while labels_to_print > 0:
+                if self.skip_first:
+                    Label_l = label_template_obj.create({
+                        'first_label_empty' : True,
+                        'label1': product_label.id,
+                        'second_label_empty': False,
+                        'label2': product_label.id,
+                        'copies_to_print': 1,
+                    })
+                    Label_Res.append(Label_l.id)
+                    self.skip_first = False
+                    labels_to_print = labels_to_print - 1
+                if leap_label:
+                    Label_l = label_template_obj.create({
+                        'first_label_empty': False,
+                        'label1': last_label.id,
+                        'second_label_empty': False,
+                        'label2': product_label.id,
+                        'copies_to_print': 1,
+                    })
+                    Label_Res.append(Label_l.id)
+                    leap_label = False
+                    labels_to_print = labels_to_print -1
+
+                if labels_to_print > 1:
+                    # 1 1
+                    Label_l = label_template_obj.create({
+                        'first_label_empty': False,
+                        'label1': product_label.id,
+                        'second_label_empty': False,
+                        'label2': product_label.id,
+                        'copies_to_print': labels_to_print/2,
+                    })
+                    labels_to_print = labels_to_print - ((labels_to_print/2)*2)
+                    Label_Res.append(Label_l.id)
+                if labels_to_print == 1:
+                    leap_label = True
+                    last_label = product_label
+                    labels_to_print = 0
+        if leap_label:
+            Label_l = label_template_obj.create({
+                #Tek last label
+                'first_label_empty': False,
+                'label1': product_label.id,
+                'second_label_empty': True,
+                'label2': product_label.id,
+                'copies_to_print': 1,
+                })
+            Label_Res.append(Label_l.id)
+        self.label_ids =[(6, 0, Label_Res)]
+        return False
+
+
+    @api.multi
     def show_label(self):
+        self.generate_labels()
         datas = {
                 'ids': self.env.context.get('active_ids'),
                 'model': 'print.pack.barcode.wiz'
             }
+
         res = {
             'type' : 'ir.actions.report.xml',
             'report_name': 'product_label_print',
@@ -57,8 +120,9 @@ class print_pack_barcode_wiz(models.TransientModel):
         uid = self.env.uid
         ids = self.ids
         context = self.env.context
+        self.generate_labels()
 
-        server_action_ids = [1142]
+        server_action_ids = [1143]
         server_action_ids = map(int, server_action_ids)
         action_server_obj = self.pool.get('ir.actions.server')
         ctx = dict(context, active_model='print.pack.barcode.wiz', active_ids=ids, active_id=ids[0])
