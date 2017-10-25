@@ -6,7 +6,7 @@
     'website': 'https://www.odoo.com',
     'category': 'Stock',
     'summary': 'Product Label Print',
-    'author': 'Kiran Kantesariya',
+    'author': 'Kiran Kantesariya, Ahmet Altinisik',
     'description': """
      """,
     'depends': [

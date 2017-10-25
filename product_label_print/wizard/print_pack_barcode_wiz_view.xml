@@ -11,17 +11,21 @@
                             <field name="product_label_ids" nolabel="1" >
                                 <tree editable="true">
                                      <field name="default_code" readonly="1"/>
+                                    <field name="barcode" readonly="1"/>
                                      <field name="name" readonly="1"/>
-                                     <field name="note" readonly="1"/>
+                                     <field name="note" />
                                      <field name="pieces_in_pack"/>
                                      <field name="label_to_print"/>
                                 </tree>
                             </field>
                         </group>
+                        <group>
+                          <field name="skip_first" string="Do not print first label"></field>
+                        </group>
                     </sheet>
                     <footer>
                         <button name="print_label" type="object" string="Print" class="oe_highlight"/>
-                        or
+                        <button name="show_label" type="object" string="Show Label" class="oe_highlight"/>
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </form>
@@ -39,7 +43,7 @@
 
     </data>
 
-    <data noupdate="0">
+    <data noupdate="1">
 
         <record id="aeroo_product_label_print_id" model="ir.actions.report.xml">
             <field name="name">Print Product Label</field>
@@ -47,13 +51,21 @@
             <field name="model">print.pack.barcode.wiz</field>
             <field name="report_name">product_label_print</field>
             <field name="copies">1</field>
+
             <field name="report_type">aeroo</field>
             <field name="in_format">genshi-raw</field>
-            <field name="report_rml">/product_label_print/Output.prn</field>
+            <field name="out_format">3</field>
+
             <field name="parser_state">default</field>
-            <field name="tml_source">file</field>
-            <field name="charset">cp1254</field>
+            <field name="charset">utf_8</field>
             <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">product_label_print/Output.prn</field>
+            <field name="report_file">product_label_print/Output.prn</field>
+            <field name="content_fname">TXT</field>
+
+
+
 
         </record>
 
