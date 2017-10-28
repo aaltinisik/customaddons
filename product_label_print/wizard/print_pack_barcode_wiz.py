@@ -105,7 +105,6 @@ class print_pack_barcode_wiz(models.TransientModel):
                 'ids': self.env.context.get('active_ids'),
                 'model': 'print.pack.barcode.wiz'
             }
-
         res = {
             'type' : 'ir.actions.report.xml',
             'report_name': 'product_label_print',
