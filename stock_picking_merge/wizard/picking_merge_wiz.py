@@ -36,7 +36,14 @@ class StockPickingMerge(models.TransientModel):
     @api.multi
     def merge_picking(self):
         move_obj = self.env['stock.move']
-        picking_ids = [picking for picking in self.source_picking_ids if picking.partner_id.id == self.destination_picking_id.partner_id.id and picking.picking_type_id.id == self.destination_picking_id.picking_type_id.id and picking.location_id.id == self.destination_picking_id.location_id.id and picking.location_dest_id.id == self.destination_picking_id.location_dest_id.id and picking.invoice_state == self.destination_picking_id.invoice_state and picking.company_id.id == self.destination_picking_id.company_id.id and picking.state not in ['done','cancel'] and self.destination_picking_id.id != picking.id]
+        picking_ids = []
+        skipped_picking_ids = []
+        for picking in self.source_picking_ids:
+            if picking.partner_id.id == self.destination_picking_id.partner_id.id and picking.picking_type_id.id == self.destination_picking_id.picking_type_id.id and picking.location_id.id == self.destination_picking_id.location_id.id and picking.location_dest_id.id == self.destination_picking_id.location_dest_id.id and picking.invoice_state == self.destination_picking_id.invoice_state and picking.company_id.id == self.destination_picking_id.company_id.id and picking.state not in ['done','cancel'] and self.destination_picking_id.id != picking.id:
+                picking_ids.append(picking)
+            else:
+                skipped_picking_ids.append(picking.id)
+        # picking_ids = [picking for picking in self.source_picking_ids if picking.partner_id.id == self.destination_picking_id.partner_id.id and picking.picking_type_id.id == self.destination_picking_id.picking_type_id.id and picking.location_id.id == self.destination_picking_id.location_id.id and picking.location_dest_id.id == self.destination_picking_id.location_dest_id.id and picking.invoice_state == self.destination_picking_id.invoice_state and picking.company_id.id == self.destination_picking_id.company_id.id and picking.state not in ['done','cancel'] and self.destination_picking_id.id != picking.id]
         for picking in picking_ids:
             for move in picking.move_lines:
                 move.copy(default={'picking_id': self.destination_picking_id.id})
@@ -57,6 +64,7 @@ class StockPickingMerge(models.TransientModel):
                 attachment.copy(default={'res_id': self.destination_picking_id.id, 'res_name': self.destination_picking_id.name})
             self.destination_picking_id.merge_picking_ids = [(4, picking.id)]
             picking.action_cancel()
+        self.destination_picking_id.skipped_picking_ids = [(6, 0, skipped_picking_ids)]
         tree_view = self.env.ref('stock.vpicktree')
         form_view = self.env.ref('stock.view_picking_form')
         return {

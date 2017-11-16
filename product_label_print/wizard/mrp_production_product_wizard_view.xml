@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_mrp_production_product_wizard_form" model="ir.ui.view">
+            <field name="name">mrp.production.product.wizard.form</field>
+            <field name="model">mrp.production.product.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Product Label Print">
+                    <sheet>
+                        <group colspan="8">
+                            <field name="product_label_ids" nolabel="1" create="false">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="default_code" readonly="1"/>
+                                    <field name="barcode" readonly="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="note"/>
+                                    <field name="no_of_products"/>
+                                    <field name="pieces_in_pack"/>
+                                    <field name="label_to_print"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                          <field name="skip_first" string="Do not print first label"></field>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_label" type="object" string="Print" class="oe_highlight"/>
+                        <button name="show_label" type="object" string="Show Label" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    <act_window name="Print Barcode"
+            res_model="mrp.production.product.wizard"
+            src_model="mrp.production"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            multi="True"
+            id="action_mrp_prod_product_wiz"/>
+
+    </data>
+
+    <data noupdate="1">
+
+        <record id="aeroo_mrp_product_label_print_id" model="ir.actions.report.xml">
+            <field name="name">Print MRP Product Label</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">mrp.production.product.wizard</field>
+            <field name="report_name">mrp_product_label_print</field>
+            <field name="copies">1</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format">3</field>
+            <field name="parser_state">default</field>
+            <field name="charset">utf_8</field>
+            <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">product_label_print/Output.prn</field>
+            <field name="report_file">product_label_print/Output.prn</field>
+            <field name="content_fname">TXT</field>
+        </record>
+
+        <ir_set>
+            <field eval="'action'" name="key"/>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="['stock.picking']" name="models"/>
+            <field name="name">Product_label1</field>
+            <field eval="'ir.actions.report.xml,'+str(aeroo_mrp_product_label_print_id)" name="value"/>
+            <field eval="True" name="isobject"/>
+            <field eval="True" name="replace"/>
+        </ir_set>
+
+    </data>
+
+</openerp>
