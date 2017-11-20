@@ -53,6 +53,10 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-reporting
 git clone -b $OE_VERSION https://github.com/aaltinisik/manufacture.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-utils.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-wip.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/mail-addons.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.git
+
+
 
 
 while true; do
@@ -204,6 +208,14 @@ ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_tree_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_image_download $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/product_attribute_types $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/product_attribute_types_views $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/product_barcode_generator $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/product_multi_ean $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_variant_default_code $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/purchase_order_line_stock_available $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/stock_inventory_barcode $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/web/support_branding $OE_HOME/custom/addons/
 
         break;;
         [Nn]* ) break;;
