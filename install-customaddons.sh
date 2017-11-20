@@ -208,8 +208,8 @@ ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_tree_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_image_download $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
-ln -s -f $OCA_HOME/product-attribute/product_attribute_types $OE_HOME/custom/addons/
-ln -s -f $OCA_HOME/product-attribute/product_attribute_types_views $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types_views $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-barcode/product_barcode_generator $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-barcode/product_multi_ean $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/product_variant_default_code $OE_HOME/custom/addons/
