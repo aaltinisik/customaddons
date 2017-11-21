@@ -328,7 +328,7 @@ sudo pip install --upgrade virtualenv
 
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
 
-sudo pip install jcconv
+sudo pip install jcconv googlemaps xlsxwriter
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
 sudo pip install --pre pyusb
