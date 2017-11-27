@@ -1,0 +1,1 @@
+import product_merge_wizard
