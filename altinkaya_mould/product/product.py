@@ -27,3 +27,10 @@ class product_template(orm.Model):
     _columns = {
         'mould_id': fields.many2one('mould', string='İlgili Kalıp'),
     }
+
+class product_template(orm.Model):
+    _inherit = 'product.product'
+
+    _columns = {
+        'mould_id': fields.many2one('mould', string='İlgili Kalıp'),
+    }

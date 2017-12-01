@@ -12,12 +12,25 @@ class product_template(osv.Model):
             size=64,
             required=False),
         'x_fiyat_dolar': fields.float(
-             'Dolar Fiyati',
+             'x Dolar Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Dolarla satilan urunlerin fiyati bu alana gore yapilir"),
         'x_fiyat_euro': fields.float(
-             'Euro Fiyati',
+             'x Euro Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="Euro ile satilirken kullanilan temel fiyat"),
     }
 product_template()
+class productProduct(osv.Model):
+    _inherit = 'product.product'
+    _columns = {
+        'v_fiyat_dolar': fields.float(
+             u"Dolar Fiyatı",
+             digits_compute=dp.get_precision('Product Price'),
+             help=u"Dolarla satılan ürünlerin fiyatı"),
+        'v_fiyat_euro': fields.float(
+             u"Euro Fiyatı",
+             digits_compute=dp.get_precision('Product Price'),
+             help=u"Euro ile satılırken kullanılan temel fiyat"),
+    }
+productProduct()
