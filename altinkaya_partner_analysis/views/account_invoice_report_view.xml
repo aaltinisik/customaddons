@@ -13,8 +13,10 @@
                     <filter string="Last Year" name="lastyear"
                         domain="['|', ('date', '=', False), '&amp;', ('date','&gt;=',(context_today()-relativedelta(years=1)).strftime('%Y-01-01')), 
                                  ('date','&lt;=', time.strftime('%Y-01-01'))]" />
-                     <filter string="Turkey" name="turkey"
-                            domain="[('country_id', '=','Turkey')]" />
+                        <separator/>
+                     <filter string="Türkiye" name="turkey" domain="[('country_id', '=','Türkiye'),('country_id', '!=','False')]"/>
+                     <filter string="Yurtdışı" name="outturkey" domain="[('country_id', '!=','Türkiye'),('country_id', '!=','Kuzey Kıbrıs'),('country_id', '!=',False)]"/>
+                        <separator/>
                 </filter>
                 <xpath expr="//search/group/filter[@name='partner_id']" position="replace">
                     <filter string="Partner" name="partner" context="{'group_by':'partner_id','residual_visible':True}"/>

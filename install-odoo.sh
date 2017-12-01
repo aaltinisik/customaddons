@@ -328,7 +328,7 @@ sudo pip install --upgrade virtualenv
 
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
 
-sudo pip install jcconv
+sudo pip install jcconv googlemaps xlsxwriter
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
 sudo pip install --pre pyusb
@@ -361,6 +361,8 @@ sudo pip install psycogreen
 echo -e "\n---- Install asterisk connector dependencies ----"
 sudo pip install phonenumbers
 sudo pip install py-Asterisk
+sudo pip install xlrd
+sudo pip install pysftp
 
 
 sudo apt-get -f install -y
@@ -385,6 +387,8 @@ cd $OE_HOME
 git clone -b 8.0 https://github.com/aaltinisik/customaddons.git
 
 $OE_HOME/customaddons/install-customaddons.sh
+
+sudo chown odoo:odoo -R $OE_HOME
 
 read -n 1 -s -p "Press any key to continue"
 

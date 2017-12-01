@@ -47,12 +47,24 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-warehouse
 git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-workflow
 git clone -b $OE_VERSION https://github.com/aaltinisik/web.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/CybroAddons.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/addons-vauxoo.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/SerpentCS_Contributions.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-reporting.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/manufacture.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-utils.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-wip.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/mail-addons.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.git
+
+
 
 
 while true; do
     read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OE_HOME
+
+
 
 
 ln -s -f $OCA_HOME/bank-statement-import/account_bank_statement_import $OE_HOME/custom/addons/
@@ -70,6 +82,46 @@ ln -s -f $OCA_HOME/server-tools/base_concurrency $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/base_export_manager $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/base_name_search_improved $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/base_optional_quick_create $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/auditlog $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/auto_backup $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/base_import_match $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/base_import_security_group $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/access-addons/ir_rule_protected $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/addons-vauxoo/mrp_production_procurement_order $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/addons-vauxoo/mrp_production_security_force $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/addons-vauxoo/mrp_workcenter_responsible $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/addons-vauxoo/product_available_by_warehouse $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/knowledge/attachments_to_filesystem $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/manufacture/mrp_hook $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/manufacture/mrp_operations_extension $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/manufacture/mrp_sale_info $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/misc-addons/product_image_filestore $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/product_packaging_views $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/product_stock_info $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/product_variant_default_code $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/purchase_stock_quant_shortcut $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/stock_quants_shortcuts $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_variants_no_automatic_creation $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_variants_types $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/sale_product_variants $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/stock_inventory_import $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/mrp_show_related_attachment $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/mrp_stock_quant_shortcut $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/product_category_in_header $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_packaging_through_attributes $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/product_attribute_priority $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/product_attribute_types $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/purchase_order_line_stock_available $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/reporting-engine/report_custom_filename $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-reporting/stock_analysis $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_inventory_line_price $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_inventory_preparation_filter $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_generator $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_manual_procurement $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_uom $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-workflow/stock_split_picking $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/addons-vauxoo/mrp_production_bom_related $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/web/web_offline_warning $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-telephony/base_phone $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-telephony/base_phone_popup $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/base_report_auto_create_qweb $OE_HOME/custom/addons/
@@ -156,6 +208,14 @@ ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_tree_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_image_download $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types_views $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/product_barcode_generator $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/product_multi_ean $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-wip/product_variant_default_code $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/purchase_order_line_stock_available $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-barcode/stock_inventory_barcode $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/web/support_branding $OE_HOME/custom/addons/
 
         break;;
         [Nn]* ) break;;

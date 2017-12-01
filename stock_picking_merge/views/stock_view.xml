@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <record id="stock_picking_merge_view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <div class="oe_right oe_button_box" position="inside">
+                    <button type="object" 
+                        class="oe_stat_button"
+                        id="merged_picking_button"
+                        icon="fa-th-list"
+                        name="show_merged_pickings"
+                        attrs="{'invisible': [('merge_picking_ids', '=', [])]}">
+                        <div><strong><field name="total_merged_pickings" widget="monetary"/></strong><br/>Merged Pickings</div>
+                    </button>
+                </div>
+                <field name="origin" position="after">
+                    <field name="merge_picking_ids" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
