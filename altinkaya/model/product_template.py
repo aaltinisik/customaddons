@@ -25,12 +25,12 @@ class productProduct(osv.Model):
     _inherit = 'product.product'
     _columns = {
         'v_fiyat_dolar': fields.float(
-             'Dolar Fiyati',
+             u"Dolar Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
-             help="Dolarla satilan urunlerin fiyati bu alana gore yapilir"),
+             help=u"Dolarla satılan ürünlerin fiyatı"),
         'v_fiyat_euro': fields.float(
-             'Euro Fiyati',
+             u"Euro Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
-             help="Euro ile satilirken kullanilan temel fiyat"),
+             help=u"Euro ile satılırken kullanılan temel fiyat"),
     }
 productProduct()

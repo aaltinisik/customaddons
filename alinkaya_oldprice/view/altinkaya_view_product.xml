@@ -30,6 +30,9 @@
             <field name="arch" type="xml">
            <xpath expr="//page[@string='Procurements']/group/group[@name='general']" position="after">
                 <group name="Old_price" string="Eski Fiyatlar">
+                    <field name="v_fiyat_2016b"> </field>
+                <field name="v_2016b_iscilik"> </field>
+                <field name="v_min_2016b_iscilik"> </field>
                     <field name="v_fiyat_2016a"> </field>
                 <field name="v_2016a_iscilik"> </field>
                 <field name="v_min_2016a_iscilik"> </field>

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from openerp.osv import osv, fields
 import openerp.addons.decimal_precision as dp
 
@@ -18,7 +19,7 @@ class product_template(osv.Model):
              'x Minimum iscilik Fiyati',
              digits_compute=dp.get_precision('Product Price'),
              help="En Az Toplam iscilik Fiyati"),
-        'z_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
+        'z_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu secenek seçili ise fiyatı yenidir."),
     }
 product_template()
 
@@ -28,17 +29,21 @@ class productProduct(osv.Model):
     _columns = {
         'v_cari_urun': fields.many2one(
             'res.partner',
-            'Carinin Urunu'
+            u"Carinin Ürünü"
             ),
+        'v_tl_fiyat': fields.float(
+            u"TL Fiyatı",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"Birim işçilik Fiyatı"),
         'v_iscilik_fiyat': fields.float(
-             'iscilik Fiyati',
+             u"işçilik Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
-             help="Birim iscilik Fiyati"),
+             help=u"Birim işçilik Fiyatı"),
         'v_min_iscilik_fiy': fields.float(
-             'Minimum iscilik Fiyati',
+             'Minimum işçilik Fiyatı',
              digits_compute=dp.get_precision('Product Price'),
-             help="En Az Toplam iscilik Fiyati"),
-        'v_guncel_fiyat': fields.boolean('Fiyat Guncel', help="Bu secenek secili ise fiyati yenidir."),
+             help=u"En Az Toplam işçilik Fiyatı"),
+        'v_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu seçenek seçili ise fiyatı yenidir."),
     }
 productProduct()
 

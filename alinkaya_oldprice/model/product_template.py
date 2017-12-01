@@ -64,7 +64,7 @@ class productProduct(osv.Model):
         'v_fiyat_2014': fields.float(
              u"2014 Eski Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanilan eski fiyatı"),
+             help=u"2014 yılında kullanılan eski fiyatı"),
         'v_2014_iscilik': fields.float(
              u"2014 işçilik Fiyatı",
              digits_compute=dp.get_precision('Product Price'),
@@ -84,5 +84,18 @@ class productProduct(osv.Model):
         'v_min_2016a_iscilik': fields.float(
             u"2015 Ekim Min İscilik",
             digits_compute=dp.get_precision('Product Price'),
-            help=u" kullanılan eski Minimum İscilik fiyatıı"),
+            help=u" kullanılan eski Minimum İşcilik fiyatı"),
+        'v_fiyat_2016b': fields.float(
+            u"2016 Aralık Fiyatı",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2016 Aralık fiyatı"),
+        'v_2016b_iscilik': fields.float(
+            u"2016 Aralık isçilik fiyatı",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2016 Aralık birim işçilik fiyatı"),
+        'v_min_2016b_iscilik': fields.float(
+            u"2016 Aralık Min İsçilik",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2016 Aralık Minimum İşçilik fiyatı"),
+
     }

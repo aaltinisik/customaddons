@@ -30,6 +30,7 @@
 			<field name="inherit_id" ref="product.product_normal_form_view" />
 			<field name="arch" type="xml">
 				<xpath expr="//page[@string='Information']/group/group/field[@name='lst_price']" position="after">
+					<field name="v_tl_fiyat"></field>
 					<field name="v_guncel_fiyat"></field>
                     <field name="v_fiyat_dolar"></field>
 					<field name="v_fiyat_euro"></field>
