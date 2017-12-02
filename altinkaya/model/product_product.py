@@ -7,19 +7,19 @@ class product_template(osv.Model):
     _inherit = 'product.template'
     _name = 'product.template'
     _columns = {
-        'x_cari_urun': fields.many2one(
-            'res.partner',
-            'Carinin Urunu'
-            ),
-        'x_iscilik': fields.float(
-             'x iscilik Fiyati',
-             digits_compute=dp.get_precision('Product Price'),
-             help="Birim iscilik Fiyati"),
-        'x_min_iscilik': fields.float(
-             'x Minimum iscilik Fiyati',
-             digits_compute=dp.get_precision('Product Price'),
-             help="En Az Toplam iscilik Fiyati"),
-        'z_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu secenek seçili ise fiyatı yenidir."),
+        # 'x_cari_urun': fields.many2one(
+        #     'res.partner',
+        #     'Carinin Urunu'
+        #     ),
+        # 'x_iscilik': fields.float(
+        #      'x iscilik Fiyati',
+        #      digits_compute=dp.get_precision('Product Price'),
+        #      help="Birim iscilik Fiyati"),
+        # 'x_min_iscilik': fields.float(
+        #      'x Minimum iscilik Fiyati',
+        #      digits_compute=dp.get_precision('Product Price'),
+        #      help="En Az Toplam iscilik Fiyati"),
+        # 'z_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu secenek seçili ise fiyatı yenidir."),
     }
 product_template()
 
