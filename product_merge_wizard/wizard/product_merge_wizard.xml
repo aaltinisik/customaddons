@@ -8,7 +8,7 @@
                 <form string="Merge Products">
                     <sheet>
                         <h1>
-                        	<field name="name" placeholder="Name of product template to create..."/>
+                        	<field name="product_tmpl_id" placeholder="Select product as merge target"/>
                         </h1>
                         <group>
                         	<field name="attribute_value_ids" widget="many2many_tags" invisible="1">
@@ -52,7 +52,7 @@
 
         <menuitem action="product_merge_wizard_action"
             id="menu_product_merge_wizard"
-            parent="base.menu_product" sequence="10" />
+            parent="base.menu_product" sequence="10" groups="base.group_no_one"/>
 
     </data>
 
