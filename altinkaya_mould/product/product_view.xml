@@ -3,7 +3,7 @@
     <data>
 
 <!-- Product View -->
-
+<!--
         <record id="product_form_view_acespritech" model="ir.ui.view">
             <field name="name">product.template.form.inherit</field>
             <field name="model">product.template</field>
@@ -16,5 +16,19 @@
                 </xpath>
             </field>
         </record>
+-->
+                <record id="product_Productform_view" model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="type">form</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group[@name='general']" position="inside">
+                    <field name="mould_id"/>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </openerp>
