@@ -21,26 +21,26 @@
 from openerp.osv import osv, fields
 
 
-class product_template(osv.osv):
-    _inherit = "product.template"
-
-    def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
-        product_id = super(product_template, self).create(cr, uid, vals, context=context)
-        if vals.get('type') == 'product':
-            warehouse_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'warehouse0')[1]
-            warehouse = self.pool.get('stock.warehouse').browse(cr, uid, warehouse_id)
-            product_search_data = self.pool.get('product.product').search(cr,uid,[('product_tmpl_id','=',product_id)],context=context)
-            product_browse_data = self.pool.get('product.product').browse(cr,uid,product_search_data,context)
-            self.pool.get('stock.warehouse.orderpoint').create(cr, uid,
-                                            {'product_id': product_browse_data.id,
-                                            'product_max_qty': 0,
-                                            'product_min_qty': 0,
-                                            'qty_multiple': 1,
-                                            'location_id': warehouse.lot_stock_id.id,
-                                            'warehouse_id': warehouse_id,
-                                            'product_uom': vals.get('uom_id')})
-        return product_id
-
-product_template()
+# class product_template(osv.osv):
+#     _inherit = "product.template"
+#
+#     def create(self, cr, uid, vals, context=None):
+#         if context is None:
+#             context = {}
+#         product_id = super(product_template, self).create(cr, uid, vals, context=context)
+#         if vals.get('type') == 'product':
+#             warehouse_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'warehouse0')[1]
+#             warehouse = self.pool.get('stock.warehouse').browse(cr, uid, warehouse_id)
+#             product_search_data = self.pool.get('product.product').search(cr,uid,[('product_tmpl_id','=',product_id)],context=context)
+#             product_browse_data = self.pool.get('product.product').browse(cr,uid,product_search_data,context)
+#             self.pool.get('stock.warehouse.orderpoint').create(cr, uid,
+#                                             {'product_id': product_browse_data.id,
+#                                             'product_max_qty': 0,
+#                                             'product_min_qty': 0,
+#                                             'qty_multiple': 1,
+#                                             'location_id': warehouse.lot_stock_id.id,
+#                                             'warehouse_id': warehouse_id,
+#                                             'product_uom': vals.get('uom_id')})
+#         return product_id
+#
+# product_template()
