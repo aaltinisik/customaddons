@@ -29,7 +29,7 @@ sudo /etc/init.d/odoo-server stop
 
 /opt/odoo/odoo-server/odoo.py -d $DBNAME -i anonymization --without-demo=all --stop-after-init --config=/etc/odoo-server.conf --workers=0 --max-cron-threads=0
 
-psql -f ./anonymizesql.txt -a -d $DBNAME
+psql -f ./anonymize.sql -a -d $DBNAME
 
 python ./anonymize.py +action a +file $DBNAME_anonymize.pickle +t 8.0 +db $DBNAME
 

@@ -47,8 +47,7 @@ UPDATE ir_cron SET active=true
     ir_cron.model = 'printing.printer' or
     ir_cron.model = 'google.calendar';
 
-UPDATE faxsend_account SET username='test', password = 'dummypass'
- WHERE faxsend_account.username = 'altinkaya';
+UPDATE faxsend_account SET username='test', password = 'dummypass';
 
 TRUNCATE faxsend_queue;
 
@@ -61,21 +60,52 @@ UPDATE public.fetchmail_server
 UPDATE public.ir_mail_server
    SET smtp_user='usr', smtp_pass='pass';
 
-TRUNCATE mail_followers,mail_mail_res_partner_rel,mail_compose_message_res_partner_rel,mail_compose_message_ir_attachments_rel,email_message_send_attachment_rel,message_attachment_rel,mail_vote,mail_followers_mail_message_subtype_rel,
-mail_message,mail_compose_message,mail_mail,mail_message_res_partner_rel,mail_notification;
-
-TRUNCATE ir_attachment,email_message_send_attachment_rel,email_template_attachment_rel,faxsend_queue,mail_compose_message_ir_attachments_rel,message_attachment_rel;
-
 UPDATE public.asterisk_server
    SET login='usr', password='pass', ip_address='';
 
+
+ALTER TABLE public.product_product DROP CONSTRAINT IF EXISTS product_product_image_variant_attachment_id_fkey;
+ALTER TABLE public.product_template DROP CONSTRAINT IF EXISTS product_template_image_attachment_id_fkey;
+ALTER TABLE public.product_template DROP CONSTRAINT IF EXISTS product_template_image_medium_attachment_id_fkey;
+ALTER TABLE public.product_template DROP CONSTRAINT IF EXISTS product_template_image_small_attachment_id_fkey;
+
+
+TRUNCATE mail_followers,mail_mail_res_partner_rel,mail_compose_message_res_partner_rel,mail_compose_message_ir_attachments_rel,message_attachment_rel,mail_vote,mail_followers_mail_message_subtype_rel,
+mail_message,mail_compose_message,mail_mail,mail_message_res_partner_rel,mail_notification;
+
+TRUNCATE ir_attachment,email_template_attachment_rel,faxsend_queue,mail_compose_message_ir_attachments_rel,message_attachment_rel;
+
+
+
+UPDATE public.product_product
+   SET image_variant_attachment_id=null;
+
 UPDATE public.product_template
-   SET image=null, image_medium=null,
-       image_small=null;
+   SET image_attachment_id=null,image_medium_attachment_id=null,image_small_attachment_id=null;
 
 UPDATE public.hr_employee
    SET image=null, image_medium=null,
        image_small=null;
 
 
+ALTER TABLE public.product_product
+  ADD CONSTRAINT product_product_image_variant_attachment_id_fkey FOREIGN KEY (image_variant_attachment_id)
+      REFERENCES public.ir_attachment (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL;
 
+ALTER TABLE public.product_template
+  ADD CONSTRAINT product_template_image_attachment_id_fkey FOREIGN KEY (image_attachment_id)
+      REFERENCES public.ir_attachment (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL;
+
+ALTER TABLE public.product_template
+  ADD CONSTRAINT product_template_image_medium_attachment_id_fkey FOREIGN KEY (image_medium_attachment_id)
+      REFERENCES public.ir_attachment (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL;
+
+ALTER TABLE public.product_template
+  ADD CONSTRAINT product_template_image_small_attachment_id_fkey FOREIGN KEY (image_small_attachment_id)
+      REFERENCES public.ir_attachment (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL;
+
+TRUNCATE public.auditlog_http_request,public.auditlog_http_session,public.auditlog_log,public.auditlog_log_line;
