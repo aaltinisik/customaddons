@@ -39,7 +39,7 @@ class ProductMergeWizard(models.TransientModel):
         attribute_ids = {}
         for line in self.attribute_line_ids:
             if attribute_ids.get(line.attribute_id.id,False):
-                raise exceptions.ValidationError(_('You can not add an attribute mode than once'))
+                raise exceptions.ValidationError(_('You can not add an attribute more than once'))
             attribute_ids.update({line.attribute_id.id:True})
             
     

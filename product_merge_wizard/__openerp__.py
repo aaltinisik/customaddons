@@ -9,7 +9,9 @@
 	This module introduces a wizard to merge products in a single template.
 	""",        
     'category' : 'Tools',
-    'data': ['wizard/product_merge_wizard.xml'],
+    'data': ['security/res_groups.xml',
+             'wizard/product_merge_wizard.xml',
+             'security/ir.model.access.csv'],
     'demo': [],
     'test': [],
     'installable': True,
