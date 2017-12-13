@@ -92,6 +92,7 @@ msgstr ""
 #. module: product_merge_wizard
 #: model:ir.actions.act_window,name:product_merge_wizard.product_merge_wizard_action
 #: model:ir.ui.menu,name:product_merge_wizard.menu_product_merge_wizard
+#: model:res.groups,name:product_merge_wizard.group_productmerge
 msgid "Merge Product Variants"
 msgstr ""
 
@@ -146,6 +147,6 @@ msgstr ""
 #. module: product_merge_wizard
 #: code:addons/product_merge_wizard/wizard/product_merge_wizard.py:42
 #, python-format
-msgid "You can not add an attribute mode than once"
+msgid "You can not add an attribute more than once"
 msgstr ""
 

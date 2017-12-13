@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+		<record id="group_productmerge" model="res.groups">
+			<field name="name">Merge Product Variants</field>
+		</record>		
+	</data>	
+</openerp>
