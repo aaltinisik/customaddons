@@ -23,7 +23,7 @@ from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
 class producttemplate(models.Model):
-    _inherit = "product.template"
+    _inherit = "product.product"
 
     @api.one
     def _calculate_weight_air(self):
@@ -122,4 +122,8 @@ class producttemplate(models.Model):
     weight_air = fields.Float(
         string=_("Weight for Air Transport (gr)"),
         compute='_calculate_weight_air'
+    )
+    rack_loc = fields.Char(
+        string=_("Rack Location in Warehouse"),
+        size=16
     )

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-        <!-- TODO: put here a reminder on what to do at the first edition -->
+        <!-- TODO: put here a reminder on what to do at the first edition
         <record id="altinkaya_shipmenttree_view" model="ir.ui.view">
             <field name="name">altinkaya_shipmenttree.view</field>
-            <field name="model">product.template</field>
+            <field name="model">product.product</field>
             <field name="view_type">tree</field>
             <field name="inherit_id" ref=""/>
             <field name="arch" type="xml">
@@ -20,5 +20,6 @@
                 </tree>
             </field>
         </record>
+        -->
     </data>
 </openerp>
