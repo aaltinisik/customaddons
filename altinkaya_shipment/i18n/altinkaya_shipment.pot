@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 18:22+0000\n"
-"PO-Revision-Date: 2017-07-11 18:22+0000\n"
+"POT-Creation-Date: 2017-12-13 06:51+0000\n"
+"PO-Revision-Date: 2017-12-13 06:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,49 +16,43 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:54
-#: field:product.template,height:0
+#: code:addons/altinkaya_shipment/models/product_template.py:106
 #, python-format
 msgid "Measured Height (cm)"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:42
-#: field:product.template,length:0
+#: code:addons/altinkaya_shipment/models/product_template.py:94
 #, python-format
 msgid "Measured Length (cm)"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:36
-#: field:product.template,width:0
+#: code:addons/altinkaya_shipment/models/product_template.py:88
 #, python-format
 msgid "Measured Width (cm)"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:60
-#: field:product.template,weight_measured:0
+#: code:addons/altinkaya_shipment/models/product_template.py:112
 #, python-format
 msgid "Measured weight (gr)"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: view:product.template:altinkaya_shipment.altinkaya_shipmenttree_view
-msgid "Paket Bilgileri"
-msgstr ""
-
-#. module: altinkaya_shipment
 #: view:product.product:altinkaya_shipment.pack_size_view
-#: view:product.template:altinkaya_shipment.pack_size_view2
 msgid "Paketleme Bilgileri"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:48
-#: field:product.template,pieces_in_pack:0
+#: code:addons/altinkaya_shipment/models/product_template.py:100
 #, python-format
 msgid "Pieces in related pack"
+msgstr ""
+
+#. module: altinkaya_shipment
+#: model:ir.model,name:altinkaya_shipment.model_product_product
+msgid "Product"
 msgstr ""
 
 #. module: altinkaya_shipment
@@ -73,9 +67,27 @@ msgid "Product Template"
 msgstr ""
 
 #. module: altinkaya_shipment
-#: code:addons/altinkaya_shipment/models/product_template.py:30
-#: field:product.template,pack_product:0
+#: code:addons/altinkaya_shipment/models/product_template.py:82
 #, python-format
 msgid "Product of Package"
+msgstr ""
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:127
+#: field:product.product,rack_loc:0
+#, python-format
+msgid "Rack Location in Warehouse"
+msgstr ""
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:123
+#, python-format
+msgid "Weight for Air Transport (gr)"
+msgstr ""
+
+#. module: altinkaya_shipment
+#: code:addons/altinkaya_shipment/models/product_template.py:119
+#, python-format
+msgid "Weight for Ground Transport (gr)"
 msgstr ""
 

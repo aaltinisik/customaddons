@@ -130,12 +130,12 @@ msgstr "Ürünlerin birleştirileceği bir hedef ürün seçin"
 #. module: product_merge_wizard
 #: field:product.merge.wizard.product_line,value_ids:0
 msgid "Value ids"
-msgstr "Değer idleri"
+msgstr "Ürüne Atanacak Nitelik Değerleri"
 
 #. module: product_merge_wizard
 #: field:product.merge.wizard.attribute_line,value_ids:0
 msgid "Values"
-msgstr "Değerler"
+msgstr "Olası Nitelik Değerleri"
 
 #. module: product_merge_wizard
 #: field:product.merge.wizard.attribute_line,wizard_id:0
