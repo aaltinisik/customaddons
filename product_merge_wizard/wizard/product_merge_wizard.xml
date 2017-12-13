@@ -8,7 +8,7 @@
                 <form string="Merge Products">
                     <sheet>
                         <h1>
-                        	<field name="product_tmpl_id" domain="[('categ_id','not ilike','CNC Kesim')]" groups="base.group_system" placeholder="Select product as merge target"/>
+                        	<field name="product_tmpl_id" domain="[('categ_id','not ilike','CNC Kesim')]"  placeholder="Select product as merge target"/>
                         </h1>
                         <group>
                         	<field name="attribute_value_ids" widget="many2many_tags" invisible="1">
