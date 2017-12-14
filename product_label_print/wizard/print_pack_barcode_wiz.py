@@ -122,7 +122,7 @@ class print_pack_barcode_wiz(models.TransientModel):
         context = self.env.context
         self.generate_labels()
 
-        server_action_ids = [1143]
+        server_action_ids = [1175]
         server_action_ids = map(int, server_action_ids)
         action_server_obj = self.pool.get('ir.actions.server')
         ctx = dict(context, active_model='print.pack.barcode.wiz', active_ids=ids, active_id=ids[0])
