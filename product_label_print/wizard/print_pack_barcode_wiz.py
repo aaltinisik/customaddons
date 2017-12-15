@@ -22,7 +22,7 @@ class print_pack_barcode_wiz(models.TransientModel):
             product_id = self.env['product.product'].browse(product)
             
             product_label_id = product_label_obj.create({
-                    'name': product_id.name,
+                    'name': product_id.name_variant,
                     'default_code': product_id.default_code,
                     'short_code': product_id.default_code,
                     'note': product_id.description,

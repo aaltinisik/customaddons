@@ -53,8 +53,8 @@ class productProduct(osv.Model):
              digits_compute=dp.get_precision('Product Price'),
              help=u"En Az Toplam işçilik Fiyatı"),
         'v_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu seçenek seçili ise fiyatı yenidir."),
-        'report_display_name':fields.function(_report_name_get,
-                                      string='Report Name',
+        'name_variant':fields.function(_report_name_get,
+                                      string='Variant Name',
                                       type='char', select=1,
                                       readonly=True, store=False)
     }
