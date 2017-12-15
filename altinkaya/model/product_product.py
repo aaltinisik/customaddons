@@ -26,6 +26,15 @@ product_template()
 class productProduct(osv.Model):
     _inherit = 'product.product'
     _name = 'product.product'
+    
+    
+    def _report_name_get(self, cr, uid, ids, name, args, context=None):
+        context = context.copy()
+        context.update({'display_default_code':False})
+        result = self.name_get(cr,uid,ids,context)
+        return result
+    
+    
     _columns = {
         'v_cari_urun': fields.many2one(
             'res.partner',
@@ -44,6 +53,14 @@ class productProduct(osv.Model):
              digits_compute=dp.get_precision('Product Price'),
              help=u"En Az Toplam işçilik Fiyatı"),
         'v_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu seçenek seçili ise fiyatı yenidir."),
+        'report_display_name':fields.function(_report_name_get,
+                                      string='Report Name',
+                                      type='char', select=1,
+                                      readonly=True, store=False)
     }
+    
+    
+    
+    
 productProduct()
 
