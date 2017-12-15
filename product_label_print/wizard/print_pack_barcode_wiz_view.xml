@@ -26,7 +26,7 @@
                     </sheet>
                     <footer>
                         <button name="print_label" type="object" string="Print" class="oe_highlight"/>
-                        <button name="show_label" type="object" string="Show Label" group="base.group_system" class="oe_highlight"/>
+                        <button name="show_label" type="object" string="Show Label" groups="base.group_system" class="oe_highlight"/>
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </form>
