@@ -16,6 +16,7 @@
                                      <field name="note" />
                                      <field name="pieces_in_pack"/>
                                      <field name="label_to_print"/>
+
                                 </tree>
                             </field>
                         </group>
@@ -31,6 +32,7 @@
                 </form>
             </field>
         </record>
+
 
         <act_window
            id="action_print_pack_barcode_wiz"

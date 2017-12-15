@@ -20,7 +20,7 @@ class labelTwoinrow(models.TransientModel):
     _name = "label.twoinrow"
     first_label_empty = fields.Boolean("Skip first label in row")
     second_label_empty = fields.Boolean("Skip second label in row")
-    label1 = fields.Many2one('product.product.label', string="Label")
+    label1 = fields.Many2one('product.product.label', string="Label 1")
     label2 = fields.Many2one('product.product.label', string="Label 2")
     copies_to_print = fields.Integer(string='# of label to be printed', default=1)
 
