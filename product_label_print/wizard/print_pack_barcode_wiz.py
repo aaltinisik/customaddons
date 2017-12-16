@@ -20,9 +20,16 @@ class print_pack_barcode_wiz(models.TransientModel):
         product_ids = []
         for product in self.env.context.get('active_ids'):
             product_id = self.env['product.product'].browse(product)
+            codeparts = product_id.default_code.split('-')
 
-            if len(product_id.default_code.split('-')) > 4:
-                shortcode = ('-'.join(product_id.default_code.split('-')[0:4]))
+            if len(codeparts) > 4:
+                if codeparts[3]=='0':
+                    if codeparts[2]=='0':
+                        shortcode = ('-'.join(codeparts[0:2]))
+                    else:
+                        shortcode = ('-'.join(codeparts[0:3]))
+                else:
+                    shortcode = ('-'.join(codeparts[0:4]))
             else:
                 shortcode = product_id.default_code
 
