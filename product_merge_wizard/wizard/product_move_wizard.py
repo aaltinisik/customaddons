@@ -39,8 +39,10 @@ class ProductMoveWizard(models.TransientModel):
     @api.onchange('product_tmpl_id','value_ids')
     def onchange_value_ids(self):
         existing_attribute_ids = self.value_ids.mapped('attribute_id.id')
-        return {'domain':
-                    {'value_ids':[('id','in', self.product_tmpl_id.attribute_line_ids.mapped('value_ids.id')),
+        product_tmpl_attr_ids = self.product_tmpl_id.attribute_line_ids.mapped('attribute_id.id')
+        existing_product_attribute_value_ids = self.product_id.attribute_value_ids.filtered(lambda self: self.attribute_id.id in product_tmpl_attr_ids)
+        self.value_ids = [(6, False, existing_product_attribute_value_ids.ids)]
+        return {'domain':{'value_ids':[('id','in', self.product_tmpl_id.attribute_line_ids.mapped('value_ids.id')),
                                   ('attribute_id','not in',existing_attribute_ids)]}
                 }
             
