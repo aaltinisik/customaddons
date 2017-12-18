@@ -11,6 +11,7 @@
     'category' : 'Tools',
     'data': ['security/res_groups.xml',
              'wizard/product_merge_wizard.xml',
+             'wizard/product_move_wizard.xml',
              'security/ir.model.access.csv'],
     'demo': [],
     'test': [],
