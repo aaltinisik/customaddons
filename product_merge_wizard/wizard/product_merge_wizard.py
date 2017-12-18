@@ -24,7 +24,14 @@ class ProductMergeWizard(models.TransientModel):
     attribute_line_ids = fields.One2many('product.merge.wizard.attribute_line','wizard_id',string='Attributes')
     product_line_ids = fields.One2many('product.merge.wizard.product_line','wizard_id',string='Products')
     attribute_value_ids = fields.Many2many('product.attribute.value','Attribute Value IDs',compute='_compute_attribute_ids')
-        
+      
+    @api.onchange('product_tmpl_id')
+    def onchange_product_tmpl_id(self):
+        self.attribute_line_ids = False
+        if self.product_tmpl_id.id:
+            self.attribute_line_ids = [(0, False, {'attribute_id':al.attribute_id.id,
+                                               'value_ids':[(6, False, al.value_ids.ids)]}) 
+                                   for al in self.product_tmpl_id.attribute_line_ids]
        
     @api.one
     @api.depends('attribute_line_ids.value_ids')
@@ -203,7 +210,6 @@ class ProductMergeWizard(models.TransientModel):
 
     @api.multi
     def _update_values(self, product_tmpl_id, new_product_tmpl_id):
-        
         columns = new_product_tmpl_id._columns
         def write_serializer(item):
             if isinstance(item, browse_record):
@@ -238,4 +244,10 @@ class ProductMergeProductLine(models.TransientModel):
     product_id = fields.Many2one('product.product',string='Product')
     value_ids = fields.Many2many('product.attribute.value',relation='product_merge_product_att_val_rel')
     
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        self.value_ids=False
+        attribute_ids = self.wizard_id.attribute_line_ids.mapped('attribute_id')
+        self.value_ids = [(6, False, self.product_id.attribute_value_ids.filtered(lambda av: av in attribute_ids))]
+
     
