@@ -1,1 +1,2 @@
 import product_merge_wizard
+import product_move_wizard
