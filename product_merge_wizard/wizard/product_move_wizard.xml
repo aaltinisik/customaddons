@@ -26,7 +26,7 @@
         </record>
 
         <act_window name="Move to Other Template" res_model="product.move.wizard"
-            src_model="product.product" view_mode="form" target="new"
+            src_model="product.product" view_mode="form" target="new" groups="product_merge_wizard.group_productvariant_change"
             multi="False" key2="client_action_relate" id="product_move_wizard_action" />
 
     </data>
