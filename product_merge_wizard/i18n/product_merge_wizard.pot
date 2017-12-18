@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 19:24+0000\n"
-"PO-Revision-Date: 2017-12-10 19:24+0000\n"
+"POT-Creation-Date: 2017-12-18 20:05+0000\n"
+"PO-Revision-Date: 2017-12-18 20:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_merge_wizard
+#: model:res.groups,name:product_merge_wizard.group_productvariant_change
+msgid "Alter Product Variant Attributes"
+msgstr ""
+
+#. module: product_merge_wizard
 #: field:product.merge.wizard.attribute_line,attribute_id:0
 msgid "Attribute"
+msgstr ""
+
+#. module: product_merge_wizard
+#: field:product.move.wizard,value_ids:0
+msgid "Attribute Value IDs"
 msgstr ""
 
 #. module: product_merge_wizard
@@ -32,6 +42,7 @@ msgstr ""
 
 #. module: product_merge_wizard
 #: view:product.merge.wizard:product_merge_wizard.view_product_merge_wizard_form
+#: view:product.move.wizard:product_merge_wizard.view_product_move_wizard_form
 msgid "Cancel"
 msgstr ""
 
@@ -39,6 +50,7 @@ msgstr ""
 #: field:product.merge.wizard,create_uid:0
 #: field:product.merge.wizard.attribute_line,create_uid:0
 #: field:product.merge.wizard.product_line,create_uid:0
+#: field:product.move.wizard,create_uid:0
 msgid "Created by"
 msgstr ""
 
@@ -46,6 +58,7 @@ msgstr ""
 #: field:product.merge.wizard,create_date:0
 #: field:product.merge.wizard.attribute_line,create_date:0
 #: field:product.merge.wizard.product_line,create_date:0
+#: field:product.move.wizard,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -53,6 +66,7 @@ msgstr ""
 #: field:product.merge.wizard,display_name:0
 #: field:product.merge.wizard.attribute_line,display_name:0
 #: field:product.merge.wizard.product_line,display_name:0
+#: field:product.move.wizard,display_name:0
 msgid "Display Name"
 msgstr ""
 
@@ -60,6 +74,7 @@ msgstr ""
 #: field:product.merge.wizard,id:0
 #: field:product.merge.wizard.attribute_line,id:0
 #: field:product.merge.wizard.product_line,id:0
+#: field:product.move.wizard,id:0
 msgid "ID"
 msgstr ""
 
@@ -67,6 +82,7 @@ msgstr ""
 #: field:product.merge.wizard,__last_update:0
 #: field:product.merge.wizard.attribute_line,__last_update:0
 #: field:product.merge.wizard.product_line,__last_update:0
+#: field:product.move.wizard,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
@@ -74,6 +90,7 @@ msgstr ""
 #: field:product.merge.wizard,write_uid:0
 #: field:product.merge.wizard.attribute_line,write_uid:0
 #: field:product.merge.wizard.product_line,write_uid:0
+#: field:product.move.wizard,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
@@ -81,6 +98,7 @@ msgstr ""
 #: field:product.merge.wizard,write_date:0
 #: field:product.merge.wizard.attribute_line,write_date:0
 #: field:product.merge.wizard.product_line,write_date:0
+#: field:product.move.wizard,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
@@ -102,13 +120,30 @@ msgid "Merge Products"
 msgstr ""
 
 #. module: product_merge_wizard
+#: view:product.move.wizard:product_merge_wizard.view_product_move_wizard_form
+msgid "Move"
+msgstr ""
+
+#. module: product_merge_wizard
+#: view:product.move.wizard:product_merge_wizard.view_product_move_wizard_form
+msgid "Move Product"
+msgstr ""
+
+#. module: product_merge_wizard
+#: model:ir.actions.act_window,name:product_merge_wizard.product_move_wizard_action
+msgid "Move to Other Template"
+msgstr ""
+
+#. module: product_merge_wizard
 #: field:product.merge.wizard,product_tmpl_id:0
+#: field:product.move.wizard,product_tmpl_id:0
 msgid "New Product Name"
 msgstr ""
 
 #. module: product_merge_wizard
-#: code:addons/product_merge_wizard/wizard/product_merge_wizard.py:69
+#: code:addons/product_merge_wizard/wizard/product_merge_wizard.py:76
 #: field:product.merge.wizard.product_line,product_id:0
+#: field:product.move.wizard,product_id:0
 #, python-format
 msgid "Product"
 msgstr ""
@@ -145,7 +180,13 @@ msgid "Wizard"
 msgstr ""
 
 #. module: product_merge_wizard
-#: code:addons/product_merge_wizard/wizard/product_merge_wizard.py:42
+#: code:addons/product_merge_wizard/wizard/product_move_wizard.py:32
+#, python-format
+msgid "Wrong context propagation"
+msgstr ""
+
+#. module: product_merge_wizard
+#: code:addons/product_merge_wizard/wizard/product_merge_wizard.py:49
 #, python-format
 msgid "You can not add an attribute more than once"
 msgstr ""
