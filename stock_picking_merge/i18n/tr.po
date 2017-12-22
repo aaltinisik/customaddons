@@ -1,0 +1,116 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_picking_merge
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-22 08:10+0000\n"
+"PO-Revision-Date: 2017-12-22 08:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "Automatic Picking Merge"
+msgstr "Sevkleri Birleştir"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,create_date:0
+msgid "Created on"
+msgstr "Oluşturuldu"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,destination_picking_id:0
+msgid "Destination Picking"
+msgstr "Hedef Sevk"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,display_name:0
+msgid "Display Name"
+msgstr "İsim"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,__last_update:0
+msgid "Last Modified on"
+msgstr "Son Güncelleme"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,write_uid:0
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,write_date:0
+msgid "Last Updated on"
+msgstr "Son Güncelleme"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "Merge Picking"
+msgstr "Sevkleri Birleştir"
+
+#. module: stock_picking_merge
+#: model:ir.model,name:stock_picking_merge.model_stock_picking_merge
+msgid "Merge Pickings"
+msgstr "Sevkleri Birleştir"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "Merge the following pickings"
+msgstr "Bu sevkleri birleştir"
+
+#. module: stock_picking_merge
+#: field:stock.picking,merge_picking_ids:0
+msgid "Merged Pickings"
+msgstr "Birleştirme Sonucu"
+
+#. module: stock_picking_merge
+#: model:ir.model,name:stock_picking_merge.model_stock_picking
+msgid "Picking List"
+msgstr "Sevk Listesi"
+
+#. module: stock_picking_merge
+#: model:ir.actions.act_window,name:stock_picking_merge.action_stock_picking_merge_wiz
+msgid "Picking Merge"
+msgstr "Sevkleri Birleştir"
+
+#. module: stock_picking_merge
+#: field:stock.picking,total_merged_pickings:0
+msgid "Pickings"
+msgstr "Sevkler"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "Please note that destination picking and picking list, picking type, partner, invoice control, source location, destination location are must be same for merging."
+msgstr "Lütfen Dikkat, Sevklerin birleştirilmesi için, Birşeltirilecek sevkler ile hedef sevkin, Faturalama yöntemi, Tipi, İş Ortağı, Kaynak ve hedef konumları aynı olmalı. Aksi durumda bu kayıtlar atlanacaktır. Atlanan kayıtlara sonuç ekranında görebilirsiniz."
+
+#. module: stock_picking_merge
+#: field:stock.picking.merge,source_picking_ids:0
+msgid "Source Picklings"
+msgstr "Birleştirilecek Sevkler"
+
+#. module: stock_picking_merge
+#: view:stock.picking.merge:stock_picking_merge.view_stock_picking_merge_form
+msgid "or"
+msgstr "ya da"

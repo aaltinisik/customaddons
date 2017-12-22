@@ -6,7 +6,7 @@
     'website': 'https://www.odoo.com',
     'category': 'Stock',
     'summary': 'Stock Picking Merge',
-    'author': 'Kiran Kantesariya',
+    'author': 'Kiran Kantesariya, Ahmet Altinisik',
     'description': """
      """,
     'depends': [
@@ -14,7 +14,6 @@
     ],
     'data': [
         'wizard/picking_merge_wiz_view.xml',
-        'views/stock_view.xml'
     ],
     'installable' : True,
     'auto_install' : False,
