@@ -40,6 +40,7 @@
            target="new"
            key2="client_action_multi"
            view_mode="form"
+           groups="group_pickingmerge"
            res_model="stock.picking.merge"
            src_model="stock.picking"/>
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-22 08:10+0000\n"
-"PO-Revision-Date: 2017-12-22 08:10+0000\n"
+"POT-Creation-Date: 2017-12-22 09:06+0000\n"
+"PO-Revision-Date: 2017-12-22 09:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -73,6 +73,11 @@ msgstr ""
 #. module: stock_picking_merge
 #: model:ir.model,name:stock_picking_merge.model_stock_picking_merge
 msgid "Merge Pickings"
+msgstr ""
+
+#. module: stock_picking_merge
+#: model:res.groups,name:stock_picking_merge.group_pickingmerge
+msgid "Merge Stock Pickings"
 msgstr ""
 
 #. module: stock_picking_merge

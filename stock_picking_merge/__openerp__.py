@@ -13,7 +13,9 @@
         'stock_account', 'document'
     ],
     'data': [
+        'security/res_groups.xml',
         'wizard/picking_merge_wiz_view.xml',
+        'security/ir.model.access.csv'
     ],
     'installable' : True,
     'auto_install' : False,
