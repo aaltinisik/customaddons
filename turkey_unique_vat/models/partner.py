@@ -6,7 +6,7 @@ class res_partner(osv.osv):
 
     def check_vat(self, cr, uid, ids, context=None):
         for partner in self.browse(cr, uid, ids, context=context):
-            if partner.sanitized_vat == '11111111111':
+            if partner.sanitized_vat == '11111111111' or partner.sanitized_vat == '2222222222' :
                 continue
             if not partner.vat:
                 continue
