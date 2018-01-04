@@ -27,3 +27,11 @@ class product_category(orm.Model):
     _columns = {
         'hscode_id': fields.many2one('hscode', 'Gümrük Tarifesi'),
     }
+
+
+class productTemplate(orm.Model):
+    _inherit = 'product.template'
+
+    _columns = {
+        'hscode_id': fields.many2one('hscode', 'Gümrük Tarifesi'),
+    }

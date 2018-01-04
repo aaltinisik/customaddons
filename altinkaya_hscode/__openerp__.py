@@ -6,7 +6,9 @@
     'category': 'General',
     'depends' : [
         'product',
-     ],
+        'account',
+
+    ],
     'author' : 'Ahmet Altınışık',
     'description': """Add hscode for related product categories""",
     'website': 'http://www.altinkaya.eu',
