@@ -46,7 +46,7 @@
             <field name="name">stock.picking.inherit_altinkaya409.view</field>
             <field name="model">stock.picking</field>
                     <field eval="17" name="priority" />
-            <field name="view_type">form</field>
+            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
               <field name="priority" position="replace"/>
@@ -56,7 +56,7 @@
             <field name="name">stock.picking.inherit_altinkaya971.view</field>
             <field name="model">stock.picking</field>
             <field eval="17" name="priority" />
-            <field name="view_type">form</field>
+            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
               <field name="date_done" position="replace"/>
@@ -66,7 +66,7 @@
             <field name="name">stock.picking.inherit_altinkaya276.view</field>
             <field name="model">stock.picking</field>
             <field eval="17" name="priority" />
-            <field name="view_type">form</field>
+            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
               <field name="carrier_id" position="replace"/>
@@ -76,7 +76,7 @@
             <field name="name">stock.picking.inherit_altinkaya354.view</field>
             <field name="model">stock.picking</field>
             <field eval="17" name="priority" />
-            <field name="view_type">form</field>
+            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
               <field name="invoice_state" position="replace"/>
@@ -87,7 +87,7 @@
             <field name="name">stock.picking.inherit_altinkaya771.view</field>
             <field name="model">stock.picking</field>
             <field eval="18" name="priority" />
-            <field name="view_type">form</field>
+            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
               <field name="date" position="replace">

@@ -101,6 +101,7 @@ ln -s -f $OCA_HOME/odoomrp-utils/product_stock_info $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-utils/product_variant_default_code $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-utils/purchase_stock_quant_shortcut $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-utils/stock_quants_shortcuts $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoomrp-utils/stock_incoterm_extension $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/product_variants_no_automatic_creation $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/product_variants_types $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/sale_product_variants $OE_HOME/custom/addons/
@@ -179,6 +180,7 @@ ln -s -f $OCA_HOME/sale-workflow/sale_partner_incoterm $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/sale-workflow/sale_payment_method $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/sale-workflow/sale_quick_payment $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/sale-workflow/sale_validity $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/sale-workflow/sale_partner_incoterm $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/save_translation_file $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/secure_uninstall $OE_HOME/custom/addons/
