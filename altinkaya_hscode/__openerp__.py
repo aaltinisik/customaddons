@@ -7,6 +7,8 @@
     'depends' : [
         'product',
         'account',
+        'sale',
+        'sale_stock',
 
     ],
     'author' : 'Ahmet Altınışık',
