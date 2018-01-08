@@ -26,6 +26,8 @@ class stock_picking(osv.osv):
         res = super(stock_picking, self)._prepare_shipping_invoice_line(cr, uid, picking, invoice, context=context)
         if picking.carrier_id:
             invoice.carrier_id = picking.carrier_id
+        if res['name'].__contains__('Teslim'):
+            invoice.address_contact_id = ''
         if res and res.get('price_unit',0.0) <= 0.0:
             return None
         return res
