@@ -20,6 +20,7 @@ class stock_picking(osv.osv):
                                      ("Muharrem", "Muharrem"),
                                      ("Sefer","Sefer")],
                                      u'Siparişi Hazırlayan', select=True),
+                'comment_irsaliye': fields.text(u'İrsaliye Notu')
                 }
     
     def _prepare_shipping_invoice_line(self, cr, uid, picking, invoice, context=None):
