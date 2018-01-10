@@ -33,9 +33,10 @@ AC,400,105,1,1,0,0,${label.label2.nameL1[0:30] or ''}
 AC,400,133,1,1,0,0,${label.label2.nameL2[0:30] or ''}
 AC,400,159,1,1,0,0,${label.label2.nameL3[0:30] or ''}
 AC,400,184,1,1,0,0,
-AC,400,209,1,1,0,0,${label.label2.barcode or ''}
-BE,440,299,3,6,75,0,1,123456789012
+AC,400,209,1,1,0,0,${label.label1.note or ''}
+BE,440,299,3,6,75,0,1,${label.label2.barcode or ''}
 AT,415,228,82,70,0,0,0,0,${formatLang(label.label2.pieces_in_pack, digits=0)  or ''} ${label.label2.uom_name or ''}
 {% end %}
 ^P${label.copies_to_print}
+E
 {% end %}
