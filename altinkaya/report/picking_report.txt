@@ -1,0 +1,55 @@
+
+
+
+
+
+
+
+
+ ${setLang('tr_TR')}
+ ${o.partner_id.display_name }
+ ${o.partner_id.neighbour_id.name or '' }${o.partner_id.street or '' }
+ ${o.partner_id.street2 or '' } ${o.partner_id.region_id.name or '' }
+ ${o.partner_id.zip or '' } ${o.partner_id.city or '' } ${o.partner_id.district_id.name or '' } / ${o.partner_id.state_id.name or '' }${(110-(len(o.partner_id.zip or "")+len(o.partner_id.city or "")+len(o.partner_id.district_id.name or "")+len(o.partner_id.state_id.name or "")))*' '}${formatLang(o.date_done, date=True)}
+ Tel: ${o.partner_id.phone or '' }
+                                                                                                                    ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                    ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+
+
+
+
+                                                                                    Müşteri Referans No:${o.name or '' }                          {%if len(o.move_lines.ids) > 24 %}Sayfa 1/${((int(len(o.move_lines.ids))/-24)*-1)}{% end %}
+
+
+{% for orderitem in o.move_lines %} {%if (((o.move_lines.ids.index(orderitem.id)%23)==1) and (o.move_lines.ids.index(orderitem.id)!=1)) %}
+
+                                                               Sayfa ${((int(o.move_lines.ids.index(orderitem.id)-1)/-24)*-1)}/${((int(len(o.move_lines.ids))/-24)*-1)}
+ 
+
+
+
+
+
+
+
+ ${setLang('tr_TR')}
+ ${o.partner_id.display_name }
+ ${o.partner_id.neighbour_id.name or '' }${o.partner_id.street or '' }
+ ${o.partner_id.street2 or '' } ${o.partner_id.region_id.name or '' }
+ ${o.partner_id.zip or '' } ${o.partner_id.city or '' } ${o.partner_id.district_id.name or '' } / ${o.partner_id.state_id.name or '' }${(110-(len(o.partner_id.zip or "")+len(o.partner_id.city or "")+len(o.partner_id.district_id.name or "")+len(o.partner_id.state_id.name or "")))*' '}${formatLang(o.date_done, date=True)}
+ Tel: ${o.partner_id.phone or '' }
+                                                                                                                    ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                    ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+
+
+
+
+                                                                                   Müşteri Referans No:${o.name or '' }
+
+
+
+                     Sayfa ${(((int(o.move_lines.ids.index(orderitem.id))-1)/-24)*-1)}'den Devam {%end%}
+ ${orderitem.product_id.display_name[:80].ljust(80) }           ${str(orderitem.product_uom_qty).rjust(15) or '' }  ${orderitem.product_uom.name.ljust(15) or '' }{% end %}
+                                                                                                   ------------Liste Sonu----------------
