@@ -6,7 +6,7 @@
 
 
 
- ${setLang('tr_TR')}                {% if o.carrier_id %}Nakliye Yöntemi:${o.carrier_id.name  or '' }{% end %}
+ ${setLang('tr_TR')}                {% if o.carrier_id %}Sevk Yöntemi:${o.carrier_id.name  or '' }{% end %}
  ${o.partner_id.display_name }
  ${o.partner_id.neighbour_id.name or '' }${o.partner_id.street or '' }
  ${o.partner_id.street2 or '' } ${o.partner_id.region_id.name or '' }
@@ -16,10 +16,10 @@
 
                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
 
+                                                                                                                    ${o.partner_id.commercial_partner_id.vat or '' }
+       {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}
 
-
-
-      {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}                     {%if len(o.move_lines.ids) > 24 %}Sayfa 1/${((int(len(o.move_lines.ids))/-24)*-1)}{% end %}
+                           {%if len(o.move_lines.ids) > 24 %}Sayfa 1/${((int(len(o.move_lines.ids))/-24)*-1)}{% end %}
 
      [KODU]        MALZEME AÇIKLAMASI                                                        MİKTAR     SİPARİŞ NO
 {% for orderitem in o.move_lines %} {%if (((o.move_lines.ids.index(orderitem.id)%23)==1) and (o.move_lines.ids.index(orderitem.id)!=1)) %}
@@ -33,7 +33,7 @@
 
 
 
- ${setLang('tr_TR')}                {% if o.carrier_id %}Nakliye Yöntemi:${o.carrier_id.name  or '' }{% end %}
+ ${setLang('tr_TR')}                {% if o.carrier_id %}Sevk Yöntemi:${o.carrier_id.name  or '' }{% end %}
  ${o.partner_id.display_name }
  ${o.partner_id.neighbour_id.name or '' }${o.partner_id.street or '' }
  ${o.partner_id.street2 or '' } ${o.partner_id.region_id.name or '' }
@@ -43,10 +43,10 @@
 
                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
 
+                                                                                                                    ${o.partner_id.commercial_partner_id.vat or '' }
+      {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}
 
-
-
-      {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}     Sayfa ${(((int(o.move_lines.ids.index(orderitem.id))-1)/-24)*-1)+1}
+           Sayfa ${(((int(o.move_lines.ids.index(orderitem.id))-1)/-24)*-1)+1}
 
      [KODU]        MALZEME AÇIKLAMASI                                                        MİKTAR     SİPARİŞ NO
 
