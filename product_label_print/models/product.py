@@ -9,6 +9,7 @@ class productproductLabel(models.TransientModel):
     nameL1 = fields.Char(string="NameL1",size=30)
     nameL2 = fields.Char(string="NameL2", size=30)
     nameL3 = fields.Char(string="NameL3", size=30)
+    nameL4 = fields.Char(string="NameL4", size=30)
     default_code = fields.Char(string="Default_code",size=40)
     short_code = fields.Char(string="Short Code",size=20)
     note = fields.Char(string="Note",size=40)

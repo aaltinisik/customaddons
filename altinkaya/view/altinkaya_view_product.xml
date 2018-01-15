@@ -36,6 +36,7 @@
 					<field name="v_fiyat_euro"></field>
 					<field name="v_iscilik_fiyat"></field>
 					<field name="v_min_iscilik_fiy"></field>
+					<field name="terazi_kodu"></field>
 					<field name="v_cari_urun"></field>
 				</xpath>
 			</field>
