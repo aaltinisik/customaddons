@@ -21,7 +21,7 @@ AC,5,133,1,1,0,0,${label.label1.nameL2[0:30] or ''}
 AC,5,159,1,1,0,0,${label.label1.nameL3[0:30] or ''}
 AC,5,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
 AC,5,209,1,1,0,0,${label.label1.note or ''}{% if label.label1.pieces_in_pack > 0.0 %}
-AT, 20, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(5) or ''} ${label.label1.uom_name or ''}{% end %}
+AT, 20, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label1.uom_name or ''}{% end %}
 BE,15,299,3,6,75,0,1,${label.label1.barcode or ''}
 {% end %}
 {% if not label.second_label_empty %}
@@ -34,7 +34,7 @@ AC,400,133,1,1,0,0,${label.label2.nameL2[0:30] or ''}
 AC,400,159,1,1,0,0,${label.label2.nameL3[0:30] or ''}
 AC,400,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
 AC,400,209,1,1,0,0,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
-AT, 415, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(5) or ''} ${label.label2.uom_name or ''}{% end %}
+AT, 415, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
 BE,440,299,3,6,75,0,1,${label.label2.barcode or ''}
 {% end %}
 ^P${label.copies_to_print}
