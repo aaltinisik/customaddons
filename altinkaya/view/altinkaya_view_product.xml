@@ -1,29 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <openerp>
 	<data>
-<!--
-		<record id="product_template_altinkaya_form_fiyatlar" model="ir.ui.view">
-			<field name="name">product.template.altinkaya_form_fiyatlar</field>
-			<field name="model">product.template</field>
-			<field name="inherit_id" ref="product.product_template_only_form_view" />
-			<field name="arch" type="xml">
 
-				<xpath expr="//page[@string='Information']/group/group/field[@name='list_price']" position="after">
-					<field name="z_guncel_fiyat"></field>
-                    <field name="x_fiyat_dolar"></field>
-					<field name="x_fiyat_euro"></field>
-					<field name="x_iscilik"></field>
-					<field name="x_min_iscilik"></field>
-					<field name="x_cari_urun"></field>
-				</xpath>
-
-                <field name="categ_id" position="replace"/>
-				<field name="sale_ok" position="before">
-					<field name="categ_id"/>
-				</field>
-			</field>
-		</record>
--->
 				<record id="product_product_altinkaya_form_fiyatlar" model="ir.ui.view">
 			<field name="name">product.product.altinkaya_form_fiyatlar</field>
 			<field name="model">product.product</field>
@@ -42,22 +20,6 @@
 			</field>
 		</record>
 
-<!--
-		<record id="product_template_altinkaya_tree_cari" model="ir.ui.view">
-			<field name="name">product.template.altinkaya_tree_cari</field>
-			<field name="model">product.template</field>
-			<field name="inherit_id" ref="product.product_template_tree_view" />
-			<field name="arch" type="xml">
 
-				<field name="name" position="replace">
-					<field name="default_code"></field>
-					<field name="name"></field>
-					<field name="x_cari_urun"></field>
-
-				</field>
-
-			</field>
-		</record>
--->
 	</data>
 </openerp>
