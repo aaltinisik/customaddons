@@ -1,4 +1,4 @@
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
 class res_partner(osv.osv):
@@ -33,3 +33,14 @@ class res_partner(osv.osv):
             return '\n' + _('The VAT number [%s] for partner [%s] does not seem to be valid. ') % (partner.vat, partner.display_name)
 
     _constraints = [(check_vat, _construct_constraint_msg, ["vat"])]
+
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if 'vat' in vals:
+            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+        return super(res_partner, self).write(cr, uid, ids, vals, context=context)
+
+    def create(self, cr, uid, ids, vals, context=None):
+        if 'vat' in vals:
+            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+        return super(res_partner, self).create(cr, uid, ids, vals, context=context)
