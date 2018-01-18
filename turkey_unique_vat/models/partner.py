@@ -40,7 +40,7 @@ class res_partner(osv.osv):
             vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
         return super(res_partner, self).write(cr, uid, ids, vals, context=context)
 
-    def create(self, cr, uid, ids, vals, context=None):
-        if 'vat' in vals:
-            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
-        return super(res_partner, self).create(cr, uid, ids, vals, context=context)
+#    def create(self, cr, uid, ids, vals, context=None):
+#        if 'vat' in vals:
+#            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+#        return super(res_partner, self).create(cr, uid, ids, vals, context=context)
