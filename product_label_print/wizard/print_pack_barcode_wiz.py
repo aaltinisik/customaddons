@@ -40,7 +40,7 @@ class print_pack_barcode_wiz(models.TransientModel):
                      4:''}
 
             for word in product_id.name_variant.split():
-                if len(nameL[nameline]+' '+word) < 31:
+                if len(nameL[nameline]+' '+word) < 27:
                     nameL[nameline]=(nameL[nameline]+' '+word).strip()
                 else:
                     nameline = nameline +1
