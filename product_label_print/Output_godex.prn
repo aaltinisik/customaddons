@@ -25,15 +25,15 @@ AT, 20, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label1.pieces_in_pack, digit
 BE,15,299,3,6,75,0,1,${label.label1.barcode or ''}
 {% end %}
 {% if not label.second_label_empty %}
-Y410,12,tek_cicek
-Lo,410,64,792,66
-AT,474,0,61,65,0,0,0,0,${label.label2.short_code[0:12]}
-AE,405,63,1,1,0,0,[${label.label2.default_code}]
-AC,405,105,1,1,0,0,${label.label2.nameL1[0:30] or ''}
-AC,405,133,1,1,0,0,${label.label2.nameL2[0:30] or ''}
-AC,405,159,1,1,0,0,${label.label2.nameL3[0:30] or ''}
-AC,405,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
-AC,405,209,1,1,0,0,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
+Y415,12,tek_cicek
+Lo,415,64,792,66
+AT,479,0,61,65,0,0,0,0,${label.label2.short_code[0:12]}
+AE,410,63,1,1,0,0,[${label.label2.default_code}]
+AC,410,105,1,1,0,0,${label.label2.nameL1[0:30] or ''}
+AC,410,133,1,1,0,0,${label.label2.nameL2[0:30] or ''}
+AC,410,159,1,1,0,0,${label.label2.nameL3[0:30] or ''}
+AC,410,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
+AC,410,209,1,1,0,0,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
 AT, 415, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
 BE,440,299,3,6,75,0,1,${label.label2.barcode or ''}
 {% end %}
