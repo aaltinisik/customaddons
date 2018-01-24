@@ -91,7 +91,7 @@
         <td><para style="terp_default_8">[[ o.vat ]]</para></td></tr>
     </blockTable>
     <!--<blockTable colWidths="20.00,80.00,50.00,50.00,100.00,60.00,60.00,60.00,10.00" style="Table111">-->
-    <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">
+    <blockTable colWidths="7mm,31mm,18mm,18mm,48mm,19mm,19mm,20mm,4mm" style="Table111">
       <tr>
         <td><para style="terp_default_8"><b>NO</b></para></td>
         <td><para style="terp_default_8"><b>Number</b></para></td>
@@ -104,7 +104,7 @@
         <td><para style="terp_default_8"></para></td>
       </tr>
     </blockTable>
-   <section><para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt') ]]</para><blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table111">
+   <section><para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt') ]]</para><blockTable colWidths="7mm,31mm,18mm,18mm,48mm,19mm,19mm,20mm,4mm" style="Table111">
       <tr><td><para style="terp_default_8_right_align">[[ partner_stmt['seq'] ]]</para></td>
         <td><para style="terp_default_8">[[ partner_stmt['number'] ]]</para></td>
         <td><para style="terp_default_8">[[ partner_stmt['date'] ]]</para></td>
@@ -118,7 +118,7 @@
     </section>
     <section><para style="terp_default_8_center_align">[[ repeatIn(get_statement_data(o),'partner_stmt1') ]]</para></section>
 <!--    <blockTable colWidths="20.00,80.00,50.00,50.00,100.00,60.00,60.00,60.00,10.00" style="Table_Partner_Address">-->
-    <blockTable colWidths="7mm,28mm,18mm,18mm,48mm,20mm,20mm,20mm,5mm" style="Table_Partner_Address"><tr>
+    <blockTable colWidths="7mm,31mm,18mm,18mm,48mm,19mm,19mm,20mm,4mm" style="Table_Partner_Address"><tr>
         <td><para style="terp_default_8_right_align"></para></td>
         <td><para style="terp_default_8"></para></td>
         <td><para style="terp_default_8"></para></td>
