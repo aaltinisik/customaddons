@@ -63,7 +63,10 @@ class addres_neighbour(models.Model):
         if context is None:
             context = {}
         if name:
-            args += [('name', operator, name)]
+            if name.isdigit():
+                args += [('code', operator, name)]
+            else:
+                args += [('name', operator, name)]
         if context.get('region_id'):
             args += [('region_id', '=', context.get('region_id'))]
         if context.get('state_id'):
