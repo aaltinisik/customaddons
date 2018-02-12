@@ -33,28 +33,29 @@ class print_pack_barcode_wiz(models.TransientModel):
             else:
                 shortcode = product_id.default_code
 
-            nameL1=u''
-            nameL2=u''
-            nameL3=u''
-            counter=0
+            nameline = 1
+            nameL = {1:'',
+                     2:'',
+                     3:'',
+                     4:''}
+
             for word in product_id.name_variant.split():
-                counter = counter + 1 + len(word)
-                if counter < 28:
-                    nameL1=(nameL1+' '+word).strip()
-                elif counter < 57:
-                    nameL2=(nameL2+' '+word).strip()
-                elif counter < 84:
-                    nameL3=(nameL3+' '+word).strip()
+                if len(nameL[nameline]+' '+word) < 27:
+                    nameL[nameline]=(nameL[nameline]+' '+word).strip()
+                else:
+                    nameline = nameline +1
+                    nameL[nameline] = (nameL[nameline] + ' ' + word).strip()
 
 
             product_label_id = product_label_obj.create({
                     'name': product_id.name_variant,
-                    'nameL1': nameL1,
-                    'nameL2': nameL2,
-                    'nameL3': nameL3,
-                    'default_code': product_id.default_code,
+                    'nameL1': nameL[1],
+                    'nameL2': nameL[2],
+                    'nameL3': nameL[3],
+                    'nameL4': nameL[4],
+                'default_code': product_id.default_code,
                     'short_code': shortcode,
-                    'note': product_id.description,
+                    'note': '',
                     'pieces_in_pack': product_id.pieces_in_pack,
                     'label_to_print': 1,
                     'barcode': product_id.ean13,
