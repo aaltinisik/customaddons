@@ -1,5 +1,18 @@
+# -*- coding: utf-8 -*-
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
+import re
+
+def clean_vals(vals):
+    if 'vat' in vals:
+        vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+    
+    if 'email' in vals:
+        s = unicode(vals['email']).lower()
+        s = re.sub(u'[ğ]','g',re.sub(u'[ç]','c',re.sub(u'[ş]','s',re.sub(u'[ı]','i',re.sub(u'[ü]','u',re.sub(u'[ö]','o',s))))))
+        vals['email'] = s 
+    
+    return vals
 
 class res_partner(osv.osv):
     _inherit = 'res.partner'
@@ -35,12 +48,12 @@ class res_partner(osv.osv):
     _constraints = [(check_vat, _construct_constraint_msg, ["vat"])]
 
 
+    
+
     def write(self, cr, uid, ids, vals, context=None):
-        if 'vat' in vals:
-            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+        vals = clean_vals(vals)
         return super(res_partner, self).write(cr, uid, ids, vals, context=context)
 
-#    def create(self, cr, uid, ids, vals, context=None):
-#        if 'vat' in vals:
-#            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
-#        return super(res_partner, self).create(cr, uid, ids, vals, context=context)
+    def create(self, cr, uid, vals, context=None):
+        vals = clean_vals(vals)
+        return super(res_partner, self).create(cr, uid, vals, context=context)
