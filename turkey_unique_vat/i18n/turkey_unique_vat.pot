@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 12:25+0000\n"
-"PO-Revision-Date: 2017-07-14 12:25+0000\n"
+"POT-Creation-Date: 2018-03-30 15:04+0000\n"
+"PO-Revision-Date: 2018-03-30 15:04+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,13 @@ msgid "Partner"
 msgstr ""
 
 #. module: turkey_unique_vat
-#: code:addons/turkey_unique_vat/models/partner.py:27
+#: code:addons/turkey_unique_vat/models/partner.py:46
 #, python-format
 msgid "The VAT number [%s] for partner [%s] does not seem to be valid. "
 msgstr ""
 
 #. module: turkey_unique_vat
-#: code:addons/turkey_unique_vat/models/partner.py:26
+#: code:addons/turkey_unique_vat/models/partner.py:45
 #, python-format
 msgid "The VAT number [%s] for this partner is also registered with partner [%s] Each partner should have unique vat number."
 msgstr ""
