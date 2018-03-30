@@ -185,6 +185,7 @@ ln -s -f $OCA_HOME/server-tools/save_translation_file $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/scheduler_error_mailer $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/secure_uninstall $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/security_protector $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/database_cleanup $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_creator $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_manual_procurement $OE_HOME/custom/addons/
@@ -210,6 +211,7 @@ ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_tree_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_image_download $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/web/web_export_view $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/odoomrp-wip/product_attribute_types_views $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-barcode/product_barcode_generator $OE_HOME/custom/addons/
@@ -218,6 +220,9 @@ ln -s -f $OCA_HOME/odoomrp-wip/product_variant_default_code $OE_HOME/custom/addo
 ln -s -f $OCA_HOME/odoomrp-utils/purchase_order_line_stock_available $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-barcode/stock_inventory_barcode $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/support_branding $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/mail-addons/mail_fix_553 $OE_HOME/custom/addons/
+
+
 
         break;;
         [Nn]* ) break;;
