@@ -21,7 +21,7 @@ class res_partner(osv.osv):
         for partner in self.browse(cr, uid, ids, context=context):
             if partner.sanitized_vat == '11111111111' or partner.sanitized_vat == '2222222222' :
                 continue
-            if not partner.vat:
+            if not partner.vat or partner.vat == "False":
                 continue
             if partner.parent_id:
                 continue
@@ -34,7 +34,7 @@ class res_partner(osv.osv):
 
     def _construct_constraint_msg(self, cr, uid, ids, context=None):
         for partner in self.browse(cr, uid, ids, context=context):
-            if not partner.vat:
+            if not partner.vat or partner.vat == "False":
                 continue
             if partner.parent_id:
                 continue
