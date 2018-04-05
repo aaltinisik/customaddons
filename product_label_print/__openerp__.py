@@ -10,10 +10,11 @@
     'description': """
      """,
     'depends': [
-        'report_aeroo', 'product', 'altinkaya_shipment'
+        'report_aeroo', 'product', 'altinkaya_shipment','report_aeroo_direct_print'
     ],
     'data': [
         'wizard/print_pack_barcode_wiz_view.xml',
+        'views/report_aeroo_direct_print_view.xml',
     ],
     'installable' : True,
     'auto_install' : False,
