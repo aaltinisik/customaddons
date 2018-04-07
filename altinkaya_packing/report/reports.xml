@@ -11,6 +11,9 @@
             file="altinkaya_packing.report_picking_altinkaya"
         />
 
+    </data>
+    <data noupdate="1">
+
                 <report
             id="stock_pickingaltinkayaB"
             model="stock.picking"
@@ -71,7 +74,5 @@
             name="altinkaya_packing.report_picking_altinkayaH"
             file="altinkaya_packing.report_picking_altinkayaH"
         />
-
-
     </data>
 </openerp>
