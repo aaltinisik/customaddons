@@ -180,5 +180,30 @@
                  </t>
              </t>
         </template>
+
+        <template id="report_picking_altinkayaB">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+
+        <template id="report_picking_altinkayaC">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaD">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaE">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaF">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaG">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaH">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+
+
     </data>
 </openerp>
