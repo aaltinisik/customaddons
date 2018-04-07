@@ -166,19 +166,41 @@
 
 
                     <div class="footer">
-                        SEVK/M20203  Yazdıran: Ahmet Altınışık Tarih: 13/03/2303 13:32:03
-                        <div class="text-center" style="border-top: 1px solid black;">
 
-                            <ul class="list-inline">
-                                <li>Sayfa:</li>
-                                <li><span class="page"/></li>
-                                <li>/</li>
-                                <li><span class="topage"/></li>
-                            </ul>
+                        <div class="text-center" style="border-top: 1px solid black;">
+                            Yazdıran: <span t-field="user.name"/> Tarih: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                                              </div>
+                    </div>
                         </div>
                     </div>
                  </t>
              </t>
+        </template>
+
+    </data>
+
+    <data noupdate="1">
+        <template id="report_picking_altinkayaB">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+
+        <template id="report_picking_altinkayaC">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaD">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaE">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaF">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaG">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaH">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
         </template>
     </data>
 </openerp>
