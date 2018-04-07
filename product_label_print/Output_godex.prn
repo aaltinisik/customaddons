@@ -1,5 +1,5 @@
 {% if user.context_def_label_printer.type=='GODEX' %}
-{% if label.first_label_empty %}^B52{% end %}
+{% if o.label_ids[0].first_label_empty %}^B52{% end %}
 ^Q50,3
 ^W104
 ^H10
