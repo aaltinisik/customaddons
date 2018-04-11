@@ -50,6 +50,7 @@
                             <thead>
                                 <tr style="font-size:10px;">
                                     <th><strong>Sipariş (kaynak)</strong></th>
+                                    <th><strong>Durumu</strong></th>
                                     <th><strong>Sorumlusu</strong></th>
                                     <th><strong>Tarih</strong></th>
                                     <th name="td_sched_date_h"><strong>Planlanan Tarih</strong></th>
@@ -59,6 +60,9 @@
                                 <tr style="font-size:10px;">
                                     <td>
                                         <span t-field="o.origin"/>
+                                    </td>
+                                     <td>
+                                        <span t-field="o.x_durum"/>
                                     </td>
                                     <td>
                                         <span t-field="o.x_hazirlayan"/>
@@ -87,7 +91,7 @@
                               <tbody>
                                 <tr t-foreach="o.move_lines" t-as="move">
                                     <t>
-                                        <td><span style="font-size:12px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:10px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:10px;"><t t-esc="move.product_id.name"/></span></td>
+                                        <td><span style="font-size:12px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:10px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:10px;"><t t-esc="move.product_id.name_variant"/></span></td>
                                         <td class="text-right" style="font-size:12px;">
 
                                             <t>
