@@ -29,4 +29,17 @@ class labelTwoinrow(models.TransientModel):
     label2 = fields.Many2one('product.product.label', string="Label 2")
     copies_to_print = fields.Integer(string='# of label to be printed', default=1)
 
+
+class product_product(models.Model):
+    _inherit = 'product.product'
+    
+    @api.multi
+    def action_print_label(self):
+        aw_obj = self.env['ir.actions.act_window'].with_context({'default_restrict_single':True})
+        action = aw_obj.for_xml_id('product_label_print', 'action_print_pack_barcode_wiz')
+        action.update({'context':{'default_restrict_single':True}})
+        return action
+        
+        
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

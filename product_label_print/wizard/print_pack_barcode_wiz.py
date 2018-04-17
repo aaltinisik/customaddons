@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from openerp import api, fields, models, _
+from openerp.exceptions import Warning
 
 
 class print_pack_barcode_wiz(models.TransientModel):
@@ -9,7 +10,30 @@ class print_pack_barcode_wiz(models.TransientModel):
     product_label_ids = fields.Many2many('product.product.label', string="Products")
     label_ids = fields.Many2many('label.twoinrow', string="Labels")
     skip_first = fields.Boolean('Skip First Label')
+    restrict_single = fields.Boolean('Restrict to single product', default=False)
 
+    single_label_id = fields.Many2one('product.product.label',compute='_compute_single_label')
+    single_label_name = fields.Char(string="Name",related='single_label_id.name')
+    single_label_nameL1 = fields.Char(string="NameL1",related='single_label_id.nameL1')
+    single_label_nameL2 = fields.Char(string="NameL1",related='single_label_id.nameL2')
+    single_label_nameL3 = fields.Char(string="NameL2",related='single_label_id.nameL3')
+    single_label_nameL4 = fields.Char(string="NameL3",related='single_label_id.nameL4')
+    single_label_default_code = fields.Char(string="Default Code",related='single_label_id.default_code')
+    single_label_short_code = fields.Char(string="Short Code",related='single_label_id.short_code')
+    single_label_note = fields.Char(string="Note",related='single_label_id.note')
+    single_label_pieces_in_pack = fields.Float(string="# in Cartoon", related='single_label_id.pieces_in_pack')
+    single_label_label_to_print = fields.Integer(string='# of label to be printed', related='single_label_id.label_to_print')
+    single_label_product_id = fields.Many2one('product.product', string="Product", related='single_label_id.product_id')
+    single_label_barcode = fields.Char(string="Barcode", related='single_label_id.barcode')
+    single_label_uom_name = fields.Char(string="UOM Name", related='single_label_id.uom_name')
+    
+    
+    @api.one
+    @api.depends('product_label_ids')
+    def _compute_single_label(self):
+        if self.product_label_ids:
+            self.single_label_id = self.product_label_ids[0]
+    
     @api.model
     def default_get(self, fields):
         ''' 
@@ -18,6 +42,10 @@ class print_pack_barcode_wiz(models.TransientModel):
         product_label_obj = self.env['product.product.label']
         res = super(print_pack_barcode_wiz, self).default_get(fields)
         product_ids = []
+        
+        if self.env.context.get('default_restrict_single',False) and len(self.env.context.get('active_ids')) > 1:
+            raise Warning(_('Printing multiple labels is restricted!'))
+            
         for product in self.env.context.get('active_ids'):
             product_id = self.env['product.product'].browse(product)
             codeparts = product_id.default_code.split('-')

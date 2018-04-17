@@ -10,7 +10,7 @@
     'depends': ['crm','mail','account_voucher','account_accountant','sale','stock','mrp','purchase','hr','account',
     'account_cancel','analytic','base','base_action_rule','base_setup','board','contacts',
     'decimal_precision','delivery','document','edi','email_template','fetchmail','knowledge','mrp_operations',
-    'procurement','product','product_visible_discount','altinkaya_packing'],
+    'procurement','product','product_visible_discount','altinkaya_packing','mrp_operations_extension'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari OpenERP V8 ozellestirmeleri
 ===============================================================
@@ -26,8 +26,10 @@ Altinkaya Elektronik Cihaz Kutulari OpenERP V8 ozellestirmeleri
     "view/altinkaya_view_payment.xml",
     "view/altinkaya_view_partner.xml",
     "view/altinkaya_view_stock.xml",
+    "view/mrp_bom_view.xml",
     "view/altinkaya_view_manufacturing.xml",
     "view/manufacturing2.xml",
+    "view/report_mrporder.xml"
 
     ],
     'demo': [],
