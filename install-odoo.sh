@@ -186,17 +186,17 @@ read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install PostgreSQL Server
 
-sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-  sudo apt-key add -
-sudo apt-get update
+#sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
+#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+#  sudo apt-key add -
+#sudo apt-get update
 
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
 sudo apt install postgresql postgresql-contrib -y
 
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
-sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.6/main/postgresql.conf
+sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/10/main/postgresql.conf
 
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres $OE_USER"
@@ -323,15 +323,15 @@ sudo apt install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt install python-dev build-essential -y
-sudo pip install --upgrade pip
-sudo pip install --upgrade virtualenv
+sudo -H pip2  install --upgrade pip
+sudo -H pip2 install --upgrade virtualenv
 
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
 
-sudo pip install jcconv googlemaps xlsxwriter
+sudo -H pip2 install jcconv googlemaps xlsxwriter
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
-sudo pip install --pre pyusb
+sudo -H pip2 install --pre pyusb
 
 echo -e "\n---- Install python packages ----"
 sudo apt install -y -f poppler-utils postgresql-client python-cairo python-cups python-dateutil python-decorator python-docutils python-egenix-mxdatetime \
@@ -343,12 +343,9 @@ python-unittest2 python-vatnumber python-vatnumber python-vobject python-webdav 
 vim curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
 
 
-# Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
-# wget -qO- https://deb.nodesource.com/setup | sudo -E bash -
-wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt install nodejs -y
-sudo npm install -g less -y
-sudo npm install node-odoo
+sudo apt install npm  -y
+sudo npm install -g less
+
 
 echo -e "\n---- Install python libraries ----"
 sudo apt-get install graphviz mc bzr lptools make -y
@@ -356,13 +353,13 @@ sudo apt-get install graphviz mc bzr lptools make -y
 sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install psycogreen
+sudo -H pip2 install psycogreen
 
 echo -e "\n---- Install asterisk connector dependencies ----"
-sudo pip install phonenumbers
-sudo pip install py-Asterisk
-sudo pip install xlrd
-sudo pip install pysftp
+sudo -H pip2 install phonenumbers
+sudo -H pip2 install py-Asterisk
+sudo -H pip2 install xlrd
+sudo -H pip2 install pysftp
 
 
 sudo apt-get -f install -y
@@ -376,10 +373,10 @@ sudo apt-get -f install -y
 echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
 sudo apt install -f -y
 cd /tmp
-sudo wget -O wkhtmltox-0.12.2.1_linux-trusty-amd64.deb https://github.com/aaltinisik/customaddons/blob/8.0/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb?raw=true
-sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
-sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
+sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+sudo cp wkhtmltox/bin/wk* /usr/local/bin/
+wkhtmltopdf --version
 
 
 cd $OE_HOME
