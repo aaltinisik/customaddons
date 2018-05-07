@@ -50,6 +50,7 @@
                             <thead>
                                 <tr style="font-size:10px;">
                                     <th><strong>Sipariş (kaynak)</strong></th>
+                                    <th><strong>Durumu</strong></th>
                                     <th><strong>Sorumlusu</strong></th>
                                     <th><strong>Tarih</strong></th>
                                     <th name="td_sched_date_h"><strong>Planlanan Tarih</strong></th>
@@ -59,6 +60,9 @@
                                 <tr style="font-size:10px;">
                                     <td>
                                         <span t-field="o.origin"/>
+                                    </td>
+                                     <td>
+                                        <span t-field="o.x_durum"/>
                                     </td>
                                     <td>
                                         <span t-field="o.x_hazirlayan"/>
@@ -74,7 +78,7 @@
                             </table>
 
 
-                            <table class="table table-condensed" t-if="not o.pack_operation_ids">
+                            <table class="table table-condensed" >
                               <thead>
                                 <tr>
                                     <th><strong>Ürün</strong></th>
@@ -86,13 +90,11 @@
                               </thead>
                               <tbody>
                                 <tr t-foreach="o.move_lines" t-as="move">
-                                    <t t-if="(o.state != 'partially_available') or (move.reserved_availability > 0)">
-                                        <td><span style="font-size:12px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:10px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:10px;"><t t-esc="move.product_id.name"/></span></td>
+                                    <t>
+                                        <td><span style="font-size:12px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:10px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:10px;"><t t-esc="move.product_id.name_variant"/></span></td>
                                         <td class="text-right" style="font-size:12px;">
-                                            <t t-if="o.state == 'partially_available'">
-                                                <span t-field="move.reserved_availability"/> <span t-field="move.product_id.uom_id" groups="product.group_uom"/>
-                                            </t>
-                                            <t t-if="o.state != 'partially_available'">
+
+                                            <t>
                                                 <t t-if="move.product_uom.id in [1,19,29,30]">
                                                     <t t-esc="'%.0f'%move.product_uom_qty" /> <span t-field="move.product_uom" groups="product.group_uom"/>
                                                 </t>
@@ -113,52 +115,7 @@
                                 </tr>
                               </tbody>
                             </table>
-                            <table class="table table-condensed" t-if="o.pack_operation_ids">
-                              <thead>
-                                <tr>
-                                    <th><strong>Ürün</strong></th>
-                                    <th class="text-right"><strong>Miktar</strong></th>
-                                    <t t-if="o.picking_type_id.code != 'incoming'"><th><strong>Kaynak</strong></th></t>
-                                    <th><strong>Barcode</strong></th>
-                                    <t t-if="o.picking_type_id.code != 'outgoing'"><th><strong>Hedef</strong></th></t>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr t-foreach="o.pack_operation_ids" t-as="pack_operation">
-                                    <td><span style="font-size:8px;" t-field="pack_operation.product_id"/>
-                                        <t t-if="not pack_operation.product_id and pack_operation.package_id"><span  t-field="pack_operation.package_id"/></t></td>
-                                    <td class="text-right" style="font-size:12px;">
-                                        <t t-if="pack_operation.product_uom_id.id in [1,19,29,30]">
-                                                    <t t-esc="'%.0f'%pack_operation.product_qty"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/>
-                                                </t>
-                                        <t t-if="not(pack_operation.product_uom_id.id in [1,19,29,30])">
-                                                    <t t-esc="pack_operation.product_qty"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/>
-                                                </t></td>
-                                    <t t-if="o.picking_type_id.code != 'incoming'"><td><span  style="font-size:8px;"><span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/><span t-field="move.product_id.uom_id.name"/><br/><span t-field="move.string_availability_info"/></span>
-                                        <span t-if="pack_operation.package_id">:</span>
-                                        <span t-field="pack_operation.package_id"/>
-                                        <span t-if="pack_operation.lot_id">:</span>
-                                        <span t-field="pack_operation.lot_id"/>
-                                        </td>
-                                    </t>
-                                    <td>
-                                        <span t-if="pack_operation.lot_id">
-                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.lot_id.name, 500, 80)" style="width:240px;height:40px"/>
-                                        </span>
-                                        <span t-if="pack_operation.product_id and not pack_operation.lot_id and pack_operation.product_id.ean13">
-                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', pack_operation.product_id.ean13, 500, 80)" style="width:240px;height:40px"/>
-                                        </span>
-                                        <span t-if="pack_operation.package_id and not pack_operation.product_id">
-                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.package_id.name, 500, 80)" style="width:240px;height:40px"/>
-                                        </span>
-                                    </td>
-                                    <t t-if="o.picking_type_id.code != 'outgoing'"><td><span t-field="pack_operation.location_dest_id"/>
-                                        <span t-if="pack_operation.result_package_id">:</span>
-                                        <span t-field="pack_operation.result_package_id"/>
-                                    </td></t>
-                                </tr>
-                              </tbody>
-                            </table>
+
 
 
                     </div>
@@ -166,19 +123,41 @@
 
 
                     <div class="footer">
-                        SEVK/M20203  Yazdıran: Ahmet Altınışık Tarih: 13/03/2303 13:32:03
-                        <div class="text-center" style="border-top: 1px solid black;">
 
-                            <ul class="list-inline">
-                                <li>Sayfa:</li>
-                                <li><span class="page"/></li>
-                                <li>/</li>
-                                <li><span class="topage"/></li>
-                            </ul>
-                        </div>
+                        <div class="text-center" style="border-top: 1px solid black;">
+                            Yazdıran: <span t-field="user.name"/> Tarih: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                                              </div>
                     </div>
+
+
                  </t>
              </t>
+        </template>
+
+    </data>
+
+    <data noupdate="1">
+        <template id="report_picking_altinkayaB">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+
+        <template id="report_picking_altinkayaC">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaD">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+        <template id="report_picking_altinkayaE">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaF">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaG">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+                <template id="report_picking_altinkayaH">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
         </template>
     </data>
 </openerp>

@@ -48,15 +48,13 @@ echo -e "\n"
 read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
 echo -e "\n"
 
-echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
-touch /etc/sysctl.d/disableipv6.conf
-echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.d/disableipv6.conf
+sudo echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
+sudo touch /etc/sysctl.d/disableipv6.conf
+sudo echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.d/disableipv6.conf
 
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install aptitude -y
-sudo aptitude update && sudo aptitude full-upgrade -y
 sudo apt build-dep build-essential -y
 
 # Install Git:
@@ -64,17 +62,22 @@ echo -e "\n---- Install Git ----"
 sudo apt install git -y
 
 # Install pip
-sudo apt install python-pip python3-pip -y
+sudo apt install python-pip python3-pip libsasl2-dev -y
 
-# sudo curl -O https://bootstrap.pypa.io/get-pip.py
-# sudo python get-pip.py
+sudo -H pip2  install --upgrade pip
+sudo -H pip3  install --upgrade pip
 
+#sudo -H pip2 install --upgrade virtualenv
+
+sudo -H pip3 install -r ./requirements.txt
 
 
 # Install AerooLib:
 echo -e "\n---- Install AerooLib ----"
-sudo apt install python-genshi python-cairo python-lxml libreoffice-script-provider-python libreoffice-base python-cups -y
 sudo apt install python-setuptools python3-pip -yf
+sudo -H pip3 install genshi lxml pycups pycairo
+sudo apt install libreoffice-script-provider-python libreoffice-base  -y
+
 sudo mkdir /opt/aeroo
 cd /opt/aeroo
 sudo git clone https://github.com/aaltinisik/aeroolib.git
@@ -106,7 +109,7 @@ sudo update-rc.d office defaults
 echo -e "\n---- Install AerooDOCS (see: https://github.com/aeroo/aeroo_docs/wiki/Installation-example-for-Ubuntu-14.04-LTS for original post): ----"
 # pip install --upgrade pip
 
-sudo pip3 install jsonrpc2 daemonize
+sudo -H pip3 install jsonrpc2 daemonize
 
 echo -e "\n---- create conf file for AerooDOCS ----"
 sudo rm /etc/aeroo-docs.conf
@@ -255,7 +258,7 @@ sudo su root -c "echo 'xmlrpc = True' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpc_interface  = ' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify the TCP port for the XML-RPC protocol' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo 'xmlrpc_port = 8069' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpc_port = 8059' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Enable correct behavior when behind a reverse proxy' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'proxy_mode = False' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## XML-RPC / HTTPS - XML-RPC Secure Configuration' >> /etc/$OE_CONFIG.conf"
@@ -264,7 +267,7 @@ sudo su root -c "echo 'xmlrpcs = True' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC Secure protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpcs_interface = ' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify the TCP port for the XML-RPC Secure protocol' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo 'xmlrpcs_port = 8071' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpcs_port = 8061' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify the certificate file for the SSL connection' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'secure_cert_file = server.cert' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify the private key file for the SSL connection' >> /etc/$OE_CONFIG.conf"
@@ -323,44 +326,21 @@ sudo apt install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt install python-dev build-essential -y
-sudo -H pip2  install --upgrade pip
-sudo -H pip2 install --upgrade virtualenv
 
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
 
-sudo -H pip2 install jcconv googlemaps xlsxwriter
-
-echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
-sudo -H pip2 install --pre pyusb
-
-echo -e "\n---- Install python packages ----"
-sudo apt install -y -f poppler-utils postgresql-client python-cairo python-cups python-dateutil python-decorator python-docutils python-egenix-mxdatetime \
-python-feedparser python-gdata python-genshi python-geoip python-gevent python-imaging python-jinja2 python-ldap python-libxslt1 \
-python-lxml python-mako python-markupsafe python-matplotlib python-mock python-openid python-openssl python-passlib \
-python-pdftools python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-qrcode python-serial \
-python-pypdf python-reportlab python-reportlab-accel python-requests python-setuptools python-simplejson python-tz python-unicodecsv \
-python-unittest2 python-vatnumber python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi \
-vim curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi
 
 
 sudo apt install npm  -y
 sudo npm install -g less
 
-
-echo -e "\n---- Install python libraries ----"
+sudo apt-get install curl ghostscript libpq-dev libreoffice libreoffice-script-provider-python xfonts-base xfonts-75dpi poppler-utils postgresql-client -y
 sudo apt-get install graphviz mc bzr lptools make -y
 
-sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo -H pip2 install psycogreen
-
-echo -e "\n---- Install asterisk connector dependencies ----"
-sudo -H pip2 install phonenumbers
-sudo -H pip2 install py-Asterisk
-sudo -H pip2 install xlrd
-sudo -H pip2 install pysftp
-
+sudo -H pip2  install -r ./requirements.txt
+sudo apt-get install python-egenix-mx-base-dev -y
 
 sudo apt-get -f install -y
 sudo apt-get install cups lpr phppgadmin -y
@@ -373,11 +353,12 @@ sudo apt-get -f install -y
 echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
 sudo apt install -f -y
 cd /tmp
-sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
-tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
-sudo cp wkhtmltox/bin/wk* /usr/local/bin/
-wkhtmltopdf --version
+#sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+#tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+#sudo cp wkhtmltox/bin/wk* /usr/local/bin/
+#wkhtmltopdf --version
 
+sudo apt install wkhtmltopdf -y
 
 cd $OE_HOME
 

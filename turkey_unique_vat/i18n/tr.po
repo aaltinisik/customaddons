@@ -31,4 +31,3 @@ msgstr "  [%s] olarak girilen Vergi/TC kimlik Numarası hatalı. İş ortağı: 
 #, python-format
 msgid "The VAT number [%s] for this partner is also registered with partner [%s] Each partner should have unique vat number."
 msgstr " [%s] olarak girilen Vergi/TC kimlik numarası daha önce [%s] isimli iş ortağına da girilmiş lütfen her müşteri için tek kayıt açınız."
-
