@@ -350,7 +350,7 @@ sudo npm install -g less
 echo -e "\n---- Install python libraries ----"
 sudo apt-get install graphviz mc bzr lptools make -y
 
-sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
+sudo apt-get install -y python-unidecode python-pygraphviz python-xlrd python-suds python-psycopg2
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo -H pip2 install psycogreen
