@@ -186,10 +186,10 @@ read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install PostgreSQL Server
 
-#sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
-#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-#  sudo apt-key add -
-#sudo apt-get update
+sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  sudo apt-key add -
+sudo apt-get update
 
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
