@@ -373,8 +373,8 @@ sudo apt-get -f install -y
 echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
 sudo apt install -f -y
 cd /tmp
-sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
-tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz?raw=true
+tar -xJf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
 sudo cp wkhtmltox/bin/wk* /usr/local/bin/
 wkhtmltopdf --version
 

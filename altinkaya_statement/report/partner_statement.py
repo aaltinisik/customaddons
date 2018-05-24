@@ -79,8 +79,8 @@ class partner_statement(report_sxw.rml_parse):
                 'dc': balance > 0.01 and 'B' or 'A',
                 'total': balance or 0.0,
             })
-        if not statement_data:
-            raise osv.except_osv(_('User Error!'), _('Bu Kayıda ait ilgili dönemde işlem yok aralıklı raporu deneyin '+partner.name))
+#        if not statement_data:
+#            raise osv.except_osv(_('User Error!'), _('Bu Kayıda ait ilgili dönemde işlem yok aralıklı raporu deneyin '+partner.name))
         return statement_data
 
 report_sxw.report_sxw('report.partner.statement', 'res.partner',
