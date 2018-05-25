@@ -4,13 +4,15 @@ from openerp.tools.translate import _
 import re
 
 def clean_vals(vals):
-    if 'vat' in vals:
-        vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
+    if 'vat' in vals :
+        if vals['vat']:
+            vals['vat'] = filter(unicode.isalnum, unicode(vals['vat']))
     
     if 'email' in vals:
-        s = unicode(vals['email']).lower()
-        s = re.sub(u'[ğ]','g',re.sub(u'[ç]','c',re.sub(u'[ş]','s',re.sub(u'[ı]','i',re.sub(u'[ü]','u',re.sub(u'[ö]','o',s))))))
-        vals['email'] = s 
+        if vals['email']:
+            s = unicode(vals['email']).lower()
+            s = re.sub(u'[ğ]','g',re.sub(u'[ç]','c',re.sub(u'[ş]','s',re.sub(u'[ı]','i',re.sub(u'[ü]','u',re.sub(u'[ö]','o',s))))))
+            vals['email'] = s
     
     return vals
 
