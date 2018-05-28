@@ -28,7 +28,7 @@ function openerp_picking_order_widgets(instance){
             });
             return ul;
         },
-        get_rows: function(){
+     /*   get_rows: function(){
             var model = this.getParent();
             this.rows = [];
             var self = this;
@@ -108,11 +108,22 @@ function openerp_picking_order_widgets(instance){
             });
 
             return sorted_row;
-        },
+        },*/
         renderElement: function(){            
             var self = this;
             this._super();
             self.get_partner();
+            
+            self.render_active_operation();
+        	
+            
+            self.$('table#operations tr td:first-child').click(function(){
+            	
+            	var id = $(this).parents("[data-id]:first").data('id');
+            	self.set_active_operation(id);
+           
+            })
+            
             self.$('#js_packconf_select').change(function(){
                 var ul_id = self.$('#js_packconf_select option:selected').data('ul-id');
                 var width = self.$('#js_packconf_select option:selected').attr('width');
@@ -123,7 +134,7 @@ function openerp_picking_order_widgets(instance){
                 self.$('.o_pack_data #length').val(length);
 
             });
-            this.$('.js_validate_pack').click(function(){
+            self.$('.js_validate_pack').click(function(){
                 //get current selection
                 var select_dom_element = self.$('#js_packconf_select');
                 var ul_id = self.$('#js_packconf_select option:selected').data('ul-id');
@@ -142,7 +153,7 @@ function openerp_picking_order_widgets(instance){
                     });
                 }
             });
-            this.$('.js_pack_configure').click(function(){
+            self.$('.js_pack_configure').click(function(){
                 var pack_id = $(this).parents(".js_pack_op_line:first").data('package-id');
                 var ul_id = $(this).parents(".js_pack_op_line:first").data('ulid');
                 self.$('#current_url').attr('value',window.location.href);
@@ -152,30 +163,88 @@ function openerp_picking_order_widgets(instance){
                 self.$el.siblings('#js_PackConfModal').modal();
             });
         },
-        get_partner: function(){              
-            return new instance.web.Model('res.partner').call('search_read',[ [['id', '=', this.getParent().picking.partner_id[0]]], ['name','street','street2','city','state_id','country_id', 'zip'] ], {context: new instance.web.CompoundContext()}).done(function(pickings){
-                    var street = pickings[0].street
-                    var street2 = pickings[0].street2
-                    var city = pickings[0].city
-                    var state = pickings[0].state_id 
-                    var zip = pickings[0].zip
-                    var partner_string = pickings[0].name
-                    $('.oe_pick_app_partner').append((pickings[0].name ? $('<h5>', {
+        get_partner: function(){    
+        	if(this.getParent().picking.partner_id){
+        		return new instance.web.Model('res.partner').call('search_read',[ [['id', '=', this.getParent().picking.partner_id[0]]], ['name','street','street2','city','state_id','country_id', 'zip'] ], {context: new instance.web.CompoundContext()}).done(function(partners){
+                    var partner = partners[0]
+        			var street = partner.street
+                    var street2 = partner.street2
+                    var city = partner.city
+                    var state = partner.state_id 
+                    var zip = partner.zip
+                    var partner_string = partner.name
+                    $('.oe_pick_app_partner').append((partner.name ? $('<h5>', {
                         'class': 'o_partner_name'
-                    }).text(pickings[0].name + ',') : '')).append((pickings[0].street ? $('<h5>', {
+                    }).text(partner.name + ',') : '')).append((partner.street ? $('<h5>', {
                         'class': 'o_partner_street'
-                    }).text(pickings[0].street + ',') : '')).append((pickings[0].street2 ? $('<h5>', {
+                    }).text(partner.street + ',') : '')).append((partner.street2 ? $('<h5>', {
                         'class': 'o_partner_street2'
-                    }).text(pickings[0].street2 + ',') : '')).append((pickings[0].city ? $('<h5>', {
+                    }).text(partner.street2 + ',') : '')).append((partner.city ? $('<h5>', {
                         'class': 'o_partner_city',
-                    }).text(pickings[0].city + ', ') : '')).append((pickings[0].state_id[1] ? $('<h5>', {
+                    }).text(partner.city + ', ') : '')).append((partner.state_id[1] ? $('<h5>', {
                         'class': 'o_partner_state',
-                    }).text(pickings[0].state_id[1] + ', ') : '')).append((pickings[0].zip ? $('<h5>', {
+                    }).text(partner.state_id[1] + ', ') : '')).append((partner.zip ? $('<h5>', {
                         'class': 'o_partner_zip',
-                    }).text(pickings[0].zip + ',') : '')).append((pickings[0].country_id[1] ? $('<h5>', {
+                    }).text(partner.zip + ',') : '')).append((partner.country_id[1] ? $('<h5>', {
                         'class': 'o_partner_country'
-                    }).text(pickings[0].country_id[1]) : ''));
-            });
+                    }).text(partner.country_id[1]) : ''));
+        		});
+        	}
+            
+        },
+        set_active_operation: function(op_id){
+        	var operation = this.rows.find(op => op.cols.id === op_id );
+        	
+        	this.active_operation_id = operation.cols.id;
+        	this.render_active_operation();
+        	
+        },
+        render_active_operation: function(){
+        	var self = this;
+        	if(this.active_operation_id){
+        		var operation = this.rows.find(op => op.cols.id === this.active_operation_id );
+            	if(operation){
+            		var active_container = this.$('#selected_product_container');
+                	active_container.html(
+                            QWeb.render('SelectedOperation',{operation:operation.cols})
+                        )
+                    active_container.find('.js_plus').click(function(){
+                        var op = $(this).parents("[data-id]:first");
+                    	var id = op.data('product-id');
+                        var op_id = op.data('id');
+                        self.getParent().scan_product_id(id,true,op_id);
+                    });
+                	active_container.find('.js_minus').click(function(){
+                		var op = $(this).parents("[data-id]:first");
+                    	var id = op.data('product-id');
+                        var op_id = op.data('id');
+                        self.getParent().scan_product_id(id,false,op_id);
+                    });
+                	
+                	active_container.find('.js_qty').focus(function(){
+                        self.getParent().barcode_scanner.disconnect();
+                        
+                    });
+                	active_container.find('.js_qty').blur(function(){
+                        var op_id = $(this).parents("[data-id]:first").data('id');
+                        var value = parseFloat($(this).val());
+                        if (value>=0){
+                            self.getParent().set_operation_quantity(value, op_id);
+                        }
+                        
+                        self.getParent().barcode_scanner.connect(function(ean){
+                            self.getParent().scan(ean);
+                        });
+                    });
+            	}
+        		
+        	}
+        	
+        },
+        blink: function(op_id){
+            this.set_active_operation(op_id);
+        	this._super();
+            
         },
     });
 }
