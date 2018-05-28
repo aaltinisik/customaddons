@@ -2,6 +2,37 @@ function openerp_picking_order_widgets(instance){
     var module = instance.stock;
     var _t     = instance.web._t;
     var QWeb   = instance.web.qweb;
+    
+    module.PickingMenuWidget.include({
+    	load: function(){
+            var self = this;
+            return new instance.web.Model('stock.picking.type').get_func('search_read')([],[])
+                .then(function(types){
+                    self.picking_types = types;
+                    type_ids = [];
+                    for(var i = 0; i < types.length; i++){
+                        self.pickings_by_type[types[i].id] = [];
+                        type_ids.push(types[i].id);
+                    }
+                    self.pickings_by_type[0] = [];
+
+                    return new instance.web.Model('stock.picking').call('search_read',[ [['state','in', ['confirmed','assigned', 'partially_available']], ['picking_type_id', 'in', type_ids]], [] ], {context: new instance.web.CompoundContext()});
+
+                }).then(function(pickings){
+                    self.pickings = pickings;
+                    for(var i = 0; i < pickings.length; i++){
+                        var picking = pickings[i];
+                        self.pickings_by_type[picking.picking_type_id[0]].push(picking);
+                        self.pickings_by_id[picking.id] = picking;
+                        self.picking_search_string += '' + picking.id + ':' + (picking.name ? picking.name.toUpperCase(): '') + '\n';
+                    }
+
+                });
+        },
+    });
+    
+  
+    
     module.PickingMainWidget.include({
         set_package_pack: function(package_id, pack,width,height,length,net_weight,gross_weight){
             var self = this;

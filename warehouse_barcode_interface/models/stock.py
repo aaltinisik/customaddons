@@ -48,3 +48,13 @@ class stock_picking(osv.osv):
                 return True
             else:
                 return False
+            
+    def get_next_picking_for_ui(self, cr, uid, context=None):
+        """ returns the next pickings to process. Used in the barcode scanner UI"""
+        if context is None:
+            context = {}
+        domain = [('state', 'in', ('confirmed','assigned', 'partially_available'))]
+        if context.get('default_picking_type_id'):
+            domain.append(('picking_type_id', '=', context['default_picking_type_id']))
+        return self.search(cr, uid, domain, context=context)
+    
