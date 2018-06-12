@@ -151,6 +151,11 @@ function openerp_picking_order_widgets(instance){
                            });
                 });
         },
+        open_form_view: function(){
+        	var self = this;
+        	window.location = '/web#model=stock.picking&view_type=form&id=' + self.picking.id;
+            
+        },
         set_package_pack: function(package_id, pack,width,height,length,net_weight,gross_weight){
             var self = this;
                 return new instance.web.Model('stock.quant.package')
@@ -266,6 +271,8 @@ function openerp_picking_order_widgets(instance){
             self.render_active_operation();
         	
             this.$('.js_pick_print_label').click(function(){ self.getParent().print_picking_label(); });
+            this.$('.js_pick_open_form').click(function(){ self.getParent().open_form_view(); });
+            
             
             
             self.$('table#operations tr td:not(:last-child)').click(function(){

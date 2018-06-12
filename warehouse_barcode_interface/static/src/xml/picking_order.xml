@@ -41,6 +41,7 @@
                     </div>
                     <div class="col-sm-4 col-xs⁻6 text-right">
 
+					<button type="button" class='btn btn-default js_pick_open_form'> Open in Form View </button>
                     <button type="button" class='btn btn-default js_pick_done'> Create backorder </button>
                     <button type="button" class='btn btn-default js_pick_print'> Print </button>
 					<button type="button" class='btn btn-default js_pick_print_label'> Print Label </button>
