@@ -42,6 +42,12 @@ class stock_picking_type(osv.osv):
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
 
+    def do_print_picking_label(self, cr, uid, ids, context=None):
+        '''This function prints the picking list'''
+        context = dict(context or {}, active_ids=ids)
+        return self.pool.get("report").get_action(cr, uid, ids, 'warehouse_barcode_interface.report_picking', context=context)
+
+
     def check_for_force_assign(self, cr, uid, ids, context=None):
         for pick in self.pool.get('stock.picking').browse(cr, uid, ids, context=context):
             if pick.state in ['confirmed','waiting','partially_available']:
@@ -57,4 +63,28 @@ class stock_picking(osv.osv):
         if context.get('default_picking_type_id'):
             domain.append(('picking_type_id', '=', context['default_picking_type_id']))
         return self.search(cr, uid, domain, context=context)
+    
+    def process_barcode_from_ui(self, cr, uid, picking_id, barcode_str, visible_op_ids, context=None):
+        '''This function is called each time there barcode scanner reads an input'''
+        def is_upca(code):
+            if len(code) == 12 and code.isdigit():
+                odd_sum = int(code[0]) + int(code[2]) + int(code[4]) + int(code[6]) + int(code[8]) + int(code[10])
+                even_sum = int(code[1]) + int(code[3]) + int(code[5]) + int(code[7]) + int(code[9])
+            
+                tmp = odd_sum * 3 + even_sum
+                parity = 10 - (tmp % 10)
+                
+                if parity == int(code[11]):
+                    return True
+                
+            return False
+                
+        
+        if is_upca(barcode_str):
+            barcode_str = '0%s' % barcode_str
+            
+        return super(stock_picking, self).process_barcode_from_ui(cr, uid, picking_id, barcode_str, visible_op_ids, context=context)
+     
+    
+    
     

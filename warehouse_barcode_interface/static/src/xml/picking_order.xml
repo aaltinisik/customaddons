@@ -43,7 +43,7 @@
 
                     <button type="button" class='btn btn-default js_pick_done'> Create backorder </button>
                     <button type="button" class='btn btn-default js_pick_print'> Print </button>
-
+					<button type="button" class='btn btn-default js_pick_print_label'> Print Label </button>
                     </div>
                 </div>
         </div>
@@ -74,7 +74,7 @@
                         <h2>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-danger hidden" type="button">Force Availability</button>
+                                    <button class="btn btn-danger hidden js_force_availableity" type="button">Force Availability</button>
                                 </span>
                             </div>
                         </h2>
@@ -101,6 +101,7 @@
 		                        <th class='text-center'>Todo</th>
 		                        <th>From</th>
 		                        <th>To</th>
+		                        <th></th>
 		                    </tr>
 		                </thead>
 		
@@ -129,7 +130,10 @@
 		                                <t t-if="row.cols.lot" ><span> : <t t-esc="row.cols.lot" /></span></t>
 		                            </td>
 		                            <td class="brctbl-col5 js_loc"> <t t-esc="row.cols.dest" />
-		                                <div class="pull-right btn-group">
+		                                
+		                            </td>
+		                            <td>
+		                            	<div class="pull-right btn-group">
 		                                    <button type="button" class="btn btn-default dropdown-toggle fa fa-cog" data-toggle="dropdown">
 		                                     <span class="caret"></span>
 		                                    </button>

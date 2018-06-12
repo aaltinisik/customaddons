@@ -34,12 +34,130 @@ function openerp_picking_order_widgets(instance){
   
     
     module.PickingMainWidget.include({
+    	load: function(picking_id){
+            var self = this;
+            function load_picking_list(type_id){
+                var pickings = new $.Deferred();
+                new instance.web.Model('stock.picking')
+                    .call('get_next_picking_for_ui',[{'default_picking_type_id':parseInt(type_id)}])
+                    .then(function(picking_ids){
+                        if(!picking_ids || picking_ids.length === 0){
+                            (new instance.web.Dialog(self,{
+                                title: _t('No Picking Available'),
+                                buttons: [{
+                                    text:_t('Ok'),
+                                    click: function(){
+                                        self.menu();
+                                    }
+                                }]
+                            }, _t('<p>We could not find a picking to display.</p>'))).open();
+
+                            pickings.reject();
+                        }else{
+                            self.pickings = picking_ids;
+                            pickings.resolve(picking_ids);
+                        }
+                    });
+
+                return pickings;
+            }
+
+            // if we have a specified picking id, we load that one, and we load the picking of the same type as the active list
+            if( picking_id ){
+                var loaded_picking = new instance.web.Model('stock.picking')
+                    .call('read',[[parseInt(picking_id)], [], new instance.web.CompoundContext()])
+                    .then(function(picking){
+                        self.picking = picking[0];
+                        self.picking_type_id = picking[0].picking_type_id[0];
+                        return load_picking_list(self.picking.picking_type_id[0]);
+                    });
+            }else{
+                // if we don't have a specified picking id, we load the pickings belong to the specified type, and then we take
+                // the first one of that list as the active picking
+                var loaded_picking = new $.Deferred();
+                load_picking_list(self.picking_type_id)
+                    .then(function(){
+                        return new instance.web.Model('stock.picking').call('read',[self.pickings[0],[], new instance.web.CompoundContext()]);
+                    })
+                    .then(function(picking){
+                        self.picking = picking;
+                        self.picking_type_id = picking.picking_type_id[0];
+                        loaded_picking.resolve();
+                    });
+            }
+
+            return loaded_picking.then(function(){
+                    if (!_.isEmpty(self.locations)){
+                        return $.when();
+                    }
+                    return new instance.web.Model('stock.location').call('search',[[['usage','=','internal']]]).then(function(locations_ids){
+                        return new instance.web.Model('stock.location').call('read',[locations_ids, []]).then(function(locations){
+                            self.locations = locations;
+                        });
+                    });
+                }).then(function(){
+                    return new instance.web.Model('stock.picking').call('check_group_pack').then(function(result){
+                        return self.show_pack = result;
+                    });
+                }).then(function(){
+                    return new instance.web.Model('stock.picking').call('check_group_lot').then(function(result){
+                        return self.show_lot = result;
+                    });
+                }).then(function(){
+                	if(self.picking.state === 'confirmed' || self.picking.state === 'partially_available'){
+                		return new instance.web.Model('stock.picking')
+                        .call('force_assign', [self.picking.id])
+                        .then(function(result){
+                            if (self.picking.pack_operation_exist === false){
+                                self.picking.recompute_pack_op = false;
+                                return new instance.web.Model('stock.picking').call('do_prepare_partial',[[self.picking.id]]);
+                            }
+                        }); 
+                	}
+                    
+                }).then(function(){
+                        return new instance.web.Model('stock.pack.operation').call('search',[[['picking_id','=',self.picking.id]]])
+                }).then(function(pack_op_ids){
+                        return new instance.web.Model('stock.pack.operation').call('read',[pack_op_ids, [], new instance.web.CompoundContext()])
+                }).then(function(operations){
+                    self.packoplines = operations;
+                    var package_ids = [];
+
+                    for(var i = 0; i < operations.length; i++){
+                        if(!_.contains(package_ids,operations[i].result_package_id[0])){
+                            if (operations[i].result_package_id[0]){
+                                package_ids.push(operations[i].result_package_id[0]);
+                            }
+                        }
+                    }
+                    return new instance.web.Model('stock.quant.package').call('read',[package_ids, [], new instance.web.CompoundContext()])
+                }).then(function(packages){
+                    self.packages = packages;
+                }).then(function(){
+                        return new instance.web.Model('product.ul').call('search',[[]])
+                }).then(function(uls_ids){
+                        return new instance.web.Model('product.ul').call('read',[uls_ids, []])
+                }).then(function(uls){
+                    self.uls = uls;
+                });
+        },
+        print_picking_label: function(){
+            var self = this;
+            return new instance.web.Model('stock.picking.type').call('read', [[self.picking_type_id], ['code'], new instance.web.CompoundContext()])
+                .then(function(pick_type){
+                    return new instance.web.Model('stock.picking').call('do_print_picking_label',[[self.picking.id]])
+                           .then(function(action){
+                                return self.do_action(action);
+                           });
+                });
+        },
         set_package_pack: function(package_id, pack,width,height,length,net_weight,gross_weight){
             var self = this;
                 return new instance.web.Model('stock.quant.package')
                     .call('write',[[package_id],{'ul_id': pack ,'width':width,'height':height,'length':length,'net_weight':net_weight,'gross_weight':gross_weight}]);
         },
     });
+    
     module.PickingEditorWidget.include({
         get_pack_data: function(pack_id){              
             return new instance.web.Model('stock.quant.package').call('search_read',[ [['id', '=', pack_id]], ['pack','width','height','length','net_weight','gross_weight'] ], {context: new instance.web.CompoundContext()}).done(function(pack_datas){
@@ -147,8 +265,10 @@ function openerp_picking_order_widgets(instance){
             
             self.render_active_operation();
         	
+            this.$('.js_pick_print_label').click(function(){ self.getParent().print_picking_label(); });
             
-            self.$('table#operations tr td:first-child').click(function(){
+            
+            self.$('table#operations tr td:not(:last-child)').click(function(){
             	
             	var id = $(this).parents("[data-id]:first").data('id');
             	self.set_active_operation(id);
