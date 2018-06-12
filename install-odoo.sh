@@ -186,10 +186,10 @@ read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 # Install PostgreSQL Server
 
-#sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
-#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-#  sudo apt-key add -
-#sudo apt-get update
+sudo su root -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' >>  /etc/apt/sources.list"
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  sudo apt-key add -
+sudo apt-get update
 
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
@@ -350,7 +350,7 @@ sudo npm install -g less
 echo -e "\n---- Install python libraries ----"
 sudo apt-get install graphviz mc bzr lptools make -y
 
-sudo apt-get install -y python-unidecode python-pygraphviz python-psycopg2
+sudo apt-get install -y python-unidecode python-pygraphviz python-xlrd python-suds python-psycopg2
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo -H pip2 install psycogreen
@@ -373,8 +373,8 @@ sudo apt-get -f install -y
 echo -e "\n---- Install Wkhtmltopdf 0.12.2.1 ----"
 sudo apt install -f -y
 cd /tmp
-sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
-tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+sudo wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/aaltinisik/customaddons/blob/11.0/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz?raw=true
+tar -xJf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
 sudo cp wkhtmltox/bin/wk* /usr/local/bin/
 wkhtmltopdf --version
 

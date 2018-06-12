@@ -47,6 +47,8 @@ class res_partner(osv.osv):
             return True
 
         for record in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, wizard_partner_ids):
+            if not record.partner_id.followup_use_fax:
+                continue
             if not record.partner_id.fax:
                 message_body = _("Define faxno for sending fax for payment followup report.")
                 msg_obj.create(cr, uid, {
@@ -120,16 +122,19 @@ class account_followup_print(osv.osv_memory):
                     manuals[key] = 1
                 else:
                     manuals[key] = manuals[key] + 1
-            if partner.max_followup_id.send_email:
-                nbunknownmails += partner_obj.do_partner_mail(cr, uid, [partner.partner_id.id], context=context)
-                nbmails += 1
+            if partner.max_followup_id.send_email and partner.partner_id.followup_use_email:
+                if partner.partner_id.followup_use_email != "false":
+                    nbunknownmails += partner_obj.do_partner_mail(cr, uid, [partner.partner_id.id], context=context)
+                    nbmails += 1
+                else:
+                    nbunknownmails +=1
             if partner.max_followup_id.send_letter:
                 partner_ids_to_print.append(partner.id)
                 nbprints += 1
                 message = "%s<I> %s </I>%s" % (_("Follow-up letter of "), partner.partner_id.latest_followup_level_id_without_lit.name, _(" will be sent"))
                 partner_obj.message_post(cr, uid, [partner.partner_id.id], body=message, context=context)
             #sending fax
-            if partner.max_followup_id.send_fax:
+            if partner.max_followup_id.send_fax and partner.partner_id.followup_use_fax:
                 partner_ids_to_fax.append(partner.id)
                 nbfax += 1
         if nbunknownmails == 0:

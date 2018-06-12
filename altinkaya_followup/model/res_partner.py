@@ -73,7 +73,7 @@ class res_partner(orm.Model):
     def _show_followup_emailaddres(self, cr, uid, partner, without_company=False, context=None):
 
         '''
-        To show followup email no if empty show partner email
+        To show followup email if empty show partner email
 
         :param partner: browse record of the res.partner
         :returns: show followup email no if empty show partner email
