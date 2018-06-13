@@ -141,14 +141,21 @@ function openerp_picking_order_widgets(instance){
                     self.uls = uls;
                 });
         },
-        print_picking_label: function(){
+        print_packages: function(){
             var self = this;
-            return new instance.web.Model('stock.picking.type').call('read', [[self.picking_type_id], ['code'], new instance.web.CompoundContext()])
-                .then(function(pick_type){
-                    return new instance.web.Model('stock.picking').call('do_print_picking_label',[[self.picking.id]])
-                           .then(function(action){
-                                return self.do_action(action);
-                           });
+            return new instance.web.Model('stock.picking')
+                .call('action_print_package',[[self.picking.id]],{context:self.session.user_context})
+                .then(function(action){
+                    return self.do_action(action);
+                });
+               
+        },
+        print_package: function(package_id){
+            var self = this;
+            return new instance.web.Model('stock.picking')
+                .call('action_print_package',[[self.picking.id]],{pack_id:package_id,context:self.session.user_context})
+                .then(function(action){
+                    return self.do_action(action);
                 });
         },
         open_form_view: function(){
@@ -270,7 +277,7 @@ function openerp_picking_order_widgets(instance){
             
             self.render_active_operation();
         	
-            this.$('.js_pick_print_label').click(function(){ self.getParent().print_picking_label(); });
+            this.$('.js_pick_print_label').click(function(){ self.getParent().print_packages(); });
             this.$('.js_pick_open_form').click(function(){ self.getParent().open_form_view(); });
             
             

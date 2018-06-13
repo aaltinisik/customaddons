@@ -42,8 +42,10 @@ class stock_picking_type(osv.osv):
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
 
-    def do_print_picking_label(self, cr, uid, ids, context=None):
-        '''This function prints the picking list'''
+    def do_print_package_label(self, cr, uid, ids, op_id=None, context=None):
+        '''This function prints the package labels of a single picking'''
+        assert len(ids) == 1, 'This option should only be used for a single id at a time.'
+        
         context = dict(context or {}, active_ids=ids)
         return self.pool.get("report").get_action(cr, uid, ids, 'warehouse_barcode_interface.report_picking', context=context)
 
@@ -84,6 +86,49 @@ class stock_picking(osv.osv):
             barcode_str = '0%s' % barcode_str
             
         return super(stock_picking, self).process_barcode_from_ui(cr, uid, picking_id, barcode_str, visible_op_ids, context=context)
+    
+    
+     
+    def printable_packages(self, pack_id=None):
+        
+        
+        package_ids = { v:i+1 for i,v in enumerate(sorted(self.pack_operation_ids.mapped('result_package_id.id')))}
+        
+        
+        operaions = self.pool.get('stock.pack.operation')
+        if pack_id:
+            operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id == pack_id)
+        else:
+            operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id)
+        
+        res = {}
+        
+        for op in operations:
+            package_data = res.get(op.result_package_id.id, {'no':'%s/%s' % (package_ids[op.result_package_id.id],len(package_ids)),
+                                                             'name':op.result_package_id.name,
+                                                             'dimensions':'5x5x5 cm',
+                                                             'net_weight':'net kg',
+                                                             'gross_weight':'gross kg',
+                                                             'contents':[]
+                                                             })
+            package_data['contents'].append({'product':op.product_id.display_name,
+                                          'qty':op.qty_done,
+                                          'uom':op.product_uom_id.name})
+            res.update({op.result_package_id.id:package_data})
+            
+        return res
+    
+    def action_print_package(self, cr, uid, ids, pack_id=None, context=None):
+        context = dict(context or {}, active_ids=ids, active_model='stock.picking',pack_id=pack_id)
+            
+#         picking = self.pool.get('stock.picking').browse(cr, uid, ids, context=context)
+#         res = picking.printable_packages(pack_id)
+#         for k, v in res.items():
+#             print v
+             
+        return self.pool.get("report").get_action(cr, uid, ids, 'warehouse_barcode_interface.aeroo_package_label_print', context=context)
+    
+
      
     
     
