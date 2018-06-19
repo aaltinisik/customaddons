@@ -1,4 +1,5 @@
 from openerp.osv import fields, osv
+from openerp import api
 from datetime import date, datetime
 import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
@@ -88,7 +89,8 @@ class stock_picking(osv.osv):
         return super(stock_picking, self).process_barcode_from_ui(cr, uid, picking_id, barcode_str, visible_op_ids, context=context)
     
     
-     
+    
+    
     def printable_packages(self, pack_id=None):
         
         
@@ -121,14 +123,25 @@ class stock_picking(osv.osv):
     def action_print_package(self, cr, uid, ids, pack_id=None, context=None):
         context = dict(context or {}, active_ids=ids, active_model='stock.picking',pack_id=pack_id)
             
-#         picking = self.pool.get('stock.picking').browse(cr, uid, ids, context=context)
-#         res = picking.printable_packages(pack_id)
-#         for k, v in res.items():
-#             print v
+
              
         return self.pool.get("report").get_action(cr, uid, ids, 'warehouse_barcode_interface.aeroo_package_label_print', context=context)
     
 
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+    
+    def action_done(self, cr, uid, ids, context=None):
+        Picking = self.pool.get('stock.picking')
+        res = super(stock_move, self).action_done(cr, uid, ids, context=context)
+        if res:
+            picking_ids = list(set([m['picking_id'][0] for m in self.read(cr, uid, ids,['picking_id'],context=context)]))
+            
+            pickings_to_print = Picking.search(cr, uid, [('id','in',picking_ids),('picking_type_code','=','outgoing')],context=context)
+            
+            self.pool.get("report").print_document(cr, uid, pickings_to_print, 'warehouse_barcode_interface.aeroo_package_label_print', html=None,
+                data=None, context=context)
+        return res
      
     
     

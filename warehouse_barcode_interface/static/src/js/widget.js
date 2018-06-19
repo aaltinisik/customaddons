@@ -34,6 +34,12 @@ function openerp_picking_order_widgets(instance){
   
     
     module.PickingMainWidget.include({
+    	start: function(){
+    		this._super();
+            var self = this;
+    		this.$('.js_pick_open_form').click(function(){ self.open_form_view(); });
+            
+    	},
     	load: function(picking_id){
             var self = this;
             function load_picking_list(type_id){
@@ -278,7 +284,6 @@ function openerp_picking_order_widgets(instance){
             self.render_active_operation();
         	
             this.$('.js_pick_print_label').click(function(){ self.getParent().print_packages(); });
-            this.$('.js_pick_open_form').click(function(){ self.getParent().open_form_view(); });
             
             
             
@@ -362,6 +367,7 @@ function openerp_picking_order_widgets(instance){
         	
         	this.active_operation_id = operation.cols.id;
         	this.render_active_operation();
+        	this.$('#selected_product_container input.js_qty').focus();
         	
         },
         render_active_operation: function(){
@@ -386,11 +392,13 @@ function openerp_picking_order_widgets(instance){
                         self.getParent().scan_product_id(id,false,op_id);
                     });
                 	
-                	active_container.find('.js_qty').focus(function(){
+                	var qty = active_container.find('.js_qty');
+                	
+                	qty.focus(function(){
                         self.getParent().barcode_scanner.disconnect();
                         
                     });
-                	active_container.find('.js_qty').blur(function(){
+                	qty.blur(function(){
                         var op_id = $(this).parents("[data-id]:first").data('id');
                         var value = parseFloat($(this).val());
                         if (value>=0){

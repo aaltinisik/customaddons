@@ -9,7 +9,7 @@
 			t-att-data-package-id="operation.package_id">
 			
 				<img t-att-src="'/web/binary/image?model=product.product&amp;field=image_medium&amp;id=' + operation.product_id + '&amp;resize=100,80'"></img>
-				<div class="input-group" style="width:50%;align:center">
+				<div class="input-group" style="width:50%;margin-left:25%;">
 					<span class="input-group-addon js_minus input-sm" >
 						<a href="#"><i class="fa fa-minus"></i></a>
 					</span>
@@ -25,6 +25,15 @@
         </div>
         
 	</t>
+	
+	<t t-extend="PickingMainWidget">
+        
+        <t t-jquery="button.js_pick_prev" t-operation="before">
+        	<button type="button" class='btn btn-default js_pick_open_form'> Open in Form View </button>   
+        </t>
+        
+    </t>
+    
     <t t-extend='PickingEditorWidget'>
 
         <t t-jquery="div:nth-child(4)" t-operation="replace">
@@ -40,11 +49,9 @@
                         <h2 class="oe_pick_app_partner" />
                     </div>
                     <div class="col-sm-4 col-xs⁻6 text-right">
-
-					<button type="button" class='btn btn-default js_pick_open_form'> Open in Form View </button>
-                    <button type="button" class='btn btn-default js_pick_done'> Create backorder </button>
-                    <button type="button" class='btn btn-default js_pick_print'> Print </button>
+					<button type="button" class='btn btn-default js_pick_print'> Print </button>
 					<button type="button" class='btn btn-default js_pick_print_label'> Print Label </button>
+					
                     </div>
                 </div>
         </div>
@@ -83,7 +90,8 @@
                     <div class="col-md-3 col-sm-4 col-xs-12 text-right">
                         <h3>
                             <button type="button" class='btn btn-default js_pick_pack js_putinpack'> Put in Pack </button>
-                            <button type="button" class='btn btn-danger js_drop_down fa fa-download'> Put in Cart </button>
+							<button type="button" class='btn btn-danger js_pick_done'> Transfer </button>
+                    
                         </h3>
                     </div>
                 </div>
