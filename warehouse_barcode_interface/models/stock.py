@@ -97,16 +97,18 @@ class stock_picking(osv.osv):
         package_ids = { v:i+1 for i,v in enumerate(sorted(self.pack_operation_ids.mapped('result_package_id.id')))}
         
         
-        operaions = self.pool.get('stock.pack.operation')
-        if pack_id:
-            operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id == pack_id)
-        else:
-            operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id)
+        packed_operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id)
+        unpacked_ops = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id == False)
+        num_packs = len(package_ids) + (len(unpacked_ops) > 0 and 1 or 0)
         
+        if pack_id:
+            packed_operations = self.pack_operation_ids.filtered(lambda po: po.result_package_id.id == pack_id)
+            unpacked_ops = False
+            
         res = {}
         
-        for op in operations:
-            package_data = res.get(op.result_package_id.id, {'no':'%s/%s' % (package_ids[op.result_package_id.id],len(package_ids)),
+        for op in packed_operations:
+            package_data = res.get(op.result_package_id.id, {'no':'%s/%s' % (package_ids[op.result_package_id.id],num_packs),
                                                              'name':op.result_package_id.name,
                                                              'dimensions':'5x5x5 cm',
                                                              'net_weight':'net kg',
@@ -117,6 +119,19 @@ class stock_picking(osv.osv):
                                           'qty':op.qty_done,
                                           'uom':op.product_uom_id.name})
             res.update({op.result_package_id.id:package_data})
+            
+        
+        package_data = {'no':'%s/%s' % (num_packs,num_packs),
+                        'name':'NOPACKAGE',
+                        'dimensions':'',
+                        'net_weight':'',
+                        'gross_weight':'',
+                        'contents':[{'product':op.product_id.display_name,
+                                     'qty':op.qty_done,
+                                     'uom':op.product_uom_id.name} for op in unpacked_ops]
+                                     }
+           
+        res.update({'no_pack':package_data})    
             
         return res
     
