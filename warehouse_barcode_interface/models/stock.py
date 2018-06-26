@@ -91,7 +91,7 @@ class stock_picking(osv.osv):
     
     
     
-    def printable_packages(self, pack_id=None):
+    def get_labels(self, pack_id=None):
         
         
         package_ids = { v:i+1 for i,v in enumerate(sorted(self.pack_operation_ids.mapped('result_package_id.id')))}
@@ -115,6 +115,7 @@ class stock_picking(osv.osv):
                                                              'gross_weight':'gross kg',
                                                              'contents':[]
                                                              })
+            
             package_data['contents'].append({'product':op.product_id.display_name,
                                           'qty':op.qty_done,
                                           'uom':op.product_uom_id.name})
@@ -132,14 +133,68 @@ class stock_picking(osv.osv):
                                      }
            
         res.update({'no_pack':package_data})    
+        
+        labels = []
+        
+        for pack_id, package in res.iteritems():
+            contents = package['contents'] 
+            if len(contents) <= 10:# single page label
+                
+                labels.append({'header':True,
+                               'header_data':{'no':package['no'],
+                                              'name':package['name'],
+                                              'dimensions':package['dimensions'],
+                                              'net_weight':package['net_weight'],
+                                              'gross_weight':package['gross_weight'],
+                                   },
+                               'footer':True,
+                               'footer_data':{},
+                               'items':[{'sequence':i+1,
+                                         'product':c['product'],
+                                         'qty':c['qty'],
+                                         'uom':c['uom']} for i,c in enumerate(contents)]})
+                
+            else:
+                rows_per_page = 24
+                rows_in_page = 12
+                label = {'header':True,
+                         'header_data':{'no':package['no'],
+                                        'name':package['name'],
+                                        'dimensions':package['dimensions'],
+                                        'net_weight':package['net_weight'],
+                                        'gross_weight':package['gross_weight'],
+                                   },
+                         'footer':False,
+                         'footer_data':{},
+                         'items':[]}
+                
+                for i, c in enumerate(contents):
+                    if rows_in_page < rows_per_page:
+                        label['items'].append({'sequence':i+1,
+                                               'product':c['product'],
+                                               'qty':c['qty'],
+                                               'uom':c['uom']})
+                        rows_in_page = rows_in_page + 1
+                    else:
+                        labels.append(label)
+                        label = {'header':False,
+                         'header_data':{},
+                         'footer':False,
+                         'footer_data':{},
+                         'items':[{'sequence':i+1,
+                                   'product':c['product'],
+                                   'qty':c['qty'],
+                                   'uom':c['uom']}]}
+                        rows_in_page = 1
+                label['footer'] = True
+                label['footer_data'] = {}
+                labels.append(label)
+                
             
-        return res
+        return labels
     
     def action_print_package(self, cr, uid, ids, pack_id=None, context=None):
-        context = dict(context or {}, active_ids=ids, active_model='stock.picking',pack_id=pack_id)
-            
-
-             
+        context = dict(context or {}, active_ids=ids, active_model='stock.picking',pack_id=pack_id)     
         return self.pool.get("report").get_action(cr, uid, ids, 'warehouse_barcode_interface.aeroo_package_label_print', context=context)
     
 
