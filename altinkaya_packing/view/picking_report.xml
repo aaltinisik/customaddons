@@ -22,20 +22,20 @@
                                 <div style="font-size:10px;">
                                     <br/>
                                     <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
-                                        <span ><strong>Tedarikçi Adresi:</strong><t t-esc="o.partner_id.display_name"/> <t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
+                                        <span ><strong>Tedarikçi Adresi:</strong> <span style="font-size:14px;"><t t-esc="o.partner_id.display_name"/> </span> <t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
                                     </div>
                                     <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
-                                        <span><strong>Depo Adresi:</strong><t t-esc="o.partner_id.display_name"/> <t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
+                                        <span><strong>Depo Adresi:</strong> <span style="font-size:14px;"><t t-esc="o.partner_id.display_name"/> </span><t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
                                     </div>
                                     <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
-                                        <span><strong>Müşteri Adresi:</strong><t t-esc="o.partner_id.display_name"/> <t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
+                                        <span><strong>Müşteri Adresi:</strong> <span style="font-size:14px;"> <t t-esc="o.partner_id.display_name"/> </span><t t-esc="o.partner_id.street"/> <t t-esc="o.partner_id.street2"/> <t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.country_id.name"/></span>
 
                                     </div>
                                     <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
-                                        <span><strong>Teslimat Adresi:</strong><t t-esc="o.move_lines[0].partner_id.display_name"/> <t t-esc="o.move_lines[0].partner_id.street"/> <t t-esc="o.move_lines[0].partner_id.street2"/> <t t-esc="o.move_lines[0].partner_id.city"/> <t t-esc="o.move_lines[0].partner_id.state_id.name"/> <t t-esc="o.move_lines[0].partner_id.name"/></span>
+                                        <span><strong>Teslimat Adresi:</strong> <span style="font-size:14px;"><t t-esc="o.move_lines[0].partner_id.display_name"/></span> <t t-esc="o.move_lines[0].partner_id.street"/> <t t-esc="o.move_lines[0].partner_id.street2"/> <t t-esc="o.move_lines[0].partner_id.city"/> <t t-esc="o.move_lines[0].partner_id.state_id.name"/> <t t-esc="o.move_lines[0].partner_id.name"/></span>
                                     </div>
                                     <div t-if="o.picking_type_id.code != 'internal' and (not o.move_lines or not o.move_lines[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
-                                        <span><strong>Depo Adresi:</strong><t t-esc="o.picking_type_id.warehouse_id.partner_id.display_name"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.street"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.city"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.state_id.name"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/></span>
+                                        <span><strong>Depo Adresi:</strong> <span style="font-size:14px;"><t t-esc="o.picking_type_id.warehouse_id.partner_id.display_name"/></span> <t t-esc="o.picking_type_id.warehouse_id.partner_id.street"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.city"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.state_id.name"/> <t t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/></span>
                                     </div>
                                  </div>
                             </div>
@@ -91,7 +91,7 @@
                               <tbody>
                                 <tr t-foreach="o.move_lines" t-as="move">
                                     <t>
-                                        <td><span style="font-size:12px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:10px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:10px;"><t t-esc="move.product_id.name_variant"/></span></td>
+                                        <td><span style="font-size:14px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:12px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:13px;"><t t-esc="move.product_id.name_variant"/></span></td>
                                         <td class="text-right" style="font-size:12px;">
 
                                             <t>
