@@ -1,0 +1,16 @@
+I8,E,001
+ZN
+q822
+O
+JF
+ZT
+Q400,25
+N
+{% for location in objects %}
+GG340,340,"cicek"
+A330,390,2,n,1,1,N,""
+LO23,333,384,2
+A405,335,2,o,1,1,N,"${location.display_name}"
+B388,100,2,E30,3,6,89,B,"${location.loc_barcode or ''}"
+P1,1
+{% end %}
