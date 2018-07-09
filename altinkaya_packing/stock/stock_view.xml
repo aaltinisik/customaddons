@@ -14,7 +14,7 @@
                    <filter string="Asım" domain="[['x_hazirlayan', '=', 'Asim']]"/>
 <filter string="Harun" domain="[['x_hazirlayan', '=', 'Harun']]"/>
 <filter string="Muhammet" domain="[['x_hazirlayan', '=', 'Muhammet']]"/>
-<filter string="Muharrem" domain="[['x_hazirlayan', '=', 'Muharrem']]"/>
+<filter string="Bilal" domain="[['x_hazirlayan', '=', 'Bilal']]"/>
 
 <separator/>
                </filter>
