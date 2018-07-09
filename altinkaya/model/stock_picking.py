@@ -17,7 +17,7 @@ class stock_picking(osv.osv):
                                     [("Asim",u"Asım"),
                                      ("Muhammet","Muhammet"),
                                      ("Harun","Harun"),
-                                     ("Muharrem", "Muharrem"),
+                                     ("Bilal", "Bilal"),
                                      ("Sefer","Sefer")],
                                      u'Siparişi Hazırlayan', select=True),
                 'comment_irsaliye': fields.text(u'İrsaliye Notu'),
