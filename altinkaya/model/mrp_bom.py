@@ -24,8 +24,12 @@ class MrpBoM(models.Model):
     
     
     wc_parameter_ids = fields.One2many('mrp.bom.wcparameter','bom_id','Workcenter Parameters')
-    
-    
+
+    categ_id = fields.Many2one('product.category',
+                                 related='product_tmpl_id.categ_id',
+                                 string='Category',
+                                 store=True, readonly=True)
+
     @api.multi
     def _prepare_wc_line(self, wc_use, level=0, factor=1):
         res = super(MrpBoM, self)._prepare_wc_line(
