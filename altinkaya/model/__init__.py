@@ -3,6 +3,7 @@ import sale_order
 import res_partner
 import product_product
 import product_template
+import product_template2
 import account_invoice
 import mrp_bom
 import mrp_production
