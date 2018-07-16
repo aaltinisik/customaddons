@@ -12,3 +12,5 @@ import product_pricelist_item
 import stock_picking
 import manufacturing
 import stock_move
+import stock_warehouse_orderpoint
+

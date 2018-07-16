@@ -11,9 +11,17 @@
               <field name="picking_type_id" position="after">
 
                   <seperator/>
+                        <filter string="Today's Deliveries" name="todaydel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
+
                         <filter string="Yesterday's Deliveries" name="yesterdaydel"
                         domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 00:00:00')),
                                  ('date_done','&lt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="last 3 day's Deliveries" name="threedaydel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-2)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
 
                         <filter string="last Week's Deliveries" name="lastweekdel"
                         domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(weeks=-1,days=0)).strftime('%Y-%m-%d 00:00:00')),

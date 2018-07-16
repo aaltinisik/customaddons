@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 21:22+0000\n"
-"PO-Revision-Date: 2017-08-28 21:22+0000\n"
+"POT-Creation-Date: 2018-07-16 20:49+0000\n"
+"PO-Revision-Date: 2018-07-16 20:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,13 +27,23 @@ msgstr "Bu Ay Gön."
 
 #. module: warehouse_filters
 #: view:stock.picking:warehouse_filters.stock_picking_sevk_inherit_view
+msgid "Today's Deliveries"
+msgstr "Bugün Onaylanan"
+
+#. module: warehouse_filters
+#: view:stock.picking:warehouse_filters.stock_picking_sevk_inherit_view
 msgid "Two Weeks ago"
 msgstr "2 Haftadan eski"
 
 #. module: warehouse_filters
 #: view:stock.picking:warehouse_filters.stock_picking_sevk_inherit_view
 msgid "Yesterday's Deliveries"
-msgstr "Dün Gön."
+msgstr "Dün Onaylanan"
+
+#. module: warehouse_filters
+#: view:stock.picking:warehouse_filters.stock_picking_sevk_inherit_view
+msgid "last 3 day's Deliveries"
+msgstr "2 gündür Onaylanan"
 
 #. module: warehouse_filters
 #: view:stock.picking:warehouse_filters.stock_picking_sevk_inherit_view
