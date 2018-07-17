@@ -55,6 +55,7 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-utils.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-wip.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/mail-addons.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/techspawn-odoo-apps.git
 
 
 
@@ -221,7 +222,7 @@ ln -s -f $OCA_HOME/odoomrp-utils/purchase_order_line_stock_available $OE_HOME/cu
 ln -s -f $OCA_HOME/stock-logistics-barcode/stock_inventory_barcode $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/support_branding $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/mail-addons/mail_fix_553 $OE_HOME/custom/addons/
-
+ln -s -f $OCA_HOME/techspawn-odoo-apps/warehouse_stock_restrictions $OE_HOME/custom/addons/
 
 
         break;;
