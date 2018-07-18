@@ -75,4 +75,38 @@
             file="altinkaya_packing.report_picking_altinkayaH"
         />
     </data>
+
+
+	<data>
+		
+		<record id="aeroo_package_label" model="ir.actions.report.xml">
+            <field name="name">Print Package Label</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">stock.picking</field>
+            <field name="report_name">package_label_print</field>
+            <field name="copies">1</field>
+
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format">3</field>
+
+            <field name="parser_state">default</field>
+            <field name="charset">utf_8</field>
+            <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">altinkaya_packing/report/package_label.prn</field>
+            <field name="report_file">altinkaya_packing/report/package_label.prn</field>
+            <field name="content_fname">TXT</field>
+
+        </record>
+
+        <record model="ir.values" id="aeroo_package_label_binding">
+            <field eval="'action'" name="key"/>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="'stock.picking'" name="model"/>
+            <field name="name">package_label</field>
+            <field eval="'ir.actions.report.xml,'+str(aeroo_package_label)" name="value"/>
+        </record>
+	
+	</data>
 </openerp>

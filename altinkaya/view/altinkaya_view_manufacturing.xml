@@ -7,6 +7,10 @@
 			<field eval="[(6,0,[])]" name="groups_id" />
 			<field name="arch" type="xml">
 				<field name='location_src_id' position='replace' />
+				<field name='product_id' position='attributes'>
+					<attribute name="domain">[('has_production_bom','=',True)]</attribute>
+					<attribute name="class"></attribute>
+				</field>
 			</field>
 			<field eval="12" name="priority" />
 			<field name="model">mrp.production</field>

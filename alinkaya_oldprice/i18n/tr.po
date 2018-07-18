@@ -220,3 +220,38 @@ msgstr "x2015 Ocak Min İşçcilik"
 msgid "x2015 Ocak işçilik Fiyatı"
 msgstr "x2015 Ocak işçilik Fiyatı"
 
+#. module: alinkaya_oldprice
+#: field:product.product,attr_price:0
+msgid "Attr. Value Price"
+msgstr "Nitelik Değeri Bedeli"
+
+#. module: alinkaya_oldprice
+#: help:product.attribute.line,attr_val_price_coef:0
+msgid "Attribute value coefficient used to compute product price based on attribute value."
+msgstr "Nitelik değerine göre fiyat hesaplamasında kullanılan katsayı"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,attr_base_price:0
+msgid "Base Price"
+msgstr "Baz Fiyat"
+
+#. module: alinkaya_oldprice
+#: help:product.attribute.line,attr_base_price:0
+msgid "Base price used to compute product price based on attribute value."
+msgstr "Nitelik değerine göre fiyat hesaplamasında kullanılan baz fiyat"
+
+#. module: alinkaya_oldprice
+#: help:product.product,attr_price:0
+msgid "Price calculated based on the product's attribute values."
+msgstr "Nitelik değerine göre hesaplanan fiyat"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,use_in_pricing:0
+msgid "Use in pricing"
+msgstr "Fiyat hesabında kullan"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,attr_val_price_coef:0
+msgid "Value Price Multiplier"
+msgstr "Nitelik değeri çarpanı"
+

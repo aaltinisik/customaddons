@@ -31,7 +31,7 @@
             'view/stock_template.xml',
             'view/stock_view.xml',
             'view/stock_quant_package_view.xml',
-
+            'report/report_package_view.xml'
             ],
     'qweb' : ['static/src/xml/picking_order.xml'],
     'installable' : True,

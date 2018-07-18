@@ -7,7 +7,7 @@
     'sequence': 1,
     'summary': 'Altinkaya add fields for old prices for V8',
     'images': [],
-    'depends': ['product','altinkaya'],
+    'depends': ['product','altinkaya','product_attribute_types'],
     'description': """
 Altinkaya Elektronik Cihaz Kutulari Eski fiyat alanlari Ekler
 ===============================================================

@@ -27,3 +27,6 @@ class stock_package(models.Model):
             self.width = self.ul_id.width
             self.height = self.ul_id.height
             self.length = self.ul_id.length
+            
+            
+    

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2015 Antiun Ingeniería S.L. - Jairo Llopis
+     © 2014-2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<openerp>
+<data>
+
+    <record id="view_product_template_form_imgages" model="ir.ui.view">
+        <field name="name">Product images</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook" position="inside">
+                <page string="Images" name="image_ids">
+                    <field name="image_ids"
+                           nolabel="1"
+                           context="{
+                               'default_res_model': 'product.template',
+                               'default_res_id': id
+                           }"
+                           mode="kanban"
+                    >
+                    	
+		                <kanban>
+		                    <field name="file_type_icon"/>
+		                    <field name="url"/>
+		                    <field name="name"/>
+		                    <templates>
+		                        <t t-name="kanban-box">
+		                            <div class="oe_kanban_global_click">
+		                                <div class="oe_kanban_vignette">
+		                                    <div class="product_image">
+		                                        <div t-if="record.file_type_icon.value != 'webimage'">
+		                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
+		                                        </div>
+		                                        <div t-if="record.file_type_icon.value == 'webimage' and !record.url.value">
+		                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
+		                                        </div>
+		                                        <div t-if="record.file_type_icon.value and record.url.value">
+		                                            <img t-att-src="record.url.value"/>
+		                                        </div>
+		                                        
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </t>
+		                    </templates>
+		                </kanban>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</openerp>
