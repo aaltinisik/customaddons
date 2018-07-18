@@ -2,28 +2,23 @@
 <openerp>
 	<data>
 
-  <!--      <record id="product_template_altinkaya_form_eskifiyat" model="ir.ui.view">
-            <field name="name">product.template.altinkaya_form_eskifiyat</field>
+        <record id="product_template_altinkaya_form_attr_price" model="ir.ui.view">
+            <field name="name">product.template.altinkaya_form_attr_price</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view" />
             <field name="arch" type="xml">
-           <xpath expr="//page[@string='Procurements']/group/group[@name='general']" position="after">
-                <group name="Old_price" string="Eski Fiyatlar">
-                    <field name="z_fiyat_2016a"> </field>
-                <field name="z_2016a_iscilik"> </field>
-                <field name="z_min_2016a_iscilik"> </field>
-                <field name="z_fiyat_2015a"> </field>
-                <field name="z_2015a_iscilik"> </field>
-                <field name="z_min_2015a_iscilik"> </field>
-                <field name="z_fiyat_2014"> </field>
-                <field name="z_2014_iscilik"> </field>
-                <field name="z_min_2014_iscilik"> </field>
-                </group>
+           <xpath expr="//field[@name='value_ids']" position="after">
+                
+                <field name="use_in_pricing"> </field>
+                
+                <field name="attr_base_price"> </field>
+                <field name="attr_val_price_coef"> </field>
+                
              </xpath>
             </field>
         </record>
--->
-                <record id="product_product_altinkaya_form_eskifiyat" model="ir.ui.view">
+
+        <record id="product_product_altinkaya_form_eskifiyat" model="ir.ui.view">
             <field name="name">product.product.altinkaya_form_eskifiyat</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view" />
@@ -44,7 +39,15 @@
                 <field name="v_fiyat_2014"> </field>
                 <field name="v_2014_iscilik"> </field>
                 <field name="v_min_2014_iscilik"> </field>
+                
                 </group>
+             </xpath>
+             
+             <xpath expr="//field[@name='lst_price']" position="after">
+                
+                	<field name="attr_price"> </field>
+                
+              
              </xpath>
             </field>
         </record>
