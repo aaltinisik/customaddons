@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
            <xpath expr="//field[@name='value_ids']" position="after">
                 
-                <field name="use_in_pricing"> </field>
+                <field name="use_in_pricing"  />
                 
                 <field name="attr_base_price"> </field>
                 <field name="attr_val_price_coef"> </field>
@@ -17,6 +17,13 @@
              </xpath>
             </field>
         </record>
+
+        <template id="assets_backend" name="help.online.assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/alinkaya_oldprice/static/src/css/alinkaya_oldprice.css" type="text/css"/>
+
+            </xpath>
+        </template>
 
         <record id="product_product_altinkaya_form_eskifiyat" model="ir.ui.view">
             <field name="name">product.product.altinkaya_form_eskifiyat</field>

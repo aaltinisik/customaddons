@@ -56,17 +56,9 @@ class productProduct(osv.Model):
         'name_variant':fields.function(_report_name_get,
                                       string='Variant Name',
                                       type='char', select=1,
-                                      readonly=True, store=False),
-        'terazi_kodu': fields.char(u'Terazi Kodu', size=4, default=None),
+                                      readonly=True, store=False)
 
     }
-
-    _sql_constraints = [
-        ('uniq_terazi_kodu',
-         'unique(terazi_kodu)',
-         u'Terazi kodu eşsiz olmalı'),
-    ]
-
 
 productProduct()
 
