@@ -13,11 +13,12 @@ Dy2-me-dd
 {% for location in objects %}
 Y5,12,tek_cicek
 Lo,5,64,382,66
-AT,74,0,61,65,0,0,0,0,4-10-5-1-2-4
-AE,5,63,1,1,0,0,[${location.display_name[0:10] or ''}]
-AC,5,105,1,1,0,0,${location.display_name[0:30] or ''}
-AC,5,133,1,1,0,0,${location.display_name[0:30] or ''}
-BE,15,171,3,6,75,0,1,8698651118193
+AT,74,0,61,65,0,0,0,0,${location.name[0:12] or ''}
+AE,5,63,1,1,0,0,[${location.display_name[0:20] or ''}]
+AC,5,105,1,1,0,0,Kor:${location.posx or ''} Raf:${location.posy or ''} Yük:${location.posz or ''}
+AC,5,133,1,1,0,0,Üst Konum:${location.location_id.display_name[0:20] or ''}
+BE,15,171,3,6,75,0,1,${location.loc_barcode[0:13] or ''}
 
 ^P1
 E
+{% end %}
