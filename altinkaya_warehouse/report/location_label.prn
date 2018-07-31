@@ -1,16 +1,23 @@
-I8,E,001
-ZN
-q822
-O
-JF
-ZT
-Q400,25
-N
+^Q50,3
+^W104
+^H10
+^AT
+^S7
+^R0
+^E15
+~R255
+^XSET,ROTATION,0
+^L
+Dy2-me-dd
+
 {% for location in objects %}
-GG340,340,"cicek"
-A330,390,2,n,1,1,N,""
-LO23,333,384,2
-A405,335,2,o,1,1,N,"${location.display_name}"
-B388,100,2,E30,3,6,89,B,"${location.loc_barcode or ''}"
-P1,1
-{% end %}
+Y5,12,tek_cicek
+Lo,5,64,382,66
+AT,74,0,61,65,0,0,0,0,4-10-5-1-2-4
+AE,5,63,1,1,0,0,[${location.display_name[0:10] or ''}]
+AC,5,105,1,1,0,0,${location.display_name[0:30] or ''}
+AC,5,133,1,1,0,0,${location.display_name[0:30] or ''}
+BE,15,171,3,6,75,0,1,8698651118193
+
+^P1
+E
