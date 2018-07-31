@@ -42,53 +42,65 @@ class productProduct(osv.Model):
 
     _columns = {
         'v_fiyat_2015a': fields.float(
-             u"2015 Ocak Eski Fiyatı",
+             u"2015 Ocak Eski Fiyatı TL",
              digits_compute=dp.get_precision('Product Price'),
              help=u"2015 Ocak eski fiyatı"),
         'v_2015a_iscilik': fields.float(
-             u"2015 Ocak işçilik Fiyatı",
+             u"2015 Ocak işçilik Fiyatı TL",
              digits_compute=dp.get_precision('Product Price'),
              help=u"2015 Ocak kullanılan birim işçilik fiyatı"),
         'v_min_2015a_iscilik': fields.float(
-             u"2015 Ocak Min İşçcilik",
+             u"2015 Ocak Min İşçcilik TL",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"2015 Ocak kullanılan eski Minimum İşçilik fiyatı"),
+             help=u"2015 Ocak kullanılan eski Minimum İşçilik fiyatı TL"),
         'v_fiyat_2014': fields.float(
-             u"2014 Eski Fiyatı",
+             u"2014 Eski Fiyatı TL",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanılan eski fiyatı"),
+             help=u"2014 yılında kullanılan eski fiyatı TL"),
         'v_2014_iscilik': fields.float(
-             u"2014 işçilik Fiyatı",
+             u"2014 işçilik Fiyatı TL",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanılan birim işçilik fiyatı"),
+             help=u"2014 yılında kullanılan birim işçilik fiyatı TL"),
         'v_min_2014_iscilik': fields.float(
-             u"2014 Min İşçcilik Fiyatı",
+             u"2014 Min İşçcilik Fiyatı TL",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı"),
+             help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı TL"),
         'v_fiyat_2016a': fields.float(
-            u"2015 Ekim Fiyatı",
+            u"2015 Ekim Fiyatı TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"2015 Ekim fiyati"),
+            help=u"2015 Ekim fiyati TL"),
         'v_2016a_iscilik': fields.float(
-            u"2015 Ekim isçilik fiyatı",
+            u"2015 Ekim isçilik fiyatı TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"2015 Ekim birim işçilik fiyatı"),
+            help=u"2015 Ekim birim işçilik fiyatı TL"),
         'v_min_2016a_iscilik': fields.float(
-            u"2015 Ekim Min İscilik",
+            u"2015 Ekim Min İscilik TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u" kullanılan eski Minimum İşcilik fiyatı"),
+            help=u" kullanılan eski Minimum İşcilik fiyatı TL"),
         'v_fiyat_2016b': fields.float(
-            u"2016 Aralık Fiyatı",
+            u"2016 Aralık Fiyatı TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"2016 Aralık fiyatı"),
+            help=u"2016 Aralık fiyatı TL"),
         'v_2016b_iscilik': fields.float(
-            u"2016 Aralık isçilik fiyatı",
+            u"2016 Aralık isçilik fiyatı TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"2016 Aralık birim işçilik fiyatı"),
+            help=u"2016 Aralık birim işçilik fiyatı TL"),
         'v_min_2016b_iscilik': fields.float(
-            u"2016 Aralık Min İsçilik",
+            u"2016 Aralık Min İsçilik TL",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"2016 Aralık Minimum İşçilik fiyatı"),
+            help=u"2016 Aralık Minimum İşçilik fiyatı TL"),
+        'v_fiyat_2017': fields.float(
+            u"2017 Aralık Fiyatı TL",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2017 Aralık fiyatı TL"),
+        'v_2017_iscilik': fields.float(
+            u"2017 Aralık isçilik fiyatı TL",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2017 Aralık birim işçilik fiyatı TL"),
+        'v_min_2017_iscilik': fields.float(
+            u"2017 Aralık Min İsçilik TL",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"2017 Aralık Minimum İşçilik fiyatı TL"),
         'attr_price': fields.function(_compute_attr_based_price, digits_compute=dp.get_precision('Product Price'), string=u"Attr. Value Price",
                                       type='float',
 #             store={
