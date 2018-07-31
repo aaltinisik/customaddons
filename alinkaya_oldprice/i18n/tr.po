@@ -248,7 +248,7 @@ msgstr "Nitelik değerine göre hesaplanan fiyat"
 #. module: alinkaya_oldprice
 #: field:product.attribute.line,use_in_pricing:0
 msgid "Use in pricing"
-msgstr "Fiyatta"
+msgstr "Fiyat hesabında kullan"
 
 #. module: alinkaya_oldprice
 #: field:product.attribute.line,attr_val_price_coef:0
