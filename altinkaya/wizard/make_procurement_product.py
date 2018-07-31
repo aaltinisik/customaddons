@@ -24,7 +24,7 @@ class make_procurement(models.TransientModel):
         group_id = group_obj.create({'name':'Request by %s at %s' % (user.name, fields.Datetime.now())})
         wh = wh_obj.browse(self.warehouse_id.id)
         procure_id = procurement_obj.create({
-            'name':'INT: '+str(user.name),
+            'name':'INT: '+user.name.encode('utf-8'),
             'date_planned': self.date_planned,
             'product_id': self.product_id.id,
             'product_qty': self.qty,
