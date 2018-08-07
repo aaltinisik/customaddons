@@ -8,8 +8,8 @@ from openerp import api, fields, models
 class ProductProduct(models.Model):
     _inherit = "product.product"
     
-    image_ids = fields.Many2many('ir.attachment',
-        compute="_compute_image_ids" ,
+    image_ids = fields.One2many('ir.attachment',
+        compute="_compute_image_ids" , inverse='_inverse_image_ids',
         string="Images")
     
    
@@ -20,6 +20,10 @@ class ProductProduct(models.Model):
         self.image_ids = self.product_tmpl_id.image_ids.filtered(lambda i:i.product_id.id in [False, self.id])
         
 
+    @api.one
+    def _inverse_image_ids(self):
+        deleted = self.product_tmpl_id.image_ids - self.image_ids
+        self.product_tmpl_id.image_ids = self.product_tmpl_id.image_ids  - deleted | self.image_ids
     
 
     @api.multi
