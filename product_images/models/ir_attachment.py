@@ -11,5 +11,6 @@ class ir_attachment(models.Model):
     _inherit = 'ir.attachment'
     
     product_tmpl_id = fields.Many2one('product.template',string='Product Template')
+    product_id = fields.Many2one('product.product',string='Product Variant')
     
     

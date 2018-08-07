@@ -1,56 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- © 2015 Antiun Ingeniería S.L. - Jairo Llopis
-     © 2014-2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
 <openerp>
 <data>
 
-    <record id="view_product_template_form_imgages" model="ir.ui.view">
+    <record id="view_product_template_form_images" model="ir.ui.view">
         <field name="name">Product images</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="/form/sheet/notebook" position="inside">
+            <xpath expr="//notebook" position="inside">
                 <page string="Images" name="image_ids">
                     <field name="image_ids"
                            nolabel="1"
-                           context="{
-                               'default_res_model': 'product.template',
-                               'default_res_id': id
-                           }"
                            mode="kanban"
+                           context="{'default_product_tmpl_id':id,'default_type':'binary'}"
                     >
                     	
 		                <kanban>
 		                    <field name="file_type_icon"/>
-		                    <field name="url"/>
-		                    <field name="name"/>
+		                    <field name="product_id"/>
 		                    <templates>
 		                        <t t-name="kanban-box">
+		                        	
 		                            <div class="oe_kanban_global_click">
+		                            	<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
 		                                <div class="oe_kanban_vignette">
-		                                    <div class="product_image">
-		                                        <div t-if="record.file_type_icon.value != 'webimage'">
-		                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
-		                                        </div>
-		                                        <div t-if="record.file_type_icon.value == 'webimage' and !record.url.value">
-		                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
-		                                        </div>
-		                                        <div t-if="record.file_type_icon.value and record.url.value">
-		                                            <img t-att-src="record.url.value"/>
-		                                        </div>
-		                                        
-		                                    </div>
+		                                	<a type="open">
+			                                    <div class="product_image">
+			                                        <div t-if="record.file_type_icon.value != 'webimage'">
+			                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
+			                                        </div>
+			                                        <div t-if="record.file_type_icon.value == 'webimage'">
+			                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
+			                                        </div>
+			                                        
+			                                        
+			                                    </div>
+		                                    </a>
+		                                    <t t-if="record.product_id.value">
+		                                    	<span t-esc="record.product_id.value"/>
+		                                    </t>
+		                                   
 		                                </div>
 		                            </div>
 		                        </t>
 		                    </templates>
 		                </kanban>
+		                
+		                <form>
+		                	<sheet>
+		                		<label for="name"></label>
+		                	<h1><field name="name"/></h1>
+		                	<group>
+		                		<field name="type" invisible="1"/>
+		                		<field name="datas" filename="datas_fname"/>
+		                		<field name="datas_fname" invisible="1"/>
+		                		<field name="product_tmpl_id"/>
+		                		<field name="product_id" domain="[('product_tmpl_id','=',product_tmpl_id)]"/>
+		                	</group>
+		                		
+		                	</sheet>
+		                	
+		                </form>
+		                
+		                
                     </field>
                 </page>
             </xpath>
         </field>
     </record>
+    
+    
+    
+    
+
+	<record id="view_product_product_form_images" model="ir.ui.view">
+        <field name="name">Product images</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Images" name="image_ids">
+                    <field name="image_ids" nolabel="1" mode="kanban" 
+                    	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary'}">
+                    	
+		                <kanban>
+		                    <field name="file_type_icon"/>
+		                    <field name="product_id"/>
+		                    <templates>
+		                        <t t-name="kanban-box">
+		                        	
+		                            <div class="oe_kanban_global_click">
+		                            	<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+		                                <div class="oe_kanban_vignette">
+		                                	<a type="open">
+			                                    <div class="product_image">
+			                                        <div t-if="record.file_type_icon.value != 'webimage'">
+			                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
+			                                        </div>
+			                                        <div t-if="record.file_type_icon.value == 'webimage'">
+			                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
+			                                        </div>
+			                                        
+			                                        
+			                                    </div>
+		                                    </a>
+		                                    <t t-if="record.product_id.value">
+		                                    	<span t-esc="record.product_id.value"/>
+		                                    </t>
+		                                   
+		                                </div>
+		                            </div>
+		                            
+		                        </t>
+		                    </templates>
+		                </kanban>
+		                
+		                <form>
+		                	<sheet>
+		                		<label for="name"></label>
+		                		<h1><field name="name"/></h1>
+		                	<group>
+		                		<field name="type" invisible="1"/>
+		                		<field name="datas" filename="datas_fname"/>
+		                		<field name="datas_fname" invisible="1"/>
+		                		<field name="product_tmpl_id"/>
+		                		<field name="product_id" domain="[('product_tmpl_id','=',product_tmpl_id)]"/>
+		                	</group>
+		                		
+		                	</sheet>
+		                	
+		                </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>    
+
+    
 
 </data>
 </openerp>

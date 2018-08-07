@@ -15,7 +15,11 @@
     ],
     "data": [
         'views/product_template_view.xml',
+        'views/web_assets.xml'
     ],
+    'qweb':[
+        'static/src/xml/image_galery_templates.xml',
+        ],
     'installable': True,
 
 }

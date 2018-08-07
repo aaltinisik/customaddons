@@ -11,5 +11,5 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
      
     image_ids = fields.One2many('ir.attachment','product_tmpl_id',
-                                 string='Other Images'
+                                 string='Product Images'
                                  )
