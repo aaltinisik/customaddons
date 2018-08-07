@@ -73,10 +73,36 @@
 						<field name="payment_term">
 						</field>
 					</field>
+					
+					
 				</data>
 			</field>
 			<field eval="9" name="priority" />
 		</record>
+
+
+		<record id="sale_order_custom_products_domain" model="ir.ui.view">
+			<field name="name">sale.order.altinkaya.show_custom_products</field>
+			<field name="model">sale.order</field>
+			<field name="priority" eval="19" />
+			<field name="type">form</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<data>
+					
+	               <xpath expr="//field[@name='order_line']/form//field[@name='product_tmpl_id']"
+                       position="before">
+                    	<field name="show_custom_products" />
+                    
+                	</xpath>
+					
+					
+					
+				</data>
+			</field>
+			<field eval="30" name="priority" />
+		</record>
+
 
 
 	</data>

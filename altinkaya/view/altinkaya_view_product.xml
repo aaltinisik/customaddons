@@ -2,7 +2,7 @@
 <openerp>
 	<data>
 
-				<record id="product_product_altinkaya_form_fiyatlar" model="ir.ui.view">
+		<record id="product_product_altinkaya_form_fiyatlar" model="ir.ui.view">
 			<field name="name">product.product.altinkaya_form_fiyatlar</field>
 			<field name="model">product.product</field>
 			<field name="inherit_id" ref="product.product_normal_form_view" />
@@ -20,6 +20,18 @@
 			</field>
 		</record>
 
+
+		<record id="product_category_custom_products" model="ir.ui.view">
+			<field name="name">product.category.custom_products</field>
+			<field name="model">product.category</field>
+			<field name="inherit_id" ref="product.product_category_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='type']" position="after">
+					<field name="custom_products"></field>
+					
+				</xpath>
+			</field>
+		</record>
 
 	</data>
 </openerp>

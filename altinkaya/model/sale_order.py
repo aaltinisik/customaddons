@@ -1,6 +1,8 @@
 from openerp.osv import osv, fields
 from openerp.tools.translate import _
 
+from openerp import models, fields as new_fields, api
+
 from werkzeug import url_encode
 import hashlib
 
@@ -43,3 +45,21 @@ class sale_order(osv.Model):
 
 sale_order()
 
+
+class sale_order_line(models.Model):
+    _inherit= 'sale.order.line'
+    
+    show_custom_products = new_fields.Boolean('Show Custom Products')
+    
+    @api.onchange('show_custom_products')
+    def onchange_show_custom(self):
+        domain = []
+        self.product_tmpl_id = False
+        self.product_id = False
+        
+        if not self.show_custom_products:
+            custom_categories = self.env['product.category'].search([('custom_products','=',True)])
+            domain = [('categ_id','not in',custom_categories.ids)]
+            
+        return {'domain':{'product_tmpl_id':domain}}
+    
