@@ -8,5 +8,6 @@ class product_category(osv.Model):
             'Kategori Referansi',
             size=64,
             required=False),
+        'custom_products':fields.boolean('Custom Products')
     }
 product_category()
