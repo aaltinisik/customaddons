@@ -73,6 +73,11 @@
 						<field name="payment_term">
 						</field>
 					</field>
+					<header position="inside">
+						<button name="action_explode_set_products" type="object" string="Explode Set Contents" 
+							attrs="{'invisible':[('contains_set_product','=',True)]}"/>
+						<field name="contains_set_product" invisible="1"/>
+					</header>
 					
 					
 				</data>
@@ -93,6 +98,8 @@
 	               <xpath expr="//field[@name='order_line']/form//field[@name='product_tmpl_id']"
                        position="before">
                     	<field name="show_custom_products" />
+                    	<field name="set_product"/>
+                    	<span attrs="{'invisible':[('set_product','=',False)]}"></span>
                     
                 	</xpath>
 					
