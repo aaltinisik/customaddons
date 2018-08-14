@@ -1,27 +1,26 @@
-from openerp.osv import osv, fields
+#from openerp.osv import osv, fields
 from openerp.tools.translate import _
 
-from openerp import models, fields as new_fields, api
+from openerp import models,fields, api
 
 from werkzeug import url_encode
 import hashlib
 
-class sale_order(osv.Model):
+class sale_order(models.Model):
     _inherit = 'sale.order'
 
-    def print_quotation(self, cr, uid, ids, context=None):
+    @api.multi
+    def print_quotation(self):
         '''
         This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
         '''
-        assert len(ids) == 1, 'This option should only be used for a single id at a time'
-        self.signal_workflow(cr, uid, ids, 'quotation_sent')
-        return self.pool['report'].get_action(cr, uid, ids, 'sale.orderprint', context=context)
+        assert len(self.ids) == 1, 'This option should only be used for a single id at a time'
+        self.signal_workflow('quotation_sent')
+        return self.env['report'].get_action(self, 'sale.orderprint')
 
-
-    def _altinkaya_payment_url(self, cr, uid, ids, field, arg, context=None):
-        res = dict.fromkeys(ids, False)
-        for order in self.browse(cr, uid, ids, context=context):
-
+    @api.multi
+    def _altinkaya_payment_url(self):
+        for order in self:
             tutar = '%d' % (int)(100*order.amount_total)
             eposta = order.partner_id.email
             if eposta is False:
@@ -36,20 +35,18 @@ class sale_order(osv.Model):
                     "lang": unicode(order.partner_id.lang),
                     "hashtr": hashlib.sha1(unicode(order.currency_id.name) + unicode(order.partner_id.commercial_partner_id.ref) + unicode(eposta) + unicode(tutar) + unicode(order.name) + unicode(order.company_id.hash_code)).hexdigest().upper(),
                     }
-            res[order.id] = "?" + url_encode(params)
-        return res
+            order.altinkaya_payment_url = "?" + url_encode(params)
+        
+    altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',compute='_altinkaya_payment_url')
+    
 
-    _columns = {
-                'altinkaya_payment_url': fields.function(_altinkaya_payment_url, type='char', string='Altinkaya Payment Url'),
-                }
 
-sale_order()
 
 
 class sale_order_line(models.Model):
     _inherit= 'sale.order.line'
     
-    show_custom_products = new_fields.Boolean('Show Custom Products')
+    show_custom_products = fields.Boolean('Show Custom Products')
     
     @api.onchange('show_custom_products')
     def onchange_show_custom(self):
