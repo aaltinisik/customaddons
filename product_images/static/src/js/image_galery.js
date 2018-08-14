@@ -13,9 +13,12 @@ instance.web.form.FieldImageGalery = instance.web.form.FieldMany2One.extend({
 			if(data.image_ids.length == 0){
 				return;
 			}
-			var dialog = new instance.web.Dialog(this, 
-					{ title: _t("Product Images")}, 
-					QWeb.render("image_galery",{'image_ids':data.image_ids})).open();
+			return new instance.web.Model('ir.attachment').call('read',[data.image_ids,['name']]).then(function(images){
+				var dialog = new instance.web.Dialog(this, 
+						{ title: _t("Product Images")}, 
+						QWeb.render("image_galery",{'image_ids':images})).open();
+			})
+			
 				
         });
 		
@@ -24,3 +27,27 @@ instance.web.form.FieldImageGalery = instance.web.form.FieldMany2One.extend({
 });
 
 instance.web.form.widgets.add('image_galery','instance.web.form.FieldImageGalery');
+
+
+instance.web.ListView.List.include({
+	init: function(){
+		this._super.apply(this, arguments);
+		this.$current.delegate('a.fa-image', 'click', function (e) {
+			var product_id = $(e.currentTarget).data('product-id');
+			new instance.web.Model('product.product').call('read',[product_id, ['image_ids']]).then(function(data){
+				if(data.image_ids.length == 0){
+					return;
+				}
+				return new instance.web.Model('ir.attachment').call('read',[data.image_ids,['name']]).then(function(images){
+					var dialog = new instance.web.Dialog(this, 
+							{ title: _t("Product Images")}, 
+							QWeb.render("image_galery",{'image_ids':images})).open();
+				})
+				
+					
+	        });
+            e.preventDefault();
+        })
+		
+	}
+});

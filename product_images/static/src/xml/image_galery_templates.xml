@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     
+    
+    <t t-extend="ListView.row"><t t-jquery="[t-raw='render_cell(record, column)']"  t-operation="replace"><div><span><t t-raw="render_cell(record, column)"/></span><t t-if="column.image_galery === '1'"><a t-att-data-product-id="record.get(column.id)[0]" class="fa fa-image" style="float:right;"></a></t></div></t></t>
+    
+    
     <t t-name="image_galery">
 
     	<div id="image_carousel" class="carousel slide" data-ride="carousel">
@@ -16,8 +20,9 @@
 		  <div class="carousel-inner" style="min-height:400px;">
 		    
 			<div t-foreach="image_ids" t-as="img_id" t-att-class="'item' + ((img_id_index == 0) and ' active' or '')"
-				style="padding-left:20px;padding-right:20px;">
-    			<img t-att-src="'/web/binary/image?model=ir.attachment&amp;field=datas&amp;id=' + img_id" style="margin:auto;"></img>
+				style="padding-left:20px;padding-right:20px;text-align:center;">
+    			<img t-att-src="'/web/binary/image?model=ir.attachment&amp;field=datas&amp;id=' + img_id['id']" style="margin:auto;"></img>
+    			<span><t t-esc="img_id['name']"/></span>
     		</div>
 		  </div>
 		

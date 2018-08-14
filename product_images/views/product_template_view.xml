@@ -2,6 +2,45 @@
 <openerp>
 <data>
 
+
+	<record id="view_ir_attachment_kanban_product_images" model="ir.ui.view">
+        <field name="name">Product images</field>
+        <field name="model">ir.attachment</field>
+        <field name="priority" eval="32"/>
+        <field name="arch" type="xml">
+        	<kanban>
+	            <field name="file_type_icon"/>
+	            <field name="product_id"/>
+	            <templates>
+	                <t t-name="kanban-box">
+	                	
+	                    <div class="oe_kanban_global_click">
+	                    	<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+	                        <div class="oe_kanban_vignette">
+	                        	<a type="open">
+	                             <div class="product_image">
+	                                 <div t-if="record.file_type_icon.value != 'webimage'">
+	                                     <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
+	                                 </div>
+	                                 <div t-if="record.file_type_icon.value == 'webimage'">
+	                                     <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
+	                                 </div>
+	                                 
+	                                 
+	                             </div>
+	                            </a>
+	                            <t t-if="record.product_id.value">
+	                            	<span t-esc="record.product_id.value"/>
+	                            </t>
+	                           
+	                        </div>
+	                    </div>
+	                </t>
+	            </templates>
+	        </kanban>
+        </field>
+    </record>
+        
     <record id="view_product_template_form_images" model="ir.ui.view">
         <field name="name">Product images</field>
         <field name="model">product.template</field>
@@ -9,43 +48,12 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Images" name="image_ids">
-                    <field name="image_ids"
+                    <field name="image_tmpl_ids"
                            nolabel="1"
                            mode="kanban"
-                           context="{'default_product_tmpl_id':id,'default_type':'binary'}"
+                           context="{'default_product_tmpl_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}"
                     >
-                    	
-		                <kanban>
-		                    <field name="file_type_icon"/>
-		                    <field name="product_id"/>
-		                    <templates>
-		                        <t t-name="kanban-box">
-		                        	
-		                            <div class="oe_kanban_global_click">
-		                            	<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
-		                                <div class="oe_kanban_vignette">
-		                                	<a type="open">
-			                                    <div class="product_image">
-			                                        <div t-if="record.file_type_icon.value != 'webimage'">
-			                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
-			                                        </div>
-			                                        <div t-if="record.file_type_icon.value == 'webimage'">
-			                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
-			                                        </div>
-			                                        
-			                                        
-			                                    </div>
-		                                    </a>
-		                                    <t t-if="record.product_id.value">
-		                                    	<span t-esc="record.product_id.value"/>
-		                                    </t>
-		                                   
-		                                </div>
-		                            </div>
-		                        </t>
-		                    </templates>
-		                </kanban>
-		                
+
 		                <form>
 		                	<sheet>
 		                		<label for="name"></label>
@@ -79,40 +87,9 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Images" name="image_ids">
+                	<field name="image_tmpl_ids" nolabel="1" mode="kanban" readonly="1"/>
                     <field name="image_variant_ids" nolabel="1" mode="kanban" 
-                    	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary'}">
-                    	
-		                <kanban>
-		                    <field name="file_type_icon"/>
-		                    <field name="product_id"/>
-		                    <templates>
-		                        <t t-name="kanban-box">
-		                        	
-		                            <div class="oe_kanban_global_click">
-		                            	<a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
-		                                <div class="oe_kanban_vignette">
-		                                	<a type="open">
-			                                    <div class="product_image">
-			                                        <div t-if="record.file_type_icon.value != 'webimage'">
-			                                            <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
-			                                        </div>
-			                                        <div t-if="record.file_type_icon.value == 'webimage'">
-			                                            <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
-			                                        </div>
-			                                        
-			                                        
-			                                    </div>
-		                                    </a>
-		                                    <t t-if="record.product_id.value">
-		                                    	<span t-esc="record.product_id.value"/>
-		                                    </t>
-		                                   
-		                                </div>
-		                            </div>
-		                            
-		                        </t>
-		                    </templates>
-		                </kanban>
+                    	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}">
 		                
 		                <form>
 		                	<sheet>

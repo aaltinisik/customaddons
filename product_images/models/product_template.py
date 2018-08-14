@@ -10,6 +10,4 @@ class ProductTemplate(models.Model):
     
     _inherit = 'product.template'
      
-    image_ids = fields.One2many('ir.attachment','product_tmpl_id', domain=[('product_id','=',False)],
-                                 string='Product Images'
-                                 )
+    image_tmpl_ids = fields.One2many('ir.attachment', 'product_tmpl_id',domain=[('product_id','=',False)], string='Product Images')

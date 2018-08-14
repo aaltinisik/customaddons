@@ -17,9 +17,9 @@ class ProductProduct(models.Model):
                                  )
 
     @api.one
-    @api.depends('product_tmpl_id', 'product_tmpl_id.image_ids')
+    @api.depends('product_tmpl_id', 'product_tmpl_id.image_tmpl_ids')
     def _compute_image_ids(self):
-        self.image_ids = self.product_tmpl_id.image_ids | self.image_variant_ids
+        self.image_ids = self.product_tmpl_id.image_tmpl_ids | self.image_variant_ids
         
 
 
