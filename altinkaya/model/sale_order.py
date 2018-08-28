@@ -1,27 +1,29 @@
-from openerp.osv import osv, fields
+#from openerp.osv import osv, fields
 from openerp.tools.translate import _
 
-from openerp import models, fields as new_fields, api
+from openerp import models,fields, api
 
 from werkzeug import url_encode
 import hashlib
 
-class sale_order(osv.Model):
+class sale_order(models.Model):
     _inherit = 'sale.order'
 
-    def print_quotation(self, cr, uid, ids, context=None):
+
+    altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',compute='_altinkaya_payment_url')
+    
+    @api.multi
+    def print_quotation(self):
         '''
         This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
         '''
-        assert len(ids) == 1, 'This option should only be used for a single id at a time'
-        self.signal_workflow(cr, uid, ids, 'quotation_sent')
-        return self.pool['report'].get_action(cr, uid, ids, 'sale.orderprint', context=context)
+        assert len(self.ids) == 1, 'This option should only be used for a single id at a time'
+        self.signal_workflow('quotation_sent')
+        return self.env['report'].get_action(self, 'sale.orderprint')
 
-
-    def _altinkaya_payment_url(self, cr, uid, ids, field, arg, context=None):
-        res = dict.fromkeys(ids, False)
-        for order in self.browse(cr, uid, ids, context=context):
-
+    @api.multi
+    def _altinkaya_payment_url(self):
+        for order in self:
             tutar = '%d' % (int)(100*order.amount_total)
             eposta = order.partner_id.email
             if eposta is False:
@@ -36,20 +38,41 @@ class sale_order(osv.Model):
                     "lang": unicode(order.partner_id.lang),
                     "hashtr": hashlib.sha1(unicode(order.currency_id.name) + unicode(order.partner_id.commercial_partner_id.ref) + unicode(eposta) + unicode(tutar) + unicode(order.name) + unicode(order.company_id.hash_code)).hexdigest().upper(),
                     }
-            res[order.id] = "?" + url_encode(params)
+            order.altinkaya_payment_url = "?" + url_encode(params)
+        
+    
+    @api.multi
+    def write(self, vals):
+        res = super(sale_order, self).write(vals)
+        self.order_line.explode_set_contents()
         return res
-
-    _columns = {
-                'altinkaya_payment_url': fields.function(_altinkaya_payment_url, type='char', string='Altinkaya Payment Url'),
-                }
-
-sale_order()
+    
+    @api.model
+    def create(self, vals):
+        res = super(sale_order, self).create(vals)
+        res.order_line.explode_set_contents()
+        return res
+    
+    
 
 
 class sale_order_line(models.Model):
     _inherit= 'sale.order.line'
     
-    show_custom_products = new_fields.Boolean('Show Custom Products')
+    show_custom_products = fields.Boolean('Show Custom Products')
+    set_product = fields.Boolean('Set product?', compute='_compute_set_product')
+    
+    @api.one
+    @api.depends('product_id')
+    def _compute_set_product(self):
+        bom_obj = self.env['mrp.bom'].sudo()
+        bom_id = bom_obj._bom_find(product_id=self.product_id.id, properties=self.property_ids)
+        if not bom_id:
+            self.set_product = False
+        else:
+            bom_id = bom_obj.browse(bom_id)
+            self.set_product = bom_id.type == 'phantom'
+        
     
     @api.onchange('show_custom_products')
     def onchange_show_custom(self):
@@ -62,4 +85,67 @@ class sale_order_line(models.Model):
             domain = [('categ_id','not in',custom_categories.ids)]
             
         return {'domain':{'product_tmpl_id':domain}}
+    
+    
+    
+    @api.multi
+    def explode_set_contents(self):
+        """ Explodes order lines.
+        """
+        
+        bom_obj = self.env['mrp.bom'].sudo()
+        prod_obj = self.env["product.product"].sudo()
+        uom_obj = self.env["product.uom"].sudo()
+        to_unlink_ids = self.env['sale.order.line']
+        to_explode_again_ids = self.env['sale.order.line']
+            
+        for line in self.filtered(lambda l: l.set_product == True):
+            property_ids = line.property_ids
+            bom_id = bom_obj._bom_find(product_id=line.product_id.id, properties=property_ids)
+            if not bom_id:
+                continue
+            bom_id = bom_obj.browse(bom_id)
+            if bom_id.type == 'phantom':
+                factor = uom_obj._compute_qty(line.product_uom.id, line.product_uom_qty, bom_id.product_uom.id) / bom_id.product_qty
+                res = bom_id._bom_explode(line.product_id, factor, property_ids)
+    
+                for bom_line in res[0]:
+                    product = prod_obj.browse( bom_line['product_id'])
+                    
+                    valdef = {
+                        'order_id': line.order_id.id,
+                        'product_id': product.id,
+                        'product_tmpl_id': product.product_tmpl_id.id,
+                        'product_uom': bom_line['product_uom'],
+                        'product_uom_qty': bom_line['product_qty'],
+#                        'product_uos': line['product_uos'],
+#                        'product_uos_qty': line['product_uos_qty'],
+                        'name': bom_line['name'],
+                    }
+                    
+                    res = self.env['sale.order.line'].product_id_change(
+                                    line.order_id.pricelist_id.id, product.id,
+                                    qty=bom_line['product_qty'], uom=bom_line['product_uom'],
+                                    qty_uos=bom_line['product_qty'], uos=bom_line['product_uom'],
+                                    name=bom_line['name'], partner_id=line.order_id.partner_id.id, lang=False,
+                                    update_tax=True, date_order=line.order_id.date_order, packaging=False,
+                                    fiscal_position=line.order_id.fiscal_position.id, flag=False)
+                    
+                    valdef.update(res['value'])
+                    
+                    sol_id = self.create(valdef)
+                    to_explode_again_ids |= sol_id
+                
+                
+                to_unlink_ids |= line
+                
+        #check if new moves needs to be exploded
+        if to_explode_again_ids:
+            to_explode_again_ids.explode_set_contents()   
+        #delete the line with original product which is not relevant anymore     
+        if to_unlink_ids:
+            to_unlink_ids.unlink()
+            
+
+    
     
