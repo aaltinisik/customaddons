@@ -112,17 +112,6 @@ class sale_order_line(models.Model):
                 for bom_line in res[0]:
                     product = prod_obj.browse( bom_line['product_id'])
                     
-                    valdef = {
-                        'order_id': line.order_id.id,
-                        'product_id': product.id,
-                        'product_tmpl_id': product.product_tmpl_id.id,
-                        'product_uom': bom_line['product_uom'],
-                        'product_uom_qty': bom_line['product_qty'],
-#                        'product_uos': line['product_uos'],
-#                        'product_uos_qty': line['product_uos_qty'],
-                        'name': bom_line['name'],
-                    }
-                    
                     res = self.env['sale.order.line'].product_id_change(
                                     line.order_id.pricelist_id.id, product.id,
                                     qty=bom_line['product_qty'], uom=bom_line['product_uom'],
@@ -131,7 +120,19 @@ class sale_order_line(models.Model):
                                     update_tax=True, date_order=line.order_id.date_order, packaging=False,
                                     fiscal_position=line.order_id.fiscal_position.id, flag=False)
                     
-                    valdef.update(res['value'])
+                    valdef = res['value']
+                    
+                    valdef.update({
+                            'order_id': line.order_id.id,
+                            'product_id': product.id,
+                            'product_tmpl_id': product.product_tmpl_id.id,
+                            'product_uom': bom_line['product_uom'],
+                            'product_uom_qty': bom_line['product_qty'],
+    #                        'product_uos': line['product_uos'],
+    #                        'product_uos_qty': line['product_uos_qty'],
+                            'name': bom_line['name'],
+                            'discount':line.discount
+                        })
                     
                     sol_id = self.create(valdef)
                     to_explode_again_ids |= sol_id
