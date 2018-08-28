@@ -34,7 +34,8 @@ class productProduct(osv.Model):
             for att_val in product.attribute_value_ids:
                 if att_val.attribute_id.id in priced_attributes:
                     val += priced_attributes[att_val.attribute_id.id]['base_price'] + att_val.numeric_value * priced_attributes[att_val.attribute_id.id]['price_coef']
-            
+            if val is 0.0:
+                val = product.v_tl_fiyat
             res[product.id] = val
             
             
