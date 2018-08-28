@@ -122,6 +122,7 @@ class sale_order_line(models.Model):
                     
                     valdef = res['value']
                     
+                    
                     valdef.update({
                             'order_id': line.order_id.id,
                             'product_id': product.id,
@@ -131,7 +132,8 @@ class sale_order_line(models.Model):
     #                        'product_uos': line['product_uos'],
     #                        'product_uos_qty': line['product_uos_qty'],
                             'name': bom_line['name'],
-                            'discount':line.discount
+                            'discount':line.discount,
+                            'tax_id': [(4,tax_id, False) for tax_id in valdef['tax_id']]
                         })
                     
                     sol_id = self.create(valdef)
