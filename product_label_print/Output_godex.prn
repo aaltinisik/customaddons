@@ -15,27 +15,27 @@ Dy2-me-dd
 {% if not label.first_label_empty %}
 Y5,12,tek_cicek
 Lo,5,64,382,66
-AT,74,0,61,65,0,0,0,0,${label.label1.short_code[0:12]}
-AE,5,63,1,1,0,0,[${label.label1.default_code}]
-AC,5,105,1,1,0,0,${label.label1.nameL1[0:30] or ''}
-AC,5,133,1,1,0,0,${label.label1.nameL2[0:30] or ''}
-AC,5,159,1,1,0,0,${label.label1.nameL3[0:30] or ''}
-AC,5,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
-AC,5,209,1,1,0,0,${label.label1.note or ''}{% if label.label1.pieces_in_pack > 0.0 %}
-AT, 20, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label1.uom_name or ''}{% end %}
+AT,74,0,61,65,0,0E,0,0,${label.label1.short_code[0:12]}
+AE,5,63,1,1,0,0E,[${label.label1.default_code}]
+AC,5,105,1,1,0,0E,${label.label1.nameL1[0:30] or ''}
+AC,5,133,1,1,0,0E,${label.label1.nameL2[0:30] or ''}
+AC,5,159,1,1,0,0E,${label.label1.nameL3[0:30] or ''}
+AC,5,184,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
+AC,5,209,1,1,0,0E,${label.label1.note or ''}{% if label.label1.pieces_in_pack > 0.0 %}
+AT, 20, 228, 82, 70, 0, 0E, 0, 0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label1.uom_name or ''}{% end %}
 BE,15,299,3,6,75,0,1,${label.label1.barcode or ''}
 {% end %}
 {% if not label.second_label_empty %}
 Y420,12,tek_cicek
 Lo,420,64,792,66
-AT,484,0,61,65,0,0,0,0,${label.label2.short_code[0:12]}
-AE,420,63,1,1,0,0,[${label.label2.default_code}]
-AC,420,105,1,1,0,0,${label.label2.nameL1[0:30] or ''}
-AC,420,133,1,1,0,0,${label.label2.nameL2[0:30] or ''}
-AC,420,159,1,1,0,0,${label.label2.nameL3[0:30] or ''}
-AC,420,184,1,1,0,0,${label.label1.nameL4[0:30] or ''}
-AC,420,209,1,1,0,0,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
-AT, 420, 228, 82, 70, 0, 0, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
+AT,484,0,61,65,0,0E,0,0,${label.label2.short_code[0:12]}
+AE,420,63,1,1,0,0E,[${label.label2.default_code}]
+AC,420,105,1,1,0,0E,${label.label2.nameL1[0:30] or ''}
+AC,420,133,1,1,0,0E,${label.label2.nameL2[0:30] or ''}
+AC,420,159,1,1,0,0E,${label.label2.nameL3[0:30] or ''}
+AC,420,184,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
+AC,420,209,1,1,0,0E,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
+AT, 420, 228, 82, 70, 0, 0E, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
 BE,445,299,3,6,75,0,1,${label.label2.barcode or ''}
 {% end %}
 ^P${label.copies_to_print}
@@ -58,8 +58,8 @@ E
 Dy2-me-dd
 Th:m:s
 {% if not label.first_label_empty %}
-Y5,12,tek_cicek
-Lo,5,64,382,66
+Y26,16,tek_cicek
+Lo,22,97,576,100
 AT,121,0,104,104,0,0E,0,0,${label.label1.short_code[0:12]}
 AT,20,100,58,58,0,0E,0,0,[${label.label1.default_code}]
 AD,27,164,1,1,0,0E,${label.label1.nameL1[0:30] or ''}
