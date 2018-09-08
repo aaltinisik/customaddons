@@ -24,7 +24,7 @@ msgstr "Muhasebe Fişi"
 #: field:account.invoice,altinkaya_payment_url:0
 #: field:sale.order,altinkaya_payment_url:0
 msgid "Altinkaya Payment Url"
-msgstr "Altinkaya Payment Url"
+msgstr "Altinkaya Ödeme Url"
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
@@ -500,7 +500,7 @@ msgstr "[('has_production_bom','=',True)]"
 #. module: altinkaya
 #: view:mrp.production:altinkaya.ir_ui_view_mrpproductioninherit_altinkaya0
 msgid "image_galery"
-msgstr "image_galery"
+msgstr "Resim Galerisi"
 
 #. module: altinkaya
 #: field:product.product,v_iscilik_fiyat:0
