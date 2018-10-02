@@ -8,9 +8,12 @@
 
 from openerp import models, fields, api
 
+from openerp.addons.procurement.procurement import PROCUREMENT_PRIORITIES
 
 class make_procurement(models.TransientModel):
     _inherit = 'make.procurement'
+    
+    priority = fields.Selection(PROCUREMENT_PRIORITIES,string='Priority', default='1')
     
     @api.multi
     def make_procurement(self):
@@ -32,7 +35,8 @@ class make_procurement(models.TransientModel):
             'warehouse_id': self.warehouse_id.id,
             'location_id': wh.lot_stock_id.id,
             'company_id': wh.company_id.id,
-            'group_id':group_id.id
+            'group_id':group_id.id,
+            'priority':self.priority
         })
         procure_id.signal_workflow( 'button_confirm')
 
