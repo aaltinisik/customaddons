@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_tree_inherit_move_name" model="ir.ui.view">
+            <field name="name">stock.move.tree.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+	            <field name="product_id" position="after">
+	            	
+	            	<field name="name" />
+                     
+	                
+	            </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
