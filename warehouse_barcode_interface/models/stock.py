@@ -205,12 +205,12 @@ class stock_move(osv.osv):
         Picking = self.pool.get('stock.picking')
         res = super(stock_move, self).action_done(cr, uid, ids, context=context)
         if res:
-            picking_ids = list(set([m['picking_id'][0] for m in self.read(cr, uid, ids,['picking_id'],context=context)]))
+            picking_ids = list(set([m['picking_id'][0] for m in self.search_read(cr, uid,[('id','in',ids),('picking_id','!=',False)],['picking_id'],context=context)]))
             
             pickings_to_print = Picking.search(cr, uid, [('id','in',picking_ids),('picking_type_code','=','outgoing')],context=context)
-            
-            self.pool.get("report").print_document(cr, uid, pickings_to_print, 'warehouse_barcode_interface.aeroo_package_label_print', html=None,
-                data=None, context=context)
+            #if pickings_to_print:
+              #  self.pool.get("report").print_document(cr, uid, pickings_to_print, 'warehouse_barcode_interface.aeroo_package_label_print', html=None,
+               #                                        data=None, context=context)
         return res
      
     
