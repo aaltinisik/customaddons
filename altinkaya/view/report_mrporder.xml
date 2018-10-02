@@ -5,45 +5,102 @@
 			<xpath expr="//div[@class='page']" position="replace">
 				<div class="page">
                     <div class="oe_structure"/>
-                    <h2>Production Order N° : <span t-field="o.name"/>
-                    	<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.procurement_group_name, 600, 100)" style="width:300px;height:50px;"/>
+                    <h2 class="row">
+                    	<div class="col-xs-7">
+                    		<span>Production Order N° :</span> <span t-field="o.name"/>
+                    	</div>
+                    	<div class="col-xs-5">
+                    		<img  t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:300px;height:50px;float:right;"/>
+                    	</div>
                     </h2>
 
-                    <div class="row mt32 mb32">
+					<div class="row mt32 mb32">
                         <div class="col-xs-3">
-                            <strong>Source Document:</strong><br/>
-                            <span t-field="o.origin"/>
+                        	<div class="row">
+                        		<div class="col-xs-12">
+                        			<img class="img img-responsive" t-att-src="'/web/binary/image?model=product.product&amp;field=image&amp;id=%s' % o.product_id.id" style="margin:auto;"></img>
+                        		</div>
+                        	</div>
+                        	<div class="row">
+                        		<div class="col-xs-12">
+                        			<span t-field="o.product_id.display_name"/>
+                        		</div>
+                        	</div>
+                        	
+                           
                         </div>
-                        <div class="col-xs-3">
-                            <strong>Product:</strong><br/>
-                            <span t-field="o.product_id.code"/>
-                            <span t-field="o.product_id.name"/>
+                        
+                        <div class="col-xs-9">
+                            <div class="row mt32 mb32">
+		                        <div class="col-xs-6">
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+		                        			<strong>Quantity:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-field="o.product_qty"/>
+		                        			<span t-field="o.product_uom.name" groups="product.group_uom"/>
+		                        		</div>
+		                        	</div>
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+		                        			<strong>Scheduled Date:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-field="o.date_planned"/>
+		                        		</div>
+		                        	</div>
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+		                        			<strong>Printing date:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-esc="time.strftime('%Y-%m-%d')"/>
+		                        		</div>
+		                        	</div>
+		                            
+		                           
+		                            
+		                        </div>
+		                        <div class="col-xs-6">
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+		                        			<strong>Source Document:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-field="o.origin"/>
+		                        		</div>
+		                        	</div>
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+				                            <strong>Partner Ref:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-esc="'sale_ref' in o._columns.keys() and o.sale_ref"/>
+		                        		</div>
+		                        	</div>
+		                        	<div class="row">
+		                        		<div class="col-xs-6">
+		                        			<strong>SO Number:</strong>
+		                        		</div>
+		                        		<div class="col-xs-6">
+		                        			<span t-esc="'sale_name' in o._columns.keys() and o.sale_name"/>
+		                            
+		                        		</div>
+		                        	</div>
+		                        	
+		                        </div>
+		                        
+		                    </div>
+                            
+                            
                         </div>
-                        <div class="col-xs-3">
-                            <strong>Quantity:</strong><br/>
-                            <span t-field="o.product_qty"/>
-                            <span t-field="o.product_uom.name" groups="product.group_uom"/>
-                        </div>
+                        
                     </div>
+					
+                    
 
-                    <div class="row mt32 mb32">
-                        <div class="col-xs-3">
-                            <strong>Scheduled Date:</strong><br/>
-                            <span t-field="o.date_planned"/>
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>Printing date:</strong><br/>
-                            <span t-esc="time.strftime('%Y-%m-%d')"/>
-                        </div>
-                        <div class="col-xs-3" t-if="'sale_ref' in o._columns.keys()">
-                            <strong>Partner Ref:</strong><br/>
-                            <span t-esc="'sale_ref' in o._columns.keys() and o.sale_ref"/>
-                        </div>
-                        <div class="col-xs-3" t-if="'sale_name' in o._columns.keys()">
-                            <strong>SO Number:</strong><br/>
-                            <span t-esc="'sale_name' in o._columns.keys() and o.sale_name"/>
-                        </div>
-                    </div>
+                    
 
                     <div t-if="o.workcenter_lines">
                         <strong>Work Orders</strong>
@@ -75,9 +132,7 @@
                                 <th class="text-center" groups="stock.group_locations">
                                     <strong>Source Location</strong>
                                 </th>
-                                <th class="text-center" groups="stock.group_locations">
-                                    <strong>Destination Location</strong>
-                                </th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -97,9 +152,7 @@
                                     <td class="text-center" groups="stock.group_locations">
                                         <span t-field="line.location_id.name"/>
                                     </td>
-                                    <td class="text-center" groups="stock.group_locations">
-                                        <span t-field="line.location_dest_id.name"/>
-                                    </td>
+                                    
                                 </tr>
                             </t>
                             <t t-if="o.move_lines2">
@@ -126,13 +179,17 @@
                         </tbody>
                     </table>
                     
-                    <h3>Product Route</h3>
-                    <ul id="product_route">
-                    	<li t-foreach="o.product_route.split('|')" t-as="route">
-                    		<span t-esc="route"></span>
-                    		<t t-if="not route_last"><span>&gt;</span></t>
-                    	</li>
-                    </ul>
+                   
+                    <t t-if="o.product_route">
+                    	<h3>Product Route</h3>
+	                    <ul id="product_route" style="list-style:none;padding-left:0;">
+	                    	<li t-foreach="o.product_route.split('|')" t-as="route" style="float:left; margin-right:10px;">
+	                    		<span t-esc="route"></span>
+	                    		<t t-if="not route_last"><span>&gt;</span></t>
+	                    	</li>
+	                    </ul>
+                    </t>
+                    
                     
                     <div class="oe_structure"/>
                 </div>

@@ -44,19 +44,22 @@ class mrp_production(osv.Model):
     def _get_product_route(self, cr, uid, ids, name, arg, context=None):
         def _get_route(move_id):
             if move_id:
-                prev_route = _get_route(move_id.move_orig_ids)
+                prev_route = _get_route(move_id.move_dest_id)
                 if prev_route:
-                    return '|'.join([prev_route,move_id.location_dest_id.name])
+                    return '|'.join([prev_route,move_id.location_dest_id.display_name])
                 else:
-                    return move_id.location_dest_id.name
+                    return move_id.location_dest_id.display_name
             return False
         
         res = {}
         for mo in self.browse(cr, uid, ids, context=context):
             if mo.move_prod_id:
-                res[mo.id] = _get_route(mo.move_prod_id)
+                r = _get_route(mo.move_prod_id)
+                r = r.split('|')
+                r.reverse()
+                res[mo.id] =  len(r) > 0 and '%s|%s' % (mo.move_prod_id.location_id.display_name, '|'.join(r)) or '' 
             else:
-                res[mo.id] = False
+                res[mo.id] = mo.location_dest_id.display_name
         return res
     
     _columns = {
