@@ -9,10 +9,10 @@
     'website': '',
     'depends': ['stock'],
     'data': [
-             #'views/product_view.xml',
+             'views/procurement_view.xml',
              'views/stock_location_view.xml',
+             'views/stock_move_view.xml',
              'report/report_location_barcode.xml',
-             #'views/report_stock_picking_altinkaya.xml'
              ],
     'installable': True,
     'auto_install': False

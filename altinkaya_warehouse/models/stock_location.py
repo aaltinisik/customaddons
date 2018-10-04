@@ -33,9 +33,7 @@ class stock_location(models.Model):
         key = (10 - sum % 10) % 10
         return '%d' % key
 
-    @api.multi
     def _generate_ean13_value(self):
-        self.ensure_one()
         ean = self.env['ir.sequence'].next_by_code('location.barcode')
         ean = (len(ean[0:6]) == 6 and ean[0:6] or
                ean[0:6].ljust(6, '0')) + ean[6:].rjust(6, '0')
@@ -53,4 +51,11 @@ class stock_location(models.Model):
         key = self._get_ean_control_digit(ean)
         ean13 = ean + key
         return ean13
+    
+    @api.model
+    def create(self, vals):
+        if not vals.get('loc_barcode'):
+            vals['loc_barcode'] = self._generate_ean13_value()
+        return super(stock_location, self).create(vals)
+        
 

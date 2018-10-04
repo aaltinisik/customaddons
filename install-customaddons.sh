@@ -191,6 +191,7 @@ ln -s -f $OCA_HOME/stock-logistics-tracking/stock_barcode_reader $OE_HOME/custom
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_creator $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_manual_procurement $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_orderpoint_uom $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_mts_mto_rule $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-tracking/stock_packaging_usability $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-tracking/stock_packaging_usability_ul $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-workflow/stock_picking_mass_action $OE_HOME/custom/addons/
