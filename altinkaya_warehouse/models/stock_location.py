@@ -10,6 +10,7 @@ from openerp import exceptions
 
 class stock_location(models.Model):
     _inherit = 'stock.location'
+    _order = 'parent_left,name'
     
     @api.multi
     def button_barcode_generate(self):
