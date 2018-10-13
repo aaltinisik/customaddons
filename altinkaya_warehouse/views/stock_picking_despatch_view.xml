@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_picking_dispatch_form" model="ir.ui.view">
+            <field name="name">stock.picking.despatch.form</field>
+            <field name="model">stock.picking.despatch</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<header>
+	            		<button name="action_done" type="object" string="Done"/>
+	            		<button name="action_cancel" type="object" string="Cancel"/>
+	            		<button name="action_cancel" type="object" string="Reset to Draft"/>
+	            		<field name="state" widget="statusbar"/>
+	            	</header>
+	            	<sheet>
+	            		<group>
+	            			<field name="name"/>
+	            			<field name="carrier_id"/>
+	            			<field name="carrier_employee"/>
+	            		</group>
+	            		<group string="Pickings">
+	            			
+	            			<field name="picking_ids" nolabel="1"/>
+	            			
+	            		</group>
+	            	</sheet>
+	            	<div class="oe_chatter">
+			            <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+			            <field name="message_ids" widget="mail_thread"/>
+			        </div>
+	            </form>
+            </field>
+        </record>
+        
+        <record id="view_picking_dispatch_tree" model="ir.ui.view">
+            <field name="name">stock.picking.despatch.tree</field>
+            <field name="model">stock.picking.despatch</field>
+            <field name="arch" type="xml">
+	            <tree>
+           			<field name="name"/>
+           			<field name="carrier_id"/>
+           			<field name="carrier_employee"/>
+           			<field name="user_id"/>
+           			<field name="date_done"/>
+           			<field name="state"/>
+	            </tree>
+            </field>
+        </record>
+        
+        <record id="action_despatch_list" model="ir.actions.act_window">
+            <field name="name">Carrier Despatches</field>
+            <field name="res_model">stock.picking.despatch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new picking dispatch. 
+              </p>
+            </field>
+        </record>
+        
+        <menuitem id="menu_despatch_list" action="action_despatch_list" parent="stock.menu_stock_warehouse_mgmt" sequence="3"/>
+        
+        
+        
+
+    </data>
+</openerp>

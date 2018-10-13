@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_wizard_create_despatch_form" model="ir.ui.view">
+            <field name="name">create.picking.despatch.form</field>
+            <field name="model">create.picking.despatch</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	
+            		<group>
+            			
+            			<field name="carrier_id"/>
+            			<field name="picking_ids">
+            				<tree>
+            					<field name="state"/>
+            					<field name="name"/>
+            					
+            				</tree>
+            			</field>
+	            			
+            		</group>
+            		<footer>
+                        <button name="action_create" string="Create Despatch" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+	            		
+	            	
+	            	
+	            </form>
+            </field>
+        </record>
+        
+        <act_window name="Create Despatch" res_model="create.picking.despatch"
+            src_model="stock.picking" view_mode="form" target="new"
+            multi="False" key2="client_action_multi" id="action_create_despatch" />
+
+
+    </data>
+</openerp>

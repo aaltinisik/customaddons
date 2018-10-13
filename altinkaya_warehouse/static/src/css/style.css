@@ -1,0 +1,16 @@
+div.picking_list div.row div {
+	border-left: solid 1px black;
+	height: 30px;
+		                }
+div.picking_list div.row {
+	border-right: solid 1px black;
+	border-top: solid 1px black;
+}
+
+div.picking_list div.row:first-of-type {
+  	text-align: center
+}
+
+div.picking_list{
+	border-bottom: solid 1px black;
+}
