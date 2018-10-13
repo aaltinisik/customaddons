@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_warehouse
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-21 15:05+0000\n"
+"PO-Revision-Date: 2018-07-21 15:05+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_warehouse
+#: view:stock.location:altinkaya_warehouse.inherit_stock_view_template_property_form
+msgid "Generate Barcode"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: model:ir.actions.report.xml,name:altinkaya_warehouse.aeroo_location_label_print
+msgid "Konum Etiketi"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_stock_location
+msgid "Location"
+msgstr ""
+

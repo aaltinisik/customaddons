@@ -367,7 +367,7 @@ function openerp_picking_order_widgets(instance){
         	
         	this.active_operation_id = operation.cols.id;
         	this.render_active_operation();
-        	this.$('#selected_product_container input.js_qty').focus();
+        //	this.$('#selected_product_container input.js_qty').focus();
         	
         },
         render_active_operation: function(){

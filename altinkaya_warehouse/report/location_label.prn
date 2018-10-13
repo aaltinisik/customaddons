@@ -1,16 +1,74 @@
-I8,E,001
-ZN
-q822
-O
-JF
-ZT
-Q400,25
-N
+{% if user.context_def_label_printer.type=='GODEX' %}
+^Q50,3
+^W104
+^H10
+^AT
+^S7
+^R0
+^E15
+~R255
+^XSET,ROTATION,0
 {% for location in objects %}
-GG340,340,"cicek"
-A330,390,2,n,1,1,N,""
-LO23,333,384,2
-A405,335,2,o,1,1,N,"${location.display_name}"
-B388,100,2,E30,3,6,89,B,"${location.loc_barcode or ''}"
-P1,1
+{% if((objects.ids.index(location.id)%2)==0) %}
+^L
+Dy2-me-dd
+Y5,12,tek_cicek
+Lo,5,64,382,66
+AT,74,0,61,65,0,0,0,0,${location.name[0:12] or ''}
+AE,5,63,1,1,0,0,[${location.display_name[0:20] or ''}]
+AC,5,105,1,1,0,0,Koridor:${location.posx or ''} Raf:${location.posy or ''} Kat:${location.posz or ''}
+AC,5,133,1,1,0,0,Üst Konum:${location.location_id.display_name[0:20] or ''}
+BE,15,171,3,6,75,0,1,${location.loc_barcode[0:13] or ''}
 {% end %}
+{% if((objects.ids.index(location.id)%2)==1) %}
+Y420,12,tek_cicek
+Lo,420,64,792,66
+AT,489,0,61,65,0,0,0,0,${location.name[0:12] or ''}
+AE,420,63,1,1,0,0,[${location.display_name[0:20] or ''}]
+AC,420,105,1,1,0,0,Koridor:${location.posx or ''} Raf:${location.posy or ''} Kat:${location.posz or ''}
+AC,420,133,1,1,0,0,Üst Konum:${location.location_id.display_name[0:20] or ''}
+BE,430,171,3,6,75,0,1,${location.loc_barcode[0:13] or ''}
+^P1
+E
+{% end %}{% end %}
+{% if ((len(objects))%2==1) %}
+^P1
+E{% end %}
+{% end %}
+{% if user.context_def_label_printer.type=='GODEX300' %}
+^Q50,3
+^W104
+^H10
+^AT
+^S5
+^R0
+^E15
+~R255
+^XSET,ROTATION,0
+{% for location in objects %}
+{% if((objects.ids.index(location.id)%2)==0) %}
+^L
+Dy2-me-dd
+Th:m:s
+Y26,16,tek_cicek
+Lo,22,97,576,100
+AT,121,0,104,104,0,0E,0,0,${location.name[0:12] or ''}
+AT,20,100,58,58,0,0E,0,0,[${location.display_name[0:20] or ''}]
+AD,27,164,1,1,0,0E,Koridor:${location.posx or ''} Raf:${location.posy or ''} Kat:${location.posz or ''}
+AD,27,198,1,1,0,0E,Üst Konum:${location.location_id.display_name[0:20] or ''}
+BE,36,245,5,12,129,0,1,${location.loc_barcode[0:13] or ''}
+{% end %}{% if((objects.ids.index(location.id)%2)==1) %}
+Y652,17,tek_cicek
+Lo,648,98,1202,101
+Dy2-me-dd
+Th:m:s
+AT,747,1,104,104,0,0E,0,0,${location.name[0:12] or ''}
+AT,646,101,58,58,0,0E,0,0,[${location.display_name[0:20] or ''}]
+AD,653,165,1,1,0,0E,Koridor:${location.posx or ''} Raf:${location.posy or ''} Kat:${location.posz or ''}
+AD,653,199,1,1,0,0E,Üst Konum:${location.location_id.display_name[0:20] or ''}
+BE,662,245,5,12,129,0,1,${location.loc_barcode[0:13] or ''}
+^P1
+E{% end %}{% end %}
+{% if ((len(objects))%2==1) %}
+^P1
+E{% end %}{% end %}

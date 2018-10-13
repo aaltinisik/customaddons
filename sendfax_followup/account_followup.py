@@ -112,7 +112,7 @@ class account_followup_print(osv.osv_memory):
         for partner in self.pool.get('account_followup.stat.by.partner').browse(cr, uid, partner_ids, context=context):
             if partner.partner_id.payment_amount_due < 50.0:
                 continue
-            if partner.partner_id.lang == "en_US":
+            if partner.partner_id.lang == "en_US" or partner.partner_id.country_id.code != "TR":
                 continue
             if partner.max_followup_id.manual_action:
                 partner_obj.do_partner_manual_action(cr, uid, [partner.partner_id.id], context=context)

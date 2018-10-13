@@ -6,19 +6,32 @@ class stock_picking(osv.osv):
     _columns = {
                 'x_durum': fields.selection(
                                     [('1',u'İthal Eksik'),
-                                     ('2',u'Kesimde'),
-                                     ('3',u'Üretimde'),
+                                     ('2',u'CNC Kesimde'),
+                                     ('3',u'Enjeksiyonda'),
                                      ('4',u'Montajda'),
                                      ('5',u'Çıkacak'),
                                      ('6',u'ACİL'),
-                                     ('7',u'Müsteriyi Bekliyor')],
+                                     ('7',u'Müsteriyi Bekliyor'),
+                                     ('8',u'Profil Kesimde'),
+                                     ('9', u'Sac Üretiminde'),
+                                     ('A', u'Boyada'),
+                                     ('B', u'Piyasadan Teminde')
+                                     ],
                                      'Durumu', select=True),
                 'x_hazirlayan': fields.selection(
                                     [("Asim",u"Asım"),
-                                     ("Muhammet","Muhammet"),
-                                     ("Harun","Harun"),
-                                     ("Bilal", "Bilal"),
-                                     ("Sefer","Sefer")],
+                                     ("Muhammet",u"Muhammet"),
+                                     ("Harun",u"Harun"),
+                                     ("Bilal", u"Bilal"),
+                                     ("Saffet",u"Saffet"),
+                                     ("Esra", u"Esra"),
+                                     ("Selma", u"Selma"),
+                                     (u"Uğur", u"Uğur"),
+                                     (u"Çağrı", u"Çağrı"),
+                                     ("Hatice", u"Hatice"),
+                                     ("Muhsin", u"Muhsin")
+                                     ],
+
                                      u'Siparişi Hazırlayan', select=True),
                 'comment_irsaliye': fields.text(u'İrsaliye Notu'),
                 'teslim_alan': fields.char(u'Malı Teslim Alan Ad Soyad', size=32)

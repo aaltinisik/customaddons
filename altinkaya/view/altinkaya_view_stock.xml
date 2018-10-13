@@ -31,7 +31,7 @@
                 <field name="inherit_id" ref="stock.vpicktree"/>
                 <field name="arch" type="xml">
                   <field name="date" position="replace">
-    				  <field name="date" invisible="1"></field>
+    				  <field name="date" invisible="0"></field>
     				  <field name="note"></field>
     				  <field name="carrier_id"></field>
     				  <field name="x_durum"></field>

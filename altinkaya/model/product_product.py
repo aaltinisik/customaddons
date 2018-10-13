@@ -41,32 +41,24 @@ class productProduct(osv.Model):
             u"Carinin Ürünü"
             ),
         'v_tl_fiyat': fields.float(
-            u"TL Fiyatı",
+            u"USD Fiyatı",
             digits_compute=dp.get_precision('Product Price'),
-            help=u"Birim işçilik Fiyatı"),
+            help=u"Birim işçilik Fiyatı USD"),
         'v_iscilik_fiyat': fields.float(
-             u"işçilik Fiyatı",
+             u"işçilik Fiyatı USD",
              digits_compute=dp.get_precision('Product Price'),
-             help=u"Birim işçilik Fiyatı"),
+             help=u"Birim işçilik Fiyatı USD"),
         'v_min_iscilik_fiy': fields.float(
-             'Minimum işçilik Fiyatı',
+             'Minimum işçilik Fiyatı USD',
              digits_compute=dp.get_precision('Product Price'),
-             help=u"En Az Toplam işçilik Fiyatı"),
+             help=u"En Az Toplam işçilik Fiyatı USD"),
         'v_guncel_fiyat': fields.boolean(u"Fiyat Güncel", help=u"Bu seçenek seçili ise fiyatı yenidir."),
         'name_variant':fields.function(_report_name_get,
                                       string='Variant Name',
                                       type='char', select=1,
-                                      readonly=True, store=False),
-        'terazi_kodu': fields.char(u'Terazi Kodu', size=4, default=None),
+                                      readonly=True, store=False)
 
     }
-
-    _sql_constraints = [
-        ('uniq_terazi_kodu',
-         'unique(terazi_kodu)',
-         u'Terazi kodu eşsiz olmalı'),
-    ]
-
 
 productProduct()
 
