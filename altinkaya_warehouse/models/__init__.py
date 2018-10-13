@@ -21,5 +21,6 @@
 
 #import product
 import stock_location
+import stock_picking_despatch
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
