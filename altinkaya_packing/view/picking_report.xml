@@ -52,7 +52,9 @@
                                     <th><strong>Sipariş (kaynak)</strong></th>
                                     <th><strong>Durumu</strong></th>
                                     <th><strong>Sorumlusu</strong></th>
-                                    <th><strong>Tarih</strong></th>
+				    <th><strong>Tarih</strong></th> 
+                                    <th><strong>Satış Temsilcisi</strong></th>
+
                                     <th name="td_sched_date_h"><strong>Planlanan Tarih</strong></th>
                                 </tr>
                             </thead>
@@ -70,6 +72,10 @@
                                     <td>
                                         <span t-field="o.date"/>
                                     </td>
+                                    <td>
+                                        <span t-field="o.sale_id.create_uid"/>
+                                    </td>
+
                                     <td name="td_sched_date">
                                         <span t-field="o.min_date"/>
                                     </td>
@@ -159,5 +165,9 @@
                 <template id="report_picking_altinkayaH">
             <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
         </template>
+                <template id="report_picking_altinkayaS">
+            <t t-call="altinkaya_packing.report_picking_altinkaya"></t>
+        </template>
+
     </data>
 </openerp>
