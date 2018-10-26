@@ -13,6 +13,15 @@
 
     </data>
     <data noupdate="1">
+                <report
+            id="stock_pickingaltinkayaS"
+            model="stock.picking"
+            string="Depo Fişi Sincan"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaS"
+            file="altinkaya_packing.report_picking_altinkayaS"
+        />
+
 
                 <report
             id="stock_pickingaltinkayaB"
