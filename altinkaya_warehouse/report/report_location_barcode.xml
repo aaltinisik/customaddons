@@ -29,7 +29,7 @@
             <field name="tml_source">file</field>
             <field name="report_rml">altinkaya_warehouse/report/location_label.prn</field>
             <field name="report_file">altinkaya_warehouse/report/location_label.prn</field>
-            <field name="content_fname">TXT</field>
+            <field name="content_fname"></field>
 
 
 

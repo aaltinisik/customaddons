@@ -112,7 +112,7 @@
             <field name="tml_source">file</field>
             <field name="report_rml">product_label_print/Output.prn</field>
             <field name="report_file">product_label_print/Output.prn</field>
-            <field name="content_fname">TXT</field>
+            <field name="content_fname"></field>
 
 
 

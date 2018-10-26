@@ -29,7 +29,7 @@
             <field name="tml_source">file</field>
             <field name="report_rml">warehouse_barcode_interface/report/package_label.prn</field>
             <field name="report_file">warehouse_barcode_interface/report/package_label.prn</field>
-            <field name="content_fname">TXT</field>
+            <field name="content_fname"></field>
 
 
 

@@ -92,7 +92,7 @@
                                     <t t-if="o.picking_type_id.code != 'incoming'"><th><strong>Kaynak</strong></th></t>
                                     <t t-if="o.picking_type_id.code != 'outgoing'"><th><strong>Hedef</strong></th></t>
                                     <th><strong>Barkod</strong></th>
-                                    
+
                                 </tr>
                               </thead>
                               <tbody>
