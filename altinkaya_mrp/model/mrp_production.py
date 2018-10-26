@@ -27,3 +27,15 @@ class MrpProduction(models.Model):
         res = super(MrpProduction, self).action_confirm()
         self.action_assign()
         return res
+    
+    
+    @api.multi
+    def action_print_product_label(self):
+        self.ensure_one()
+        aw_obj = self.env['ir.actions.act_window'].with_context({'default_restrict_single':True})
+        action = aw_obj.for_xml_id('product_label_print', 'action_print_pack_barcode_wiz')
+        action.update({'context':{'default_restrict_single':True,
+                                  'active_ids':[self.product_id.id]}})
+        
+        return action
+        

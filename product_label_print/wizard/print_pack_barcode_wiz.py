@@ -43,11 +43,15 @@ class print_pack_barcode_wiz(models.TransientModel):
         res = super(print_pack_barcode_wiz, self).default_get(fields)
         product_ids = []
         
-        if self.env.context.get('default_restrict_single',False) and len(self.env.context.get('active_ids')) > 1:
+        product_product_ids = self.env.context.get('product_ids',False)
+        
+        if not product_product_ids:
+            product_product_ids = self.env['product.product'].browse(self.env.context.get('active_ids'))
+        
+        if self.env.context.get('default_restrict_single',False) and len(product_product_ids) > 1:
             raise Warning(_('Printing multiple labels is restricted!'))
             
-        for product in self.env.context.get('active_ids'):
-            product_id = self.env['product.product'].browse(product)
+        for product_id in product_product_ids:
             codeparts = product_id.default_code.split('-')
 
             if len(codeparts) > 4:

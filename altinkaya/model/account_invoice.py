@@ -28,6 +28,18 @@ class account_invoice(osv.Model):
         return res
 
 
+    
+    def invoice_validate(self, cr, uid, ids, context=None):
+        res = super(account_invoice, self).invoice_validate(cr, uid, ids, context=context)
+        
+        user = self.pool.get('res.users').browse(cr,uid,[uid],context=context)
+        for invoice in self.pool.get('account.invoice').browse(cr,uid, ids, context=context):
+            for picking in invoice.picking_ids:
+                if picking.carrier_id.id != invoice.carrier_id.id:
+                    picking.message_post(body='Carrier changed from %s to %s through invoice by %s' % (picking.carrier_id.name,invoice.carrier_id.name, user.name))
+                    picking.write({'carrier_id':invoice.carrier_id.id})
+        
+        return res
 
 
     _columns = {
@@ -46,5 +58,7 @@ class account_invoice(osv.Model):
             ),
         'altinkaya_payment_url': fields.function(_altinkaya_payment_url, type='char', string='Altinkaya Payment Url'),
                 }
+
+    
 
 account_invoice()
