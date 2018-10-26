@@ -112,12 +112,22 @@
                                         </td>
                                         <t t-if="o.picking_type_id.code != 'incoming'">
                                         	<td><span  style="font-size:8px;">
-                                        		<span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/>
-                                        		<span t-field="move.product_id.uom_id.name"/><br/>
-                                        		<span t-field="move.string_availability_info"/></span><br/>
-                                        		<span t-foreach="move.reserved_quants" t-as="res_quant">
-                                        			<t t-esc="res_quant.amount"/> <t t-esc="res_quant.location.display_name"/>
+                                        			<span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/>
+                                        			<span t-field="move.product_id.uom_id.name"/><br/>
+                                        			<span t-field="move.string_availability_info"/><br/>
+                                        			<t t-if="len(move.reserved_quant_ids) > 0">
+                                        				<ul style="list-style:none;">
+                                        					<li t-foreach="move.reserved_quant_ids" t-as="res_quant">
+		                                        				<span>
+			                                        				<t t-esc="res_quant.location_id.display_name"/>:<t t-esc="res_quant.qty"/> 
+			                                        			</span>
+			                                        		</li>
+                                        				</ul>
+                                        			</t>
+                                        			
+                                        			
                                         		</span>
+                                        		
                                         	</td>
                                         </t>
                                         <td>
