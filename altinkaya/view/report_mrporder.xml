@@ -2,46 +2,86 @@
 <openerp>
 	<data>
 		<template id="report_mrporder_altinkaya" inherit_id="mrp.report_mrporder">
-			<xpath expr="//div[@class='page']" position="replace">
+			<xpath expr="//t[@t-call='report.internal_layout']" position="replace">
+				<div class="header">
+					<table class="table-condensed"
+						style="border-color: #000000;margin-right: 10px;margin-left: 10px;margin-bottom: 0px;margin-top: 10px;width: 100%;"
+						border="2">
+						<tbody>
+							<tr>
+								<td
+									style="border-color: #ffffff; text-align: center; vertical-align: center;">
+									<h2 style="margin-top: 2px;margin-bottom: 2px;">
+										<span t-field="o.name" />
+									</h2>
+									<t t-if="len(o.workcenter_lines) > 0">
+										<span style="margin-top: 2px;margin-bottom: 2px;" t-field="o.workcenter_lines[0].workcenter_id.name" />
+									</t>
+									
+								</td>
+								<td
+									style="border-color: #ffffff; text-align: center; vertical-align: center;">
+									<svg xml:space="preserve" width="12mm" height="9mm"
+										version="1.1"
+										style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+										viewBox="0 0 1200 900"><defs>
+  <style type="text/css"> .fil0 {fill:#E5097F}</style></defs><g
+										id="Katman_x0020_1"><metadata id="CorelCorpID_0Corel-Layer" /><path
+										class="fil0"
+										d="M688 693c37,18 67,49 86,86 21,-5 107,-30 161,-86 62,-65 71,-131 20,-181 -50,-51 -116,-42 -181,20 -56,54 -80,139 -86,161zm-148 -12l0 0c-11,-19 -55,-96 -53,-174 2,-90 42,-143 114,-143 71,0 112,53 113,143 2,78 -42,156 -53,174 -19,-6 -40,-10 -61,-10 -21,0 -41,4 -60,10zm-114 97l0 0c19,-37 50,-67 87,-86 -6,-21 -30,-106 -86,-161 -65,-62 -131,-71 -181,-20 -51,50 -42,117 20,181 54,56 139,80 160,86zm-344 -772l0 0 1036 0c41,0 74,33 74,74l0 814 -93 0c2,-8 3,-18 3,-27 0,-72 -53,-112 -143,-114 -78,-2 -155,42 -174,53 6,19 10,39 10,60 0,10 -1,19 -2,28l-386 0c-1,-9 -2,-18 -2,-28 0,-21 4,-42 10,-61 -18,-11 -96,-55 -174,-53 -90,1 -143,42 -143,113 0,11 1,20 3,29l-93 0 0 -814c0,-41 33,-74 74,-74z" /></g>
+                                    </svg>
+								</td>
+								<td
+									style="border-color: #ffffff; text-align: center; vertical-align: center;">
+									<img
+										t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+										style="width:300px;height:50px;" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
 				<div class="page">
                     <div class="oe_structure"/>
-                    <h2 class="row">
-                    	<div class="col-xs-7">
-                    		<span>Production Order N° :</span> <span t-field="o.name"/>
-                    	</div>
-                    	<div class="col-xs-5">
-                    		<img  t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:300px;height:50px;float:right;"/>
-                    	</div>
-                    </h2>
-
-					<div class="row mt32 mb32">
+					<div class="row mt16 mb32">
                         <div class="col-xs-3">
-                        	<div class="row">
-                        		<div class="col-xs-12">
-                        			<img class="img img-responsive" t-att-src="'/web/binary/image?model=product.product&amp;field=image&amp;id=%s' % o.product_id.id" style="margin:auto;"></img>
-                        		</div>
-                        	</div>
-                        	<div class="row">
-                        		<div class="col-xs-12">
-                        			<span t-field="o.product_id.display_name"/>
-                        		</div>
-                        	</div>
+                        	
+                      		<img class="img img-responsive" t-att-src="'/web/binary/image?model=product.product&amp;field=image&amp;id=%s' % o.product_id.id" style="margin:auto;"></img>
                         	
                            
                         </div>
                         
                         <div class="col-xs-9">
+                        	<div class="row">
+                        		<div class="col-xs-3">
+                        			<span t-field="o.product_qty"/>
+                        			<span t-field="o.product_uom.name" groups="product.group_uom"/>
+                        		</div>
+                        		<div class="col-xs-9">
+                        			<span t-field="o.product_id.display_name"/>
+                        		</div>
+                        		
+                        	</div>
+                        	<div class="row" t-if="o.sale_id.id">
+                        		<div class="col-xs-12">
+                        			<span>Sale Info</span>
+                        		</div>
+                        		
+                        	</div>
+                        	<div class="row" t-if="o.sale_id.id">
+                        		<div class="col-xs-6">
+                        			<span t-field="o.sale_id.partner_id.display_name"/>
+                        		</div>
+                        		<div class="col-xs-3">
+                        			<span t-field="o.sale_id.name"/>
+                        		</div>
+                        		<div class="col-xs-3">
+                        			<span t-field="o.sale_id.client_order_ref"/>
+                        		</div>
+                        	</div>
                             <div class="row mt32 mb32">
 		                        <div class="col-xs-6">
-		                        	<div class="row">
-		                        		<div class="col-xs-6">
-		                        			<strong>Quantity:</strong>
-		                        		</div>
-		                        		<div class="col-xs-6">
-		                        			<span t-field="o.product_qty"/>
-		                        			<span t-field="o.product_uom.name" groups="product.group_uom"/>
-		                        		</div>
-		                        	</div>
 		                        	<div class="row">
 		                        		<div class="col-xs-6">
 		                        			<strong>Scheduled Date:</strong>
@@ -50,47 +90,7 @@
 		                        			<span t-field="o.date_planned"/>
 		                        		</div>
 		                        	</div>
-		                        	<div class="row">
-		                        		<div class="col-xs-6">
-		                        			<strong>Printing date:</strong>
-		                        		</div>
-		                        		<div class="col-xs-6">
-		                        			<span t-esc="time.strftime('%Y-%m-%d')"/>
-		                        		</div>
-		                        	</div>
-		                            
-		                           
-		                            
 		                        </div>
-		                        <div class="col-xs-6">
-		                        	<div class="row">
-		                        		<div class="col-xs-6">
-		                        			<strong>Source Document:</strong>
-		                        		</div>
-		                        		<div class="col-xs-6">
-		                        			<span t-field="o.origin"/>
-		                        		</div>
-		                        	</div>
-		                        	<div class="row">
-		                        		<div class="col-xs-6">
-				                            <strong>Partner Ref:</strong>
-		                        		</div>
-		                        		<div class="col-xs-6">
-		                        			<span t-esc="'sale_ref' in o._columns.keys() and o.sale_ref"/>
-		                        		</div>
-		                        	</div>
-		                        	<div class="row">
-		                        		<div class="col-xs-6">
-		                        			<strong>SO Number:</strong>
-		                        		</div>
-		                        		<div class="col-xs-6">
-		                        			<span t-esc="'sale_name' in o._columns.keys() and o.sale_name"/>
-		                            
-		                        		</div>
-		                        	</div>
-		                        	
-		                        </div>
-		                        
 		                    </div>
                             
                             
@@ -102,7 +102,7 @@
 
                     
 
-                    <div t-if="o.workcenter_lines">
+                    <!-- <div t-if="o.workcenter_lines">
                         <strong>Work Orders</strong>
                         <table class="table table-condensed">
                             <tr>
@@ -120,7 +120,7 @@
                                 <td class="text-center"><span t-field="line2.hour"/></td>
                             </tr>
                         </table>
-                    </div>
+                    </div> -->
 
                     <h3 t-if="o.move_lines">Bill Of Material</h3>
 
@@ -183,9 +183,9 @@
                     <t t-if="o.product_route">
                     	<h3>Product Route</h3>
 	                    <ul id="product_route" style="list-style:none;padding-left:0;">
-	                    	<li t-foreach="o.product_route.split('|')" t-as="route" style="float:left; margin-right:10px;">
-	                    		<span t-esc="route"></span>
-	                    		<t t-if="not route_last"><span>&gt;</span></t>
+	                    	<li t-foreach="o.product_pickings" t-as="picking" style="float:left; margin-right:10px;">
+	                    		<span t-field="picking.name"/>
+	                    		
 	                    	</li>
 	                    </ul>
                     </t>
@@ -193,6 +193,37 @@
                     
                     <div class="oe_structure"/>
                 </div>
+			
+				<div class="footer" style="font-size:10px;">
+					<div class="text-center" style="border-top: 1px solid black;">
+						<ul class="list-inline">
+							<li t-if="o.name">
+								<span t-field="o.name" />
+							</li>
+							<li t-if="o.name">&amp;bull;</li>
+							<li>
+								Yazan:
+								<span t-esc="user.name" />
+							</li>
+							<li>&amp;bull;</li>
+							<li>
+								Baskı Tarih Saat:
+								<span
+									t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')" />
+							</li>
+						</ul>
+						<ul class="list-inline">
+							<li>Sayfa:</li>
+							<li>
+								<span class="page" />
+							</li>
+							<li>/</li>
+							<li>
+								<span class="topage" />
+							</li>
+						</ul>
+					</div>
+				</div>
 			</xpath>
 		</template>
 	
