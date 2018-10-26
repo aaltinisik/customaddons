@@ -20,3 +20,10 @@ class MrpProduction(models.Model):
             production, product, uom_id, qty, uos_id, uos_qty)
         self.env['stock.move'].browse([move_id]).priority = production.priority
         return move_id
+    
+    
+    @api.multi
+    def action_confirm(self):
+        res = super(MrpProduction, self).action_confirm()
+        self.action_assign()
+        return res
