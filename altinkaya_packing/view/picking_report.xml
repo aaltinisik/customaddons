@@ -97,7 +97,7 @@
                               <tbody>
                                 <tr t-foreach="o.move_lines" t-as="move">
                                     <t>
-                                        <td><span style="font-size:14px;">[<t t-esc="move.product_id.default_code"/>]</span><span style="font-size:12px;"> Yeri:[<t t-esc="move.product_id.loc_rack"/>]</span><br/><span style="font-size:13px;"><t t-esc="move.product_id.name_variant"/></span></td>
+                                        <td><span style="font-size:14px;">[<t t-esc="move.product_id.default_code"/>]</span><br/><span style="font-size:13px;"><t t-esc="move.product_id.name_variant"/></span></td>
                                         <td class="text-right" style="font-size:12px;">
 
                                             <t>
@@ -110,7 +110,26 @@
 
                                             </t>
                                         </td>
-                                        <t t-if="o.picking_type_id.code != 'incoming'"><td><span  style="font-size:8px;"><span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/><span t-field="move.product_id.uom_id.name"/><br/><span t-field="move.string_availability_info"/></span></td></t>
+                                        <t t-if="o.picking_type_id.code != 'incoming'">
+                                        	<td><span  style="font-size:8px;">
+                                        			<span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/>
+                                        			<span t-field="move.product_id.uom_id.name"/><br/>
+                                        			<span t-field="move.string_availability_info"/><br/>
+                                        			<t t-if="len(move.reserved_quant_ids) > 0">
+                                        				<ul style="list-style:none;">
+                                        					<li t-foreach="move.reserved_quant_ids" t-as="res_quant">
+		                                        				<span>
+			                                        				<t t-esc="res_quant.location_id.display_name"/>:<t t-esc="res_quant.qty"/> 
+			                                        			</span>
+			                                        		</li>
+                                        				</ul>
+                                        			</t>
+                                        			
+                                        			
+                                        		</span>
+                                        		
+                                        	</td>
+                                        </t>
                                         <td>
                                             <span t-if="move.product_id and move.product_id.ean13">
                                                 <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', move.product_id.ean13, 500, 80)" style="width:240px;height:40px"/>
