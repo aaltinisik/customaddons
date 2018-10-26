@@ -90,8 +90,9 @@
                                     <th><strong>Ürün</strong></th>
                                     <th class="text-right"><strong>Miktar</strong></th>
                                     <t t-if="o.picking_type_id.code != 'incoming'"><th><strong>Kaynak</strong></th></t>
-                                    <th><strong>Barkod</strong></th>
                                     <t t-if="o.picking_type_id.code != 'outgoing'"><th><strong>Hedef</strong></th></t>
+                                    <th><strong>Barkod</strong></th>
+                                    
                                 </tr>
                               </thead>
                               <tbody>
@@ -128,7 +129,7 @@
                                         <t t-if="len(move.reserved_quant_ids) > 0"><td style="line-height: 1;">
                                         				<ul style="list-style:none;">
                                         					<li t-foreach="move.reserved_quant_ids" t-as="res_quant">
-		                                        				<span style="font-size:10px;">
+		                                        				<span style="font-size:11px;">
 			                                        				<t t-esc="res_quant.location_id.name"/>:<t t-esc="res_quant.qty"/>
 			                                        			</span>
 			                                        		</li>
