@@ -62,6 +62,24 @@ class mrp_production(osv.Model):
                 res[mo.id] = mo.location_dest_id.display_name
         return res
     
+    def _get_product_pickings(self, cr, uid, ids, name, arg, context=None):
+        def _get_next_moves(move_id):
+            if move_id:
+                next_moves = _get_next_moves(move_id.move_dest_id)
+                if next_moves:
+                    return move_id | next_moves
+                else:
+                    return move_id
+            return False
+        
+        res = {}
+        for mo in self.browse(cr, uid, ids, context=context):
+            if mo.move_prod_id:
+                res[mo.id] = _get_next_moves(mo.move_prod_id).mapped('picking_id')
+            else:
+                res[mo.id] = False
+        return res
+    
     _columns = {
         'x_operator': fields.many2one(
             'hr.employee',
@@ -89,6 +107,10 @@ class mrp_production(osv.Model):
             _get_product_route, type='char', string="Product route",
             readonly=True,
             ),
+        'product_pickings': fields.function(
+            _get_product_pickings, type='many2many', string="Product Pickings", relation='stock.picking',
+            readonly=True,
+            )
     }
     
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=80):
