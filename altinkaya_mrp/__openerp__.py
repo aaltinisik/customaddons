@@ -12,7 +12,7 @@
 
     """,
     'data': [
-      #  "view/mrp_production_view.xml"
+        "view/mrp_production_view.xml"
     ],
     'demo': [],
     'test': [],

@@ -1,4 +1,5 @@
 import res_company
+import res_user
 import sale_order
 import res_partner
 import product_product

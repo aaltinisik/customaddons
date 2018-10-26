@@ -7,6 +7,7 @@
 
 
 from openerp import models, fields, api
+from openerp.exceptions import except_orm
 
 from openerp.addons.procurement.procurement import PROCUREMENT_PRIORITIES
 
@@ -56,3 +57,16 @@ class make_procurement(models.TransientModel):
             'views': [(id3,'form'),(id2,'tree')],
             'type': 'ir.actions.act_window',
          }
+        
+        
+    @api.model
+    def default_get(self, fields):
+        """ override default to remove warehouse_id
+        """        
+        res = super(make_procurement, self).default_get( fields)
+
+        if 'warehouse_id' in fields:
+            res['warehouse_id'] = self.env.user.default_procurement_wh_id.id
+
+        return res
+    
