@@ -86,9 +86,16 @@
                                 <td><h6>Bitiş Tarih Saat: </h6></td>
                             </tr>
  <tr><td>
-                                 <h2>Üretilen Adet: </h2>
+     <h2>Üretilen Adet: </h2>
+
                             </td>
-                                <td><h2>Fire Ürünler: </h2></td>
+
+                                <td class="text-center">
+ <span t-if="o.product_id and o.product_id.ean13">
+     <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.product_id.ean13, 200, 45)" style="width:200px;height:45px"/><br></br>
+     <span t-field="o.product_id.ean13"/>
+                                            </span>
+</td>
                             </tr>
 
                         </tbody>
@@ -118,6 +125,9 @@
 
                                 <tr t-foreach="o.move_lines" t-as="line">
                                     <td>
+                                          <span t-if="line.product_id and line.product_id.ean13">
+                                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.ean13, 200, 15)" style="width:200px;height:15px"/>
+                                            </span>
                                         <span t-field="line.product_id.code"/>
                                         <span t-field="line.product_id.name"/>
                                     </td>
@@ -128,11 +138,7 @@
                                          <t t-if="not(line.product_uom.id in [1,19,29,30])"><span t-field="line.product_qty"/> <span t-field="line.product_uom.name" groups="product.group_uom"/></t>
                                       </t>
                                     </td>
-                                    <td style="width: 200px;">
-                                            <span t-if="line.product_id and line.product_id.ean13">
-                                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.ean13, 200, 25)" style="width:200px;height:25px"/>
-                                            </span>
-                                        </td>
+
                                     <td class="text-center" groups="stock.group_locations">
                                         <span t-field="line.location_id.display_name"/>
                                     </td>
@@ -169,7 +175,7 @@
 
 					<table class="table table-condensed" t-if="o.product_route" style="border-collapse:collapse">
                     <thead>
-                        <tr><th><strong>Üretilecek Ürün Rotası</strong></th></tr>
+                        <tr><th><strong>Mamül Ürün Rotası</strong></th></tr>
                     </thead>
                             <tbody>
                                 <tr t-foreach="o.product_pickings" t-as="picking"  style="border: 2pt solid black;">
@@ -179,10 +185,10 @@
 
 
                                     </td>
-                                    <td style="border-color: #ffffff; text-align: left; vertical-align: center;"><h6 style="margin-top: 2px;margin-bottom: 2px;"><span t-field="picking.name"/></h6>
-
+                                    <td style="border-color: #ffffff; text-align: left; vertical-align: center;"><h4 style="margin-top: 2px;margin-bottom: 2px;"><span t-field="picking.name"/> : <span t-field="picking.move_lines[0].location_id"/> >> <span t-field="picking.move_lines[0].location_dest_id"/>   </h4>
+                                     <h6><span t-field="picking.partner_id"/></h6>
                                         </td>
-                                    <td> <span t-field="picking.partner_id"/> </td>
+
                                 </tr>
                         </tbody>
                     </table>
@@ -227,5 +233,33 @@
 		</template>
 	
 	</data>
+
+
+        <data noupdate="1">
+            <template id="report_mrporder_altinkayaB">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaC">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaD">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaE">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaF">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaG">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaH">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+            <template id="report_mrporder_altinkayaI">
+                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+            </template>
+        </data>
 
 </openerp>
