@@ -237,28 +237,28 @@
 
         <data noupdate="1">
             <template id="report_mrporder_altinkayaB">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaC">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaD">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaE">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaF">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaG">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaH">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
             <template id="report_mrporder_altinkayaI">
-                <t t-call="altinkaya.report_mrporder_altinkaya"></t>
+                <t t-call="mrp.report_mrporder"></t>
             </template>
         </data>
 
