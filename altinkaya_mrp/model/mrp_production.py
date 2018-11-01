@@ -53,7 +53,7 @@ class MrpProduction(models.Model):
 
         for production in productions:
 
-            report.print_document(cr, uid, [production.id], 'mrp.report_mrporder', html=None,
+            report.print_document(cr, uid, [production.id], 'altinkaya.report_mrporder_altinkayaE', html=None,
                                   data=None,
                                   context=context)
 #            produce_object.produce_mrp_order(cr, uid, [production.id], context=context)
