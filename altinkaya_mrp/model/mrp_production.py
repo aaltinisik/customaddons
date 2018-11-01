@@ -44,7 +44,7 @@ class MrpProduction(models.Model):
     @api.model
     def auto_print_mrp_orders(self):
         productions = self.search([('routing_id', '=', 'Profil Kesim'),
-                                ('state', 'in', ['confirmed', 'ready', 'in_production']),
+                                ('state', 'in', ['confirmed', 'ready', 'in_production', 'done']),
                                 ('mo_printed', '=', False)],
                                   limit=20)
         report = self.pool.get('report')
