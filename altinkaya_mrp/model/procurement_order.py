@@ -16,3 +16,4 @@ class procurement_order(models.Model):
         res.update({'priority':procurement.priority})
         
         return res
+    

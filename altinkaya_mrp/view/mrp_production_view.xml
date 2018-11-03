@@ -8,6 +8,9 @@
 				<field name="product_id" position="after">
 					<button name="action_print_product_label" type="object" class="fa fa-barcode"/>
 				</field>
+				<field name="move_prod_id" position="after">
+					<field name="group_id"/>
+				</field>
 			</field>
 			<field eval="17" name="priority" />
 			<field name="model">mrp.production</field>

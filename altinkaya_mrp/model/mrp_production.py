@@ -6,6 +6,9 @@ from openerp import models, fields, api
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
     
+    
+    group_id = fields.Many2one('procurement.group',string='Producrement Group', related='move_prod_id.group_id')
+    
     @api.onchange('routing_id')
     def onchange_routing_id(self):
         if self.routing_id.location_id:
