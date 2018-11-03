@@ -24,11 +24,12 @@ class MrpProduction(models.Model):
         return move_id
     
     
-    @api.multi
-    def action_confirm(self):
-        res = super(MrpProduction, self).action_confirm()
-        self.action_assign()
-        return res
+#     @api.multi
+#     def action_confirm(self):
+#         res = super(MrpProduction, self).action_confirm()
+#         self.env.cr.commit()
+#         res2 = self.action_assign()
+#         return res
     
     
     @api.multi

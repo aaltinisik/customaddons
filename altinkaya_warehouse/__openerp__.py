@@ -6,8 +6,10 @@
     'description': """This Module is used to print a stock report""",
     'summary': '',
     'website': '',
-    'depends': ['stock'],
+    'depends': ['stock','sale'],
     'data': [
+             'views/product_view.xml',
+             'views/sale_order_view.xml',
              'views/procurement_view.xml',
              'views/stock_location_view.xml',
              'views/stock_move_view.xml',
