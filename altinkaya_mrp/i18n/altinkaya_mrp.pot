@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_mrp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-03 08:31+0000\n"
+"PO-Revision-Date: 2018-11-03 08:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_mrp
+#: view:mrp.production:altinkaya_mrp.view_production_form_inherit_print_product_label
+msgid "Barkod Yazdır"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: field:mrp.production,mo_printed:0
+msgid "Manufacting Order Printed"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: model:ir.model,name:altinkaya_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: view:sale.order:altinkaya_mrp.view_sale_order_form_inherit_mrp
+#: field:sale.order,production_ids:0
+msgid "Manufacturing Orders"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: model:ir.model,name:altinkaya_mrp.model_procurement_order
+msgid "Procurement"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: field:mrp.production,group_id:0
+msgid "Producrement Group"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: view:procurement.group:altinkaya_mrp.view_procurement_grouo_form_inherit_mrp
+msgid "Productions"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: model:ir.actions.act_window,name:altinkaya_mrp.do_view_productions
+msgid "Productions for Groups"
+msgstr ""
+
+#. module: altinkaya_mrp
+#: model:ir.model,name:altinkaya_mrp.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
