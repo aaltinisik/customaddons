@@ -5,10 +5,10 @@ from openerp import models, fields, api
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
-    
-    
     group_id = fields.Many2one('procurement.group',string='Producrement Group', related='move_prod_id.group_id')
-    
+    mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
+
+
     @api.onchange('routing_id')
     def onchange_routing_id(self):
         if self.routing_id.location_id:
@@ -42,4 +42,21 @@ class MrpProduction(models.Model):
                                   'active_ids':[self.product_id.id]}})
         
         return action
-        
+
+    @api.model
+    def auto_print_mrp_orders(self):
+        productions = self.search([('routing_id', '=', 'Profil Kesim'),
+                                ('state', 'in', ['confirmed', 'ready', 'in_production', 'done']),
+                                ('mo_printed', '=', False)],
+                                  limit=20)
+        report = self.pool.get('report')
+        produce_object = self.pool.get('mrp.produce.more')
+        cr, uid, context = self._cr, self._uid,self._context,
+
+        for production in productions:
+
+            report.print_document(cr, uid, [production.id], 'altinkaya.report_mrporder_altinkayaE', html=None,
+                                  data=None,
+                                  context=context)
+#            produce_object.produce_mrp_order(cr, uid, [production.id], context=context)
+            production.write({'mo_printed': True})
