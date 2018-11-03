@@ -18,11 +18,10 @@ msgstr ""
 #. module: stock_variant_routes
 #: field:product.product,variant_route_ids:0
 msgid "Variant Routes"
-msgstr "Varyant Rotaları"
+msgstr "Ürün Tipine Özel Rotalar"
  ""
 
 #. module: stock_variant_routes
 #: view:product.product:stock_variant_routes.product_normal_form_inherit_variant_routes
 msgid "Inventory"
 msgstr "Envanter"
-

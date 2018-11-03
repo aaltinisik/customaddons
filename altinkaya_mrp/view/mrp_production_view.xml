@@ -11,6 +11,11 @@
 				<field name="move_prod_id" position="after">
 					<field name="group_id"/>
 				</field>
+				<div name="buttons" position="inside">
+                    <button class="oe_inline oe_stat_button" name="action_print_product_label" type="object" icon="fa-barcode" string="Barkod Yazdır">
+                    </button>
+                </div>
+
 			</field>
 			<field eval="17" name="priority" />
 			<field name="model">mrp.production</field>
