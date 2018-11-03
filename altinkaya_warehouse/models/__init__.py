@@ -19,7 +19,9 @@
 #
 ##############################################################################
 
-#import product
+import product
+import sale_order_line
+import stock_move
 import stock_location
 import stock_picking_despatch
 

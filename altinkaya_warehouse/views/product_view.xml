@@ -2,14 +2,17 @@
 <openerp>
     <data>
 
-        <record id="inherit_stock_view_template_property_form" model="ir.ui.view">
-            <field name="name">product.template.form.inherit</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="stock.view_template_property_form"/>
+        <record id="view_product_form_inherit_custom_available" model="ir.ui.view">
+            <field name="name">product.product.normal.form.inherit.custom_available</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-            <field name="virtual_available" position="after">
-                <field name="pop_bom_in_reports"/>
-            </field>
+	            <xpath expr="//label[@for='incoming_qty']" position="before">
+	            	<field name="qty_available_merkez"/>
+	            	<field name="qty_available_sincan"/>
+	                
+	            </xpath>
+	           
             </field>
         </record>
 
