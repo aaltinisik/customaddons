@@ -13,7 +13,8 @@
     """,
     'data': [
         "view/mrp_production_view.xml",
-        "view/procurement_view.xml"
+        "view/procurement_view.xml",
+        "view/sale_order_view.xml"
     ],
     'demo': [],
     'test': [],
