@@ -102,7 +102,7 @@
 
                       </table>
 
-                    <div t-if="o.sale_id"><b>Müşteri:</b><span t-field="o.sale_id.partner_id.display"/>  </div>
+                    <div t-if="o.sale_id"><b>Müşteri:</b><span t-field="o.sale_id.partner_id.display_name"/>  </div>
 
 
 

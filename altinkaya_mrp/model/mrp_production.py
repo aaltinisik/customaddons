@@ -9,6 +9,7 @@ class MrpProduction(models.Model):
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
 
 
+
     @api.onchange('routing_id')
     def onchange_routing_id(self):
         if self.routing_id.location_id:
