@@ -123,12 +123,12 @@ class mrp_production(osv.Model):
         ids = self.search(cr, user, args, limit=limit, context=context)
         return self.name_get(cr, user, ids, context=context)
 
-    def action_produce(self, cr, uid, production_id, production_qty, production_mode, wiz=False, context=None):
-        res = super(mrp_production, self).action_produce(cr, uid, production_id, production_qty, production_mode, wiz=wiz, context=context)
-        for production in self.browse(cr, uid, production_id):
-            for picking in production.product_pickings:
-                picking.origin = '%s##%s##' % (picking.origin,production.name)
-        return res
+#     def action_produce(self, cr, uid, production_id, production_qty, production_mode, wiz=False, context=None):
+#         res = super(mrp_production, self).action_produce(cr, uid, production_id, production_qty, production_mode, wiz=wiz, context=context)
+#         for production in self.browse(cr, uid, production_id):
+#             for picking in production.product_pickings:
+#                 picking.origin = '%s##%s##' % (picking.origin,production.name)
+#         return res
     
     
 mrp_production()

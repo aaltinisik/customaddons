@@ -1,9 +1,11 @@
 from openerp import models
 from openerp.tools import float_is_zero
+import re
 
 class StockMove(models.Model):
     _inherit= 'stock.move'
 
+    
     def _get_invoice_line_vals(self, cr, uid, move, partner, inv_type, context=None):
         res = super(StockMove, self)._get_invoice_line_vals(cr, uid, move, partner, inv_type, context=context)
         if inv_type in ('out_invoice', 'out_refund') and not move.procurement_id:
@@ -38,3 +40,32 @@ class StockMove(models.Model):
             res['price_unit'] = res['price_unit'] / uos_coeff
 
         return res
+    
+    
+    
+    
+    def action_assign(self, cr, uid, ids, context=None):
+        def get_origin_moves(moves):
+            origin_moves = moves.filtered(lambda m: len(m.move_orig_ids) == 0)
+            intermediate_moves = moves.filtered(lambda m: len(m.move_orig_ids) > 0)
+            if len(intermediate_moves) > 0:
+                origin_moves |= get_origin_moves(intermediate_moves.mapped('move_orig_ids'))
+                
+            return origin_moves
+                
+        res = super(StockMove, self).action_assign(cr, uid, ids, context=context)
+        moves = self.browse(cr, uid, ids, context=context)
+        
+        for picking in moves.mapped('picking_id').filtered(lambda p: p.state in ['assigned','partially_available']):
+            origin_moves = get_origin_moves(picking.move_lines)
+            origin_docs = set([move.picking_id.name or move.production_id.name for move in origin_moves])
+            if not re.match('##[^#]*##', picking.origin):
+                picking.origin = '%s##%s##' % (picking.origin, ','.join(origin_docs) )
+            else:
+                picking.origin = re.sub('##[^#]*##', ','.join(origin_docs), picking.origin)
+            
+        
+            
+        
+        return res
+    
