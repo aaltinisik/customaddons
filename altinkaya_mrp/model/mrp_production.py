@@ -61,3 +61,5 @@ class MrpProduction(models.Model):
                                   context=context)
 #            produce_object.produce_mrp_order(cr, uid, [production.id], context=context)
             production.write({'mo_printed': True})
+            
+    
