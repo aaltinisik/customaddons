@@ -11,9 +11,9 @@
 	            	<field name="qty_available_merkez"/>
 	            	<field name="qty_available_sincan"/>
 	                
-<!--	            </xpath>
+	            </xpath>
 	            
-	            <xpath expr="//field[@name='type']" position="after">
+	<!--            <xpath expr="//field[@name='type']" position="after">
 	            	<field name="type_variant"/>
 	            	
 	            </xpath>
