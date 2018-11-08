@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_wizard_create_procurement_move_form" model="ir.ui.view">
+            <field name="name">create.procurement.move.form</field>
+            <field name="model">create.procurement.move</field>
+            <field name="arch" type="xml">
+	            <form>
+            		<group>
+            			<field name="move_id"/>
+            			<field name="product_id"/>
+            			<label for="qty"/>
+            			<div>
+            				<field name="qty" class="oe_inline"/>
+            				<field name="uom" class="oe_inline"/>
+            			
+            			</div>
+            			
+	            			
+            		</group>
+            		<div>
+            			<p>açıklama</p>
+            		</div>
+            		<footer>
+                        <button name="action_create" string="Create Procurement" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+	            		
+	            	
+	            	
+	            </form>
+            </field>
+        </record>
+        
+        
+
+
+    </data>
+</openerp>
