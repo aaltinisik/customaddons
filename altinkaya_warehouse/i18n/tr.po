@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-21 15:05+0000\n"
-"PO-Revision-Date: 2018-07-21 15:05+0000\n"
+"POT-Creation-Date: 2018-11-08 08:16+0000\n"
+"PO-Revision-Date: 2018-11-08 08:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,17 +16,328 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_warehouse
+#: model:ir.actions.act_window,help:altinkaya_warehouse.action_despatch_list
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a new picking dispatch. \n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a new picking dispatch. \n"
+"              </p>\n"
+"            "
+
+#. module: altinkaya_warehouse
+#: view:website:altinkaya_warehouse.report_picking_despatch
+msgid "Ağırlık(brüt/net Kg)"
+msgstr "Ağırlık(brüt/net Kg)"
+
+#. module: altinkaya_warehouse
+#: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
+#: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
+#: selection:stock.picking.despatch,state:0
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,carrier_id:0
+msgid "Carrier"
+msgstr "Taşıyıcı"
+
+#. module: altinkaya_warehouse
+#: model:ir.actions.act_window,name:altinkaya_warehouse.action_despatch_list
+#: model:ir.ui.menu,name:altinkaya_warehouse.menu_despatch_list
+msgid "Carrier Despatches"
+msgstr "Carrier Despatches"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,carrier_employee:0
+msgid "Carrier Employee"
+msgstr "Carrier Employee"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,carrier_id:0
+msgid "Carrier id"
+msgstr "Carrier id"
+
+#. module: altinkaya_warehouse
+#: code:addons/altinkaya_warehouse/models/stock_location.py:43
+#, python-format
+msgid "Configuration Error!The next sequence is longer than 12 characters. It is not valid for an EAN13 needing 12 characters, the 13 being used as a control digitYou will have to redefine the sequence or create a new one"
+msgstr "Configuration Error!The next sequence is longer than 12 characters. It is not valid for an EAN13 needing 12 characters, the 13 being used as a control digitYou will have to redefine the sequence or create a new one"
+
+#. module: altinkaya_warehouse
+#: selection:product.product,type_variant:0
+msgid "Consumable"
+msgstr "Sarf Malzemesi"
+
+#. module: altinkaya_warehouse
+#: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
+#: model:ir.actions.act_window,name:altinkaya_warehouse.action_create_despatch
+msgid "Create Despatch"
+msgstr "Create Despatch"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,create_uid:0
+#: field:stock.picking.despatch,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,create_date:0
+#: field:stock.picking.despatch,create_date:0
+msgid "Created on"
+msgstr "Oluşturulma"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,date_done:0
+msgid "Date Done"
+msgstr "Tamamlanma Tarihi"
+
+#. module: altinkaya_warehouse
+#: help:stock.picking.despatch,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Date of the last message posted on the record."
+
+#. module: altinkaya_warehouse
+#: selection:stock.picking.despatch,state:0
+msgid "Delivered"
+msgstr "Teslim Edildi"
+
+#. module: altinkaya_warehouse
+#: model:ir.actions.report.xml,name:altinkaya_warehouse.action_report_picking_despatch
+msgid "Despatch Document"
+msgstr "Despatch Document"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,user_id:0
+msgid "Dispatching User"
+msgstr "Dispatching User"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,display_name:0
+#: field:stock.picking.despatch,display_name:0
+msgid "Display Name"
+msgstr "Görünen Ad"
+
+#. module: altinkaya_warehouse
+#: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
+msgid "Done"
+msgstr "Tamamlandı"
+
+#. module: altinkaya_warehouse
+#: selection:stock.picking.despatch,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_stock_picking_despatch
+msgid "Email Thread"
+msgstr "E-posta Konusu"
+
+#. module: altinkaya_warehouse
+#: view:website:altinkaya_warehouse.report_picking_despatch
+msgid "Fatura/İrsaliye No"
+msgstr "Fatura/İrsaliye No"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_follower_ids:0
+msgid "Followers"
+msgstr "Takipçiler"
+
+#. module: altinkaya_warehouse
 #: view:stock.location:altinkaya_warehouse.inherit_stock_view_template_property_form
 msgid "Generate Barcode"
 msgstr "Barkod Oluştur"
 
 #. module: altinkaya_warehouse
-#: model:ir.actions.report.xml,name:altinkaya_warehouse.aeroo_location_label_print
-msgid "Konum Etiketi"
-msgstr "Konum Etiketi"
+#: help:stock.picking.despatch,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,id:0
+#: field:stock.picking.despatch,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: altinkaya_warehouse
+#: help:stock.picking.despatch,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "If checked new messages require your attention."
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Takip ediyor"
+
+#. module: altinkaya_warehouse
+#: view:website:altinkaya_warehouse.report_picking_despatch
+msgid "Koli adedi"
+msgstr "Koli adedi"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_last_post:0
+msgid "Last Message Date"
+msgstr "Last Message Date"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,__last_update:0
+#: field:stock.picking.despatch,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,write_uid:0
+#: field:stock.picking.despatch,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,write_date:0
+#: field:stock.picking.despatch,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
 
 #. module: altinkaya_warehouse
 #: model:ir.model,name:altinkaya_warehouse.model_stock_location
 msgid "Location"
 msgstr "Konum"
+
+#. module: altinkaya_warehouse
+#: view:sale.order:altinkaya_warehouse.view_order_form_inherit_altinkaya_stock
+#: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
+msgid "Merkez"
+msgstr "Merkez"
+
+#. module: altinkaya_warehouse
+#: field:product.product,qty_available_merkez:0
+#: field:sale.order.line,qty_available_merkez:0
+#: field:stock.move,qty_available_merkez:0
+msgid "Merkez Depo Mevcut"
+msgstr "Merkez Depo Mevcut"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_ids:0
+msgid "Messages"
+msgstr "Messages"
+
+#. module: altinkaya_warehouse
+#: help:stock.picking.despatch,message_ids:0
+msgid "Messages and communication history"
+msgstr "Messages and communication history"
+
+#. module: altinkaya_warehouse
+#: code:addons/altinkaya_warehouse/models/stock_picking_despatch.py:23
+#, python-format
+msgid "New"
+msgstr "Yeni"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,name:0
+msgid "Number"
+msgstr "Sayı"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_stock_picking
+msgid "Picking List"
+msgstr "Alım Listesi"
+
+#. module: altinkaya_warehouse
+#: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
+#: field:stock.picking.despatch,picking_ids:0
+msgid "Pickings"
+msgstr "Sevkler"
+
+#. module: altinkaya_warehouse
+#: field:create.picking.despatch,picking_ids:0
+msgid "Pickings to dispatch"
+msgstr "Pickings to dispatch"
+
+#. module: altinkaya_warehouse
+#: model:ir.actions.report.xml,name:altinkaya_warehouse.aeroo_location_label_print
+msgid "Print Location Label"
+msgstr "Print Location Label"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: altinkaya_warehouse
+#: field:product.product,type_variant:0
+msgid "Product Type"
+msgstr "Çeşide Özel Ürün Tipi"
+
+#. module: altinkaya_warehouse
+#: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
+msgid "Reset to Draft"
+msgstr "Taslağa Çevir"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Satış Siparişi Öğesi"
+
+#. module: altinkaya_warehouse
+#: selection:product.product,type_variant:0
+msgid "Service"
+msgstr "Hizmet"
+
+#. module: altinkaya_warehouse
+#: view:sale.order:altinkaya_warehouse.view_order_form_inherit_altinkaya_stock
+#: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
+msgid "Sincan"
+msgstr "Sincan"
+
+#. module: altinkaya_warehouse
+#: field:product.product,qty_available_sincan:0
+#: field:sale.order.line,qty_available_sincan:0
+#: field:stock.move,qty_available_sincan:0
+msgid "Sincan Depo Mevcut"
+msgstr "Sincan Depo Mevcut"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,state:0
+msgid "State"
+msgstr "Durum"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_stock_move
+msgid "Stock Move"
+msgstr "Stok Hareketi"
+
+#. module: altinkaya_warehouse
+#: selection:product.product,type_variant:0
+msgid "Stockable Product"
+msgstr "Stoklanabilir Ürün"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_summary:0
+msgid "Summary"
+msgstr "Özet"
+
+#. module: altinkaya_warehouse
+#: view:website:altinkaya_warehouse.report_picking_despatch
+msgid "Teslim edilen irsaliyeler"
+msgstr "Teslim edilen irsaliyeler"
+
+#. module: altinkaya_warehouse
+#: view:website:altinkaya_warehouse.report_picking_despatch
+msgid "Teslimat Adresi"
+msgstr "Teslimat Adresi"
+
+#. module: altinkaya_warehouse
+#: field:stock.picking.despatch,message_unread:0
+msgid "Unread Messages"
+msgstr "Okunmamış Mesajlar"
+
+#. module: altinkaya_warehouse
+#: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
+msgid "or"
+msgstr "ya da"
+
+#. module: altinkaya_warehouse
+#: view:product.product:altinkaya_warehouse.view_product_form_inherit_custom_available
+msgid "{'invisible':[('type_variant','!=',False)]}"
+msgstr "{'invisible':[('type_variant','!=',False)]}"
 
