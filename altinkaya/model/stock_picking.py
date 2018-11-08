@@ -49,12 +49,7 @@ class stock_picking(osv.osv):
             return None
         return res
     
-    @api.cr_uid_ids_context
-    def do_transfer(self, cr, uid, picking_ids, context=None):
-        res = super(stock_picking, self).do_transfer(cr, uid, picking_ids, context=context)
-        for picking in self.browse(cr, uid, picking_ids, context=context):
-            picking.origin = re.sub('##[^#]*##', '', picking.origin)
-        return res
+
 
     
 stock_picking()
