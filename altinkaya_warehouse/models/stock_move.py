@@ -17,3 +17,16 @@ class stock_move(models.Model):
             res.update({'sale_line_id':sale_line_id})
                 
         return res
+    
+    @api.multi
+    def action_create_procurement(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.procurement.move',
+            'context' : {'default_move_id':self.id},
+            'target': 'new'
+            
+         }
