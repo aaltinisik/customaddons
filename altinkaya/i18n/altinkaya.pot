@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-13 07:38+0000\n"
-"PO-Revision-Date: 2018-08-13 07:38+0000\n"
+"POT-Creation-Date: 2018-11-03 18:25+0000\n"
+"PO-Revision-Date: 2018-11-03 18:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "&bull;"
+msgstr ""
 
 #. module: altinkaya
 #: model:ir.model,name:altinkaya.model_account_voucher
@@ -28,7 +33,12 @@ msgstr ""
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
-msgid "Bill Of Material"
+msgid "Baskı Tarih Saat:"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Başlama Tarih Saat:"
 msgstr ""
 
 #. module: altinkaya
@@ -40,6 +50,11 @@ msgstr ""
 #: help:product.product,v_iscilik_fiyat:0
 #: help:product.product,v_tl_fiyat:0
 msgid "Birim işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Bitiş Tarih Saat:"
 msgstr ""
 
 #. module: altinkaya
@@ -99,11 +114,6 @@ msgid "Companies"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Consumed Products"
-msgstr ""
-
-#. module: altinkaya
 #: field:mrp.bom.wcparameter,create_uid:0
 #: field:mrp.cancel.more,create_uid:0
 #: field:x.makine,create_uid:0
@@ -133,8 +143,8 @@ msgid "Cycle Time(Hour)"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Destination Location"
+#: field:res.users,default_procurement_wh_id:0
+msgid "Default Procurement Warehouse"
 msgstr ""
 
 #. module: altinkaya
@@ -203,8 +213,18 @@ msgid "Invoice"
 msgstr ""
 
 #. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Kaynak"
+msgstr ""
+
+#. module: altinkaya
 #: field:account.voucher,x_cek_tarih:0
 msgid "Keside Tarihi"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Kullanılmış Ürünler"
 msgstr ""
 
 #. module: altinkaya
@@ -245,6 +265,11 @@ msgid "Makine Adi"
 msgstr ""
 
 #. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Makine Adı:"
+msgstr ""
+
+#. module: altinkaya
 #: field:x.makine,x_kod:0
 msgid "Makine Kodu"
 msgstr ""
@@ -257,6 +282,11 @@ msgstr ""
 #. module: altinkaya
 #: field:stock.picking,teslim_alan:0
 msgid "Malı Teslim Alan Ad Soyad"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Mamül Ürün Rotası"
 msgstr ""
 
 #. module: altinkaya
@@ -276,17 +306,12 @@ msgstr ""
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
-msgid "Name"
+msgid "Müşteri:"
 msgstr ""
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
-msgid "No. Of Cycles"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "No. Of Hours"
+msgid "Operatör Adı:"
 msgstr ""
 
 #. module: altinkaya
@@ -300,11 +325,6 @@ msgid "Partner"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Partner Ref:"
-msgstr ""
-
-#. module: altinkaya
 #: model:ir.model,name:altinkaya.model_stock_picking
 msgid "Picking List"
 msgstr ""
@@ -315,18 +335,12 @@ msgid "Pricelist item"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Printing date:"
-msgstr ""
-
-#. module: altinkaya
 #: field:mrp.production,procurement_group_name:0
 msgid "Procurement Group"
 msgstr ""
 
 #. module: altinkaya
 #: model:ir.model,name:altinkaya.model_product_product
-#: view:website:mrp.report_mrporder
 msgid "Product"
 msgstr ""
 
@@ -336,8 +350,8 @@ msgid "Product Category"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Product Route"
+#: field:mrp.production,product_pickings:0
+msgid "Product Pickings"
 msgstr ""
 
 #. module: altinkaya
@@ -352,32 +366,7 @@ msgstr ""
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
-msgid "Product:"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Production Order N° :"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Products to Consume"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
 msgid "Quantity"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Quantity:"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "SO Number:"
 msgstr ""
 
 #. module: altinkaya
@@ -392,7 +381,7 @@ msgstr ""
 
 #. module: altinkaya
 #: view:website:mrp.report_mrporder
-msgid "Scheduled Date:"
+msgid "Sayfa:"
 msgstr ""
 
 #. module: altinkaya
@@ -402,23 +391,13 @@ msgid "Select category for the current product"
 msgstr ""
 
 #. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Sequence"
+#: field:sale.order.line,set_product:0
+msgid "Set product?"
 msgstr ""
 
 #. module: altinkaya
 #: field:sale.order.line,show_custom_products:0
 msgid "Show Custom Products"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Source Document:"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Source Location"
 msgstr ""
 
 #. module: altinkaya
@@ -442,6 +421,11 @@ msgid "Teslimat Adresi"
 msgstr ""
 
 #. module: altinkaya
+#: view:sale.order:altinkaya.sale_order_custom_products_domain
+msgid "This is a set product"
+msgstr ""
+
+#. module: altinkaya
 #: field:mrp.bom.wcparameter,time_stop:0
 msgid "Time After Prod."
 msgstr ""
@@ -462,23 +446,8 @@ msgid "Used in comm with ext services"
 msgstr ""
 
 #. module: altinkaya
-#: field:product.product,image_variant_ids:0
-msgid "Variant Images"
-msgstr ""
-
-#. module: altinkaya
 #: field:product.product,name_variant:0
 msgid "Variant Name"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "Work Orders"
-msgstr ""
-
-#. module: altinkaya
-#: view:website:mrp.report_mrporder
-msgid "WorkCenter"
 msgstr ""
 
 #. module: altinkaya
@@ -493,18 +462,33 @@ msgid "Workcenter Parameters"
 msgstr ""
 
 #. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Yazdıran:"
+msgstr ""
+
+#. module: altinkaya
 #: view:mrp.production:altinkaya.ir_ui_view_mrpproductioninherit_altinkaya0
 msgid "[('has_production_bom','=',True)]"
 msgstr ""
 
 #. module: altinkaya
-#: view:mrp.production:altinkaya.ir_ui_view_mrpproductioninherit_altinkaya0
-msgid "image_galery"
+#: field:product.product,v_iscilik_fiyat:0
+msgid "işçilik Fiyatı USD"
 msgstr ""
 
 #. module: altinkaya
-#: field:product.product,v_iscilik_fiyat:0
-msgid "işçilik Fiyatı USD"
+#: view:website:mrp.report_mrporder
+msgid "Üretilen Adet:"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Üretim Emri"
+msgstr ""
+
+#. module: altinkaya
+#: view:website:mrp.report_mrporder
+msgid "Üretimde Kullanılacak Ürünler"
 msgstr ""
 
 #. module: altinkaya
