@@ -59,8 +59,8 @@ class StockMove(models.Model):
         for picking in moves.mapped('picking_id').filtered(lambda p: p.state in ['assigned','partially_available']):
             origin_moves = get_origin_moves(picking.move_lines)
             origin_docs = set([move.picking_id.name or move.production_id.name for move in origin_moves])
-            if not re.match('##[^#]*##', picking.origin):
-                picking.origin = '%s##%s##' % (picking.origin, ','.join(origin_docs) )
+            if not re.match('##[^#]*##', picking.origin or ''):
+                picking.origin = '%s##%s##' % (picking.origin or '', ','.join(origin_docs) )
             else:
                 picking.origin = re.sub('##[^#]*##', ','.join(origin_docs), picking.origin)
             

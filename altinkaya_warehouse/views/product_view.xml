@@ -13,14 +13,14 @@
 	                
 	            </xpath>
 	            
-	            <xpath expr="//field[@name='type']" position="after">
+	<!--            <xpath expr="//field[@name='type']" position="after">
 	            	<field name="type_variant"/>
 	            	
 	            </xpath>
 	            <xpath expr="//field[@name='type']" position="attributes">
 	            	<attribute name="attrs">{'invisible':[('type_variant','!=',False)]}</attribute>
 	            	
-	            </xpath>
+	            </xpath>-->
 	           
             </field>
         </record>
