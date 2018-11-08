@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp.osv import osv, fields
+from openerp import api
+import re
 
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
@@ -45,6 +47,13 @@ class stock_picking(osv.osv):
             invoice.address_contact_id = ''
         if res and res.get('price_unit',0.0) <= 0.0:
             return None
+        return res
+    
+    @api.cr_uid_ids_context
+    def do_transfer(self, cr, uid, picking_ids, context=None):
+        res = super(stock_picking, self).do_transfer(cr, uid, picking_ids, context=context)
+        for picking in self.browse(cr, uid, picking_ids, context=context):
+            picking.origin = re.sub('##[^#]*##', '', picking.origin)
         return res
 
     
