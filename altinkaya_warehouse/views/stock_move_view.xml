@@ -16,7 +16,7 @@
 	            <field name="string_availability_info" position="after">
 	            	<field name="qty_available_merkez" string="Merkez" />
                     <field name="qty_available_sincan" string="Sincan"/>
-	                <button name="action_create_procurement" type="object" string="Tedarik Oluştur"/>
+	                <button name="action_create_procurement" type="object" string="Tedarik Oluştur" attrs="{'invisible':[('state','=','waiting')]}"/>
 	            </field>
 	            
             </field>

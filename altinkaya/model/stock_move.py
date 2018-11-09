@@ -50,22 +50,24 @@ class StockMove(models.Model):
             intermediate_moves = moves.filtered(lambda m: len(m.move_orig_ids) > 0)
             if len(intermediate_moves) > 0:
                 origin_moves |= get_origin_moves(intermediate_moves.mapped('move_orig_ids'))
-                
+
             return origin_moves
-                
+
         res = super(StockMove, self).action_assign(cr, uid, ids, context=context)
         moves = self.browse(cr, uid, ids, context=context)
-        
+
         for picking in moves.mapped('picking_id').filtered(lambda p: p.state in ['assigned','partially_available']):
             origin_moves = get_origin_moves(picking.move_lines)
             origin_docs = set([move.picking_id.name or move.production_id.name for move in origin_moves])
+            if picking.name in origin_docs:
+                origin_docs.remove(picking.name)
+            if origin_docs:
+                continue
             if not re.match('##[^#]*##', picking.origin or ''):
                 picking.origin = '%s##%s##' % (picking.origin or '', ','.join(origin_docs) )
             else:
                 picking.origin = re.sub('##[^#]*##', ','.join(origin_docs), picking.origin)
-            
-        
-            
-        
+
+
         return res
-    
+

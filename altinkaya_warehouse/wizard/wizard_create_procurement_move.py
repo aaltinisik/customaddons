@@ -30,25 +30,32 @@ class create_despatch(models.TransientModel):
         if float_compare(self.qty, 0.0, precision_rounding=self.uom.rounding) <= 0:
             return
         
-        qty_to_split = 0.0
-        qty_to_add = 0.0
+        qty_to_split = 0.0  # simdiki eksik quantitiy
+        qty_to_add = 0.0  #
         
         comparison = float_compare(self.qty, self.move_id.remaining_qty, precision_rounding=self.uom.rounding)
         
         if comparison <= 0.0:
+            # istenen miktar gerekli miktardan az
             qty_to_split = self.qty
             qty_to_add = 0.0
         
         elif comparison > 0.0:
+            #istenen miktar gerekli miktardan fazla
+            #TODO: burasi hatali
             qty_to_split = self.move_id.remaining_qty
             qty_to_add = self.qty - self.move_id.remaining_qty 
         
         
         if qty_to_split == self.qty:
+            #istenen miktar move miktarina esitse sadece mto ya cevir
             self.move_id.action_cancel()
             self.move_id.procure_method = 'make_to_order'
             self.move_id.action_confirm()
-            
+
+        elif self.qty: # kosul duzenlenecek
+            # istenen miktar move miktarından buyukse move u mto yap
+            print ''
         elif qty_to_split > 0.0:
             
             defaults = {
