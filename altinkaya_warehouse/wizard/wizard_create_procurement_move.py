@@ -18,9 +18,25 @@ class create_despatch(models.TransientModel):
     
     move_qty = fields.Float('Demand Quantity', related='move_id.product_uom_qty', readonly=True)
     qty_to_sincan = fields.Float('Quantity to Sincan Depo')
-    qty_to_ivedik = fields.Float('Quantity to Ivedik Depo')
-    
+    qty_to_merkez = fields.Float('Quantity to Merkez Depo')
+    qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
+    qty_available_sincan = fields.Float('Sincan Depo Mevcut', related='product_id.qty_available_sincan')
+    qty_incoming_merkez = fields.Float('Merkez Depo Gelen', related='product_id.qty_incoming_merkez')
+    qty_incoming_sincan = fields.Float('Sincan Depo Gelen', related='product_id.qty_incoming_sincan')
+    qty_outgoing_merkez = fields.Float('Merkez Depo Giden', related='product_id.qty_outgoing_merkez')
+    qty_outgoing_sincan = fields.Float('Sincan Depo Giden', related='product_id.qty_outgoing_sincan')
+    qty_virtual_merkez = fields.Float('Merkez Depo Tahmini', related='product_id.qty_virtual_merkez')
+    qty_virtual_sincan = fields.Float('Sincan Depo Tahmini', related='product_id.qty_virtual_sincan')
     uom = fields.Many2one('product.uom', string='UoM', related='move_id.product_uom', readonly=True)
+    
+    production_ids = fields.Many2many('mrp.production',string='Manufacturing Orders', compute='_compute_productions')
+    
+    
+    @api.multi
+    @api.depends('product_id')
+    def _compute_productions(self):
+        for wizard in self:
+            wizard.production_ids = self.env['mrp.production'].search([('product_id','=',wizard.product_id.id),('state','not in', ['done','cancel'])])
     
     @api.onchange('move_id')
     def onchange_move_id(self):
@@ -37,7 +53,7 @@ class create_despatch(models.TransientModel):
         procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
         
         if self.qty_to_sincan > 0.0:
-            wh = self.env['stock.warehouse'].browse([3])
+            wh = self.env['stock.warehouse'].browse([28])
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
@@ -51,13 +67,13 @@ class create_despatch(models.TransientModel):
             procure_id.signal_workflow( 'button_confirm')
             procurement_ids |= procure_id
             
-        if self.qty_to_ivedik > 0.0:
-            wh = self.env['stock.warehouse'].browse([2])
+        if self.qty_to_merkez > 0.0:
+            wh = self.env['stock.warehouse'].browse([10])
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
                 'product_id': self.product_id.id,
-                'product_qty': self.qty_to_ivedik,
+                'product_qty': self.qty_to_merkez,
                 'product_uom': self.uom.id,
                 'warehouse_id': wh.id,
                 'location_id': wh.lot_stock_id.id,
@@ -69,7 +85,7 @@ class create_despatch(models.TransientModel):
         data_obj = self.env['ir.model.data']            
         
         
-        id2 = data_obj.xmlid_to_res_id('procurement.procurement_tree_view')# data_obj._get_id('procurement', 'procurement_tree_view')
+        id2 = data_obj.xmlid_to_res_id('procurement.procurement_tree_view')
         id3 = data_obj.xmlid_to_res_id('procurement.procurement_form_view')
 
         action = {
