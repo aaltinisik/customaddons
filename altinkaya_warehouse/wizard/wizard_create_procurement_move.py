@@ -15,7 +15,11 @@ class create_despatch(models.TransientModel):
         
     move_id = fields.Many2one('stock.move','Move', readonly=True)
     product_id = fields.Many2one('product.product',string='Product', related='move_id.product_id', readonly=True)
-    qty = fields.Float('Requested Quantity')
+    
+    move_qty = fields.Float('Demand Quantity', related='move_id.product_uom_qty', readonly=True)
+    qty_to_sincan = fields.Float('Quantity to Sincan Depo')
+    qty_to_ivedik = fields.Float('Quantity to Ivedik Depo')
+    
     uom = fields.Many2one('product.uom', string='UoM', related='move_id.product_uom', readonly=True)
     
     @api.onchange('move_id')
@@ -26,69 +30,67 @@ class create_despatch(models.TransientModel):
     @api.multi
     def action_create(self):
         self.ensure_one()
+        self.move_id.action_cancel()
+        self.move_id.procure_method = 'make_to_order'
+        self.move_id.action_confirm()
         
-        if float_compare(self.qty, 0.0, precision_rounding=self.uom.rounding) <= 0:
-            return
+        procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
         
-        qty_to_split = 0.0
-        qty_to_add = 0.0
-        
-        comparison = float_compare(self.qty, self.move_id.remaining_qty, precision_rounding=self.uom.rounding)
-        
-        if comparison <= 0.0:
-            qty_to_split = self.qty
-            qty_to_add = 0.0
-        
-        elif comparison > 0.0:
-            qty_to_split = self.move_id.remaining_qty
-            qty_to_add = self.qty - self.move_id.remaining_qty 
-        
-        
-        if qty_to_split == self.qty:
-            self.move_id.action_cancel()
-            self.move_id.procure_method = 'make_to_order'
-            self.move_id.action_confirm()
-            
-        elif qty_to_split > 0.0:
-            
-            defaults = {
-                'product_uom_qty': qty_to_split,
-                'product_uos_qty': qty_to_split,
-                'procure_method': 'make_to_order',
-                'restrict_lot_id': self.move_id.restrict_lot_id.id,
-                'split_from': self.move_id.id,
-                'procurement_id': self.move_id.procurement_id.id,
-                'move_dest_id': self.move_id.move_dest_id.id,
-                'origin_returned_move_id': self.move_id.origin_returned_move_id.id,
-                'restrict_partner_id': self.move_id.restrict_partner_id.id,
-            }
-    
-            
-            new_move = self.move_id.copy(defaults)
-            
-            self.move_id.with_context({'do_not_propagate':True}).write({
-                'product_uom_qty': self.move_id.product_uom_qty - qty_to_split,
-                'product_uos_qty': self.move_id.product_uos_qty - qty_to_split
-            })
-    
-            
-            new_move.action_confirm()
-            
-        if qty_to_add > 0.0:
-            wh = self.move_id.warehouse_id
+        if self.qty_to_sincan > 0.0:
+            wh = self.env['stock.warehouse'].browse([3])
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
                 'product_id': self.product_id.id,
-                'product_qty': qty_to_add,
+                'product_qty': self.qty_to_sincan,
                 'product_uom': self.uom.id,
                 'warehouse_id': wh.id,
                 'location_id': wh.lot_stock_id.id,
                 'company_id': wh.company_id.id,
             })
             procure_id.signal_workflow( 'button_confirm')
+            procurement_ids |= procure_id
             
+        if self.qty_to_ivedik > 0.0:
+            wh = self.env['stock.warehouse'].browse([2])
+            procure_id = self.env['procurement.order'].create({
+                'name':'INT: %s' % self.env.user.name,
+                'date_planned': self.move_id.date_expected,
+                'product_id': self.product_id.id,
+                'product_qty': self.qty_to_ivedik,
+                'product_uom': self.uom.id,
+                'warehouse_id': wh.id,
+                'location_id': wh.lot_stock_id.id,
+                'company_id': wh.company_id.id,
+            })
+            procure_id.signal_workflow( 'button_confirm')
+            procurement_ids |= procure_id
         
-        return {}
+        data_obj = self.env['ir.model.data']            
+        
+        
+        id2 = data_obj.xmlid_to_res_id('procurement.procurement_tree_view')# data_obj._get_id('procurement', 'procurement_tree_view')
+        id3 = data_obj.xmlid_to_res_id('procurement.procurement_form_view')
+
+        action = {
+            'name': 'Procurements',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'procurement.order',
+            'type': 'ir.actions.act_window'
+        }
+        
+        if len(procurement_ids) > 1:
+            action.update({'domain' : [('id','in',procurement_ids.ids)] })
+        elif len(procurement_ids) == 1:
+            
+            action.update({'res_id' : procurement_ids[0].id ,
+                           'views': [(id3,'form'),(id2,'tree')]})
+        else:
+            return {}
+        
+        return action
+        
+        
         
         

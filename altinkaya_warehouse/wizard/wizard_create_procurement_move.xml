@@ -10,14 +10,16 @@
             		<group>
             			<field name="move_id"/>
             			<field name="product_id"/>
-            			<label for="qty"/>
+            			<label for="move_qty"/>
             			<div>
-            				<field name="qty" class="oe_inline"/>
+            				<field name="move_qty" class="oe_inline"/>
             				<field name="uom" class="oe_inline"/>
             			
             			</div>
-            			
-	            			
+            			<field name="qty_to_sincan" class="oe_inline"/>
+            				
+            			<field name="qty_to_ivedik" class="oe_inline"/>
+            				
             		</group>
             		<div>
             			<p>açıklama</p>
