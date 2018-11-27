@@ -43,29 +43,43 @@ class StockMove(models.Model):
     
     
     
-    
-    def action_assign(self, cr, uid, ids, context=None):
-        def get_origin_moves(moves):
-            origin_moves = moves.filtered(lambda m: len(m.move_orig_ids) == 0)
-            intermediate_moves = moves.filtered(lambda m: len(m.move_orig_ids) > 0)
-            if len(intermediate_moves) > 0:
-                origin_moves |= get_origin_moves(intermediate_moves.mapped('move_orig_ids'))
-                
-            return origin_moves
-                
-        res = super(StockMove, self).action_assign(cr, uid, ids, context=context)
+    def action_done(self, cr, uid, ids, context=None):
+        res = super(StockMove, self).action_done(cr, uid, ids, context=context)
         moves = self.browse(cr, uid, ids, context=context)
         
-        for picking in moves.mapped('picking_id').filtered(lambda p: p.state in ['assigned','partially_available']):
-            origin_moves = get_origin_moves(picking.move_lines)
-            origin_docs = set([move.picking_id.name or move.production_id.name for move in origin_moves])
-            if not re.match('##[^#]*##', picking.origin or ''):
-                picking.origin = '%s##%s##' % (picking.origin or '', ','.join(origin_docs) )
+        mapping = {}
+        for move in moves.filtered(lambda m: m.state == 'done' and m.move_dest_id.id):
+            origin = False
+            if move.production_id.id:
+                origin = move.production_id
+            elif move.picking_id.id:
+                origin = move.picking_id
+            
+            dest_pickings = mapping.get(origin, set())
+            dest_pickings.add(move.move_dest_id.picking_id)
+            mapping[origin] = dest_pickings
+            
+        for src_obj, dest_pickings in mapping.iteritems():
+            origin = re.findall('##[^#]*##', src_obj.origin)
+            
+            if len(origin) == 0:
+                # origin document is the source
+                origin = src_obj.name
             else:
-                picking.origin = re.sub('##[^#]*##', ','.join(origin_docs), picking.origin)
-            
+                origin = origin[0][2:-2]
+                
+            for picking in dest_pickings:
+                existing_origin = re.findall('##[^#]*##', picking.origin or '')
+                if len(existing_origin) > 0:
+                    origin = '%s,%s' % (existing_origin, origin)
+                    
+                picking.origin = '%s##%s##' % (picking.origin or '', origin)
         
-            
+        
+        for picking in moves.mapped('picking_id').filtered(lambda p: p.state == 'done'):
+            picking.origin = re.sub('##[^#]*##', '', picking.origin)
         
         return res
+        
+    
     
