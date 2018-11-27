@@ -12,6 +12,21 @@
 	            	<field name="qty_available_sincan"/>
 	                
 	            </xpath>
+	            <xpath expr="//field[@name='outgoing_qty']" position="before">
+	            	<field name="qty_incoming_merkez"/>
+	            	<field name="qty_incoming_sincan"/>
+	                
+	            </xpath>
+	            <xpath expr="//field[@name='outgoing_qty']" position="after">
+	            	<field name="qty_outgoing_merkez"/>
+	            	<field name="qty_outgoing_sincan"/>
+	                
+	            </xpath>
+	            <xpath expr="//field[@name='virtual_available']" position="after">
+	            	<field name="qty_virtual_merkez"/>
+	            	<field name="qty_virtual_sincan"/>
+	                
+	            </xpath>
 	            
 	<!--            <xpath expr="//field[@name='type']" position="after">
 	            	<field name="type_variant"/>

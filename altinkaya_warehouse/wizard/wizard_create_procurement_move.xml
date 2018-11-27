@@ -10,18 +10,31 @@
             		<group>
             			<field name="move_id"/>
             			<field name="product_id"/>
-            			<label for="qty"/>
+            			<label for="move_qty"/>
             			<div>
-            				<field name="qty" class="oe_inline"/>
+            				<field name="move_qty" class="oe_inline"/>
             				<field name="uom" class="oe_inline"/>
             			
             			</div>
-            			
-	            			
+            			<field name="qty_to_sincan" class="oe_inline"/>
+            			<field name="qty_available_sincan"/>
+            			<field name="qty_incoming_sincan"/>
+            			<field name="qty_outgoing_sincan"/>
+            			<field name="qty_virtual_sincan"/>
+            			<field name="qty_to_merkez" class="oe_inline"/>
+            			<field name="qty_available_merkez"/>
+            			<field name="qty_incoming_merkez"/>
+            			<field name="qty_outgoing_merkez"/>
+            			<field name="qty_virtual_merkez"/>
             		</group>
             		<div>
             			<p>açıklama</p>
             		</div>
+            		<notebook>
+            			<page name="production" string="Manufacturing Orders">
+            				<field name="production_ids"/>
+            			</page>
+            		</notebook>
             		<footer>
                         <button name="action_create" string="Create Procurement" type="object" class="oe_highlight"/>
                         or
