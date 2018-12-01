@@ -7,25 +7,22 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-	            <xpath expr="//label[@for='incoming_qty']" position="before">
-	            	<field name="qty_available_merkez"/>
-	            	<field name="qty_available_sincan"/>
-	                
-	            </xpath>
-	            <xpath expr="//field[@name='outgoing_qty']" position="before">
-	            	<field name="qty_incoming_merkez"/>
-	            	<field name="qty_incoming_sincan"/>
-	                
-	            </xpath>
-	            <xpath expr="//field[@name='outgoing_qty']" position="after">
-	            	<field name="qty_outgoing_merkez"/>
-	            	<field name="qty_outgoing_sincan"/>
-	                
-	            </xpath>
-	            <xpath expr="//field[@name='virtual_available']" position="after">
-	            	<field name="qty_virtual_merkez"/>
-	            	<field name="qty_virtual_sincan"/>
-	                
+
+	            <xpath expr="//group[@name='lot']" position="before">
+
+					<group name="Merkezdepo" string="Merkez Depo">
+					<field name="qty_available_merkez"/>
+					<field name="qty_incoming_merkez"/>
+					<field name="qty_outgoing_merkez"/>
+					<field name="qty_virtual_merkez"/>
+					</group>
+					<group name="Sincandepo" string="Sincan Depo">
+					<field name="qty_available_sincan"/>
+					<field name="qty_incoming_sincan"/>
+					<field name="qty_outgoing_sincan"/>
+					<field name="qty_virtual_sincan"/>
+					</group>
+
 	            </xpath>
 	            
 	<!--            <xpath expr="//field[@name='type']" position="after">

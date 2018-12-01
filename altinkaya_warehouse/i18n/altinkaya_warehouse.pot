@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-08 08:16+0000\n"
-"PO-Revision-Date: 2018-11-08 08:16+0000\n"
+"POT-Creation-Date: 2018-11-30 12:10+0000\n"
+"PO-Revision-Date: 2018-11-30 12:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,7 @@ msgstr ""
 
 #. module: altinkaya_warehouse
 #: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
 #: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
 #: selection:stock.picking.despatch,state:0
 msgid "Cancel"
@@ -63,24 +64,26 @@ msgid "Configuration Error!The next sequence is longer than 12 characters. It is
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: selection:product.product,type_variant:0
-msgid "Consumable"
-msgstr ""
-
-#. module: altinkaya_warehouse
 #: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
 #: model:ir.actions.act_window,name:altinkaya_warehouse.action_create_despatch
 msgid "Create Despatch"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
+msgid "Create Procurement"
+msgstr ""
+
+#. module: altinkaya_warehouse
 #: field:create.picking.despatch,create_uid:0
+#: field:create.procurement.move,create_uid:0
 #: field:stock.picking.despatch,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,create_date:0
+#: field:create.procurement.move,create_date:0
 #: field:stock.picking.despatch,create_date:0
 msgid "Created on"
 msgstr ""
@@ -101,6 +104,11 @@ msgid "Delivered"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: field:create.procurement.move,move_qty:0
+msgid "Demand Quantity"
+msgstr ""
+
+#. module: altinkaya_warehouse
 #: model:ir.actions.report.xml,name:altinkaya_warehouse.action_report_picking_despatch
 msgid "Despatch Document"
 msgstr ""
@@ -112,6 +120,7 @@ msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,display_name:0
+#: field:create.procurement.move,display_name:0
 #: field:stock.picking.despatch,display_name:0
 msgid "Display Name"
 msgstr ""
@@ -153,6 +162,7 @@ msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,id:0
+#: field:create.procurement.move,id:0
 #: field:stock.picking.despatch,id:0
 msgid "ID"
 msgstr ""
@@ -179,18 +189,21 @@ msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,__last_update:0
+#: field:create.procurement.move,__last_update:0
 #: field:stock.picking.despatch,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,write_uid:0
+#: field:create.procurement.move,write_uid:0
 #: field:stock.picking.despatch,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: altinkaya_warehouse
 #: field:create.picking.despatch,write_date:0
+#: field:create.procurement.move,write_date:0
 #: field:stock.picking.despatch,write_date:0
 msgid "Last Updated on"
 msgstr ""
@@ -201,16 +214,46 @@ msgid "Location"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
+#: field:create.procurement.move,production_ids:0
+msgid "Manufacturing Orders"
+msgstr ""
+
+#. module: altinkaya_warehouse
 #: view:sale.order:altinkaya_warehouse.view_order_form_inherit_altinkaya_stock
 #: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
 msgid "Merkez"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: view:product.product:altinkaya_warehouse.view_product_form_inherit_custom_available
+msgid "Merkez Depo"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_incoming_merkez:0
+#: field:product.product,qty_incoming_merkez:0
+msgid "Merkez Depo Gelen"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_outgoing_merkez:0
+#: field:product.product,qty_outgoing_merkez:0
+msgid "Merkez Depo Giden"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_available_merkez:0
 #: field:product.product,qty_available_merkez:0
 #: field:sale.order.line,qty_available_merkez:0
 #: field:stock.move,qty_available_merkez:0
 msgid "Merkez Depo Mevcut"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_virtual_merkez:0
+#: field:product.product,qty_virtual_merkez:0
+msgid "Merkez Depo Tahmini"
 msgstr ""
 
 #. module: altinkaya_warehouse
@@ -221,6 +264,11 @@ msgstr ""
 #. module: altinkaya_warehouse
 #: help:stock.picking.despatch,message_ids:0
 msgid "Messages and communication history"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,move_id:0
+msgid "Move"
 msgstr ""
 
 #. module: altinkaya_warehouse
@@ -256,13 +304,19 @@ msgid "Print Location Label"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: field:create.procurement.move,product_id:0
 #: model:ir.model,name:altinkaya_warehouse.model_product_product
 msgid "Product"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: field:product.product,type_variant:0
-msgid "Product Type"
+#: field:create.procurement.move,qty_to_merkez:0
+msgid "Quantity to Merkez Depo"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_to_sincan:0
+msgid "Quantity to Sincan Depo"
 msgstr ""
 
 #. module: altinkaya_warehouse
@@ -276,21 +330,40 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: selection:product.product,type_variant:0
-msgid "Service"
-msgstr ""
-
-#. module: altinkaya_warehouse
 #: view:sale.order:altinkaya_warehouse.view_order_form_inherit_altinkaya_stock
 #: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
 msgid "Sincan"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: view:product.product:altinkaya_warehouse.view_product_form_inherit_custom_available
+msgid "Sincan Depo"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_incoming_sincan:0
+#: field:product.product,qty_incoming_sincan:0
+msgid "Sincan Depo Gelen"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_outgoing_sincan:0
+#: field:product.product,qty_outgoing_sincan:0
+msgid "Sincan Depo Giden"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_available_sincan:0
 #: field:product.product,qty_available_sincan:0
 #: field:sale.order.line,qty_available_sincan:0
 #: field:stock.move,qty_available_sincan:0
 msgid "Sincan Depo Mevcut"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,qty_virtual_sincan:0
+#: field:product.product,qty_virtual_sincan:0
+msgid "Sincan Depo Tahmini"
 msgstr ""
 
 #. module: altinkaya_warehouse
@@ -304,13 +377,13 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: selection:product.product,type_variant:0
-msgid "Stockable Product"
+#: field:stock.picking.despatch,message_summary:0
+msgid "Summary"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: field:stock.picking.despatch,message_summary:0
-msgid "Summary"
+#: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
+msgid "Tedarik Oluştur"
 msgstr ""
 
 #. module: altinkaya_warehouse
@@ -324,17 +397,28 @@ msgid "Teslimat Adresi"
 msgstr ""
 
 #. module: altinkaya_warehouse
+#: help:create.procurement.move,move_qty:0
+msgid "This is the quantity of products from an inventory point of view. For moves in the state 'done', this is the quantity of products that were actually moved. For other moves, this is the quantity of product that is planned to be moved. Lowering this quantity does not generate a backorder. Changing this quantity on assigned moves affects the product reservation, and should be done with care."
+msgstr ""
+
+#. module: altinkaya_warehouse
 #: field:stock.picking.despatch,message_unread:0
 msgid "Unread Messages"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
-msgid "or"
+#: field:create.procurement.move,uom:0
+msgid "UoM"
 msgstr ""
 
 #. module: altinkaya_warehouse
-#: view:product.product:altinkaya_warehouse.view_product_form_inherit_custom_available
-msgid "{'invisible':[('type_variant','!=',False)]}"
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
+msgid "açıklama"
+msgstr ""
+
+#. module: altinkaya_warehouse
+#: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
+msgid "or"
 msgstr ""
 

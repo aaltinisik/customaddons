@@ -17,6 +17,7 @@ class create_despatch(models.TransientModel):
     product_id = fields.Many2one('product.product',string='Product', related='move_id.product_id', readonly=True)
     
     move_qty = fields.Float('Demand Quantity', related='move_id.product_uom_qty', readonly=True)
+    procure_move  = fields.Boolean('Harekete Tedarik Oluştur',default=True)
     qty_to_sincan = fields.Float('Quantity to Sincan Depo')
     qty_to_merkez = fields.Float('Quantity to Merkez Depo')
     qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
@@ -30,14 +31,20 @@ class create_despatch(models.TransientModel):
     uom = fields.Many2one('product.uom', string='UoM', related='move_id.product_uom', readonly=True)
     
     production_ids = fields.Many2many('mrp.production',string='Manufacturing Orders', compute='_compute_productions')
-    
+    transfers_to_customer_ids = fields.Many2many('stock.move',string='Transfers to Customers', compute='_compute_customer_transfers')
     
     @api.multi
     @api.depends('product_id')
     def _compute_productions(self):
         for wizard in self:
             wizard.production_ids = self.env['mrp.production'].search([('product_id','=',wizard.product_id.id),('state','not in', ['done','cancel'])])
-    
+
+    @api.multi
+    @api.depends('product_id')
+    def _compute_customer_transfers(self):
+        for wizard in self:
+            wizard.transfers_to_customer_ids = self.env['stock.move'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])])
+
     @api.onchange('move_id')
     def onchange_move_id(self):
         self.qty = self.move_id.remaining_qty
@@ -46,11 +53,11 @@ class create_despatch(models.TransientModel):
     @api.multi
     def action_create(self):
         self.ensure_one()
-        self.move_id.action_cancel()
-        self.move_id.procure_method = 'make_to_order'
-        self.move_id.action_confirm()
-        
-        procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
+        if self.procure_move:
+            self.move_id.action_cancel()
+            self.move_id.procure_method = 'make_to_order'
+            self.move_id.action_confirm()
+            procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
         
         if self.qty_to_sincan > 0.0:
             wh = self.env['stock.warehouse'].browse([28])
