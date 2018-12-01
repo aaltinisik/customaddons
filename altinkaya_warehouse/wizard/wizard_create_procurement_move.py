@@ -53,14 +53,15 @@ class create_despatch(models.TransientModel):
     @api.multi
     def action_create(self):
         self.ensure_one()
-        if self.procure_move:
-            self.move_id.action_cancel()
-            self.move_id.procure_method = 'make_to_order'
-            self.move_id.action_confirm()
-            procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
-        
+
+        # if self.procure_move:
+        #     self.move_id.action_cancel()
+        #     self.move_id.procure_method = 'make_to_order'
+        #     self.move_id.action_confirm()
+        #     procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
+        #
         if self.qty_to_sincan > 0.0:
-            wh = self.env['stock.warehouse'].browse([28])
+            wh = self.env['stock.warehouse'].browse([2])
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
@@ -72,10 +73,10 @@ class create_despatch(models.TransientModel):
                 'company_id': wh.company_id.id,
             })
             procure_id.signal_workflow( 'button_confirm')
-            procurement_ids |= procure_id
+            procurement_ids = procure_id
             
         if self.qty_to_merkez > 0.0:
-            wh = self.env['stock.warehouse'].browse([10])
+            wh = self.env['stock.warehouse'].browse([1])
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
