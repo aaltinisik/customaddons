@@ -71,6 +71,7 @@ class StockMove(models.Model):
                 
             for picking in dest_pickings:
                 existing_origin = re.findall('##[^#]*##', picking.origin or '')
+                combined_origin = ""
                 if len(existing_origin) > 0:
                     existing_origin = existing_origin[0][2:-2]
                     existing_origins = existing_origin.split(",")
@@ -78,7 +79,8 @@ class StockMove(models.Model):
                     origins=set(existing_origins)
                     combined_origin=",".join(origins)
 
-                picking.origin = '%s##%s##' % (re.sub('##[^#]*##', '', picking.origin) or '', combined_origin)
+                old_origin = picking.origin or ""
+                picking.origin = '%s##%s##' % (re.sub('##[^#]*##', '', old_origin) or '', combined_origin)
 
         
         for picking in moves.mapped('picking_id').filtered(lambda p: p.state == 'done'):
