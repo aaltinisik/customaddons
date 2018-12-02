@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 #Created on Oct 12, 2018
 #
@@ -31,8 +31,11 @@ class create_despatch(models.TransientModel):
     uom = fields.Many2one('product.uom', string='UoM', related='move_id.product_uom', readonly=True)
     
     production_ids = fields.Many2many('mrp.production',string='Manufacturing Orders', compute='_compute_productions')
-    transfers_to_customer_ids = fields.Many2many('stock.move',string='Transfers to Customers', compute='_compute_customer_transfers')
-    
+    transfers_to_customer_ids = fields.Many2many('stock.move',string='Transfers to Customers',
+                                                 compute='_compute_customer_transfers')
+    pending_orderline_ids = fields.Many2many('sale.order.line', string='Pending Orders',
+                                                 compute='_compute_pending_orderlines')
+
     @api.multi
     @api.depends('product_id')
     def _compute_productions(self):
@@ -45,6 +48,13 @@ class create_despatch(models.TransientModel):
         for wizard in self:
             wizard.transfers_to_customer_ids = self.env['stock.move'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])])
 
+    @api.multi
+    @api.depends('product_id')
+    def _compute_pending_orderlines(self):
+        for wizard in self:
+            wizard.pending_orderline_ids = self.env['sale.order.line'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])])
+
+
     @api.onchange('move_id')
     def onchange_move_id(self):
         self.qty = self.move_id.remaining_qty
@@ -54,18 +64,24 @@ class create_despatch(models.TransientModel):
     def action_create(self):
         self.ensure_one()
 
-        # if self.procure_move:
-        #     self.move_id.action_cancel()
-        #     self.move_id.procure_method = 'make_to_order'
-        #     self.move_id.action_confirm()
-        #     procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
-        #
+        if self.procure_move:
+            self.pool.get('stock.move').do_unreserve(self._cr, self._uid, [self.move_id.id], context=self._context)
+            self.move_id.procure_method = 'make_to_order'
+            self.move_id.action_confirm()
+            procurement_ids = self.move_id.move_orig_ids.mapped('procurement_id')
+
         if self.qty_to_sincan > 0.0:
             wh = self.env['stock.warehouse'].browse([2])
+
+            group_id = self.pool.get("procurement.group").create(self._cr, self._uid,{
+                'name': u"Sincana Açan: " + self.env.user.name,
+            }, context=self._context)
+
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
                 'product_id': self.product_id.id,
+                'group_id': group_id,
                 'product_qty': self.qty_to_sincan,
                 'product_uom': self.uom.id,
                 'warehouse_id': wh.id,
@@ -73,14 +89,24 @@ class create_despatch(models.TransientModel):
                 'company_id': wh.company_id.id,
             })
             procure_id.signal_workflow( 'button_confirm')
-            procurement_ids = procure_id
+            try:
+                procurement_ids
+            except NameError:
+                procurement_ids = procure_id
+            else:
+                procurement_ids |= procure_id
             
         if self.qty_to_merkez > 0.0:
             wh = self.env['stock.warehouse'].browse([1])
+            group_id2 = self.pool.get("procurement.group").create(self._cr, self._uid, {
+                'name': u"Merkeze Açan:"+ self.env.user.name,
+            }, context=self._context)
+
             procure_id = self.env['procurement.order'].create({
                 'name':'INT: %s' % self.env.user.name,
                 'date_planned': self.move_id.date_expected,
                 'product_id': self.product_id.id,
+                'group_id': group_id2,
                 'product_qty': self.qty_to_merkez,
                 'product_uom': self.uom.id,
                 'warehouse_id': wh.id,
@@ -88,8 +114,13 @@ class create_despatch(models.TransientModel):
                 'company_id': wh.company_id.id,
             })
             procure_id.signal_workflow( 'button_confirm')
-            procurement_ids |= procure_id
-        
+            try:
+                procurement_ids
+            except NameError:
+                procurement_ids = procure_id
+            else:
+                procurement_ids |= procure_id
+
         data_obj = self.env['ir.model.data']            
         
         

@@ -7,7 +7,7 @@
             <field name="model">create.procurement.move</field>
             <field name="arch" type="xml">
 	            <form>
-            		<group invisible="1">
+            		<group invisible="0">
             			<field name="move_id"/>
             			<field name="product_id"/>
             			<label for="move_qty"/>
@@ -38,7 +38,19 @@
 
 						<notebook>
             			<page name="production" string="Manufacturing Orders">
-            				<field name="production_ids"/>
+								<field name="production_ids" widget="many2many">
+									<tree>
+										<field name="name"/>
+										<field name="date_planned"/>
+										<field name="product_id"/>
+										<field name="product_qty"/>
+										<field name="product_uom" groups="product.group_uom"/>
+					                    <field name="routing_id" groups="mrp.group_mrp_routings"/>
+					                    <field name="location_src_id"/>
+   								        <field name="state"/>
+
+									</tree>
+								</field>
             			</page>
             		</notebook>
 
