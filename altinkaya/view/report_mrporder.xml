@@ -75,6 +75,8 @@
 						style="border-color: #000000;margin-right: 0px;margin-left: 0px;margin-bottom: 0px;margin-top: 2px;width: 100%;border: 1pt solid black;"
 						border="1">
 						<tbody>
+                                           <tr t-if="o.x_note"><td><h4>NOT:<span t-field="o.x_note"></span></h4></td> </tr>
+
                             <tr><td>
                                  <h6>Makine Adı: <span t-field="o.x_makine"/></h6>
                             </td>

@@ -67,7 +67,7 @@
                                         <span t-field="o.x_durum"/>
                                     </td>
                                     <td>
-                                        <span t-field="o.x_hazirlayan"/>
+                                        <span t-field="o.hazirlayan"/>
                                     </td>
                                     <td>
                                         <span t-field="o.date"/>
