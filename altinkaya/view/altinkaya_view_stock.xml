@@ -9,6 +9,7 @@
 					<field name="partner_id" on_change="onchange_partner_in(partner_id)"
 						context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}" />
                     <field name='carrier_id'/>
+                    <field name="hazirlayan"></field>
                     <field name='x_hazirlayan'/>
                     <field name='x_durum'/>
 
@@ -35,7 +36,7 @@
     				  <field name="note"></field>
     				  <field name="carrier_id"></field>
     				  <field name="x_durum"></field>
-    				  <field name="x_hazirlayan"></field>
+    				  <field name="hazirlayan"></field>
     				  </field>
 
                 </field>

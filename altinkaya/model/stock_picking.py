@@ -34,8 +34,9 @@ class stock_picking(osv.osv):
                                      ("Muhsin", u"Muhsin")
                                      ],
 
-                                     u'Siparişi Hazırlayan', select=True),
+                                     u'Siparişi Hazırlayan',readonly=True ,select=True),
                 'comment_irsaliye': fields.text(u'İrsaliye Notu'),
+                'hazirlayan': fields.many2one('hr.employee', u'Sevki Hazırlayan'),
                 'teslim_alan': fields.char(u'Malı Teslim Alan Ad Soyad', size=32)
                 }
     
