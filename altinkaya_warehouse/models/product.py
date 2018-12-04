@@ -7,6 +7,15 @@ class product_product(models.Model):
 
     qty_available_sincan = fields.Float('Sincan Depo Mevcut',compute='_compute_custom_available', search='_search_qty_sincan')
     qty_available_merkez = fields.Float('Merkez Depo Mevcut',compute='_compute_custom_available', search='_search_qty_merkez')
+    qty_available_enjek = fields.Float('Enjeksiyon Depo Mevcut',compute='_compute_custom2_available', search='_search_qty_enjek')
+    qty_available_montaj = fields.Float('Montaj Depo Mevcut',compute='_compute_custom2_available', search='_search_qty_montaj')
+    qty_available_cnc = fields.Float('CNC Depo Mevcut', compute='_compute_custom2_available',
+                                        search='_search_qty_cnc')
+    qty_available_metal = fields.Float('Metal Depo Mevcut', compute='_compute_custom2_available',
+                                        search='_search_qty_metal')
+    qty_available_boya = fields.Float('Boya Depo Mevcut', compute='_compute_custom2_available',
+                                       search='_search_qty_boya')
+
     qty_incoming_sincan = fields.Float('Sincan Depo Gelen',compute='_compute_custom_available')
     qty_incoming_merkez = fields.Float('Merkez Depo Gelen',compute='_compute_custom_available')
     qty_outgoing_sincan = fields.Float('Sincan Depo Giden',compute='_compute_custom_available')
@@ -31,6 +40,21 @@ class product_product(models.Model):
     def _search_qty_sincan(self, operator, value):
         return [('id', 'in', self.with_context({'location':28})._search_qty_available(operator, value))]
 
+    def _search_qty_enjek(self, operator, value):
+        return [('id', 'in', self.with_context({'location':34})._search_qty_available(operator, value))]
+
+    def _search_qty_montaj(self, operator, value):
+        return [('id', 'in', self.with_context({'location':80})._search_qty_available(operator, value))]
+
+    def _search_qty_cnc(self, operator, value):
+        return [('id', 'in', self.with_context({'location':9029})._search_qty_available(operator, value))]
+
+    def _search_qty_boya(self, operator, value):
+        return [('id', 'in', self.with_context({'location':71})._search_qty_available(operator, value))]
+
+    def _search_qty_metal(self, operator, value):
+        return [('id', 'in', self.with_context({'location':65})._search_qty_available(operator, value))]
+
 
     @api.multi
     def _compute_custom_available(self):
@@ -43,3 +67,14 @@ class product_product(models.Model):
             product.qty_outgoing_merkez = product.with_context({'location':10}).outgoing_qty
             product.qty_virtual_sincan = product.with_context({'location':28}).virtual_available
             product.qty_virtual_merkez = product.with_context({'location':10}).virtual_available
+
+    @api.multi
+    def _compute_custom2_available(self):
+        for product in self:
+            product.qty_available_montaj = product.with_context({'location':80}).qty_available
+            product.qty_available_enjek = product.with_context({'location':34}).qty_available
+            product.qty_available_cnc = product.with_context({'location':9029}).qty_available
+            product.qty_available_boya = product.with_context({'location':71}).qty_available
+            product.qty_available_metal = product.with_context({'location':65}).qty_available
+
+
