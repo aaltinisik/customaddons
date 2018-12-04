@@ -5,7 +5,7 @@ from openerp import models, fields, api, _
 class product_product(models.Model):
     _inherit = "product.product"
 
-    qty_available_sincan = fields.Float('Sincan Depo Mevcut',compute='_compute_custom_available')
+    qty_available_sincan = fields.Float('Sincan Depo Mevcut',compute='_compute_custom_available',search='_search_qty_custom')
     qty_available_merkez = fields.Float('Merkez Depo Mevcut',compute='_compute_custom_available')
     qty_incoming_sincan = fields.Float('Sincan Depo Gelen',compute='_compute_custom_available')
     qty_incoming_merkez = fields.Float('Merkez Depo Gelen',compute='_compute_custom_available')
@@ -24,6 +24,10 @@ class product_product(models.Model):
 #        for product in self:
 #            product.type = product.type_variant or product.product_tmpl_id.type
             
+    
+    def _search_qty_custom(self, operator, value):
+        return [('id', 'in', self.with_context({'location':28})._search_qty_available(operator, value))]
+                 
     
     @api.multi
     def _compute_custom_available(self):
