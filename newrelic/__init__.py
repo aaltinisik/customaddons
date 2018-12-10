@@ -5,8 +5,8 @@ from logging import getLogger
 _logger = getLogger(__name__)
 
 try:
-    import odoo
-    target = odoo.service.server.server
+    import openerp
+    target = openerp.service.server.server
 
     try:
         instrumented = target._nr_instrumented
@@ -34,7 +34,7 @@ try:
         target.app = newrelic.agent.WSGIApplicationWrapper(target.app)
 
         # Workers new WSGI Application
-        target = odoo.service.wsgi_server
+        target = openerp.service.wsgi_server
         target.application_unproxied = newrelic.agent.WSGIApplicationWrapper(target.application_unproxied)
 
         # Error handling
@@ -64,7 +64,7 @@ try:
 
             return _handle_exception
 
-        target = odoo.http.WebRequest
+        target = openerp.http.WebRequest
         target._handle_exception = _nr_wrapper_handle_exception_(target._handle_exception)
 
 
