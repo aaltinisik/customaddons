@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import http, tools
-import odoo.addons.bus.controllers.main
+from openerp import http, tools
+import openerp.addons.bus.controllers.main
 
 try:
     import newrelic
@@ -10,7 +10,7 @@ except ImportError:
     newrelic = None
 
 
-class BusController(odoo.addons.bus.controllers.main.BusController):
+class BusController(openerp.addons.bus.controllers.main.BusController):
 
     @http.route()
     def send(self, channel, message):
