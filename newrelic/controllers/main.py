@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp import http, tools
-import openerp.addons.bus.controllers.main
+import openerp
 
 try:
     import newrelic
@@ -10,7 +10,7 @@ except ImportError:
     newrelic = None
 
 
-class BusController(openerp.addons.bus.controllers.main.BusController):
+class BusController(openerp.addons.bus.bus.Controller):
 
     @http.route()
     def send(self, channel, message):
