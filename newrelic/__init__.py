@@ -16,7 +16,7 @@ try:
     if instrumented:
         _logger.info("NewRelic instrumented already")
     else:
-        import odoo.tools.config as config
+        import openerp.tools.config as config
         import newrelic.agent
 
 
