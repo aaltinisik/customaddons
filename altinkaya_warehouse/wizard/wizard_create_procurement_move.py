@@ -36,23 +36,27 @@ class create_despatch(models.TransientModel):
     pending_orderline_ids = fields.Many2many('sale.order.line', string='Pending Orders',
                                                  compute='_compute_pending_orderlines')
 
+    sale_qty30days = fields.Float(u'Son 1 ayda satılan', related='move_id.product_id.sale_qty30days', readonly=True, store=False)
+    sale_qty180days = fields.Float(u'Son 6 ayda satılan', related='move_id.product_id.sale_qty180days', readonly=True, store=False)
+    sale_qty360days = fields.Float(u'Son 1 senede satılan', related='move_id.product_id.sale_qty360days', readonly=True, store=False)
+
     @api.multi
     @api.depends('product_id')
     def _compute_productions(self):
         for wizard in self:
-            wizard.production_ids = self.env['mrp.production'].search([('product_id','=',wizard.product_id.id),('state','not in', ['done','cancel'])])
+            wizard.production_ids = self.env['mrp.production'].search([('product_id','=',wizard.product_id.id),('state','not in', ['done','cancel'])],limit=40,order='create_date desc')
 
     @api.multi
     @api.depends('product_id')
     def _compute_customer_transfers(self):
         for wizard in self:
-            wizard.transfers_to_customer_ids = self.env['stock.move'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])])
+            wizard.transfers_to_customer_ids = self.env['stock.move'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])],limit=40,order='create_date desc')
 
     @api.multi
     @api.depends('product_id')
     def _compute_pending_orderlines(self):
         for wizard in self:
-            wizard.pending_orderline_ids = self.env['sale.order.line'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])])
+            wizard.pending_orderline_ids = self.env['sale.order.line'].search([('product_id','=',wizard.product_id.id),('state','not in', ['draft','done','cancel'])],limit=40,order='create_date desc')
 
 
     @api.onchange('move_id')

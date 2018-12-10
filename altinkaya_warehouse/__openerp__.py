@@ -6,7 +6,7 @@
     'description': """This Module is used to print a stock report""",
     'summary': '',
     'website': '',
-    'depends': ['stock','sale'],
+    'depends': ['stock','sale','altinkaya_partner_ranking'],
     'data': [
              'views/product_view.xml',
              'views/sale_order_view.xml',

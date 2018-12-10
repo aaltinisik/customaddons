@@ -17,15 +17,20 @@
             			</div>
 						<field name="procure_move"/>
             		</group>
-					<group col="2">
+					<group col="3">
             		<group class="oe_right oe_form" col="2">
 						<field name="qty_to_sincan" class="oe_inline"/>
             			<field name="qty_available_sincan"/>
             			<field name="qty_incoming_sincan"/>
             			<field name="qty_outgoing_sincan"/>
             			<field name="qty_virtual_sincan"/></group>
-					<group class="oe_right oe_form" col="2">
-            			            			<field name="qty_to_merkez" class="oe_inline"/>
+						<group string="Satışlar">
+							<field name="sale_qty30days" />
+							<field name="sale_qty180days" />
+							<field name="sale_qty360days" />
+						</group>
+						<group class="oe_right oe_form" col="2">
+            			<field name="qty_to_merkez" class="oe_inline"/>
             			<field name="qty_available_merkez"/>
             			<field name="qty_incoming_merkez"/>
             			<field name="qty_outgoing_merkez"/>
