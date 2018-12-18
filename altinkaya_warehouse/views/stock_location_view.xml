@@ -17,6 +17,20 @@
 	            </field>
             </field>
         </record>
+        
+        <record id="inherit_stock_view_putaway_form_all" model="ir.ui.view">
+            <field name="name">product.putaway.form.inherit.fixed_all</field>
+            <field name="model">product.putaway</field>
+            
+            <field name="inherit_id" ref="stock.view_putaway"/>
+            <field name="arch" type="xml">
+            
+            	<field name="method" position="after">
+            		<field name="fixed_all_location_id" attrs="{'invisible':[('method','!=','fixed_all')],'required':('method','=','fixed_all')}"/>
+            	</field>
+                
+            </field>
+        </record>
 
     </data>
 </openerp>
