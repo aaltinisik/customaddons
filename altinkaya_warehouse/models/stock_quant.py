@@ -10,21 +10,16 @@ from openerp import models, api, fields
 
 class stock_quant(models.Model):
     _inherit = 'stock.quant'
-    
-    
+
+    ignore_reservation = fields.Boolean(related='location_id.ignore_reservation',store=True)
+
     @api.model
     def _quants_get_order(self, location, product, quantity, domain=[], orderby='in_date'):
         ''' overwrite default behavior
         '''
         
-        child_locations = self.env['stock.location'].search([('id','child_of',location.id),('ignore_reservation','=',False)])
-        
-        domain += location and [('location_id', 'in', child_locations.ids)] or []
-        
-        return super(stock_quant, self)._quants_get_order(location=None,product=product,quantity=quantity, domain=domain, orderby=orderby)
-        
-        
-        
-        
-        
-        
+        if location and not location.ignore_reservation:
+                domain += [('ignore_reservation','=',False)]
+        return super(stock_quant, self)._quants_get_order(location=location, product=product, quantity=quantity,
+                                                                  domain=domain, orderby=orderby)
+    
