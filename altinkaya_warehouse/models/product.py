@@ -2,6 +2,35 @@
 from openerp import models, fields, api, _
 
 
+
+class product_putaway_strategy(models.Model):
+    _inherit = 'product.putaway'
+  
+    @api.model
+    def _get_putaway_options(self):
+        ret = super(product_putaway_strategy, self)._get_putaway_options()
+        return ret + [('fixed_all','Fixed for all products')]
+
+    method = fields.Selection(
+        selection=_get_putaway_options,
+        string="Method",
+        required=True)
+    
+    fixed_all_location_id = fields.Many2one('stock.location',string='Fixed Location for all products')
+
+    @api.onchange('method')
+    def onchange_method(self):
+        if self.method != 'fixed_all':
+            self.fixed_all_location_id = False
+        
+    @api.model
+    def putaway_apply(self,putaway_strat, product):
+        if putaway_strat.method == 'fixed_all':
+            return putaway_strat.fixed_all_location_id.id
+        else:
+            return super(product_putaway_strategy, self).putaway_apply(putaway_strat, product)
+
+
 class product_product(models.Model):
     _inherit = "product.product"
 
