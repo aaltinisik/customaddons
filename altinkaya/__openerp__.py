@@ -31,7 +31,8 @@ Altinkaya Elektronik Cihaz Kutulari OpenERP V8 ozellestirmeleri
     "view/altinkaya_view_manufacturing.xml",
     "view/manufacturing2.xml",
     "view/report_mrporder.xml",
-    "wizard/make_procurement_view.xml"
+    "wizard/make_procurement_view.xml",
+    "wizard/partner_reconcile_close_view.xml"
 
     ],
     'demo': [],
