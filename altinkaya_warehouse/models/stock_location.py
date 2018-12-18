@@ -12,6 +12,8 @@ class stock_location(models.Model):
     _inherit = 'stock.location'
     _order = 'loc_barcode'
     
+    ignore_reservation = fields.Boolean('Ignore in quants reservation')
+    
     @api.multi
     def button_barcode_generate(self):
         self.ensure_one()

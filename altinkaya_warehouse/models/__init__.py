@@ -23,6 +23,7 @@ import product
 import sale_order_line
 import stock_move
 import stock_location
+import stock_quant
 import stock_picking_despatch
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
