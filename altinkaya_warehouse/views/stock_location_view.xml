@@ -15,6 +15,10 @@
 	            	</div>
 	                
 	            </field>
+	            
+	            <field name="removal_strategy_id" position="after">
+	            	<field name="ignore_reservation"/>
+	            </field>
             </field>
         </record>
         
