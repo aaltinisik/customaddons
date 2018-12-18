@@ -21,7 +21,7 @@ class stock_quant(models.Model):
         
         domain += location and [('location_id', 'in', child_locations.ids)] or []
         
-        return super(stock_quant, self)._quants_get_order(location=None,product=product, domain=domain, order_by=orderby)
+        return super(stock_quant, self)._quants_get_order(location=None,product=product,quantity=quantity, domain=domain, orderby=orderby)
         
         
         
