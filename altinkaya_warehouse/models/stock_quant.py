@@ -12,6 +12,8 @@ class stock_quant(models.Model):
     _inherit = 'stock.quant'
 
     ignore_reservation = fields.Boolean(related='location_id.ignore_reservation',store=True)
+    priority = fields.Integer(related='location_id.priority', help='high priority quants will be reserved first',
+                             readonly=True, store=True)
 
     @api.model
     def _quants_get_order(self, location, product, quantity, domain=[], orderby='in_date'):

@@ -13,6 +13,7 @@ class stock_location(models.Model):
     _order = 'loc_barcode'
     
     ignore_reservation = fields.Boolean('Ignore in quants reservation')
+    priority = fields.Integer('priority', help='high priority locations will be reserved first',default=10)
     
     @api.multi
     def button_barcode_generate(self):
