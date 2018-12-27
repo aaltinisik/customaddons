@@ -11,7 +11,7 @@
             			<field name="country_id"/>
             			<field name="customer"/>
             			<field name="supplier"/>
-            			<field name="partner_id"/>
+            			<field name="partner_id" domain="[('parent_id','=',False)]"/>
             		</group>
             		
             		<group string="Date Selection">

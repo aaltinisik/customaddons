@@ -7,6 +7,10 @@
 
 from openerp import models, fields, api, _
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class PartnerReconcileClose(models.TransientModel):
     """
@@ -68,7 +72,7 @@ class PartnerReconcileClose(models.TransientModel):
         if self.partner_id:
             partner_ids |= self.partner_id
         else:
-            partner_domain = []
+            partner_domain = [('parent_id','=',False)]
             
             if self.country_id:
                 partner_domain.append(('country_id','=',self.country_id.id))
@@ -84,105 +88,94 @@ class PartnerReconcileClose(models.TransientModel):
             
             partner_ids = self.env['res.partner'].search(partner_domain)
             
-    
-        closing_lines = []
-        opening_lines = []
 
-
-
-        for partner in partner_ids:
-            for account in [partner.property_account_receivable, partner.property_account_payable]:
-            
-                lines = move_line_obj.search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
-                balance = sum([ ml.debit - ml.credit for ml in lines])
-                
-                if balance > 0:
-                    debit = balance
-                    credit = 0.0
-                    self_credit = balance
-                    self_debit = 0.0
-                elif balance < 0:
-                    debit = 0.0
-                    credit = -balance
-                    self_credit = 0.0
-                    self_debit = -balance
-                else:
-                    continue
-                
-                closing_lines.extend([
-                                        (0, 0, {
-                                            'name': _('Closing'),
-                                            'debit': self_debit,
-                                            'credit': self_credit,
-                                            'account_id': account.id,
-                                            'date': self.closing_move_date,
-                                            'partner_id': partner.id,
-                                            'currency_id': (account.currency_id.id or False)
-                                        }),
-                                        (0, 0, {
-                                            'name': _('Closing'),
-                                            'debit': debit,
-                                            'credit': credit,
-                                            'account_id': self.transfer_account_id.id,
-                                            'date': self.closing_move_date,
-                                            'partner_id': partner.id,
-                                            'currency_id': (account.currency_id.id or False)
-                                        })
-                                      ])
-                
-                opening_lines.extend([
-                                        (0, 0, {
-                                            'name': _('Opening'),
-                                            'debit': debit,
-                                            'credit': credit,
-                                            'account_id': account.id,
-                                            'date': self.opening_move_date,
-                                            'partner_id': partner.id,
-                                        }),
-                                        (0, 0, {
-                                            'name': _('Opening'),
-                                            'debit': self_debit,
-                                            'credit': self_credit,
-                                            'account_id': self.transfer_account_id.id,
-                                            'date': self.opening_move_date,
-                                            'partner_id': partner.id,
-                                        })
-                                      ])
-            
-                
-            
         closing_move_id = move_obj.create({
             'period_id': self.closing_period_id.id,
             'journal_id': self.transfer_journal_id.id,
             'date':self.closing_move_date,
-            'state': '',
-            'line_id': closing_lines
+            'state': 'draft'
         })
         
         opening_move_id = move_obj.create({
             'period_id': self.opening_period_id.id,
             'journal_id': self.transfer_journal_id.id,
             'date':self.opening_move_date,
-            'state': 'draft',
-            'line_id': opening_lines
+            'state': 'draft'
         })
-        
-        
+
+
+        for partner in partner_ids:
+            try:
+                
+                for account in [partner.property_account_receivable, partner.property_account_payable]:
+                
+                    lines = move_line_obj.search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
+                    balance = sum([ ml.debit - ml.credit for ml in lines])
+                    
+                    if balance > 0:
+                        debit = balance
+                        credit = 0.0
+                        self_credit = balance
+                        self_debit = 0.0
+                    elif balance < 0:
+                        debit = 0.0
+                        credit = -balance
+                        self_credit = 0.0
+                        self_debit = -balance
+                    else:
+                        continue
+                    
+                    lines |= closing_move_id.line_id.create({
+                                                'move_id':closing_move_id.id,
+                                                'name': _('Closing'),
+                                                'debit': self_debit,
+                                                'credit': self_credit,
+                                                'account_id': account.id,
+                                                'date': self.closing_move_date,
+                                                'partner_id': partner.id,
+                                                'currency_id': (account.currency_id.id or False)
+                                            })
+                    
+                    closing_move_id.line_id.create({
+                                                'move_id':closing_move_id.id,
+                                                'name': _('Closing'),
+                                                'debit': debit,
+                                                'credit': credit,
+                                                'account_id': self.transfer_account_id.id,
+                                                'date': self.closing_move_date,
+                                                'partner_id': partner.id,
+                                                'currency_id': (account.currency_id.id or False)
+                                            })
+                    
+                    opening_move_id.line_id.create({
+                                                'move_id':opening_move_id.id,
+                                                'name': _('Opening'),
+                                                'debit': debit,
+                                                'credit': credit,
+                                                'account_id': account.id,
+                                                'date': self.opening_move_date,
+                                                'partner_id': partner.id,
+                                            })
+                    opening_move_id.line_id.create({
+                                                'move_id':opening_move_id.id,
+                                                'name': _('Opening'),
+                                                'debit': self_debit,
+                                                'credit': self_credit,
+                                                'account_id': self.transfer_account_id.id,
+                                                'date': self.opening_move_date,
+                                                'partner_id': partner.id,
+                                            })
+               
+                    move_line_obj._remove_move_reconcile(lines.ids)
+                    lines.reconcile()
+
+                partner.devir_yapildi = True
+                
+            except Exception, e:
+                _logger.exception('Partner reconciliation wizard error. Partner: %s \n\n %s' % (partner.name, e.message))
+            
         closing_move_id.post()
         opening_move_id.post()
-        
-        for partner in partner_ids:
-            for account in [partner.property_account_receivable, partner.property_account_payable]:
-                lines = move_line_obj.search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
-                lines |= closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == account.id and ml.partner_id.id == partner.id)
-                move_line_obj._remove_move_reconcile(lines.ids)
-                lines.reconcile()
-
-            partner.devir_yapildi = True
-                
-#            lines = closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
-#            lines |= opening_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
-#            lines.reconcile()
 
         
         
