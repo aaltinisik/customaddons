@@ -64,7 +64,7 @@ class PartnerReconcileClose(models.TransientModel):
         domain = [('date','>=',self.start_date),('date','<=',self.end_date)]
         partner_ids = self.env['res.partner']
         move_obj = self.env['account.move']
-        
+        move_line_obj = self.env['account.move.line'].with_context({'comment':self.transfer_description})
         if self.partner_id:
             partner_ids |= self.partner_id
         else:
@@ -90,7 +90,7 @@ class PartnerReconcileClose(models.TransientModel):
         for partner in partner_ids:
             for account in [partner.property_account_receivable, partner.property_account_payable]:
             
-                lines = self.env['account.move.line'].search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
+                lines = move_line_obj.search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
                 balance = sum([ ml.debit - ml.credit for ml in lines])
                 
                 if balance > 0:
@@ -170,9 +170,9 @@ class PartnerReconcileClose(models.TransientModel):
         
         for partner in partner_ids:
             for account in [partner.property_account_receivable, partner.property_account_payable]:
-                lines = self.env['account.move.line'].search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
+                lines = move_line_obj.search(domain + [('partner_id','=',partner.id),('account_id','=',account.id)])   
                 lines |= closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == account.id and ml.partner_id.id == partner.id)
-                
+                move_line_obj._remove_move_reconcile(lines.ids)
                 lines.reconcile()
                 
             lines = closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
@@ -200,14 +200,7 @@ class PartnerReconcileClose(models.TransientModel):
                 
             
             
-            
-            
-        move_lines._remove_move_reconcile()
-        
-        
-        
-        
-        move_lines.with_context({'comment':self.transfer_description}).reconcile()
+
             
         
             
