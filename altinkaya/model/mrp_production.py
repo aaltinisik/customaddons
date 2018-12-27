@@ -42,25 +42,49 @@ class mrp_production(osv.Model):
     
     
     def _get_product_route(self, cr, uid, ids, name, arg, context=None):
-        def _get_route(move_id):
+        def _get_next_moves(move_id):
             if move_id:
-                prev_route = _get_route(move_id.move_dest_id)
-                if prev_route:
-                    return '|'.join([prev_route,move_id.location_dest_id.display_name])
+                next_moves = _get_next_moves(move_id.move_dest_id)
+                if next_moves:
+                    return move_id | next_moves
                 else:
-                    return move_id.location_dest_id.display_name
+                    return move_id
             return False
         
         res = {}
         for mo in self.browse(cr, uid, ids, context=context):
             if mo.move_prod_id:
-                r = _get_route(mo.move_prod_id)
-                r = r.split('|')
-                r.reverse()
-                res[mo.id] =  len(r) > 0 and '%s|%s' % (mo.move_prod_id.location_id.display_name, '|'.join(r)) or '' 
+                route = []
+                for m in _get_next_moves(mo.move_prod_id):
+                    if m.picking_id.id:
+                        route.append(('picking',m.picking_id))
+                    elif m.raw_material_production_id.id:
+                        route.append(('production',m.raw_material_production_id))
+                    
+                res[mo.id] = route
             else:
-                res[mo.id] = mo.location_dest_id.display_name
+                res[mo.id] = False
+                
         return res
+#         def _get_route(move_id):
+#             if move_id:
+#                 prev_route = _get_route(move_id.move_dest_id)
+#                 if prev_route:
+#                     return '|'.join([prev_route,move_id.location_dest_id.display_name])
+#                 else:
+#                     return move_id.location_dest_id.display_name
+#             return False
+#         
+#         res = {}
+#         for mo in self.browse(cr, uid, ids, context=context):
+#             if mo.move_prod_id:
+#                 r = _get_route(mo.move_prod_id)
+#                 r = r.split('|')
+#                 r.reverse()
+#                 res[mo.id] =  len(r) > 0 and '%s|%s' % (mo.move_prod_id.location_id.display_name, '|'.join(r)) or '' 
+#             else:
+#                 res[mo.id] = mo.location_dest_id.display_name
+#         return res
     
     def _get_product_pickings(self, cr, uid, ids, name, arg, context=None):
         def _get_next_moves(move_id):
