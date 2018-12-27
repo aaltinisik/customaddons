@@ -87,6 +87,9 @@ class PartnerReconcileClose(models.TransientModel):
     
         closing_lines = []
         opening_lines = []
+
+
+
         for partner in partner_ids:
             for account in [partner.property_account_receivable, partner.property_account_payable]:
             
@@ -174,10 +177,12 @@ class PartnerReconcileClose(models.TransientModel):
                 lines |= closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == account.id and ml.partner_id.id == partner.id)
                 move_line_obj._remove_move_reconcile(lines.ids)
                 lines.reconcile()
+
+            partner.devir_yapildi = True
                 
-            lines = closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
-            lines |= opening_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
-            lines.reconcile()
+#            lines = closing_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
+#            lines |= opening_move_id.line_id.filtered(lambda ml: ml.account_id.id == self.transfer_account_id.id and ml.partner_id.id == partner.id)
+#            lines.reconcile()
 
         
         
@@ -191,20 +196,3 @@ class PartnerReconcileClose(models.TransientModel):
             'domain':[('id','in',[opening_move_id.id, closing_move_id.id])],
             'context':self._context
         }
-        
-        
-                
-                
-                
-                
-                
-            
-            
-
-            
-        
-            
-        
-        
-    
-    
