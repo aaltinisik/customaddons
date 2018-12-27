@@ -174,13 +174,14 @@
                         </tbody>
                     </table>
 
-
-					<table class="table table-condensed" t-if="o.product_route" style="border-collapse:collapse">
+					<t t-set="routes" t-value="o.get_product_route()"/>
+					<table class="table table-condensed" t-if="routes" style="border-collapse:collapse">
                     <thead>
                         <tr><th><strong>Mamül Ürün Rotası</strong></th></tr>
                     </thead>
                             <tbody>
-                                <tr t-foreach="o.product_route" t-as="route"  style="border: 2pt solid black;">
+                            
+                                <tr t-foreach="routes" t-as="route"  style="border: 2pt solid black;">
                                     <t t-if="route[0] == 'picking'" >
                                     	
                                     	<td style="border-color: #ffffff; text-align: left; vertical-align: center;width: 210px;">
