@@ -30,7 +30,7 @@
             <field name="arch" type="xml">
             
             	<field name="method" position="after">
-            		<field name="fixed_all_location_id" attrs="{'invisible':[('method','!=','fixed_all')],'required':('method','=','fixed_all')}"/>
+            		<field name="fixed_all_location_id" attrs="{'invisible':[('method','!=','fixed_all')],'required':[('method','=','fixed_all')]}"/>
             	</field>
                 
             </field>
