@@ -31,6 +31,8 @@ class product_putaway_strategy(models.Model):
             return super(product_putaway_strategy, self).putaway_apply(putaway_strat, product)
 
 
+
+
 class product_product(models.Model):
     _inherit = "product.product"
 
@@ -119,3 +121,13 @@ class product_product(models.Model):
             product.qty_available_metal = product.with_context({'location':65}).qty_available
 
 
+class mrpProduction(models.Model):
+    _inherit = "mrp.production"
+
+    qty_available_sincan = fields.Float('Sincan Depo Mevcut', related='product_id.qty_available_sincan')
+    qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
+    qty_available_enjek = fields.Float('Enjeksiyon Depo Mevcut', related='product_id.qty_available_enjek')
+    qty_available_montaj = fields.Float('Montaj Depo Mevcut', related='product_id.qty_available_montaj')
+    qty_available_cnc = fields.Float('CNC Depo Mevcut', related='product_id.qty_available_cnc')
+    qty_available_metal = fields.Float('Metal Depo Mevcut', related='product_id.qty_available_metal')
+    qty_available_boya = fields.Float('Boya Depo Mevcut',related='product_id.qty_available_boya')
