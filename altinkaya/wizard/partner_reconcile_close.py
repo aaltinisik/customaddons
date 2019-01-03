@@ -104,11 +104,15 @@ class PartnerReconcileClose(models.TransientModel):
             try:
 
                 for account in [partner.property_account_receivable, partner.property_account_payable]:
-
+                    
                     lines = move_line_obj.search(
                         domain + [('partner_id', '=', partner.id), ('account_id', '=', account.id)])
+                    if len(lines) == 0:
+                        continue
+                    
                     balance = sum([ml.debit - ml.credit for ml in lines])
-
+                    date_due = max(lines.mapped('date_maturity'))
+                    
                     if balance > 0:
                         debit = balance
                         credit = 0.0
@@ -129,6 +133,7 @@ class PartnerReconcileClose(models.TransientModel):
                         'credit': self_credit,
                         'account_id': account.id,
                         'date': self.closing_move_date,
+                        'date_maturity':date_due,
                         'partner_id': partner.id,
                         'currency_id': (account.currency_id.id or False)
                     })
@@ -140,6 +145,7 @@ class PartnerReconcileClose(models.TransientModel):
                         'credit': credit,
                         'account_id': self.transfer_account_id.id,
                         'date': self.closing_move_date,
+                        'date_maturity':date_due,
                         'partner_id': partner.id,
                         'currency_id': (account.currency_id.id or False)
                     })
@@ -151,6 +157,7 @@ class PartnerReconcileClose(models.TransientModel):
                         'credit': credit,
                         'account_id': account.id,
                         'date': self.opening_move_date,
+                        'date_maturity':date_due,
                         'partner_id': partner.id,
                     })
                     opening_move_id.line_id.create({
@@ -160,6 +167,7 @@ class PartnerReconcileClose(models.TransientModel):
                         'credit': self_credit,
                         'account_id': self.transfer_account_id.id,
                         'date': self.opening_move_date,
+                        'date_maturity':date_due,
                         'partner_id': partner.id,
                     })
 

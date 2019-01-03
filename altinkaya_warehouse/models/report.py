@@ -15,7 +15,7 @@ class Report(osv.Model):
     
     def render(self, cr, uid, ids, template, values=None, context=None):
         if values['doc_model'] == 'stock.picking':
-            values['docs'].action_assign()
+            values['docs'].filtered(lambda p: p.state in ['confirmed','waiting']).action_assign()
             
         return super(Report, self).render(cr, uid, ids, template, values=values, context=context)
     
