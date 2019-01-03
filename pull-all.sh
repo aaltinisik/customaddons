@@ -5,12 +5,12 @@
 #openerp
 
 OE_USER="odoo"
-OE_HOME="/opt/$OE_USER"
-OCA_HOME="/opt/odoo/custom/repos"
-OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
+OE_HOME="/opt/odoo"
+OCA_HOME="/opt/odoo/12/repos"
+OE_HOME_EXT="/opt/odoo/odoo12"
 # Replace for openerp-gevent for enabling gevent mode for chat
 OE_SERVERTYPE="openerp-server"
-OE_VERSION="8.0"
+OE_VERSION="12.0"
 #set the superadmin password
 OE_CONFIG="odoo-server"
 
@@ -41,30 +41,5 @@ while true; do
     esac
 done
 
-while true; do
-    read -p "Would you like to git pull odoo repository (y/n)?" yn
-    case $yn in
-        [Yy]* )  cd $OE_HOME_EXT
-        pwd
-        git pull
-        cd $OE_HOME/customaddons
-        pwd
-        git pull
-        break;;
-        [Nn]* ) break;;
-        * )  echo "Please answer yes or no.";;
-    esac
-done
 
-while true; do
-    read -p "Would you like to update odoo database all  modules  (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME_EXT
-        
-        /opt/odoo/odoo-server/odooupdate.sh
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
