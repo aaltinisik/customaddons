@@ -61,13 +61,19 @@ class StockMove(models.Model):
             mapping[origin] = dest_pickings
             
         for src_obj, dest_pickings in mapping.iteritems():
-            origin = re.findall('##[^#]*##', src_obj.origin)
-            
-            if len(origin) == 0:
+            if not src_obj.origin or len(src_obj.origin) == 0:
                 # origin document is the source
                 origin = src_obj.name
             else:
-                origin = origin[0][2:-2]
+                origin = re.findall('##[^#]*##', src_obj.origin)
+                if len(origin) == 0:
+                    #origin is not empty bu no ## defined so take self as origin.
+                    origin = src_obj.name
+                else:
+                    if len(origin[0])>5:
+                        origin = origin[0][2:-2]
+                    else:
+                        origin = src_obj.name
                 
             for picking in dest_pickings:
                 existing_origin = re.findall('##[^#]*##', picking.origin or '')
@@ -78,7 +84,8 @@ class StockMove(models.Model):
                     existing_origins.append(origin)
                     origins=set(existing_origins)
                     combined_origin=",".join(origins)
-
+                else:
+                    combined_origin=origin
                 old_origin = picking.origin or ""
                 picking.origin = '%s##%s##' % (re.sub('##[^#]*##', '', old_origin) or '', combined_origin)
 
