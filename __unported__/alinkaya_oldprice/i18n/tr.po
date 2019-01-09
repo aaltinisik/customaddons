@@ -1,0 +1,257 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* alinkaya_oldprice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-02 12:19+0000\n"
+"PO-Revision-Date: 2017-10-02 12:19+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alinkaya_oldprice
+#: help:product.product,min_2016a_iscilik:0
+#: help:product.template,z_min_2016a_iscilik:0
+msgid " kullanılan eski Minimum İscilik fiyatıı"
+msgstr " kullanılan eski Minimum İscilik fiyatıı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,fiyat_2014:0
+msgid "2014 Eski Fiyatı"
+msgstr "2014 Eski Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,min_2014_iscilik:0
+msgid "2014 Min İşçcilik Fiyatı"
+msgstr "2014 Min İşçcilik Fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.product,fiyat_2014:0
+msgid "2014 yılında kullanilan eski fiyatı"
+msgstr "2014 yılında kullanilan eski fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.product,min_2014_iscilik:0
+msgid "2014 yılında kullanılan eski Minimum İşçilik fiyatı"
+msgstr "2014 yılında kullanılan eski Minimum İşçilik fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,fiyat_2016a:0
+msgid "2015 Ekim Fiyatı"
+msgstr "2015 Ekim Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,min_2016a_iscilik:0
+msgid "2015 Ekim Min İscilik"
+msgstr "2015 Ekim Min İscilik"
+
+#. module: alinkaya_oldprice
+#: help:product.template,z_2016a_iscilik:0
+msgid "2015 Ekim birim işçilik fiyatı"
+msgstr "2015 Ekim birim işçilik fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.product,fiyat_2016a:0
+#: help:product.template,z_fiyat_2016a:0
+msgid "2015 Ekim fiyati"
+msgstr "2015 Ekim fiyati"
+
+#. module: alinkaya_oldprice
+#: field:product.product,fiyat_2015a:0
+msgid "2015 Ocak Eski Fiyatı"
+msgstr "2015 Ocak Eski Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,min_2015a_iscilik:0
+msgid "2015 Ocak Min İşçcilik"
+msgstr "2015 Ocak Min İşçcilik"
+
+#. module: alinkaya_oldprice
+#: help:product.product,fiyat_2015a:0
+#: help:product.template,z_fiyat_2015a:0
+msgid "2015 Ocak eski fiyatı"
+msgstr "2015 Ocak eski fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.template,z_2015a_iscilik:0
+msgid "2015 Ocak kullanılan birim işçilik fiyatı"
+msgstr "2015 Ocak kullanılan birim işçilik fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.product,min_2015a_iscilik:0
+#: help:product.template,z_min_2015a_iscilik:0
+msgid "2015 Ocak kullanılan eski Minimum İşçilik fiyatı"
+msgstr "2015 Ocak kullanılan eski Minimum İşçilik fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.product,iscilik_fiyat:0
+msgid "Birim iscilik Fiyati"
+msgstr "Birim iscilik Fiyati"
+
+#. module: alinkaya_oldprice
+#: field:product.product,cari_urun:0
+msgid "Carinin Urunu"
+msgstr "Carinin Urunu"
+
+#. module: alinkaya_oldprice
+#: field:product.product,fiyat_dolar:0
+msgid "Dolar Fiyati"
+msgstr "Dolar Fiyati"
+
+#. module: alinkaya_oldprice
+#: help:product.product,fiyat_dolar:0
+msgid "Dolarla satilan urunlerin fiyati bu alana gore yapilir"
+msgstr "Dolarla satilan urunlerin fiyati bu alana gore yapilir"
+
+#. module: alinkaya_oldprice
+#: help:product.product,min_iscilik_fiy:0
+msgid "En Az Toplam iscilik Fiyati"
+msgstr "En Az Toplam iscilik Fiyati"
+
+#. module: alinkaya_oldprice
+#: view:product.product:alinkaya_oldprice.product_product_altinkaya_form_eskifiyat
+#: view:product.template:alinkaya_oldprice.product_template_altinkaya_form_eskifiyat
+msgid "Eski Fiyatlar"
+msgstr "Eski Fiyatlar"
+
+#. module: alinkaya_oldprice
+#: field:product.product,fiyat_euro:0
+msgid "Euro Fiyati"
+msgstr "Euro Fiyati"
+
+#. module: alinkaya_oldprice
+#: help:product.product,fiyat_euro:0
+msgid "Euro ile satilirken kullanilan temel fiyat"
+msgstr "Euro ile satilirken kullanilan temel fiyat"
+
+#. module: alinkaya_oldprice
+#: field:product.product,min_iscilik_fiy:0
+msgid "Minimum iscilik Fiyati"
+msgstr "Minimum iscilik Fiyati"
+
+#. module: alinkaya_oldprice
+#: model:ir.model,name:alinkaya_oldprice.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: alinkaya_oldprice
+#: field:product.product,alert_time:0
+msgid "Product Alert Time"
+msgstr "Product Alert Time"
+
+#. module: alinkaya_oldprice
+#: field:product.product,life_time:0
+msgid "Product Life Time"
+msgstr "Product Life Time"
+
+#. module: alinkaya_oldprice
+#: field:product.product,removal_time:0
+msgid "Product Removal Time"
+msgstr "Product Removal Time"
+
+#. module: alinkaya_oldprice
+#: model:ir.model,name:alinkaya_oldprice.model_product_template
+msgid "Product Template"
+msgstr "Ürün Şablonu"
+
+#. module: alinkaya_oldprice
+#: field:product.product,use_time:0
+msgid "Product Use Time"
+msgstr "Product Use Time"
+
+#. module: alinkaya_oldprice
+#: help:product.product,alert_time:0
+msgid "When a new a Serial Number is issued, this is the number of days before an alert should be notified."
+msgstr "When a new a Serial Number is issued, this is the number of days before an alert should be notified."
+
+#. module: alinkaya_oldprice
+#: help:product.product,life_time:0
+msgid "When a new a Serial Number is issued, this is the number of days before the goods may become dangerous and must not be consumed."
+msgstr "When a new a Serial Number is issued, this is the number of days before the goods may become dangerous and must not be consumed."
+
+#. module: alinkaya_oldprice
+#: help:product.product,removal_time:0
+msgid "When a new a Serial Number is issued, this is the number of days before the goods should be removed from the stock."
+msgstr "When a new a Serial Number is issued, this is the number of days before the goods should be removed from the stock."
+
+#. module: alinkaya_oldprice
+#: help:product.product,use_time:0
+msgid "When a new a Serial Number is issued, this is the number of days before the goods starts deteriorating, without being dangerous yet."
+msgstr "When a new a Serial Number is issued, this is the number of days before the goods starts deteriorating, without being dangerous yet."
+
+#. module: alinkaya_oldprice
+#: field:product.product,iscilik_fiyat:0
+msgid "iscilik Fiyati"
+msgstr "iscilik Fiyati"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_fiyat_2016a:0
+msgid "x2015 Ekim Fiyatı"
+msgstr "x2015 Ekim Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_min_2016a_iscilik:0
+msgid "x2015 Ekim Min İscilik"
+msgstr "x2015 Ekim Min İscilik"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_2016a_iscilik:0
+msgid "x2015 Ekim isçilik fiyatı"
+msgstr "x2015 Ekim isçilik fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_fiyat_2015a:0
+msgid "x2015 Ocak Eski Fiyatı"
+msgstr "x2015 Ocak Eski Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_min_2015a_iscilik:0
+msgid "x2015 Ocak Min İşçcilik"
+msgstr "x2015 Ocak Min İşçcilik"
+
+#. module: alinkaya_oldprice
+#: field:product.template,z_2015a_iscilik:0
+msgid "x2015 Ocak işçilik Fiyatı"
+msgstr "x2015 Ocak işçilik Fiyatı"
+
+#. module: alinkaya_oldprice
+#: field:product.product,attr_price:0
+msgid "Attr. Value Price"
+msgstr "Nitelik Fiyatı"
+
+#. module: alinkaya_oldprice
+#: help:product.attribute.line,attr_val_price_coef:0
+msgid "Attribute value coefficient used to compute product price based on attribute value."
+msgstr "Nitelik değerine göre fiyat hesaplamasında kullanılan katsayı"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,attr_base_price:0
+msgid "Base Price"
+msgstr "F bazı"
+
+#. module: alinkaya_oldprice
+#: help:product.attribute.line,attr_base_price:0
+msgid "Base price used to compute product price based on attribute value."
+msgstr "Nitelik değerine göre fiyat hesaplamasında kullanılan baz fiyat"
+
+#. module: alinkaya_oldprice
+#: help:product.product,attr_price:0
+msgid "Price calculated based on the product's attribute values."
+msgstr "Nitelik değerine göre hesaplanan fiyat"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,use_in_pricing:0
+msgid "Use in pricing"
+msgstr "Fiyat hesabında kullan"
+
+#. module: alinkaya_oldprice
+#: field:product.attribute.line,attr_val_price_coef:0
+msgid "Value Price Multiplier"
+msgstr "F. Çarpanı"
+

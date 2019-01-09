@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="res_partner_search_view">
+            <field name="name">res.partner.search.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="vat" filter_domain="[('vat','like',self)]" />
+                </field>
+            </field>
+        </record>
+
+
+		<record id="sale.action_quotations" model="ir.actions.act_window">
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','in',('draft','sent','cancel'))]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a quotation, the first step of a new sale.
+              </p><p>
+                Odoo will help you handle efficiently the complete sale flow:
+                from the quotation to the sales order, the
+                delivery, the invoicing and the payment collection.
+              </p><p>
+                The social feature helps you organize discussions on each sales
+                order, and allow your customers to keep track of the evolution
+                of the sales order.
+              </p>
+            </field>
+        </record>
+
+		<record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{
+                }
+            </field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a quotation that can be converted into a sales
+                    order.
+                </p><p>
+                    Odoo will help you efficiently handle the complete sales flow:
+                    quotation, sales order, delivery, invoicing and payment.
+                </p>
+            </field>
+        </record>
+
+		
+
+
+		<record id="sale_order_custom_products_domain" model="ir.ui.view">
+			<field name="name">sale.order.altinkaya.show_custom_products</field>
+			<field name="model">sale.order</field>
+			<field name="priority" eval="19" />
+			<field name="type">form</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<data>
+					
+	               <xpath expr="//field[@name='order_line']/form//field[@name='product_tmpl_id']"
+                       position="before">
+                    	<field name="show_custom_products" />
+                    	
+                	</xpath>
+					
+					<xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="after">
+                    	<field name="set_product" invisible="1"/>
+                    	<span class="oe_form_field" attrs="{'invisible':[('set_product','=',False)]}">This is a set product</span>
+                    
+                	</xpath>
+					
+				</data>
+			</field>
+			<field eval="30" name="priority" />
+		</record>
+
+
+
+	</data>
+
+
+    <data>
+  		<record id="ir_ui_view_accountinvoice_altinkaya_inherit0" model="ir.ui.view">
+ 			<field name="model">account.invoice</field>
+ 			<field name="type">form</field>
+             	<field eval="14" name="priority"/>
+  			<field name="inherit_id" ref="account.invoice_form"/>
+  			<field name="name">account.invoice.inherit_612</field>
+
+             <field name="arch" type="xml">
+
+                 <field name="partner_id" position="before">
+                 <field name="carrier_id"></field>
+                 <field name="address_contact_id" string="Teslimat Adresi" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}" />
+                 </field>
+
+                 <field name="date_invoice" position="after">
+                 <field name="supplier_invoice_number"  attrs="{'invisible': [('type','=','out_invoice')]}">  </field>
+            </field>
+
+
+             </field>
+
+</record>
+
+
+
+
+      </data>
+
+
+        <data>
+        <record id="ir_ui_view_altinkaya_Paymentterm0" model="ir.ui.view">
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="name">sale.order.inherit1</field>
+            <field name="arch" type="xml">
+                <field name='payment_term' position='replace'> </field>
+            </field>
+            <field eval="5" name="priority"/>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+        </record>
+    </data>
+
+
+</openerp>

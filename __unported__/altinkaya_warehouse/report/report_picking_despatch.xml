@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="assets_report" name="altinkaya_warehouse assets"
+		          inherit_id="report.layout">
+		    <xpath expr="//head" position="inside">
+		        <link rel="stylesheet" type="text/css" href="/altinkaya_warehouse/static/src/css/style.css" />
+		    </xpath>
+		   
+		</template>
+        
+        <report id="action_report_picking_despatch" 
+        	model="stock.picking.despatch" 
+        	report_type="qweb-html" 
+        	name="altinkaya_warehouse.report_picking_despatch" 
+        	file="altinkaya_warehouse.report_picking_despatch"
+        	string="Despatch Document"/>
+        
+        <template id="report_picking_despatch">
+        	<t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		            <t t-call="report.internal_layout">
+		                <div class="page">
+		                    <div class="oe_structure"/>
+		                    <div class="row mt32">
+		                    	<div class="col-xs-6">
+		                    		<span t-field="o.carrier_id"/>
+		                    		<span t-field="o.carrier_employee"/>
+		                    	</div>
+		                    	<div class="col-xs-6">
+		                    		<span t-field="o.user_id"/>
+		                    		<span t-field="o.date_done"/>
+		                    	</div>
+		                    </div>
+		                    <div class="row col-xs-12 picking_list">
+		                    	<div class="row mt32">
+			                    	<div class="col-xs-12">
+			                    		<strong>Teslim edilen irsaliyeler</strong>
+			                    	</div>
+			                    </div>
+			                    <div class="row">
+			                    	<div class="col-xs-2">
+			                    		<strong>Fatura/İrsaliye No</strong>
+			                    	</div>
+			                    	<div class="col-xs-6">
+			                    		<strong>Teslimat Adresi</strong>
+			                    	</div>
+			                    	<div class="col-xs-2">
+			                    		<strong>Ağırlık(brüt/net Kg)</strong>
+			                    	</div>
+			                    	<div class="col-xs-2">
+			                    		<strong>Koli adedi</strong>
+			                    	</div>
+			                    </div>
+			                    <div class="row" t-foreach="o.picking_ids" t-as="p">
+			                    	<div class="col-xs-2">
+			                    		<t t-if="p.invoice_id.id">
+			                    			<span t-field="p.invoice_id.number"/>
+			                    		</t>
+			                    		<t t-if="not p.invoice_id.id">
+			                    			<span t-field="p.document_number"/>
+			                    		</t>
+			                    	</div>
+			                    	<div class="col-xs-6">
+			                    		<span t-field="p.partner_id.display_name"/>
+			                    		<span t-field="p.partner_id.street"/>
+			                    		<span t-field="p.partner_id.street2"/> 
+			                    		<span t-esc="p.partner_id.city"/> 
+			                    		<span t-esc="p.partner_id.state_id.name"/> 
+			                    		<span t-esc="p.partner_id.country_id.name"/>
+			                    	</div>
+			                    	<div class="col-xs-2">
+			                    		
+			                    	</div>
+			                    	<div class="col-xs-2">
+			                    		
+			                    	</div>
+			                    </div>
+		                    </div>
+		                    
+        				</div>
+        			</t>
+        		</t>
+        	</t>
+        </template>
+
+        
+    </data>
+</openerp>

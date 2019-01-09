@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="partner_statement_altinkaya" model="res.partner" menu="False"
+                name="partner.statement" string="Partner Statement"
+                rml="altinkaya_statement/report/partner_statement.rml" header="False"/>
+
+        <report id="partner_statement2_altinkaya" model="res.partner"
+                name="partner.statement2" string="Partner Statement2"
+                rml="altinkaya_statement/report/partner_statement2.rml" header="False"/>
+
+    </data>
+</openerp>

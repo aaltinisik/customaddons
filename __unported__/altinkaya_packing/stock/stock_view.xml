@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="aces_search_view_pos_order" model="ir.ui.view" >
+           <field name="name">aces.picking.order.search</field>
+           <field name="model">stock.picking</field>
+           <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+           <field name="arch" type="xml">
+               <filter name="backorder" position="after">
+                         <filter string="Yapılacaklar" domain="['|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
+               <filter string="Gidecekler" domain="[['picking_type_id', '=', 2], '|', '|', '|', ['state', '=', 'waiting'], ['state', '=', 'confirmed'], ['state', '=', 'partially_available'], ['state', '=', 'assigned']]"/>
+               <separator/>
+                   <filter string="Asım" domain="[['x_hazirlayan', '=', 'Asim']]"/>
+<filter string="Harun" domain="[['x_hazirlayan', '=', 'Harun']]"/>
+<filter string="Muhammet" domain="[['x_hazirlayan', '=', 'Muhammet']]"/>
+<filter string="Bilal" domain="[['x_hazirlayan', '=', 'Bilal']]"/>
+
+<separator/>
+               </filter>
+           </field>
+       </record>
+
+        <record id = "view_altinkaya_packing_form" model = "ir.ui.view">
+            <field name = "name">view.delivery.packaging.form</field>
+            <field name = "model">delivery.packaging</field>
+            <field name ="arch" type = "xml">
+                <form string = "Create Packing" version = "7.0" >
+                    <sheet string="Packing Details">
+                        <div style = "color: #7c7bad;">
+                            <h2>
+                                <label string = "Create Packing" />
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pack_no" />
+                                <field name="dimension_x" />
+                                <field name="dimension_y" />
+                                <field name="dimension_z" />
+                            </group>
+                            <group>
+                                <field name="no_of_cups" />
+                                <field name="invoice_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_altinkaya_packing_tree" model="ir.ui.view">
+            <field name="name">view.delivery.packaging.tree</field>
+            <field name="model">delivery.packaging</field>
+            <field name="arch" type="xml">
+                <tree string="List of Coupons">
+                    <field name="pack_no" />
+                    <field name="dimension_x" />
+                    <field name="dimension_y" />
+                    <field name="dimension_z" />
+                    <field name="no_of_cups" />
+                    <field name="invoice_id" />
+                    <field name="grosswg" />
+                    <field name="netwg" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="inherit_view_picking_out_form_ace" model="ir.ui.view">
+            <field name="name">view.picking.out.form.ace</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Additional Info']/group[last()]" position="after">
+                    <group>
+                        <group col='1' colspan="6">
+                            <group colspan="4">
+                                <label for="packing_ids" />
+                            </group>
+                            <group colspan="6">
+                                 <field mode="tree" name="packing_ids" select="1" nolabel='1' widget="one2many_list">
+                                    <tree string="Packing Details" editable="bottom">
+                                        <field name="pack_no" widget="handle"/>
+                                        <field name="no_of_cups" string="kap adedi"/>
+                                        <field name="dimension_x" string="En cm"/>
+                                        <field name="dimension_y" string="boy cm"/>
+                                        <field name="dimension_z" string="Yük cm"/>
+                                        <field name="grosswg" string="Brüt Kg"/>
+                                        <field name="netwg" string="Net Kg"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_grosswg" />
+                                <field name="total_netwg" />
+                                <field name="total_num_pack" />
+                                <button name="btn_calc_weight" string="Calculate" type="object" />
+                            </group>
+                            <group>
+                                <field name="total_volume" />
+                                <field name="total_air" />
+                                <field name="total_land" />
+                            </group>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

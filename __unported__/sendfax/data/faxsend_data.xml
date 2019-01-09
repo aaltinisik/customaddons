@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="cron_faxsend_queue_action" model="ir.cron">
+            <field name="name">Send fax Service</field>
+            <field name="interval_number">16</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">faxsend.queue</field>
+            <field name="function">_process_faxes</field>
+            <field name="args">()</field>
+        </record>
+    </data>
+</openerp>

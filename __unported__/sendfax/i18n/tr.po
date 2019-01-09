@@ -1,0 +1,221 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sendfax
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-09 05:55+0000\n"
+"PO-Revision-Date: 2015-02-09 08:09+0200\n"
+"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sendfax
+#: field:faxsend.account,name:0
+#: field:faxsend.queue,account_id:0
+msgid "Account"
+msgstr "Hesap"
+
+#. module: sendfax
+#: sql_constraint:faxsend.account:0
+msgid "Account already exists in database!"
+msgstr "Veritabanında bu hesap zaten var!"
+
+#. module: sendfax
+#: field:faxsend.queue,attachment_id:0
+#: selection:faxsend.queue,object_type:0
+msgid "Attachment"
+msgstr "Ek"
+
+#. module: sendfax
+#: view:faxsend.queue:0
+msgid "Cancel send fax"
+msgstr "Faksı iptal et"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: sendfax
+#: field:faxsend.queue,queue_date:0
+msgid "Date of entry"
+msgstr "Giriş Tarihi"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Draft"
+msgstr "Taslak"
+
+#. module: sendfax
+#: field:faxsend.queue,duration:0
+msgid "Duration (sec.)"
+msgstr "Süre (san.)"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Error"
+msgstr "Hata"
+
+#. module: sendfax
+#: model:ir.ui.menu,name:sendfax.menu_fax
+msgid "Fax"
+msgstr "Faks"
+
+#. module: sendfax
+#: model:ir.actions.act_window,name:sendfax.action_faxsend_account_list
+#: model:ir.ui.menu,name:sendfax.menu_fax_sendaccount
+msgid "Fax Account"
+msgstr "Faks Hesabı"
+
+#. module: sendfax
+#: field:faxsend.queue,faxno:0
+msgid "Fax No."
+msgstr "Faks No."
+
+#. module: sendfax
+#: model:ir.actions.act_window,name:sendfax.action_faxsend_queue_list
+#: model:ir.ui.menu,name:sendfax.menu_fax_sendqueue
+msgid "Fax Queue"
+msgstr "Faks Sırası"
+
+#. module: sendfax
+#: field:faxsend.queue,state:0
+msgid "Fax State"
+msgstr "Faks Durumu"
+
+#. module: sendfax
+#: model:res.groups,name:sendfax.res_groups_faxsendmanager
+msgid "Fax send / Manager"
+msgstr "Faks gönder/yönet"
+
+#. module: sendfax
+#: help:faxsend.queue,state:0
+msgid "Gives the state of the fax."
+msgstr "Faksın durumunu verir."
+
+#. module: sendfax
+#: field:faxsend.queue,job_no:0
+msgid "Job"
+msgstr "İş"
+
+#. module: sendfax
+#: field:faxsend.queue,trigger_method_args:0
+msgid "Method args"
+msgstr "Fonsiyon Parametreleri"
+
+#. module: sendfax
+#: field:faxsend.queue,object_type:0
+msgid "Obj type"
+msgstr "Obj tipi"
+
+#. module: sendfax
+#: field:faxsend.queue,obj_id:0
+msgid "Obj. ID"
+msgstr "Obj. ID"
+
+#. module: sendfax
+#: field:faxsend.queue,pages:0
+msgid "Pages"
+msgstr "Sayfa"
+
+#. module: sendfax
+#: field:faxsend.account,password:0
+msgid "Password"
+msgstr "Şifre"
+
+#. module: sendfax
+#: field:faxsend.queue,name:0
+msgid "Queue"
+msgstr "Sıra"
+
+#. module: sendfax
+#: selection:faxsend.queue,object_type:0
+msgid "Report"
+msgstr "Raport"
+
+#. module: sendfax
+#: field:faxsend.queue,report:0
+msgid "Report/Model"
+msgstr "Rapor/Model"
+
+#. module: sendfax
+#: field:faxsend.queue,retry_counter:0
+msgid "Retry"
+msgstr "Tekrar #"
+
+#. module: sendfax
+#: view:faxsend.queue:0
+msgid "Send again"
+msgstr "Tekrar Gönder"
+
+#. module: sendfax
+#: view:faxsend.queue:0
+msgid "Send fax"
+msgstr "Faksı Gönder"
+
+#. module: sendfax
+#: view:faxsend.account:0
+msgid "Send fax account"
+msgstr "Faks Hesabı"
+
+#. module: sendfax
+#: view:faxsend.queue:0
+msgid "Send fax queue"
+msgstr "Faks iş sırası"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Send ok"
+msgstr "Gitti"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Sending"
+msgstr "Gönderiliyor"
+
+#. module: sendfax
+#: field:faxsend.queue,subject:0
+msgid "Subject"
+msgstr "Başlık"
+
+#. module: sendfax
+#: field:faxsend.queue,trigger_method:0
+msgid "Trigger method"
+msgstr "Tetiklenecek Fonksiyon"
+
+#. module: sendfax
+#: field:faxsend.queue,trigger_model:0
+msgid "Trigger model"
+msgstr "Tetiklenecek model"
+
+#. module: sendfax
+#: view:faxsend.queue:0
+msgid "Trigger settings on Fax 'error' or 'success'"
+msgstr "Faks  'hata' ya da 'gitti' durumlarında yapılacak eylem"
+
+#. module: sendfax
+#: field:faxsend.account,username:0
+msgid "Username"
+msgstr "Kullanıcı"
+
+#. module: sendfax
+#: selection:faxsend.queue,state:0
+msgid "Waiting"
+msgstr "Bekliyor"
+
+#. module: sendfax
+#: model:ir.model,name:sendfax.model_faxsend_account
+msgid "faxsend.account"
+msgstr "faxsend.account"
+
+#. module: sendfax
+#: model:ir.model,name:sendfax.model_faxsend_queue
+msgid "faxsend.queue"
+msgstr "faxsend.queue"
+

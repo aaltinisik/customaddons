@@ -1,0 +1,156 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * altinkaya_packing
+# aaltinisik <aaltinisik@altinkaya.com.tr>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-15 11:21+0000\n"
+"PO-Revision-Date: 2014-02-15 15:00+0300\n"
+"Last-Translator: aaltinisik <aaltinisik@altinkaya.com.tr>\n"
+"Language-Team: Ahmet Altinisik\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_num_pack:0
+#: field:stock.picking,total_num_pack:0
+#: field:stock.picking.out,total_num_pack:0
+msgid "Total Packages"
+msgstr "Kap adedi"
+
+#. module: altinkaya_packing
+#: view:account.invoice:0
+#: view:stock.picking.out:0
+msgid "Calculate"
+msgstr "Koli Hesapla"
+
+#. module: altinkaya_packing
+#: view:account.invoice:0
+#: field:account.invoice,packing_ids:0
+#: view:delivery.packaging:0
+#: field:stock.picking,packing_ids:0
+#: view:stock.picking.out:0
+#: field:stock.picking.out,packing_ids:0
+msgid "Packing Details"
+msgstr "Paket Bilgisi"
+
+#. module: altinkaya_packing
+#: model:ir.model,name:altinkaya_packing.model_stock_picking
+msgid "Picking List"
+msgstr "İrsaliye Listesi"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,dimension_y:0
+msgid "Pack Length"
+msgstr "Boy cm"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,grosswg:0
+msgid "Gross Weight"
+msgstr "Brüt Kg"
+
+#. module: altinkaya_packing
+#: view:delivery.packaging:0
+msgid "List of Coupons"
+msgstr "Kupon Listesi"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_grosswg:0
+#: field:stock.picking,total_grosswg:0
+#: field:stock.picking.out,total_grosswg:0
+msgid "Total Gross Weight"
+msgstr "Toplam Brüt Kg"
+
+#. module: altinkaya_packing
+#: field:account.invoice,carrier_id:0
+msgid "Carrier"
+msgstr "Teslimat"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,dimension_x:0
+msgid "Pack Width"
+msgstr "En cm"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_air:0
+msgid "Total Air Weight"
+msgstr "Hava Kargo Desi Kg"
+
+#. module: altinkaya_packing
+#: model:ir.model,name:altinkaya_packing.model_stock_picking_out
+msgid "Delivery Orders"
+msgstr "Teslimat Siparişleri"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_land:0
+msgid "Total Land Weight"
+msgstr "Toplam Kara Desi Kg"
+
+#. module: altinkaya_packing
+#: view:delivery.packaging:0
+msgid "Create Packing"
+msgstr "Paketleme Oluştur"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_volume:0
+msgid "Total Volume"
+msgstr "Toplam Hacim M³"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,netwg:0
+msgid "Net Weight"
+msgstr "Net Kg"
+
+#. module: altinkaya_packing
+#: model:ir.model,name:altinkaya_packing.model_delivery_packaging
+msgid "delivery.packaging"
+msgstr "delivery.packaging"
+
+#. module: altinkaya_packing
+#: field:account.invoice,total_netwg:0
+#: field:stock.picking,total_netwg:0
+#: field:stock.picking.out,total_netwg:0
+msgid "Total Net Weight"
+msgstr "Toplam Net Kg"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,invoice_id:0
+#: model:ir.model,name:altinkaya_packing.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: altinkaya_packing
+#: field:account.invoice,waybillno:0
+msgid "Way Bill no."
+msgstr "Kargo Takip No."
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,no_of_cups:0
+msgid "Number of Cups"
+msgstr "Kap adedi"
+
+#. module: altinkaya_packing
+#: field:account.invoice,currency_at_date:0
+msgid "Currency Rate"
+msgstr "Döviz Kuru"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,pack_no:0
+msgid "Pack Number"
+msgstr "Kap Sıra"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,picking_out_id:0
+msgid "Picking Out"
+msgstr "Picking Out"
+
+#. module: altinkaya_packing
+#: field:delivery.packaging,dimension_z:0
+msgid "Pack Height"
+msgstr "Yük cm"

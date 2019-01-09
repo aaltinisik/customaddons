@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+           <record id="pack_size_view" model="ir.ui.view">
+            <field name="name">pack_size.view</field>
+            <field name="model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+           <xpath expr="//page[@string='Inventory']/group/group[@name='status']" position="after">
+                  <group name="Package Info" string="Paketleme Bilgileri">
+                      <field name="rack_loc"/>
+                      <field name="width"/>
+                      <field name="length"/>
+                      <field name="height"/>
+                      <field name="weight_measured"/>
+                      <field name="pack_product"/>
+                      <field name="pieces_in_pack"/>
+                      <field name="weight_ground"/>
+                      <field name="weight_air"/>
+                  </group>
+             </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>
