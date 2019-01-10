@@ -34,7 +34,7 @@ class ResPartner(models.Model):
     def onchange_neighbour(self):
         neighbour_obj = self.env['address.neighbour']
         if self.neighbour_id:
-            neighbour_rec = neighbour_obj.browse(self.neighbour_id)
+            neighbour_rec = neighbour_obj.browse(self.neighbour_id.id)
             return {'value': {'zip': neighbour_rec and neighbour_rec.code,
                               'region_id':neighbour_rec and neighbour_rec.region_id,
                               'district_id': neighbour_rec and neighbour_rec.region_id.district_id,
