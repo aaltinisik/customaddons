@@ -19,7 +19,7 @@ class AddressDistrict(models.Model):
         if self.env.context.get('state_id'):
             args += [('state_id', '=', self.env.context.get('state_id'))]
         ids = self.search( args, limit=limit)
-        return self.name_get()
+        return ids.name_get()
 
 
 class AddressRegion(models.Model):
@@ -76,4 +76,4 @@ class AddressNeighbour(models.Model):
         if self.env.context.get('state_id'):
             args += [('state_id', '=', self.env.context.get('state_id'))]
         ids = self.search( args, limit=limit )
-        return self.name_get()
+        return ids.name_get()
