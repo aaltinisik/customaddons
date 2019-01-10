@@ -34,3 +34,9 @@ class ResPartner(models.Model):
         if 'vat' in values:
             self.check_vat()
         return super(ResPartner,self).write(values)
+    
+    @api.model
+    def create(self,values):
+        if 'vat' in values:
+            self.check_vat()
+        return super(ResPartner,self).create(values)

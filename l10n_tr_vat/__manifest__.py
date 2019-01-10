@@ -1,6 +1,6 @@
 
 {
-    'name': 'Turkey Unique Vat ',
+    'name': 'Vat Localization TR ',
     'version': '8.0.2',
     'website': 'https://www.odoo.com',
     'author': 'Kirankumar,Codequarters,OnurUgur',
