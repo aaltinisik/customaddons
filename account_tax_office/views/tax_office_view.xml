@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.tax.office.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="before">
+                    <field name="tax_office_id" options="{'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="company_form_tax_office" model="ir.ui.view">
+            <field name="name">res.company.form.tax.office.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="before">
+                    <field name="tax_office_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_tax_office_search" model="ir.ui.view">
+            <field name="name">account.tax.office.search</field>
+            <field name="model">account.tax.office</field>
+            <field name="arch" type="xml">
+                <search string="Tax Office">
+                    <field name="name" filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]" string="Tax Office"/>
+                    <field name="state_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_tax_office_tree" model="ir.ui.view">
+            <field name="name">account.tax.office.tree</field>
+            <field name="model">account.tax.office</field>
+            <field name="arch" type="xml">
+                <tree string="Tax Office">
+                    <field name="state_id"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tax_office_form" model="ir.ui.view">
+            <field name="name">account.tax.office.form</field>
+            <field name="model">account.tax.office</field>
+            <field name="arch" type="xml">
+                <form string="Tax Office">
+                    <group>
+                        <group col="4" colspan="2">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_tax_office" model="ir.actions.act_window" >
+            <field name="name">Tax Office</field>
+            <field name="res_model">account.tax.office</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Tax Offices" id="menu_tax_office"
+        	action="action_tax_office"
+        	parent="account.account_account_menu"/>
+    </data>
+</odoo>
