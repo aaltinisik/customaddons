@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_print_pack_barcode_form" model="ir.ui.view">
+            <field name="name">view.print.pack.barcode.wiz.form</field>
+            <field name="model">print.pack.barcode.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Product Label Print">
+                    <sheet>
+                    	<field name="restrict_single" invisible="1"/>
+                    	<field name="single_label_id" invisible="1"/>
+                        <group colspan="8" attrs="{'invisible':[('restrict_single','=',True)]}">
+                            <field name="product_label_ids" nolabel="1" >
+                                <tree editable="true">
+                                     <field name="default_code" readonly="1"/>
+                                    <field name="barcode" readonly="1"/>
+                                     <field name="name" readonly="1"/>
+                                     <field name="note" />
+                                     <field name="pieces_in_pack"/>
+                                     <field name="label_to_print"/>
+
+                                </tree>
+                            </field>
+                        </group>
+                        <group attrs="{'invisible':[('restrict_single','=',False)]}">
+                        	<field name="single_label_default_code" readonly="1"/>
+                            <field name="single_label_barcode" readonly="1"/>
+                            <field name="single_label_name" readonly="1"/>
+                            <field name="single_label_note" />
+                            <field name="single_label_pieces_in_pack"/>
+                            <field name="single_label_label_to_print"/>
+                        </group>
+                        <group>
+                          <field name="skip_first" string="Do not print first label"></field>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_label" type="object" string="Print" class="oe_highlight"/>
+                        <button name="show_label" type="object" string="Show Label" groups="base.group_system" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <act_window
+           id="action_print_pack_barcode_wiz"
+           name="Product Label Print"
+           target="new"
+           key2="client_action_multi"
+           view_mode="form"
+           res_model="print.pack.barcode.wiz"
+           src_model="product.product"/>
+           
+       	<record id="product_product_print_label_single_tree" model="ir.ui.view">
+       		<field name="name">product.product.tree.inherit.print_label</field>
+          	<field name="model">product.product</field>
+          	<field name="inherit_id" ref="product.product_product_tree_view"/>
+          	<field name="arch" type="xml">
+            	
+                	<field name="ean13" position="before">
+       						<button name="action_print_label" type="object" string="Print Label" icon="gtk-print"/>	
+                  	</field>
+          	</field>
+       </record>
+       
+       <record id="product_product_print_label_single_form" model="ir.ui.view">
+       		<field name="name">product.product.form.inherit.print_label</field>
+          	<field name="model">product.product</field>
+          	<field name="inherit_id" ref="product.product_normal_form_view"/>
+          	<field name="arch" type="xml">
+            	
+                <div name="buttons" position="inside">
+                    <button class="oe_inline oe_stat_button" name="action_print_label" type="object" 
+                         icon="fa-barcode" string="Print Label">
+                    </button>
+                    
+                </div>
+          	</field>
+       </record>
+       
+       <record id="stock_move_tree_print_product_label" model="ir.ui.view">
+       		<field name="name">stock.move.tree.inherit.print_product_label</field>
+          	<field name="model">stock.move</field>
+          	<field name="inherit_id" ref="stock.view_move_picking_tree"/>
+          	<field name="arch" type="xml">
+                	<field name="product_uom" position="after">
+       						<button name="action_print_product_label" type="object" string="Print Product Label" icon="gtk-print"/>	
+                  	</field>
+          	</field>
+       </record>
+
+    </data>
+
+    <data noupdate="1">
+
+        <record id="aeroo_product_label_print_id" model="ir.actions.report.xml">
+            <field name="name">Print Product Label</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">print.pack.barcode.wiz</field>
+            <field name="report_name">product_label_print</field>
+            <field name="copies">1</field>
+
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format">3</field>
+
+            <field name="parser_state">default</field>
+            <field name="charset">utf_8</field>
+            <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">product_label_print/Output.prn</field>
+            <field name="report_file">product_label_print/Output.prn</field>
+            <field name="content_fname"></field>
+
+
+
+
+        </record>
+
+        <ir_set>
+            <field eval="'action'" name="key"/>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="['product.product']" name="models"/>
+            <field name="name">Product_label1</field>
+            <field eval="'ir.actions.report.xml,'+str(aeroo_product_label_print_id)" name="value"/>
+            <field eval="True" name="isobject"/>
+            <field eval="True" name="replace"/>
+        </ir_set>
+
+    </data>
+</openerp>

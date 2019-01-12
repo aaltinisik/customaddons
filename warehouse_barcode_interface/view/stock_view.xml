@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	
+        <record id="action_picking_tree_waiting" model="ir.actions.act_window">
+            <field name="name">Waiting Availability Transfers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_waiting': 1,
+                    'search_default_available': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+        <record id="stock_picking_type_kanban_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.type.kanban</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.stock_picking_type_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@t-if='record.count_picking_waiting.raw_value &gt; 0']" position="replace">
+                    <div t-if="record.count_picking_waiting.raw_value &gt; 0">
+                        <a name="%(action_picking_tree_waiting)d" type="action">
+                            <field name="count_picking_waiting"/> Waiting Availability
+                        </a>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

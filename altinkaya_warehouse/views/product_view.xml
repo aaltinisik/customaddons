@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_product_form_inherit_custom_available" model="ir.ui.view">
+            <field name="name">product.product.normal.form.inherit.custom_available</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+	            <xpath expr="//group[@name='lot']" position="before">
+
+					<group name="Merkezdepo" string="Merkez Depo">
+					<field name="qty_available_merkez"/>
+					<field name="qty_incoming_merkez"/>
+					<field name="qty_outgoing_merkez"/>
+					<field name="qty_virtual_merkez"/>
+					</group>
+					<group name="Sincandepo" string="Sincan Depo">
+					<field name="qty_available_sincan"/>
+					<field name="qty_incoming_sincan"/>
+					<field name="qty_outgoing_sincan"/>
+					<field name="qty_virtual_sincan"/>
+					</group>
+
+	            </xpath>
+	            
+	<!--            <xpath expr="//field[@name='type']" position="after">
+	            	<field name="type_variant"/>
+	            	
+	            </xpath>
+	            <xpath expr="//field[@name='type']" position="attributes">
+	            	<attribute name="attrs">{'invisible':[('type_variant','!=',False)]}</attribute>
+	            	
+	            </xpath>-->
+	           
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,249 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_label_print
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-17 18:16+0000\n"
+"PO-Revision-Date: 2018-04-17 18:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_pieces_in_pack:0
+#: field:product.product.label,pieces_in_pack:0
+msgid "# in Cartoon"
+msgstr "koli #"
+
+#. module: product_label_print
+#: field:label.twoinrow,copies_to_print:0
+#: field:print.pack.barcode.wiz,single_label_label_to_print:0
+#: field:product.product.label,label_to_print:0
+msgid "# of label to be printed"
+msgstr "Etiket #"
+
+#. module: product_label_print
+#: model:ir.model,name:product_label_print.model_aeroo_printers
+msgid "Available printers for Aeroo direct print"
+msgstr "Aeroo baskısı için müsait yazıcılar"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_barcode:0
+#: field:product.product.label,barcode:0
+msgid "Barcode"
+msgstr "Barkod"
+
+#. module: product_label_print
+#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: product_label_print
+#: field:label.twoinrow,create_uid:0
+#: field:print.pack.barcode.wiz,create_uid:0
+#: field:product.product.label,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: product_label_print
+#: field:label.twoinrow,create_date:0
+#: field:print.pack.barcode.wiz,create_date:0
+#: field:product.product.label,create_date:0
+msgid "Created on"
+msgstr "Oluşturulma"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_default_code:0
+msgid "Default Code"
+msgstr "Kodu"
+
+#. module: product_label_print
+#: field:product.product.label,default_code:0
+msgid "Default_code"
+msgstr "Kodu"
+
+#. module: product_label_print
+#: field:label.twoinrow,display_name:0
+#: field:print.pack.barcode.wiz,display_name:0
+#: field:product.product.label,display_name:0
+msgid "Display Name"
+msgstr "Adı"
+
+#. module: product_label_print
+#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+msgid "Do not print first label"
+msgstr "İlk Etiketi Atla"
+
+#. module: product_label_print
+#: field:label.twoinrow,id:0
+#: field:print.pack.barcode.wiz,id:0
+#: field:product.product.label,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_label_print
+#: field:label.twoinrow,label1:0
+msgid "Label 1"
+msgstr "Label 1"
+
+#. module: product_label_print
+#: field:label.twoinrow,label2:0
+msgid "Label 2"
+msgstr "Etiket2"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,label_ids:0
+msgid "Labels"
+msgstr "Etiketler"
+
+#. module: product_label_print
+#: field:label.twoinrow,__last_update:0
+#: field:print.pack.barcode.wiz,__last_update:0
+#: field:product.product.label,__last_update:0
+msgid "Last Modified on"
+msgstr "Son güncelleme"
+
+#. module: product_label_print
+#: field:label.twoinrow,write_uid:0
+#: field:print.pack.barcode.wiz,write_uid:0
+#: field:product.product.label,write_uid:0
+msgid "Last Updated by"
+msgstr "Son güncelleyen"
+
+#. module: product_label_print
+#: field:label.twoinrow,write_date:0
+#: field:print.pack.barcode.wiz,write_date:0
+#: field:product.product.label,write_date:0
+msgid "Last Updated on"
+msgstr "Son güncelleme"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_name:0
+#: field:product.product.label,name:0
+msgid "Name"
+msgstr "Ürün Adı"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_nameL1:0
+#: field:print.pack.barcode.wiz,single_label_nameL2:0
+#: field:product.product.label,nameL1:0
+msgid "NameL1"
+msgstr "NameL1"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_nameL3:0
+#: field:product.product.label,nameL2:0
+msgid "NameL2"
+msgstr "NameL2"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_nameL4:0
+#: field:product.product.label,nameL3:0
+msgid "NameL3"
+msgstr "NameL3"
+
+#. module: product_label_print
+#: field:product.product.label,nameL4:0
+msgid "NameL4"
+msgstr "NameL4"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_note:0
+#: field:product.product.label,note:0
+msgid "Note"
+msgstr "Etikete Yazılacak Ek Not"
+
+#. module: product_label_print
+#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+msgid "Print"
+msgstr "Yazdır"
+
+#. module: product_label_print
+#: view:product.product:product_label_print.product_product_print_label_single_form
+#: view:product.product:product_label_print.product_product_print_label_single_tree
+msgid "Print Label"
+msgstr "Etiket Yazdır"
+
+#. module: product_label_print
+#: model:ir.actions.report.xml,name:product_label_print.aeroo_product_label_print_id
+msgid "Print Product Label"
+msgstr "Ürün Etiketlerini Yazdır"
+
+#. module: product_label_print
+#: field:aeroo.printers,type:0
+msgid "Printer_Type"
+msgstr "Printer_Type"
+
+#. module: product_label_print
+#: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:47
+#, python-format
+msgid "Printing multiple labels is restricted!"
+msgstr "Birden fazla etiket basılamaz!"
+
+#. module: product_label_print
+#: model:ir.model,name:product_label_print.model_product_product
+#: field:print.pack.barcode.wiz,single_label_product_id:0
+#: field:product.product.label,product_id:0
+msgid "Product"
+msgstr "Ürün"
+
+#. module: product_label_print
+#: model:ir.actions.act_window,name:product_label_print.action_print_pack_barcode_wiz
+#: model:ir.model,name:product_label_print.model_print_pack_barcode_wiz
+#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+msgid "Product Label Print"
+msgstr "Barkod Etiketi Yazdır"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,product_label_ids:0
+msgid "Products"
+msgstr "Ürünler"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,restrict_single:0
+msgid "Restrict to single product"
+msgstr "Tek ürüne sınırla"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_short_code:0
+#: field:product.product.label,short_code:0
+msgid "Short Code"
+msgstr "Kısa Kodu"
+
+#. module: product_label_print
+#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+msgid "Show Label"
+msgstr "Etiketi Göster"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_id:0
+msgid "Single label id"
+msgstr "Single label id"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,skip_first:0
+msgid "Skip First Label"
+msgstr "İlk Etiketi Atla"
+
+#. module: product_label_print
+#: field:label.twoinrow,first_label_empty:0
+msgid "Skip first label in row"
+msgstr "İlk Etiketi atla"
+
+#. module: product_label_print
+#: field:label.twoinrow,second_label_empty:0
+msgid "Skip second label in row"
+msgstr "Satırdaki ikinci etiketi atla"
+
+#. module: product_label_print
+#: field:print.pack.barcode.wiz,single_label_uom_name:0
+#: field:product.product.label,uom_name:0
+msgid "UOM Name"
+msgstr "UOM Adı"
+

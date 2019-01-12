@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:
+-->
+<openerp>
+    <data>
+
+<template id="report.external_layout_footer">
+    <div class="footer">
+
+
+        <div class="text-center" style="border-top: 1px solid black;">
+            <ul t-if="not company.custom_footer" class="list-inline">
+                <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+
+                <li t-if="company.fax and company.phone">&amp;bull;</li>
+                <li t-if="company.fax">Fax: <span t-field="company.fax"/></li>
+
+                <li t-if="company.email">&amp;bull;</li>
+                <li t-if="company.email">Email: <span t-field="company.email"/></li>
+
+                <li t-if="company.website">&amp;bull;</li>
+                <li t-if="company.website">Website: <span t-field="company.website"/></li>
+            </ul>
+
+            <t t-if="company.custom_footer">
+                <span t-raw="company.rml_footer"/>
+            </t>
+
+            <ul class="list-inline">
+                <li>Page:</li>
+                <li><span class="page"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+
+<template id="report.external_layout_header">
+    <div class="header">
+
+        <div class="header">
+                            <table class="table-condensed" style="border-color: #000000;margin-right: 10px;margin-left: 10px;margin-bottom: 0px;margin-top: 10px;width: 100%;" border="2">
+                            <tbody>
+                                <tr>
+                                    <td style="font-size:12px;padding:0px;vertical-align:top;">
+                                        <t t-raw="raw">
+                                            <svg xml:space="preserve" width="60mm" height="10mm" version="1.0" viewBox="0 0 6000 1000" style="image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"><defs><style type="text/css">
+                                                .str0 {stroke:#FEFEFE;stroke-width:20}.fil0 {fill:#FEFEFE}.fil3 {fill:#1A1B1F;fill-rule:nonzero}.fil1 {fill:#1A1C1F;fill-rule:nonzero}.fil4 {fill:#ED1C23;fill-rule:nonzero}.fil2 {fill:white;fill-rule:nonzero}
+                                            </style></defs><rect class="fil0 str0" x="98" y="269" width="1166" height="698"/><polygon class="fil1" points="5413 692 5413 692 5614 0 5800 0 6001 692 5819 692 5798 600 5616 600 5593 692 "/><polygon class="fil2" points="5649 455 5649 455 5764 455 5707 216 "/><polygon class="fil1" points="5137 692 5137 692 5321 692 5321 436 5527 0 5329 0 5229 236 5130 0 4927 0 5137 436 "/><polygon class="fil1" points="4451 692 4451 692 4652 0 4838 0 5040 692 4857 692 4836 600 4654 600 4632 692 "/><polygon class="fil2" points="4687 455 4687 455 4803 455 4746 216 "/><polygon class="fil1" points="3861 692 3861 692 4043 692 4043 472 4088 415 4228 692 4448 692 4217 255 4421 0 4208 0 4043 229 4043 0 3861 0 "/><path class="fil1" d="M3242 692l0 0 0-692 174 0 161 322c4 9 10 22 15 38 6 17 12 37 18 61-2-13-3-26-3-41-1-15-2-32-2-53l0-327 176 0 0 692-176 0-160-319c-5-10-10-23-16-40-6-18-12-37-18-60 2 13 3 25 4 39 1 13 1 32 1 56l0 324-174 0z"/><polygon class="fil1" points="3159 692 3159 692 2971 692 2971 0 3159 0 "/><polygon class="fil1" points="2560 692 2560 692 2560 182 2395 182 2395 0 2905 0 2905 182 2744 182 2744 692 "/><polygon class="fil1" points="2053 692 2053 692 2487 692 2487 508 2237 508 2237 0 2053 0 "/><polygon class="fil1" points="1412 692 1412 692 1614 0 1800 0 2001 692 1819 692 1797 600 1615 600 1593 692 "/><polygon class="fil2" points="1648 455 1764 455 1707 216 "/><polygon class="fil3" points="1412 994 1412 773 1573 773 1573 811 1457 811 1457 858 1563 858 1563 896 1457 896 1457 953 1578 953 1578 994 "/><polygon class="fil3" points="1613 994 1613 773 1659 773 1659 953 1767 953 1767 994 "/><polygon class="fil3" points="1792 994 1792 773 1952 773 1952 811 1836 811 1836 858 1942 858 1942 896 1836 896 1836 953 1958 953 1958 994 "/><polygon class="fil3" points="1992 994 1992 773 2038 773 2038 863 2124 773 2181 773 2093 862 2189 994 2134 994 2062 893 2038 916 2038 994 "/><polygon class="fil3" points="2255 994 2255 812 2189 812 2189 773 2365 773 2365 812 2300 812 2300 994 "/><path class="fil3" d="M2437 869l54 0c11 0 20-2 25-7 6-5 9-12 9-22 0-10-3-17-8-22-6-5-14-7-24-7l-56 0 0 58zm-45 125l0-221 107 0c24 0 42 5 54 15 11 10 17 26 17 47 0 14-3 25-8 34-6 9-14 15-25 19 10 3 16 8 21 15 4 7 6 18 6 33l1 26c0 0 0 1 0 1 1 13 4 21 9 24l0 7-50 0c-1-3-3-7-3-12-1-4-2-10-2-16l-1-23c0-14-3-23-7-28-5-5-13-7-26-7l-48 0 0 86-45 0zM2648 883c0 25 6 44 16 57 11 14 26 20 46 20 19 0 35-6 45-20 11-13 17-32 17-57 0-24-6-43-17-56-10-14-26-21-45-21-20 0-35 7-46 21-10 13-16 32-16 56zm-46 0c0-35 9-64 29-85 19-21 46-31 79-31 33 0 59 10 79 31 19 21 29 50 29 85 0 36-10 64-29 85-20 21-46 32-79 32-33 0-60-11-79-32-20-21-29-49-29-85z"/><polygon class="fil3" points="2854 994 2854 773 2902 773 2992 925 2992 773 3036 773 3036 994 2989 994 2899 842 2899 994 "/><path class="fil3" d="M3084 994l0-221 45 0 0 221-45 0zm5-249l0-39 35 0 0 39-35 0z"/><polygon class="fil3" points="3177 994 3177 773 3222 773 3222 863 3308 773 3365 773 3277 862 3373 994 3318 994 3246 893 3222 916 3222 994 "/><path class="fil3" d="M3673 918c-2 25-11 45-29 60-18 15-41 22-69 22-33 0-59-10-77-31-18-20-27-49-27-86 0-37 9-66 28-86 18-20 45-30 80-30 28 0 50 7 67 20 16 14 25 34 27 59l-45 0c-2-13-7-22-16-29-8-6-19-10-33-10-20 0-35 7-46 20-10 13-15 32-15 56 0 24 5 43 15 56 10 13 25 20 44 20 14 0 25-4 34-11 9-7 15-17 17-30l45 0zM3711 994l0-221 45 0 0 221-45 0zm5-249l0-39 36 0 0 39-36 0z"/><polygon class="fil3" points="3804 994 3804 773 3850 773 3850 855 3941 855 3941 773 3987 773 3987 994 3941 994 3941 896 3850 896 3850 994 "/><path class="fil3" d="M4115 817l-31 94 62 0-31-94zm-27-44l53 0 80 221-48 0-15-46-86 0-14 46-48 0 78-221z"/><polygon class="fil3" points="4226 994 4226 955 4347 813 4229 813 4229 773 4402 773 4402 811 4281 954 4399 954 4399 994 "/><polygon class="fil3" points="4516 994 4516 773 4561 773 4561 863 4648 773 4705 773 4616 862 4713 994 4657 994 4585 893 4561 916 4561 994 "/><path class="fil3" d="M4720 772l46 0 0 139c0 17 3 29 10 37 7 8 18 12 33 12 15 0 26-4 32-12 7-8 11-20 11-37l0-139 45 0 0 144c0 27-7 48-23 62-15 15-37 22-65 22-29 0-51-7-66-22-15-14-23-35-23-62l0-144z"/><polygon class="fil3" points="4988 994 4988 812 4922 812 4922 773 5098 773 5098 812 5033 812 5033 994 "/><path class="fil3" d="M5123 772l46 0 0 139c0 17 4 29 10 37 7 8 18 12 33 12 15 0 26-4 33-12 7-8 10-20 10-37l0-139 46 0 0 144c0 27-8 48-23 62-15 15-37 22-66 22-28 0-50-7-66-22-15-14-23-35-23-62l0-144z"/><polygon class="fil3" points="5345 994 5345 773 5391 773 5391 953 5499 953 5499 994 "/><path class="fil3" d="M5606 817l-31 94 62 0-31-94zm-26-44l52 0 80 221-48 0-15-46-86 0-14 46-48 0 79-221zM5780 869l54 0c11 0 20-2 25-7 6-5 9-12 9-22 0-10-3-17-8-22-6-5-14-7-24-7l-56 0 0 58zm-45 125l0-221 107 0c24 0 42 5 54 15 11 10 17 26 17 47 0 14-3 25-8 34-6 9-14 15-25 19 10 3 17 8 21 15 4 7 6 18 7 33l1 26c0 0 0 1 0 1 0 13 3 21 8 24l0 7-50 0c-1-3-3-7-3-12-1-4-2-10-2-16l-1-23c0-14-3-23-7-28-5-5-13-7-25-7l-49 0 0 86-45 0z"/><polygon class="fil3" points="5956 994 5956 773 6001 773 6001 994 "/><polygon class="fil2" points="389 530 1232 530 1232 125 389 125 "/><path class="fil4" d="M765 773c41 21 75 55 96 97 23-6 120-33 181-97 70-72 80-147 23-204-56-57-131-47-204 23-63 61-90 157-96 181zm-167-13l0 0c21-7 44-11 67-11 24 0 47 4 69 11 12-20 62-108 60-196-2-101-48-161-128-161-80 0-126 60-128 161-2 88 47 175 60 196zm-128 109l0 0c21-42 55-76 97-96-6-24-33-120-97-182-72-70-147-80-204-23-57 57-47 132 23 205 61 63 157 90 181 96zm-388-869l0 0 1167 0c45 0 83 37 83 83l0 917-105 0c2-10 3-20 3-31 1-80-59-126-160-128-88-2-175 47-196 60 7 21 10 44 10 67 0 11 0 22-2 32l-434 0c-1-10-2-21-2-32 0-24 4-47 11-69-20-12-108-61-196-59-101 1-161 47-161 128 0 11 1 22 4 32l-105 0 0-917c0-46 37-83 83-83z"/>
+                                            </svg>
+                                        </t><br/> <span>ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC.A.Ş.</span></td>
+                                    <td style="font-size:11px;padding:0px;vertical-align:bottom;">
+                                        <strong>Tel:</strong>+90 312 395 2768 <strong>Faks:</strong>+90 312 395 2772<br/>
+                                        <strong>e-posta:</strong>muhasebe@altinkaya.com.tr <strong>web:</strong> www.altinkaya.com.tr
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:11px;padding:0px;vertical-align:top;">
+                                        <strong>Merkez:</strong> 1469 Cad No:10 ivedik OSB 06378 Yenimahalle/ANKARA
+                                    </td>
+                                    <td style="font-size:11px;padding:0px;vertical-align:top;">
+                                        Ulus VD No: 0610422947 Merkez MERSİS:0061042294700027<br/>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                            </table>
+            <div style="border-bottom: 2px solid black;"></div>
+                       </div>
+
+    </div>
+</template>
+
+    </data>
+</openerp>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="stock_picking_sevk_inherit_view" model="ir.ui.view">
+            <field name="name">stock.picking.sevk_inherit.view</field>
+            <field name="model">stock.picking</field>
+            <field name="view_type">search</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+              <field name="picking_type_id" position="after">
+
+                  <seperator/>
+                        <filter string="Today's Deliveries" name="todaydel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="Yesterday's Deliveries" name="yesterdaydel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="last 3 day's Deliveries" name="threedaydel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-2)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="last Week's Deliveries" name="lastweekdel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(weeks=-1,days=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_done','&lt;=',(context_today()+relativedelta(weeks=-1,days=5)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+
+                        <filter string="last Month's Deliveries" name="lastmonthdel"
+                        domain="[('picking_type_id', '=', 2), '&amp;', ('date_done','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01 00:00:00')),
+                                 ('date_done','&lt;',time.strftime('%Y-%m-01 00:00:00'))]" />
+
+                        <filter string="This Month's Deliveries" name="thismonthdel"
+                        domain="[('picking_type_id', '=', 2), ('date_done','&gt;=',(context_today()).strftime('%Y-%m-01 00:00:00'))]" />
+
+
+                  <seperator/>
+
+                                          <filter string="Two Weeks ago" name="twoweeks"
+                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-2)).strftime('%Y-%m-%d 00:00:00'))]" />
+
+                                          <filter string="Four weeks ago" name="fourweeks"
+                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-4)).strftime('%Y-%m-%d 00:00:00'))]" />
+
+                  <seperator/>
+
+              </field>
+            </field>
+        </record>
+    </data>
+</openerp>

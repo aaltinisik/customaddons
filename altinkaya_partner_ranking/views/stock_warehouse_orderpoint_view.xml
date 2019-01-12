@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="stock_warehouse_orderpointform_view">
+            <field name="name">stock.warehouse.orderpointform</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
+            <field name="arch" type="xml">
+                <group string="Rules" position="after">
+                    <group string="Satışlar">
+                        <field name="sale_qty30days" />
+                        <field name="sale_qty180days" />
+                        <field name="sale_qty360days" />
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>

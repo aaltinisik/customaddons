@@ -1,0 +1,41 @@
+{% for label in o.get_labels(pack_id) %}^Q100,3
+^W102
+^H10
+^P1
+^S5
+^AT
+^C1
+^R0
+~Q+0
+^O0
+^D0
+^E15
+~R255
+^XSET,ROTATION,0
+^L
+Dy2-me-dd
+Th:m:s
+{% if label.header %}
+B55,142,28,4,4,24,0,1,${label.header_data.name}
+AT,44,212,54,54,0,0E,0,0,${o.origin}
+R332,282,1197,545,4,4
+AT,36,274,133,133,0,0E,0,0,${label.header_data.no}
+AD,364,310,1,1,0,0E,Alıcı: "${o.partner_id.name}"
+AD,364,348,1,1,0,0E,${o.partner_id.street or ''}
+AD,364,386,1,1,0,0E,${o.partner_id.street2 or ''}
+AD,364,424,1,1,0,0E,${o.partner_id.zip or ''} ${o.partner_id.region_id.name or ''} ${o.partner_id.district_id.name or ''} / ${o.partner_id.state_id.name or ''} / ${o.partner_id.country_id.name or ''} 
+AD,198,564,1,1,0,0E,${label.header_data.dimensions} Brüt: ${label.header_data.gross_weight} Kg Net: 222,34 Kg
+{% end %}
+{% for item in label['items']%}AD,28,624,1,1,0,0E,${item.sequence} ${item.product}	${item.qty}	${item.uom}
+{%end%}
+{% if label.footer %}
+AT,38,1022,46,46,0,0E,0,0,Gönderen: ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN TİC AŞ
+AT,38,1088,46,46,0,0E,0,0,1469 cad No:10 ivedik OSB Yenimahalle ANKARA TURKEY
+AD,24,1154,1,1,0,0E,Baskı Tarihi: 13/06/2018 16:18:20 Yazdıran: Ahmet Altınışık  İVEDİK OSB DEPO
+AT,404,196,62,62,0,0E,0,0,YURTİÇİ KARGO ALICI ÖDEMELİ
+Lo,14,1006,1190,1012
+AT,54,434,92,92,0,0E,0,0,120Desi
+Lo,18,602,1194,608
+E
+{% end %}
+{% end %}

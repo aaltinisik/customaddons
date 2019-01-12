@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="stock_pickingaltinkaya"
+            model="stock.picking"
+            string="Depo Fişi Ekrana"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkaya"
+            file="altinkaya_packing.report_picking_altinkaya"
+        />
+
+    </data>
+    <data noupdate="1">
+                <report
+            id="stock_pickingaltinkayaS"
+            model="stock.picking"
+            string="Depo Fişi Sincan"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaS"
+            file="altinkaya_packing.report_picking_altinkayaS"
+        />
+
+
+                <report
+            id="stock_pickingaltinkayaB"
+            model="stock.picking"
+            string="Depo Fişi Bas"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaB"
+            file="altinkaya_packing.report_picking_altinkayaB"
+        />
+
+                <report
+            id="stock_pickingaltinkayaC"
+            model="stock.picking"
+            string="Depo Fişi 2.Kat"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaC"
+            file="altinkaya_packing.report_picking_altinkayaC"
+        />
+                <report
+            id="stock_pickingaltinkayaD"
+            model="stock.picking"
+            string="Depo Fişi Satış"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaD"
+            file="altinkaya_packing.report_picking_altinkayaD"
+        />
+                <report
+            id="stock_pickingaltinkayaE"
+            model="stock.picking"
+            string="Depo Fişi Depo"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaE"
+            file="altinkaya_packing.report_picking_altinkayaE"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaF"
+            model="stock.picking"
+            string="Depo Fişi Profil"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaF"
+            file="altinkaya_packing.report_picking_altinkayaF"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaG"
+            model="stock.picking"
+            string="Depo Fişi Kesim"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaG"
+            file="altinkaya_packing.report_picking_altinkayaG"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaH"
+            model="stock.picking"
+            string="Depo Fişi Enjeksiyon"
+            report_type="qweb-pdf"
+            name="altinkaya_packing.report_picking_altinkayaH"
+            file="altinkaya_packing.report_picking_altinkayaH"
+        />
+    </data>
+
+
+	<data>
+		
+		<record id="aeroo_package_label" model="ir.actions.report.xml">
+            <field name="name">Print Package Label</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">stock.picking</field>
+            <field name="report_name">package_label_print</field>
+            <field name="copies">1</field>
+
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format">3</field>
+
+            <field name="parser_state">default</field>
+            <field name="charset">utf_8</field>
+            <field name="usage">default</field>
+            <field name="tml_source">file</field>
+            <field name="report_rml">altinkaya_packing/report/package_label.prn</field>
+            <field name="report_file">altinkaya_packing/report/package_label.prn</field>
+            <field name="content_fname">TXT</field>
+
+        </record>
+
+        <record model="ir.values" id="aeroo_package_label_binding">
+            <field eval="'action'" name="key"/>
+            <field eval="'client_print_multi'" name="key2"/>
+            <field eval="'stock.picking'" name="model"/>
+            <field name="name">package_label</field>
+            <field eval="'ir.actions.report.xml,'+str(aeroo_package_label)" name="value"/>
+        </record>
+	
+	</data>
+</openerp>

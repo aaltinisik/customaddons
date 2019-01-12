@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="acespritech_view_partner_property_form" model="ir.ui.view">
+            <field name="name">acespritech.res.partner.property.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <field name="credit_limit" position="after">
+
+                </field>
+            </field>
+        </record>
+
+<record id="acespritech_view_partner_property_form2" model="ir.ui.view">
+            <field name="name">altinkaya_telfax.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field eval="2" name="priority" />
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="z_tel_kampanya"></field>
+                    <field name="z_kamp_2016A"></field>
+                    <field name="z_kamp_2017A"></field>
+                    <field name="z_kat_postala"></field>
+                    <field name="z_kat_postalandi"></field>
+                    <field name="z_kat_email"></field>
+
+                </field>
+                   <field name="fax" position="after">
+                    <field name="z_contact_name"></field>
+                </field>
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>

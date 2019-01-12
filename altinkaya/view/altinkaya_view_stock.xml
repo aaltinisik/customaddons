@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record id="ir_ui_view_stockpickingoutinheritaltinkaya0" model="ir.ui.view">
+			<field name="inherit_id" ref="stock.view_picking_form" />
+			<field name="name">stock.picking.inherit_altinkaya_88</field>
+			<field name="arch" type="xml">
+				<field name='partner_id' position='replace'>
+					<field name="partner_id" on_change="onchange_partner_in(partner_id)"
+						context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}" />
+                    <field name='carrier_id'/>
+                    <field name="hazirlayan"></field>
+                    <field name='x_hazirlayan'/>
+                    <field name='x_durum'/>
+
+
+				</field>
+			</field>
+			<field eval="18" name="priority" />
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+		</record>
+
+
+            <record id="stock_picking_inherit_altinkaya474_view" model="ir.ui.view">
+                <field name="name">stock.picking.inherit_altinkaya474.view</field>
+                <field name="model">stock.picking</field>
+                <field name="type">tree</field>
+
+				<field eval="18" name="priority" />
+
+                <field name="inherit_id" ref="stock.vpicktree"/>
+                <field name="arch" type="xml">
+                  <field name="date" position="replace">
+    				  <field name="date" invisible="0"></field>
+    				  <field name="note"></field>
+    				  <field name="carrier_id"></field>
+    				  <field name="x_durum"></field>
+    				  <field name="hazirlayan"></field>
+    				  </field>
+
+                </field>
+            </record>
+
+                    <record id="stock_picking_inherit_altinkaya475_view" model="ir.ui.view">
+                <field name="name">stock.picking.inherit_altinkaya475.view</field>
+                <field name="model">stock.picking</field>
+                <field name="type">form</field>
+				<field eval="18" name="priority" />
+                <field name="inherit_id" ref="stock.view_picking_form"/>
+                <field name="arch" type="xml">
+
+                    <field name='note' position='after'>
+                        <field name="comment_irsaliye" placeholder="İrsaliyeye eklenecek not..." class="oe_inline"/>
+                    </field>
+
+                    <field name='move_type' position='after'>
+                        <field name="teslim_alan"/>
+                    </field>
+
+                </field>
+            </record>
+
+
+                <record id="stock_picking_inherit_altinkaya409_view" model="ir.ui.view">
+            <field name="name">stock.picking.inherit_altinkaya409.view</field>
+            <field name="model">stock.picking</field>
+                    <field eval="17" name="priority" />
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <field name="priority" position="replace"/>
+            </field>
+        </record>
+        <record id="stock_picking_inherit_altinkaya971_view" model="ir.ui.view">
+            <field name="name">stock.picking.inherit_altinkaya971.view</field>
+            <field name="model">stock.picking</field>
+            <field eval="17" name="priority" />
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <field name="date_done" position="replace"/>
+            </field>
+        </record>
+        <record id="stock_picking_inherit_altinkaya276_view" model="ir.ui.view">
+            <field name="name">stock.picking.inherit_altinkaya276.view</field>
+            <field name="model">stock.picking</field>
+            <field eval="17" name="priority" />
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <field name="carrier_id" position="replace"/>
+            </field>
+        </record>
+        <record id="stock_picking_inherit_altinkaya354_view" model="ir.ui.view">
+            <field name="name">stock.picking.inherit_altinkaya354.view</field>
+            <field name="model">stock.picking</field>
+            <field eval="17" name="priority" />
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <field name="invoice_state" position="replace"/>
+            </field>
+        </record>
+
+        <record id="stock_picking_inherit_altinkaya771_view" model="ir.ui.view">
+            <field name="name">stock.picking.inherit_altinkaya771.view</field>
+            <field name="model">stock.picking</field>
+            <field eval="18" name="priority" />
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <field name="date" position="replace">
+              <field name="priority"/>
+              <field name="date_done"/>
+              <field name='invoice_state'/>
+              <field name="date"/>
+
+              </field>
+            </field>
+        </record>
+
+
+
+
+	</data>
+</openerp>
