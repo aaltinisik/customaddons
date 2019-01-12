@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_custom2
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-03 18:30+0000\n"
+"PO-Revision-Date: 2018-11-03 18:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_custom2
+#: view:mrp.production:altinkaya_custom2.mrp_production_form_view_ace
+msgid "(Update)"
+msgstr "(güncelle)"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_kamp_2016A:0
+msgid "2016 Katalog için arandı"
+msgstr "2016 Katalog için arandı"
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_kamp_2016A:0
+msgid "2016 Temmuz Katalog gönderme kampanyası icin arandi."
+msgstr "2016 Temmuz Katalog gönderme kampanyası icin arandi."
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_kamp_2017A:0
+msgid "2017 Adres güncelleme için arandı"
+msgstr "2017 Adres güncelleme için arandı"
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_kamp_2017A:0
+msgid "2017 Temmuz Adres günceleme için arandı."
+msgstr "2017 Temmuz Adres günceleme için arandı."
+
+#. module: altinkaya_custom2
+#: code:addons/altinkaya_custom2/partner/partner.py:68
+#: code:addons/altinkaya_custom2/partner/partner.py:71
+#, python-format
+msgid "Account Exist!"
+msgstr "Muhasebe Hesabı Zaten Var!"
+
+#. module: altinkaya_custom2
+#: code:addons/altinkaya_custom2/partner/partner.py:72
+#, python-format
+msgid "Account Payable is already created with this reference."
+msgstr "Bu referansla Satıcılar Hesabı zaten oluşturulmuş."
+
+#. module: altinkaya_custom2
+#: code:addons/altinkaya_custom2/partner/partner.py:69
+#, python-format
+msgid "Account Receivable is already created with this reference."
+msgstr "Alıcılar hesabı zaten oluşturulmuş."
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_old_cep:0
+msgid "Eski Cep"
+msgstr "Eski Cep"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_old_fax:0
+msgid "Eski Faks"
+msgstr "Eski Faks"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_old_tel:0
+msgid "Eski Tel"
+msgstr "Eski Tel"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_tel_kampanya:0
+msgid "Kampanyalarda Aranmayacak"
+msgstr "Kampanyalarda Aranmayacak"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_kat_email:0
+msgid "Katalog E-mail"
+msgstr "Katalog E-mail"
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_kat_postalandi:0
+msgid "Katalog Posta ile gönderildi."
+msgstr "Katalog Posta ile gönderildi."
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_kat_postala:0
+msgid "Katalog Posta ile gönderilecek."
+msgstr "Katalog Posta ile gönderilecek."
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_kat_postala:0
+msgid "Katalog Postala"
+msgstr "Katalog Postala"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_kat_postalandi:0
+msgid "Katalog Postalandi"
+msgstr "Katalog Postalandi"
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_kat_email:0
+msgid "Katalog email ile gönderilecek."
+msgstr "Katalog email ile gönderilecek."
+
+#. module: altinkaya_custom2
+#: model:ir.model,name:altinkaya_custom2.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Üretim Emri"
+
+#. module: altinkaya_custom2
+#: code:addons/altinkaya_custom2/partner/partner.py:54
+#, python-format
+msgid "No Reference!"
+msgstr "Referans Değeri Yok!"
+
+#. module: altinkaya_custom2
+#: model:ir.model,name:altinkaya_custom2.model_res_partner
+msgid "Partner"
+msgstr "Ortak"
+
+#. module: altinkaya_custom2
+#: model:ir.model,name:altinkaya_custom2.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: altinkaya_custom2
+#: model:ir.model,name:altinkaya_custom2.model_product_template
+msgid "Product Template"
+msgstr "Ürün Şablonu"
+
+#. module: altinkaya_custom2
+#: help:res.partner,z_tel_kampanya:0
+msgid "Seçili ise telefon kampanyalarında aranmayacak."
+msgstr "Seçili ise telefon kampanyalarında aranmayacak."
+
+#. module: altinkaya_custom2
+#: code:addons/altinkaya_custom2/partner/partner.py:55
+#, python-format
+msgid "You must define reference for creating accounts!"
+msgstr "Hesapları oluşturmak için önce cariye referans değeri tanımlayın!"
+
+#. module: altinkaya_custom2
+#: field:res.partner,z_contact_name:0
+msgid "ilgili kişi"
+msgstr "ilgili kişi"
+

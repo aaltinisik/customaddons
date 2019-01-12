@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+		<record id="group_pickingmerge" model="res.groups">
+			<field name="name">Merge Stock Pickings</field>
+		</record>
+
+
+	</data>	
+</openerp>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    
+    
+    <t t-extend="ListView.row"><t t-jquery="[t-raw='render_cell(record, column)']"  t-operation="replace"><div><span><t t-raw="render_cell(record, column)"/></span><t t-if="column.image_galery === '1'"><a t-att-data-product-id="record.get(column.id)[0]" class="fa fa-image" style="float:right;"></a></t></div></t></t>
+    
+    
+    <t t-name="image_galery">
+
+    	<div id="image_carousel" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li t-foreach="image_ids" t-as="img_id" 
+		    t-att-data-slide-to="img_id_index" data-target="#image_carousel" t-att-class=" (img_id_index == 0) and 'active' or '' "></li>
+		    
+		    
+		  </ol>
+		
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" style="min-height:400px;">
+		    
+			<div t-foreach="image_ids" t-as="img_id" t-att-class="'item' + ((img_id_index == 0) and ' active' or '')"
+				style="padding-left:20px;padding-right:20px;text-align:center;">
+    			<img t-att-src="'/web/binary/image?model=ir.attachment&amp;field=datas&amp;id=' + img_id['id']" style="margin:auto;"></img>
+    			<span><t t-esc="img_id['name']"/></span>
+    		</div>
+		  </div>
+		
+		  <!-- Left and right controls -->
+		  <a class="left carousel-control" href="#image_carousel" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#image_carousel" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+    </t>
+    
+    <t t-name="FieldMany2One_ImageGalery">
+	    <span class="oe_form_field oe_form_field_many2one oe_form_field_with_button" t-att-style="widget.node.attrs.style">
+	        <t t-if="widget.get('effective_readonly')">
+	            <a t-if="! widget.options.no_open" href="#" class="oe_form_uri"/>
+	            <span t-if="widget.options.no_open" href="#" class="oe_form_uri"/>
+	            <span class="oe_form_m2o_follow"/>
+	            <a class="fa fa-image"></a>
+	        </t>
+	        <t t-if="!widget.get('effective_readonly')">
+	            <a t-if="! widget.options.no_open" href="#" tabindex="-1"
+	                class="oe_m2o_cm_button oe_e" draggable="false">/</a>
+	            <div>
+	                <input type="text"
+	                    t-att-id="widget.id_for_label"
+	                    t-att-tabindex="widget.node.attrs.tabindex"
+	                    t-att-autofocus="widget.node.attrs.autofocus"
+	                    t-att-placeholder="widget.node.attrs.placeholder"
+	                />
+	                <span class="oe_m2o_drop_down_button">
+	                    <img t-att-src='_s + "/web/static/src/img/down-arrow.png"' draggable="false"/>
+	                </span>
+	            </div>
+	        </t>
+	    </span>
+	</t>
+</templates>
