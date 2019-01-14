@@ -52,7 +52,7 @@ class ResPartner(models.Model):
         return fields + ['district_id','neighbour_id','region_id']
 
     @api.multi
-    def _display_address(self, address, without_company=False, context=None):
+    def _display_address(self,  without_company=False, context=None):
 
         '''
         The purpose of this function is to build and return an address formatted accordingly to the
@@ -66,24 +66,24 @@ class ResPartner(models.Model):
 
         # get the information that will be injected into the display format
         # get the address format
-        address_format = address.country_id.address_format or \
+        address_format = self.country_id.address_format or \
               "%(street)s\n%(street2)s\n%(city)s %(state_code)s %(zip)s\n%(country_name)s"
         args = {
-            'state_code': address.state_id.code or '',
-            'state_name': address.state_id.name or '',
-            'country_code': address.country_id.code or '',
-            'country_name': address.country_id.name or '',
-            'company_name': address.parent_name or '',
-            'neighbourhood_name': address.neighbour_id.name or '',
-            'region_name': address.region_id.name or '',
-            'district_name': address.district_id.name or '',
+            'state_code': self.state_id.code or '',
+            'state_name': self.state_id.name or '',
+            'country_code': self.country_id.code or '',
+            'country_name': self.country_id.name or '',
+            'company_name': self.parent_name or '',
+            'neighbourhood_name': self.neighbour_id.name or '',
+            'region_name': self.region_id.name or '',
+            'district_name': self.district_id.name or '',
         }
 
         for field in self._address_fields():
-            args[field] = getattr(address, field) or ''
+            args[field] = getattr(self, field) or ''
         if without_company:
             args['company_name'] = ''
-        elif address.parent_id:
+        elif self.parent_id:
             address_format = '%(company_name)s\n' + address_format
         if args['region_name']==args['district_name']:
             args['region_name']=''
