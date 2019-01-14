@@ -15,12 +15,16 @@ class ResPartner(models.Model):
     @api.onchange('state_id')
     def onchange_state(self):
         if self.state_id:
-            country_id=self.env['res.country.state'].browse(self.state_id.id).country_id.id
-            return {'value':{'country_id':country_id,
-#                             'district_id':False,
-#                             'region_id': False,
-                             'neighbour_id': False,
+            if self._origin.state_id and self._origin.state_id != self.state_id :
+                
+                country_id=self.env['res.country.state'].browse(self.state_id.id).country_id.id
+                return {'value':{'country_id':country_id,
+                            'district_id':False,
+                            'region_id': False,
+                            'neighbour_id': False,
                              }}
+            else:
+                return {}
         else:
             return {'value': {'district_id':False,
                               'region_id': False,
@@ -41,6 +45,7 @@ class ResPartner(models.Model):
                               'state_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id,
                               'country_id': neighbour_rec and neighbour_rec.region_id.district_id.state_id.country_id,
                               'city': False,
+                              'neighbour_id':neighbour_rec and neighbour_rec.id,
                               }}
         return {'value': {}}
     

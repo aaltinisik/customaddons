@@ -53,7 +53,7 @@ class AddressNeighbour(models.Model):
     district_id = fields.Many2one('address.district', 'District',  related='region_id.district_id')
 
     @api.multi
-    def name_get(self):
+    def name_get2(self):
         res = []
         for inst in self:
             name = inst.name or '/'
@@ -76,4 +76,4 @@ class AddressNeighbour(models.Model):
         if self.env.context.get('state_id'):
             args += [('state_id', '=', self.env.context.get('state_id'))]
         ids = self.search( args, limit=limit )
-        return ids.name_get()
+        return ids.name_get2()
