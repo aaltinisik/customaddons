@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record model="ir.ui.view" id="hscode_form">
+            <field name="name">product.HSCode.Form</field>
+            <field name="model">product.hscode</field>
+            <field name="arch" type="xml">
+                <form string="GTIP">
+                    <sheet>
+                        <group>
+                             <group>
+                                <field name="hscode"/>
+                                <field name="name" />
+                                <field name="nameen" />
+                                <field name="Kisa_aciklama" />
+                                <field name="short_desc" />
+                                <field name="Uzun_aciklama" />
+                                <field name="long_desc" />
+                            </group>
+                            <group>
+                                <field name="image" widget="image" img_height="300" img_width="300"/>
+                            </group>
+                        </group>
+                        <separator string="Notes"/>
+                        <field name="notes" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="product_hscode_tree">
+            <field name="name">product.HSCode.tree</field>
+            <field name="model">product.hscode</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="hscode"/>
+                     <field name="name"/>
+                     <field name="nameen"/>
+                     <field name="Kisa_aciklama"/>
+                     <field name="short_desc"/>
+                     <field name="Uzun_aciklama"/>
+                     <field name="long_desc"/>
+                </tree>
+            </field>
+        </record>
+		
+
+
+        <record id="action_hscode" model="ir.actions.act_window">
+            <field name="name">Customs Tariffs</field>
+            <field name="res_model">product.hscode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            action="action_hscode"
+            id="menu_hscode"
+            name="HS Codes"
+            parent="sale.prod_config_main" sequence="20"/>
+
+
+
+    </data>
+</odoo>
