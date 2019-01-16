@@ -23,3 +23,6 @@ class ResPartner(models.Model):
     z_kat_postalandi = fields.Boolean('Katalog Postalandi', help=u"Katalog Posta ile gönderildi.")
     z_kat_email = fields.Boolean('Katalog E-mail', help=u"Katalog email ile gönderilecek.")
 
+
+    #altinkaya61
+    z_muhasebe_kodu = fields.Char('Zirve Muhasebe kodu', size=64, required=False, translate=False)
