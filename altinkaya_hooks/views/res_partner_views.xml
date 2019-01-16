@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+	
+	<record id="acespritech_view_partner_property_form2" model="ir.ui.view">
+            <field name="name">altinkaya_telfax.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field eval="2" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='industry_id']" position="after">
+                    <field name="z_tel_kampanya"/>
+                    <field name="z_kamp_2016A"/>
+                    <field name="z_kamp_2017A"/>
+                    <field name="z_kat_postala"/>
+                    <field name="z_kat_postalandi"/>
+                    <field name="z_kat_email"/>
+					<field name="z_contact_name"/>
+                </xpath>
+                </field>
+        </record>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</data>
+
+
+
+</odoo>
