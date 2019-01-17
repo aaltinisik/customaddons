@@ -18,7 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models,api
+from odoo import models,api,fields
+
+
+class StockWarehouseOrderpoint(models.Model):
+    _inherit = 'stock.warehouse.orderpoint'
+
+    categ_id = fields.Many2one('product.category',
+                                 related='product_id.categ_id',
+                                 string='Category',
+                                 store=True, readonly=True)
+
 
 
 class StockPicking(models.Model):
@@ -35,3 +45,35 @@ class StockPicking(models.Model):
             'target':'current',
         }
 
+
+    x_durum = fields.Selection(
+                                    [('1',u'İthal Eksik'),
+                                     ('2',u'CNC Kesimde'),
+                                     ('3',u'Enjeksiyonda'),
+                                     ('4',u'Montajda'),
+                                     ('5',u'Çıkacak'),
+                                     ('6',u'ACİL'),
+                                     ('7',u'Müsteriyi Bekliyor'),
+                                     ('8',u'Profil Kesimde'),
+                                     ('9', u'Sac Üretiminde'),
+                                     ('A', u'Boyada'),
+                                     ('B', u'Piyasadan Teminde')
+                                     ],
+                                     'Durumu', select=True)
+    x_hazirlayan = fields.Selection(
+                                    [("Asim",u"Asım"),
+                                     ("Muhammet",u"Muhammet"),
+                                     ("Harun",u"Harun"),
+                                     ("Bilal", u"Bilal"),
+                                     ("Saffet",u"Saffet"),
+                                     ("Esra", u"Esra"),
+                                     ("Selma", u"Selma"),
+                                     (u"Uğur", u"Uğur"),
+                                     (u"Çağrı", u"Çağrı"),
+                                     ("Hatice", u"Hatice"),
+                                     ("Muhsin", u"Muhsin")
+                                     ],
+                                     u'Siparişi Hazırlayan',readonly=True )
+    comment_irsaliye = fields.Text('İrsaliye Notu')
+    hazirlayan = fields.Many2one('hr.employee', 'Sevki Hazırlayan')
+    teslim_alan = fields.Char('Malı Teslim Alan Ad Soyad', size=32)

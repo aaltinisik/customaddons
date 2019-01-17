@@ -24,6 +24,17 @@
                         <field name='picking_ids'/>
                     </page>
 				</xpath>
+				<xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="before">
+                    	<field name="show_custom_products" />
+                    	
+                	</xpath>
+					
+					<xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                    	<field name="set_product" invisible="1"/>
+                    	<span class="oe_form_field" attrs="{'invisible':[('set_product','=',False)]}">This is a set product</span>
+                      <xpath expr="//field[@name='payment_term']" position='replace'/>
+                	</xpath>
             </field>
         </record>
 

@@ -1,0 +1,189 @@
+{% if o.currency_id.name=='TRY' %}
+
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%}${(113-(len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1")))*' '} ${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' }{%end%}
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 25 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-24)*-1)}{% end %}
+
+  
+{% for orderitem in o.invoice_line %} {%if (((o.invoice_line.ids.index(orderitem.id)%24)==1) and (o.invoice_line.ids.index(orderitem.id)!=1)) %}
+                                                                                                    Nakli Yekün :${(17-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)-1],"price_subtotal"))) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.symbol or '' }
+                                                                Sayfa ${((int(o.invoice_line.ids.index(orderitem.id)-1)/-24)*-1)}/${((int(len(o.invoice_line.ids))/-24)*-1)}
+  
+  
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%}${(113-(len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1")))*' '}${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name or '' }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street  or "1")))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' }{%end%} 
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 20 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-24)*-1)}/${((int(len(o.invoice_line.ids))/-24)*-1)}{% end %}
+                     
+
+					 
+                      Sayfa ${(((int(o.invoice_line.ids.index(orderitem.id))-1)/-24)*-1)}'den Nakli Yekun${(85-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)],"price_subtotal"))) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.symbol or '' }{%end%}
+  {% if (orderitem.product_id.default_code[0:3] or "DGL")=="KAR" %}                    Teslimat Şekli:${orderitem.name[orderitem.name.find("]")+1:59] or '' }{% end %}{% if (orderitem.product_id.default_code[0:3] or "DGL")!="KAR" %}${orderitem.product_id.default_code or '  ' }${(19-(len(orderitem.product_id.default_code or '1')))*' '}${orderitem.name[orderitem.name.find("]")+1:orderitem.name.find("]")+58] or '' }${(60-(len(orderitem.name[orderitem.name.find("]")+1:orderitem.name.find("]")+58]  or "1")))*' '}{% if orderitem.name.find("]")+1 %} {%end%}         ${orderitem.quantity or '' } ${orderitem.uos_id.name or '' }${(8-(len(str(int(orderitem.quantity)) or "1")+len(orderitem.uos_id.name or "12")))*' '}${(4-(len(str(int(orderitem.price_unit)) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(orderitem.price_unit,digits=2 or '')}${o.currency_id.symbol or ''} {%if orderitem.discount!=0 %}%${orderitem.discount}isk{%if orderitem.discount<10 %} {%end%}{%end%}{%if orderitem.discount==0 %}        {%end%}${(12-(len(str(int(orderitem.price_subtotal)) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(orderitem.price_subtotal, digits=2) or '' }${o.currency_id.symbol or '' }{% end %}{% end %}
+                                                                                                    ---------------------------------
+                                                                                                    Ara Toplam  :${(17-(len(str(int(o.amount_untaxed)) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(o.amount_untaxed,digits=2) or '' }${o.currency_id.symbol or '' }
+                                                                                                    %18 KDV     :${(17-(len(str(int(o.amount_tax)) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(o.amount_tax,digits=2) or '' }${o.currency_id.symbol or '' }
+                      Ödeme Şekli: ${o.payment_term.name or '' }${(66-(len(o.payment_term.name or "1")))*' '}---------------------------------
+                      YALNIZ: ${currency_to_text(o.amount_total, o.currency_id.name,'tr_TR')  or '' }${(70-(len(currency_to_text(o.amount_total, o.currency_id.name,'tr_TR'))))*' '}GENEL TOPLAM:${(17-(len(str(int(o.amount_total)) or "1")+len(o.currency_id.symbol or "1")))*' '}${formatLang(o.amount_total,digits=2) or '' }${o.currency_id.symbol or '' }
+                      Bu Fatura Dahil Cari Hesap Bakiyeniz:{%if o.total_balance < -0.1%}${ -1*(o.total_balance)} TL Alacak{%end%}{%if o.total_balance > 0.1%}${ (o.total_balance)} TL Borç{%end%}
+{%end%}{% if o.currency_id.name=='EUR' %}
+
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%} ${o.address_contact_id.country_id.name or '' }${(114-((len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+len(o.address_contact_id.country_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1"))))*' '}${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}								
+
+
+{% for orderitem in o.invoice_line %} {%if (((o.invoice_line.ids.index(orderitem.id)%22)==1) and (o.invoice_line.ids.index(orderitem.id)!=1)) %}
+                                                                                                    Nakli Yekun :${(22-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)-1],"price_subtotal"))) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.name or '' }
+                                                                Sayfa ${((int(o.invoice_line.ids.index(orderitem.id)-1)/-22)*-1)}/${((int(len(o.invoice_line.ids))/-22)*-1)}
+  
+
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%} ${o.address_contact_id.country_id.name or '' }${(114-((len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+len(o.address_contact_id.country_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1"))))*' '}${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-22)*-1)}/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}
+
+
+
+                      Sayfa ${(((int(o.invoice_line.ids.index(orderitem.id))-1)/-22)*-1)}'den Nakli Yekun${(85-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)],"price_subtotal"))) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.name or '' }{%end%}
+  ${orderitem.product_id.default_code or '' }${(19-(len(orderitem.product_id.default_code or '1')))*' '}${orderitem.product_id.name[0:58] or '' }${(60-len(orderitem.product_id.name[0:58]))*' '}          ${orderitem.quantity or '' } ${orderitem.uos_id.name or '' }${(12-(len(str(int(orderitem.quantity)) or "1")+len(orderitem.uos_id.name or "12")+(len(str(int(orderitem.price_unit)) or "1")+len(o.currency_id.name or "1"))))*' '}${formatLang(orderitem.price_unit,digits=2 or '')}${o.currency_id.name or ''} {%if orderitem.discount!=0 %}%${orderitem.discount}isk{%if orderitem.discount<10 %} {%end%}{%end%}{%if orderitem.discount==0 %}        {%end%}${(12-(len(str(int(orderitem.price_subtotal)) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(orderitem.price_subtotal, digits=2) or '' }${o.currency_id.name or '' }{% end %}
+                                                                                                    ---------------------------------
+                      YALNIZ: ${currency_to_text(o.amount_total, o.currency_id.name,'tr_TR')  or '' }/${o.x_teslimat or '' }${(68-(len(currency_to_text(o.amount_total, o.currency_id.name,'tr_TR'))+ len(o.x_teslimat or "")))*' '} GENEL TOPLAM:${(17-(len(str(int(o.amount_total)) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(o.amount_total,digits=2) or '' }${o.currency_id.name or '' }
+                      {% if o.x_comment_export %}${o.x_comment_export.replace("\n","\n                      ")}
+                      {%end%}{% if o.x_comment_export != "" %}
+                      {% if o.total_num_pack > 0 %}KAP Adedi:${o.total_num_pack} Kap  {%end%}{% if o.total_grosswg > 0 %}Brüt Ağırlık:${o.total_grosswg} Kg{%end%}{% if o.total_netwg > 0 %} Net Ağırlık:${o.total_netwg} Kg
+                      {%end%}ARACI BANKA: GARANTİ BANKASI / OSTİM ŞUBESİ   {% if o.payment_term %}ÖDEME ŞEKLİ:${o.payment_term.name}
+                      {%end%}{% if o.x_teslimat %}TESLİM ŞEKLİ:${o.x_teslimat}
+                      {%end%}MENŞEİ: TÜRKİYE / İMALATÇI: ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SANAYİ TİCARET A.Ş.
+                      {% if o.currency_id.name %}DÖVİZ CİNSİ:${o.currency_id.name}  {%end%}{% if o.currency_at_date %}DÖVİZ KURU:${formatLang(o.currency_at_date, digits=4)} TL
+                      {%end%}{%end%}
+{%end%}{% if o.currency_id.name=='USD' %}
+
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%} ${o.address_contact_id.country_id.name or '' }${(114-((len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+len(o.address_contact_id.country_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1"))))*' '}${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa 1/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}								
+
+
+{% for orderitem in o.invoice_line %} {%if (((o.invoice_line.ids.index(orderitem.id)%22)==1) and (o.invoice_line.ids.index(orderitem.id)!=1)) %}
+                                                                                                    Nakli Yekün :${(22-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)-1],"price_subtotal"))) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.name or '' }
+                                                                Sayfa ${((int(o.invoice_line.ids.index(orderitem.id)-1)/-22)*-1)}/${((int(len(o.invoice_line.id))/-22)*-1)}
+  
+
+
+
+
+
+
+
+  ${setLang('tr_TR')}
+  ${o.address_contact_id.display_name }
+  ${o.address_contact_id.street or '' }
+  ${o.address_contact_id.street2 or '' } ${o.address_contact_id.zip or '' }
+  ${o.address_contact_id.city or '' }{% if o.address_contact_id.state_id.name %} / ${o.address_contact_id.state_id.name or '' } {%end%} ${o.address_contact_id.country_id.name or '' }${(114-((len(o.address_contact_id.city or "1")+len(o.address_contact_id.state_id.name  or "1")+len(o.address_contact_id.country_id.name  or "1")+int("3" if o.address_contact_id.state_id.name else "-1"))))*' '}${formatLang(o.date_invoice, date=True)}
+  Tel: ${o.address_contact_id.phone or '' }
+                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
+
+                                                                                                                     ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+  ${o.partner_id.display_name }
+  ${o.partner_id.street or '' }${(115-(len(o.partner_id.street)))*' '}${o.partner_id.commercial_partner_id.vat or '' }
+  ${o.partner_id.street2 or '' } ${o.partner_id.zip or '' }
+  ${o.partner_id.city or '' }{% if o.partner_id.state_id.name %} / ${o.partner_id.state_id.name or '' } {%end%} ${o.partner_id.country_id.name or '' }
+  Tel: ${o.partner_id.phone or '' }	Faks: ${o.partner_id.fax or '' }		{% if o.name%}Müşteri Referans No:${o.name or '' }{% end %}                          {%if len(o.invoice_line.ids) > 23 %}Sayfa ${((int(o.invoice_line.ids.index(orderitem.id))/-22)*-1)}/${((int(len(o.invoice_line.ids))/-22)*-1)}{% end %}
+
+
+
+                      Sayfa ${(((int(o.invoice_line.ids.index(orderitem.id))-1)/-22)*-1)}'den Nakli Yekun${(85-(len(str(int(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)],"price_subtotal"))) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(sum_field(o.invoice_line[0:o.invoice_line.ids.index(orderitem.id)], "price_subtotal"), digits=2) or '' }${o.currency_id.name or '' }{%end%}
+  ${orderitem.product_id.default_code or '' }${(19-(len(orderitem.product_id.default_code or '1')))*' '}${orderitem.product_id.name[0:58] or '' }${(60-len(orderitem.product_id.name[0:58]))*' '}          ${orderitem.quantity or '' } ${orderitem.uos_id.name or '' }${(12-(len(str(int(orderitem.quantity)) or "1")+len(orderitem.uos_id.name or "12")+(len(str(int(orderitem.price_unit)) or "1")+len(o.currency_id.name or "1"))))*' '}${formatLang(orderitem.price_unit,digits=2 or '')}${o.currency_id.name or ''} {%if orderitem.discount!=0 %}%${orderitem.discount}isk{%if orderitem.discount<10 %} {%end%}{%end%}{%if orderitem.discount==0 %}        {%end%}${(12-(len(str(int(orderitem.price_subtotal)) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(orderitem.price_subtotal, digits=2) or '' }${o.currency_id.name or '' }{% end %}
+                                                                                                    ---------------------------------
+                      YALNIZ: ${currency_to_text(o.amount_total, o.currency_id.name,'tr_TR')  or '' }/${o.x_teslimat or '' }${(68-(len(currency_to_text(o.amount_total, o.currency_id.name,'tr_TR'))+ len(o.x_teslimat or "")))*' '} GENEL TOPLAM:${(17-(len(str(int(o.amount_total)) or "1")+len(o.currency_id.name or "1")))*' '}${formatLang(o.amount_total,digits=2) or '' }${o.currency_id.name or '' }
+                      {% if o.x_comment_export %}${o.x_comment_export.replace("\n","\n                      ")}
+                      {%end%}{% if o.x_comment_export != "" %}
+                      {% if o.total_num_pack > 0 %}KAP Adedi:${o.total_num_pack} Kap  {%end%}{% if o.total_grosswg > 0 %}Brüt Ağırlık:${o.total_grosswg} Kg{%end%}{% if o.total_netwg > 0 %} Net Ağırlık:${o.total_netwg} Kg
+                      {%end%}ARACI BANKA: GARANTİ BANKASI / OSTİM ŞUBESİ   {% if o.payment_term %}ÖDEME ŞEKLİ:${o.payment_term.name}
+                      {%end%}{% if o.x_teslimat %}TESLİM ŞEKLİ:${o.x_teslimat}
+                      {%end%}MENŞEİ: TÜRKİYE / İMALATÇI: ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN TİC A.Ş.
+                      {% if o.currency_id.name %}DÖVİZ CİNSİ:${o.currency_id.name}  {%end%}{% if o.currency_at_date %}DÖVİZ KURU:${formatLang(o.currency_at_date, digits=4)} TL
+                      {%end%}{%end%}
+{%end%}

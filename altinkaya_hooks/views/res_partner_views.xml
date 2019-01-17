@@ -2,7 +2,7 @@
 <odoo>
 	<data>
 	
-	<record id="acespritech_view_partner_property_form2" model="ir.ui.view">
+	<record id="res_partner_view_form_altinkaya" model="ir.ui.view">
             <field name="name">altinkaya_telfax.partner.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -17,10 +17,50 @@
                     <field name="z_kat_email"/>
 					<field name="z_contact_name"/>
                 </xpath>
+                <!-- should place well onur -->
+                <xpath expr="//field[@name='name']" position="after">
+					<field string="Tax Office Name" name="x_vergidairesi" />
+				</xpath>
+				<xpath expr="//field[@name='ref']" position="replace">
+					<field name="ref"/>
+				</xpath>
+           </field>
+      </record>
+	<record id="res_partner_view_tree_altinkaya" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_partner_tree" />
+			<field name="name">res.partner.inherit_altinkaya1</field>
+			<field name="model">res.partner</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<xpath expr="///field[@name='display_name']" position="after">
+					<field name="state_id" />
+				</xpath>
+			</field>
+		</record>
+	
+	
+	<record model="ir.ui.view" id="res_partner_search_view_altinkaya">
+            <field name="name">res.partner.search.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="vat" filter_domain="[('vat','like',self)]" />
                 </field>
+            </field>
         </record>
 	
 	
+	<record id="res_users_form_inherit_default_procurement_wh" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_users_form" />
+			<field name="name">res.users.form.inherit.default_procurement_wh</field>
+			<field name="model">res.users</field>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tz']" position="after">
+                     <field name="default_procurement_wh_id"/>
+				</xpath>
+			</field>
+		</record>
 	
 	
 	

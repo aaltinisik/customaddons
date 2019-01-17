@@ -3,12 +3,111 @@
 from odoo import models, fields, api
 
 
+
+class x_makine(models.Model):
+    _name = 'x.makine'
+        
+        
+    x_group = fields.Char(
+            'Bolum',
+            size=128,
+            )
+    x_kod =  fields.Char(
+            'Makine Kodu',
+            size=128)
+    x_name = fields.Char(
+            'Makine Adi',
+            size=128)
+    name =  fields.Char(
+            'Makine Adi',
+            size=128)
+
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
     #group_id = fields.Many2one('procurement.group',string='Producrement Group', related='move_prod_id.group_id')
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
     sale_id = fields.Many2one('sale.order',string="Sale Order")
+    
+    date_planned = fields.Datetime('Scheduled Date')
+    date_start2 = fields.Datetime('Start Date')
+    date_finished2 = fields.Datetime('End Date')
+    priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority')
+    
+    
+    def _get_procurement_group_name(self):
+        for mo in self:
+            if mo.move_finished_ids:
+                mo.id = mo.move_finished_ids[0].group_id.name
+            else:
+                mo.id = False
+    
+    def get_product_route(self):
+        def _get_next_moves(move_id):
+            if move_id:
+                next_moves = _get_next_moves(move_id.move_dest_id)
+                if next_moves:
+                    return move_id | next_moves
+                else:
+                    return move_id
+            return False
+        
+        if self.move_finished_ids:
+            route = []
+            for m in _get_next_moves(self.move_finished_ids[0]):
+                if m.picking_id.id:
+                    route.append(('picking',m.picking_id))
+                elif m.raw_material_production_id.id:
+                    route.append(('production',m.raw_material_production_id))
+                
+            res = route
+        else:
+            res = False
+                
+        return res
 
+    
+    def _get_product_pickings(self):
+        def _get_next_moves(move_id):
+            if move_id:
+                next_moves = _get_next_moves(move_id.move_dest_id)
+                if next_moves:
+                    return move_id | next_moves
+                else:
+                    return move_id
+            return False
+        
+        for mo in self:
+            if mo.move_finished_ids:
+                mo.id = _get_next_moves(mo.move_finished_ids[0]).mapped('picking_id')
+            else:
+                mo.id = False
+    
+    x_operator = fields.Many2one(
+            'hr.employee',
+            'Uretimi Yapan Operator'
+            )
+    x_note = fields.Char(
+            'Not',
+            size=256)
+    x_makine = fields.Many2one('x.makine',
+            'Uretim Yapilan Makine'
+            )
+    x_makine_kod =  fields.Char(related='x_makine.x_kod',
+            string='Makine',
+            readonly=1)
+    procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
+    product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
+             readonly=True)
+    
+    def name_search(self,name, args=None, operator='ilike', limit=80):
+        if name:
+            args += [('move_finished_ids[0].group_id.name', operator, name)]
+        ids = self.search( args, limit=limit)
+        return ids.name_get()
+
+
+    
+    
     @api.onchange('routing_id')
     def onchange_routing_id(self):
         if self.routing_id.location_id:

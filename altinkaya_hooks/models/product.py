@@ -20,7 +20,7 @@ class product_attribute_line(models.Model):
 class productProduct(models.Model):
     _inherit = 'product.product'
     
-    @api.depends()
+    @api.depends('product_tmpl_id')
     def _compute_attr_based_price(self):
         res = {}
         for product in self:
@@ -37,6 +37,13 @@ class productProduct(models.Model):
             
             
         return res
+    
+    @api.depends()
+    def _compute_name_variant_report_name(self):
+        self.env._context.update({'display_default_code':False})
+        result = self.name_get()
+        return result
+    
 
     v_fiyat_2015a = fields.Float("2015 Ocak Eski Fiyatı TL",digits=dp.get_precision('Product Price'),help="2015 Ocak eski fiyatı")
     v_2015a_iscilik = fields.Float("2015 Ocak işçilik Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2015 Ocak kullanılan birim işçilik fiyatı")
@@ -52,10 +59,17 @@ class productProduct(models.Model):
     v_min_2016b_iscilik = fields.Float("2016 Aralık Min İsçilik TL",digits=dp.get_precision('Product Price'),help=u"2016 Aralık Minimum İşçilik fiyatı TL")
     v_fiyat_2017 = fields.Float("2017 Aralık Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2017 Aralık fiyatı TL")
     v_2017_iscilik = fields.Float(u"2017 Aralık isçilik fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2017 Aralık birim işçilik fiyatı TL")
-    v_min_2017_iscilik = fields.Float(u"2017 Aralık Min İsçilik TL",digits=dp.get_precision('Product Price'),
-            help=u"2017 Aralık Minimum İşçilik fiyatı TL")
+    v_min_2017_iscilik = fields.Float(u"2017 Aralık Min İsçilik TL",digits=dp.get_precision('Product Price'),help=u"2017 Aralık Minimum İşçilik fiyatı TL")
     attr_price =  fields.Float(compute="_compute_attr_based_price", digits=dp.get_precision('Product Price'), string=u"Attr. Value Price",help=u"Price calculated based on the product's attribute values.")
 
+    v_cari_urun = fields.Many2one('res.partner',"Partner Product")
+    v_tl_fiyat = fields.Float("USD Fiyatı",digits=dp.get_precision('Product Price'),help="Birim işçilik Fiyatı USD")
+    v_iscilik_fiyat = fields.Float("işçilik Fiyatı USD",digits=dp.get_precision('Product Price'),help=u"Birim işçilik Fiyatı USD")
+    v_min_iscilik_fiy = fields.Float('Minimum işçilik Fiyatı USD',digits=dp.get_precision('Product Price'),help="En Az Toplam işçilik Fiyatı USD")
+    v_guncel_fiyat = fields.Boolean("Fiyat Güncel", help="Bu seçenek seçili ise fiyatı yenidir.")
+    name_variant =fields.Char(compute="_compute_name_variant_report_name",string='Variant Name')
     
-    
+    #altinkaya
+    v_fiyat_dolar = fields.Float("Dolar Fiyatı",digits=dp.get_precision('Product Price'),help="Dolarla satılan ürünlerin fiyatı")
+    v_fiyat_euro = fields.Float("Euro Fiyatı",digits=dp.get_precision('Product Price'),help="Euro ile satılırken kullanılan temel fiyat")
     
