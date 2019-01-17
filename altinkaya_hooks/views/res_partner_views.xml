@@ -18,7 +18,7 @@
 					<field name="z_contact_name"/>
                 </xpath>
                 <!-- should place well onur -->
-                <xpath expr="//field[@name='name']" position="after">
+                <xpath expr="//field[@name='vat']" position="after">
 					<field string="Tax Office Name" name="x_vergidairesi" />
 				</xpath>
 				<xpath expr="//field[@name='ref']" position="replace">
