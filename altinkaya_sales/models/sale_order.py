@@ -1,15 +1,25 @@
-#from openerp.osv import osv, fields
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
 from odoo.tools.translate import _
 
-from odoo import models,fields, api
 
 from werkzeug import url_encode
 import hashlib
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-
-
+    
+    
+    production_ids = fields.Many2many('mrp.production',string='Manufacturing Orders', compute='_compute_productions')
+    
+    @api.multi
+    def _compute_productions(self):
+        for so in self:
+            so.production_ids = self.env['mrp.production'].search([('sale_id','=', so.id)])
+            
+            
+    
     altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',compute='_altinkaya_payment_url')
     
     @api.multi
@@ -151,4 +161,4 @@ class sale_order_line(models.Model):
             
 
     
-    
+  

@@ -16,10 +16,9 @@
         "security/ir.model.access.csv",
         "view/mrp_production_view.xml",
         "view/procurement_view.xml",
-        "view/sale_order_view.xml",
         "view/mrp_bom_views.xml",
         'view/x_makine_views.xml',
-
+        'wizard/mrp_cancel_wizard_view.xml',
     ],
     'demo': [],
     'test': [],

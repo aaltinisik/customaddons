@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
 
 <!--            sales order form view        -->
@@ -35,6 +35,11 @@
                     	<span class="oe_form_field" attrs="{'invisible':[('set_product','=',False)]}">This is a set product</span>
                       <xpath expr="//field[@name='payment_term']" position='replace'/>
                 	</xpath>
+                <xpath expr="//notebook" position="inside">
+	            	<page string="Manufacturing Orders">
+	            		<field name="production_ids"/>
+	            	</page>
+               	</xpath>
             </field>
         </record>
 
@@ -53,4 +58,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
