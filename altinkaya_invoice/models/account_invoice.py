@@ -32,7 +32,7 @@ class AccountInvoice(models.Model):
                     "ref": invoice.partner_id.commercial_partner_id.ref,
                     "currency": invoice.currency_id.name,
                     "lang": invoice.partner_id.lang,
-                    "hashtr": hashlib.sha1(invoice.currency_id.name + invoice.partner_id.commercial_partner_id.ref + eposta + tutar + invoice.number + invoice.company_id.hash_code).hexdigest().upper(),
+                    "hashtr": hashlib.sha1(invoice.currency_id.name.encode() + invoice.partner_id.commercial_partner_id.ref.encode() + eposta.encode() + tutar.encode() + invoice.number.encode() + invoice.company_id.hash_code.encode()).hexdigest().upper(),
                     }
             invoice.altinkaya_payment_url = "?" + url_encode(params)
 

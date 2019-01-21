@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    	<record id="invoice_supplier_form_inherit_create_invoice" model="ir.ui.view">
+	        <field name="name">account.invoice.supplier.form.inherit.create_invoice</field>
+	        <field name="model">account.invoice</field>
+	        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+	        <field name="priority" eval="40"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+	            	<field name="partner_order_ref"/>
+	            	<field name="moves_picking_ref"/>
+	            	<field name="lot_ids" widget="many2many_tags"/>
+	            </xpath>
+	        </field>
+	    </record>
+        
+    	<record id="invoice_form_inherit_create_invoice" model="ir.ui.view">
+	        <field name="name">account.invoice.form.inherit.create_invoice</field>
+	        <field name="model">account.invoice</field>
+	        <field name="inherit_id" ref="account.invoice_form"/>
+	        <field name="priority" eval="40"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+	            	<field name="partner_order_ref"/>
+	            	<field name="moves_picking_ref"/>
+	            	<field name="lot_ids" widget="many2many_tags"/>
+	            </xpath>
+	        </field>
+	    </record>
+	    
+</odoo>
