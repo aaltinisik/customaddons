@@ -47,7 +47,10 @@ class partner_statement(report_sxw.rml_parse):
             start_date = parser.parse(data['date_start']).date()
         else:
             end_date = date(date.today().year, 12, 31)
-            start_date = date(date.today().year, 1, 1)
+            if date.today().month < 4:
+                start_date = date(date.today().year-1, 1, 1)
+            else:
+                start_date = date(date.today().year, 1, 1)
         move_type = ('receivable','payable')
         self.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit FROM account_move_line AS l \
                         LEFT JOIN account_account a ON (l.account_id=a.id) \
