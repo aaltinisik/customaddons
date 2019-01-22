@@ -68,7 +68,7 @@ class PartnerReconcileClose(models.TransientModel):
         if self.partner_id:
             partner_ids |= self.partner_id
         else:
-            partner_domain = [('parent_id', '=', False)]
+            partner_domain = [('parent_id', '=', False),('devir_yapildi', '=', False)]
 
             if self.country_id:
                 partner_domain.append(('country_id', '=', self.country_id.id))
