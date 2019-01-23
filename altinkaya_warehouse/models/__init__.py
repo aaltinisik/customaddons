@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+import procurement
 import product
 import sale_order_line
 import stock_move
