@@ -32,5 +32,5 @@ class stock_quant(models.Model):
                 domain += [('ignore_reservation','=',False)]
 
         return super(stock_quant, self)._quants_get_order(location=location, product=product, quantity=quantity,
-                                                                  domain=domain, orderby=orderby)
+                                                                  domain=domain, orderby='priority, %s' % orderby)
     
