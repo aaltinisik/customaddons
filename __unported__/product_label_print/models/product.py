@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import api, fields, models, _
+from odoo import api, fields, models, _
 
 
 class productproductLabel(models.TransientModel):
@@ -21,8 +21,8 @@ class productproductLabel(models.TransientModel):
 
 
 class labelTwoinrow(models.TransientModel):
-
     _name = "label.twoinrow"
+    
     first_label_empty = fields.Boolean("Skip first label in row")
     second_label_empty = fields.Boolean("Skip second label in row")
     label1 = fields.Many2one('product.product.label', string="Label 1")
@@ -42,4 +42,3 @@ class product_product(models.Model):
         
         
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

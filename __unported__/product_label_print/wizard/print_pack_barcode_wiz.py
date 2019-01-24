@@ -1,7 +1,7 @@
 # coding: utf-8
 
-from openerp import api, fields, models, _
-from openerp.exceptions import Warning
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class print_pack_barcode_wiz(models.TransientModel):
@@ -49,7 +49,7 @@ class print_pack_barcode_wiz(models.TransientModel):
             product_product_ids = self.env['product.product'].browse(self.env.context.get('active_ids'))
         
         if self.env.context.get('default_restrict_single',False) and len(product_product_ids) > 1:
-            raise Warning(_('Printing multiple labels is restricted!'))
+            raise UserError(_('Printing multiple labels is restricted!'))
             
         for product_id in product_product_ids:
             codeparts = product_id.default_code.split('-')

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import api, fields, models, _
+from odoo import api, fields, models, _
 
 
 class stock_move(models.Model):
@@ -16,5 +16,4 @@ class stock_move(models.Model):
         
         
         
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
