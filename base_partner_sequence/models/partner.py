@@ -15,7 +15,7 @@ class ResPartner(models.Model):
     @api.multi
     def _get_next_ref(self, vals=None):
         return self.env['ir.sequence'].next_by_code('res.partner')
-
+    
     @api.model
     def create(self, vals):
         if not vals.get('ref') and self._needsRef(vals=vals):
