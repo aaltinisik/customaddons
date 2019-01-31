@@ -38,8 +38,8 @@ class BarcodeGenerateMixin(models.AbstractModel):
                     raise UserError(_(
                         "Generate Base can be used only with barcode rule with"
                         " 'Generate Type' set to 'Base managed by Sequence'"))
-                elif item.barcode_rule_id:
-                    item.barcode_base =item.barcode_rule_id.sequence_id.next_by_id()
+                elif item.product_tmpl_id.barcode_rule_id:
+                    item.barcode_base =item.product_tmpl_id.barcode_rule_id.sequence_id.next_by_id()
                 else:
                     item.barcode_base = item.categ_id.barcode_rule_id.sequence_id.next_by_id()
         else:
@@ -56,7 +56,7 @@ class BarcodeGenerateMixin(models.AbstractModel):
         instead that replace 'N' and 'D' char.
         """
         if item._name =='product.product':
-            if not item.barcode_rule_id and not item.categ_id.barcode_rule_id:
+            if not item.product_tmpl_id.barcode_rule_id and not item.categ_id.barcode_rule_id:
                 return False
 
             # Define barcode
