@@ -29,34 +29,34 @@ class MrpBoM(models.Model):
                                  string='Category',
                                  store=True, readonly=True)
 
-    @api.multi
-    def _prepare_wc_line(self, wc_use, level=0, factor=1):
-        res = super(MrpBoM, self)._prepare_wc_line(
-            wc_use, level=level, factor=factor)
-        
-        cycle_by_bom = self.env['mrp.config.settings']._get_parameter(
-            'cycle.by.bom')
-        if not (cycle_by_bom and cycle_by_bom.value == 'True'):
-            production = self.env.context.get('production')
-            factor = self._factor(production and production.product_qty or 1,
-                                  self.product_efficiency,
-                                  self.product_rounding)
-        
-        wc_parameter_id = self.wc_parameter_ids.filtered(lambda wcp: wcp.routing_wc_id.id == wc_use.id)
-        
-        if len(wc_parameter_id) == 1:   
-            
-            cycle = wc_parameter_id.cycle_nbr or 1.0
-            hour = wc_parameter_id.hour_nbr * cycle
-            time_start = wc_parameter_id.time_start
-            time_stop = wc_parameter_id.time_stop
-            res.update({
-                'cycle': cycle,
-                'hour': hour,
-                'time_start': time_start,
-                'time_stop': time_stop
-            })
-        return res
+#     @api.multi
+#     def _prepare_wc_line(self, wc_use, level=0, factor=1):
+#         res = super(MrpBoM, self)._prepare_wc_line(
+#             wc_use, level=level, factor=factor)
+#         
+#         cycle_by_bom = self.env['mrp.config.settings']._get_parameter(
+#             'cycle.by.bom')
+#         if not (cycle_by_bom and cycle_by_bom.value == 'True'):
+#             production = self.env.context.get('production')
+#             factor = self._factor(production and production.product_qty or 1,
+#                                   self.product_efficiency,
+#                                   self.product_rounding)
+#         
+#         wc_parameter_id = self.wc_parameter_ids.filtered(lambda wcp: wcp.routing_wc_id.id == wc_use.id)
+#         
+#         if len(wc_parameter_id) == 1:   
+#             
+#             cycle = wc_parameter_id.cycle_nbr or 1.0
+#             hour = wc_parameter_id.hour_nbr * cycle
+#             time_start = wc_parameter_id.time_start
+#             time_stop = wc_parameter_id.time_stop
+#             res.update({
+#                 'cycle': cycle,
+#                 'hour': hour,
+#                 'time_start': time_start,
+#                 'time_stop': time_stop
+#             })
+#         return res
     
     @api.multi
     @api.onchange('routing_id')
@@ -65,16 +65,9 @@ class MrpBoM(models.Model):
         
         self.wc_parameter_ids = False
         vals = []
-        for wc_line in self.routing_id.workcenter_lines:
-            default_wc_line = wc_line.op_wc_lines.filtered(lambda r: r.default)
-            data_source = (default_wc_line if default_wc_line.custom_data else
-                           default_wc_line.workcenter)
-            
+        for wc_line in self.routing_id.operation_ids:
             vals.append( {'routing_wc_id':wc_line.id,
-                    'cycle_nbr':wc_line.cycle_nbr,
-                    'hour_nbr':wc_line.hour_nbr,
-                    'time_start':data_source.time_start,
-                    'time_stop':data_source.time_stop})
+                  })
 
         
         self.wc_parameter_ids = [(0,False, val) for val in vals]

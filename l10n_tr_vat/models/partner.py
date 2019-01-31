@@ -35,7 +35,7 @@ class ResPartner(models.Model):
         if 'vat' in values:
             if values['vat']:
                 values['vat'] = re.sub(r'\W+', '', values['vat']).upper()
-              #  self.check_vat()
+                #  self.check_vat()
         return super(ResPartner,self).write(values)
     
     @api.model

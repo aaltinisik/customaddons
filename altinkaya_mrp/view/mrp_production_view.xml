@@ -30,6 +30,7 @@
 					<field name="location_dest_id" />
 				</xpath>
 				<xpath expr="//field[@name='origin']" position="after">
+					<field name="sale_id" readonly="1"/>
 					<field name="x_makine"/>
 					<field name="x_operator" />
 				</xpath>
