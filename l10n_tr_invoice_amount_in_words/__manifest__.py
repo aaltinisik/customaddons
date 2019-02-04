@@ -33,7 +33,7 @@ Fatura toplam tutarını yazdırmak için birleşik kelimeye çevirir
 
     """,
     'author': 'Codequarters',
-    'depends': ['account','sale'],
+    'depends': ['account','sale','purchase'],
     'installable': True,
     'auto_install': False,
 }

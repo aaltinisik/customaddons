@@ -7,8 +7,8 @@
         	<div class="row" style="border:1px solid #dddddd">
         		<div class="col-5 align-middle">
         			<t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                    <span t-if="doc.state not in ['draft','sent']" style="font-size:36pt">Quotation </span>
-                    <span t-if="doc.state in ['draft','sent']" style="font-size:36pt">Order </span>
+                    <span t-if="doc.state in ['draft','sent']" style="font-size:36pt">Quotation </span>
+                    <span t-if="doc.state not in ['draft','sent','cancel']" style="font-size:36pt">Order </span>
                 </t>
                 <t t-if="env.context.get('proforma', False) or is_pro_forma">
                     <span style="font-size:36pt;">Pro-Forma Invoice </span>
@@ -37,10 +37,10 @@
         		</div>
         	</div>
         </div>
-        <div class="page">
+        <div class="page" style="font-size:16pt">
             <div class="oe_structure"/>
             <div class="row mt32" style="border:1px solid #dddddd">
-            <div class="col-6">
+            <div class="col">
             <h2>
                 <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                     <span t-if="doc.state not in ['draft','sent']">Order # </span>
@@ -61,49 +61,58 @@
 				Date:<span t-field="doc.create_date"/>
 			</div>
 			</div>
-			<div class="row mt8" style="border:1px solid #dddddd">
-			<div class="col-4">
-		            <div t-field="doc.partner_id"
-		                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-		            <span t-if="doc.partner_id.x_vergidairesi">Tax Office:<span t-field="doc.partner_id.x_vergidairesi"></span></span>
-		            <span t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></span>
-			</div>
-	        <t t-if="doc.partner_shipping_id == doc.partner_invoice_id
+			<div class="row mt8">
+			<table class="table table-bordered">
+				<tr>
+					<td t-if="doc.partner_shipping_id == doc.partner_invoice_id
 		                             and doc.partner_invoice_id != doc.partner_id
 		                             or doc.partner_shipping_id != doc.partner_invoice_id">
-        	
-            <div class="col-4">
-                <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing and shipping address:</strong>
-                <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoicing address:</strong>
-                <div t-field="doc.partner_invoice_id"
-                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-            </div>
-            <div class="col-4">
-                <t t-if="doc.partner_shipping_id != doc.partner_invoice_id">
-                    <strong>Shipping address:</strong>
-                    <div t-field="doc.partner_shipping_id"
-                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                </t>
-                </div>
-		        </t>
-	        	<t t-if="doc.carrier_id">
-	        	<div class="col-6"  style="border:1px solid #dddddd">
-				     <span>Delivery Type:<span t-field="doc.carrier_id.name"/></span>   		
-	        	</div>
-	        	</t>
-	        	<t t-if="doc.payment_term_id">
-	        	<div class="col-6" style="border:1px solid #dddddd">
-					<span>Payment Term:<span t-field="doc.payment_term_id"/></span>        	  
-	        	</div>
-	        	</t>
-	        </div>
+		                 <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing and shipping address:</strong>
+			                <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoicing address:</strong>
+			               <span>
+						<span t-field="doc.partner_invoice_id.neighbour_id"/>
+						<span t-field="doc.partner_invoice_id.street"/>
+						<span t-field="doc.partner_invoice_id.street2"/><br/>
+						<span t-field="doc.partner_invoice_id.region_id"/>
+						 <span t-field="doc.partner_invoice_id.district_id"/>
+						 <span t-field="doc.partner_invoice_id.state_id.name"/>
+						<span t-field="doc.partner_invoice_id.country_id.name"/> </span>
+						<span t-if="doc.partner_id.x_vergidairesi">Tax Office:<span t-field="doc.partner_id.x_vergidairesi"></span></span><br/>
+		           		 <span t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></span>
+					
+					</td>
+					<td t-if="doc.partner_shipping_id != doc.partner_invoice_id">
+						 <strong>Shipping address:</strong>
+                     <span>
+						<span t-field="doc.partner_shipping_id.neighbour_id"/>
+						<span t-field="doc.partner_shipping_id.street"/>
+						<span t-field="doc.partner_shipping_id.street2"/><br/>
+						<span t-field="doc.partner_shipping_id.region_id"/>
+						 <span t-field="doc.partner_shipping_id.district_id"/>
+						 <span t-field="doc.partner_shipping_id.state_id.name"/>
+						<span t-field="doc.partner_shipping_id.country_id.name"/> </span>
+					</td>
+				</tr>
+				<tr t-if="doc.carrier_id or doc.payment_term_id">
+					<td t-if="doc.carrier_id">
+						     <span>Delivery Type:<span t-field="doc.carrier_id.name"/></span>   		
+					</td>
+					<td t-if="doc.payment_term_id">
+						<span>Payment Term:<span t-field="doc.payment_term_id"/></span>        	  
+					</td>
+					<td>
+					</td>
+				</tr>
+				
+			</table>
+			</div>
 			<div class="row mt32">
             <!-- Is there a discount on at least one line? -->
             <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
-            <table class="table table-bordered o_main_table">
+            <table class="table table-bordered o_main_table" style="page-break-inside:avoid;">
                 <thead>
                     <tr>
-                        <t t-set="colspan" t-value="5"/>
+                        <t t-set="colspan" t-value="6"/>
                         <th class="text-left">Code</th>
                         <th class="text-left">Description</th>
                         <th class="text-right">Quantity</th>
@@ -146,7 +155,7 @@
                                     <span t-field="line.discount"/>
                                 </td>
                                 <td  t-if="display_discount" class="text-right">
-                                	<span t-field="line.unit_discounted"/>
+                                	<span t-field="line.unit_discounted" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                                 </td>
                                 <td class="text-right o_price_total">
                                     <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
@@ -184,9 +193,6 @@
 			</div>
             <div class="clearfix">
                 <div id="total" class="row" name="total">
-                	<div class="col-8">
-                	<span>Text:<span t-field="doc.sale_order_amount_in_words"/></span>
-                	</div>
                     <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
                         <table class="table table-bordered">
                             <tr class="border-black o_subtotal" style="">
@@ -228,36 +234,41 @@
                     </div>
                 </div>
             </div>
-
+				<p> 
+                	<span>Say in:<span t-field="doc.sale_order_amount_in_words"/></span>
+                </p>
             <p t-field="doc.note" />
            	<div class="row">
-           	<t t-if="doc.currency_id.name=='TRY'">
-           		<table class="table table-bordered">
-           			<th  class="text-left col-2">
+           	<t t-if="doc.partner_id.lang=='tr_TR'">
+           		<table class="table table-bordered" style="page-break-inside:avoid;">
+           			<t t-if="doc.currency_id.name=='TRY'">
+           			<tr>
+           			<th class="text-left">
            			<span>
            				Banka Adı
            			</span>
            			</th>
-           			<th  class="text-left col-2">
+           			<th  class="text-left">
            			<span>
            				Şube
            			</span>
            			</th>
-           			<th  class="text-left col-1">
+           			<th  class="text-left">
            			<span>
            				Şb.Kd.
            			</span>
            			</th>
-           			<th class="text-left col-1">
+           			<th class="text-left">
            			<span>
            				Hs.No.
            			</span>
            			</th>
-           			<th class="text-left col-6">
+           			<th class="text-left">
            			<span>
            				IBAN
            			</span>
            			</th>
+           			</tr>
            			<tr>
            			<td>
            				İş Bankası
@@ -293,12 +304,55 @@
            			</td>
            			</tr>
            		
-           		
+           		</t>
+           		<t t-if="doc.currency_id.name in ['USD','EUR']">
+           		<tr>
+           			<th>
+           			Hesap adı
+           		</th>
+           		<th>
+           			Banka adı
+           		</th>
+				<th>
+					Hesap No
+				</th>           		
+           		<th>
+           			IBAN:
+           		</th>
+           		</tr>
+           		<tr>
+           			<td>
+           				ALTINKAYA ELEKTRONIK CIH KUT SAN TIC AS
+           			</td>
+           			<td>
+           				Garanti Bankası, Ostim Ahi Evran Şubesi
+           			</td>
+           			<t t-if="doc.currency_id.name == 'USD'" >
+           			<td>
+           				481-9097055
+           			</td>
+           			<td>
+           				TR 30 0006 2000 4810 0009 0970 55
+           			</td>
+           			</t>
+           			<t t-if="doc.currency_id.name == 'EUR'">
+           			<td>
+           				481-9097053
+           			
+           			</td>
+           			<td>
+           				TR 84 0006 2000 4810 0009 0970 53
+           			</td>
+           			</t>
+           		</tr>
+           		</t>
            		</table>
-           	<table class="table table-bordered">
+           	
+           	<table class="table table-bordered" style="page-break-inside:avoid;">
            		<tr>
            		<td>
            		 		SATIŞ TEMSİLCİSİ
+           		 		
            		
            		</td>
            		<td>
@@ -306,6 +360,8 @@
            		</td>
            		<td>
            				ALICI FİRMA ONAYI
+           				<br/>
+           				<br/>
            	
            		</td>
 			</tr>           	
@@ -313,16 +369,133 @@
 				<td>
 					<span t-field="doc.user_id.name">
 					</span>
+					<br/>
+           		 		<br/>
 				</td>
 				<td>
 				</td>
 				<td>
+					<br/>
+           		 		<br/>
+           		 		<br/>
 				</td>
 				</tr>	
            	
-		</table>           
+		</table>  
 		</t>
 		</div>
+		
+		
+		<t t-if="doc.partner_id.lang != 'tr_TR'">
+			<div class="row">
+				<div class="col">
+			<t t-if="doc.currency_id.name == 'USD'">
+				<strong>USD BANK ACCOUNT INFORMATION</strong>
+			</t>
+			<t t-if="doc.currency_id.name=='EUR'">
+			<strong>EURO BANK ACCOUNT INFORMATION</strong>
+			</t>
+			</div>
+			</div>
+			<div class="row">
+			<table class="table table-bordered" style="page-break-inside:avoid;">
+			
+			<tr>
+				<td style="width:100px">
+					<strong>BENEFICIARY</strong>
+				</td>
+				<td style="width:300px">
+					<span>ALTINKAYA ELEKTRONIK CIH KUT SAN TIC AS </span>
+				</td>
+				<td style="width:100px">
+				<strong>BANK NAME</strong>
+				</td>			
+				<td style="width:300px">
+				<span>GARANTI BANK ,OSTIM BRANCH (481)</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:200">
+					<strong>ACCOUNT NO</strong>
+				</td>
+				<td t-if="doc.currency_id.name=='USD'" style="width:400px">
+					481-9097055
+				</td>
+				<td t-if="doc.currency_id.name=='EUR'" style="width:400px">
+					481-9097053
+				</td>
+				<td style="width:200px">
+					<strong>BANK ADDRESS</strong>
+				</td>
+				<td style="width:400px">
+					<span>AHIEVRAN CD. NO:86 OSTIM YENIMAHALLE 06280  ANKARA TURKEY</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:200px">
+				 <strong>IBAN NO</strong>
+				</td>
+				<td t-if="doc.currency_id.name=='USD'" style="width:400px">
+					<strong><h4>TR300006200048100009097055</h4></strong>
+				</td>
+				<td t-if="doc.currency_id.name=='EUR'" style="width:400px">
+					<strong><h4>TR840006200048100009097053</h4></strong>
+				</td>
+				<td style="width:200px">
+					<strong>BANK PHONE</strong>
+				</td>
+				<td style="width:400px">
+					+90 312 3850860
+				</td>
+			</tr>
+			<tr>
+				<td style="width:200px">
+					<strong>SWIFT CODE</strong>
+				</td>
+				<td style="width:400px">
+					<span>TGBATRIS</span>
+				</td>
+				<td style="width:200px">
+					<strong>BANK FAX</strong>
+				</td>
+				<td style="width:400px"> 
+					+90 312 3853722
+				</td>
+			</tr>
+			</table>
+		</div>
+		<div class="row" style="page-break-inside:avoid;">
+		<p>
+			Any bank charges and other expenses shall be borne by the customer. It is important to order the transfer indicating <strong>OUR</strong> as the method of payment in section <strong>71A:DETAILS OF CHARGES</strong> in your swift transfer.We must be possession of the amount specified without any deduction and free of expense.
+		</p>		
+		
+		</div>
+		<div class="row" style="page-break-inside:avoid;">
+			<table class="table table-bordered" >
+			<thead>
+				<tr>
+				<th style="width:600px"><strong>Seller</strong></th>
+				<th style="width:600px"><strong>Buyer Approval</strong></th>
+				</tr>
+			</thead>
+			<tbody>
+			
+           		<tr>
+           		<td>
+           		 		ALTINKAYA Enclosures For Electronics <br/>
+           		 		<span t-field="doc.user_id.name"></span><br/>
+           				<br/>
+           		</td>
+           		<td>
+           				<br/><br/><br/>
+           		</td>
+			</tr>   
+			</tbody>        	
+		</table>   
+		</div>        
+		
+		
+		</t>
         </div>
         <div class="footer">
         <div class="row">
@@ -335,12 +508,12 @@
         	<div class="col-4">
         		Rev.No/Tar:02/18.08.2014
         	</div>
-        	<div class="col ml-auto">
-        		<span>Page:</span><span class="page" />/<span class="topage" />
-        	</div>
-        	
         </div>
-			        
+        <div class="row">	
+        	<div class="col text-right">
+		                    Page: <span class="page"/> / <span class="topage"/>
+       		</div>
+        </div>
         </div>
     </t>
 </template>

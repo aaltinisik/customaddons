@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="report_purchasequotation_document">
+    <t t-call="web.basic_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+        <div class="header">
+        	<div class="row" style="border:1px solid #dddddd">
+        		<div class="col-5 align-middle" style="font-size:36pt">
+        			<h4>Request for Quotation</h4>
+        		</div>
+        		<div class="col-7">
+        			<t t-if="o.partner_id.lang == 'tr_TR'">
+        				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.png" 
+        				style="min-weight:480px;min-height:70px"/><br/>
+        			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
+        			<div style="line-height:80%">
+        			<span style="font-size:10pt">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>
+        			<span style="font-size:10pt">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>
+        			<span style="font-size:10pt">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>
+        			</div>
+        			</t>
+        			<t t-else="">
+        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.png" style="min-weight:480px;min-height:70px"/><br/>
+        			 <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong>  <br/>
+        			<div style="line-height:80%">
+        			 <span style="font-size:10pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>
+        			<span style="font-size:10pt">TURKEY         Phone:+90(312)395 2768           Fax:+90(312)395 2772</span><br/>
+        			<span style="font-size:10pt">ULUS Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>
+					</div>
+					</t>         		
+        		</div>
+        	</div>
+        </div>
+        <div class="page">
+            <div class="oe_structure"/>
+			<div class="row">
+				<table class="table table-bordered">
+				 <tbody>
+				 	<tr>
+				 		<td colspan="3">
+				 			To:<strong t-field="o.partner_id.name"/>
+				 			<span t-field="o.partner_id.email"/>
+				 		</td>
+				 	</tr>
+					<tr>
+						<td class="col-6">
+						   <span t-field="o.partner_id.commercial_partner_id.display_name"/>
+						</td>
+						<td class="col-3">
+						<strong>Date</strong>
+						</td>
+						<td class="col-3">
+						  <span t-field="o.date_order" t-options=""/>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+						<span>
+						<span t-field="o.partner_id.neighbour_id"/>
+						<span t-field="o.partner_id.street"/>
+						<span t-field="o.partner_id.street2"/><br/>
+						<span t-field="o.partner_id.region_id"/>
+						 <span t-field="o.partner_id.district_id"/>
+						 <span t-field="o.partner_id.state_id.name"/>
+						<span t-field="o.partner_id.country_id.name"/> </span> <br/>
+						</td>
+						<td>
+							<strong>Reference</strong>
+						</td>
+						<td>
+							<span t-field="o.name"/>
+						</td>
+					
+					</tr>	
+					<tr>
+						<td colspan="3">
+						Phone:<span t-field="o.partner_id.phone"/> Fax:<span t-field="o.partner_id.fax"/>
+						</td>
+					</tr>		 
+				 </tbody>
+				
+				
+				</table>
+			
+			
+			</div>
+			<div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    	<th><strong>Code</strong></th>
+                        <th><strong>Description of Goods</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>UOM</strong></th>
+                        <th class="text-right"><strong>Unit Price</strong></th>
+                        <th class="text-right"><strong>Amount</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o.order_line" t-as="order_line">
+                    	<td>
+                    		<span t-field="order_line.product_id.default_code"/>
+                    	</td>
+                        <td>
+                            <span t-field="order_line.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order_line.product_qty"/>
+                            
+                        </td>
+                        <td>
+                        	<span t-field="order_line.product_uom" groups="uom.group_uom"/>
+                        </td>
+                    	<td>
+                    	</td>
+                    	<td>
+                    	</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+			<t t-if="o.notes">
+			PS:<p t-field="o.notes"/>
+			
+			</t>
+			<div class="row">
+			INCOTERM	FOB <br/>
+			Please send us your quotation for the items above.<br/>	
+			</div>
+			<div class="row">
+			<table class="table table-bordered" style="page-break-inside:avoid;">
+           		<tr>
+           		<td width="400px">
+           		 		BUYER
+           		 		
+           		
+           		</td>
+           		<td width="400px">
+           				Seller
+           		</td>
+			</tr>           	
+				<tr>
+				<td >
+					<span t-field="o.user_id.name">
+					</span>
+					<br/>
+           		 <br/>
+				</td>
+				<td>
+					<br/>
+           		 		<br/>
+           		 		<br/>
+				</td>
+				</tr>	
+           	
+		</table>  
+            
+        </div>
+        </div>
+    	    <div class="footer">
+        <div class="row">	
+        	<div class="col text-right">
+		                    Page: <span class="page"/> / <span class="topage"/>
+       		</div>
+        </div>
+        </div>
+    
+    </t>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+<template id="purchase.report_purchasequotation">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="altinkaya_reports.report_purchasequotation_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+
+
+
+</odoo>

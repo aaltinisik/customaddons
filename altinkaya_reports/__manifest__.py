@@ -10,6 +10,8 @@
     'website': 'http://www.codequarters.com',
     'data': [
              'report/sale_reports.xml',
+             'report/paperformat.xml',
+             'report/purchase_quotation_reports.xml',
             ],
     'demo': [],
     'installable': True,
