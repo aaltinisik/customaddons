@@ -10,7 +10,7 @@
         		</div>
         		<div class="col-7">
         			<t t-if="o.partner_id.lang == 'tr_TR'">
-        				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.png" 
+        				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.svg" 
         				style="min-weight:480px;min-height:70px"/><br/>
         			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
         			<div style="line-height:80%">
@@ -20,7 +20,7 @@
         			</div>
         			</t>
         			<t t-else="">
-        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.png" style="min-weight:480px;min-height:70px"/><br/>
+        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.svg" style="min-weight:480px;min-height:70px"/><br/>
         			 <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong>  <br/>
         			<div style="line-height:80%">
         			 <span style="font-size:10pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>
@@ -43,13 +43,13 @@
 				 		</td>
 				 	</tr>
 					<tr>
-						<td class="col-6">
+						<td style="width:500px">
 						   <span t-field="o.partner_id.commercial_partner_id.display_name"/>
 						</td>
-						<td class="col-3">
+						<td >
 						<strong>Date</strong>
 						</td>
-						<td class="col-3">
+						<td>
 						  <span t-field="o.date_order" t-options=""/>
 						</td>
 					</tr>	
@@ -72,9 +72,10 @@
 						</td>
 					
 					</tr>	
-					<tr>
-						<td colspan="3">
-						Phone:<span t-field="o.partner_id.phone"/> Fax:<span t-field="o.partner_id.fax"/>
+					<tr t-if="o.partner_id.phone or o.partner_id.fax">
+						<td colspan="3" > 
+						<t t-if="o.partner_id.phone">
+						Phone:<span t-field="o.partner_id.phone"/></t><t t-if="o.partner_id.fax"> Fax:<span t-field="o.partner_id.fax"/></t>
 						</td>
 					</tr>		 
 				 </tbody>
@@ -119,13 +120,38 @@
                 </tbody>
             </table>
             </div>
+             <div class="clearfix">
+                <div id="total" class="row" name="total">
+                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                        <table class="table table-bordered">
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Subtotal</strong></td>
+                                <td style="width:140px" class="text-right">
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td><strong>Taxes</strong></td>
+                                <td style="width:140px" class="text-right">
+                                </td>
+                            </tr>
+                            <tr class="border-black o_total">
+                                <td><strong>Total</strong></td>
+                                <td style="width:140px" class="text-right">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
 			<t t-if="o.notes">
 			PS:<p t-field="o.notes"/>
 			
 			</t>
 			<div class="row">
+			<div class="col">
 			INCOTERM	FOB <br/>
 			Please send us your quotation for the items above.<br/>	
+			</div>
 			</div>
 			<div class="row">
 			<table class="table table-bordered" style="page-break-inside:avoid;">

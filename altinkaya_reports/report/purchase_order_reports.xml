@@ -10,7 +10,7 @@
         		</div>
         		<div class="col-7">
         			<t t-if="o.partner_id.lang == 'tr_TR'">
-        				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.png" 
+        				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.svg" 
         				style="min-weight:480px;min-height:70px"/><br/>
         			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
         			<div style="line-height:80%">
@@ -20,7 +20,7 @@
         			</div>
         			</t>
         			<t t-else="">
-        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.png" style="min-weight:480px;min-height:70px"/><br/>
+        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.svg" style="min-weight:480px;min-height:70px"/><br/>
         			 <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong>  <br/>
         			<div style="line-height:80%">
         			 <span style="font-size:10pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>
@@ -43,13 +43,13 @@
 				 		</td>
 				 	</tr>
 					<tr>
-						<td class="col-6">
+						<td style="width:500px">
 						   <span t-field="o.partner_id.commercial_partner_id.display_name"/>
 						</td>
-						<td class="col-3">
+						<td >
 						<strong>Date</strong>
 						</td>
-						<td class="col-3">
+						<td>
 						  <span t-field="o.date_order" t-options=""/>
 						</td>
 					</tr>	
@@ -72,9 +72,10 @@
 						</td>
 					
 					</tr>	
-					<tr>
-						<td colspan="3">
-						Phone:<span t-field="o.partner_id.phone"/> Fax:<span t-field="o.partner_id.fax"/>
+					<tr t-if="o.partner_id.phone or o.partner_id.fax">
+						<td colspan="3" > 
+						<t t-if="o.partner_id.phone">
+						Phone:<span t-field="o.partner_id.phone"/></t><t t-if="o.partner_id.fax"> Fax:<span t-field="o.partner_id.fax"/></t>
 						</td>
 					</tr>		 
 				 </tbody>
@@ -112,49 +113,89 @@
                         	<span t-field="order_line.product_uom" groups="uom.group_uom"/>
                         </td>
                     	<td>
+                    		<span t-field="order_line.price_unit"/>
                     	</td>
                     	<td>
+                    		<span t-field="order_line.price_subtotal"/>
                     	</td>
                     </tr>
                 </tbody>
             </table>
             </div>
+             <div class="clearfix">
+             	<div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                <table class="table table-bordered">
+                	
+                            <tr class="border-black o_subtotal" style="">
+                                <td><strong>Subtotal</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                    <td>
+                                    <strong>TAX(%18)</strong>
+                                    </td>
+                                	<td class="text-right">
+                                		<span t-field="o.amount_tax"
+                                		t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                	</td>
+                            </tr>
+                            <tr class="border-black o_total">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                  </div>
+            </div>
+            <div class="row">
+            <div class="col">
+           <span>Say in:<span t-field="o.purchase_order_amount_in_words"/></span>
+            </div>
+            </div>
+            
 			<t t-if="o.notes">
 			PS:<p t-field="o.notes"/>
 			
 			</t>
 			<div class="row">
+			<div class="col">
 			INCOTERM	FOB <br/>
-			Please send us your quotation for the items above.<br/>	
+			The products with the above types and quantities are our order.<br/>	
+			</div>
 			</div>
 			<div class="row">
-			<table class="table table-bordered" style="page-break-inside:avoid;">
-           		<tr>
-           		<td width="400px">
-           		 		BUYER
-           		 		
-           		
-           		</td>
-           		<td width="400px">
-           				Seller
-           		</td>
-			</tr>           	
-				<tr>
-				<td >
-					<span t-field="o.user_id.name">
-					</span>
-					<br/>
-           		 <br/>
-				</td>
-				<td>
-					<br/>
+			<div class="col-6">
+			<t t-set="address" t-value="o.picking_type_id.warehouse_id.partner_id"/>
+			<strong>
+				Delivery Address<br/>
+			</strong>
+			<span t-esc="address.commercial_partner_id.name"/><br/>
+			<span t-esc="address.street"/><span t-esc="address.street2"/><br/>
+			<span t-esc="address.zip"/> <span t-esc="address.region_id.name"/> <span t-esc="address.district_id.name"/> <span t-esc="address.state_id.name"/> <span t-esc="address.country_id.name"/>
+			<br/><span t-esc="address.x_vergidairesi"/><span t-esc="address.vat"/><br/>
+			<span> Tel:<span t-esc="address.phone"/>  Fax:<span t-esc="address.fax"/></span>
+			</div>
+			<div class="col-3">
+			<table class="table table-bordered" style="page-break-inside:avoid;width:400px;right:0">
+				<tr class="text-center">
+					<th>Purchase Order Approval</th>
+				</tr>
+           		<tr class="text-center">
+           		<td >
+           		 		<span t-field="o.validator_id.name"/><br/>
+           		 		<span t-field="o.validator_id.email"/><br/>
            		 		<br/>
            		 		<br/>
-				</td>
-				</tr>	
+           		</td>
+				</tr>           	
            	
 		</table>  
-            
+            </div>
         </div>
         </div>
     	    <div class="footer">
@@ -164,8 +205,7 @@
        		</div>
         </div>
         </div>
-    
-    </t>
+        </t>
 </template>
 
 

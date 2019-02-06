@@ -45,7 +45,7 @@ class SaleOrder(models.Model):
     @api.one
     @api.depends('amount_total','currency_id')
     def _compute_sale_order_amount_in_words(self):
-        self.sale_order_amount_in_words = self.currency_id.with_context({'lang':self.company_id.partner_id.lang}).amount_to_text(
+        self.sale_order_amount_in_words = self.currency_id.with_context({'lang':self.partner_id.lang}).amount_to_text(
             self.amount_total)
 
 
@@ -59,7 +59,7 @@ class PurchaseOrder(models.Model):
     @api.one
     @api.depends('amount_total','currency_id')
     def _compute_purchase_order_amount_in_words(self):
-        self.purchase_order_amount_in_words = self.currency_id.with_context({'lang':self.company_id.partner_id.lang}).amount_to_text(
+        self.purchase_order_amount_in_words = self.currency_id.with_context({'lang':self.partner_id.lang}).amount_to_text(
             self.amount_total)
 
 

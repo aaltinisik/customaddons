@@ -16,7 +16,7 @@
         		</div>
         		<div class="col-7">
         			<t t-if="doc.partner_id.lang == 'tr_TR'">
-        				<img t-if="doc.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.png" 
+        				<img t-if="doc.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.svg" 
         				style="min-weight:480px;min-height:70px"/><br/>
         			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
         			<div style="line-height:80%">
@@ -26,7 +26,7 @@
         			</div>
         			</t>
         			<t t-else="">
-        			 <img t-if="doc.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.png" style="min-weight:480px;min-height:70px"/><br/>
+        			 <img t-if="doc.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.svg" style="min-weight:480px;min-height:70px"/><br/>
         			 <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong>  <br/>
         			<div style="line-height:80%">
         			 <span style="font-size:10pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>
@@ -37,10 +37,10 @@
         		</div>
         	</div>
         </div>
-        <div class="page" style="font-size:16pt">
+        <div class="page" style="font-size:11pt">
             <div class="oe_structure"/>
             <div class="row mt32" style="border:1px solid #dddddd">
-            <div class="col">
+            <div class="col" style="width:400px">
             <h2>
                 <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                     <span t-if="doc.state not in ['draft','sent']">Order # </span>
@@ -56,8 +56,8 @@
             	Client Order Ref: <span t-field="doc.client_order_ref"></span>
             </h4>
 			</t>
-			 </div>
-			<div class="col-6 text-right">
+			</div>
+			<div class="col text-right" style="width:400px">
 				Date:<span t-field="doc.create_date"/>
 			</div>
 			</div>
@@ -76,7 +76,7 @@
 						<span t-field="doc.partner_invoice_id.region_id"/>
 						 <span t-field="doc.partner_invoice_id.district_id"/>
 						 <span t-field="doc.partner_invoice_id.state_id.name"/>
-						<span t-field="doc.partner_invoice_id.country_id.name"/> </span>
+						<span t-field="doc.partner_invoice_id.country_id.name"/><br/> </span>
 						<span t-if="doc.partner_id.x_vergidairesi">Tax Office:<span t-field="doc.partner_id.x_vergidairesi"></span></span><br/>
 		           		 <span t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></span>
 					
@@ -100,10 +100,7 @@
 					<td t-if="doc.payment_term_id">
 						<span>Payment Term:<span t-field="doc.payment_term_id"/></span>        	  
 					</td>
-					<td>
-					</td>
 				</tr>
-				
 			</table>
 			</div>
 			<div class="row mt32">
@@ -149,7 +146,7 @@
                                     <span t-field="line.product_uom" groups="uom.group_uom"/>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="line.price_unit"/>
+                                    <span t-field="line.price_unit"   t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                                 </td>
                                 <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
                                     <span t-field="line.discount"/>
@@ -238,8 +235,9 @@
                 	<span>Say in:<span t-field="doc.sale_order_amount_in_words"/></span>
                 </p>
             <p t-field="doc.note" />
-           	<div class="row">
+           
            	<t t-if="doc.partner_id.lang=='tr_TR'">
+           		<div class="row">
            		<table class="table table-bordered" style="page-break-inside:avoid;">
            			<t t-if="doc.currency_id.name=='TRY'">
            			<tr>
@@ -347,7 +345,8 @@
            		</tr>
            		</t>
            		</table>
-           	
+           	</div>
+           	<div class="row">
            	<table class="table table-bordered" style="page-break-inside:avoid;">
            		<tr>
            		<td>
@@ -381,9 +380,10 @@
 				</td>
 				</tr>	
            	
-		</table>  
+		</table>
+		</div>  
 		</t>
-		</div>
+		
 		
 		
 		<t t-if="doc.partner_id.lang != 'tr_TR'">
@@ -496,7 +496,7 @@
 		
 		
 		</t>
-        </div>
+		</div>
         <div class="footer">
         <div class="row">
         	<div class="col-4">
