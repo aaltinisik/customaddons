@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+			<report id="label_stock_location"
+            model="stock.location"
+            string="Localation Label (GODEX)"
+            name="altinkaya_reports.location_report_godex"
+            file="altinkaya_reports.location_report_godex"
+            report_type="qweb-text"
+        />
+
+
+</data>
+
+</odoo>

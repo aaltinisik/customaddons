@@ -2,7 +2,7 @@
     'name' : 'Altinkaya Reports',
     'version' : '12.0',
     'category': 'General',
-    'depends' : ['base', 'sale', 'stock','l10n_tr_invoice_amount_in_words'],
+    'depends' : ['base', 'sale', 'stock','l10n_tr_invoice_amount_in_words','base_report_to_printer'],
     'author' : 'OnurUgur,Codequarters,',
     'description': """
     Contain altinkaya reports"
@@ -13,6 +13,9 @@
              'report/paperformat.xml',
              'report/purchase_quotation_reports.xml',
              'report/purchase_order_reports.xml',
+             'report/location_reports.xml',
+             'report/reports.xml',
+             'views/res_users_views.xml',
             
             ],
     'demo': [],
