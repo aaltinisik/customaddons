@@ -44,7 +44,7 @@ class MrpProduction(models.Model):
     def get_product_route(self):
         def _get_next_moves(move_id):
             if move_id:
-                next_moves = _get_next_moves(move_id.move_dest_id)
+                next_moves = _get_next_moves(move_id.move_dest_ids)
                 if next_moves:
                     return move_id | next_moves
                 else:

@@ -31,7 +31,7 @@
                             <field name="single_label_label_to_print"/>
                         </group>
                         <group>
-                        <field name="label_ids"/>
+<!--                         <field name="label_ids"/> -->
                           <field name="skip_first" string="Do not print first label"></field>
                         </group>
                     </sheet>

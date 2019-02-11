@@ -14,7 +14,10 @@
              'report/purchase_quotation_reports.xml',
              'report/purchase_order_reports.xml',
              'report/location_reports.xml',
+             'report/report_mrp_production.xml',
+             'report/stock_picking_report.xml',
              'report/reports.xml',
+             
              'views/res_users_views.xml',
             
             ],

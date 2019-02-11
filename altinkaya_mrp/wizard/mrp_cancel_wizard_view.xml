@@ -14,14 +14,14 @@
             </field>
         </record>
 
-<!--         <act_window name="Cancel Manufacturing Order" -->
-<!--             res_model="mrp.cancel.more" -->
-<!--             binding_model_id="mrp.production" -->
-<!--             view_mode="form" -->
-<!--             multi="True" -->
-<!--             view_type="form" -->
-<!--             target="new" -->
-<!--             id="action_mrp_cancel_more"/> -->
+        <act_window name="Cancel Manufacturing Order"
+            res_model="mrp.cancel.more"
+            src_model="mrp.production"
+            view_mode="form"
+            multi="True"
+            view_type="form"
+            target="new"
+            id="action_mrp_cancel_more"/>
 
     </data>
 </odoo>
