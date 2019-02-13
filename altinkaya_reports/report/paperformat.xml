@@ -45,6 +45,9 @@
         <record id="purchase.report_purchase_quotation" model="ir.actions.report">
             <field name="paperformat_id" ref="altinkaya_reports.paperformat_sale"/>
         </record>
+        <record id="stock.action_report_picking" model="ir.actions.report">
+            <field name="paperformat_id" ref="altinkaya_reports.paperformat_sale"/>
+        </record>
 
 </data>
 

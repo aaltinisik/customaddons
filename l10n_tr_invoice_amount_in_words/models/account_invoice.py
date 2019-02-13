@@ -65,4 +65,18 @@ class PurchaseOrder(models.Model):
 
     purchase_order_amount_in_words = fields.Char(compute='_compute_purchase_order_amount_in_words',
                                  string='Amount to Text')
+    
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+    
+    
+    @api.one
+    @api.depends('amount','currency_id')
+    def _compute_account_payment_amount_in_words(self):
+        self.account_payment_amount_in_words = self.currency_id.with_context({'lang':self.company_id.partner_id.lang}).amount_to_text(
+            self.amount)
+
+
+    account_payment_amount_in_words = fields.Char(compute='_compute_account_payment_amount_in_words',
+                                 string='Amount to Text')
 

@@ -8,8 +8,90 @@
             file="altinkaya_reports.location_report_godex"
             report_type="qweb-text"
         />
+        <data>
+
+        <report
+            id="stock_pickingaltinkaya"
+            model="stock.picking"
+            string="Depo Fişi Ekrana"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkaya"
+            file="altinkaya_reports.report_picking_altinkaya"
+        />
+
+    </data>
+    <data noupdate="1">
+                <report
+            id="stock_pickingaltinkayaS"
+            model="stock.picking"
+            string="Depo Fişi Sincan"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaS"
+            file="altinkaya_reports.report_picking_altinkayaS"
+        />
 
 
+                <report
+            id="stock_pickingaltinkayaB"
+            model="stock.picking"
+            string="Depo Fişi Bas"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaB"
+            file="altinkaya_reports.report_picking_altinkayaB"
+        />
+
+                <report
+            id="stock_pickingaltinkayaC"
+            model="stock.picking"
+            string="Depo Fişi 2.Kat"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaC"
+            file="altinkaya_reports.report_picking_altinkayaC"
+        />
+                <report
+            id="stock_pickingaltinkayaD"
+            model="stock.picking"
+            string="Depo Fişi Satış"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaD"
+            file="altinkaya_reports.report_picking_altinkayaD"
+        />
+                <report
+            id="stock_pickingaltinkayaE"
+            model="stock.picking"
+            string="Depo Fişi Depo"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaE"
+            file="altinkaya_reports.report_picking_altinkayaE"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaF"
+            model="stock.picking"
+            string="Depo Fişi Profil"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaF"
+            file="altinkaya_reports.report_picking_altinkayaF"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaG"
+            model="stock.picking"
+            string="Depo Fişi Kesim"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaG"
+            file="altinkaya_reports.report_picking_altinkayaG"
+        />
+
+                        <report
+            id="stock_pickingaltinkayaH"
+            model="stock.picking"
+            string="Depo Fişi Enjeksiyon"
+            report_type="qweb-pdf"
+            name="altinkaya_reports.report_picking_altinkayaH"
+            file="altinkaya_reports.report_picking_altinkayaH"
+        />
+    </data>
 </data>
 
 </odoo>

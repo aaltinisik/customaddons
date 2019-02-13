@@ -9,10 +9,10 @@
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
             	<xpath expr="//field[@name='communication']" position="after">
-            		<field name="x_cek_no" />
-					<field name="x_cek_banka" />
-<!-- 					<field name="date_due" /> -->
-					<field name="x_cek_vergi" />
+            		<field name="x_cek_no" readonly="1" />
+					<field name="x_cek_banka" readonly="1" />
+					<field name="date_due"  readonly="1"/>
+					<field name="x_cek_vergi" readonly="1" />
             	</xpath>
             </field>
             </record>

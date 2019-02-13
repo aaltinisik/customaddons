@@ -2,7 +2,7 @@
     'name' : 'Altinkaya Reports',
     'version' : '12.0',
     'category': 'General',
-    'depends' : ['base', 'sale', 'stock','l10n_tr_invoice_amount_in_words','base_report_to_printer'],
+    'depends' : ['base', 'sale', 'stock','l10n_tr_invoice_amount_in_words','base_report_to_printer','account','account_check','mrp'],
     'author' : 'OnurUgur,Codequarters,',
     'description': """
     Contain altinkaya reports"
@@ -17,7 +17,7 @@
              'report/report_mrp_production.xml',
              'report/stock_picking_report.xml',
              'report/reports.xml',
-             
+             'report/report_account_payment.xml',
              'views/res_users_views.xml',
             
             ],
