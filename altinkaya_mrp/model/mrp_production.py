@@ -86,7 +86,7 @@ class MrpProduction(models.Model):
             'hr.employee',
             'Uretimi Yapan Operator'
             )
-    x_note = fields.Char(
+    x_note = fields.Text(
             'Not',
             size=256)
     x_makine = fields.Many2one('x.makine',

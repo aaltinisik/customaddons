@@ -18,6 +18,7 @@
              'report/stock_picking_report.xml',
              'report/reports.xml',
              'report/report_account_payment.xml',
+             'report/report_list_mrp.xml',
              'views/res_users_views.xml',
             
             ],

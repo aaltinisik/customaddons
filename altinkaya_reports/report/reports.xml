@@ -20,7 +20,7 @@
         />
 
     </data>
-    <data noupdate="1">
+    <data noupdate="0">
                 <report
             id="stock_pickingaltinkayaS"
             model="stock.picking"
@@ -90,6 +90,14 @@
             report_type="qweb-pdf"
             name="altinkaya_reports.report_picking_altinkayaH"
             file="altinkaya_reports.report_picking_altinkayaH"
+        />
+        <report 
+       id="list_mrp_report"
+            string="Üretim Listesi"
+            model="mrp.production" 
+            report_type="qweb-pdf"
+            file="altinkaya_reports.report_list_mrp_report_data" 
+            name="altinkaya_reports.report_list_mrp_report_data" 
         />
     </data>
 </data>
