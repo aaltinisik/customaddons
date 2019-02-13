@@ -19,8 +19,9 @@
              'report/reports.xml',
              'report/report_account_payment.xml',
              'report/report_list_mrp.xml',
+             'report/report_stock_delivery_carrier.xml',
              'views/res_users_views.xml',
-            
+             
             ],
     'demo': [],
     'installable': True,

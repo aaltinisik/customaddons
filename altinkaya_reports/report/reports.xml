@@ -99,6 +99,14 @@
             file="altinkaya_reports.report_list_mrp_report_data" 
             name="altinkaya_reports.report_list_mrp_report_data" 
         />
+        <report 
+        id="list_carrier_report"
+            string="Kargo Teslim"
+            model="stock.picking" 
+            report_type="qweb-pdf"
+            file="altinkaya_reports.report_delivery_carrier_report_data" 
+            name="altinkaya_reports.report_delivery_carrier_report_data" 
+        />
     </data>
 </data>
 

@@ -29,7 +29,7 @@
 								Makine : <span t-field="o.x_makine.x_name"/>
 								</td>
 								<td class="text-right">
-								Tarih  : <span t-field="o.date_planned_start" t-options="{'widget': 'date'}"/>
+								Tarih  : <span t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')" t-options="{'widget': 'date'}"/>
 								</td>
 							</tr>
 						
