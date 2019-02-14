@@ -20,6 +20,8 @@
              'report/report_account_payment.xml',
              'report/report_list_mrp.xml',
              'report/report_stock_delivery_carrier.xml',
+             'report/report_hr_employee_annual.xml',
+             'report/stock_picking_delivery.xml',
              'views/res_users_views.xml',
              
             ],

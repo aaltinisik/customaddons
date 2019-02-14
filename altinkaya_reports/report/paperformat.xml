@@ -82,6 +82,9 @@
         <record id="altinkaya_reports.list_mrp_report" model="ir.actions.report">
             <field name="paperformat_id" ref="altinkaya_reports.paperformat_mrp_list"/>
         </record>
+        <record id="altinkaya_reports.list_employee_annual_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="altinkaya_reports.paperformat_mrp_list"/>
+        </record>
         <record id="altinkaya_reports.list_carrier_report" model="ir.actions.report">
             <field name="paperformat_id" ref="altinkaya_reports.paperformat_stock_transfer_carrier_list"/>
         </record>

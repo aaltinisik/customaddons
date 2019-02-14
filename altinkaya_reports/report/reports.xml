@@ -10,6 +10,13 @@
         />
         <data>
 
+		<report id="stock_picking_irsaliye"
+            model="stock.picking"
+            string="Sevk Irsaliyesi"
+            name="altinkaya_reports.stock_picking_delivery"
+            file="altinkaya_reports.stock_picking_delivery"
+            report_type="qweb-text"
+        />
         <report
             id="stock_pickingaltinkaya"
             model="stock.picking"
@@ -106,6 +113,14 @@
             report_type="qweb-pdf"
             file="altinkaya_reports.report_delivery_carrier_report_data" 
             name="altinkaya_reports.report_delivery_carrier_report_data" 
+        />
+         <report 
+        id="list_employee_annual_report"
+            string="Yıllık Değerlendirme Formu"
+            model="hr.employee" 
+            report_type="qweb-pdf"
+            file="altinkaya_reports.report_hr_employee_annual_data" 
+            name="altinkaya_reports.report_hr_employee_annual_data" 
         />
     </data>
 </data>
