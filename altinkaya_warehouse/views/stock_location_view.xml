@@ -18,6 +18,7 @@
 	            
 	            <field name="removal_strategy_id" position="after">
 	            	<field name="ignore_reservation"/>
+	            	<field name="priority"/>
 	            </field>
             </field>
         </record>
