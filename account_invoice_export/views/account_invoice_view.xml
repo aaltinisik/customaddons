@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="inherit_account_invoice_form_form_view" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']/parent::div" position="after">
+                    <field name="date_export"/>
+                    <field name="amount_untaxed_tl" invisible="0"/>
+                    <field name="amount_tax_tl" invisible="0"/>
+                    <field name="amount_total_tl" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

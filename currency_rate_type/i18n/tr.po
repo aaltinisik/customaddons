@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* currency_rate_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20150311\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-07 10:15+0000\n"
+"PO-Revision-Date: 2015-12-07 12:26+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: tr\n"
+"X-Generator: Poedit 1.7.5\n"
+
+#. module: currency_rate_type
+#: help:res.currency.rate,currency_rate_type_id:0
+msgid "Allow you to define your own currency rate types, like 'Average' or 'Year to Date'. Leave empty if you simply want to use the normal 'spot' rate type"
+msgstr "'Ortalama', 'Efektif Alış' gibi kendi para birimi kur tiplerinizi tanımlayabilirsiniz. Normal spot kur tipini kullanmak için boş bırakınız."
+
+#. module: currency_rate_type
+#: field:res.currency.rate.type,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: currency_rate_type
+#: field:res.currency.rate.type,create_date:0
+msgid "Created on"
+msgstr "Oluşturma"
+
+#. module: currency_rate_type
+#: model:ir.model,name:currency_rate_type.model_res_currency
+msgid "Currency"
+msgstr "Para Birimi"
+
+#. module: currency_rate_type
+#: model:ir.model,name:currency_rate_type.model_res_currency_rate
+msgid "Currency Rate"
+msgstr "Para Birimi Kuru"
+
+#. module: currency_rate_type
+#: model:ir.actions.act_window,name:currency_rate_type.action_currency_rate_type_form
+#: model:ir.model,name:currency_rate_type.model_res_currency_rate_type
+#: field:res.currency.rate,currency_rate_type_id:0
+#: view:res.currency.rate.type:currency_rate_type.view_currency_rate_type_form
+#: view:res.currency.rate.type:currency_rate_type.view_currency_rate_type_search
+#: view:res.currency.rate.type:currency_rate_type.view_currency_rate_type_tree
+msgid "Currency Rate Type"
+msgstr "Para Birimi Kur Tipi"
+
+#. module: currency_rate_type
+#: model:ir.ui.menu,name:currency_rate_type.menu_action_currency_rate_type_form
+msgid "Currency Rate Types"
+msgstr "Para Birimi Kur Tipleri"
+
+#. module: currency_rate_type
+#: field:res.currency.rate.type,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: currency_rate_type
+#: field:res.currency.rate.type,write_uid:0
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: currency_rate_type
+#: field:res.currency.rate.type,write_date:0
+msgid "Last Updated on"
+msgstr "Son Güncelleme"
+
+#. module: currency_rate_type
+#: view:res.currency.rate.type:currency_rate_type.view_currency_rate_type_search
+#: field:res.currency.rate.type,name:0
+msgid "Name"
+msgstr "Adı"
+
+#. module: currency_rate_type
+#: view:res.currency.rate.type:currency_rate_type.view_currency_rate_type_search
+#: field:res.currency.rate.type,code:0
+msgid "Code"
+msgstr "Kodu"
