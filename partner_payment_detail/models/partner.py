@@ -29,7 +29,7 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.depends('partner_id')
     def partner_balance(self, partner_id):
-        partner = self.env['res.partner'].browse(partner_id.id)
+        partner = self.env['res.partner'].browse(partner_id)
         balance = 0
         if partner.parent_id:
             balance = partner.parent_id.credit - partner.parent_id.debit
@@ -50,6 +50,6 @@ class AccountInvoice(models.Model):
                 partner_id = vals['partner_id']
             else:
                 partner_id = invoice.partner_id.id
-            vals['total_balance'] = self.partner_balance(partner_id.id)
+            vals['total_balance'] = self.partner_balance(partner_id)
         return super(AccountInvoice, self).write( vals)
 
