@@ -37,22 +37,22 @@ class wizard_partner_detail(models.TransientModel):
         partner_obj = self.env['res.partner']
         query = self.env['account.move.line']._query_get()
         partner_ids = self.env['res.partner'].search([])
-        self.env.cr.execute("""SELECT l.partner_id, a.user_type_id, SUM(l.debit-l.credit)
+        self.env.cr.execute("""SELECT l.partner_id, at.type, SUM(l.debit-l.credit)
                       FROM account_move_line l
                       LEFT JOIN account_account a ON (l.account_id=a.id)
-                      JOIN account_account_type at ON (a.user_type_id =al.id)
-                      WHERE al.type IN ('receivable','payable')
+                      JOIN account_account_type at ON (a.user_type_id =at.id)
+                      WHERE at.type IN ('receivable','payable')
                       AND l.partner_id IN %s
                       AND l.date >= %s
                       AND l.date <= %s
-                      GROUP BY l.partner_id, a.user_type_id""", (tuple(partner_ids.ids), record.start_date, record.end_date))
+                      GROUP BY l.partner_id, at.type""", (tuple(partner_ids.ids), record.start_date, record.end_date))
         result = {}
         for id in partner_ids:
             result[id] = {'receivable': 0, 'payable': 0}
         for pid,type,val in self.env.cr.fetchall():
             for v in result:
-                if v == pid:
-                    result[pid][type] = (type=='receivable') and val or -val
+                if v.id == pid:
+                    result[v][type] = (type=='receivable') and val or -val
         fl = BytesIO()
         wbk = xlwt.Workbook()
         sheet = wbk.add_sheet('Customer Payment Details')
@@ -61,8 +61,8 @@ class wizard_partner_detail(models.TransientModel):
         sheet.write(0, 2, "Credit")
         sheet.write(0, 3, "Debit")
         sheet.write(0, 4, "Balance")
-        sheet.write(0, 5, "Alicilar Kodu")
-        sheet.write(0, 6, "Saticilar kodu")
+#         sheet.write(0, 5, "Alicilar Kodu")
+#         sheet.write(0, 6, "Saticilar kodu")
         sheet.write(0, 7, "Faks")
         sheet.write(0, 8, "Vergi No")
         sheet.write(0, 9, "Vergi Daire")
@@ -73,7 +73,7 @@ class wizard_partner_detail(models.TransientModel):
         sheet.write(0, 14, "ulke")
         row = 1
         for res in result.items():
-            partner = partner_obj.browse(res[0])
+            partner = res[0]
             if not partner.is_company:
                 continue
             sheet.write(row, 0, partner.name)
@@ -81,8 +81,8 @@ class wizard_partner_detail(models.TransientModel):
             sheet.write(row, 2, res[1]['payable'])
             sheet.write(row, 3, res[1]['receivable'])
             sheet.write(row, 4, res[1]['receivable'] - res[1]['payable'])
-            sheet.write(row, 5, partner.z_receivable_export or '')
-            sheet.write(row, 6, partner.z_payable_export or '')
+#             sheet.write(row, 5, partner.z_receivable_export or '')
+#             sheet.write(row, 6, partner.z_payable_export or '')
             sheet.write(row, 7, partner.fax or '')
             sheet.write(row, 8, partner.vat or '')
             sheet.write(row, 9, partner.x_vergidairesi or '')
@@ -108,6 +108,13 @@ class wizard_partner_detail(models.TransientModel):
            'target': 'new',
            'context': ctx,
         }
+#         return {
+#             'name': 'Report',
+#             'type': 'ir.actions.act_url',
+#             'url': "web/content/?model=" + self._name +"&id=" + str(
+#                 self.id) + "&filename_field=file_name&field=data_file&download=true&filename=" + self.file_name,
+#             'target': 'self',
+#             }
 
 
 
@@ -123,3 +130,14 @@ class CustomerExcel(models.Model):
 
     file = fields.Binary('File')
     name = fields.Char(string='File Name', size=64)
+    
+    @api.multi
+    def download_xlsx(self):
+        return {
+            'name': 'Report',
+            'type': 'ir.actions.act_url',
+            'url': "web/content/?model=" + self._name +"&id=" + str(
+                self.id) + "&filename_field=file_name&field=file&download=true&filename=" + str(self.name),
+            'target': 'new',
+            }
+    

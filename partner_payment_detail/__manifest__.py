@@ -29,6 +29,7 @@ Calculate total based on the payable and receivable amount on the partner
     """,
     'depends': ['base', 'account'],
     "data" : [
+                'security/ir.model.access.csv',
          "wizard/partner_detail_wizard_view.xml",
         "views/partner_view.xml",
        
