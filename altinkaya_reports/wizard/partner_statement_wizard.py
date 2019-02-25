@@ -31,12 +31,10 @@ class WizarPartnerStatement(models.TransientModel):
             'model': 'res.partner',
             'date_end':self.date_end,
             'date_start':self.date_start,
-            'doc_model': self.env['res.partner'],}
-        res ={
-            'get_statement_data':self.get_statement_data(data),
-            }
+            'doc_model': self.env['res.partner'],
+            'form': self.read()[0]}
         return self.env.ref('altinkaya_reports.partner_statement2_altinkaya'). \
-            with_context(active_model='res.partner').report_action(docids=data['doc_ids'])
+            with_context(active_model='res.partner').report_action(docids=data['doc_ids'],data=data)
              
             
     @api.multi
