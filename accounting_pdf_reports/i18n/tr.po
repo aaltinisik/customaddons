@@ -85,7 +85,7 @@ msgstr "<strong>Yevmiye Defterleri:</strong>"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_agedpartnerbalance
 msgid "<strong>Partner's:</strong>"
-msgstr "<strong>İş Ortağı'nın:</strong>"
+msgstr "<strong>Cari'nin:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_agedpartnerbalance
@@ -147,12 +147,12 @@ msgstr "Genel Hesap Raporu"
 #. module: accounting_pdf_reports
 #: model:ir.model,name:accounting_pdf_reports.model_account_common_partner_report
 msgid "Account Common Partner Report"
-msgstr "Genel İş Ortağı Raporu"
+msgstr "Genel Cari Raporu"
 
 #. module: accounting_pdf_reports
 #: model:ir.model,name:accounting_pdf_reports.model_account_report_partner_ledger
 msgid "Account Partner Ledger"
-msgstr "İş Ortağı Hesabı Defteri"
+msgstr "Cari Hesabı Defteri"
 
 #. module: accounting_pdf_reports
 #: model:ir.model,name:accounting_pdf_reports.model_account_print_journal
@@ -581,7 +581,7 @@ msgstr "Yevmiye"
 #. module: accounting_pdf_reports
 #: selection:account.report.general.ledger,sortby:0
 msgid "Journal & Partner"
-msgstr "Yevmiye & İş Ortağı"
+msgstr "Yevmiye & Cari"
 
 #. module: accounting_pdf_reports
 #: selection:account.print.journal,sort_selection:0
@@ -592,7 +592,7 @@ msgstr "Yevmiye Kayıt Numarası"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 msgid "Journal and Partner"
-msgstr "Yevmiye ve İş Ortağı"
+msgstr "Yevmiye ve Cari"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__journal_ids
@@ -612,7 +612,7 @@ msgstr "Yevmiyeler"
 #: model:ir.actions.report,name:accounting_pdf_reports.action_report_journal
 #: model:ir.ui.menu,name:accounting_pdf_reports.menu_print_journal
 msgid "Journals Audit"
-msgstr "Yevmiye Denetimi"
+msgstr "Yevmiye Kayıtları"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
@@ -688,7 +688,7 @@ msgstr "Ana Başlık 1 (koyu, altçizgili)"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Move"
-msgstr "Hareket"
+msgstr "Fiş Numarası"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
@@ -735,7 +735,7 @@ msgstr "Üst Rapor"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Partner"
-msgstr "İş Ortağı"
+msgstr "Cari"
 
 #. module: accounting_pdf_reports
 #: model:ir.actions.act_window,name:accounting_pdf_reports.action_account_partner_ledger_menu
@@ -743,19 +743,19 @@ msgstr "İş Ortağı"
 #: model:ir.ui.menu,name:accounting_pdf_reports.menu_partner_ledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 msgid "Partner Ledger"
-msgstr "İş Ortağı Defteri"
+msgstr "Cari Defteri"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__result_selection
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_common_partner_report__result_selection
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_report_partner_ledger__result_selection
 msgid "Partner's"
-msgstr "İş Ortağı'nın"
+msgstr "Cari'nin"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_agedpartnerbalance
 msgid "Partners"
-msgstr "İş Ortakları"
+msgstr "Cariler"
 
 #. module: accounting_pdf_reports
 #: selection:account.aged.trial.balance,result_selection:0
@@ -981,7 +981,7 @@ msgstr "Tür"
 #: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:208
 #, python-format
 msgid "Unknown Partner"
-msgstr "Bilinmeyen Partner"
+msgstr "Bilinmeyen Cari"
 
 #. module: accounting_pdf_reports
 #: selection:account.financial.report,type:0

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <template id="report_partner_statement">
+        <t t-call="web.html_container">
+        	<t t-call="web.basic_layout">
+        		<div class="header" style="font-size:8pt">
+        			<div class="row" style="border-bottom:2px solid black;">
+        				<div class="col-6" >
+        				<img src="/altinkaya_reports/static/img/altinkaya.svg" 
+        				style="max-height:20px"/><br/>
+        			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
+        			<span>İvedikosb Mah. 1469. sk, No:10 </span><br/>
+        			<span>İvedik Osb</span><br/>
+        			<span>06378 Yenimahalle / ANKARA</span>
+        				</div>
+        				<div class="col-6">
+        					<strong class="text-right" style="font-size:14pt">CARİ HESAP EKSTRESİ</strong> <br/><br/>
+        					<div class="row">
+        						<div class="col-6 text-left">
+        							<span>Ulus VD:</span><br/>
+        							<span>Tel:</span><br/>
+        							<span>Faks:</span><br/>
+        							<span>Eposta:</span><br/>
+        						</div>
+        						<div class="col-6 text-right">
+        							<span>0610422947</span><br/>
+        							<span>+90 312 395 2768</span><br/>
+        							<span>+90 312 395 2772</span><br/>
+        							<span>muhasebe@altinkaya.com.tr</span><br/>
+        						
+        						</div>
+        					
+        					</div>
+        				
+        				</div>
+        			</div>
+        		
+        		</div>
+        		<div class="footer">
+        		 	<div class="row" style="border-top:2px solid black">
+        		 		<div class="col-12 text-center">
+        		 			<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 | www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947</span><br/>
+        		 			<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006 2980 17 (TL)</span><br/>
+        		 			<span>Hazırlayan : Altınkaya - Sayfa: <span class="page"/></span><br/>
+        		 		</div>
+        		 	</div>
+        		</div>
+        		<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row">
+					<div class="col-12">
+					<table class="table table-sm">
+						<tr>
+						 <td>
+						 	<strong>Partner:<span t-esc="o.display_name"/></strong><br/>
+							<span><span t-esc="o.street"/>, <span t-esc="o.street2"/>,<span t-esc="o.city"/> <span t-esc="o.state_id.name"/>-<span t-esc="o.zip"/>,<span t-esc="o.country_id.name"/></span><br/>
+							<span> Tel:<t t-esc="o.phone"/>                   Fax:<span t-esc="o.fax"/></span>
+						 </td>
+						 <td class="text-right">
+						 		<span>Date:</span> <br/>
+						 		<span>Vergi Dairesi :</span><br/>
+						 		<span>Vergi No </span><br/>
+						 </td>
+						 <td>
+						 	<span t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')" t-options="{'widget': 'date'}"/><br/>
+						 	<span t-esc="o.x_vergidairesi"/><br/>
+						 	<span t-esc="o.vat"/><br/>
+						 </td>
+						</tr>
+					</table>
+					
+					</div>
+					</div>
+					<div class="row">
+					<div class="col-12">
+						<table class="table table-bordered">
+							<tr >
+								<th>NO</th>
+								<th>Number</th>
+								<th>Date</th>
+								<th>Due Date</th>
+								<th>Explanation</th>
+								<th>Debit</th>
+								<th>Credit</th>
+								<th>Balance</th>
+								<th></th>
+							</tr>
+							<t t-set="sblc" t-value="0"/>
+							<t t-set="sdc" t-value="'C'"/>
+							<t t-foreach="o._get_statement_data(data)" t-as="s">
+								<tr style="line-height:%80">
+									<td> <span t-esc="s['seq']"/></td>
+									<td> <span t-esc="s['number']"/></td>
+									<td> <span t-esc="s['date']"/></td>
+									<td> <span t-esc="s['due_date']"/></td>
+									<td> <span t-esc="s['description']"/></td>
+									<td> <span t-esc="'%.2f' %s['debit']"/></td>
+									<td> <span t-esc="'%.2f' %s['credit']"/></td>
+									<td> <span t-esc="'%.2f' %s['balance']"/></td>
+									<td> <span t-esc="s['dc']"/></td>
+									<t t-value="s['dc']" t-set="sdc"/>
+									<t t-value="'%.2f' %s['balance']" t-set="sblc"/>
+								</tr>
+							</t>
+							<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>Total</td>
+									<td></td>
+									<td> <span t-esc="sblc"/></td>
+									<td> <span t-esc="sdc"/></td>
+							</tr>
+						
+						</table>
+					</div>
+					</div>
+					
+					
+				</div>
+				</t>
+				</t>
+  </t>
+  	</template>
+</odoo>

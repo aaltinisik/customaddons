@@ -122,6 +122,18 @@
             file="altinkaya_reports.report_hr_employee_annual_data" 
             name="altinkaya_reports.report_hr_employee_annual_data" 
         />
+        <report id="partner_statement_altinkaya" 
+        		model="res.partner"
+                 string="Partner Statement"
+                file="altinkaya_reports.report_partner_statement" 
+            	name="altinkaya_reports.report_partner_statement" />
+
+		 <report id="partner_statement2_altinkaya" 
+        		model="partner.statement.wizard"
+                 string="Partner Statement"
+                file="altinkaya_reports.report_partner_statement2" 
+            	name="altinkaya_reports.report_partner_statement2" />
+		
     </data>
 </data>
 

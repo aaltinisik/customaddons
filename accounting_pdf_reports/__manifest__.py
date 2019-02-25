@@ -19,6 +19,7 @@
         'security/security.xml',
         'views/account_pdf_reports.xml',
         'views/account_reports_settings.xml',
+        'views/res_partner_views.xml',
         'wizards/partner_ledger.xml',
         'wizards/general_ledger.xml',
         'wizards/trial_balance.xml',
@@ -35,6 +36,8 @@
         'reports/report_tax.xml',
         'reports/report_aged_partner.xml',
         'reports/report_journal_audit.xml',
+        'reports/reports_paperformat.xml',
+              
     ],
     'installable': True,
     'application': False,
