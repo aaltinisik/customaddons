@@ -189,6 +189,6 @@ class print_pack_barcode_wiz(models.TransientModel):
         server_action_ids = map(int, server_action_ids)
         action_server_obj = self.pool.get('ir.actions.server')
         ctx = dict(context, active_model='print.pack.barcode.wiz', active_ids=ids, active_id=ids[0])
-        action_server_obj.run(cr, uid, server_action_ids, context=ctx)
+        action_server_obj.run(server_action_ids)
 
         return {'type': 'ir.actions.act_window_close'}
