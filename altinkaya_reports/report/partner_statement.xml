@@ -89,29 +89,29 @@
 							<t t-set="sdc" t-value="'C'"/>
 							<t t-foreach="o._get_statement_data(data)" t-as="s">
 								<tr style="line-height:%80">
-									<td> <span t-esc="s['seq']"/></td>
-									<td> <span t-esc="s['number']"/></td>
-									<td> <span t-esc="s['date']"/></td>
-									<td> <span t-esc="s['due_date']"/></td>
-									<td> <span t-esc="s['description']"/></td>
-									<td> <span t-esc="'%.2f' %s['debit']"/></td>
-									<td> <span t-esc="'%.2f' %s['credit']"/></td>
-									<td> <span t-esc="'%.2f' %s['balance']"/></td>
-									<td> <span t-esc="s['dc']"/></td>
+									<td style="padding:0"> <span t-esc="s['seq']"/></td>
+									<td style="padding:0;"> <span t-esc="s['number']"/></td>
+									<td style="padding:0;"> <span t-esc="s['date']"/></td>
+									<td style="padding:0;"> <span t-esc="s['due_date']"/></td>
+									<td style="padding:0;"> <span t-esc="s['description']"/></td>
+									<td style="padding:0;"> <span t-esc="'%.2f' %s['debit']"/></td>
+									<td style="padding:0;"> <span t-esc="'%.2f' %s['credit']"/></td>
+									<td style="padding:0;"> <span t-esc="'%.2f' %s['balance']"/></td>
+									<td style="padding:0;"> <span t-esc="s['dc']"/></td>
 									<t t-value="s['dc']" t-set="sdc"/>
 									<t t-value="'%.2f' %s['balance']" t-set="sblc"/>
 								</tr>
 							</t>
 							<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>Total</td>
-									<td></td>
-									<td> <span t-esc="sblc"/></td>
-									<td> <span t-esc="sdc"/></td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;">Total</td>
+									<td style="padding:0;"></td>
+									<td style="padding:0;"> <span t-esc="sblc"/></td>
+									<td style="padding:0;"> <span t-esc="sdc"/></td>
 							</tr>
 						
 						</table>
