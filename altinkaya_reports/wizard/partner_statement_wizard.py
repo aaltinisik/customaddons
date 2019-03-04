@@ -13,37 +13,36 @@ class WizarPartnerStatement(models.TransientModel):
         return date(date.today().year, 1, 1).strftime('%Y-%m-%d')
     def _default_date_end(self):
         return date(date.today().year, 12, 31).strftime('%Y-%m-%d')
-
-    date_start = fields.Date('Start Date', required=1,default=_default_date_start)
-    date_end = fields.Date('End Date', required=1,default=_default_date_end)
-    partner_id = fields.Many2one('res.partner',compute='_compute_partner_ids')
     
-    @api.depends()
-    def _compute_partner_ids(self):
-        self.partner_id= self.env['res.partner'].browse(self.env.context.get('active_ids',False))
+    def _default_partner_ids(self):
+        return self.env.context.get('active_ids')[0]
+    
+    date_start = fields.Date('Start Date', required=1,default=_default_date_start,store=True)
+    date_end = fields.Date('End Date', required=1,default=_default_date_end,store=True)
+    partner_id = fields.Many2one('res.partner',default=_default_partner_ids)
     
     
     @api.multi
     def print_report(self):
         data = {
-            'ids': self.env.context.get('active_ids',[]),
-            'doc_ids': self.env.context.get('active_ids'),
+            'ids': self.id,
+            'doc_ids': self.id,
             'model': 'res.partner',
             'date_end':self.date_end,
             'date_start':self.date_start,
             'doc_model': self.env['res.partner']._name,
             'form': self.read()[0]}
         return self.env.ref('altinkaya_reports.partner_statement2_altinkaya'). \
-            with_context(active_model='res.partner').report_action(docids=data['doc_ids'],data=data)
+            with_context(active_model='res.partner').report_action(docids=data['doc_ids'])
              
             
     @api.multi
     def get_statement_data(self,data=None):
         statement_data = []
         balance, seq = 0.0, 0
-        start_date=data['date_start']
-        partner= self.env['res.partner'].browse(data['ids'])
-        end_date = data['date_end']
+        start_date=self.date_start
+        partner= self.partner_id
+        end_date =self.date_end
         move_type = ('payable','receivable')
         self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit FROM account_move_line AS l \
                         LEFT JOIN account_account a ON (l.account_id=a.id) \

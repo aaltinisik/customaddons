@@ -11,6 +11,7 @@
                     <group string="Print Partner Statement">
                         <field name="date_start"/>
                         <field name="date_end"/>
+                        <field name="partner_id" invisible="1"/>
                     </group>
                     <footer>
                         <button name="print_report" type="object" string="Print" class="oe_highlight" 
