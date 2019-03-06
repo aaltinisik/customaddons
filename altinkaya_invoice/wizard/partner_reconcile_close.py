@@ -27,18 +27,10 @@ class PartnerReconcileClose(models.TransientModel):
     transfer_description = fields.Char('Transfer description', required=True)
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
-    opening_period_id = fields.Many2one('account.period', string='Opening Period', required=True)
     opening_move_date = fields.Date('Opening Move Date', required=True)
-    closing_period_id = fields.Many2one('account.period', string='Closing Period', required=True)
     closing_move_date = fields.Date('Closing Move Date', required=True)
 
-    @api.onchange('opening_period_id')
-    def onchange_opening_period_id(self):
-        self.opening_move_date = self.opening_period_id.date_start
 
-    @api.onchange('closing_period_id')
-    def onchange_closing_period_id(self):
-        self.closing_move_date = self.closing_period_id.date_stop
 
     @api.onchange('country_id', 'customer', 'supplier')
     def onchange_country_id(self):
@@ -85,14 +77,12 @@ class PartnerReconcileClose(models.TransientModel):
             partner_ids = self.env['res.partner'].search(partner_domain)
 
         closing_move_id = move_obj.create({
-            'period_id': self.closing_period_id.id,
             'journal_id': self.transfer_journal_id.id,
             'date': self.closing_move_date,
             'state': 'draft'
         })
 
         opening_move_id = move_obj.create({
-            'period_id': self.opening_period_id.id,
             'journal_id': self.transfer_journal_id.id,
             'date': self.opening_move_date,
             'state': 'draft'

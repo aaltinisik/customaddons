@@ -8,11 +8,11 @@ class product_attribute_line(models.Model):
     _inherit = 'product.template.attribute.line'
     attr_base_price =fields.Float(
              u"Base Price",
-             digits_compute=dp.get_precision('Product Price'),
+             digits=dp.get_precision('Product Price'),
              help=u"Base price used to compute product price based on attribute value.")
     attr_val_price_coef= fields.Float(
              u"Value Price Multiplier",
-             digits_compute=dp.get_precision('Product Price'),
+             digits=dp.get_precision('Product Price'),
              help=u"Attribute value coefficient used to compute product price based on attribute value.")
     use_in_pricing = fields.Boolean('Use in pricing')
     
@@ -51,7 +51,7 @@ class productProduct(models.Model):
     v_fiyat_2014 = fields.Float(u"2014 Eski Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2014 yılında kullanılan eski fiyatı TL")
     v_2014_iscilik = fields.Float("2014 işçilik Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2014 yılında kullanılan birim işçilik fiyatı TL")
     v_min_2014_iscilik = fields.Float("2014 Min İşçcilik Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2014 yılında kullanılan eski Minimum İşçilik fiyatı TL")
-    v_fiyat_2016a = fields.Float("2015 Ekim Fiyatı TL",digits_compute=dp.get_precision('Product Price'),help=u"2015 Ekim fiyati TL")
+    v_fiyat_2016a = fields.Float("2015 Ekim Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2015 Ekim fiyati TL")
     v_2016a_iscilik = fields.Float("2015 Ekim isçilik fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2015 Ekim birim işçilik fiyatı TL")
     v_min_2016a_iscilik = fields.Float("2015 Ekim Min İscilik TL",digits=dp.get_precision('Product Price'),help=u" kullanılan eski Minimum İşcilik fiyatı TL")
     v_fiyat_2016b = fields.Float("2016 Aralık Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2016 Aralık fiyatı TL")

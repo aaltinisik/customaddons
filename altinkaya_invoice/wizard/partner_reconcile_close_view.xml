@@ -19,9 +19,7 @@
             				<field name="end_date"/>
 	           			</group>
             			<group>
-            				<field name="closing_period_id"/>
             				<field name="closing_move_date"/>
-            				<field name="opening_period_id"/>
             				<field name="opening_move_date"/>
             			</group>
             			

@@ -1,5 +1,5 @@
 from datetime import datetime
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models, _

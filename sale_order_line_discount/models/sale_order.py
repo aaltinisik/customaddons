@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-import odoo.addons.decimal_precision as dp
+from odoo.addons import decimal_precision as dp
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     unit_discounted = fields.Float('Disc. Unit',
-                                   digits_compute=dp.get_precision('Product Price'),
+                                   digits=dp.get_precision('Product Price'),
                                    compute='_compute_unit_discounted',
                                    readonly=True, states={'draft': [('readonly', False)]},
                                    store=True)

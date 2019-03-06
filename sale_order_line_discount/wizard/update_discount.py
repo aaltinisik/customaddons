@@ -1,5 +1,5 @@
-from openerp import models, fields, api, _
-import openerp.addons.decimal_precision as dp
+from odoo import models, fields, api, _
+from odoo.addons import decimal_precision as dp
 
 
 class update_discount(models.TransientModel):
@@ -17,9 +17,9 @@ class update_discount(models.TransientModel):
         return res
 
     unit_discounted = fields.Float('Discount Price',
-                                  digits_compute=dp.get_precision('Product Price'))
+                                  digits=dp.get_precision('Product Price'))
     price_unit = fields.Float('Unit Price',
-                                  digits_compute=dp.get_precision('Product Price'))
+                                  digits=dp.get_precision('Product Price'))
 
     @api.multi
     def update_discount_price(self):
