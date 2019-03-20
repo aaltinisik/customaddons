@@ -8,11 +8,12 @@
     'description': """
      """,
     'depends': [
-        'stock'
+        'stock','delivery'
     ],
     'data': [
             'views/stock_picking_views.xml',
             'views/stock_view.xml',
+            'views/delivery_carrier_views.xml',
     ],
     'installable' : True,
     'auto_install' : False,

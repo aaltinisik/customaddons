@@ -31,7 +31,7 @@ class StockMove(models.Model):
             if move.product_id.id != sale_line.product_id.id:
                 precision = self.env['decimal.precision'].precision_get(cr, uid, 'Discount')
                 if float_is_zero(sale_line.discount, precision_digits=precision):
-                    res['price_unit'] = self.pool['product.pricelist'].price_get(
+                    res['price_unit'] = self.env['product.pricelist'].price_get(
                         cr, uid, [sale_line.order_id.pricelist_id.id],
                         move.product_id.id, move.product_uom_qty or 1.0,
                         sale_line.order_id.partner_id, context=context)[sale_line.order_id.pricelist_id.id]
