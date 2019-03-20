@@ -24,6 +24,7 @@ from odoo import models, fields
 class ProductMould(models.Model):
     _name = 'product.mould'
     _order = "parent_id,sequence,code"
+    _description="Product Mould"
     
     code =  fields.Char('Code', size=32)
     name = fields.Char('Name',required=True, size=100)

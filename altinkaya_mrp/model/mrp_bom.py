@@ -11,6 +11,7 @@ import math
 
 class MrpBoMWCParameter(models.Model):
     _name = 'mrp.bom.wcparameter'
+    _description="Mrp Bom WCParameter"
     
     bom_id = fields.Many2one('mrp.bom',string='BoM')
     routing_wc_id = fields.Many2one('mrp.routing.workcenter','Workcenter')

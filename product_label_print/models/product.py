@@ -5,6 +5,7 @@ from odoo import api, fields, models, _
 
 class productproductLabel(models.TransientModel):
     _name = "product.product.label"
+    _description="Product Product Label"
     
     name = fields.Char(string="Name",size=120)
     nameL1 = fields.Char(string="NameL1",size=30)
@@ -23,6 +24,7 @@ class productproductLabel(models.TransientModel):
 
 class labelTwoinrow(models.TransientModel):
     _name = "label.twoinrow"
+    _description="Label Two in Row"
     
     first_label_empty = fields.Boolean("Skip first label in row")
     second_label_empty = fields.Boolean("Skip second label in row")

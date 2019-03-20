@@ -11,6 +11,7 @@ from datetime import date
 
 class PurchaseOrderReport(models.TransientModel):
     _name = "purchase.order.report"
+    _description="Purchase Order Report"
     
     start_date = fields.Date(string='Start Date', required=True, default=date.today().replace(day=1))
     end_date = fields.Date(string="End Date", required=True, default=date.today().replace(day=calendar.monthrange(date.today().year, date.today().month)[1]))

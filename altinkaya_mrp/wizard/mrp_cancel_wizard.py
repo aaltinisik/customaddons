@@ -4,6 +4,7 @@ from odoo import models,fields,api
 
 class mrp_cancel_more(models.TransientModel):
     _name = 'mrp.cancel.more'
+    _description="Mrp Cancel More"
 
 
 

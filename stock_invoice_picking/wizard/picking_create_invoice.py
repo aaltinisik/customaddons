@@ -11,6 +11,7 @@ from odoo.tools.translate import _
 
 class StockPickingCreateInvoice(models.TransientModel):
     _name = 'stock.picking.create_invoice'
+    _description="Create Invoice From Stock"
     
     @api.model
     def default_get(self, fields):

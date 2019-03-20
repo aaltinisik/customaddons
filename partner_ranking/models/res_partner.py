@@ -7,6 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class PartnerRank(models.Model):
     _name = 'res.partner.rank'
+    _description="Partner Ranking"
     
     partner_id = fields.Many2one('res.partner','Partner', required=True)
     date_rank = fields.Date('Ranking Date', required=True)

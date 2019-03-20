@@ -9,6 +9,7 @@ import xlrd
 
 class wizard_import_script(models.TransientModel):
     _name = 'wizard.import.script'
+    _description="Import Script"
 
     xls_file = fields.Binary('Upload XLS File')
 

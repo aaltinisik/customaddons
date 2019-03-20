@@ -27,6 +27,7 @@ import base64
 
 class wizard_partner_detail(models.TransientModel):
     _name = "wizard.partner.detail"
+    _description ="Partner Details"
    
     start_date = fields.Date('Start Date', required=True,default=lambda *a:time.strftime('%Y-01-01'))
     end_date = fields.Date('End Date', required=True,default=lambda *a: time.strftime('%Y-%m-%d'))
@@ -120,6 +121,7 @@ class wizard_partner_detail(models.TransientModel):
 
 class CustomerExcel(models.Model):
     _name = "customer.excel"
+    _description="Customer Excel"
 
     @api.model
     def default_get(self, fields):

@@ -4,6 +4,7 @@ from odoo.addons import decimal_precision as dp
 
 class update_discount(models.TransientModel):
     _name = 'update.discount'
+    _description="Update Discount"
 
     @api.model
     def default_get(self, fields):

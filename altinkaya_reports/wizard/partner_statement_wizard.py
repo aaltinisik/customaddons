@@ -7,6 +7,7 @@ from datetime import date,datetime
 
 class WizarPartnerStatement(models.TransientModel):
     _name = "partner.statement.wizard"
+    _description="Partner Statement Wizard"
 
 
     def _default_date_start(self):

@@ -4,6 +4,7 @@ from odoo import models, fields
 class ProductHscode(models.Model):
     _name = 'product.hscode'
     _order = "hscode"
+    _description="HSCode"
     
     
     

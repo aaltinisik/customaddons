@@ -1,3 +1,0 @@
-import res_parter
-import product_product
-import stock_warehouse_orderpoint

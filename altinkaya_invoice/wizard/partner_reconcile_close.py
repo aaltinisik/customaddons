@@ -17,6 +17,7 @@ class PartnerReconcileClose(models.TransientModel):
     Wizard for reconciliation of account move lines and creating closing/opening moves
     """
     _name = 'partner.reconcile.close'
+    _description="Partner Reconcile Close"
 
     country_id = fields.Many2one('res.country', string='Partner Country')
     customer = fields.Boolean('Customer')

@@ -59,7 +59,7 @@ class StockPicking(models.Model):
                                      ('A', u'Boyada'),
                                      ('B', u'Piyasadan Teminde')
                                      ],
-                                     'Durumu', select=True)
+                                     'Durumu', index=True)
     x_hazirlayan = fields.Selection(
                                     [("Asim",u"Asım"),
                                      ("Muhammet",u"Muhammet"),

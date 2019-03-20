@@ -31,6 +31,7 @@ from odoo import api, fields, models, _
 
 class ReportRappel(models.AbstractModel):
     _name = 'report.devit_account_followup.report_followup'
+    _description="Report Followup"
 
     @api.model
     def _get_report_values(self, docids, data=None):
