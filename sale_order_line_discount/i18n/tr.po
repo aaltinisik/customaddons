@@ -88,7 +88,7 @@ msgstr "Birim Maliyet"
 #. module: sale_order_line_discount
 #: model_terms:ir.ui.view,arch_db:sale_order_line_discount.view_sale_order_form_inherit
 msgid "Update"
-msgstr ""
+msgstr "Güncelle"
 
 #. module: sale_order_line_discount
 #: model:ir.actions.act_window,name:sale_order_line_discount.action_update_discount

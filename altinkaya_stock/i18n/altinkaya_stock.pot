@@ -18,7 +18,7 @@ msgstr ""
 #. module: altinkaya_stock
 #: selection:stock.picking,x_durum:0
 msgid "ACİL"
-msgstr "Acil"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_hazirlayan:0
@@ -43,17 +43,17 @@ msgstr ""
 #. module: altinkaya_stock
 #: model:ir.model.fields,field_description:altinkaya_stock.field_delivery_carrier__partner_id
 msgid "Carrier"
-msgstr "Nakliyeci"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model:ir.model.fields,field_description:altinkaya_stock.field_stock_warehouse_orderpoint__categ_id
 msgid "Category"
-msgstr "Kategori"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model:ir.model,name:altinkaya_stock.model_delivery_carrier
 msgid "Delivery Methods"
-msgstr "Teslimat Yöntemleri"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model:ir.model.fields,field_description:altinkaya_stock.field_stock_picking__x_durum
@@ -73,7 +73,7 @@ msgstr ""
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "Four weeks ago"
-msgstr "4 Hafta Önce"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_hazirlayan:0
@@ -93,7 +93,7 @@ msgstr ""
 #. module: altinkaya_stock
 #: model:ir.model,name:altinkaya_stock.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr "Min. Envanter Kuralı"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_durum:0
@@ -138,12 +138,12 @@ msgstr ""
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.altinkaya_customV7_stock_picking_out_form
 msgid "Sales Order"
-msgstr "Satış Siparişi"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model:ir.model.fields,help:altinkaya_stock.field_stock_warehouse_orderpoint__categ_id
 msgid "Select category for the current product"
-msgstr "Geçerli ürün için kategori belirtin"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_hazirlayan:0
@@ -163,22 +163,22 @@ msgstr ""
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "This Month's Deliveries"
-msgstr "Bu ayın Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "Today's Deliveries"
-msgstr "Bugünün Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model:ir.model,name:altinkaya_stock.model_stock_picking
 msgid "Transfer"
-msgstr "Teslimat"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "Two Weeks ago"
-msgstr "2 Hafta Önce"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_hazirlayan:0
@@ -188,22 +188,22 @@ msgstr ""
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "Yesterday's Deliveries"
-msgstr "Dünün Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "last 3 day's Deliveries"
-msgstr "Son 3 günün Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "last Month's Deliveries"
-msgstr "Geçen Ayın Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: model_terms:ir.ui.view,arch_db:altinkaya_stock.view_picking_internal_search_day_filters
 msgid "last Week's Deliveries"
-msgstr "Geçen Haftanın Teslimatları"
+msgstr ""
 
 #. module: altinkaya_stock
 #: selection:stock.picking,x_hazirlayan:0

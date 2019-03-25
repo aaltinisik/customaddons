@@ -18,50 +18,50 @@ msgstr ""
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
 msgid "Cancel"
-msgstr "İptal"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__create_uid
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__create_uid
 msgid "Created by"
-msgstr "Oluşturan"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__create_date
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__create_date
 msgid "Created on"
-msgstr "Oluşturulma"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
 msgid "Customer Excel"
-msgstr "Müşteri Exceli"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__display_name
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__display_name
 msgid "Display Name"
-msgstr "Görünüm Adı"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
 msgid "Download"
-msgstr "İndir"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__end_date
 msgid "End Date"
-msgstr "Bitiş Tarihi"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__file
 msgid "File"
-msgstr "Dosya"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__name
 msgid "File Name"
-msgstr "Dosya Adı"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__id
@@ -72,57 +72,57 @@ msgstr ""
 #. module: partner_payment_detail
 #: model:ir.model,name:partner_payment_detail.model_account_invoice
 msgid "Invoice"
-msgstr "Fatura"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel____last_update
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail____last_update
 msgid "Last Modified on"
-msgstr "Son Güncelleme"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__write_uid
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__write_uid
 msgid "Last Updated by"
-msgstr "Son Güncelleyen"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__write_date
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__write_date
 msgid "Last Updated on"
-msgstr "Son Güncelleme"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.wizard_partner_detail_form
 msgid "Partner Detail"
-msgstr "İş Ortağı Detayı"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.actions.act_window,name:partner_payment_detail.action_wizard_partner_detail_form
 #: model:ir.actions.act_window,name:partner_payment_detail.wizard_partner_detail_window
 msgid "Partner Payment Detail"
-msgstr "Cari Borç/Alacak Dökümü"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.ui.menu,name:partner_payment_detail.menu_payment_detail
 msgid "Partner Payment detail"
-msgstr "İş Ortağı Ödemi Detayı"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.wizard_partner_detail_form
 msgid "Print"
-msgstr "Yazdır"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__start_date
 msgid "Start Date"
-msgstr "Başlangıç Tarihi"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model.fields,field_description:partner_payment_detail.field_account_invoice__total_balance
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.account_invoice_total_balance
 msgid "Total Balance"
-msgstr "Toplam Bakiye"
+msgstr ""
 
 #. module: partner_payment_detail
 #: model:ir.model,name:partner_payment_detail.model_customer_excel
