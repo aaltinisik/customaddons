@@ -9,9 +9,9 @@
     """,
     'website': 'http://www.codequarters.com',
     'data': [
-             'data/partner_data.xml',
+             
              'report/sale_reports.xml',
-             'report/paperformat.xml',
+             
              'report/purchase_quotation_reports.xml',
              'report/purchase_order_reports.xml',
              'report/location_reports.xml',
@@ -24,10 +24,12 @@
              'report/stock_picking_delivery.xml',
              'report/partner_statement.xml',
              'report/partner_statement2.xml',
+             'wizard/partner_statement_wizard_view.xml',
              'views/res_users_views.xml',
              'views/partner_view.xml',
-             'wizard/partner_statement_wizard_view.xml',
              'report/reports.xml',
+             'report/paperformat.xml',
+             'data/partner_data.xml',
              
             ],
     'demo': [],
