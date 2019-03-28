@@ -19,7 +19,7 @@
         'security/security.xml',
         'views/account_pdf_reports.xml',
         'views/account_reports_settings.xml',
-        'views/res_partner_views.xml',
+        
         'wizards/partner_ledger.xml',
         'wizards/general_ledger.xml',
         'wizards/trial_balance.xml',
@@ -29,6 +29,7 @@
         'wizards/aged_partner.xml',
         'wizards/journal_audit.xml',
         'reports/report.xml',
+        'views/res_partner_views.xml',
         'reports/report_partner_ledger.xml',
         'reports/report_general_ledger.xml',
         'reports/report_trial_balance.xml',
