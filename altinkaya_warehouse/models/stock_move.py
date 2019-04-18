@@ -27,8 +27,20 @@ class stock_move(models.Model):
             'view_mode': 'form',
             'res_model': 'create.procurement.move',
             'context' : {'default_move_id':self.id},
+            'target': 'new'  
+         }
+        
+    @api.multi
+    def action_make_mts(self):
+        self.ensure_one()
+        return {
+            'name':'Pick from stock',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'make.mts.move',
+            'context' : {'default_move_id':self.id},
             'target': 'new'
-            
          }
         
     @api.multi
