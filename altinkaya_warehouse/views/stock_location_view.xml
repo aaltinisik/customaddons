@@ -19,6 +19,7 @@
 	            <field name="removal_strategy_id" position="after">
 	            	<field name="ignore_reservation"/>
 	            	<field name="priority"/>
+	            	<field name="stock_location_ids" widget="many2many_tags"/>
 	            </field>
             </field>
         </record>
