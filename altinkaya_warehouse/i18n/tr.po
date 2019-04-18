@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 12:10+0000\n"
-"PO-Revision-Date: 2018-11-30 12:10+0000\n"
+"POT-Creation-Date: 2019-04-18 13:51+0000\n"
+"PO-Revision-Date: 2019-04-18 13:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,9 +27,24 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 "            "
 
 #. module: altinkaya_warehouse
+#: field:product.product,active_bom:0
+msgid "Active Bom"
+msgstr "Active Bom"
+
+#. module: altinkaya_warehouse
 #: view:website:altinkaya_warehouse.report_picking_despatch
 msgid "Ağırlık(brüt/net Kg)"
 msgstr "Ağırlık(brüt/net Kg)"
+
+#. module: altinkaya_warehouse
+#: field:mrp.production,qty_available_boya:0
+msgid "Boya Depo Mevcut"
+msgstr "Boya Depo Mevcut"
+
+#. module: altinkaya_warehouse
+#: field:mrp.production,qty_available_cnc:0
+msgid "CNC Depo Mevcut"
+msgstr "CNC Depo Mevcut"
 
 #. module: altinkaya_warehouse
 #: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
@@ -61,7 +76,7 @@ msgid "Carrier id"
 msgstr "Carrier id"
 
 #. module: altinkaya_warehouse
-#: code:addons/altinkaya_warehouse/models/stock_location.py:43
+#: code:addons/altinkaya_warehouse/models/stock_location.py:52
 #, python-format
 msgid "Configuration Error!The next sequence is longer than 12 characters. It is not valid for an EAN13 needing 12 characters, the 13 being used as a control digitYou will have to redefine the sequence or create a new one"
 msgstr "Configuration Error!The next sequence is longer than 12 characters. It is not valid for an EAN13 needing 12 characters, the 13 being used as a control digitYou will have to redefine the sequence or create a new one"
@@ -144,9 +159,19 @@ msgid "Email Thread"
 msgstr "E-posta Konusu"
 
 #. module: altinkaya_warehouse
+#: field:mrp.production,qty_available_enjek:0
+msgid "Enjeksiyon Depo Mevcut"
+msgstr "Enjeksiyon Depo Mevcut"
+
+#. module: altinkaya_warehouse
 #: view:website:altinkaya_warehouse.report_picking_despatch
 msgid "Fatura/İrsaliye No"
 msgstr "Fatura/İrsaliye No"
+
+#. module: altinkaya_warehouse
+#: field:product.putaway,fixed_all_location_id:0
+msgid "Fixed Location for all products"
+msgstr "Fixed Location for all products"
 
 #. module: altinkaya_warehouse
 #: field:stock.picking.despatch,message_follower_ids:0
@@ -157,6 +182,11 @@ msgstr "Takipçiler"
 #: view:stock.location:altinkaya_warehouse.inherit_stock_view_template_property_form
 msgid "Generate Barcode"
 msgstr "Barkod Oluştur"
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,procure_move:0
+msgid "Harekete Tedarik Oluştur"
+msgstr "Harekete Tedarik Oluştur"
 
 #. module: altinkaya_warehouse
 #: help:stock.picking.despatch,message_summary:0
@@ -174,6 +204,12 @@ msgstr "ID"
 #: help:stock.picking.despatch,message_unread:0
 msgid "If checked new messages require your attention."
 msgstr "If checked new messages require your attention."
+
+#. module: altinkaya_warehouse
+#: field:stock.location,ignore_reservation:0
+#: field:stock.quant,ignore_reservation:0
+msgid "Ignore in quants reservation"
+msgstr "Ignore in quants reservation"
 
 #. module: altinkaya_warehouse
 #: field:stock.picking.despatch,message_is_follower:0
@@ -217,6 +253,11 @@ msgid "Location"
 msgstr "Konum"
 
 #. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Üretim Emri"
+
+#. module: altinkaya_warehouse
 #: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
 #: field:create.procurement.move,production_ids:0
 msgid "Manufacturing Orders"
@@ -247,6 +288,7 @@ msgstr "Merkez Depo Giden"
 
 #. module: altinkaya_warehouse
 #: field:create.procurement.move,qty_available_merkez:0
+#: field:mrp.production,qty_available_merkez:0
 #: field:product.product,qty_available_merkez:0
 #: field:sale.order.line,qty_available_merkez:0
 #: field:stock.move,qty_available_merkez:0
@@ -270,6 +312,16 @@ msgid "Messages and communication history"
 msgstr "Messages and communication history"
 
 #. module: altinkaya_warehouse
+#: field:mrp.production,qty_available_metal:0
+msgid "Metal Depo Mevcut"
+msgstr "Metal Depo Mevcut"
+
+#. module: altinkaya_warehouse
+#: field:mrp.production,qty_available_montaj:0
+msgid "Montaj Depo Mevcut"
+msgstr "Montaj Depo Mevcut"
+
+#. module: altinkaya_warehouse
 #: field:create.procurement.move,move_id:0
 msgid "Move"
 msgstr "Hareket"
@@ -284,6 +336,16 @@ msgstr "Yeni"
 #: field:stock.picking.despatch,name:0
 msgid "Number"
 msgstr "Sayı"
+
+#. module: altinkaya_warehouse
+#: help:stock.location,stock_location_ids:0
+msgid "Other locations for availability computation"
+msgstr "Other locations for availability computation"
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,pending_orderline_ids:0
+msgid "Pending Orders"
+msgstr "Pending Orders"
 
 #. module: altinkaya_warehouse
 #: model:ir.model,name:altinkaya_warehouse.model_stock_picking
@@ -302,15 +364,31 @@ msgid "Pickings to dispatch"
 msgstr "Pickings to dispatch"
 
 #. module: altinkaya_warehouse
+#: view:stock.move:altinkaya_warehouse.view_move_form_inherit_origin_moves
+#: view:stock.move:altinkaya_warehouse.view_move_picking_form_inherit_origin_moves
+msgid "Preceeding Moves"
+msgstr "Beklenen Hareketler"
+
+#. module: altinkaya_warehouse
 #: model:ir.actions.report.xml,name:altinkaya_warehouse.aeroo_location_label_print
 msgid "Print Location Label"
-msgstr "Konum Barkodu bas"
+msgstr "Print Location Label"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_procurement_order
+msgid "Procurement"
+msgstr "Satınalma"
 
 #. module: altinkaya_warehouse
 #: field:create.procurement.move,product_id:0
 #: model:ir.model,name:altinkaya_warehouse.model_product_product
 msgid "Product"
 msgstr "Ürün"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_product_putaway
+msgid "Put Away Strategy"
+msgstr "Yerleştirme Strateji"
 
 #. module: altinkaya_warehouse
 #: field:create.procurement.move,qty_to_merkez:0
@@ -323,14 +401,40 @@ msgid "Quantity to Sincan Depo"
 msgstr "Sincan Depoya Tedarik"
 
 #. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_stock_quant
+msgid "Quants"
+msgstr "Stoklar"
+
+#. module: altinkaya_warehouse
+#: field:stock.location,priority:0
+#: field:stock.quant,priority:0
+msgid "Removal Priority"
+msgstr "Removal Priority"
+
+#. module: altinkaya_warehouse
+#: model:ir.model,name:altinkaya_warehouse.model_report
+msgid "Report"
+msgstr "Rapor"
+
+#. module: altinkaya_warehouse
 #: view:stock.picking.despatch:altinkaya_warehouse.view_picking_dispatch_form
 msgid "Reset to Draft"
 msgstr "Taslağa Çevir"
 
 #. module: altinkaya_warehouse
+#: field:product.product,routing_id:0
+msgid "Rota"
+msgstr "Rota"
+
+#. module: altinkaya_warehouse
 #: model:ir.model,name:altinkaya_warehouse.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Satış Siparişi Öğesi"
+
+#. module: altinkaya_warehouse
+#: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
+msgid "Satışlar"
+msgstr "Satışlar"
 
 #. module: altinkaya_warehouse
 #: view:sale.order:altinkaya_warehouse.view_order_form_inherit_altinkaya_stock
@@ -357,6 +461,7 @@ msgstr "Sincan Depo Giden"
 
 #. module: altinkaya_warehouse
 #: field:create.procurement.move,qty_available_sincan:0
+#: field:mrp.production,qty_available_sincan:0
 #: field:product.product,qty_available_sincan:0
 #: field:sale.order.line,qty_available_sincan:0
 #: field:stock.move,qty_available_sincan:0
@@ -370,9 +475,29 @@ msgid "Sincan Depo Tahmini"
 msgstr "Sincan Depo Tahmini"
 
 #. module: altinkaya_warehouse
+#: field:create.procurement.move,sale_qty30days:0
+msgid "Son 1 ayda satılan"
+msgstr "Son 1 ayda satılan"
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,sale_qty360days:0
+msgid "Son 1 senede satılan"
+msgstr "Son 1 senede satılan"
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,sale_qty180days:0
+msgid "Son 6 ayda satılan"
+msgstr "Son 6 ayda satılan"
+
+#. module: altinkaya_warehouse
 #: field:stock.picking.despatch,state:0
 msgid "State"
 msgstr "Durum"
+
+#. module: altinkaya_warehouse
+#: field:stock.location,stock_location_ids:0
+msgid "Stock Locations"
+msgstr "Stock Locations"
 
 #. module: altinkaya_warehouse
 #: model:ir.model,name:altinkaya_warehouse.model_stock_move
@@ -386,8 +511,8 @@ msgstr "Özet"
 
 #. module: altinkaya_warehouse
 #: view:stock.move:altinkaya_warehouse.view_move_tree_inherit_move_name
-msgid "Tedarik Oluştur"
-msgstr "Tedarik Oluştur"
+msgid "Tedarik"
+msgstr "Tedarik"
 
 #. module: altinkaya_warehouse
 #: view:website:altinkaya_warehouse.report_picking_despatch
@@ -400,9 +525,19 @@ msgid "Teslimat Adresi"
 msgstr "Teslimat Adresi"
 
 #. module: altinkaya_warehouse
+#: help:product.product,routing_id:0
+msgid "The list of operations (list of work centers) to produce the finished product. The routing is mainly used to compute work center costs during operations and to plan future loads on work centers based on production planning."
+msgstr "The list of operations (list of work centers) to produce the finished product. The routing is mainly used to compute work center costs during operations and to plan future loads on work centers based on production planning."
+
+#. module: altinkaya_warehouse
 #: help:create.procurement.move,move_qty:0
 msgid "This is the quantity of products from an inventory point of view. For moves in the state 'done', this is the quantity of products that were actually moved. For other moves, this is the quantity of product that is planned to be moved. Lowering this quantity does not generate a backorder. Changing this quantity on assigned moves affects the product reservation, and should be done with care."
 msgstr "This is the quantity of products from an inventory point of view. For moves in the state 'done', this is the quantity of products that were actually moved. For other moves, this is the quantity of product that is planned to be moved. Lowering this quantity does not generate a backorder. Changing this quantity on assigned moves affects the product reservation, and should be done with care."
+
+#. module: altinkaya_warehouse
+#: field:create.procurement.move,transfers_to_customer_ids:0
+msgid "Transfers to Customers"
+msgstr "Transfers to Customers"
 
 #. module: altinkaya_warehouse
 #: field:stock.picking.despatch,message_unread:0
@@ -417,8 +552,17 @@ msgstr "UoM"
 #. module: altinkaya_warehouse
 #: view:create.procurement.move:altinkaya_warehouse.view_wizard_create_procurement_move_form
 msgid "açıklama"
-msgstr "Tedarik Oluştur tuşuna basıldığında siparişin kaleminin tam sayısı kadar ilgili depoya tedarik oluşturulup sevk satırına bağlanır.\n
-Ek olarak depolara da tedarik oluşturulması isteniyorsa ilgili deponun kutusuna adet girilir."
+msgstr "Tedarik Oluştur tuşuna basıldığında siparişin kaleminin tam sayısı kadar ilgili depoya tedarik oluşturulup sevk satırına bağlanır.\\k olarak depolara da tedarik oluşturulması isteniyorsa ilgili deponun kutusuna adet girilir."
+
+#. module: altinkaya_warehouse
+#: help:stock.location,priority:0
+msgid "high priority locations will be reserved first"
+msgstr "high priority locations will be reserved first"
+
+#. module: altinkaya_warehouse
+#: help:stock.quant,priority:0
+msgid "high priority quants will be reserved first"
+msgstr "high priority quants will be reserved first"
 
 #. module: altinkaya_warehouse
 #: view:create.picking.despatch:altinkaya_warehouse.view_wizard_create_despatch_form
