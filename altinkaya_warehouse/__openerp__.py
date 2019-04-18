@@ -16,6 +16,7 @@
              'views/stock_picking_despatch_view.xml',
              'wizard/wizard_create_despatch_view.xml',
              'wizard/wizard_create_procurement_move.xml',
+             'wizard/wizard_make_mts_move.xml',
              'report/report_location_barcode.xml',
              'report/report_picking_despatch.xml'
              ],
