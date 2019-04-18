@@ -22,5 +22,30 @@
             </field>
         </record>
 
+		<record id="view_move_form_inherit_origin_moves" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+	            
+	            <button name="action_cancel" position="after">
+	            	<button name="action_view_origin_moves" string="Preceeding Moves" type="object"/>
+	            </button>
+	            
+            </field>
+        </record>
+        
+        <record id="view_move_picking_form_inherit_origin_moves" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+	            
+	            <button name="do_unreserve" position="after">
+	            	<button name="action_view_origin_moves" string="Preceeding Moves" type="object"/>
+	            </button>
+	            
+            </field>
+        </record>
     </data>
 </openerp>
