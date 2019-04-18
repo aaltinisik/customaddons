@@ -15,6 +15,12 @@ class stock_location(models.Model):
     ignore_reservation = fields.Boolean('Ignore in quants reservation')
     priority = fields.Integer('Removal Priority', help='high priority locations will be reserved first',default=10)
     
+    stock_location_ids = fields.Many2many('stock.location',
+                                          relation='stock_location_other_location_rel',
+                                          column1='main_location_id',
+                                          column2='other_location_id',
+                                          string='Stock Locations',help='Other locations for availability computation')
+    
     @api.multi
     def button_barcode_generate(self):
         self.ensure_one()

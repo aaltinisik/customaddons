@@ -19,6 +19,15 @@ class ProcurementOrder(models.Model):
             res['group_id'] = group_id.id
         return res
     
+    @api.model
+    def _product_virtual_get(self, order_point):
+        res = super(ProcurementOrder, self)._product_virtual_get(order_point)
+        
+        other_res = order_point.product_id.with_context({'location':order_point.location_id.stock_location_ids.ids}).virtual_available
+        
+        
+        return res + other_res
+    
     
     @api.multi
     def get_mto_qty_to_order(self):
