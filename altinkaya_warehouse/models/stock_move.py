@@ -30,6 +30,20 @@ class stock_move(models.Model):
             'target': 'new'
             
          }
+        
+    @api.multi
+    def action_view_origin_moves(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': self.name,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'stock.move',
+            'domain' : [('move_dest_id','=', self.id)],
+            'target': 'current'
+         }
 
     @api.model
     def _create_procurements(self, moves):
