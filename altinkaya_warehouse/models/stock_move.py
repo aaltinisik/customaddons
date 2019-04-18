@@ -30,3 +30,12 @@ class stock_move(models.Model):
             'target': 'new'
             
          }
+
+    @api.model
+    def _create_procurements(self, moves):
+        res = super(stock_move, self)._create_procurements(moves)
+        for move in moves:
+            if move.procure_method == 'make_to_stock':
+                moves.remove(move)
+            
+        return res
