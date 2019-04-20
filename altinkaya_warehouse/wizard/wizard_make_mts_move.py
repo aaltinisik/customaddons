@@ -28,12 +28,15 @@ class make_mts(models.TransientModel):
     @api.multi
     def action_confirm(self):
         self.ensure_one()
+        sale_order = self.move_id.procurement_id.sale_line_id.order_id
+        order_state = sale_order.state
         self.move_id.with_context(cancel_procurement=True).action_cancel()
         self.move_id.procure_method = 'make_to_stock'
         self.move_id.action_confirm()
         self.move_id.action_assign()
         
-        
+        if order_state != 'shipping_except' and sale_order.state == 'shipping_except':
+            sale_order.state = order_state
                 
         return {}
         
