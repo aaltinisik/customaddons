@@ -37,15 +37,14 @@
             </field>
         </record>
         
-        <record id="product_template_search_form_inherit_multi_location_filter" model="ir.ui.view">
-            <field name="name">product.template.search.stock.form.inherit.multi_location</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_search_view"/>
+        <record id="quant_search_view_inherit_multiple_location" model="ir.ui.view">
+            <field name="name">stock.quant.search.inherit.multi_location</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view"/>
             <field name="arch" type="xml">
-                <field name="product_variant_ids" position="before">
+                <filter name="internal_loc" position="after">
                     <filter name="multi_location" string="Spread to multiple locations" domain="[('multi_location','=',True)]"/>
-                </field>
-                
+                </filter>
             </field>
         </record>
 

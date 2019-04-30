@@ -2,6 +2,47 @@
 from openerp import models, fields, api, _
 
 
+class stock_quant(models.Model):
+    _inherit = 'stock.quant'
+    
+    @api.model
+    def search(self, domain, *args, **kwargs):
+        for i, e in enumerate(domain):
+            if not isinstance(e, basestring) and e[0] == 'multi_location':
+                self.env.cr.execute(
+                """select id, location_id from (
+                        select p.id, l.location_id, count(distinct q.location_id) as c from stock_quant q 
+                            join product_product p on q.product_id = p.id 
+                            join stock_location l on l.id = q.location_id 
+                        where l.usage = 'internal' and l.active = true
+                        group by p.id, l.location_id order by p.id
+                    ) res  where res.c > 1 """,
+                log_exceptions=False)
+                res = self.env.cr.fetchall()
+                domain[i] = ('location_id', 'child_of', list(set([r[1] for r in res]))) 
+                domain.insert(i,('product_id','in',list(set([r[0] for r in res]))))
+                
+        return super(stock_quant, self).search(domain, *args, **kwargs)
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        for i, e in enumerate(domain):
+            if not isinstance(e, basestring) and e[0] == 'multi_location':
+                self.env.cr.execute(
+                """select id, location_id from (
+                        select p.id, l.location_id, count(distinct q.location_id) as c from stock_quant q 
+                            join product_product p on q.product_id = p.id 
+                            join stock_location l on l.id = q.location_id 
+                        where l.usage = 'internal' and l.active = true
+                        group by p.id, l.location_id order by p.id
+                    ) res  where res.c > 1 """,
+                log_exceptions=False)
+                res = self.env.cr.fetchall()
+                domain[i] = ('location_id', 'child_of', list(set([r[1] for r in res]))) 
+                domain.insert(i,('product_id','in',list(set([r[0] for r in res]))))
+        
+        res = super(stock_quant, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        return res
 
 class product_putaway_strategy(models.Model):
     _inherit = 'product.putaway'
@@ -122,27 +163,7 @@ class product_product(models.Model):
             
             
             
-    @api.model
-    def search(self, domain, *args, **kwargs):
-        for i, e in enumerate(domain):
-            if not isinstance(e, basestring) and e[0] == 'multi_location':
-                self.env.cr.execute(
-                """select id from (
-                    select p.id, count(distinct q.location_id) as c from stock_quant q 
-                        join product_product p on q.product_id = p.id 
-                        join stock_location l on l.id = q.location_id 
-                    where l.usage = 'internal'
-                    group by p.id order by p.id
-                    
-                    
-                    ) res  where res.c > 1 """,
-                log_exceptions=False)
-                
-                res = self.env.cr.fetchall()
-                #eans = self.env['product.ean13'].search([('name', e[1], e[2])])
-                domain[i] = ('id', 'in', [r[0] for r in res])
-                
-        return super(product_product, self).search(domain, *args, **kwargs)
+    
     
 
 
