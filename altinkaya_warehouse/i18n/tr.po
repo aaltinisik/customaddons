@@ -570,3 +570,9 @@ msgstr "high priority quants will be reserved first"
 msgid "or"
 msgstr "ya da"
 
+
+#. module: altinkaya_warehouse
+#: view:stock.quant:altinkaya_warehouse.quant_search_view_inherit_multiple_location
+msgid "Spread to multiple locations"
+msgstr "Birden fazla lokasyonda olan"
+

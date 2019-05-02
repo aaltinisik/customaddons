@@ -3,6 +3,8 @@ from openerp import models, fields, api, _
 
 
 
+    
+
 class product_putaway_strategy(models.Model):
     _inherit = 'product.putaway'
   
@@ -119,6 +121,11 @@ class product_product(models.Model):
             product.qty_available_cnc = product.with_context({'location':9029}).qty_available
             product.qty_available_boya = product.with_context({'location':71}).qty_available
             product.qty_available_metal = product.with_context({'location':65}).qty_available
+            
+            
+            
+    
+    
 
 
 class mrpProduction(models.Model):
