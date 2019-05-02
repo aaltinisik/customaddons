@@ -567,3 +567,8 @@ msgstr ""
 msgid "or"
 msgstr ""
 
+#. module: altinkaya_warehouse
+#: view:stock.quant:altinkaya_warehouse.quant_search_view_inherit_multiple_location
+msgid "Spread to multiple locations"
+msgstr ""
+
