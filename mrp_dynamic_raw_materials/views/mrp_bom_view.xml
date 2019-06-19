@@ -11,10 +11,111 @@
                    <field name="factor_attribute_id"/>
                    <field name="attribute_factor"/>
                 </xpath>
+                
+				<xpath expr="//page[position() = 1]" position="after">
+                	<page string="Dynamic Components">
+                		<field name="template_line_ids" context="{'default_bom_id':active_id}">
+                	                		
+                		</field>
+                	</page>
+                	
+                </xpath>
             </field>
         </record>
 
+        <record id="view_bom_variant_line_rule_form" model="ir.ui.view">
+        	<field name="name">mrp.bom.template_line.rule.form</field>
+            <field name="model">mrp.bom.template_line.rule</field>
+            <field name="arch" type="xml">
+            	<form>
+            		<sheet>
+            			<group>
+            				<field name="bom_attribute_id"/>
+	                		<field name="attribute_id"/>
+	           				<field name="offset"/>
+	                		<field name="coeff"/>
+            			</group>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
         
+        <record id="view_bom_variant_line_rule_tree" model="ir.ui.view">
+        	<field name="name">mrp.bom.template_line.rule.tree</field>
+            <field name="model">mrp.bom.template_line.rule</field>
+            <field name="arch" type="xml">
+            	<tree editable="bottom">
+        			<field name="bom_attribute_id" domain="[('id','in',parent.bom_attribute_ids[0][2])]"/>
+               		<field name="attribute_id" domain="[('id','in',parent.attribute_ids[0][2])]"/>
+       				<field name="offset"/>
+               		<field name="coeff"/>
+        		</tree>
+            </field>
+        </record>
+        
+        <record id="view_bom_variant_line_form" model="ir.ui.view">
+        	<field name="name">mrp.bom.template_line.form</field>
+            <field name="model">mrp.bom.template_line</field>
+            <field name="arch" type="xml">
+            	<form>
+            		<sheet>
+            			<field name="bom_id" invisible="1"/>
+            			<field name="bom_attribute_ids" invisible="1"/>
+            			<field name="attribute_ids" invisible="1"/>
+            			<group>
+            				<group>
+            					<field name="product_tmpl_id" />
+            				
+		                		<field name="product_qty"/>
+								<field name="product_uom"/>
+			             		<field name="product_rounding"/>
+			             		<field name="product_efficiency"/>
+            				
+            				</group>
+							<group>
+								<field name="type"/>
+								<field name="date_start"/>
+			             		<field name="date_stop"/>
+			             		<field name="attribute_value_ids" widget="many2many_tags" domain="[('product_ids.product_tmpl_id', '=', parent.product_tmpl_id)]"/>
+			             		<field name="property_ids" widget="many2many_tags"/>
+		                		
+							
+							</group>
+							
+            			</group>
+            			
+            			<group string="Variant Selection Rules">
+            				<field name="variant_rule_ids" nolabel="1"/>
+            			</group>
+            		</sheet>
+            	</form>
+            </field>
+        	
+        
+        </record>
+        
+        <record id="view_bom_variant_line_tree" model="ir.ui.view">
+        	<field name="name">mrp.bom.template_line.tree</field>
+            <field name="model">mrp.bom.template_line</field>
+            <field name="arch" type="xml">
+            	<tree>
+        			<field name="product_tmpl_id"/>
+             		<field name="product_qty"/>
+             		<field name="product_uom"/>
+             		<field name="product_rounding"/>
+             		<field name="product_efficiency"/>
+             		<field name="date_start"/>
+             		<field name="date_stop"/>
+             		<field name="attribute_value_ids"/>
+             		<field name="property_ids"/>
+        		</tree>
+            </field>
+        	
+        
+        </record>
 
     </data>
+    
+    
+    
 </openerp>
