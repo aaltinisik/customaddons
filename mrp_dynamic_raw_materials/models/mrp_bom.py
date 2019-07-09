@@ -182,7 +182,7 @@ class MrpBoM(models.Model):
                        tmpl_line.product_uos_qty * factor,
                        tmpl_line.product_efficiency, tmpl_line.product_rounding))
         return {
-            'name': tmpl_line.product_id.name,
+            'name': product_id.name,
             'product_id': product_id.id,
             'product_qty': quantity,
             'product_uom': tmpl_line.product_uom.id,
@@ -244,7 +244,7 @@ class MrpBoM(models.Model):
             if (tmpl_line.type != "phantom" and
                     (not bom2 or bom2.type != "phantom")):
                 result.append(
-                    self._prepare_template_consume_line(tmpl_line, quantity, factor))
+                    self._prepare_template_consume_line(tmpl_line, product_id, quantity, factor))
             elif bom2:
                 all_prod = [self.product_tmpl_id.id] + (previous_products or [])
                 #bom2 = self.browse(bom_id)
