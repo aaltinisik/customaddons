@@ -24,11 +24,15 @@ class sale_order(models.Model):
             
         if self.order_policy == 'prepaid':
             return True
+        
+        commercial_partner_id = self.partner_id.commercial_partner_id
+        
+        if commercial_partner_id.credit_limit == 0.0:
+            return True
 
         order_amount = convert_to_company_currency_amount(self.currency_id, self.amount_total)
         
         
-        commercial_partner_id = self.partner_id.commercial_partner_id
         # We sum from all the sale orders that are aproved, the sale order
         # lines that are not yet invoiced
         domain = [('order_id.partner_id', 'child_of', commercial_partner_id.id),
