@@ -5,7 +5,9 @@ from openerp import models, fields, api
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
-    group_id = fields.Many2one('procurement.group',string='Producrement Group', related='move_prod_id.group_id')
+    
+    
+    group_id = fields.Many2one('procurement.group',string='Producrement Group', copy=False)#, related='move_prod_id.group_id')
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
 
 
@@ -51,7 +53,7 @@ class MrpProduction(models.Model):
                                 ('mo_printed', '=', False)],
                                   limit=20)
         report = self.pool.get('report')
-        produce_object = self.pool.get('mrp.produce.more')
+        #produce_object = self.pool.get('mrp.produce.more')
         cr, uid, context = self._cr, self._uid,self._context,
 
         for production in productions:
@@ -61,5 +63,14 @@ class MrpProduction(models.Model):
                                   context=context)
 #            produce_object.produce_mrp_order(cr, uid, [production.id], context=context)
             production.write({'mo_printed': True})
+            
+            
+    @api.model
+    def create(self, vals):
+        if 'group_id' not in vals:
+            group_id = self.env['procurement.group'].create({'name':'Manually created by %s at %s' % (self.env.user.name, fields.Datetime.now())})
+            vals.update({'group_id':group_id.id})
+            
+        return super(MrpProduction, self).create(vals)
             
     
