@@ -236,7 +236,7 @@ ln -s -f $OCA_HOME/product-attribute/product_multi_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/product-variant/product_variant_supplierinfo $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/product-variant/product_variant_cost_price $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector/connector $OE_HOME/custom/addons/
-ln -s -f $OCA_HOME/sale-payment/sale_payment_method_automatic_workflow $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/sale-workflow/sale_payment_method_automatic_workflow $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector/connector_base_product $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop_catalog_manager $OE_HOME/custom/addons/
