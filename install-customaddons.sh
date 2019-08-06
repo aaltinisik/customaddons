@@ -59,7 +59,7 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/connector-prestashop.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/e-commerce.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/connector-ecommerce.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/connector.git
-
+git clone -b $OE_VERSION https://github.com/aaltinisik/techspawn-odoo-apps.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/connector-prestashop.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/product-variant.git
 
