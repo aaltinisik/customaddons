@@ -4,6 +4,7 @@ from openerp import api, fields, models, _
 from openerp.exceptions import Warning
 
 
+
 class print_pack_barcode_wiz(models.TransientModel):
     _name = 'print.pack.barcode.wiz'
     _description = 'Product Label Print'
@@ -86,15 +87,16 @@ class print_pack_barcode_wiz(models.TransientModel):
                     'nameL2': nameL[2],
                     'nameL3': nameL[3],
                     'nameL4': nameL[4],
-                'default_code': product_id.default_code,
+                    'default_code': product_id.default_code,
                     'short_code': shortcode,
                     'note': '',
                     'pieces_in_pack': product_id.pieces_in_pack,
                     'label_to_print': 1,
                     'barcode': product_id.ean13,
                     'uom_name': product_id.uom_id.name,
-                    'product_id': product_id.id
+                    'product_id': product_id.id,
             })
+            product_label_id.batchcode = product_label_id.genBatchCode()
             product_ids.append(product_label_id.id)
         res.update({'product_label_ids': [(6, 0, product_ids)] or [],
                     'skip_first': False
