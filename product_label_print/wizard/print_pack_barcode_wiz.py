@@ -74,9 +74,10 @@ class print_pack_barcode_wiz(models.TransientModel):
             for word in product_id.name_variant.split():
                 if len(nameL[nameline]+' '+word) < 27:
                     nameL[nameline]=(nameL[nameline]+' '+word).strip()
-                else:
+                elif nameline < 4:
                     nameline = nameline +1
                     nameL[nameline] = (nameL[nameline] + ' ' + word).strip()
+
 
 
             product_label_id = product_label_obj.create({

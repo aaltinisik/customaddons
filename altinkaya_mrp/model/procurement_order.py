@@ -15,6 +15,7 @@ class procurement_order(models.Model):
         
         res.update({'priority':procurement.priority,
                     'group_id':procurement.group_id.id})
+
         
         return res
     

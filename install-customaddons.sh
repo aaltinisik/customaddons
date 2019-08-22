@@ -4,9 +4,9 @@
 ##fixed parameters
 #openerp
 
-OE_USER="odoo"
-OE_HOME="/opt/$OE_USER"
-OCA_HOME="/opt/odoo/custom/repos"
+OE_USER="dogan"
+OE_HOME="/home/dogan/workspace/ALTINKAYA"
+OCA_HOME="/home/dogan/workspace/ALTINKAYA/custom/repos"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
 OE_SERVERTYPE="openerp-server"
@@ -55,8 +55,13 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-utils.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-wip.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/mail-addons.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.git
-git clone -b $OE_VERSION https://github.com/aaltinisik/techspawn-odoo-apps.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/connector-prestashop.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/e-commerce.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/connector-ecommerce.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/connector.git
 
+git clone -b $OE_VERSION https://github.com/aaltinisik/connector-prestashop.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/product-variant.git
 
 
 
@@ -198,6 +203,7 @@ ln -s -f $OCA_HOME/stock-logistics-workflow/stock_picking_mass_action $OE_HOME/c
 ln -s -f $OCA_HOME/stock-logistics-workflow/stock_picking_package_preparation $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_quant_merge $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/super_calendar $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/base_multi_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_graph_improved $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_graph_sort $OE_HOME/custom/addons/
@@ -225,7 +231,16 @@ ln -s -f $OCA_HOME/web/support_branding $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/mail-addons/mail_fix_553 $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/techspawn-odoo-apps/warehouse_stock_restrictions $OE_HOME/custom/addons/
 
-
+ln -s -f $OCA_HOME/product-attribute/product_m2mcategories $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/connector-ecommerce/connector_ecommerce $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-attribute/product_multi_image $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-variant/product_variant_supplierinfo $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/product-variant/product_variant_cost_price $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/connector/connector $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/sale-workflow/sale_payment_method_automatic_workflow $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/connector/connector_base_product $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop_catalog_manager $OE_HOME/custom/addons/
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;

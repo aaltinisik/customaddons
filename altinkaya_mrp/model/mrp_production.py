@@ -5,12 +5,10 @@ from openerp import models, fields, api
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
-    
-    
+
     group_id = fields.Many2one('procurement.group',string='Producrement Group', copy=False)#, related='move_prod_id.group_id')
+
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
-
-
 
     @api.onchange('routing_id')
     def onchange_routing_id(self):
