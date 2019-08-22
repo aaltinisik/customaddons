@@ -24,6 +24,8 @@ AC,5,184,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
 AC,5,209,1,1,0,0E,${label.label1.note or ''}{% if label.label1.pieces_in_pack > 0.0 %}
 AT, 20, 228, 82, 70, 0, 0E, 0, 0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label1.uom_name or ''}{% end %}
 BE,15,299,3,6,75,0,1,${label.label1.barcode or ''}
+AB,330,360,1,1,0,0E,${label.label1.batchcode or ''}
+
 {% end %}
 {% if not label.second_label_empty %}
 Y420,12,tek_cicek
@@ -37,6 +39,7 @@ AC,420,184,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
 AC,420,209,1,1,0,0E,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
 AT, 420, 228, 82, 70, 0, 0E, 0, 0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
 BE,445,299,3,6,75,0,1,${label.label2.barcode or ''}
+AB,760,360,1,1,0,0E,${label.label1.batchcode or ''}
 {% end %}
 ^P${label.copies_to_print}
 E
@@ -68,7 +71,8 @@ AD,27,234,1,1,0,0E,${label.label1.nameL3[0:30] or ''}
 AD,27,272,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
 AD,27,308,1,1,0,0E,${label.label1.note or ''}{% if label.label1.pieces_in_pack > 0.0 %}
 AT,52,336,80,87,0,0E,0,0,${(formatLang(label.label1.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label1.uom_name or ''}{% end %}
-BE,36,429,5,12,129,0,1,${label.label1.barcode or ''}
+BE,30,425,5,12,129,0,1,${label.label1.barcode or ''}
+AD,535,550,1,1,0,0E,${label.label1.batchcode or ''}
 {% end %}
 {% if not label.second_label_empty %}
 Y652,17,tek_cicek
@@ -83,7 +87,8 @@ AD,653,235,1,1,0,0E,${label.label2.nameL3[0:30] or ''}
 AD,653,273,1,1,0,0E,${label.label1.nameL4[0:30] or ''}
 AD,653,309,1,1,0,0E,${label.label1.note or ''}{% if label.label2.pieces_in_pack > 0.0 %}
 AT,678,337,80,87,0,0E,0,0,${(formatLang(label.label2.pieces_in_pack, digits=0)).rjust(3) or ''} ${label.label2.uom_name or ''}{% end %}
-BE,662,430,5,12,129,0,1,${label.label2.barcode or ''}
+BE,656,425,5,12,129,0,1,${label.label2.barcode or ''}
+AD,1160,550,1,1,0,0E,${label.label1.batchcode or ''}
 {% end %}
 ^P${label.copies_to_print}
 E

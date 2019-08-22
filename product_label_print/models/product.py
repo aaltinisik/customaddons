@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from openerp import api, fields, models, _
+from datetime import date
+
 
 
 class productproductLabel(models.TransientModel):
@@ -18,6 +20,88 @@ class productproductLabel(models.TransientModel):
     product_id = fields.Many2one('product.product', string="Product")
     barcode = fields.Char(string="Barcode")
     uom_name = fields.Char(string="UOM Name", size=10)
+    batchcode = fields.Char(string="Batch Code",size=4)
+
+
+    def genBatchCode(self):
+        DayCode = {
+            '1': '1',
+            '2': '2',
+            '3': '3',
+            '4': '4',
+            '5': '5',
+            '6': '6',
+            '7': '7',
+            '8': '8',
+            '9': '9',
+            '10': 'a',
+            '11': 'b',
+            '12': 'c',
+            '13': 'd',
+            '14': 'e',
+            '15': 'f',
+            '16': 'g',
+            '17': 'h',
+            '18': 'i',
+            '19': 'j',
+            '20': 'k',
+            '21': 'l',
+            '22': 'm',
+            '23': 'n',
+            '24': 'o',
+            '25': 'p',
+            '26': 'r',
+            '27': 's',
+            '28': 't',
+            '29': 'u',
+            '30': 'v',
+            '31': 'y',
+        }
+        MonthCode = {
+            '1': 'a',
+            '2': 's',
+            '3': 'd',
+            '4': 'f',
+            '5': 'g',
+            '6': 'h',
+            '7': 'j',
+            '8': 'k',
+            '9': 'l',
+            '10': 'z',
+            '11': 'x',
+            '12': 'c',
+        }
+        YearCode = {
+            '2019': 'Q',
+            '2020': 'W',
+            '2021': 'E',
+            '2022': 'R',
+            '2023': 'T',
+            '2024': 'Y',
+            '2025': 'U',
+            '2026': 'I',
+            '2027': 'O',
+            '2028': 'P',
+            '2029': 'A',
+            '2030': 'S',
+            '2031': 'D',
+            '2032': 'F',
+            '2033': 'G',
+            '2034': 'H',
+            '2035': 'J',
+            '2036': 'K',
+            '2037': 'L',
+            '2038': 'Z',
+            '2039': 'X',
+            '2040': 'C',
+            '2041': 'V',
+            '2042': 'B',
+        }
+
+        def UserCode(userid):
+            return chr(userid % 60 + 65)
+        today = date.today()
+        return DayCode[today.day.__str__()] + MonthCode[today.month.__str__()] + YearCode[today.year.__str__()] + UserCode(self.env.user.id)
 
 
 class labelTwoinrow(models.TransientModel):
