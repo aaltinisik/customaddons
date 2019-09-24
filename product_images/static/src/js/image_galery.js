@@ -10,7 +10,7 @@ instance.web.form.FieldImageGalery = instance.web.form.FieldMany2One.extend({
 		
 		var product_id = this.get('value');
 		return new instance.web.Model('product.product').call('read',[product_id, ['altinkaya_image_ids']]).then(function(data){
-			if(data.image_ids.length == 0){
+			if(data.altinkaya_image_ids.length == 0){
 				return;
 			}
 			return new instance.web.Model('ir.attachment').call('read',[data.image_ids,['name']]).then(function(images){
@@ -35,7 +35,7 @@ instance.web.ListView.List.include({
 		this.$current.delegate('a.fa-image', 'click', function (e) {
 			var product_id = $(e.currentTarget).data('product-id');
 			new instance.web.Model('product.product').call('read',[product_id, ['altinkaya_image_ids']]).then(function(data){
-				if(data.image_ids.length == 0){
+				if(data.altinkaya_image_ids.length == 0){
 					return;
 				}
 				return new instance.web.Model('ir.attachment').call('read',[data.altinkaya_image_ids,['name']]).then(function(images){
