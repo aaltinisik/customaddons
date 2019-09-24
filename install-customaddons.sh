@@ -4,10 +4,11 @@
 ##fixed parameters
 #openerp
 
-OE_USER="dogan"
-OE_HOME="/home/dogan/workspace/ALTINKAYA"
-OCA_HOME="/home/dogan/workspace/ALTINKAYA/custom/repos"
+OE_USER="odoo"
+OE_HOME="/opt/$OE_USER"
+OCA_HOME="/opt/odoo/custom/repos"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
+
 # Replace for openerp-gevent for enabling gevent mode for chat
 OE_SERVERTYPE="openerp-server"
 OE_VERSION="8.0"
