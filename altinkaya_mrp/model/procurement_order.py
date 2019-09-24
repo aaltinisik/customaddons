@@ -14,8 +14,9 @@ class procurement_order(models.Model):
         res = super(procurement_order, self)._prepare_mo_vals(procurement)
         
         res.update({'priority':procurement.priority,
-                    'group_id':procurement.group_id.id,
-                    })
+                    'group_id':procurement.group_id.id})
+
         
         return res
+    
     

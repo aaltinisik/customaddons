@@ -4,9 +4,9 @@
 ##fixed parameters
 #openerp
 
-OE_USER="odoo"
-OE_HOME="/opt/$OE_USER"
-OCA_HOME="/opt/odoo/custom/repos"
+OE_USER="dogan"
+OE_HOME="/home/dogan/workspace/ALTINKAYA"
+OCA_HOME="/home/dogan/workspace/ALTINKAYA/custom/repos"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
 OE_SERVERTYPE="openerp-server"
@@ -203,6 +203,7 @@ ln -s -f $OCA_HOME/stock-logistics-workflow/stock_picking_mass_action $OE_HOME/c
 ln -s -f $OCA_HOME/stock-logistics-workflow/stock_picking_package_preparation $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_quant_merge $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/server-tools/super_calendar $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/base_multi_image $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_environment_ribbon $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_graph_improved $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_graph_sort $OE_HOME/custom/addons/
