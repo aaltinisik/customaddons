@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--Email template for send partner statement-->
+        <record id="email_template_edi_send_statement" model="mail.template">
+            <field name="name">Partner Statement Send by email</field>
+            <field name="email_from">${(user.email or '')|safe}</field>
+            <field name="subject">Partner Statement</field>
+            <field name="email_recipients">${object.id}</field>
+            <field name="email_to">${object.email}</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="partner_statement_altinkaya"/>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
+
+    <p>Hello ${object.name},</p>
+
+    <p>Here is your partner statement from ${(user.email or '')|safe}</p>
+
+</div>
+            ]]></field>
+        </record>
+
+    </data>
+</openerp>

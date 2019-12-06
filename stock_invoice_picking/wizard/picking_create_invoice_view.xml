@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_picking_create_invoice" model="ir.ui.view">
+            <field name="name">Invoice Orders</field>
+            <field name="model">stock.picking.create_invoice</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Pickings">
+                    <p class="oe_grey">
+                        Invoices will be created in draft so that you can review
+                        them before validation.
+                    </p>
+                   	<group name="invoice_info">
+                   		<field name="invoice_type" invisible="1"/>
+                   		<field name="commercial_partner_id" invisible="1"/>
+                   		<field name="partner_invoice_id" domain="[('commercial_partner_id','=',commercial_partner_id)]"/>
+                   		<field name="date_invoice"/>
+                   		<field name="journal_id"/>
+                   		<field name="currency_id" readonly="1"/>
+                   	</group>
+                    <footer>
+                        <button name="create_invoices" string="Create Invoices" type="object"
+                            class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+		<record id="action_view_picking_create_invoice" model="ir.actions.act_window">
+	        <field name="name">Invoice Pickings</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">stock.picking.create_invoice</field>
+	        <field name="src_model">stock.picking</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">form</field>
+	        <field name="key">client_action_multi</field>
+	        <field name="target">new</field>
+	    </record>
+		
+	    <act_window
+            name="Invoice Transfers"
+            res_model="stock.picking.create_invoice"
+            src_model="stock.picking"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="stock_move_make_invoice" />
+	    
+</odoo>

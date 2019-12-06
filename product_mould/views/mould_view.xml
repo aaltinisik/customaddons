@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mould_form">
+            <field name="name">Product Mould Form</field>
+            <field name="model">product.mould</field>
+            <field name="arch" type="xml">
+                <form string="Mould">
+                    <sheet>
+                        <group>
+                             <group >
+                                <field name="code" colspan="2"/>
+                                <field name="name"/>
+                                <field name="is_parent"/>
+                                <field name="type"/>
+                                <field name="numcores"/>
+                                <field name="dailycapacity"/>
+                                <field name="material_id" />
+                                <field name="product_ids" widget="many2many_tags" />
+                                <field name="partner_id" />
+                                <field name="owner_id" />
+                            </group>
+                            <group>
+                                <field name="image" widget="image" img_height="300" img_width="300"/>
+                            </group>
+                        </group>
+                        <separator string="Notes"/>
+                        <field name="notes" />
+                        <separator string="Core Moulds"/>
+                        <field name="mould_ids" nolabel='1' widget="one2many_list">
+                            <tree string="Maçalar" editable="bottom">
+                                <field name="sequence" widget="handle" />
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="product_ids" widget="many2many_tags"/>
+                                <field name="partner_id"/>
+                                <field name="material_id"/>
+                                <field name="notes"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!-- mould tree view -->
+
+        <record model="ir.ui.view" id="product_mould_tree">
+            <field name="name">Product Mould Tree</field>
+            <field name="model">product.mould</field>
+            <field name="arch" type="xml">
+                <tree string="Mould" >
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="is_parent" string="Main" />
+                    <field name="type" />
+                    <field name="product_ids" />
+                    <field name="partner_id" />
+                    <field name="notes" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_mould" model="ir.actions.act_window">
+            <field name="name">Product MOuld</field>
+            <field name="res_model">product.mould</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_mould" id="menu_mould" name="Moulds" parent="mrp.menu_mrp_bom" sequence="16"/>
+
+    </data>
+</odoo>

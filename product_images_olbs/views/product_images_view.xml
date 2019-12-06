@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#    Copyright (c) 2015 - Present Teckzilla Software Solutions Pvt Ltd. All Rights Reserved
+#    Author: [Teckzilla Software Solutions]  <[ sales@teckzilla.net]>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    A copy of the GNU General Public License is available at:
+#    <http://www.gnu.org/licenses/gpl.html>.
+#
+#    
+#
+##############################################################################
+-->
+
+
+<openerp>
+    <data>
+        <record id="view_product_image_form" model="ir.ui.view">
+            <field name="name">product.images.form</field>
+            <field name="model">product.images</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Product Images" version="7.0">
+                    <sheet>
+                        <notebook colspan="4">
+                            <page string="Image">
+                                <group col="6" colspan="4">
+                                    <field name="name" colspan="4" />
+                                    <field name="extention" colspan="2" />
+                                    <field name="link" colspan="4" />
+                                </group>
+                                <group>
+                                    <field name="file_db_store" widget="image" nolabel="1" filename="name" colspan="4" attrs="{'readonly':[('link','==',0)]}"/>
+                                </group>
+                                <group attrs="{'invisible':[('link','=',False)]}" colspan="4">
+                                    <separator string="File Location and Preview (Only when saved)" colspan="4"/>
+                                    <field name="url" colspan="4" widget="url" nolabel="1" attrs="{'required' :[('link','=',True)],}"/>
+                                </group>
+                                <field name="file" widget="image" nolabel="1" filename="name" colspan="4" attrs="{'readonly':[('link','!=',0)],'invisible':[('link','=',False)]}"/>
+                            </page>
+                            <page string="Comments">
+                                <field name="comments" nolabel="1" colspan="4" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_product_image_tree" model="ir.ui.view">
+            <field name="name">product.images.tree</field>
+            <field name="model">product.images</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Images">
+                    <field name="name" select="1" />
+                    <field name="comments" select="2" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_product_form_img_inh" model="ir.ui.view">
+            <field name="name">product.product.images</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook" position="inside">
+                    <page string="Images">
+                        <field name="image_ids" nolabel="1" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

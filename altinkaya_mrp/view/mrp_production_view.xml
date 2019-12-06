@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="view_production_form_inherit_print_product_label" model="ir.ui.view">
+			<field name="inherit_id" ref="mrp.mrp_production_form_view" />
+			<field name="name">mrp.production.form.inherit.label</field>
+			<field name="model">mrp.production</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_inline oe_stat_button" name="action_print_product_label" type="object" icon="fa-barcode" string="Print Barcode"/>
+				</xpath>
+				<xpath expr="//field[@name='user_id']" position="replace"/>
+				<xpath expr="//field[@name='location_src_id']" position='replace' />
+				<xpath expr="//field[@name='location_dest_id']" position='replace' />
+				<xpath expr="//form//field[@name='product_id']" position='attributes'>
+					<attribute name="domain">[('has_production_bom','=',True)]</attribute>
+					<attribute name="class"></attribute>
+				</xpath>
+<!-- 				<xpath expr="//field[@name='priority']" position="replace" /> -->
+<!-- 				<xpath expr="//field[@name='date_planned']" position="replace"> -->
+<!-- 					<field name="priority" /> -->
+<!-- 				    <field name="date_planned" /> -->
+<!--                     <field name="date_start2" /> -->
+<!-- 					<field name="date_finished2" /> -->
+<!-- 					<field name="x_note" colspan="8" /> -->
+<!-- 				</xpath> -->
+				<xpath expr="//field[@name='availability']"  position="after">
+					<field name="location_src_id" />
+					<field name="location_dest_id" />
+				</xpath>
+				<xpath expr="//field[@name='origin']" position="after">
+					<field name="sale_id" readonly="1"/>
+					<field name="x_makine"/>
+					<field name="x_operator" />
+					<field name="priority" />
+				    <field name="date_planned" />
+                    <field name="date_start2" />
+                    <field name="date_finished2" />
+				</xpath>
+				<xpath expr="//field[@name='routing_id']" position="after">
+				<field name="x_note" />
+				</xpath>
+			</field>
+				
+			
+		</record>
+
+    </data>
+</odoo>

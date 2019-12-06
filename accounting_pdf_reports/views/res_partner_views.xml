@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+
+	 <record id="action_res_partner_account_move_lines" model="ir.actions.act_window">
+        <field name="name">Move Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('partner_id','=',active_id)]</field>
+        <field name="target">current</field>
+    </record>
+
+	<record id="view_partner_form_reports" model="ir.ui.view">
+		<field name="name">res.partner.form.inherit.local</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form" />
+		<field name="priority" eval="25" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button name="%(accounting_pdf_reports.action_account_partner_ledger_menu)d" type="action"
+			            class="oe_stat_button" icon="fa-download"
+			            string="Partner Ledger" >
+			    </button>
+<!-- 			    <button name="%(accounting_pdf_reports.action_account_aged_balance_view)d" type="action" -->
+<!-- 			            class="oe_stat_button" icon="fa-download" -->
+<!-- 			            string="Aged Partner Balance" > -->
+<!-- 			    </button> -->
+			    <button name="%(accounting_pdf_reports.action_res_partner_account_move_lines)d" type="action"
+			            class="oe_stat_button" icon="fa-list"
+			            string="Move Lines" >
+			    </button>
+			</xpath>
+		</field>
+	</record>
+
+</data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_vendor_receipt_dialog_form_ace">
+            <field name="name">view.vendor.receipt.dialog.form.ace</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//button[@name='action_validate_invoice_payment']" position="after">
+                        <button name="button_proforma_voucher_report" string="Save &amp; Print" class="oe_highlight" type="object"/>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

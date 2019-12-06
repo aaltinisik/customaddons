@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_payment_detail
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-25 13:53+0000\n"
+"PO-Revision-Date: 2019-03-25 13:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_payment_detail
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
+msgid "Cancel"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__create_uid
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__create_date
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
+msgid "Customer Excel"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__display_name
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.customer_excel_form
+msgid "Download"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__file
+msgid "File"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__name
+msgid "File Name"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__id
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model,name:partner_payment_detail.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel____last_update
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__write_uid
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_customer_excel__write_date
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.wizard_partner_detail_form
+msgid "Partner Detail"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.actions.act_window,name:partner_payment_detail.action_wizard_partner_detail_form
+#: model:ir.actions.act_window,name:partner_payment_detail.wizard_partner_detail_window
+msgid "Partner Payment Detail"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.ui.menu,name:partner_payment_detail.menu_payment_detail
+msgid "Partner Payment detail"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.wizard_partner_detail_form
+msgid "Print"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_wizard_partner_detail__start_date
+msgid "Start Date"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model.fields,field_description:partner_payment_detail.field_account_invoice__total_balance
+#: model_terms:ir.ui.view,arch_db:partner_payment_detail.account_invoice_total_balance
+msgid "Total Balance"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model,name:partner_payment_detail.model_customer_excel
+msgid "customer.excel"
+msgstr ""
+
+#. module: partner_payment_detail
+#: model:ir.model,name:partner_payment_detail.model_wizard_partner_detail
+msgid "wizard.partner.detail"
+msgstr ""
+

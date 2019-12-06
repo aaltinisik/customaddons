@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_picking_internal_search_day_filters" model="ir.ui.view">
+            <field name="name">stock.picking.filter.days.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+              <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+                   <separator/> 
+                        <filter string="Today's Deliveries" name="todaydel"
+                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00')),
+                                  ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" /> 
+
+                        <filter string="Yesterday's Deliveries" name="yesterdaydel"
+                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 00:00:00')),
+                               ('date_done','&lt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="last 3 day's Deliveries" name="threedaydel"
+                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-2)).strftime('%Y-%m-%d 00:00:00')),
+                                ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+                        <filter string="last Week's Deliveries" name="lastweekdel"
+                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(weeks=-1,days=0)).strftime('%Y-%m-%d 00:00:00')),
+                               ('date_done','&lt;=',(context_today()+relativedelta(weeks=-1,days=5)).strftime('%Y-%m-%d 23:59:59'))]" />
+
+
+                        <filter string="last Month's Deliveries" name="lastmonthdel"
+                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01 00:00:00')),
+                                 ('date_done','&lt;',time.strftime('%Y-%m-01 00:00:00'))]" /> 
+
+                        <filter string="This Month's Deliveries" name="thismonthdel" 
+                        domain="[('picking_type_code', '=', 'outgoing'), ('date_done','&gt;=',(context_today()).strftime('%Y-%m-01 00:00:00'))]" />
+                    <separator/>
+                                          <filter string="Two Weeks ago" name="twoweeks"
+                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-2)).strftime('%Y-%m-%d 00:00:00'))]" />
+
+                                          <filter string="Four weeks ago" name="fourweeks"
+                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-4)).strftime('%Y-%m-%d 00:00:00'))]" />
+
+                  <separator/>
+
+              </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+		<report id="label_product_product"
+            model="print.pack.barcode.wiz"
+            string="Product Label (GODEX)"
+            name="product_label_print.product_label_report"
+            file="product_label_print.product_label_report"
+            report_type="qweb-text"
+        />
+
+</data>
+</odoo>

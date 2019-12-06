@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<odoo>
+	<data>
+		<record id="account_partner_ledger_paperformat" model="report.paperformat">
+            <field name="name">Partner Ledger Format</field>
+            <field name="default" eval="False" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">55</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+             <field name="header_line" eval="False" />
+            <field name="header_spacing">45</field>
+            <field name="dpi">90</field>
+        </record>
+        
+           <record id="accounting_pdf_reports.action_report_partnerledger" model="ir.actions.report">
+            <field name="paperformat_id"
+                ref="accounting_pdf_reports.account_partner_ledger_paperformat" />
+        </record>
+		
+	</data>
+</odoo>
+
+
+
+</odoo>

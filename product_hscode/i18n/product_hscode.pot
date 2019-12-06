@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_hscode
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-16 11:11+0000\n"
+"PO-Revision-Date: 2019-01-16 11:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_account_invoice_line__hscode_id
+#: model:ir.model.fields,field_description:product_hscode.field_product_category__hscode_id
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_template__hscode_id
+#: model_terms:ir.ui.view,arch_db:product_hscode.hscode_form
+msgid "GTIP"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.actions.act_window,name:product_hscode.action_hscode
+msgid "Gümrük Tarifeleri"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.ui.menu,name:product_hscode.menu_hscode
+msgid "HS Codes"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__id
+msgid "ID"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__image
+msgid "Image"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model,name:product_hscode.model_account_invoice_line
+msgid "Invoice Line"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__Kisa_aciklama
+msgid "Kısa Açıklama"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__long_desc
+msgid "Long Description"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__name
+msgid "Name"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__nameen
+msgid "Name(Eng)"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__notes
+#: model_terms:ir.ui.view,arch_db:product_hscode.hscode_form
+msgid "Notes"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model,name:product_hscode.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model,name:product_hscode.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model,name:product_hscode.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__short_desc
+msgid "Short Description"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model.fields,field_description:product_hscode.field_product_hscode__Uzun_aciklama
+msgid "Uzun Açıklama"
+msgstr ""
+
+#. module: product_hscode
+#: model:ir.model,name:product_hscode.model_product_hscode
+msgid "product.hscode"
+msgstr ""
+

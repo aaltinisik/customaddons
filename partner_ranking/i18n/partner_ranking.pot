@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_ranking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-16 09:03+0000\n"
+"PO-Revision-Date: 2019-01-16 09:03+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_ranking
+#: model:ir.model,name:partner_ranking.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model,name:partner_ranking.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.actions.server,name:partner_ranking.ir_cron_res_partner_ranking_ir_actions_server
+#: model:ir.cron,cron_name:partner_ranking.ir_cron_res_partner_ranking
+#: model:ir.cron,name:partner_ranking.ir_cron_res_partner_ranking
+msgid "Partner Ranking"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model,name:partner_ranking.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.actions.server,name:partner_ranking.ir_cron_product_sales__count_ir_actions_server
+#: model:ir.cron,cron_name:partner_ranking.ir_cron_product_sales__count
+#: model:ir.cron,name:partner_ranking.ir_cron_product_sales__count
+msgid "Product Sale counts"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__rank
+msgid "Rank"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner__ranking
+msgid "Ranking"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__date_rank
+msgid "Ranking Date"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_product_product__sale_qty180days
+#: model:ir.model.fields,field_description:partner_ranking.field_stock_warehouse_orderpoint__sale_qty180days
+msgid "Sale in last 180 days"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_product_product__sale_qty30days
+#: model:ir.model.fields,field_description:partner_ranking.field_stock_warehouse_orderpoint__sale_qty30days
+msgid "Sale in last 30 days"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_product_product__sale_qty360days
+#: model:ir.model.fields,field_description:partner_ranking.field_stock_warehouse_orderpoint__sale_qty360days
+msgid "Sale in last 360 days"
+msgstr ""
+
+#. module: partner_ranking
+#: model_terms:ir.ui.view,arch_db:partner_ranking.stock_warehouse_orderpoint_form_view_partner_ranking
+msgid "Sales"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model.fields,field_description:partner_ranking.field_res_partner_rank__total
+msgid "Total Revenue"
+msgstr ""
+
+#. module: partner_ranking
+#: model:ir.model,name:partner_ranking.model_res_partner_rank
+msgid "res.partner.rank"
+msgstr ""
+

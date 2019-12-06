@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- altinkaya_customV7 Stock Picking Out Form View -->
+
+        <record id="altinkaya_customV7_stock_picking_out_form" model="ir.ui.view">
+              <field name="name">Altinkaya CustomV7 Stock Picking Out Form</field>
+              <field name="model">stock.picking</field>
+              <field name="inherit_id" ref="stock.view_picking_form"></field>
+              <field name="priority" eval="1"></field>
+              <field name="arch" type="xml">
+                  <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="open_sales_order" string="Sales Order" icon="fa-dollar"
+                    type="object" class="oe_highlight" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}"/>
+                  </xpath>
+                  <xpath expr="//field[@name='partner_id']" position="replace">
+	                  <field name="partner_id"
+							context="{'show_address': 1}" options="{'always_reload': True}" />
+	                    <field name='carrier_id'/>
+	                    <field name="hazirlayan"></field>
+	                    <field name='x_hazirlayan'/>
+	                    <field name='x_durum'/>
+                  </xpath>
+                  
+                  <xpath expr="//field[@name='note']" position='after'>
+                        <field name="comment_irsaliye" placeholder="İrsaliyeye eklenecek not..." class="oe_inline"/>
+                         <field name="teslim_alan"/>
+                    </xpath>
+                     <field name="priority" position="replace"/>
+                     <field name="date_done" position="replace"/>
+                      <field name="carrier_id" position="replace"/>
+                      
+<!--                      <xpath expr="//field[@name='date']" position="replace"> -->
+<!--               			<field name="priority"/> -->
+<!--               			<field name="date_done"/> -->
+<!--               			<field name='invoice_state'/> -->
+<!--               			<field name="date"/> -->
+<!--               		</xpath> -->
+                     
+              </field>
+        </record>
+		
+		
+    </data>
+</openerp>

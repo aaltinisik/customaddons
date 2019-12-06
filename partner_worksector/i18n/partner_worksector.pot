@@ -1,0 +1,111 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_worksector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-10 13:56+0000\n"
+"PO-Revision-Date: 2019-01-10 13:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__product_categ_ids
+msgid "Category"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model,name:partner_worksector.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.actions.act_window,name:partner_worksector.action_res_partner_worksector
+#: model:ir.ui.menu,name:partner_worksector.menuitem_res_partner_worksector
+msgid "Customer Sectors"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__description
+msgid "Description"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: partner_worksector
+#: model_terms:ir.ui.view,arch_db:partner_worksector.res_partner_form_view
+msgid "Marketing"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__name
+msgid "Name"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_partner_worksector__partner_ids
+#: model_terms:ir.ui.view,arch_db:partner_worksector.res_partner_worksector_form_view
+msgid "Partner"
+msgstr ""
+
+#. module: partner_worksector
+#: model_terms:ir.ui.view,arch_db:partner_worksector.res_partner_worksector_form_view
+msgid "Product Category"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_res_partner__target_product_categ_ids
+#: model_terms:ir.ui.view,arch_db:partner_worksector.res_partner_form_view
+msgid "Target Product Category"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model,name:partner_worksector.model_partner_worksector
+msgid "Work Sector"
+msgstr ""
+
+#. module: partner_worksector
+#: model:ir.model.fields,field_description:partner_worksector.field_res_partner__worksector_ids
+#: model_terms:ir.ui.view,arch_db:partner_worksector.res_partner_form_view
+msgid "Worksector"
+msgstr ""
+

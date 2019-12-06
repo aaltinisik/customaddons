@@ -1,3 +1,0 @@
-import address_details
-import res_partner
-import models

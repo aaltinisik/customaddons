@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <report
+                id="action_report_followup"
+                model="devit_account_followup.followup"
+                string="Follow-up Report"
+                report_type="qweb-pdf"
+                name="devit_account_followup.report_followup"
+                file="devit_account_followup.report_followup"
+                menu="False"
+        />
+    </data>
+</odoo>

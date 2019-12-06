@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--            sales order form view        -->
+
+        <record model='ir.ui.view' id='view_sales_order_form_acespritech'>
+            <field name='name'>sales order form</field>
+            <field name='model'>sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field eval="1" name="priority" />
+            <field name='arch' type='xml'>
+                <xpath expr="//field[@name='partner_invoice_id']" position="replace">
+                    <field name="partner_invoice_id" context="{'default_type':'invoice', 'show_address': 1}" options='{"always_reload": True}'/>
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="replace">
+                    <field name="partner_shipping_id" context="{'default_type':'delivery', 'show_address': 1}" options='{"always_reload": True}'/>
+                </xpath>
+                <xpath expr="//page[@name='other_information']" position='after'>
+                    <page string='History'>
+                    	<label for='invoice_ids'/>
+                        <field name='invoice_ids'/>
+                        <label for='picking_ids'/>
+                        <field name='picking_ids'/>
+                    </page>
+				</xpath>
+				<xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="before">
+                    	<field name="show_custom_products" />
+                    	
+                	</xpath>
+					
+					<xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                    	<field name="set_product" invisible="1"/>
+                    	<span class="oe_form_field" attrs="{'invisible':[('set_product','=',False)]}">This is a set product</span>
+                      <xpath expr="//field[@name='payment_term']" position='replace'/>
+                	</xpath>
+                <xpath expr="//notebook" position="inside">
+	            	<page string="Manufacturing Orders">
+	            		<field name="production_ids"/>
+	            	</page>
+               	</xpath>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='view_sales_order_remove_dm_form_acespritech'>
+            <field name='name'>sale order form2</field>
+            <field name='model'>sale.order</field>
+            <field name="inherit_id" ref="delivery.view_order_form_with_carrier" />
+            <field eval="1" name="priority" />
+            <field name='arch' type='xml'>
+                <field name='carrier_id' position='replace'/>
+                <label for='carrier_id' position='replace'/>
+                <field name='client_order_ref' position='after'>
+                    <field name='carrier_id'/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

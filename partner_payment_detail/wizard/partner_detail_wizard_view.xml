@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_partner_detail_form">
+            <field name="name">wizard.partner.detail.form</field>
+            <field name="model">wizard.partner.detail</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Partner Detail" version="7.0">
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <footer>
+                        <button name='print_report' string="Print" type="object" icon="fa-print" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_wizard_partner_detail_form" model="ir.actions.act_window">
+            <field name="name">Partner Payment Detail</field>
+            <field name="res_model">wizard.partner.detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <act_window name="Partner Payment Detail"
+                res_model="wizard.partner.detail"
+                src_model="res.partner"
+                view_type="form" 
+                view_mode="form"
+                key2="client_action_multi"
+                target="new"
+                multi="True"
+                id="wizard_partner_detail_window"/>
+
+        <record model="ir.ui.view" id="customer_excel_form">
+            <field name="name">customer.excel.form</field>
+            <field name="model">customer.excel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Customer Excel">
+                    <group>
+	                    <field name="file" filename="name" nolabel="0" readonly="1"/>
+	                    <field name="name" invisible='1'/>
+                    </group>
+                    <footer>
+                    	<button name="download_xlsx" type="object" string="Download" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
