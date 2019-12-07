@@ -98,13 +98,15 @@ sudo apt-get install postgresql-11 -y
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
 sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/$PG_VERSION/main/postgresql.conf
 
+cd /opt
 echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
 sudo su - postgres -c "createuser --createdb --username postgres $OE_USER"
 #sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
-sudo su - postgres -c 'ALTER USER $OE_USER with password $DBPASS;'
+sudo -u postgres  psql -d postgres -c "alter user $OE_USER with password '$DBPASS';"
+
 
 
 #--------------------------------------------------
