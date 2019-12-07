@@ -17,7 +17,7 @@
 OE_VER="12"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
-Oe_HOMEV="/opt/$OE_USER/v$OE_VERSION"
+OE_HOMEV="/opt/$OE_USER/v$OE_VERSION"
 OE_HOME_EXT="/opt/$OE_USER/v$OE_VERSION/${OE_USER}-server"
 # The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 # Set to true if you want to install it, false if you don't need it or have it already installed.
@@ -33,8 +33,6 @@ IS_ENTERPRISE="False"
 OE_CONFIG="${OE_USER}-$OE_VER"
 
 echo -e "---- Decide system passwords ----"
-read -e -s -p "Enter odoo system users password: " OE_USERPASS
-echo -e "\n"
 read -e -s -p "Enter the Database password: " DBPASS
 echo -e "\n"
 read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
@@ -82,7 +80,6 @@ echo -e "\n---- Update Server ----"
 # universe package is for Ubuntu 18.x
 sudo add-apt-repository universe
 # libpng12-0 dependency for wkhtmltopdf
-sudo add-apt-repository "deb http://mirrors.kernel.org/ubuntu/ xenial main"
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -100,7 +97,7 @@ sudo apt-get install postgresql-11 -y
 # Install Dependencies
 #--------------------------------------------------
 echo -e "\n--- Installing Python 3 + pip3 --"
-sudo apt-get install git python3 python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpng12-0 gdebi -y
+sudo apt-get install git python3 python3-pip build-essential wget mc python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpng12-0 gdebi -y
 
 echo -e "\n---- Install python packages/requirements ----"
 sudo pip3 install -r https://github.com/odoo/odoo/raw/${OE_VERSION}/requirements.txt
@@ -129,7 +126,7 @@ else
 fi
 
 echo -e "\n---- Create Log directory ----"
-sudo mkdir /var/log/$OE_USER
+sudo mkdir -p -v /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 #--------------------------------------------------
@@ -138,9 +135,9 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 
 echo -e "\n---- Create custom module directory ----"
 echo -e "\n create $OE_HOMEV,$OE_HOMEV/repos,$OE_HOMEV/addons"
-sudo su $OE_USER -c "mkdir $OE_HOMEV"
-sudo su $OE_USER -c "mkdir $OE_HOMEV/repos"
-sudo su $OE_USER -c "mkdir $OE_HOMEV/addons"
+
+sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/repos"
+sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/addons"
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
