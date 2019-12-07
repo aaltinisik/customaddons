@@ -150,9 +150,6 @@ cd $OE_HOMEV
 
 sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/aaltinisik/customaddons.git
 
-$OE_HOMEV/customaddons/install-customaddons.sh
-
-
 echo -e "* Create server config file"
 
 sudo touch /etc/${OE_CONFIG}.conf
@@ -186,6 +183,11 @@ sudo systemctl enable odoo.service
 
 echo -e "* Open ports in UFW for odoo-server"
 sudo ufw allow $OE_PORT
+
+echo -e "\n** installing customaddons and links "
+
+$OE_HOMEV/customaddons/install-customaddons.sh
+
 
 sudo systemctl start odoo.service
 
