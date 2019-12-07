@@ -60,11 +60,10 @@ sudo adduser odoo --home=$OE_HOME
 read -n 1 -s -p "Press any key to continue"
 #--------------------------------------------------
 
-#Disable ipv6
+#Disable ipv6 for apt
+
 
 sudo echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
-sudo touch /etc/sysctl.d/disableipv6.conf
-sudo echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.d/disableipv6.conf
 
 
 
@@ -93,9 +92,9 @@ sudo apt-get upgrade -y
 
 echo -e "\n---- Install PostgreSQL Server ----"
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install postgresql-11  postgresql-contrib postgresql-server-dev-all -y
-
 
 #--------------------------------------------------
 # Install Dependencies
@@ -136,13 +135,16 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 # Install ODOO
 #--------------------------------------------------
+
 echo -e "\n---- Create custom module directory ----"
+echo -e "\n create $OE_HOMEV,$OE_HOMEV/repos,$OE_HOMEV/addons"
 sudo su $OE_USER -c "mkdir $OE_HOMEV"
 sudo su $OE_USER -c "mkdir $OE_HOMEV/repos"
 sudo su $OE_USER -c "mkdir $OE_HOMEV/addons"
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
+
 
 echo -e "\n==== Installing ODOO Server ===="
 
