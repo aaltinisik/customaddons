@@ -152,6 +152,7 @@ sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/aaltinisik/
 
 echo -e "* Create server config file"
 
+sudo rm  /etc/${OE_CONFIG}.conf
 sudo touch /etc/${OE_CONFIG}.conf
 echo -e "* Creating server config file"
 sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> /etc/${OE_CONFIG}.conf"
