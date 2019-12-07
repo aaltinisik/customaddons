@@ -18,13 +18,8 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/access-addons
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-financial-tools
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-invoicing.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-payment.git
-git clone -b $OE_VERSION https://github.com/aaltinisik/addons-onestein
-git clone -b $OE_VERSION https://github.com/aaltinisik/aeroo_reports
-git clone -b $OE_VERSION https://github.com/aaltinisik/bank-statement-import.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/connector-telephony.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/crm
-git clone -b $OE_VERSION https://github.com/aaltinisik/gant_improvement
-git clone -b $OE_VERSION https://github.com/aaltinisik/geospatial.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/knowledge.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/misc-addons.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/partner-contact.git
@@ -43,7 +38,6 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/addons-vauxoo.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/SerpentCS_Contributions.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-reporting.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/manufacture.git
-git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-utils.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/odoomrp-wip.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/mail-addons.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.git
