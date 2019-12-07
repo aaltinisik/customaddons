@@ -10,6 +10,7 @@ OE_VERSION=$OE_VER".0"
 
 echo -e "\n---- : ----"
 
+sudo pip3 install -r https://github.com/aaltinisik/customaddons/raw/${OE_VERSION}/requirements.txt
 sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/repos"
 sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/addons"
 cd $OE_HOMEV/repos
