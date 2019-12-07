@@ -104,7 +104,7 @@ sudo su - postgres -c "createuser --createdb --username postgres $OE_USER"
 echo -e "\n---- Creating postgres unaccent search extension  ----"
 sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
 
-sudo su - postgres -c "ALTER USER $OE_USER with password '$DBPASS';"
+sudo su - postgres -c 'ALTER USER $OE_USER with password $DBPASS;'
 
 
 #--------------------------------------------------
