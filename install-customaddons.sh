@@ -1,26 +1,18 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 
-##fixed parameters
-#openerp
-
+OE_VER="12"
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
-OCA_HOME="/opt/odoo/12/repos"
-OE_HOME_EXT="/opt/$OE_USER/$OE_USER12"
-# Replace for openerp-gevent for enabling gevent mode for chat
-OE_SERVERTYPE="openerp-server"
-OE_VERSION="12.0"
-#set the superadmin password
-OE_CONFIG="odoo-server"
+OE_HOMEV="/opt/$OE_USER/v$OE_VER"
+OE_HOME_EXT="$OE_HOMEV/$OE_USER-server"
+OE_VERSION=$OE_VER".0"
 
 echo -e "\n---- : ----"
-cd $OE_HOME
-mkdir $OE_HOME/12
-cd $OE_HOME/12
-mkdir $OE_HOME/12/addons
-mkdir $OE_HOME/12/repos
-cd $OE_HOME/12/repos
+
+sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/repos"
+sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/addons"
+cd $OE_HOMEV/repos
 
 git clone -b $OE_VERSION https://github.com/aaltinisik/access-addons
 git clone -b $OE_VERSION https://github.com/aaltinisik/account-financial-tools
@@ -58,7 +50,8 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-barcode.g
 git clone -b $OE_VERSION https://github.com/aaltinisik/techspawn-odoo-apps.git
 
 
-
+echo -e "\n---- Setting permissions on home folder ----"
+sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 while true; do
     read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
