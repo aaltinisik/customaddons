@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# Addtions by Ahmet Altinisik 2019
+# Addtions by Ahmet Altinisik dec 2019
 # Script for installing Odoo on Ubuntu 14.04, 15.04, 16.04 and 18.04 (could be used for other version too)
 # Author: Yenthe Van Ginneken
 #-------------------------------------------------------------------------------
@@ -16,7 +16,8 @@
 ################################################################################
 OE_VER="12"
 OE_USER="odoo"
-OE_HOME="/opt/$OE_USER/v$OE_VERSION"
+OE_HOME="/opt/$OE_USER"
+Oe_HOMEV="/opt/$OE_USER/v$OE_VERSION"
 OE_HOME_EXT="/opt/$OE_USER/v$OE_VERSION/${OE_USER}-server"
 # The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 # Set to true if you want to install it, false if you don't need it or have it already installed.
@@ -29,8 +30,43 @@ OE_VERSION=$OE_VER".0"
 # Set this to True if you want to install the Odoo enterprise version!
 IS_ENTERPRISE="False"
 # set the superadmin password
-OE_SUPERADMIN="admin2453D"
-OE_CONFIG="${OE_USER}-conf"
+OE_CONFIG="${OE_USER}-$OE_VER"
+
+echo -e "---- Decide system passwords ----"
+read -e -s -p "Enter odoo system users password: " OE_USERPASS
+echo -e "\n"
+read -e -s -p "Enter the Database password: " DBPASS
+echo -e "\n"
+read -e -s -p "Enter the Odoo Administrator Password: " OE_SUPERADMIN
+echo -e "\n"
+
+
+#--------------------------------------------------
+# Set Locale en_US.UTF-8
+#--------------------------------------------------
+echo -e "\n---- Set en_US.UTF-8 Locale ----"
+sudo cp /etc/default/locale /etc/default/locale.BACKUP
+sudo rm -rf /etc/default/locale
+echo -e "* Change server config file"
+sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
+sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
+sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
+
+#-----------------------
+# Odoo user
+echo -e "\n---- Enter odoo system users password ----"
+sudo adduser odoo --home=$OE_HOME
+
+read -n 1 -s -p "Press any key to continue"
+#--------------------------------------------------
+
+#Disable ipv6
+
+sudo echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
+sudo touch /etc/sysctl.d/disableipv6.conf
+sudo echo "net.ipv6.conf.all.disable_ipv6=1" >> /etc/sysctl.d/disableipv6.conf
+
+
 
 ##
 ###  WKHTMLTOPDF download links
@@ -52,13 +88,14 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 #--------------------------------------------------
-# Install PostgreSQL Server
+# Install PostgreSQL Server from postgresql repo
 #--------------------------------------------------
-echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql postgresql-server-dev-all -y
 
-echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+echo -e "\n---- Install PostgreSQL Server ----"
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+sudo apt-get update
+sudo apt-get install postgresql-11  postgresql-contrib postgresql-server-dev-all -y
+
 
 #--------------------------------------------------
 # Install Dependencies
@@ -92,11 +129,6 @@ else
   echo "Wkhtmltopdf isn't installed due to the choice of the user!"
 fi
 
-echo -e "\n---- Create ODOO system user ----"
-sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' --group $OE_USER
-#The user should also be added to the sudo'ers group.
-sudo adduser $OE_USER sudo
-
 echo -e "\n---- Create Log directory ----"
 sudo mkdir /var/log/$OE_USER
 sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
@@ -104,40 +136,23 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 # Install ODOO
 #--------------------------------------------------
-echo -e "\n==== Installing ODOO Server ===="
-sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
-
-if [ $IS_ENTERPRISE = "True" ]; then
-    # Odoo Enterprise install!
-    echo -e "\n--- Create symlink for node"
-    sudo ln -s /usr/bin/nodejs /usr/bin/node
-    sudo su $OE_USER -c "mkdir $OE_HOME/enterprise"
-    sudo su $OE_USER -c "mkdir $OE_HOME/enterprise/addons"
-
-    GITHUB_RESPONSE=$(sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/enterprise "$OE_HOME/enterprise/addons" 2>&1)
-    while [[ $GITHUB_RESPONSE == *"Authentication"* ]]; do
-        echo "------------------------WARNING------------------------------"
-        echo "Your authentication with Github has failed! Please try again."
-        printf "In order to clone and install the Odoo enterprise version you \nneed to be an offical Odoo partner and you need access to\nhttp://github.com/odoo/enterprise.\n"
-        echo "TIP: Press ctrl+c to stop this script."
-        echo "-------------------------------------------------------------"
-        echo " "
-        GITHUB_RESPONSE=$(sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/enterprise "$OE_HOME/enterprise/addons" 2>&1)
-    done
-
-    echo -e "\n---- Added Enterprise code under $OE_HOME/enterprise/addons ----"
-    echo -e "\n---- Installing Enterprise specific libraries ----"
-    sudo pip3 install num2words ofxparse dbfread ebaysdk firebase_admin pyOpenSSL
-    sudo npm install -g less
-    sudo npm install -g less-plugin-clean-css
-fi
-
 echo -e "\n---- Create custom module directory ----"
-sudo su $OE_USER -c "mkdir $OE_HOME/custom"
-sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
+sudo su $OE_USER -c "mkdir $OE_HOMEV"
+sudo su $OE_USER -c "mkdir $OE_HOMEV/repos"
+sudo su $OE_USER -c "mkdir $OE_HOMEV/addons"
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
+
+echo -e "\n==== Installing ODOO Server ===="
+
+sudo git clone --depth 1 --branch $OE_VERSION https://github.com/aaltinisik/OCBAltinkaya.git $OE_HOME_EXT/
+cd $OE_HOMEV
+
+sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/aaltinisik/customaddons.git
+
+$OE_HOMEV/customaddons/install-customaddons.sh
+
 
 echo -e "* Create server config file"
 
@@ -147,11 +162,8 @@ sudo su root -c "printf '[options] \n; This is the password that allows database
 sudo su root -c "printf 'admin_passwd = ${OE_SUPERADMIN}\n' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "printf 'logfile = /var/log/${OE_USER}/${OE_CONFIG}.log\n' >> /etc/${OE_CONFIG}.conf"
-if [ $IS_ENTERPRISE = "True" ]; then
-    sudo su root -c "printf 'addons_path=${OE_HOME}/enterprise/addons,${OE_HOME_EXT}/addons\n' >> /etc/${OE_CONFIG}.conf"
-else
-    sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOME}/custom/addons\n' >> /etc/${OE_CONFIG}.conf"
-fi
+sudo su root -c "printf 'addons_path=${OE_HOME_EXT}/addons,${OE_HOMEV}/addons,$OE_HOME/customaddons\n' >> /etc/${OE_CONFIG}.conf"
+
 sudo chown $OE_USER:$OE_USER /etc/${OE_CONFIG}.conf
 sudo chmod 640 /etc/${OE_CONFIG}.conf
 
@@ -161,94 +173,40 @@ sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/odoo-bin --config=/etc/${OE
 sudo chmod 755 $OE_HOME_EXT/start.sh
 
 #--------------------------------------------------
-# Adding ODOO as a deamon (initscript)
+# Adding ODOO as a systemD daemon (initscript)
 #--------------------------------------------------
 
-echo -e "* Create init file"
-cat <<EOF > ~/$OE_CONFIG
-#!/bin/sh
-### BEGIN INIT INFO
-# Provides: $OE_CONFIG
-# Required-Start: \$remote_fs \$syslog
-# Required-Stop: \$remote_fs \$syslog
-# Should-Start: \$network
-# Should-Stop: \$network
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
-# Short-Description: Enterprise Business Applications
-# Description: ODOO Business Applications
-### END INIT INFO
-PATH=/bin:/sbin:/usr/bin
-DAEMON=$OE_HOME_EXT/odoo-bin
-NAME=$OE_CONFIG
-DESC=$OE_CONFIG
-# Specify the user name (Default: odoo).
-USER=$OE_USER
-# Specify an alternate config file (Default: /etc/openerp-server.conf).
-CONFIGFILE="/etc/${OE_CONFIG}.conf"
-# pidfile
-PIDFILE=/var/run/\${NAME}.pid
-# Additional options that are passed to the Daemon.
-DAEMON_OPTS="-c \$CONFIGFILE"
-[ -x \$DAEMON ] || exit 0
-[ -f \$CONFIGFILE ] || exit 0
-checkpid() {
-[ -f \$PIDFILE ] || return 1
-pid=\`cat \$PIDFILE\`
-[ -d /proc/\$pid ] && return 0
-return 1
-}
-case "\${1}" in
-start)
-echo -n "Starting \${DESC}: "
-start-stop-daemon --start --quiet --pidfile \$PIDFILE \
---chuid \$USER --background --make-pidfile \
---exec \$DAEMON -- \$DAEMON_OPTS
-echo "\${NAME}."
-;;
-stop)
-echo -n "Stopping \${DESC}: "
-start-stop-daemon --stop --quiet --pidfile \$PIDFILE \
---oknodo
-echo "\${NAME}."
-;;
-restart|force-reload)
-echo -n "Restarting \${DESC}: "
-start-stop-daemon --stop --quiet --pidfile \$PIDFILE \
---oknodo
-sleep 1
-start-stop-daemon --start --quiet --pidfile \$PIDFILE \
---chuid \$USER --background --make-pidfile \
---exec \$DAEMON -- \$DAEMON_OPTS
-echo "\${NAME}."
-;;
-*)
-N=/etc/init.d/\$NAME
-echo "Usage: \$NAME {start|stop|restart|force-reload}" >&2
-exit 1
-;;
-esac
-exit 0
-EOF
 
-echo -e "* Security Init File"
-sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
-sudo chmod 755 /etc/init.d/$OE_CONFIG
-sudo chown root: /etc/init.d/$OE_CONFIG
+echo -e "* SystemD Init File"
 
-echo -e "* Start ODOO on Startup"
-sudo update-rc.d $OE_CONFIG defaults
+sudo cp /opt/odoo/odoo-server/debian/odoo.service /etc/systemd/system/odoo.service
+sudo chmod 755 /etc/systemd/system/odoo.service
+sudo chown root: /etc/systemd/system/odoo.service
+sudo systemctl enable odoo.service
 
-echo -e "* Starting Odoo Service"
-sudo su root -c "/etc/init.d/$OE_CONFIG start"
-echo "-----------------------------------------------------------"
-echo "Done! The Odoo server is up and running. Specifications:"
-echo "Port: $OE_PORT"
-echo "User service: $OE_USER"
-echo "User PostgreSQL: $OE_USER"
-echo "Code location: $OE_USER"
-echo "Addons folder: $OE_USER/$OE_CONFIG/addons/"
-echo "Start Odoo service: sudo service $OE_CONFIG start"
-echo "Stop Odoo service: sudo service $OE_CONFIG stop"
-echo "Restart Odoo service: sudo service $OE_CONFIG restart"
-echo "-----------------------------------------------------------"
+
+echo -e "* Open ports in UFW for odoo-server"
+sudo ufw allow $OE_PORT
+
+sudo systemctl start odoo.service
+
+
+echo "Done! The ODOO server can be started with sudo systemctl start odoo.service"
+echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
+echo "Once you've rebooted you'll be able to access your Odoo instance by going to http://[your server's IP address]:8069"
+echo "For example, if your server's IP address is 192.168.1.123 you'll be able to access it on http://192.168.1.123:8069"
+
+echo -e "\n >>>>>>>>>> PLEASE RESTART YOUR SERVER TO FINALISE THE INSTALLATION (See below for the command you should use) <<<<<<<<<<"
+echo -e "\n---- restart the server (sudo shutdown -r now) ----"
+while true; do
+    read -p "Would you like to restart your server now (y/n)?" yn
+    case $yn in
+        [Yy]* ) sudo shutdown -r now
+        break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+
