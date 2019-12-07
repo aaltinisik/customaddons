@@ -24,6 +24,7 @@ OE_HOME_EXT="$OE_HOMEV/$OE_USER-server"
 INSTALL_WKHTMLTOPDF="True"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8069"
+PG_VERSION="11"
 # Choose the Odoo version which you want to install. For example: 13.0, 12.0, 11.0 or saas-18. When using 'master' the master version will be installed.
 # IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 13.0
 OE_VERSION=$OE_VER".0"
@@ -93,6 +94,18 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install postgresql-11 -y
+
+echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
+sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/$PG_VERSION/main/postgresql.conf
+
+echo -e "\n---- Enter password for ODOO PostgreSQL User  ----"
+sudo su - postgres -c "createuser --createdb --username postgres $OE_USER"
+#sudo su - postgres -c 'ALTER USER $OE_USER WITH SUPERUSER;'
+echo -e "\n---- Creating postgres unaccent search extension  ----"
+sudo su - postgres -c 'psql template1 -c "CREATE EXTENSION \"unaccent\"";'
+
+sudo -u postgres psql -U postgres -d postgres -c "alter user $OE_USER with password '$DBPASS';"
+
 
 #--------------------------------------------------
 # Install Dependencies
