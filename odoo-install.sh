@@ -187,7 +187,7 @@ sudo ufw allow $OE_PORT
 
 echo -e "\n** installing customaddons and links "
 
-$OE_HOMEV/customaddons/install-customaddons.sh
+sudo $OE_HOMEV/customaddons/install-customaddons.sh
 
 
 sudo systemctl start odoo.service
