@@ -173,9 +173,26 @@ sudo touch /etc/${OE_CONFIG}.conf
 echo -e "* Creating server config file"
 sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "printf 'admin_passwd = ${OE_SUPERADMIN}\n' >> /etc/${OE_CONFIG}.conf"
-sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "printf 'logfile = /var/log/${OE_USER}/${OE_CONFIG}.log\n' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "printf 'addons_path=$OE_HOME_EXT/addons,$OE_HOMEV/addons,$OE_HOMEV/customaddons\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'data_dir = ${OE_HOME}/data\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_host = False\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_maxconn = 64\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_name = False\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_password = False\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_port = False\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_sslmode = prefer\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'db_user = odoo\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'http_enable = True\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'http_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'xmlrpc_port = ${OE_PORT}\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'log_handler = :INFO\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'log_level = info\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'unaccent = True\n' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "printf 'workers = 0\n' >> /etc/${OE_CONFIG}.conf"
+
+
+
 
 sudo chown $OE_USER:$OE_USER /etc/${OE_CONFIG}.conf
 sudo chmod 640 /etc/${OE_CONFIG}.conf
