@@ -64,7 +64,8 @@ read -n 1 -s -p "Press any key to continue"
 
 sudo echo 'Acquire::ForceIPv4 "true";' | tee /etc/apt/apt.conf.d/99force-ipv4
 
-
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
 
 ##
 ###  WKHTMLTOPDF download links
