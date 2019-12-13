@@ -57,15 +57,4 @@ while true; do
     esac
 done
 
-while true; do
-    read -p "Would you like to update odoo database all  modules  (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME_EXT
-        
-        /opt/odoo/odoo-server/odooupdate.sh
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
