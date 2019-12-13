@@ -39,7 +39,7 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/misc-addons.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/partner-contact.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/product-attribute.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/purchase-workflow.git
-git clone -b $OE_VERSION https://github.com/aaltinisik/reporting-engine
+git clone -b $OE_VERSION https://github.com/aaltinisik/reporting-engine.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/report-print-send.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/sale-workflow
 git clone -b $OE_VERSION https://github.com/aaltinisik/server-tools.git
@@ -63,7 +63,11 @@ git clone -b $OE_VERSION https://github.com/aaltinisik/connector.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/techspawn-odoo-apps.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/connector-prestashop.git
 git clone -b $OE_VERSION https://github.com/aaltinisik/product-variant.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/manufacture-reporting.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/odoo-extra-addons.git
+git clone -b $OE_VERSION https://github.com/aaltinisik/stock-logistics-warehouse.git
 
+git clone -b $OE_VERSION https://github.com/aaltinisik/altinkaya_private.git
 
 
 while true; do
@@ -218,6 +222,8 @@ ln -s -f $OCA_HOME/web/web_searchbar_full_width $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_sheet_full_width $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_translate_dialog $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_tree_image $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/web/web_tree_many2one_clickable $OE_HOME/custom/addons/
+
 ln -s -f $OCA_HOME/web/web_widget_image_download $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_widget_many2many_tags_multi_selection $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/web/web_export_view $OE_HOME/custom/addons/
@@ -242,6 +248,19 @@ ln -s -f $OCA_HOME/sale-workflow/sale_payment_method_automatic_workflow $OE_HOME
 ln -s -f $OCA_HOME/connector/connector_base_product $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop $OE_HOME/custom/addons/
 ln -s -f $OCA_HOME/connector-prestashop/connector_prestashop_catalog_manager $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/manufacture-reporting/mrp_bom_structure_xls $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/reporting-engine/report_xls $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/reporting-engine/report_xlsx $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/server-tools/shell $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-workflow/stock_disable_force_availability_button $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/odoo-extra-addons/stock_warehouse_transfer $OE_HOME/custom/addons/
+
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_inventory_exclude_sublocation $OE_HOME/custom/addons/
+ln -s -f $OCA_HOME/stock-logistics-warehouse/stock_warehouse_orderpoint_stock_info $OE_HOME/custom/addons/
+
+
+
+
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;

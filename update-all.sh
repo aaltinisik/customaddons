@@ -30,6 +30,7 @@ while true; do
                 echo "${D}"
                 cd ${D}   # your processing here
                 pwd
+		git checkout $OE_VERSION
                 git pull
                 cd ..
             fi
