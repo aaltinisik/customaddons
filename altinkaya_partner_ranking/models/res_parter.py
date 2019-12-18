@@ -64,9 +64,9 @@ class Partner(models.Model):
         
         self._cr.execute('''
                             UPDATE res_partner p set ranking = r.rank
-                            from (SELECT * FROM res_partner_rank ORDER BY date_rank DESC) r 
+                            from (SELECT * FROM res_partner_rank where date_rank='%s' ORDER BY date_rank DESC) r 
                             WHERE p.commercial_partner_id = r.partner_id 
-                        ''')
+                        ''' % today_date.strftime('%Y-%m-%d'))
         
 #         out_inv_datas = self._cr.fetchall()
 #         all_partners = self.env['res.partner'].search([]).ids
