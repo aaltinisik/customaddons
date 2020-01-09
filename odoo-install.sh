@@ -210,10 +210,10 @@ sudo chmod 755 $OE_HOME_EXT/start.sh
 
 echo -e "* SystemD Init File"
 
-sudo cp $OE_HOME_EXT/debian/odoo.service /etc/systemd/system/odoo.service 
-sudo chmod 755 /etc/systemd/system/odoo.service
-sudo chown root: /etc/systemd/system/odoo.service
-sudo systemctl enable odoo.service
+sudo cp $OE_HOME_EXT/debian/odoo.service /etc/systemd/system/odoo$OE_VER.service 
+sudo chmod 755 /etc/systemd/system/odoo$OE_VER.service
+sudo chown root: /etc/systemd/system/odoo$OE_VER.service
+sudo systemctl enable odoo$OE_VER.service
 
 
 echo -e "* Open ports in UFW for odoo-server"
