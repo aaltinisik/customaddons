@@ -21,7 +21,7 @@ echo -e "\n---- Install community Modules: ----"
 cd $OCA_HOME
 
 while true; do
-    read -p "Would you like to git pull repos of community modules (y/n)?" yn
+    read -p "Would you like to git merge all repos from upstream repos (y/n)?" yn
     case $yn in
         [Yy]* ) cd $OCA_HOME
 
