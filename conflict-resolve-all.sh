@@ -22,6 +22,7 @@ for D in *; do
       echo "${D}"
       cd ${D}   # your processing here
       pwd
+      git checkout $OE_VERSION
       if [ -n "$(git status --porcelain)" ]; then
           git status
           echo "there are changes in $D";

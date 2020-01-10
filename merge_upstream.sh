@@ -30,6 +30,7 @@ while true; do
                 echo "${D}"
                 cd ${D}   # your processing here
                 pwd
+                git checkout $OE_VERSION
                 git pull
                 git remote -v
 		git fetch upstream
@@ -38,7 +39,6 @@ while true; do
 		git commit -m "merge upstream $OE_VERSION"
 		git push origin $OE_VERSION
                 cd ..
-		read -p "Press enter to continue"
             fi
         done
 
@@ -47,6 +47,3 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
-
-
