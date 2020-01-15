@@ -1,206 +1,166 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 
-OE_VER="12"
-OE_USER="odoo"
-OE_HOME="/opt/$OE_USER"
+OE_HOME="/opt/$OE_USER/v$OE_VERSION"
 OE_HOMEV="/opt/$OE_USER/v$OE_VER"
 OE_HOME_EXT="$OE_HOMEV/$OE_USER-server"
-OE_VERSION=$OE_VER".0"
+OE_VERSION="12.0"
+CLONE_REPOS=1
+CREATE_ADDONS_LINKS=1
+INSTALL_REQUIREMENTS=0
+SRC_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+REPO_LIST_FILE=$SRC_PATH"/repo_list.txt"
+ADDONS_LIST_FILE=$SRC_PATH"/addon_list.txt"
+REQUIREMENTS_FILE=$SRC_PATH"/requirements.txt"
+
+INSTALL_DIR=$OE_HOME
+#USER=$(id -u)
+OE_USER=$USER
+
+clone_repos()
+{ 
+
+	if [ -z $REPO_LIST_FILE ] 
+	then
+		echo "Git repo list is not provided"
+		exit
+	elif [ ! -r $REPO_LIST_FILE ]
+	then 
+		echo "Git repo list file is not readable"
+		exit
+	else
+	
+		echo "Cloning custom repositories from file "$REPO_LIST_FILE
+		
+		if [ ! -d  $INSTALL_DIR"/repos" ]; then
+			mkdir $INSTALL_DIR"/repos"
+		fi
+		
+		if [ ! -d  $INSTALL_DIR"/addons" ]; then
+			mkdir $INSTALL_DIR"/addons"
+		fi
+
+		
+		cd $INSTALL_DIR"/repos"
+		while read -r name upstream upstream_name ; 
+		do
+			git clone -b $OE_VERSION "https://github.com/aaltinisik/"$name $name
+			cd "$name"
+			if [ -z $upstream_name ]
+			then
+				git remote add upstream $upstream"/"$name
+			else
+				git remote add upstream $upstream"/"$upstream_name
+			fi
+			cd ..
+			
+		done < "$REPO_LIST_FILE"
+
+	fi
+	
+	
+}
+
+create_sym_links()
+{
+	if [ -z $ADDONS_LIST_FILE ] 
+	then
+		echo "Addons list is not provided"
+		exit 1
+	elif [ ! -r $ADDONS_LIST_FILE ]
+	then 
+		echo "Addons list file is not readable"
+		exit 1
+	else
+	
+		cd $INSTALL_DIR
+		
+		if [ ! -d  "repos" ]; then
+			echo "Repos folders does not exist"
+			exit 1
+		fi
+		
+		echo "Creating addons links from file "$ADDONS_LIST_FILE
+		
+		if [ ! -d  "addons" ]; then
+			mkdir "addons"
+		fi
+		
+		cd "addons"
+		
+		while read -r repo addon ; 
+		do
+			ln -s "../repos/$repo/$addon" "$addon"
+			
+		done < "$ADDONS_LIST_FILE"
+
+	fi
+}
+
+usage()
+{ 
+	echo "install-customaddons.sh [option]"
+	echo "    -C Do not create addon links"
+	exit 1
+}
+
+
+while getopts 'Cd:Lru:v:' opt
+do
+  case $opt in
+  	C) CLONE_REPOS=0 ;;
+    d) 
+    	if [[ $OPTARG == -* ]];
+    	then 
+    		echo "Invalid directory parameter"
+    		exit 1
+    	fi
+    	if [ ! -d $OPTARG ];
+    	then
+    		echo "Creating installation directory $OPTARG"
+    		mkdir $OPTARG
+    	fi
+    	INSTALL_DIR="$( cd $OPTARG ; pwd -P )"
+    ;;
+    u) OE_USER=$OPTARG ;;
+    L) CREATE_ADDONS_LINKS=0 ;;
+    r) INSTALL_REQUIREMENTS=1 ;;
+    v) OE_VERSION=$OPTARG ;;
+    ?) usage;;
+	    
+  esac
+done
+
+
+
 
 echo -e "\n---- : ----"
+echo "Installing into "$INSTALL_DIR
 
-sudo pip3 install -r https://github.com/aaltinisik/customaddons/raw/${OE_VERSION}/requirements.txt
-sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/repos"
-sudo su $OE_USER -c "mkdir -p -v $OE_HOMEV/addons"
-cd $OE_HOMEV/repos
+if [ $INSTALL_REQUIREMENTS -ne 0 ];
+then
+	pip3 install -r $REQUIREMENTS_FILE
+fi
 
-git clone https://github.com/aaltinisik/access-addons
-cd access-addons
-git checkout $OE_VERSION
-git remote add upstream https://github.com/it-projects-llc/access-addons.git
-git remote -v
-cd ..
+if [ $CLONE_REPOS -ne 0 ];
+then
+	clone_repos
+fi
 
-git clone https://github.com/aaltinisik/account-financial-tools
-cd account-financial-tools
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/account-financial-tools.git
-cd ..
+if [ $CREATE_ADDONS_LINKS -ne 0 ];
+then
+	create_sym_links
+fi
 
-git clone https://github.com/aaltinisik/account-invoicing.git
-cd account-invoicing 
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/account-invoicing
-cd ..
+echo $USER
+echo $OE_USER
 
-git clone https://github.com/aaltinisik/account-payment.git
-cd  account-payment
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/account-payment
-cd ..
+if [ $USER != $OE_USER ];
+then
+	echo "Changing owner to "$OE_USER
+	chown -R $OE_USER:$OE_USER $INSTALL_DIR
+fi
 
-git clone https://github.com/aaltinisik/connector-telephony.git
-cd  connector-telephony
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/connector-telephony
-cd ..
+exit 0
 
-git clone https://github.com/aaltinisik/crm
-cd  crm
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/crm
-cd ..
-
-git clone https://github.com/aaltinisik/knowledge.git
-cd  knowledge
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/knowledge
-cd ..
-
-git clone https://github.com/aaltinisik/misc-addons.git
-cd  misc-addons
-git checkout $OE_VERSION
-git remote add upstream https://github.com/it-projects-llc/misc-addons 
-cd ..
-
-git clone https://github.com/aaltinisik/partner-contact.git
-cd  partner-contact
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/partner-contact
-cd ..
-
-git clone https://github.com/aaltinisik/product-attribute.git
-cd  product-attribute
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/product-attribute
-cd ..
-
-git clone https://github.com/aaltinisik/purchase-workflow.git
-cd  purchase-workflow
-git checkout $OE_VERSION
-git remote add upstream  https://github.com/OCA/purchase-workflow
-cd ..
-
-git clone https://github.com/aaltinisik/reporting-engine
-cd  reporting-engine
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/reporting-engine
-cd ..
-
-git clone https://github.com/aaltinisik/report-print-send.git
-cd  report-print-send
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/report-print-send
-cd ..
-
-git clone https://github.com/aaltinisik/sale-workflow
-cd  sale-workflow
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/sale-workflow
-cd ..
-
-git clone https://github.com/aaltinisik/server-tools.git
-cd  server-tools
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/server-tools
-cd ..
-
-git clone https://github.com/aaltinisik/stock-logistics-tracking.git
-cd  stock-logistics-tracking
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/stock-logistics-tracking
-cd ..
-
-git clone https://github.com/aaltinisik/stock-logistics-warehouse
-cd stock-logistics-warehouse
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/stock-logistics-warehouse
-cd ..
-
-git clone https://github.com/aaltinisik/stock-logistics-workflow
-cd stock-logistics-workflow
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/stock-logistics-workflow
-cd ..
-
-git clone https://github.com/aaltinisik/web.git
-cd web
-git checkout $OE_VERSION
-git remote add upstream  https://github.com/OCA/web
-cd ..
-
-git clone https://github.com/aaltinisik/CybroAddons.git
-cd CybroAddons
-git checkout $OE_VERSION
-git remote add upstream https://github.com/CybroOdoo/CybroAddons
-cd ..
-
-git clone https://github.com/aaltinisik/addons-vauxoo.git
-cd addons-vauxoo
-git checkout $OE_VERSION
-git remote add upstream https://github.com/Vauxoo/addons-vauxoo
-cd ..
-
-git clone https://github.com/aaltinisik/SerpentCS_Contributions.git
-cd SerpentCS_Contributions
-git checkout $OE_VERSION
-git remote add upstream https://github.com/JayVora-SerpentCS/SerpentCS_Contributions
-cd ..
-
-git clone https://github.com/aaltinisik/stock-logistics-reporting.git
-cd stock-logistics-reporting
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/stock-logistics-reporting
-cd ..
-
-git clone https://github.com/aaltinisik/manufacture.git
-cd manufacture
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/manufacture
-cd ..
-
-git clone https://github.com/aaltinisik/odoomrp-wip.git
-cd odoomrp-wip
-git checkout $OE_VERSION
-git remote add upstream https://github.com/odoomrp/odoomrp-wip
-cd ..
-
-git clone https://github.com/aaltinisik/mail-addons.git
-cd mail-addons
-git checkout $OE_VERSION
-git remote add upstream https://github.com/it-projects-llc/mail-addons
-cd ..
-
-git clone https://github.com/aaltinisik/stock-logistics-barcode.git
-cd  stock-logistics-barcode
-git checkout $OE_VERSION
-git remote add upstream https://github.com/OCA/stock-logistics-barcode
-cd ..
-
-git clone https://github.com/aaltinisik/techspawn-odoo-apps.git
-cd  techspawn-odoo-apps
-git checkout $OE_VERSION
-git remote add upstream https://github.com/techspawn/odoo-apps
-cd ..
-
-
-echo -e "\n---- Setting permissions on home folder ----"
-sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
-
-while true; do
-    read -p "Would you like to symlink selected modules to custom/addons folder  (y/n)?" yn
-    case $yn in
-        [Yy]* ) cd $OE_HOME
-
-
-
-
-
-
-        break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
