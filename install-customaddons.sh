@@ -1,19 +1,25 @@
 #!/bin/bash
 # -*- encoding: utf-8 -*-
-
-OE_HOME="/opt/$OE_USER/v$OE_VERSION"
+OE_USER="odoo"
+OE_VER="12"
+OE_VERSION="12.0"
+OE_HOME="/opt/$OE_USER"
 OE_HOMEV="/opt/$OE_USER/v$OE_VER"
 OE_HOME_EXT="$OE_HOMEV/$OE_USER-server"
-OE_VERSION="12.0"
 CLONE_REPOS=1
 CREATE_ADDONS_LINKS=1
 INSTALL_REQUIREMENTS=0
 SRC_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+echo "source path:$SRCPATH \n"
 REPO_LIST_FILE=$SRC_PATH"/repo_list.txt"
+echo "Repo list file:$REPO_LIST_FILE \n"
 ADDONS_LIST_FILE=$SRC_PATH"/addon_list.txt"
+echo "Addons list file:$ADDONS_LIST_FILE \n"
 REQUIREMENTS_FILE=$SRC_PATH"/requirements.txt"
+echo "Requirements file:$REQUIREMENTS_FILE \n"
 
-INSTALL_DIR=$OE_HOME
+INSTALL_DIR=$OE_HOMEV
+echo "Install dir$INSTALL_DIR /n"
 #USER=$(id -u)
 OE_USER=$USER
 
