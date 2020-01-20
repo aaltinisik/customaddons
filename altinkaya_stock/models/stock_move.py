@@ -4,7 +4,7 @@ import re
 
 
 
-# not ported should check onur
+#TODO @dogan:  not ported should check onur
 class StockMove(models.Model):
     _inherit= 'stock.move'
 

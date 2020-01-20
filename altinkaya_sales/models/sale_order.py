@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
             
     
     altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',compute='_altinkaya_payment_url')
-    
+
 #     @api.multi
 #     def print_quotation(self):
 #         '''
@@ -51,7 +51,7 @@ class SaleOrder(models.Model):
             order.altinkaya_payment_url = "?" + url_encode(params)
         
  
-#TDE Fix Onur set Products  
+#TODO:   
 #     @api.multi
 #     def write(self, vals):
 #         res = super(SaleOrder, self).write(vals)

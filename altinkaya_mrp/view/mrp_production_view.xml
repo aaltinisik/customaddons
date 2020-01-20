@@ -33,10 +33,6 @@
 					<field name="sale_id" readonly="1"/>
 					<field name="x_makine"/>
 					<field name="x_operator" />
-					<field name="priority" />
-				    <field name="date_planned" />
-                    <field name="date_start2" />
-                    <field name="date_finished2" />
 				</xpath>
 				<xpath expr="//field[@name='routing_id']" position="after">
 				<field name="x_note" />

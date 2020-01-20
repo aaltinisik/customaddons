@@ -4,47 +4,12 @@ from odoo import models, fields,api
 from odoo.addons import decimal_precision as dp
 
 
-class product_attribute_line(models.Model):
-    _inherit = 'product.template.attribute.line'
-    attr_base_price =fields.Float(
-             u"Base Price",
-             digits=dp.get_precision('Product Price'),
-             help=u"Base price used to compute product price based on attribute value.")
-    attr_val_price_coef= fields.Float(
-             u"Value Price Multiplier",
-             digits=dp.get_precision('Product Price'),
-             help=u"Attribute value coefficient used to compute product price based on attribute value.")
-    use_in_pricing = fields.Boolean('Use in pricing')
+
     
 
 class productProduct(models.Model):
     _inherit = 'product.product'
     
-    @api.depends('product_tmpl_id')
-    def _compute_attr_based_price(self):
-        res = {}
-        for product in self:
-            priced_attributes = { al.attribute_id.id:{'base_price':al.attr_base_price,
-                                                      'price_coef': al.attr_val_price_coef} for al in product.product_tmpl_id.attribute_line_ids.filtered(lambda al: al.use_in_pricing)}
-            
-            val = 0.0
-            for att_val in product.attribute_value_ids:
-                if att_val.attribute_id.id in priced_attributes:
-                    val += priced_attributes[att_val.attribute_id.id]['base_price'] + att_val.numeric_value * priced_attributes[att_val.attribute_id.id]['price_coef']
-            if val is 0.0:
-                val = product.v_tl_fiyat
-            res[product.id] = val
-            
-            
-        return res
-    
-    @api.depends()
-    def _compute_name_variant_report_name(self):
-        self.env._context.update({'display_default_code':False})
-        result = self.name_get()
-        return result
-    
-
     v_fiyat_2015a = fields.Float("2015 Ocak Eski Fiyatı TL",digits=dp.get_precision('Product Price'),help="2015 Ocak eski fiyatı")
     v_2015a_iscilik = fields.Float("2015 Ocak işçilik Fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2015 Ocak kullanılan birim işçilik fiyatı")
     v_min_2015a_iscilik = fields.Float("2015 Ocak Min İşçcilik TL",digits=dp.get_precision('Product Price'), help=u"2015 Ocak kullanılan eski Minimum İşçilik fiyatı TL")
@@ -73,3 +38,26 @@ class productProduct(models.Model):
     v_fiyat_dolar = fields.Float("Dolar Fiyatı",digits=dp.get_precision('Product Price'),help="Dolarla satılan ürünlerin fiyatı")
     v_fiyat_euro = fields.Float("Euro Fiyatı",digits=dp.get_precision('Product Price'),help="Euro ile satılırken kullanılan temel fiyat")
     
+    
+    @api.depends('product_tmpl_id')
+    def _compute_attr_based_price(self):
+        res = {}
+        for product in self:
+            priced_attributes = { al.attribute_id.id:{'base_price':al.attr_base_price,
+                                                      'price_coef': al.attr_val_price_coef} for al in product.product_tmpl_id.attribute_line_ids.filtered(lambda al: al.use_in_pricing)}
+            
+            val = 0.0
+            for att_val in product.attribute_value_ids:
+                if att_val.attribute_id.id in priced_attributes:
+                    val += priced_attributes[att_val.attribute_id.id]['base_price'] + att_val.numeric_value * priced_attributes[att_val.attribute_id.id]['price_coef']
+            if val is 0.0:
+                val = product.v_tl_fiyat
+            res[product.id] = val
+            
+            
+        return res
+    
+    @api.multi
+    def _compute_name_variant_report_name(self):
+        result = self.with_context({'display_default_code':False}).name_get()
+        return result

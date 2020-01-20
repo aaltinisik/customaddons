@@ -30,6 +30,7 @@ class MrpBoM(models.Model):
                                  string='Category',
                                  store=True, readonly=True)
 
+#TODO: @dogan create work orders override
 #     @api.multi
 #     def _prepare_wc_line(self, wc_use, level=0, factor=1):
 #         res = super(MrpBoM, self)._prepare_wc_line(

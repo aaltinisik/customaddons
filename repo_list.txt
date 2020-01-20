@@ -1,28 +1,33 @@
-access-addons	https://github.com/it-projects-llc
-account-financial-tools	https://github.com/OCA
-account-invoicing	https://github.com/OCA
-account-payment	https://github.com/OCA
-connector-telephony	https://github.com/OCA
-crm	https://github.com/OCA
-knowledge	https://github.com/OCA
-misc-addons	https://github.com/it-projects-llc
-partner-contact	https://github.com/OCA
-product-attribute	https://github.com/OCA
-purchase-workflow	https://github.com/OCA
-reporting-engine	https://github.com/OCA
-report-print-send	https://github.com/OCA
-sale-workflow	https://github.com/OCA
-server-tools	https://github.com/OCA
-stock-logistics-tracking	https://github.com/OCA
-stock-logistics-warehouse	https://github.com/OCA/
-stock-logistics-workflow	https://github.com/OCA
-web	https://github.com/OCA
-CybroAddons	https://github.com/CybroOdoo
-addons-vauxoo	https://github.com/Vauxoo
-SerpentCS_Contributions	https://github.com/JayVora-SerpentCS
-stock-logistics-reporting	https://github.com/OCA
-manufacture	https://github.com/OCA
-odoomrp-wip	https://github.com/odoomrp
-mail-addons	https://github.com/it-projects-llc
-stock-logistics-barcode	https://github.com/OCA/
-techspawn-odoo-apps	https://github.com/techspawn	odoo-apps
+https://github.com/aaltinisik	access-addons	https://github.com/it-projects-llc
+https://github.com/aaltinisik	account-financial-tools	https://github.com/OCA
+https://github.com/aaltinisik	account-invoicing	https://github.com/OCA
+https://github.com/aaltinisik	account-payment	https://github.com/OCA
+https://github.com/aaltinisik	connector-telephony	https://github.com/OCA
+https://github.com/aaltinisik	crm	https://github.com/OCA
+https://github.com/aaltinisik	knowledge	https://github.com/OCA
+https://github.com/aaltinisik	misc-addons	https://github.com/it-projects-llc
+https://github.com/aaltinisik	partner-contact	https://github.com/OCA
+https://github.com/aaltinisik	product-attribute	https://github.com/OCA
+https://github.com/aaltinisik	purchase-workflow	https://github.com/OCA
+https://github.com/aaltinisik	reporting-engine	https://github.com/OCA
+https://github.com/aaltinisik	report-print-send	https://github.com/OCA
+https://github.com/aaltinisik	sale-workflow	https://github.com/OCA
+https://github.com/aaltinisik	server-tools	https://github.com/OCA
+https://github.com/aaltinisik	stock-logistics-tracking	https://github.com/OCA
+https://github.com/aaltinisik	stock-logistics-warehouse	https://github.com/OCA/
+https://github.com/aaltinisik	stock-logistics-workflow	https://github.com/OCA
+https://github.com/aaltinisik	web	https://github.com/OCA
+https://github.com/aaltinisik	CybroAddons	https://github.com/CybroOdoo
+https://github.com/aaltinisik	addons-vauxoo	https://github.com/Vauxoo
+https://github.com/aaltinisik	SerpentCS_Contributions	https://github.com/JayVora-SerpentCS
+https://github.com/aaltinisik	stock-logistics-reporting	https://github.com/OCA
+https://github.com/aaltinisik	manufacture	https://github.com/OCA
+https://github.com/aaltinisik	odoomrp-wip	https://github.com/odoomrp
+https://github.com/aaltinisik	mail-addons	https://github.com/it-projects-llc
+https://github.com/aaltinisik	stock-logistics-barcode	https://github.com/OCA
+https://github.com/aaltinisik	intrastat-extrastat/ https://github.com/OCA
+https://github.com/aaltinisik	techspawn-odoo-apps	https://github.com/techspawn	odoo-apps
+https://github.com/aaltinisik	server-ux	https://github.com/OCA
+https://github.com/aaltinisik	manufacture-reporting	https://github.com/OCA
+https://github.com/aaltinisik	community-data-files	https://github.com/OCA
+https://github.com/aaltinisik	edi	https://github.com/OCA

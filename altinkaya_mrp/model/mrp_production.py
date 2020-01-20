@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 
-
+#TODO: @dogan bence bu verilerin workcentera tasinmasi gerek uzerinde olmasi gerekli. 
 class x_makine(models.Model):
     _name = 'x.makine'
     _description="X Makine"
@@ -29,10 +29,28 @@ class MrpProduction(models.Model):
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
     sale_id = fields.Many2one('sale.order',string="Sale Order")
     
-    date_planned = fields.Datetime('Scheduled Date')
-    date_start2 = fields.Datetime('Start Date')
-    date_finished2 = fields.Datetime('End Date')
-    priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority')
+    #date_planned = fields.Datetime('Scheduled Date')
+    #date_start2 = fields.Datetime('Start Date')
+    #date_finished2 = fields.Datetime('End Date')
+    #priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority')
+    
+    x_operator = fields.Many2one(
+            'hr.employee',
+            'Uretimi Yapan Operator'
+            )
+    x_note = fields.Text(
+            'Not',
+            size=256)
+    #TODO: @dogan workcenter_id alanini kullanabiliriz
+    x_makine = fields.Many2one('x.makine',
+            'Uretim Yapilan Makine'
+            )
+    x_makine_kod =  fields.Char(related='x_makine.x_kod',
+            string='Makine',
+            readonly=1)
+    procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
+    product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
+             readonly=True)
     
     
     def _get_procurement_group_name(self):
@@ -83,22 +101,7 @@ class MrpProduction(models.Model):
             else:
                 mo.id = False
     
-    x_operator = fields.Many2one(
-            'hr.employee',
-            'Uretimi Yapan Operator'
-            )
-    x_note = fields.Text(
-            'Not',
-            size=256)
-    x_makine = fields.Many2one('x.makine',
-            'Uretim Yapilan Makine'
-            )
-    x_makine_kod =  fields.Char(related='x_makine.x_kod',
-            string='Makine',
-            readonly=1)
-    procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
-    product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
-             readonly=True)
+    
     
     def name_search(self,name, args=None, operator='ilike', limit=80):
         if name:

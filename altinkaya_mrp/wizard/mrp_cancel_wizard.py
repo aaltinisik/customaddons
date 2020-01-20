@@ -8,7 +8,7 @@ class mrp_cancel_more(models.TransientModel):
 
 
 
-    #should check what is this doing onur
+    #TODO: should check what is this doing onur
 
     @api.multi
     def cancel_mrp_order(self):

@@ -21,16 +21,6 @@
 from odoo import models,api,fields
 
 
-class StockWarehouseOrderpoint(models.Model):
-    _inherit = 'stock.warehouse.orderpoint'
-
-    categ_id = fields.Many2one('product.category',
-                                 related='product_id.categ_id',
-                                 string='Category',
-                                 store=True, readonly=True)
-
-
-
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
@@ -77,3 +67,14 @@ class StockPicking(models.Model):
     comment_irsaliye = fields.Text('İrsaliye Notu')
     hazirlayan = fields.Many2one('hr.employee', 'Sevki Hazırlayan')
     teslim_alan = fields.Char('Malı Teslim Alan Ad Soyad', size=32)
+    
+    #TODO @dogan: invoice picking
+#     def _prepare_shipping_invoice_line(self, cr, uid, picking, invoice, context=None):
+#         res = super(stock_picking, self)._prepare_shipping_invoice_line(cr, uid, picking, invoice, context=context)
+#         if picking.carrier_id:
+#             invoice.carrier_id = picking.carrier_id
+#         if res and res.get('name',False) and ['name'].__contains__('Teslim'):
+#             invoice.address_contact_id = ''
+#         if res and res.get('price_unit',0.0) <= 0.0:
+#             return None
+#         return res

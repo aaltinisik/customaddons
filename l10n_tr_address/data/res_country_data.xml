@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="1">
 
-        <delete id="224" model="base.res_country"/>
+<!--         <delete id="224" model="base.res_country"/> -->
         <record id="224" model="base.res_country">
             <field name="name">Turkey</field>
             <field name="code">tr</field>

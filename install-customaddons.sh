@@ -42,9 +42,9 @@ clone_repos()
 
 		
 		cd $INSTALL_DIR"/repos"
-		while read -r name upstream upstream_name ; 
+		while read -r origin name upstream upstream_name ; 
 		do
-			git clone -b $OE_VERSION "https://github.com/aaltinisik/"$name $name
+			git clone -b $OE_VERSION $origin"/"$name $name
 			cd "$name"
 			if [ -z $upstream_name ]
 			then
@@ -151,9 +151,6 @@ if [ $CREATE_ADDONS_LINKS -ne 0 ];
 then
 	create_sym_links
 fi
-
-echo $USER
-echo $OE_USER
 
 if [ $USER != $OE_USER ];
 then
