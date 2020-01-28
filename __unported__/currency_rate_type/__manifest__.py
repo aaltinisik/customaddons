@@ -32,7 +32,7 @@ Curreny Rate Type
     """,
     'author': 'Eska Yazılım ve Danışmanlık A.Ş.',
     'website': 'http://www.eskayazilim.com.tr',
-    'depends': ['base'],
+    'depends': ['account'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_currency_rate_type_view.xml',
