@@ -17,7 +17,7 @@
     ],
     'data': [
         'data/account_payment_method_data.xml',
-        'data/ir_actions_server_data.xml',
+        #'data/ir_actions_server_data.xml',
         'wizard/account_check_action_wizard_view.xml',
         'wizard/print_pre_numbered_checks_view.xml',
         'views/res_config_settings_view.xml',
