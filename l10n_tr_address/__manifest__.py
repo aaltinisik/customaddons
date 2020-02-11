@@ -10,7 +10,7 @@
     'depends': ['sale','base','contacts'],
     'data': [
         'security/ir.model.access.csv',
-        'data/res.country.state.csv',
+#        'data/res.country.state.csv',
        'views/res_partner_view.xml',
         'views/address_details_view.xml',
         'wizard/wizard_import_script_views.xml',
