@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-01 06:23+0000\n"
-"PO-Revision-Date: 2019-02-01 06:23+0000\n"
+"POT-Creation-Date: 2020-02-13 08:19+0000\n"
+"PO-Revision-Date: 2020-02-13 08:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,14 +32,12 @@ msgstr "<span>Vadesi gelmemiş</span>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 msgid "<strong>Company:</strong>"
 msgstr "<strong>Şirket:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "<strong>Date from :</strong>"
 msgstr "<strong>Bu tarihten:</strong>"
@@ -47,7 +45,6 @@ msgstr "<strong>Bu tarihten:</strong>"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "<strong>Date to :</strong>"
 msgstr "<strong>Bu tarihe kadar:</strong>"
@@ -65,17 +62,17 @@ msgstr "<strong>Hesabı Görüntüle</strong>"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "<strong>Entries Sorted By:</strong>"
-msgstr "<strong>Girişleri Sırala:</strong>"
+msgstr "<strong>Sıralama:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_tax
 msgid "<strong>From</strong>"
-msgstr ""
+msgstr "<strong>Başlangıç</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "<strong>Journal:</strong>"
-msgstr "<strong>Yevmiye Defteri:</strong>"
+msgstr "<strong>Yevmiye:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
@@ -112,10 +109,9 @@ msgstr "<strong>Başlama Tarihi:</strong>"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "<strong>Target Moves:</strong>"
-msgstr "<strong>Hedef Hareketler:</strong>"
+msgstr "<strong>Hedef Hareket:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
@@ -229,7 +225,6 @@ msgstr "Hepsi"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "All Entries"
 msgstr "Tüm Kayıtlar"
@@ -248,7 +243,6 @@ msgstr "Tüm Kayıtlar"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "All Posted Entries"
 msgstr "Tüm Onaylı Kayıtlar"
@@ -356,7 +350,7 @@ msgstr "Oluşturulma"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "Credit"
-msgstr "Kredi"
+msgstr "Alacak"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
@@ -383,6 +377,11 @@ msgstr "Tarih"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "Debit"
 msgstr "Borç"
+
+#. module: accounting_pdf_reports
+#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
+msgid "Description"
+msgstr "Açıklama"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_balance_report__display_account
@@ -493,16 +492,17 @@ msgid "For accounts that are typically more debited than credited and that you w
 msgstr "Eğer hesaplar tipik olarak borcun alacaktan daha çok olması durumundaysa ve raporlarınızda tutarları eksi değerlerde yazmak istemiyorsanız, bakiyenin işaretini ters çevirmelisiniz; örn.: Gider hesabı. Tıpkı tipik olarak alacağın borçlardan çok olması durumu gibi örn.: Gelir hesabı."
 
 #. module: accounting_pdf_reports
-#: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:219
-#: code:addons/accounting_pdf_reports/reports/report_financial.py:149
-#: code:addons/accounting_pdf_reports/reports/report_general_ledger.py:114
-#: code:addons/accounting_pdf_reports/reports/report_journal.py:100
-#: code:addons/accounting_pdf_reports/reports/report_partner_ledger.py:72
-#: code:addons/accounting_pdf_reports/reports/report_tax.py:13
-#: code:addons/accounting_pdf_reports/reports/report_trial_balance.py:63
+#: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:222
+#: code:addons/accounting_pdf_reports/reports/report_financial.py:150
+#: code:addons/accounting_pdf_reports/reports/report_general_ledger.py:115
+#: code:addons/accounting_pdf_reports/reports/report_journal.py:101
+#: code:addons/accounting_pdf_reports/reports/report_partner_ledger.py:96
+#: code:addons/accounting_pdf_reports/reports/report_partner_ledger.py:131
+#: code:addons/accounting_pdf_reports/reports/report_tax.py:14
+#: code:addons/accounting_pdf_reports/reports/report_trial_balance.py:64
 #, python-format
 msgid "Form content is missing, this report cannot be printed."
-msgstr "Form içeriği eksik, bu rapor yazdırılamıyor."
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: model:ir.actions.act_window,name:accounting_pdf_reports.action_account_general_ledger_menu
@@ -569,9 +569,8 @@ msgstr "Yatık Metin (daha küçük)"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 msgid "JRNL"
-msgstr "JRNL"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
@@ -688,7 +687,13 @@ msgstr "Ana Başlık 1 (koyu, altçizgili)"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Move"
-msgstr "Fiş Numarası"
+msgstr "Hareket"
+
+#. module: accounting_pdf_reports
+#: model:ir.actions.act_window,name:accounting_pdf_reports.action_res_partner_account_move_lines
+#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.view_partner_form_reports
+msgid "Move Lines"
+msgstr "Hareket Satırları"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
@@ -699,7 +704,7 @@ msgstr "İsim"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_tax
 msgid "Net"
-msgstr "Net"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: selection:accounting.report,filter_cmp:0
@@ -735,13 +740,13 @@ msgstr "Üst Rapor"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Partner"
-msgstr "Cari"
+msgstr "İş Ortağı"
 
 #. module: accounting_pdf_reports
 #: model:ir.actions.act_window,name:accounting_pdf_reports.action_account_partner_ledger_menu
 #: model:ir.actions.report,name:accounting_pdf_reports.action_report_partnerledger
 #: model:ir.ui.menu,name:accounting_pdf_reports.menu_partner_ledger
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.view_partner_form_reports
 msgid "Partner Ledger"
 msgstr "Cari Defteri"
 
@@ -755,7 +760,7 @@ msgstr "Cari'nin"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_agedpartnerbalance
 msgid "Partners"
-msgstr "Cariler"
+msgstr "İş Ortakları"
 
 #. module: accounting_pdf_reports
 #: selection:account.aged.trial.balance,result_selection:0
@@ -820,14 +825,33 @@ msgstr "Uzlaştırılmış Girişler"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_generalledger
-#: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_partnerledger
 msgid "Ref"
-msgstr ""
+msgstr "REF"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.view_account_financial_report_form
 msgid "Report"
-msgstr "Rapor"
+msgstr "Bildirim"
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_agedpartnerbalance
+msgid "Report Aged Partner Balance"
+msgstr ""
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_financial
+msgid "Report Financial"
+msgstr ""
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_generalledger
+msgid "Report General Ledger"
+msgstr ""
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_journal
+msgid "Report Journal"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_financial_report__name
@@ -837,12 +861,27 @@ msgstr "Rapor Adı"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.account_aged_balance_view
 msgid "Report Options"
-msgstr "Rapor Opsiyonları"
+msgstr "Çıktı Seçenekleri"
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_partnerledger
+msgid "Report Partner Ledger"
+msgstr ""
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_tax
+msgid "Report Tax"
+msgstr ""
+
+#. module: accounting_pdf_reports
+#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_trialbalance
+msgid "Report TrialBalance"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.view_account_financial_report_search
 msgid "Report Type"
-msgstr "Rapor Çeşidi"
+msgstr "Çıktı Türü"
 
 #. module: accounting_pdf_reports
 #: selection:account.financial.report,type:0
@@ -892,7 +931,7 @@ msgstr "Sıralama"
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_accounting_report__date_from
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_accounting_report__date_from_cmp
 msgid "Start Date"
-msgstr "Başlama Tarihi"
+msgstr "Başlangıç Tarihi"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__target_move
@@ -915,12 +954,12 @@ msgstr "Vergi"
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Tax Amount"
-msgstr "Vergi Miktarı"
+msgstr "Vergi Tutarı"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 msgid "Tax Declaration"
-msgstr "Vergi Beyannamesi"
+msgstr "Vergi Bildirimi"
 
 #. module: accounting_pdf_reports
 #: model:ir.actions.report,name:accounting_pdf_reports.action_report_account_tax
@@ -978,10 +1017,10 @@ msgid "Type"
 msgstr "Tür"
 
 #. module: accounting_pdf_reports
-#: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:208
+#: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:211
 #, python-format
 msgid "Unknown Partner"
-msgstr "Bilinmeyen Cari"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: selection:account.financial.report,type:0
@@ -1038,39 +1077,4 @@ msgstr "0'dan büyük bir dönem uzunluğu girmelisiniz."
 #, python-format
 msgid "You must set a start date."
 msgstr "Bir başlangıç tarih girmelisiniz."
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_agedpartnerbalance
-msgid "report.accounting_pdf_reports.report_agedpartnerbalance"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_financial
-msgid "report.accounting_pdf_reports.report_financial"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_generalledger
-msgid "report.accounting_pdf_reports.report_generalledger"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_journal
-msgid "report.accounting_pdf_reports.report_journal"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_partnerledger
-msgid "report.accounting_pdf_reports.report_partnerledger"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_tax
-msgid "report.accounting_pdf_reports.report_tax"
-msgstr ""
-
-#. module: accounting_pdf_reports
-#: model:ir.model,name:accounting_pdf_reports.model_report_accounting_pdf_reports_report_trialbalance
-msgid "report.accounting_pdf_reports.report_trialbalance"
-msgstr ""
 

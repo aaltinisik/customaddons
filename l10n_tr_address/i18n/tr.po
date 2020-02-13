@@ -33,12 +33,12 @@ msgstr "İlçeler listenize bir İlçe eklemek için tıklayın."
 #. module: l10n_tr_address
 #: model_terms:ir.actions.act_window,help:l10n_tr_address.action_neighbour
 msgid "Click to add a Neighbourhoud in your Neighbourhoud list."
-msgstr ""
+msgstr "Mahalle listenize bir Mahalle eklemek için tıklayın."
 
 #. module: l10n_tr_address
 #: model_terms:ir.actions.act_window,help:l10n_tr_address.action_region
 msgid "Click to add a Region in your Regions list."
-msgstr "Mahalle listenize bir Mahalle eklemek için tıklayın."
+msgstr "Semt/Belde/Bucaklar listenize Semt/Belde/Bucak eklemek için tıklayın."
 
 #. module: l10n_tr_address
 #: model:ir.model,name:l10n_tr_address.model_res_partner
@@ -89,7 +89,7 @@ msgstr "İlçe"
 #: model:ir.actions.act_window,name:l10n_tr_address.action_district
 #: model:ir.ui.menu,name:l10n_tr_address.district_menu
 msgid "Districts"
-msgstr "İlçeler"
+msgstr "İlçe"
 
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__id
@@ -108,12 +108,12 @@ msgstr "Adresleri İçe Aktar"
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.wizard_import_script_form_view
 msgid "Import Excel"
-msgstr "Exceli Aktar"
+msgstr "Exceli İçe Aktar"
 
 #. module: l10n_tr_address
 #: model:ir.model,name:l10n_tr_address.model_wizard_import_script
 msgid "Import Script"
-msgstr "İçe Aktar"
+msgstr ""
 
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_district____last_update
@@ -150,7 +150,7 @@ msgstr "Mahalle"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__neighbour_id
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__neighbour_id
 msgid "Neighbourhood"
-msgstr "Mahalle"
+msgstr "Mahelle"
 
 #. module: l10n_tr_address
 #: model:ir.actions.act_window,name:l10n_tr_address.action_neighbour
