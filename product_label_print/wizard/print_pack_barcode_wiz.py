@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning
+from odoo.exceptions import Warning, UserError
 
 
 class PrintPackBarcodeWizard(models.TransientModel):
@@ -53,6 +53,9 @@ class PrintPackBarcodeWizard(models.TransientModel):
             raise Warning(_('Printing multiple labels is restricted!'))
             
         for product_id in product_product_ids:
+            if not product_id.default_code:
+                raise UserError(msg=_("Product : %s not have default code" %(product_id.display_name)))
+            
             codeparts = product_id.default_code.split('-')
 
             if len(codeparts) > 4:
