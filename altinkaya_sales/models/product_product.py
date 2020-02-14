@@ -3,10 +3,6 @@
 from odoo import models, fields,api
 from odoo.addons import decimal_precision as dp
 
-
-
-    
-
 class productProduct(models.Model):
     _inherit = 'product.product'
     
@@ -49,7 +45,7 @@ class productProduct(models.Model):
             val = 0.0
             for att_val in product.attribute_value_ids:
                 if att_val.attribute_id.id in priced_attributes:
-                    val += priced_attributes[att_val.attribute_id.id]['base_price'] + att_val.numeric_value * priced_attributes[att_val.attribute_id.id]['price_coef']
+                    val += priced_attributes[att_val.attribute_id.id]['base_price'] +  priced_attributes[att_val.attribute_id.id]['price_coef'] # *att_val.numaric_value
             if val is 0.0:
                 val = product.v_tl_fiyat
             res[product.id] = val
