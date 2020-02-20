@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 08:19+0000\n"
-"PO-Revision-Date: 2020-02-13 08:19+0000\n"
+"POT-Creation-Date: 2020-02-20 12:26+0000\n"
+"PO-Revision-Date: 2020-02-20 12:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,7 @@ msgstr "<strong>Başlama Tarihi:</strong>"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_trialbalance
 msgid "<strong>Target Moves:</strong>"
-msgstr "<strong>Hedef Hareket:</strong>"
+msgstr "<strong>Hedef Hareketler:</strong>"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_journal
@@ -341,7 +341,7 @@ msgstr "Oluşturan"
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_tax_report__create_date
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_accounting_report__create_date
 msgid "Created on"
-msgstr "Oluşturulma"
+msgstr "Oluşturuldu"
 
 #. module: accounting_pdf_reports
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.report_financial
@@ -637,7 +637,7 @@ msgstr "Etiket"
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_report_accounting_pdf_reports_report_tax____last_update
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_report_accounting_pdf_reports_report_trialbalance____last_update
 msgid "Last Modified on"
-msgstr "Son Güncelleme"
+msgstr "Son Düzenleme Tarihi"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__write_uid
@@ -651,7 +651,7 @@ msgstr "Son Güncelleme"
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_tax_report__write_uid
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_accounting_report__write_uid
 msgid "Last Updated by"
-msgstr "Son Güncelleyen"
+msgstr "Son güncelleyen"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__write_date
@@ -665,7 +665,7 @@ msgstr "Son Güncelleyen"
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_tax_report__write_date
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_accounting_report__write_date
 msgid "Last Updated on"
-msgstr "Son Güncelleme"
+msgstr "Son güncellenme"
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_financial_report__level
@@ -749,6 +749,11 @@ msgstr "İş Ortağı"
 #: model_terms:ir.ui.view,arch_db:accounting_pdf_reports.view_partner_form_reports
 msgid "Partner Ledger"
 msgstr "Cari Defteri"
+
+#. module: accounting_pdf_reports
+#: model:res.groups,name:accounting_pdf_reports.partner_ledger_and_movelines
+msgid "Partner Ledger and Move Lines on Partners"
+msgstr ""
 
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_aged_trial_balance__result_selection
@@ -1014,7 +1019,7 @@ msgstr "Geçici Mizan Raporu"
 #. module: accounting_pdf_reports
 #: model:ir.model.fields,field_description:accounting_pdf_reports.field_account_financial_report__type
 msgid "Type"
-msgstr "Tür"
+msgstr "Tipi"
 
 #. module: accounting_pdf_reports
 #: code:addons/accounting_pdf_reports/reports/report_aged_partner.py:211
