@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="view_res_users_security_from">
+		<field name="name">res.users.security</field>
+		<field name="model">res.users</field>
+		<field name="inherit_id" ref="base.view_users_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="/form/sheet/notebook" position="inside">
+				<page string="Security">
+					 <label for="menu_access"/>
+					 <field name="menu_access"/>
+					 <label for="view_access"/>
+	                 <field name="view_access"/>
+					<label for="model_access"/>
+					 <field name="model_access">
+	                    <tree string="Access Rights" edit="false" create="false" >
+	                        <field name="name"/>
+	                        <field name="model_id"/>
+	                        <field name="perm_read"/>
+	                        <field name="perm_write"/>
+	                        <field name="perm_create"/>
+	                        <field name="perm_unlink"/>
+	                    </tree>
+	                </field>
+	                <label for="rule_groups"/>
+	                 <field name="rule_groups">
+		                 <tree string="Record Rules" edit="false" create="false" >
+		                     <field name="name"/>
+		                     <field name="model_id"/>
+		                     <field name="domain_force"/>
+		                     <field name="perm_read"/>
+		                     <field name="perm_write"/>
+		                     <field name="perm_create"/>
+		                     <field name="perm_unlink"/>
+		                 </tree>
+		             </field>
+				
+				</page>
+                
+
+			
+			</xpath>
+		
+		</field>
+	
+	</record>
+
+</odoo>

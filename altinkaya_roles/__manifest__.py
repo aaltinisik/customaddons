@@ -12,6 +12,7 @@
             'data/altinkaya_category_data.xml',
             'security/altinkaya_security.xml',
             'security/ir.model.access.csv',
+            'views/res_users.xml',
             ],
     'demo': [],
     'installable': True,
