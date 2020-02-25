@@ -213,7 +213,7 @@
 									<t t-else="">
 										<t t-set="sblc" t-value="0" />
 										<t t-set="sdc" t-value="'A'" />
-										<t t-foreach="o._get_statement_data()" t-as="s">
+										<t t-foreach="o.get_statement_data()" t-as="s">
 											<tr style="line-height:%80">
 												<td style="padding:0">
 													<span t-esc="s['seq']" />
