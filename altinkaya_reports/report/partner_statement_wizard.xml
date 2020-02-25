@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<template id="report_partner_statement_document">
+	<template id="report_partner_statement_wizard_document">
 		<!-- <t t-call="web.html_container">
 			<t t-call="web.basic_layout"> -->
 				<div class="header" style="font-size:10pt">
@@ -57,7 +57,7 @@
 				</div>
 				<div class="footer">
 					<div class="row"
-						style="border-top:2px solid black;font-size:10pt">
+						style="border-top:2px solid black;font-size:14pt">
 						<div class="col-12 text-center">
 							<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |
 								www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947
@@ -75,8 +75,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- <t t-foreach="docs" t-as="o">
-					<t t-set="o" t-value="o.with_context(lang=o.lang)" /> -->
+				<!-- <t t-foreach="docs" t-as="o"> -->
+					<!-- <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" /> -->
 					<div class="page" style="font-size=8pt;">
 						<div class="row">
 							<div class="col-12">
@@ -85,23 +85,23 @@
 										<td>
 											<strong>
 												Partner:
-												<span t-esc="o.display_name" />
+												<span t-esc="o.partner_id.display_name" />
 											</strong>
 											<br />
 											<span>
-												<span t-esc="o._display_address()"></span>
-												<!-- <span t-esc="o.street" /> , <span t-esc="o.street2" /> , 
-													<span t-esc="o.city" /> <span t-esc="o.state_id.name" /> - <span t-esc="o.zip" 
-													/> , <span t-esc="o.country_id.name" /> -->
+												<span t-esc="o.partner_id._display_address()"></span>
+												<!-- <span t-esc="o.partner_id.street" /> , <span t-esc="o.partner_id.street2" 
+													/> , <span t-esc="o.partner_id.city" /> <span t-esc="o.partner_id.state_id.name" 
+													/> - <span t-esc="o.partner_id.zip" /> , <span t-esc="o.partner_id.country_id.name" 
+													/> -->
 											</span>
 											<br />
 											<span>
 												<strong>Tel:</strong>
-												<t t-esc="o.phone" />
+												<t t-esc="o.partner_id.phone" />
 
 												<strong>Fax:</strong>
-												<span t-esc="o.fax" />
-
+												<span t-esc="o.partner_id.fax" />
 											</span>
 										</td>
 										<td class="text-right">
@@ -123,9 +123,9 @@
 												t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')"
 												t-options="{'widget': 'date'}" />
 											<br />
-											<span t-esc="o.x_vergidairesi" />
+											<span t-esc="o.partner_id.x_vergidairesi" />
 											<br />
-											<span t-esc="o.vat" />
+											<span t-esc="o.partner_id.vat" />
 											<br />
 										</td>
 									</tr>
@@ -147,8 +147,7 @@
 										<th>Balance</th>
 										<th></th>
 									</tr>
-
-									<t t-if="o.use_secondary_currency">
+									<t t-if="o.partner_id.use_secondary_currency">
 										<t t-foreach="o._get_statement_data_currency()"
 											t-as="s_dict">
 											<t t-set="sblc" t-value="0" />
@@ -266,9 +265,6 @@
 
 									</t>
 
-
-
-
 								</table>
 							</div>
 						</div>
@@ -280,16 +276,17 @@
 		</t> -->
 	</template>
 	<template
-		id="altinkaya_reports.report_partner_statement"
+		id="altinkaya_reports.report_partner_statement_wizard"
 		priority="151">
 		<t t-call="web.html_container">
 			<t t-call="web.basic_layout">
 				<t t-foreach="docs" t-as="o">
 					<t
-						t-call="altinkaya_reports.report_partner_statement_document"
-						t-lang="o.lang" />
+						t-call="altinkaya_reports.report_partner_statement_wizard_document"
+						t-lang="o.partner_id.lang" />
 				</t>
 			</t>
 		</t>
 	</template>
+	
 </odoo>

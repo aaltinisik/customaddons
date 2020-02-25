@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 09:01+0000\n"
-"PO-Revision-Date: 2020-02-18 09:01+0000\n"
+"POT-Creation-Date: 2020-02-25 11:49+0000\n"
+"PO-Revision-Date: 2020-02-25 11:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -94,12 +94,13 @@ msgid "<b>Müşteri:</b>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<br/>\n"
 "							<br/>\n"
 "							<strong style=\"font-size:12pt\">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.\n"
-"								TİC. A.Ş.</strong>\n"
+"								TİC. A.Ş.\n"
+"							</strong>\n"
 "							<br/>\n"
 "							<span>İvedikosb Mah. 1469. sk, No:10 </span>\n"
 "							<br/>\n"
@@ -160,6 +161,23 @@ msgid "<span style=\"font-size:9pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İ
 msgstr ""
 
 #. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
+msgid "<span>\n"
+"												<strong>Date:</strong>\n"
+"											</span>\n"
+"											<br/>\n"
+"											<span>\n"
+"												<strong>Tax Office :</strong>\n"
+"											</span>\n"
+"											<br/>\n"
+"											<span>\n"
+"												<strong>VAT :</strong>\n"
+"											</span>\n"
+"											<br/>"
+msgstr ""
+
+#. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "<span>\n"
 "           				Banka Adı\n"
@@ -200,8 +218,8 @@ msgid "<span> Teslim Eden</span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>0610422947</span>\n"
 "									<br/>\n"
 "									<span>+90 312 395 2768</span>\n"
@@ -210,17 +228,6 @@ msgid "<span>0610422947</span>\n"
 "									<br/>\n"
 "									<span>muhasebe@altinkaya.com.tr</span>\n"
 "									<br/>"
-msgstr ""
-
-#. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
-msgid "<span><strong>Date:</strong></span>\n"
-"											<br/>\n"
-"											<span><strong>Tax Office :</strong></span>\n"
-"											<br/>\n"
-"											<span><strong>VAT :</strong></span>\n"
-"											<br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -259,13 +266,15 @@ msgid "<span>TGBATRIS</span>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |\n"
-"								www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947</span>\n"
+"								www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947\n"
+"							</span>\n"
 "							<br/>\n"
 "							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006\n"
-"								2980 17 (TL)</span>\n"
+"								2980 17 (TL)\n"
+"							</span>\n"
 "							<br/>\n"
 "							<span>\n"
 "								Hazırlayan : Altınkaya - Sayfa:\n"
@@ -275,8 +284,8 @@ msgid "<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |\n"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>Ulus VD:</span>\n"
 "									<br/>\n"
 "									<span>Tel:</span>\n"
@@ -301,8 +310,8 @@ msgid "<strong class=\"mr16\">Subtotal</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<strong class=\"text-right\" style=\"font-size:16pt\">PARTNER STATEMENT\n"
 "							</strong>\n"
 "							<br/>\n"
@@ -401,8 +410,8 @@ msgid "<strong>EURO BANK ACCOUNT INFORMATION</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<strong>Fax:</strong>"
 msgstr ""
 
@@ -528,8 +537,8 @@ msgid "<strong>Tedarikçi Adresi:</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<strong>Tel:</strong>"
 msgstr ""
 
@@ -725,8 +734,8 @@ msgid "BUYER"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Balance"
 msgstr ""
 
@@ -801,14 +810,14 @@ msgid "Created on"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Credit"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Date"
 msgstr ""
 
@@ -818,8 +827,8 @@ msgid "Date:"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Debit"
 msgstr ""
 
@@ -894,8 +903,8 @@ msgid "Display Name"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Due Date"
 msgstr ""
 
@@ -910,8 +919,8 @@ msgid "End Date"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Explanation"
 msgstr ""
 
@@ -1050,8 +1059,8 @@ msgid "Miktar"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "NO"
 msgstr ""
 
@@ -1082,8 +1091,8 @@ msgid "Notlar:"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Number"
 msgstr ""
 
@@ -1164,8 +1173,8 @@ msgid "Partner Statement with Dates"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Partner:"
 msgstr ""
 
@@ -1367,8 +1376,8 @@ msgid "To:"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement2
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Total"
 msgstr ""
 
@@ -1380,6 +1389,12 @@ msgstr ""
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "Unit Price"
+msgstr ""
+
+#. module: altinkaya_reports
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__use_secondary_currency
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__use_secondary_currency
+msgid "Use Secondary Currency"
 msgstr ""
 
 #. module: altinkaya_reports
