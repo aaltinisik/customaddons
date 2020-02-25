@@ -6,12 +6,15 @@
 		<field name="inherit_id" ref="base.view_users_form"/>
 		<field name="arch" type="xml">
 			<xpath expr="/form/sheet/notebook" position="inside">
-				<page string="Security">
-					 <label for="menu_access"/>
+				<page string="User Access Menu">
+					<!--  <label for="menu_access"/> -->
 					 <field name="menu_access"/>
-					 <label for="view_access"/>
+				</page>
+				<page string="User Access Views">
 	                 <field name="view_access"/>
-					<label for="model_access"/>
+				</page>
+				<page string="User Access Model">
+					<!-- <label for="model_access"/> -->
 					 <field name="model_access">
 	                    <tree string="Access Rights" edit="false" create="false" >
 	                        <field name="name"/>
@@ -22,7 +25,9 @@
 	                        <field name="perm_unlink"/>
 	                    </tree>
 	                </field>
-	                <label for="rule_groups"/>
+				</page>
+                <page string="User Rules">
+                	<!-- <label for="rule_groups"/> -->
 	                 <field name="rule_groups">
 		                 <tree string="Record Rules" edit="false" create="false" >
 		                     <field name="name"/>
@@ -34,9 +39,7 @@
 		                     <field name="perm_unlink"/>
 		                 </tree>
 		             </field>
-				
-				</page>
-                
+                </page>
 
 			
 			</xpath>
