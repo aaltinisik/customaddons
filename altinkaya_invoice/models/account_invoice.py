@@ -22,11 +22,12 @@ class AccountInvoice(models.Model):
     x_teslimat =  fields.Char('Teslimat Kisaltmasi',size=64)
     address_contact_id = fields.Many2one('res.partner','Shipping Address')
     altinkaya_payment_url = fields.Char(compute='_compute_altinkaya_payment_url', string='Altinkaya Payment Url')
+    receiver = fields.Char(string="Reciever")
     
     #TODO this is not required we can use invoice.number field for supplier invoices
-    #supplier_invoice_number = fields.Char(string='Supplier Invoice Number',
-    #    help="The reference of this invoice as provided by the supplier.",
-    #    readonly=True, states={'draft': [('readonly', False)]})
+    supplier_invoice_number = fields.Char(string='Supplier Invoice Number',
+        help="The reference of this invoice as provided by the supplier.",
+        readonly=True, states={'draft': [('readonly', False)]})
     
     
     #TDE Fix Onur

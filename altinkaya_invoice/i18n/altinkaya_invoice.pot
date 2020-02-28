@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 11:23+0000\n"
-"PO-Revision-Date: 2019-03-25 11:23+0000\n"
+"POT-Creation-Date: 2020-02-28 12:46+0000\n"
+"PO-Revision-Date: 2020-02-28 12:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,16 @@ msgstr ""
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__altinkaya_payment_url
 msgid "Altinkaya Payment Url"
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Auto-detect"
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Bank Account"
 msgstr ""
 
 #. module: altinkaya_invoice
@@ -71,6 +81,11 @@ msgstr ""
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__closing_move_date
 msgid "Closing Move Date"
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_res_partner
+msgid "Contact"
 msgstr ""
 
 #. module: altinkaya_invoice
@@ -134,6 +149,16 @@ msgid "Invoice"
 msgstr ""
 
 #. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_account_journal__name
+msgid "Journal Name"
+msgstr ""
+
+#. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_payment__x_cek_tarih
 msgid "Keside Tarihi"
 msgstr ""
@@ -181,13 +206,31 @@ msgid "Partner Country"
 msgstr ""
 
 #. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_partner_reconcile_close
+msgid "Partner Reconcile Close"
+msgstr ""
+
+#. module: altinkaya_invoice
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.view_partner_reconcile_close_form
 msgid "Partner Selection"
 msgstr ""
 
 #. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Payment Date"
+msgstr ""
+
+#. module: altinkaya_invoice
 #: model:ir.model,name:altinkaya_invoice.model_account_payment
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
 msgid "Payments"
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__receiver
+msgid "Reciever"
 msgstr ""
 
 #. module: altinkaya_invoice
@@ -221,7 +264,7 @@ msgid "Supplier Invoice Number"
 msgstr ""
 
 #. module: altinkaya_invoice
-#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.ir_ui_view_accountinvoice_altinkaya_inherit0
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
 msgid "Teslimat Adresi"
 msgstr ""
 
@@ -233,6 +276,11 @@ msgstr ""
 #. module: altinkaya_invoice
 #: model:ir.model.fields,help:altinkaya_invoice.field_account_invoice__supplier_invoice_number
 msgid "The reference of this invoice as provided by the supplier."
+msgstr ""
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+msgid "Total Balance"
 msgstr ""
 
 #. module: altinkaya_invoice
@@ -251,6 +299,12 @@ msgid "Transfer description"
 msgstr ""
 
 #. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_res_partner__z_muhasebe_kodu
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_res_users__z_muhasebe_kodu
+msgid "Zirve Muhasebe kodu"
+msgstr ""
+
+#. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__x_comment_export
 msgid "ihracaat fatura notu"
 msgstr ""
@@ -258,10 +312,5 @@ msgstr ""
 #. module: altinkaya_invoice
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.view_partner_reconcile_close_form
 msgid "or"
-msgstr ""
-
-#. module: altinkaya_invoice
-#: model:ir.model,name:altinkaya_invoice.model_partner_reconcile_close
-msgid "partner.reconcile.close"
 msgstr ""
 
