@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 11:51+0000\n"
-"PO-Revision-Date: 2019-03-25 11:51+0000\n"
+"POT-Creation-Date: 2020-02-28 08:11+0000\n"
+"PO-Revision-Date: 2020-02-28 08:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -137,16 +137,19 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kamp_2016A
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kamp_2016A
 msgid "2016 Katalog için arandı"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kamp_2016A
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kamp_2016A
 msgid "2016 Temmuz Katalog gönderme kampanyası icin arandi."
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kamp_2017A
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kamp_2017A
 msgid "2017 Adres güncelleme için arandı"
 msgstr ""
 
@@ -182,6 +185,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kamp_2017A
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kamp_2017A
 msgid "2017 Temmuz Adres günceleme için arandı."
 msgstr ""
 
@@ -248,6 +252,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__devir_yapildi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__devir_yapildi
 msgid "Devir yapıldı"
 msgstr ""
 
@@ -268,16 +273,19 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_cep
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_cep
 msgid "Eski Cep"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_fax
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_fax
 msgid "Eski Faks"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_tel
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_tel
 msgid "Eski Tel"
 msgstr ""
 
@@ -302,6 +310,7 @@ msgid "Guncelleme Kodu"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__has_production_bom
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__has_production_bom
 msgid "Has production BoM"
 msgstr ""
@@ -318,36 +327,43 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_tel_kampanya
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_tel_kampanya
 msgid "Kampanyalarda Aranmayacak"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_email
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_email
 msgid "Katalog E-mail"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_postalandi
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_postalandi
 msgid "Katalog Posta ile gönderildi."
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_postala
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_postala
 msgid "Katalog Posta ile gönderilecek."
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_postala
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_postala
 msgid "Katalog Postala"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_postalandi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_postalandi
 msgid "Katalog Postalandi"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_email
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_email
 msgid "Katalog email ile gönderilecek."
 msgstr ""
 
@@ -388,6 +404,11 @@ msgid "Pricelist Item"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
+msgid "Prices"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_product_product
 msgid "Product"
 msgstr ""
@@ -418,12 +439,18 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
+msgid "Sales Price"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_product
 msgid "Set product?"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_tel_kampanya
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_tel_kampanya
 msgid "Seçili ise telefon kampanyalarında aranmayacak."
 msgstr ""
 
@@ -435,6 +462,11 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
 msgid "Tax Office Name"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_v2_to_v12_views
+msgid "Tax Position"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -469,21 +501,19 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergidairesi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergidairesi
 msgid "Vergi Dairesi"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergino
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergino
 msgid "Vergi No"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_muhasebe_kodu
-msgid "Zirve Muhasebe kodu"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_contact_name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_contact_name
 msgid "ilgili kişi"
 msgstr ""
 
