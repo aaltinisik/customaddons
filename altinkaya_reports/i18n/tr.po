@@ -756,7 +756,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "ALTINKAYA Enclosures For Electronics\n"
 "								<br/>"
-msgstr ""
+msgstr "ALTINKAYA Elektronik Cihaz Kutuları\n"
+"								<br/>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.location_report_godex
