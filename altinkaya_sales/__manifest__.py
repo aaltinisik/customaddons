@@ -29,9 +29,11 @@
     """,
     'website': 'http://www.codequarters.com',
     'data': [
+             'security/ir.model.access.csv',
              'views/sales_order_view.xml',
              'views/res_partner_views.xml',
              'views/product_views.xml',
+             'views/pricelist.xml',
             ],
     'demo': [],
     'installable': True,

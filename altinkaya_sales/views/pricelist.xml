@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="view_product_pricelist_type_from">
+		<field name="name">product.pricelist.types.form</field>
+		<field name="model">product.pricelist.type</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="name" required="1"/>
+							<field name="field" required="1"/>
+							<field name="active" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="view_product_pricelist_type_tree">
+		<field name="name">product.pricelist.type.tree</field>
+		<field name="model">product.pricelist.type</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" required="1"/>
+				<field name="field" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_product_pricelist_type">
+		<field name="name">Product Pricelist Type</field>
+		<field name="res_model">product.pricelist.type</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<menuitem id="menu_product_pricelist_type" parent="sale.menu_sale_config" name="Product Pricelist Types" action="action_product_pricelist_type" sequence="8" />
+	
+</odoo>
