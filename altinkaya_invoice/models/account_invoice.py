@@ -32,17 +32,17 @@ class AccountInvoice(models.Model):
     
     #TDE Fix Onur
     #invoice have picking_ids but not yet
-#     @api.multi
-#     def invoice_validate(self):
-#         res = super(AccountInvoice, self).invoice_validate()
-#         user = self.env['res.users'].browse(self.env.user.id)
-#         for invoice in self:
-#             for picking in invoice.picking_ids:
-#                 if picking.carrier_id.id != invoice.carrier_id.id:
-#                     picking.message_post(body='Carrier changed from %s to %s through invoice by %s' % (picking.carrier_id.name,invoice.carrier_id.name, user.name))
-#                     picking.write({'carrier_id':invoice.carrier_id.id})
-#          
-#         return res
+    @api.multi
+    def invoice_validate(self):
+        res = super(AccountInvoice, self).invoice_validate()
+        user = self.env['res.users'].browse(self.env.user.id)
+        for invoice in self:
+            for picking in invoice.picking_ids:
+                if picking.carrier_id.id != invoice.carrier_id.id:
+                    picking.message_post(body='Carrier changed from %s to %s through invoice by %s' % (picking.carrier_id.name,invoice.carrier_id.name, user.name))
+                    picking.write({'carrier_id':invoice.carrier_id.id})
+           
+        return res
     
     @api.depends('amount_total','partner_id','currency_id')
     def _compute_altinkaya_payment_url(self):
