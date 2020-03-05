@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-03 13:39+0000\n"
-"PO-Revision-Date: 2020-03-03 13:39+0000\n"
+"POT-Creation-Date: 2020-03-05 12:21+0000\n"
+"PO-Revision-Date: 2020-03-05 12:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -195,7 +195,7 @@ msgid "<span class=\"oe_form_field\" attrs=\"{'invisible':[('set_product','=',Fa
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__active
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__active
 msgid "Active"
 msgstr ""
 
@@ -259,18 +259,18 @@ msgid "Contact"
 msgstr ""
 
 #. module: altinkaya_sales
-#: code:addons/altinkaya_sales/models/product_pricelist.py:33
+#: code:addons/altinkaya_sales/models/product_pricelist.py:202
 #, python-format
 msgid "Cost"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__create_uid
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__create_date
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_date
 msgid "Created on"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgid "Devir yapıldı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__display_name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -339,7 +339,7 @@ msgid "Euro ile satılırken kullanılan temel fiyat"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__field
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__field
 msgid "Field"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgid "History"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__id
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__id
 msgid "ID"
 msgstr ""
 
@@ -422,17 +422,17 @@ msgid "Kategori Referansi"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type____last_update
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__write_uid
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__write_date
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -448,7 +448,7 @@ msgid "Minimum işçilik Fiyatı USD"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_type__name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
 msgid "Name"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgid "Old Prices"
 msgstr ""
 
 #. module: altinkaya_sales
-#: code:addons/altinkaya_sales/models/product_pricelist.py:34
+#: code:addons/altinkaya_sales/models/product_pricelist.py:203
 #, python-format
 msgid "Other Pricelist"
 msgstr ""
@@ -471,6 +471,11 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_product__attr_price
 msgid "Price calculated based on the product's attribute values."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_pricelist
+msgid "Pricelist"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -494,13 +499,13 @@ msgid "Product Category"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.actions.act_window,name:altinkaya_sales.action_product_pricelist_type
-msgid "Product Pricelist Type"
+#: model:ir.actions.act_window,name:altinkaya_sales.action_product_price_type
+msgid "Product Price Type"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.ui.menu,name:altinkaya_sales.menu_product_pricelist_type
-msgid "Product Pricelist Types"
+#: model:ir.ui.menu,name:altinkaya_sales.menu_product_price_type
+msgid "Product Price Types"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -514,7 +519,7 @@ msgid "Product Template Attribute Line"
 msgstr ""
 
 #. module: altinkaya_sales
-#: code:addons/altinkaya_sales/models/product_pricelist.py:32
+#: code:addons/altinkaya_sales/models/product_pricelist.py:201
 #, python-format
 msgid "Public Price"
 msgstr ""
@@ -611,6 +616,11 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_iscilik_fiyat
 msgid "işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_price_type
+msgid "product.price.type"
 msgstr ""
 
 #. module: altinkaya_sales

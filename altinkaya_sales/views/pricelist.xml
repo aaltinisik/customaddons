@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-	<record model="ir.ui.view" id="view_product_pricelist_type_from">
-		<field name="name">product.pricelist.types.form</field>
-		<field name="model">product.pricelist.type</field>
+	<record model="ir.ui.view" id="view_product_price_type_from">
+		<field name="name">product.price.types.form</field>
+		<field name="model">product.price.type</field>
 		<field name="arch" type="xml">
 			<form>
 				<sheet>
@@ -17,9 +17,9 @@
 			</form>
 		</field>
 	</record>
-	<record model="ir.ui.view" id="view_product_pricelist_type_tree">
-		<field name="name">product.pricelist.type.tree</field>
-		<field name="model">product.pricelist.type</field>
+	<record model="ir.ui.view" id="view_product_price_type_tree">
+		<field name="name">product.price.type.tree</field>
+		<field name="model">product.price.type</field>
 		<field name="arch" type="xml">
 			<tree>
 				<field name="name" required="1"/>
@@ -28,12 +28,12 @@
 			</tree>
 		</field>
 	</record>
-	<record model="ir.actions.act_window" id="action_product_pricelist_type">
-		<field name="name">Product Pricelist Type</field>
-		<field name="res_model">product.pricelist.type</field>
+	<record model="ir.actions.act_window" id="action_product_price_type">
+		<field name="name">Product Price Type</field>
+		<field name="res_model">product.price.type</field>
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 	</record>
-	<menuitem id="menu_product_pricelist_type" parent="sale.menu_sale_config" name="Product Pricelist Types" action="action_product_pricelist_type" sequence="8" />
+	<menuitem id="menu_product_price_type" parent="sale.menu_sale_config" name="Product Price Types" action="action_product_price_type" sequence="8" />
 	
 </odoo>
