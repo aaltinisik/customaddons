@@ -209,8 +209,9 @@ class ProductPriclelistItem(models.Model):
                 res.append((price_type.field,price_type.name))    
         return res        
                 
-    x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
+    
     base = fields.Selection(selection = lambda self: self._compute_base())
+    x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
     
     
     
