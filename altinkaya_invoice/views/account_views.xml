@@ -67,9 +67,11 @@
                             </field>
                         </page>
                      <page string="Pickings">
-                     		<field name="picking_ids">
+                     		<label for='waiting_picking_ids'/>
+                     		<field name="waiting_picking_ids"/>
+                     		<label for='picking_ids'/>
+                     		<field name="picking_ids"/>
                      		
-                     		</field>
                      </page>
           	     </xpath>  
   			</field>

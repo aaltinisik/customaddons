@@ -29,6 +29,15 @@ class AccountInvoice(models.Model):
         help="The reference of this invoice as provided by the supplier.",
         readonly=True, states={'draft': [('readonly', False)]})
     
+    waiting_picking_ids = fields.One2many('stock.picking',string="Waiting Pickings",compute="_compute_waiting_picking_ids")
+    
+    
+    def _compute_waiting_picking_ids(self):
+        
+        stocks = self.env['stock.picking'].search([('partner_id','=',self.partner_id.id),('picking_type_id.code','=','incoming'),('invoice_status','=','to_invoice')])
+        
+        return stocks
+    
     
     #TDE Fix Onur
     #invoice have picking_ids but not yet
