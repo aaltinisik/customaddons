@@ -29,7 +29,7 @@ from odoo.tools.translate import _
 class Partner(models.Model):
     _inherit='res.partner'
 
-    use_secondary_currency = fields.Boolean(company_dependent=True,string="Use Secondary Currency",default=False)
+    use_secondary_currency = fields.Boolean(string="Use Secondary Currency",default=False)
     
     @api.multi
     def _get_statement_data_currency(self,data=None):

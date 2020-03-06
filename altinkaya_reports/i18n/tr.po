@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 07:27+0000\n"
-"PO-Revision-Date: 2020-02-28 07:27+0000\n"
+"POT-Creation-Date: 2020-03-06 12:40+0000\n"
+"PO-Revision-Date: 2020-03-06 12:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,7 @@ msgstr ""
 msgid "<strong>\n"
 "				Delivery Address<br/>\n"
 "			</strong>"
-msgstr  "<strong>\n"
+msgstr "\"<strong>\n"
 "				Teslim Adresi<br/>\n"
 "			</strong>"
 
@@ -914,7 +914,7 @@ msgstr "Oluşturan"
 #. module: altinkaya_reports
 #: model:ir.model.fields,field_description:altinkaya_reports.field_partner_statement_wizard__create_date
 msgid "Created on"
-msgstr "Oluşturuldu"
+msgstr "Oluşturulma"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
@@ -1123,17 +1123,17 @@ msgstr ""
 #. module: altinkaya_reports
 #: model:ir.model.fields,field_description:altinkaya_reports.field_partner_statement_wizard____last_update
 msgid "Last Modified on"
-msgstr "Son Düzenleme Tarihi"
+msgstr "Son Güncelleme"
 
 #. module: altinkaya_reports
 #: model:ir.model.fields,field_description:altinkaya_reports.field_partner_statement_wizard__write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
 #. module: altinkaya_reports
 #: model:ir.model.fields,field_description:altinkaya_reports.field_partner_statement_wizard__write_date
 msgid "Last Updated on"
-msgstr "Son güncellenme"
+msgstr "Son Güncelleme"
 
 #. module: altinkaya_reports
 #: model:ir.actions.report,name:altinkaya_reports.label_stock_location
@@ -1491,7 +1491,7 @@ msgstr "Birim Fiyat"
 #: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__use_secondary_currency
 #: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__use_secondary_currency
 msgid "Use Secondary Currency"
-msgstr ""
+msgstr "2. Para Birimini Kullan"
 
 #. module: altinkaya_reports
 #: model:ir.model,name:altinkaya_reports.model_res_users
