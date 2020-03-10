@@ -7,7 +7,7 @@
 """,
     'website': 'https://www.codequarters.com',
     'depends' : [
-        'base'
+        'base',
         ],
     'data': [
     ],

@@ -10,15 +10,16 @@ from odoo import models,fields,api
 class MigrationMapping(models.AbstractModel):
     _name = "migration.mapping"
     
-    v8_id = fields.Integer(string="V8 ID")
+    v8_id = fields.Integer(string="V8 ID",store=True)
 
 
-class ResPartner(models.Model):
-    _inherit = ['res.partner','migration.mapping']
+# class ResPartner(models.Model):
+#     _inherit = ['res.partner','migration.mapping']
+#      
     
     
-    
-class ResCountry(models.Model):
+class Rescountry(models.Model):
+    _name = 'res.country'
     _inherit= ["res.country",'migration.mapping'] 
     
 
