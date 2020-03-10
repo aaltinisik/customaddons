@@ -28,6 +28,24 @@
 						<label for='picking_ids' />
 						<field name='picking_ids' />
 					</page>
+					<page string="Old Sales">
+						 <label for='sale_line_history' />
+						<field name='sale_line_history' >
+							 <tree>
+							 	<button class="oe_edit_only" name="copy_line_to_active_order" type="object" attrs="{'invisible':[('parent.state','not in',['draft'])]}" context="{'active_order_id':parent.id}" string="Copy to Sale" icon="fa-plus"/>
+								<field name="date_order"/>								
+								<field name="order_id"/>
+								<field name="name"/>
+								<field name="salesman_id"/>
+								<field name="product_uom_qty"/>
+								<field name="price_unit"/>
+								<field name="discount"/>
+								<field name="price_total"/>
+									
+							</tree>
+						
+						</field>
+					</page>
 				</xpath>
 				<!-- <xpath expr="//field[@name='payment_term']"
 						position='replace' /> -->

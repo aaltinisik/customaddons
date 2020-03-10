@@ -21,7 +21,15 @@ class SaleOrder(models.Model):
             
     
     altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',compute='_altinkaya_payment_url')
-
+    
+    sale_line_history = fields.One2many('sale.order.line',string="Old Sales",compute="_compute_sale_line_history")
+    
+    def _compute_sale_line_history(self):
+        
+        for sale in self:
+            last_sale_lines = sale.env['sale.order.line'].search([('order_id.partner_id','=',sale.partner_id.id),('state','not in',['draft','sent','cancelled'])],limit=50,order="id desc")
+            sale.sale_line_history = last_sale_lines.ids
+    
 #     @api.multi
 #     def print_quotation(self):
 #         '''
@@ -72,7 +80,21 @@ class sale_order_line(models.Model):
     
     show_custom_products = fields.Boolean('Show Custom Products')
     set_product = fields.Boolean('Set product?', compute='_compute_set_product')
+    date_order = fields.Datetime(related="order_id.date_order")  
     
+    
+    def copy_line_to_active_order(self):
+        sale = self.env['sale.order'].browse(self.env.context.get('active_order_id') or  self.env.context.get('params',{}).get('id'))
+        for line in self:
+        
+            sale.write({'order_line':[(0,0,{
+                'name':line.name,
+                'product_id':line.product_id.id,
+                'product_uom_qty':line.product_uom_qty,})]})
+            
+            sale.order_line._compute_amount()
+    
+       
     @api.one
     @api.depends('product_id')
     def _compute_set_product(self):
