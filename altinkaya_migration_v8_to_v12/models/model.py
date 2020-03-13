@@ -13,10 +13,6 @@ class MigrationMapping(models.AbstractModel):
     v8_id = fields.Integer(string="V8 ID",store=True)
 
 
-# class ResPartner(models.Model):
-#     _inherit = ['res.partner','migration.mapping']
-#      
-    
     
 class Rescountry(models.Model):
     _name = 'res.country'
@@ -38,5 +34,24 @@ class AddressNeighbour(models.Model):
     _name = 'address.neighbour'
     _inherit= ["address.neighbour",'migration.mapping']
 
+class ResPartner(models.Model):
+    _name="res.partner"
+    _inherit = ['res.partner','migration.mapping']
+    
+class AccountPaymentTerm(models.Model):
+    _name = "account.payment.term"
+    _inherit=["account.payment.term",'migration.mapping']
+    
+class ProductPricelist(models.Model):
+    _name="product.pricelist"
+    _inherit=["product.pricelist",'migration.mapping']
 
+class ResBartnerBank(models.Model):
+    _name="res.partner.bank"
+    _inherit=["res.partner.bank","migration.mapping"]
+
+class ProductCategory(models.Model):
+    _name="product.category"
+    _inherit=["product.category","migration.mapping"]
+    
 
