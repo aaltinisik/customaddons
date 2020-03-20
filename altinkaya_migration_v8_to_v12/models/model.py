@@ -79,11 +79,11 @@ class ProductAttributeValue(models.Model):
     
 class ProductTemplateAttributeLine(models.Model):
     _name="product.template.attribute.line"
-    _inherit=['product.attribute.line','migration.mapping']
+    _inherit=['product.template.attribute.line','migration.mapping']
     
 class ProductTemplateAttributeValue(models.Model):
     _name="product.template.attribute.value"
-    _inherit=['product.attribute.value','migration.mapping']                
+    _inherit=['product.template.attribute.value','migration.mapping']                
     
 class ProductTemplate(models.Model):
     _name="product.template"
