@@ -71,7 +71,7 @@ class UomUom(models.Model):
     
 class ProductAttribute(models.Model):
     _name="product.attribute"
-    _inherit=['product.attribute','migraion.mapping']
+    _inherit=['product.attribute','migration.mapping']
     
 class ProductAttributeValue(models.Model):
     _name="product.attribute.value"
