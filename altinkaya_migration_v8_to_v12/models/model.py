@@ -37,21 +37,59 @@ class AddressNeighbour(models.Model):
 class ResPartner(models.Model):
     _name="res.partner"
     _inherit = ['res.partner','migration.mapping']
+
+
+class ResPartnerCategory(models.Model):
+    _name="res.partner.category"
+    _inherit = ['res.partner.category','migration.mapping']    
     
 class AccountPaymentTerm(models.Model):
     _name = "account.payment.term"
     _inherit=["account.payment.term",'migration.mapping']
     
-class ProductPricelist(models.Model):
-    _name="product.pricelist"
-    _inherit=["product.pricelist",'migration.mapping']
 
 class ResBartnerBank(models.Model):
     _name="res.partner.bank"
     _inherit=["res.partner.bank","migration.mapping"]
 
+
+class ProductPricelist(models.Model):
+    _name="product.pricelist"
+    _inherit=["product.pricelist",'migration.mapping']
+
 class ProductCategory(models.Model):
     _name="product.category"
     _inherit=["product.category","migration.mapping"]
+
+class UomCategory(models.Model):
+    _name="uom.category"
+    _inherit=['uom.category',"migration.mapping"]
+
+class UomUom(models.Model):
+    _name="uom.uom" 
+    _inherit=['uom.uom',"migration.mapping"]   
     
+class ProductAttribute(models.Model):
+    _name="product.attribute"
+    _inherit=['product.attribute','migraion.mapping']
+    
+class ProductAttributeValue(models.Model):
+    _name="product.attribute.value"
+    _inherit=['product.attribute.value','migration.mapping']
+    
+class ProductTemplateAttributeLine(models.Model):
+    _name="product.template.attribute.line"
+    _inherit=['product.attribute.line','migration.mapping']
+    
+class ProductTemplateAttributeValue(models.Model):
+    _name="product.template.attribute.value"
+    _inherit=['product.attribute.value','migration.mapping']                
+    
+class ProductTemplate(models.Model):
+    _name="product.template"
+    _inherit = ['product.template','migration.mapping']
+    
+class ProductProduct(models.Model):
+    _name="product.product"
+    _inherit=['product.product','migration.mapping']        
 
