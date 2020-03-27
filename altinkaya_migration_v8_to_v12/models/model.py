@@ -93,3 +93,13 @@ class ProductProduct(models.Model):
     _name="product.product"
     _inherit=['product.product','migration.mapping']        
 
+class DeliveryCarrier(models.Model):
+    _name = 'delivery.carrier'
+    _inherit =["delivery.carrier","migration.mapping"]
+
+class AccountTax(models.Model):
+    _name="account.tax"
+    _inherit=["account.tax","migration.mapping"]
+    
+    
+    
