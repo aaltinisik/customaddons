@@ -100,6 +100,9 @@ class DeliveryCarrier(models.Model):
 class AccountTax(models.Model):
     _name="account.tax"
     _inherit=["account.tax","migration.mapping"]
+
+
+
     
     
     
