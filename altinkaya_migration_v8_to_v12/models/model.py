@@ -102,7 +102,11 @@ class AccountTax(models.Model):
     _inherit=["account.tax","migration.mapping"]
 
 
-
+class StockLocation(models.Model):
+    _name="stock.location"
+    _inherit = ['stock.location',"migration.mapping"]
     
-    
+class StockLocationRoute(models.Model):
+    _name="stock.location.route"
+    _inherit = ['stock.location.route',"migration.mapping"]    
     
