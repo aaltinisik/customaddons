@@ -118,6 +118,8 @@ class ProductPricelistItem(models.Model):
     _name="product.pricelist.item"
     _inherit = ['product.pricelist.item',"migration.mapping"]
 
-     
+class PartnerWorksector(models.Model):
+    _name="partner.worksector"
+    _inherit=['partner.worksector',"migration.mapping"]     
     
     
