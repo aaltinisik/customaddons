@@ -110,3 +110,14 @@ class StockLocationRoute(models.Model):
     _name="stock.location.route"
     _inherit = ['stock.location.route',"migration.mapping"]    
     
+class ProductPriceType(models.Model):
+    _name="product.price.type"
+    _inherit = ['product.price.type',"migration.mapping"]   
+    
+class ProductPricelistItem(models.Model):
+    _name="product.pricelist.item"
+    _inherit = ['product.pricelist.item',"migration.mapping"]
+
+     
+    
+    
