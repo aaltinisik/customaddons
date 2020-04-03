@@ -121,5 +121,11 @@ class ProductPricelistItem(models.Model):
 class PartnerWorksector(models.Model):
     _name="partner.worksector"
     _inherit=['partner.worksector',"migration.mapping"]     
+
+class StockQuant(models.Model):
+    _name="stock.quant"
+    _inherit=['stock.quant',"migration.mapping"]
     
+    
+        
     
