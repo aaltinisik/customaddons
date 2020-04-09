@@ -126,6 +126,8 @@ class StockQuant(models.Model):
     _name="stock.quant"
     _inherit=['stock.quant',"migration.mapping"]
     
-    
+class StockWarehouse(models.Model):
+    _name="stock.warehouse"
+    _inherit = ["stock.warehouse","migration.mapping"]
         
     
