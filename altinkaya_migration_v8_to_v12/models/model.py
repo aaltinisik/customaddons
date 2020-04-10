@@ -129,5 +129,22 @@ class StockQuant(models.Model):
 class StockWarehouse(models.Model):
     _name="stock.warehouse"
     _inherit = ["stock.warehouse","migration.mapping"]
+
+class StockWarehouseOrderpoint(models.Model):
+    _name="stock.warehouse.orderpoint"
+    _inherit = ["stock.warehouse.orderpoint","migration.mapping"]
+    
+class MrpWorkcenter(models.Model):
+    _name="mrp.workcenter"
+    _inherit = ['mrp.workcenter',"migration.mapping"]     
+    
+class MrpBom(models.Model):
+    _name="mrp.bom"
+    _inherit = ["mrp.bom","migration.mapping"]
+
+class MrpBomWcparameter(models.Model):
+    _name="mrp.bom.wcparameter"
+    _inherit = ["mrp.bom.wcparameter","migration.mapping"]    
         
+       
     
