@@ -146,5 +146,18 @@ class MrpBomWcparameter(models.Model):
     _name="mrp.bom.wcparameter"
     _inherit = ["mrp.bom.wcparameter","migration.mapping"]    
         
-       
+class CrmTeam(models.Model):
+    _name="crm.team"     
+    _inherit=["crm.team","migration.mapping"]  
+    
+class SaleOrder(models.Model):
+    _name="sale.order"
+    _inherit=["sale.order","migration.mapping"]
+
+class SaleOrderLine(models.Model):
+    _name="sale.order.line"
+    _inherit=["sale.order.line","migration.mapping"]
+    
+        
+    
     
