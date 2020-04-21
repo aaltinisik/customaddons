@@ -157,7 +157,30 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _name="sale.order.line"
     _inherit=["sale.order.line","migration.mapping"]
-    
+
+
+class AccountInvoice(models.Model):
+    _name="account.invoice"
+    _inherit=["account.invoice","migration.mapping"]    
         
+class AccountInvoiceLine(models.Model):
+    _name="account.invoice.line"
+    _inherit=["account.invoice.line","migration.mapping"]     
+    
+    
+class AccountEinvoiceProvider(models.Model):
+    _name="account.einvoice.provider"
+    _inherit =["account.einvoice.provider","migration.mapping"]   
+     
+class AccountEinvoiceSender(models.Model):
+    _name="account.einvoice.sender"
+    _inherit=["account.einvoice.sender","migration.mapping"]      
+          
+  
+class AccountEinvoicePostbox(models.Model):
+    _name="account.einvoice.postbox"
+    _inherit=["account.einvoice.postbox","migration.mapping"]
+      
+    
     
     
