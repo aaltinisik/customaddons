@@ -181,6 +181,15 @@ class AccountEinvoicePostbox(models.Model):
     _name="account.einvoice.postbox"
     _inherit=["account.einvoice.postbox","migration.mapping"]
       
-    
-    
+class AccountJournal(models.Model):
+    _name="account.journal"
+    _inherit=["account.journal","migration.mapping"]    
+
+class AccountAccount(models.Model):
+    _name="account.account"
+    _inherit=["account.account","migration.mapping"]    
+
+class AccountGroup(models.Model):
+    _name="account.group"
+    _inherit=["account.group","migration.mapping"]  
     
