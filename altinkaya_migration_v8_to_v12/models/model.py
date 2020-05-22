@@ -125,6 +125,11 @@ class PartnerWorksector(models.Model):
 class StockQuant(models.Model):
     _name="stock.quant"
     _inherit=['stock.quant',"migration.mapping"]
+
+class StockRule(models.Model):
+    _name="stock.rule"
+    _inherit = ["stock.rule","migration.mapping"]
+
     
 class StockWarehouse(models.Model):
     _name="stock.warehouse"
