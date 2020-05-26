@@ -4,13 +4,18 @@
 #
 #@author: dogan
 #
-from odoo import models
+from odoo import models, fields
 
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
-    
+class MigrationMapping(models.AbstractModel):
+    _name = 'migration.mapping'
     
     old_id = fields.Id()
+
+class ResPartner(models.Model):
+    _inherit = ['res.partner', 'migration.mapping']
+    
+    
+   
     
     
