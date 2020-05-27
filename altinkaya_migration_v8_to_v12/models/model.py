@@ -198,3 +198,13 @@ class AccountGroup(models.Model):
     _name="account.group"
     _inherit=["account.group","migration.mapping"]  
     
+class StockPicking(models.Model):
+    _name="stock.picking"
+    _inherit=["stock.picking","migration.mapping"]
+        
+class StockMove(models.Model):
+    _name="stock.move"
+    _inherit=["stock.move","migration.mapping"]    
+    
+    
+    
