@@ -215,4 +215,8 @@ class AccountMoveLine(models.Model):
     _name="account.move.line"
     _inherit=["account.move.line","migration.mapping"]    
     
+class HrEmployee(models.Model):
+    _name="hr.employee"
+    _inherit=["hr.employee","migration.mapping"]    
+    
     
