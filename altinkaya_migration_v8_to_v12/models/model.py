@@ -205,6 +205,14 @@ class StockPicking(models.Model):
 class StockMove(models.Model):
     _name="stock.move"
     _inherit=["stock.move","migration.mapping"]    
-    
+
+class AccountMove(models.Model):
+    _name="account.move"
+    _inherit=["account.move","migration.mapping"]    
+
+
+class AccountMoveLine(models.Model):
+    _name="account.move.line"
+    _inherit=["account.move.line","migration.mapping"]    
     
     
