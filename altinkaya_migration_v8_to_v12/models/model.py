@@ -218,5 +218,13 @@ class AccountMoveLine(models.Model):
 class HrEmployee(models.Model):
     _name="hr.employee"
     _inherit=["hr.employee","migration.mapping"]    
+ 
+class MrpProduction(models.Model):
+    _name="mrp.production"
+    _inherit = ["mrp.production","migration.mapping"] 
+ 
+class MrpWorkorder(models.Model):
+    _name="mrp.workorder"
+    _inherit = ["mrp.workorder","migration.mapping"] 
     
     
