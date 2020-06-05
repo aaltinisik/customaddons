@@ -29,10 +29,10 @@ class MrpProduction(models.Model):
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
     sale_id = fields.Many2one('sale.order',string="Sale Order")
     
-    #date_planned = fields.Datetime('Scheduled Date')
-    #date_start2 = fields.Datetime('Start Date')
-    #date_finished2 = fields.Datetime('End Date')
-    #priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')], 'Priority')
+    date_planned = fields.Datetime('Scheduled Date')
+    date_start2 = fields.Datetime('Start Date')
+    date_finished2 = fields.Datetime('End Date')
+    priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')],string='Priority',default="0")
     
     x_operator = fields.Many2one(
             'hr.employee',
@@ -51,6 +51,21 @@ class MrpProduction(models.Model):
     procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
     product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
              readonly=True)
+    
+    
+    @api.multi
+    def _generate_moves(self):
+        if self.env.context.get("context",{}).get("migration",False):
+            return True
+        for production in self:
+            production._generate_finished_moves()
+            factor = production.product_uom_id._compute_quantity(production.product_qty, production.bom_id.product_uom_id) / production.bom_id.product_qty
+            boms, lines = production.bom_id.explode(production.product_id, factor, picking_type=production.bom_id.picking_type_id)
+            production._generate_raw_moves(lines)
+            # Check for all draft moves whether they are mto or not
+            production._adjust_procure_method()
+            production.move_raw_ids._action_confirm()
+        return True
     
     
     def _get_procurement_group_name(self):
@@ -130,7 +145,7 @@ class MrpProduction(models.Model):
                 return _get_sale_line(moves[0].move_dest_ids)
             return False
         
-        sale_line = _get_sale_line(production.move_finished_ids[0])
+        sale_line = _get_sale_line(production.move_finished_ids and production.move_finished_ids[0])
         if sale_line:
             production.write({
                 'sale_id':sale_line.order_id.id or '',
