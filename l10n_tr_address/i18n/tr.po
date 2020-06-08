@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 13:04+0000\n"
-"PO-Revision-Date: 2020-02-13 13:04+0000\n"
+"POT-Creation-Date: 2020-06-08 12:34+0000\n"
+"PO-Revision-Date: 2020-06-08 12:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "<b>Firma Adresi:</b>"
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "City"
-msgstr "Semt/İlçe"
+msgstr "Şehir"
 
 #. module: l10n_tr_address
 #: model_terms:ir.actions.act_window,help:l10n_tr_address.action_district
@@ -38,7 +38,7 @@ msgstr "Mahalle listenize bir Mahalle eklemek için tıklayın."
 #. module: l10n_tr_address
 #: model_terms:ir.actions.act_window,help:l10n_tr_address.action_region
 msgid "Click to add a Region in your Regions list."
-msgstr "Semt/Belde/Bucaklar listenize Semt/Belde/Bucak eklemek için tıklayın."
+msgstr "Bölgeler listenize Bölge eklemek için tıklayın."
 
 #. module: l10n_tr_address
 #: model:ir.model,name:l10n_tr_address.model_res_partner
@@ -89,7 +89,7 @@ msgstr "İlçe"
 #: model:ir.actions.act_window,name:l10n_tr_address.action_district
 #: model:ir.ui.menu,name:l10n_tr_address.district_menu
 msgid "Districts"
-msgstr "İlçe"
+msgstr "İlçeler"
 
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__id
@@ -108,7 +108,7 @@ msgstr "Adresleri İçe Aktar"
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.wizard_import_script_form_view
 msgid "Import Excel"
-msgstr "Exceli İçe Aktar"
+msgstr "Exceli Aktar"
 
 #. module: l10n_tr_address
 #: model:ir.model,name:l10n_tr_address.model_wizard_import_script
@@ -150,7 +150,7 @@ msgstr "Mahalle"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__neighbour_id
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__neighbour_id
 msgid "Neighbourhood"
-msgstr "Mahelle"
+msgstr "Mahalle"
 
 #. module: l10n_tr_address
 #: model:ir.actions.act_window,name:l10n_tr_address.action_neighbour
@@ -170,14 +170,14 @@ msgstr "Posta Kodu"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__region_id
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "Region"
-msgstr "Semt/Bucak/Belde"
+msgstr "Bölge"
 
 #. module: l10n_tr_address
 #: model:ir.actions.act_window,name:l10n_tr_address.action_region
 #: model:ir.model,name:l10n_tr_address.model_address_region
 #: model:ir.ui.menu,name:l10n_tr_address.region_menu
 msgid "Regions"
-msgstr "Semt/Bucak/Beldeler"
+msgstr "Bölgeler"
 
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__state_id
@@ -185,7 +185,7 @@ msgstr "Semt/Bucak/Beldeler"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__state_id
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "State"
-msgstr "İl"
+msgstr "Durum"
 
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
@@ -200,7 +200,7 @@ msgstr "Adres..."
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__xls_file
 msgid "Upload XLS File"
-msgstr "XLS Dosyasını Yükle"
+msgstr "XLS Dosyası Yükle"
 
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
