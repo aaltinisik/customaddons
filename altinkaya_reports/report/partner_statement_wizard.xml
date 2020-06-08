@@ -169,19 +169,19 @@
 													<td style="padding:0;">
 														<span t-esc="s['description']" />
 													</td>
-													<td style="padding:0;">
+													<td class="text-right" style="padding:0;">
 														<span t-esc="s['debit']"
 															t-options='{"widget": "monetary", "display_currency":s["currency_id"]}' />
 													</td>
-													<td style="padding:0;">
+													<td class="text-right" style="padding:0;">
 														<span t-esc="s['credit']"
 															t-options='{"widget": "monetary", "display_currency": s["currency_id"]}' />
 													</td>
-													<td style="padding:0;">
+													<td class="text-right" style="padding:0;">
 														<span t-esc="s['balance']"
 															t-options='{"widget": "monetary", "display_currency": s["currency_id"]}' />
 													</td>
-													<td style="padding:0;">
+													<td class="text-right" style="padding:0;">
 														<span t-esc="s['dc']" />
 													</td>
 													<t t-value="s['dc']" t-set="sdc" />
@@ -196,11 +196,11 @@
 												<td style="padding:0;"></td>
 												<td style="padding:0;">Total</td>
 												<td style="padding:0;"></td>
-												<td style="padding:0;">
+												<td class="text-right" style="padding:0;">
 													<span t-esc="sblc"
 														t-options='{"widget": "monetary", "display_currency":s_dict}' />
 												</td>
-												<td style="padding:0;">
+												<td class="text-right" style="padding:0;">
 													<span t-esc="sdc" />
 												</td>
 											</tr>
@@ -230,20 +230,21 @@
 												<td style="padding:0;">
 													<span t-esc="s['description']" />
 												</td>
-												<td style="padding:0;">
-													<span t-esc="'%.2f' %s['debit']" />
+												<td class="text-right" style="padding:0;">
+													<span t-esc="'{:,.2f}'.format(s['debit'])" />
 												</td>
-												<td style="padding:0;">
-													<span t-esc="'%.2f' %s['credit']" />
+												<td class="text-right" style="padding:0;">
+													<span t-esc="'{:,.2f}'.format(s['credit'])" />
 												</td>
-												<td style="padding:0;">
-													<span t-esc="'%.2f' %s['balance']" />
+												<td class="text-right" style="padding:0;">
+													<span t-esc="'{:,.2f}'.format(s['balance'])" />
 												</td>
-												<td style="padding:0;">
+												<td class="text-right" style="padding:0;">
 													<span t-esc="s['dc']" />
 												</td>
 												<t t-value="s['dc']" t-set="sdc" />
 												<t t-value="'%.2f' %s['balance']" t-set="sblc" />
+												
 											</tr>
 										</t>
 										<tr>
@@ -254,10 +255,10 @@
 											<td style="padding:0;"></td>
 											<td style="padding:0;">Total</td>
 											<td style="padding:0;"></td>
-											<td style="padding:0;">
+											<td class="text-right" style="padding:0;">
 												<span t-esc="sblc" />
 											</td>
-											<td style="padding:0;">
+											<td class="text-right" style="padding:0;">
 												<span t-esc="sdc" />
 											</td>
 										</tr>
