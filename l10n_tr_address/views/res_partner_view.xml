@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
-    		<record id="view_partner_form_neigbourhood" model="ir.ui.view">
+        
+       <record id="view_partner_form_neigbourhood" model="ir.ui.view">
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -30,7 +31,8 @@
                     <field name="neighbour_id" placeholder="Neighbour"  context="{'region_id': region_id,'state_id': state_id,'district_id': district_id}"/>
                 </xpath>
             </field>
-        </record>
+        </record> 
+        
 
     </data>
 </odoo>
