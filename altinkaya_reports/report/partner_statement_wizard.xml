@@ -147,6 +147,7 @@
 										<th>Balance</th>
 										<th></th>
 									</tr>
+									<t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
 									<t t-if="o.partner_id.use_secondary_currency">
 										<t t-foreach="o._get_statement_data_currency()"
 											t-as="s_dict">
@@ -231,16 +232,16 @@
 													<span t-esc="s['description']" />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span  t-esc="'{:,.2f}'.format(s['debit'])"
+													<span t-raw="number_lang.format('%.2f', s['debit'],grouping=True, monetary=True)"
 													 />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span  t-esc="'{:,.2f}'.format(s['credit'])" 
-													/>
+													<span t-raw="number_lang.format('%.2f', s['credit'],grouping=True, monetary=True)"
+													 />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span  t-esc="'{:,.2f}'.format(s['balance'])" 
-													/>
+													<span t-raw="number_lang.format('%.2f', s['balance'],grouping=True, monetary=True)"
+													 />
 													<!-- t-options='{"widget": "monetary", "display_currency": None}' -->
 												</td>
 												<td class="text-right" style="padding:0;">
