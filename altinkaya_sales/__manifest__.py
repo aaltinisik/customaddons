@@ -34,7 +34,8 @@
              'views/res_partner_views.xml',
              'views/product_views.xml',
              'views/pricelist.xml',
-             "views/res_partner.xml"
+             "views/res_partner.xml",
+             "data/mail_data.xml"
             ],
     'demo': [],
     'installable': True,
