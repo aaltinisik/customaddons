@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_partner_analysis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-14 13:45+0000\n"
+"PO-Revision-Date: 2020-02-14 13:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_partner_analysis
+#: model:ir.model,name:altinkaya_partner_analysis.model_res_partner
+msgid "Contact"
+msgstr "İletişim"
+
+#. module: altinkaya_partner_analysis
+#: model:res.groups,name:altinkaya_partner_analysis.invoice_analysis_partner
+msgid "Invoice Analysis on Partners"
+msgstr "İş Ortaklarında Fatura Analizi"
+
+#. module: altinkaya_partner_analysis
+#: code:addons/altinkaya_partner_analysis/models/partner.py:32
+#: code:addons/altinkaya_partner_analysis/models/partner.py:44
+#, python-format
+msgid "Invoices Analysis"
+msgstr "Fatura Analizi"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "Journal Entries with period in current year"
+msgstr ""
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "Last Year"
+msgstr "Geçen Yıl"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "Partner"
+msgstr "İş Ortağı"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_partner_form
+msgid "Purchase Stats"
+msgstr "Satınalma Analizi"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_partner_form
+msgid "Sale Stats"
+msgstr "Satış Analizi"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "This F.Year"
+msgstr "Bu Yıl"
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "Türkiye"
+msgstr ""
+
+#. module: altinkaya_partner_analysis
+#: model_terms:ir.ui.view,arch_db:altinkaya_partner_analysis.inherit_view_account_invoice_report_search
+msgid "Yurtdışı"
+msgstr ""
+

@@ -14,20 +14,20 @@ class StockRule(models.Model):
     mto_rule_id = fields.Many2one(
         'stock.rule', string="MTO Rule")
 
-    @api.constrains('action', 'mts_rule_id', 'mto_rule_id')
-    def _check_mts_mto_rule(self):
-        for rule in self:
-            if rule.action == 'split_procurement':
-                if not rule.mts_rule_id or not rule.mto_rule_id:
-                    msg = _('No MTS or MTO rule configured on procurement '
-                            'rule: %s!') % (rule.name, )
-                    raise UserError(msg)
-                if (rule.mts_rule_id.location_src_id.id !=
-                        rule.mto_rule_id.location_src_id.id):
-                    msg = _('Inconsistency between the source locations of '
-                            'the mts and mto rules linked to the procurement '
-                            'rule: %s! It should be the same.') % (rule.name,)
-                    raise UserError(msg)
+#     @api.constrains('action', 'mts_rule_id', 'mto_rule_id')
+#     def _check_mts_mto_rule(self):
+#         for rule in self:
+#             if rule.action == 'split_procurement':
+#                 if not rule.mts_rule_id or not rule.mto_rule_id:
+#                     msg = _('No MTS or MTO rule configured on procurement '
+#                             'rule: %s!') % (rule.name, )
+#                     raise UserError(msg)
+#                 if (rule.mts_rule_id.location_src_id.id !=
+#                         rule.mto_rule_id.location_src_id.id):
+#                     msg = _('Inconsistency between the source locations of '
+#                             'the mts and mto rules linked to the procurement '
+#                             'rule: %s! It should be the same.') % (rule.name,)
+#                     raise UserError(msg)
 
     @api.multi
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):

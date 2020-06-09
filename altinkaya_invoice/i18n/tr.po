@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 11:23+0000\n"
-"PO-Revision-Date: 2019-03-25 11:23+0000\n"
+"POT-Creation-Date: 2020-03-06 12:44+0000\n"
+"PO-Revision-Date: 2020-03-06 12:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,16 @@ msgid "Altinkaya Payment Url"
 msgstr "Altınkaya Ödeme URL'i"
 
 #. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Auto-detect"
+msgstr "Kendiliğinden algıla"
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Bank Account"
+msgstr "Banka Hesabı"
+
+#. module: altinkaya_invoice
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.view_partner_reconcile_close_form
 msgid "Cancel"
 msgstr "İptal"
@@ -49,7 +59,7 @@ msgstr "Cek NO"
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_payment__x_cek_vergi
 msgid "Cek Vergi No"
-msgstr "Cek Vergi No"
+msgstr ""
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_payment__x_cek_banka
@@ -72,6 +82,11 @@ msgstr "Kapatılıyor"
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__closing_move_date
 msgid "Closing Move Date"
 msgstr "Kapatma Tarihi"
+
+#. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_res_partner
+msgid "Contact"
+msgstr "İletişim"
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__create_uid
@@ -111,7 +126,7 @@ msgstr "Tamamlandı"
 #. module: altinkaya_invoice
 #: model:ir.model.fields,help:altinkaya_invoice.field_account_invoice__z_tevkifatli_mi
 msgid "Eger fatura tevkifatli fatura ise bu alan secilmeli Sadece zirve programi transferinde kullanilmaktadir."
-msgstr "Eger fatura tevkifatli fatura ise bu alan secilmeli Sadece zirve programi transferinde kullanilmaktadir."
+msgstr ""
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__end_date
@@ -121,7 +136,7 @@ msgstr "Bitiş Tarihi"
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__x_serino
 msgid "Fatura No"
-msgstr "Fatura No"
+msgstr ""
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__id
@@ -132,6 +147,16 @@ msgstr ""
 #: model:ir.model,name:altinkaya_invoice.model_account_invoice
 msgid "Invoice"
 msgstr "Fatura"
+
+#. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_account_journal
+msgid "Journal"
+msgstr "Yevmiye"
+
+#. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_account_journal__name
+msgid "Journal Name"
+msgstr "Yevmiye Adı"
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_payment__x_cek_tarih
@@ -181,14 +206,38 @@ msgid "Partner Country"
 msgstr "İş Ortağı Ülke"
 
 #. module: altinkaya_invoice
+#: model:ir.model,name:altinkaya_invoice.model_partner_reconcile_close
+msgid "Partner Reconcile Close"
+msgstr "İş Ortağı Mutabakatı Kapatma"
+
+#. module: altinkaya_invoice
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.view_partner_reconcile_close_form
 msgid "Partner Selection"
 msgstr "İş Ortağı Seçimi"
 
 #. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Payment Date"
+msgstr "Ödeme Tarihi"
+
+#. module: altinkaya_invoice
 #: model:ir.model,name:altinkaya_invoice.model_account_payment
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
 msgid "Payments"
 msgstr "Ödemeler"
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
+msgid "Pickings"
+msgstr "Transfer Listeleri"
+
+#. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__receiver
+msgid "Reciever"
+msgstr "Teslim Alan"
 
 #. module: altinkaya_invoice
 #: model:ir.ui.menu,name:altinkaya_invoice.menu_wizard_partner_reconcile_close
@@ -198,7 +247,7 @@ msgstr "Reconcile Kapama"
 #. module: altinkaya_invoice
 #: model:ir.actions.act_window,name:altinkaya_invoice.action_partner_reconcile_close
 msgid "Reconcile/Close Partner Entries"
-msgstr ""
+msgstr "İş Ortağı Girişlerini Uzlaştırma/Kapatma"
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__address_contact_id
@@ -221,9 +270,9 @@ msgid "Supplier Invoice Number"
 msgstr "Tedarikçi Fatura Numarası"
 
 #. module: altinkaya_invoice
-#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.ir_ui_view_accountinvoice_altinkaya_inherit0
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
 msgid "Teslimat Adresi"
-msgstr "Teslimat Adresi"
+msgstr ""
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__x_teslimat
@@ -234,6 +283,11 @@ msgstr "Teslimat Kısaltması"
 #: model:ir.model.fields,help:altinkaya_invoice.field_account_invoice__supplier_invoice_number
 msgid "The reference of this invoice as provided by the supplier."
 msgstr "Tedarikçinin fatura referansı"
+
+#. module: altinkaya_invoice
+#: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
+msgid "Total Balance"
+msgstr "Toplam Bakiye"
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_partner_reconcile_close__transfer_account_id
@@ -251,6 +305,17 @@ msgid "Transfer description"
 msgstr "Transfer Açıklaması"
 
 #. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__waiting_picking_ids
+msgid "Waiting Pickings"
+msgstr "Faturalanacak Transferler"
+
+#. module: altinkaya_invoice
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_res_partner__z_muhasebe_kodu
+#: model:ir.model.fields,field_description:altinkaya_invoice.field_res_users__z_muhasebe_kodu
+msgid "Zirve Muhasebe kodu"
+msgstr ""
+
+#. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__x_comment_export
 msgid "ihracaat fatura notu"
 msgstr "İhraçat Fatura Notu"
@@ -258,10 +323,5 @@ msgstr "İhraçat Fatura Notu"
 #. module: altinkaya_invoice
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.view_partner_reconcile_close_form
 msgid "or"
-msgstr "veya"
-
-#. module: altinkaya_invoice
-#: model:ir.model,name:altinkaya_invoice.model_partner_reconcile_close
-msgid "partner.reconcile.close"
-msgstr ""
+msgstr "yada"
 

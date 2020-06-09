@@ -23,15 +23,18 @@
     'version' : '12.0',
     'category': 'General',
     'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery','partner_fax'],
-    'author' : 'OnurUgur,Codequarters,Acespritech Solutions Pvt. Ltd.',
+    'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.',
     'description': """
     Sales Order Customization
     """,
     'website': 'http://www.codequarters.com',
     'data': [
+             'security/ir.model.access.csv',
              'views/sales_order_view.xml',
              'views/res_partner_views.xml',
              'views/product_views.xml',
+             'views/pricelist.xml',
+             "views/res_partner.xml"
             ],
     'demo': [],
     'installable': True,

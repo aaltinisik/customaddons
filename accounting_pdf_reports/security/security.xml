@@ -8,6 +8,10 @@
             <field name="category_id" ref="base.module_category_accounting_and_finance"/>
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
+        
+         <record id="partner_ledger_and_movelines" model="res.groups">
+            <field name="name">Partner Ledger and Move Lines on Partners</field>
+        </record>
 
     </data>
 </odoo>

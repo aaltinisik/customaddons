@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* turkey_address
+#	* l10n_tr_address
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 05:49+0000\n"
-"PO-Revision-Date: 2017-07-05 05:49+0000\n"
+"POT-Creation-Date: 2020-06-08 12:34+0000\n"
+"PO-Revision-Date: 2020-06-08 12:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,148 +15,195 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,help:turkey_address.action_district
-msgid "<p class=\"oe_view_nocontent_create\">\n"
-"                Click to add a District in your Distriicts list.\n"
-"              </p>\n"
-"            "
-msgstr "<p class=\"oe_view_nocontent_create\">\n"
-"                İlçe eklemek için tıklayın.\n"
-"              </p>\n"
-"            "
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "<b>Company Address:</b>"
+msgstr "<b>Firma Adresi:</b>"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,help:turkey_address.action_neighbour
-msgid "<p class=\"oe_view_nocontent_create\">\n"
-"                Click to add a Neighbour in your Neighbours list.\n"
-"              </p>\n"
-"            "
-msgstr "<p class=\"oe_view_nocontent_create\">\n"
-"                Mahalle Eklemek için tıklayın.\n"
-"              </p>\n"
-"            "
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "City"
+msgstr "Şehir"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,help:turkey_address.action_region
-msgid "<p class=\"oe_view_nocontent_create\">\n"
-"                Click to add a Region in your Regions list.\n"
-"              </p>\n"
-"            "
-msgstr "<p class=\"oe_view_nocontent_create\">\n"
-"                Semt Eklemek için tıklayın.\n"
-"              </p>\n"
-"            "
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_district
+msgid "Click to add a District in your Districts list."
+msgstr "İlçeler listenize bir İlçe eklemek için tıklayın."
 
-#. module: turkey_address
-#: field:address.district,create_uid:0
-#: field:address.neighbour,create_uid:0
-#: field:address.region,create_uid:0
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_neighbour
+msgid "Click to add a Neighbourhoud in your Neighbourhoud list."
+msgstr "Mahalle listenize bir Mahalle eklemek için tıklayın."
+
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_region
+msgid "Click to add a Region in your Regions list."
+msgstr "Bölgeler listenize Bölge eklemek için tıklayın."
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_res_partner
+msgid "Contact"
+msgstr "İletişim"
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Country"
+msgstr "Ülke"
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__create_uid
 msgid "Created by"
 msgstr "Oluşturan"
 
-#. module: turkey_address
-#: field:address.district,create_date:0
-#: field:address.neighbour,create_date:0
-#: field:address.region,create_date:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__create_date
 msgid "Created on"
 msgstr "Oluşturulma"
 
-#. module: turkey_address
-#: field:address.district,display_name:0
-#: field:address.neighbour,display_name:0
-#: field:address.region,display_name:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__display_name
 msgid "Display Name"
-msgstr "Görünen Adı"
+msgstr "Görünüm Adı"
 
-#. module: turkey_address
-#: field:address.district,name:0
-#: field:address.neighbour,district_id:0
-#: field:address.region,district_id:0
-#: view:res.partner:turkey_address.view_res_partner_inherite_view
-#: field:res.partner,district_id:0
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_address_district
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__district_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "District"
 msgstr "İlçe"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,name:turkey_address.action_district
-#: model:ir.ui.menu,name:turkey_address.district_menu
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_district
+#: model:ir.ui.menu,name:l10n_tr_address.district_menu
 msgid "Districts"
 msgstr "İlçeler"
 
-#. module: turkey_address
-#: field:address.district,id:0
-#: field:address.neighbour,id:0
-#: field:address.region,id:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
-#. module: turkey_address
-#: field:address.district,__last_update:0
-#: field:address.neighbour,__last_update:0
-#: field:address.region,__last_update:0
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_wizard_import_script_view
+#: model:ir.ui.menu,name:l10n_tr_address.menu_wizard_import_script
+msgid "Import Address Script"
+msgstr "Adresleri İçe Aktar"
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.wizard_import_script_form_view
+msgid "Import Excel"
+msgstr "Exceli Aktar"
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_wizard_import_script
+msgid "Import Script"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script____last_update
 msgid "Last Modified on"
-msgstr "Son Değiştirilme"
+msgstr "Son Güncelleme"
 
-#. module: turkey_address
-#: field:address.district,write_uid:0
-#: field:address.neighbour,write_uid:0
-#: field:address.region,write_uid:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
-#. module: turkey_address
-#: field:address.district,write_date:0
-#: field:address.neighbour,write_date:0
-#: field:address.region,write_date:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__write_date
 msgid "Last Updated on"
-msgstr "son güncelleme"
+msgstr "Son Güncelleme"
 
-#. module: turkey_address
-#: field:address.neighbour,name:0
-#: view:res.partner:turkey_address.view_res_partner_inherite_view
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__name
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "Neighbour"
 msgstr "Mahalle"
 
-#. module: turkey_address
-#: field:res.partner,neighbour_id:0
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_address_neighbour
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__neighbour_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__neighbour_id
 msgid "Neighbourhood"
 msgstr "Mahalle"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,name:turkey_address.action_neighbour
-#: model:ir.ui.menu,name:turkey_address.neighbour_menu
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_neighbour
+#: model:ir.ui.menu,name:l10n_tr_address.neighbour_menu
 msgid "Neighbours"
-msgstr "Mahalleler ve posta kodları"
+msgstr "Mahalleler"
 
-#. module: turkey_address
-#: model:ir.model,name:turkey_address.model_res_partner
-msgid "Partner"
-msgstr "Ortak"
-
-#. module: turkey_address
-#: field:address.neighbour,code:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__code
 msgid "Postal Code"
 msgstr "Posta Kodu"
 
-#. module: turkey_address
-#: field:address.neighbour,region_id:0
-#: field:address.region,name:0
-#: view:res.partner:turkey_address.view_res_partner_inherite_view
-#: field:res.partner,region_id:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__region_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__region_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__region_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "Region"
-msgstr "Semt Bucak Belde"
+msgstr "Bölge"
 
-#. module: turkey_address
-#: model:ir.actions.act_window,name:turkey_address.action_region
-#: model:ir.ui.menu,name:turkey_address.region_menu
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_region
+#: model:ir.model,name:l10n_tr_address.model_address_region
+#: model:ir.ui.menu,name:l10n_tr_address.region_menu
 msgid "Regions"
-msgstr "Semtler bucaklar beldeler"
+msgstr "Bölgeler"
 
-#. module: turkey_address
-#: field:address.district,state_id:0
-#: field:address.neighbour,state_id:0
-#: field:address.region,state_id:0
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__state_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__state_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__state_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "State"
-msgstr "İl"
+msgstr "Durum"
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Street 2..."
+msgstr "Adres 2..."
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Street..."
+msgstr "Adres..."
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__xls_file
+msgid "Upload XLS File"
+msgstr "XLS Dosyası Yükle"
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "ZIP"
+msgstr "PK"
 

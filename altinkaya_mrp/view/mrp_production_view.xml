@@ -17,14 +17,12 @@
 					<attribute name="domain">[('has_production_bom','=',True)]</attribute>
 					<attribute name="class"></attribute>
 				</xpath>
-<!-- 				<xpath expr="//field[@name='priority']" position="replace" /> -->
-<!-- 				<xpath expr="//field[@name='date_planned']" position="replace"> -->
-<!-- 					<field name="priority" /> -->
-<!-- 				    <field name="date_planned" /> -->
-<!--                     <field name="date_start2" /> -->
-<!-- 					<field name="date_finished2" /> -->
-<!-- 					<field name="x_note" colspan="8" /> -->
-<!-- 				</xpath> -->
+				<xpath expr="//field[@name='bom_id']" position="after">
+					<field name="priority" />
+				    <field name="date_planned" />
+                    <field name="date_start2" />
+					<field name="date_finished2" />
+				</xpath>
 				<xpath expr="//field[@name='availability']"  position="after">
 					<field name="location_src_id" />
 					<field name="location_dest_id" />
@@ -35,7 +33,7 @@
 					<field name="x_operator" />
 				</xpath>
 				<xpath expr="//field[@name='routing_id']" position="after">
-				<field name="x_note" />
+					<field name="x_note" />
 				</xpath>
 			</field>
 				

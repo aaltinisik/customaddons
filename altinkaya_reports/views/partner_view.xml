@@ -12,6 +12,11 @@
                        <button name="email_statement" string="Email Statement" type="object" class="oe_highlight"/>
                     </header>
                 </xpath>
+                <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
+                
+                	<field name="use_secondary_currency"/>
+                
+                </xpath>
             </field>
         </record>
 

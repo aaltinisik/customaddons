@@ -27,9 +27,52 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page[@name='general_information']" position="after">
+            	<page name="Prices" string="Prices">
+            		<group>
+            			<group name="old_price" string="Old Prices">
+			                <field name="v_fiyat_2017"/>
+			                <field name="v_2017_iscilik"/>
+			                <field name="v_min_2017_iscilik"/>
+			                <field name="v_fiyat_2016b"/>
+			                <field name="v_2016b_iscilik"/>
+			                <field name="v_min_2016b_iscilik"/>
+			                <field name="v_fiyat_2016a"/>
+			                <field name="v_2016a_iscilik"/>
+			                <field name="v_min_2016a_iscilik"/>
+			                <field name="v_fiyat_2015a"/>
+			                <field name="v_2015a_iscilik"/>
+			                <field name="v_min_2015a_iscilik"/>
+			                <field name="v_fiyat_2014"/>
+			                <field name="v_2014_iscilik"/>
+			                <field name="v_min_2014_iscilik"/>
+		               </group>
+		               <group>	
+		               		<field name="list_price" string="Sales Price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+		               		<field name="attr_price"/>
+			               	<field name="v_tl_fiyat"></field>
+							<field name="v_guncel_fiyat"></field>
+		                    <field name="v_fiyat_dolar"></field>
+							<field name="v_fiyat_euro"></field>
+							<field name="v_iscilik_fiyat"></field>
+							<field name="v_min_iscilik_fiy"></field>
+							
+		               
+		               
+		               </group>
+            		
+            		</group>
+            		
+            	
+            	</page>
+            
+            
+            </xpath>
+			<xpath expr="//field[@name='lst_price']" position="after">
+                	<field name="v_cari_urun"></field>
+             </xpath>
 
-
-           <xpath expr="//field[@name='description']" position="after">
+           <!-- <xpath expr="//field[@name='description']" position="after">
                 <group name="Old_price" string="Old Prices">
                 <field name="v_fiyat_2017"/>
                 <field name="v_2017_iscilik"/>
@@ -56,10 +99,8 @@
 					<field name="v_iscilik_fiyat"></field>
 					<field name="v_min_iscilik_fiy"></field>
 					<field name="v_cari_urun"></field>
-				</xpath>
-             <xpath expr="//field[@name='lst_price']" position="after">
-                	<field name="attr_price"/>
-             </xpath>
+				</xpath>-->
+              
             </field>
         </record>
 

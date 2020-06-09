@@ -61,7 +61,9 @@ class StockPicking(models.Model):
                                      (u"Uğur", u"Uğur"),
                                      (u"Çağrı", u"Çağrı"),
                                      ("Hatice", u"Hatice"),
-                                     ("Muhsin", u"Muhsin")
+                                     ("Muhsin", u"Muhsin"),
+                                     ("Muharrem",u"Muharrem"),
+                                     ("Sefer","Sefer")
                                      ],
                                      u'Siparişi Hazırlayan',readonly=True )
     comment_irsaliye = fields.Text('İrsaliye Notu')
