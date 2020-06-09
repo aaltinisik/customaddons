@@ -231,13 +231,17 @@
 													<span t-esc="s['description']" />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span t-esc="'{:,.2f}'.format(s['debit'])" />
+													<span  t-esc="'{:,.2f}'.format(s['debit'])"
+													 />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span t-esc="'{:,.2f}'.format(s['credit'])" />
+													<span  t-esc="'{:,.2f}'.format(s['credit'])" 
+													/>
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span t-esc="'{:,.2f}'.format(s['balance'])" />
+													<span  t-esc="'{:,.2f}'.format(s['balance'])" 
+													/>
+													<!-- t-options='{"widget": "monetary", "display_currency": None}' -->
 												</td>
 												<td class="text-right" style="padding:0;">
 													<span t-esc="s['dc']" />
@@ -256,7 +260,7 @@
 											<td style="padding:0;">Total</td>
 											<td style="padding:0;"></td>
 											<td class="text-right" style="padding:0;">
-												<span t-esc="sblc" />
+												<span t-esc="'%,.2f'.format(sblc) "/>
 											</td>
 											<td class="text-right" style="padding:0;">
 												<span t-esc="sdc" />
