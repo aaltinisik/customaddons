@@ -190,6 +190,8 @@ class ProductMergeWizard(models.TransientModel):
         for record in record_ids:
             try:
                 proxy_model = self.env[record.model].sudo()
+                if isinstance(proxy_model, models.AbstractModel):
+                    continue
                 column = proxy_model._columns[record.name]
             except KeyError:
                 # unknown model or field => skip
