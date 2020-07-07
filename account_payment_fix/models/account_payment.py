@@ -5,7 +5,8 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountPayment(models.Model):
-    _inherit = "account.payment"
+    _name = "account.payment"
+    _inherit = ['mail.thread', 'account.payment']
 
     name = fields.Char(readonly=False)
     state = fields.Selection(track_visibility='always')
