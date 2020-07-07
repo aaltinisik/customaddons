@@ -7,7 +7,7 @@
 """,
     'website': 'https://www.codequarters.com',
     'depends' : [
-        'base','l10n_tr_address','product','sale','delivery','stock','altinkaya_sales'
+        'base','l10n_tr_address','product','sale','delivery','stock','altinkaya_sales','l10n_tr_account_einvoice_base'
         ],
     'data': [
     ],
