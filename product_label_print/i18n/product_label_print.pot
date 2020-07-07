@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-17 18:16+0000\n"
-"PO-Revision-Date: 2018-04-17 18:16+0000\n"
+"POT-Creation-Date: 2020-06-09 10:39+0000\n"
+"PO-Revision-Date: 2020-06-09 10:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,234 +16,250 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_pieces_in_pack:0
-#: field:product.product.label,pieces_in_pack:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_pieces_in_pack
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__pieces_in_pack
 msgid "# in Cartoon"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,copies_to_print:0
-#: field:print.pack.barcode.wiz,single_label_label_to_print:0
-#: field:product.product.label,label_to_print:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__copies_to_print
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_label_to_print
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__label_to_print
 msgid "# of label to be printed"
 msgstr ""
 
 #. module: product_label_print
-#: model:ir.model,name:product_label_print.model_aeroo_printers
-msgid "Available printers for Aeroo direct print"
-msgstr ""
-
-#. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_barcode:0
-#: field:product.product.label,barcode:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_barcode
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__barcode
 msgid "Barcode"
 msgstr ""
 
 #. module: product_label_print
-#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Cancel"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,create_uid:0
-#: field:print.pack.barcode.wiz,create_uid:0
-#: field:product.product.label,create_uid:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__create_uid
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__create_uid
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,create_date:0
-#: field:print.pack.barcode.wiz,create_date:0
-#: field:product.product.label,create_date:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__create_date
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__create_date
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_default_code:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_default_code
 msgid "Default Code"
 msgstr ""
 
 #. module: product_label_print
-#: field:product.product.label,default_code:0
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__default_code
 msgid "Default_code"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,display_name:0
-#: field:print.pack.barcode.wiz,display_name:0
-#: field:product.product.label,display_name:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__display_name
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__display_name
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: product_label_print
-#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Do not print first label"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,id:0
-#: field:print.pack.barcode.wiz,id:0
-#: field:product.product.label,id:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__id
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__id
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__id
 msgid "ID"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,label1:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__label1
 msgid "Label 1"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,label2:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__label2
 msgid "Label 2"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,label_ids:0
+#: model:ir.model,name:product_label_print.model_label_twoinrow
+msgid "Label Two in Row"
+msgstr ""
+
+#. module: product_label_print
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__label_ids
 msgid "Labels"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,__last_update:0
-#: field:print.pack.barcode.wiz,__last_update:0
-#: field:product.product.label,__last_update:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow____last_update
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz____last_update
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,write_uid:0
-#: field:print.pack.barcode.wiz,write_uid:0
-#: field:product.product.label,write_uid:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__write_uid
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__write_uid
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,write_date:0
-#: field:print.pack.barcode.wiz,write_date:0
-#: field:product.product.label,write_date:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__write_date
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__write_date
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_name:0
-#: field:product.product.label,name:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_name
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__name
 msgid "Name"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_nameL1:0
-#: field:print.pack.barcode.wiz,single_label_nameL2:0
-#: field:product.product.label,nameL1:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_nameL1
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_nameL2
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__nameL1
 msgid "NameL1"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_nameL3:0
-#: field:product.product.label,nameL2:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_nameL3
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__nameL2
 msgid "NameL2"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_nameL4:0
-#: field:product.product.label,nameL3:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_nameL4
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__nameL3
 msgid "NameL3"
 msgstr ""
 
 #. module: product_label_print
-#: field:product.product.label,nameL4:0
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__nameL4
 msgid "NameL4"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_note:0
-#: field:product.product.label,note:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_note
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__note
 msgid "Note"
 msgstr ""
 
 #. module: product_label_print
-#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Print"
 msgstr ""
 
 #. module: product_label_print
-#: view:product.product:product_label_print.product_product_print_label_single_form
-#: view:product.product:product_label_print.product_product_print_label_single_tree
+#: model_terms:ir.ui.view,arch_db:product_label_print.product_product_print_label_single_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.product_product_print_label_single_tree
 msgid "Print Label"
 msgstr ""
 
 #. module: product_label_print
-#: model:ir.actions.report.xml,name:product_label_print.aeroo_product_label_print_id
+#: model_terms:ir.ui.view,arch_db:product_label_print.stock_move_tree_print_product_label
 msgid "Print Product Label"
 msgstr ""
 
 #. module: product_label_print
-#: field:aeroo.printers,type:0
-msgid "Printer_Type"
-msgstr ""
-
-#. module: product_label_print
-#: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:47
+#: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:53
 #, python-format
 msgid "Printing multiple labels is restricted!"
 msgstr ""
 
 #. module: product_label_print
 #: model:ir.model,name:product_label_print.model_product_product
-#: field:print.pack.barcode.wiz,single_label_product_id:0
-#: field:product.product.label,product_id:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_product_id
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__product_id
 msgid "Product"
+msgstr ""
+
+#. module: product_label_print
+#: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:57
+#, python-format
+msgid "Product : %s not have default code"
+msgstr ""
+
+#. module: product_label_print
+#: model:ir.actions.report,name:product_label_print.label_product_product
+msgid "Product Label (GODEX)"
 msgstr ""
 
 #. module: product_label_print
 #: model:ir.actions.act_window,name:product_label_print.action_print_pack_barcode_wiz
 #: model:ir.model,name:product_label_print.model_print_pack_barcode_wiz
-#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Product Label Print"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,product_label_ids:0
+#: model:ir.model,name:product_label_print.model_product_product_label
+msgid "Product Product Label"
+msgstr ""
+
+#. module: product_label_print
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__product_label_ids
 msgid "Products"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,restrict_single:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__restrict_single
 msgid "Restrict to single product"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_short_code:0
-#: field:product.product.label,short_code:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_short_code
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__short_code
 msgid "Short Code"
 msgstr ""
 
 #. module: product_label_print
-#: view:print.pack.barcode.wiz:product_label_print.view_print_pack_barcode_form
+#: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Show Label"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_id:0
-msgid "Single label id"
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_id
+msgid "Single Label"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,skip_first:0
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__skip_first
 msgid "Skip First Label"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,first_label_empty:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__first_label_empty
 msgid "Skip first label in row"
 msgstr ""
 
 #. module: product_label_print
-#: field:label.twoinrow,second_label_empty:0
+#: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__second_label_empty
 msgid "Skip second label in row"
 msgstr ""
 
 #. module: product_label_print
-#: field:print.pack.barcode.wiz,single_label_uom_name:0
-#: field:product.product.label,uom_name:0
+#: model:ir.model,name:product_label_print.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: product_label_print
+#: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_uom_name
+#: model:ir.model.fields,field_description:product_label_print.field_product_product_label__uom_name
 msgid "UOM Name"
 msgstr ""
 

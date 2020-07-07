@@ -3,7 +3,7 @@
     'version' : '12.0',
     'category': 'General',
     'depends' : ['base','contacts', 'sale', 'stock','l10n_tr_invoice_amount_in_words','base_report_to_printer','account','account_check','mrp'],
-    'author' : 'OnurUgur,Codequarters,',
+    'author' : 'MAkifOzdemir,OnurUgur,Codequarters,',
     'description': """
     Contain altinkaya reports"
     """,
@@ -11,7 +11,6 @@
     'data': [
              
              'report/sale_reports.xml',
-             
              'report/purchase_quotation_reports.xml',
              'report/purchase_order_reports.xml',
              'report/location_reports.xml',
@@ -23,7 +22,9 @@
              'report/report_hr_employee_annual.xml',
              'report/stock_picking_delivery.xml',
              'report/partner_statement.xml',
-             'report/partner_statement2.xml',
+             'report/partner_statement_wizard.xml',
+#              'report/partner_statement_currency.xml',
+#              'report/partner_statement_currency_wizard.xml',
              'wizard/partner_statement_wizard_view.xml',
              'views/res_users_views.xml',
              'views/partner_view.xml',

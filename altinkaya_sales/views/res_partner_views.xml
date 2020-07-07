@@ -6,8 +6,11 @@
             <field name="name">altinkaya_telfax.partner.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
-            <field eval="2" name="priority" />
+            <field eval="12445" name="priority" />
             <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group//field[@name='lang']" position="before">
+            		<field name="z_contact_name"/>
+            	</xpath>
                 <xpath expr="//field[@name='industry_id']" position="after">
                     <field name="z_tel_kampanya"/>
                     <field name="z_kamp_2016A"/>
@@ -15,7 +18,6 @@
                     <field name="z_kat_postala"/>
                     <field name="z_kat_postalandi"/>
                     <field name="z_kat_email"/>
-					<field name="z_contact_name"/>
                 </xpath>
                 <!-- should place well onur -->
                 <xpath expr="//field[@name='vat']" position="after">
@@ -24,8 +26,49 @@
 				<xpath expr="//field[@name='ref']" position="replace">
 					<field name="ref"/>
 				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@name='internal_notes']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@name='accounting']" position="after">
+						<page name="internal_notes" string="Notes" modifiers="{}">
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Sales Order" colspan="4" modifiers="{}"/>
+								<field name="sale_warn" nolabel="1" modifiers="{}"/>
+								<field name="sale_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('sale_warn', '!=', False), ('sale_warn','!=','no-message')],'readonly':[('sale_warn','=','no-message')]}" modifiers="{'required':[['sale_warn','!=',false],['sale_warn','!=','no-message']],'readonly':[['sale_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" invisible="1" modifiers="{'invisible':true}">
+								<separator string="Warning on the Purchase Order" colspan="4" modifiers="{}"/>
+								<field name="purchase_warn" nolabel="1" modifiers="{}"/>
+								<field name="purchase_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('purchase_warn', '!=', False), ('purchase_warn','!=','no-message')],'readonly':[('purchase_warn','=','no-message')]}" modifiers="{'required':[['purchase_warn','!=',false],['purchase_warn','!=','no-message']],'readonly':[['purchase_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Invoice" colspan="4" modifiers="{}"/>
+								<field name="invoice_warn" nolabel="1" modifiers="{}"/>
+								<field name="invoice_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('invoice_warn', '!=', False), ('invoice_warn','!=','no-message')],'readonly':[('invoice_warn','=','no-message')]}" modifiers="{'required':[['invoice_warn','!=',false],['invoice_warn','!=','no-message']],'readonly':[['invoice_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Picking" colspan="4" modifiers="{}"/>
+								<field name="picking_warn" nolabel="1" modifiers="{}"/>
+								<field name="picking_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('picking_warn', '!=', False), ('picking_warn','!=','no-message')],'readonly':[('picking_warn','=','no-message')]}" modifiers="{'required':[['picking_warn','!=',false],['picking_warn','!=','no-message']],'readonly':[['picking_warn','=','no-message']]}"/>
+							</group>
+						</page>
+				</xpath>
+				<xpath expr="/form/sheet//field[@name='category_id']" position="replace"/>
+				<xpath expr="/form/sheet//field[@name='name']" position="after">
+					 <h3>
+                     	<field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
+                     </h3>
+				</xpath>
+				<xpath expr="/form/sheet/group/group" position="inside">
+					<field name="comment"/>
+				
+				</xpath> 
+				
            </field>
       </record>
+      	
+      
+      
 	<record id="res_partner_view_tree_altinkaya" model="ir.ui.view">
 			<field name="inherit_id" ref="base.view_partner_tree" />
 			<field name="name">res.partner.inherit_altinkaya1</field>

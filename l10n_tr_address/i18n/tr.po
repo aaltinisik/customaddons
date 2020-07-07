@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 07:51+0000\n"
-"PO-Revision-Date: 2020-02-13 07:51+0000\n"
+"POT-Creation-Date: 2020-06-08 12:34+0000\n"
+"PO-Revision-Date: 2020-06-08 12:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "<b>Firma Adresi:</b>"
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "City"
-msgstr "Semt/İlçe"
+msgstr "Şehir"
 
 #. module: l10n_tr_address
 #: model_terms:ir.actions.act_window,help:l10n_tr_address.action_district
@@ -185,7 +185,7 @@ msgstr "Bölgeler"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__state_id
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "State"
-msgstr "İl"
+msgstr "Durum"
 
 #. module: l10n_tr_address
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood

@@ -12,6 +12,13 @@ from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 from odoo.addons import decimal_precision as dp
 
+class StockMoveLine(models.Model):
+    _inherit = 'stock.move.line'
+
+    invoice_line_ids = fields.Many2many(
+        comodel_name='account.invoice.line', relation='account_stock_line_rel',
+        column1='stock_line_id', column2='invoice_line_id', string='Invoice Lines', copy=False)
+
 
 class StockMove(models.Model):
     _inherit = 'stock.move'

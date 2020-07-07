@@ -127,12 +127,25 @@
                  string="Partner Statement"
                 file="altinkaya_reports.report_partner_statement" 
             	name="altinkaya_reports.report_partner_statement" />
+            	
 
 		 <report id="partner_statement2_altinkaya" 
         		model="partner.statement.wizard"
                  string="Partner Statement"
-                file="altinkaya_reports.report_partner_statement2" 
-            	name="altinkaya_reports.report_partner_statement2" />
+                file="altinkaya_reports.report_partner_statement_wizard" 
+            	name="altinkaya_reports.report_partner_statement_wizard" />
+            	
+       <!-- <report id="action_partner_statement_currency_wizard" 
+        		model="partner.statement.wizard"
+                 string="Partner Statement"
+                file="altinkaya_reports.report_partner_statement_currency_wizard" 
+            	name="altinkaya_reports.report_partner_statement_currency_wizard" />     	 -->
+            	
+       <!-- <report id="action_partner_statement_currency" 
+        		model="res.partner"
+                 string="Partner Statement Currency"
+                file="altinkaya_reports.report_partner_statement_currency" 
+            	name="altinkaya_reports.report_partner_statement_currency" />     	 -->
 		
     </data>
 </data>

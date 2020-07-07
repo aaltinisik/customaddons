@@ -57,6 +57,13 @@ class AccountInvoiceLine(models.Model):
     moves_picking_ref = fields.Char('Picking Ref', compute="_compute_picking_ref")
     partner_order_ref = fields.Char(string='Order Reference')
 
+    stock_line_ids = fields.Many2many(
+        comodel_name='stock.move.line', relation='account_stock_line_rel',
+        column1='invoice_line_id', column2='stock_line_id', string='Stock Moves', copy=False)
+    picking_ids = fields.Many2many(
+        comodel_name='stock.picking', relation='account_invoice_line_picking_rel',
+        column1='invoice_line_id', column2='picking_id', string='Transfers', copy=False)
+
     picking_ids = fields.Many2many('stock.picking', compute="_compute_picking_ids",
                                    string='Pickings', store=True)
 

@@ -13,7 +13,7 @@ class ResPartner(models.Model):
     z_old_tel = fields.Char('Eski Tel', size=64, required=False)
     z_old_fax = fields.Char('Eski Faks', size=64, required=False)
     z_old_cep = fields.Char('Eski Cep', size=64, required=False)
-    z_contact_name = fields.Char('ilgili kişi', size=64, required=False)
+    z_contact_name = fields.Char('İlgili kişi', size=64, required=False)
     z_tel_kampanya = fields.Boolean('Kampanyalarda Aranmayacak',default=False, help=u"Seçili ise telefon kampanyalarında aranmayacak.")
     z_kamp_2016A = fields.Boolean('2016 Katalog için arandı', help=u"2016 Temmuz Katalog gönderme kampanyası icin arandi.")
     z_kamp_2017A = fields.Boolean('2017 Adres güncelleme için arandı', help=u"2017 Temmuz Adres günceleme için arandı.")
