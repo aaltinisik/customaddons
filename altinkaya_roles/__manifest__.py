@@ -7,7 +7,7 @@
     Altınkaya Roles
     """,
     'website': 'http://www.codequarters.com',
-     'depends' : ['sale', 'sales_team', 'crm'],
+     'depends' : ['sale', 'sales_team', 'crm','sale_cancel_reason'],
     'data': [
             'data/altinkaya_category_data.xml',
             'security/altinkaya_security.xml',

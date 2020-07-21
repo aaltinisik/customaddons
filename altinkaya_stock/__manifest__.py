@@ -11,9 +11,12 @@
         'stock','delivery'
     ],
     'data': [
-            'views/stock_picking_views.xml',
-            'views/stock_view.xml',
-            'views/delivery_carrier_views.xml',
+        'views/stock_picking_views.xml',
+        'views/stock_view.xml',
+        'views/product_views.xml',
+        'views/delivery_carrier_views.xml',
+        'wizard/wizard_create_procurement_move.xml',
+        'wizard/wizard_make_mts_move.xml',
     ],
     'installable' : True,
     'auto_install' : False,

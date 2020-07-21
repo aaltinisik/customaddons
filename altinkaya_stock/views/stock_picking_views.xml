@@ -1,6 +1,64 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
+
+        <record id="view_picking_form_inherit_procurement" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit_altinkaya</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']" position="after">
+	            	<field name="qty_available_merkez" string="Merkez" />
+                    <field name="qty_available_sincan" string="Sincan"/>
+	                <button name="action_create_procurement" type="object" string="Tedarik"
+	                	attrs="{'invisible':[('state','in',['waiting','done','cancel'])]}"/>
+	            	<button name="action_make_mts" type="object" string="Stoktan Al"
+	            		attrs="{'invisible':['|',('state','!=','waiting'),('state','in',['done','cancel'])]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--<record id="view_move_tree_inherit_move_name" model="ir.ui.view">
+            <field name="name">stock.move.tree.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+	            <field name="product_id" position="after">
+	            	<field name="name" />
+	            </field>
+	            <xpath expr="//tree" position="inside">
+	            	<field name="qty_available_merkez" string="Merkez" />
+                    <field name="qty_available_sincan" string="Sincan"/>
+	                <button name="action_create_procurement" type="object" string="Tedarik"
+	                	attrs="{'invisible':[('state','in',['waiting','done','cancel'])]}"/>
+	            	<button name="action_make_mts" type="object" string="Stoktan Al"
+	            		attrs="{'invisible':['|',('state','!=','waiting'),('state','in',['done','cancel'])]}"/>
+                </xpath>
+            </field>
+        </record>-->
+
+		<!--<record id="view_move_form_inherit_origin_moves" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+	            <button name="action_cancel" position="after">
+	            	<button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
+	            </button>
+            </field>
+        </record>
+
+        <record id="view_move_picking_form_inherit_origin_moves" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit.altinkaya</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+	            <button name="do_unreserve" position="after">
+	            	<button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
+	            </button>
+            </field>
+        </record>-->
+
         <record id="view_picking_internal_search_day_filters" model="ir.ui.view">
             <field name="name">stock.picking.filter.days.view</field>
             <field name="model">stock.picking</field>
