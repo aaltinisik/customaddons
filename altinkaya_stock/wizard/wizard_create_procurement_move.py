@@ -11,6 +11,7 @@ from odoo.tools import float_compare
 
 class CreateProcurementMoveLocation(models.TransientModel):
     _name = 'create.procurement.move.location'
+    _description = 'Create procurement move location'
 
     wizard_id = fields.Many2one('create.procurement.move', 'Wizard')
     qty_to_procurement = fields.Float('Quantity to Procurement')
@@ -41,6 +42,7 @@ class CreateProcurementMoveLocation(models.TransientModel):
 
 class CreateProcurementMove(models.TransientModel):
     _name = 'create.procurement.move'
+    _description = 'Create procurement move'
         
     move_id = fields.Many2one('stock.move','Move', readonly=True)
     product_id = fields.Many2one('product.product',string='Product', related='move_id.product_id', readonly=True)

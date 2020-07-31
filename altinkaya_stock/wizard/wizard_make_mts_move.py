@@ -12,6 +12,7 @@ from odoo.tools import float_compare
 
 class MakeMtsMove(models.TransientModel):
     _name = 'make.mts.move'
+    _description = 'make MTS Move'
 
     move_id = fields.Many2one('stock.move','Move', readonly=True)
     #cancel_production_ids = fields.Many2many('mrp.production',compute='_compute_productions', string='Productions to be canceled')

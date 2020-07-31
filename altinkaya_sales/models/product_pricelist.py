@@ -13,7 +13,7 @@ from odoo.exceptions import UserError
 
 class ProductPriceType(models.Model):
     _name = "product.price.type"
-    
+    _description = "Price type"
     def _compute_selection_fields(self):
         res = []
         fields = self.env['ir.model.fields'].search([('model','in',['product.product']),('ttype','=','float')])
