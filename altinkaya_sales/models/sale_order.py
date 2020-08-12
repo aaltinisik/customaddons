@@ -24,6 +24,26 @@ class SaleOrder(models.Model):
     
     sale_line_history = fields.One2many('sale.order.line',string="Old Sales",compute="_compute_sale_line_history")
     
+    @api.multi
+    def action_quotation_send(self):
+        res = super(SaleOrder,self).action_quotation_send()
+        
+        
+        ir_model_data = self.env['ir.model.data']
+        try:
+            template_id = ir_model_data.get_object_reference('altinkaya_sales', 'email_template_edi_sale_altinkaya')[1]
+        except ValueError:
+            template_id = False
+        
+        context = res.get("context",{})
+        context.update({
+            "default_template_id":template_id
+            })
+        
+        res.update({"context":context})
+        return res
+    
+    
     def _compute_sale_line_history(self):
         
         for sale in self:

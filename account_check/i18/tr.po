@@ -340,7 +340,7 @@ msgstr "Konfigürasyon Ayarları"
 #. module: account_check
 #: model_terms:ir.ui.view,arch_db:account_check.account_check_action_wizard_form_view
 msgid "Confirm"
-msgstr "Doğrula"
+msgstr "Onayla"
 
 #. module: account_check
 #: selection:account.payment,check_deposit_type:0

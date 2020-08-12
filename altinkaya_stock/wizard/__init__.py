@@ -1,2 +1,3 @@
-import make_procurement_product
-import partner_reconcile_close
+#from . import make_procurement_product
+from . import wizard_create_procurement_move
+from . import wizard_make_mts_move

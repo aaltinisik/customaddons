@@ -3,6 +3,7 @@
 	<template id="report_partner_statement_document">
 		<!-- <t t-call="web.html_container">
 			<t t-call="web.basic_layout"> -->
+			<t t-set="lang" t-value="user.lang"/>
 				<div class="header" style="font-size:10pt">
 					<div class="row" style="border-bottom:2px solid black;margin">
 						<div class="col-7">
@@ -147,7 +148,7 @@
 										<th>Balance</th>
 										<th></th>
 									</tr>
-
+									<t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
 									<t t-if="o.use_secondary_currency">
 										<t t-foreach="o._get_statement_data_currency()"
 											t-as="s_dict">
@@ -205,11 +206,7 @@
 													<span t-esc="sdc" />
 												</td>
 											</tr>
-
 										</t>
-
-
-
 									</t>
 									<t t-else="">
 										<t t-set="sblc" t-value="0" />
@@ -232,14 +229,17 @@
 													<span t-esc="s['description']" />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span  t-esc="'{:,.2f}'.format(s['debit'])" />
+													<span t-raw="number_lang.format('%.2f', s['debit'],grouping=True, monetary=True)"
+													 />
 												</td>
 												<td class="text-right" style="padding:0;">
-													<span  t-esc="'{:,.2f}'.format(s['credit'])" />
+													<span t-raw="number_lang.format('%.2f', s['credit'],grouping=True, monetary=True)"
+													 />
 												</td>
 												<td class="text-right" style="padding:0;">
-<!-- 													<span  t-esc="'%.2f' %s['balance']" /> -->
-													<span  t-esc="'{:,.2f}'.format(s['balance'])" />
+													<span t-raw="number_lang.format('%.2f', s['balance'],grouping=True, monetary=True)"
+													 />
+													<!-- t-options='{"widget": "monetary", "display_currency": None}' -->
 												</td>
 												<td class="text-right" style="padding:0;">
 														<span t-esc="s['dc']" />
@@ -257,28 +257,18 @@
 											<td style="padding:0;">Total</td>
 											<td style="padding:0;"></td>
 											<td class="text-right" style="padding:0;">
-												<span t-esc="sblc" />
+												<span t-esc="'%,.2f'.format(sblc) "
+												 />
 											</td>
 											<td class="text-right" style="padding:0;">
 												<span t-esc="sdc" />
 											</td>
 										</tr>
-
-
 									</t>
-
-
-
-
 								</table>
 							</div>
 						</div>
-
-
 					</div>
-				<!-- </t>
-			</t>
-		</t> -->
 	</template>
 	<template
 		id="altinkaya_reports.report_partner_statement"

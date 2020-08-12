@@ -4,6 +4,14 @@
 		<t t-call="web.basic_layout">
 			<t t-set="doc"
 				t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+			<style>
+				.table-bordered thead th {
+					border: 1px solid black !important;
+				}
+				.table-bordered th, .table-bordered td {
+					border: 1px solid black !important;
+				}
+			</style>
 			<div class="header">
 				<div class="row"><!-- style="border:1px solid #dddddd" -->
 					<div class="col-5 text-center center">
@@ -117,7 +125,8 @@
 							<td style="padding:0;">
 								<!-- <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing 
 									and shipping address:</strong> -->
-								<strong>Invoicing address</strong>
+
+								<strong>Shipping address</strong>
 								<br />
 								<span>
 									<strong>
@@ -152,35 +161,44 @@
 
 							</td>
 							<td style="border-left:2px solid black;padding:0;padding-left:5px;">
-								<strong>Shipping address</strong>
+								<strong>Invoice address</strong>
 								<br />
-								<span>
-									<strong>
-										<span t-field="doc.partner_shipping_id.name" />
-									</strong>
-									<br />
-									<span t-if="doc.partner_shipping_id.neighbour_id" t-field="doc.partner_shipping_id.neighbour_id" >,</span>
-									<span t-if="doc.partner_shipping_id.street"  t-field="doc.partner_shipping_id.street" >,</span>
-									<span  t-if="doc.partner_shipping_id.street2" t-field="doc.partner_shipping_id.street2" >,</span>
-									<br />
-									<span t-if="doc.partner_shipping_id.region_id"  t-field="doc.partner_shipping_id.region_id" >,</span>
-									<span t-if="doc.partner_shipping_id.district_id"  t-field="doc.partner_shipping_id.district_id" >,</span>
-									<span t-if="doc.partner_shipping_id.state_id.name"  t-field="doc.partner_shipping_id.state_id.name" >,</span>
-									<span t-if="doc.partner_shipping_id.zip" t-field="doc.partner_shipping_id.zip"/>
+								<strong>
+									<span t-field="doc.partner_invoice_id.name" />
+								</strong>
+								<br />
+								<span t-if="doc.partner_invoice_id.neighbour_id" t-field="doc.partner_invoice_id.neighbour_id" >,</span>
+								<span t-if="doc.partner_invoice_id.street"  t-field="doc.partner_invoice_id.street" >,</span>
+								<span  t-if="doc.partner_invoice_id.street2" t-field="doc.partner_invoice_id.street2" >,</span>
+								<br />
+								<span t-if="doc.partner_invoice_id.region_id"  t-field="doc.partner_invoice_id.region_id" >,</span>
+								<span t-if="doc.partner_invoice_id.district_id"  t-field="doc.partner_invoice_id.district_id" >,</span>
+								<span t-if="doc.partner_invoice_id.state_id.name"  t-field="doc.partner_invoice_id.state_id.name" >,</span>
+								<span t-if="doc.partner_invoice_id.zip" t-field="doc.partner_invoice_id.zip"/>
+								<br/>
+								<span t-field="doc.partner_invoice_id.country_id.name" />
+								<t t-if="doc.partner_invoice_id.phone">
 									<br/>
-									<span t-field="doc.partner_shipping_id.country_id.name" />
-									<t t-if="doc.partner_shipping_id.phone">
-										<br/>
-										<strong >Phone:</strong><span  t-field="doc.partner_shipping_id.phone"/>
-									</t>
-								</span>
+									<strong >Phone:</strong><span  t-field="doc.partner_invoice_id.phone"/>
+								</t>
+								<t t-if="doc.partner_id.tax_office_name">
+									<br />
+									<strong>Tax Office:</strong>
+									<span t-field="doc.partner_id.tax_office_name"></span>
+								</t>
+								<t t-if="doc.partner_id.vat">
+									<br />
+									<strong t-esc="doc.company_id.country_id.vat_label or 'Tax ID'" />
+									:
+									<span t-field="doc.partner_id.vat" />
+								</t>
 							</td>
 						</tr>
 						<tr t-if="doc.carrier_id or doc.payment_term_id">
 							<td t-if="doc.carrier_id" style="padding:0;">
 								<span>
 									<strong>
-										Delivery:
+										Delivery Method:
 										<span t-field="doc.carrier_id.name" />
 									</strong>
 								</span>
@@ -190,7 +208,7 @@
 								t-if="doc.payment_term_id">
 								<span>
 									<strong>
-										Payment Term:
+										Payment Terms:
 										<span t-field="doc.payment_term_id" />
 									</strong>
 								</span>
@@ -207,21 +225,21 @@
 						<thead>
 							<tr>
 								<t t-set="colspan" t-value="6" />
-								<th class="text-left" style="padding:0;">Code</th>
-								<th class="text-left" style="padding:0;">Description</th>
-								<th class="text-right" style="padding:0;">Quantity</th>
-								<th class="text-right" style="padding:0;">Unit Price</th>
+								<th class="text-center" style="padding:0;">Reference</th>
+								<th class="text-center" style="padding:0;">Description</th>
+								<th class="text-center" style="padding:0;">Quantity</th>
+								<th class="text-center" style="padding:0;">Unit Price</th>
 								<th t-if="display_discount" style="padding:0;"
-									class="text-right" groups="sale.group_discount_per_so_line">
+									class="text-center" groups="sale.group_discount_per_so_line">
 									<span>Disc.(%)</span>
 									<t t-set="colspan" t-value="colspan+1" />
 								</th>
-								<th t-if="display_discount" class="text-right"
+								<th t-if="display_discount" class="text-center"
 									style="padding:0;" groups="sale.group_discount_per_so_line">
 									<span>Disc. Unit Price</span>
 								</th>
 
-								<th class="text-right" style="padding:0;">
+								<th class="text-center" style="padding:0;">
 									<t groups="account.group_show_line_subtotals_tax_excluded">Amount</t>
 									<t groups="account.group_show_line_subtotals_tax_included">Total Price</t>
 								</th>

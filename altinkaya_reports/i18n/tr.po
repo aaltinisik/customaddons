@@ -946,8 +946,8 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "Delivery:"
-msgstr "Teslimat"
+msgid "Delivery Method:"
+msgstr "Teslimat Şekli:"
 
 #. module: altinkaya_reports
 #: model:ir.actions.report,name:altinkaya_reports.stock_pickingaltinkayaC
@@ -1288,7 +1288,7 @@ msgstr "Cari"
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "Payment Term:"
-msgstr "Ödeme Koşulu"
+msgstr "Ödeme Koşulu:"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.altinkaya_hr_employee_annual_report_data_table

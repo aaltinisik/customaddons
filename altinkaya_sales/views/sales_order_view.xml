@@ -9,7 +9,7 @@
 			<field name='name'>sales order form</field>
 			<field name='model'>sale.order</field>
 			<field name="inherit_id" ref="sale.view_order_form" />
-			<field eval="1" name="priority" />
+			<field eval="100" name="priority" />
 			<field name='arch' type='xml'>
 				<xpath expr="//field[@name='partner_invoice_id']" position="replace">
 					<field name="partner_invoice_id"
@@ -89,6 +89,9 @@
 			<field name="inherit_id" ref="sale.view_order_form" />
 			<field eval="1098" name="priority" />
 			<field name='arch' type='xml'>
+				<xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="editable"/>
+                </xpath>
 				<xpath
 					expr="/form/sheet/group/group//field[@name='validity_date']"
 					position="before">

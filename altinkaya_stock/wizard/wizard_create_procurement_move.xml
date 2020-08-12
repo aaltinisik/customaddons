@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_wizard_create_procurement_move_form" model="ir.ui.view">
+            <field name="name">create.procurement.move.form</field>
+            <field name="model">create.procurement.move</field>
+            <field name="arch" type="xml">
+	            <form>
+            		<group invisible="0">
+            			<field name="move_id"/>
+            			<field name="product_id"/>
+            			<label for="move_qty"/>
+            			<div>
+            				<field name="move_qty" class="oe_inline"/>
+            				<field name="uom" class="oe_inline"/>
+            			</div>
+						<field name="procure_move"/>
+            		</group>
+					<group string="Procurement Quantities">
+						<field name="procurement_qty_ids" nolabel="1">
+							<tree editable="1" create="0" delete="0">
+								<field name="warehouse_id" invisible="1"/>
+								<field name="warehouse_id_readonly" readonly="1"/>
+								<field name="qty_available"/>
+								<field name="qty_incoming"/>
+								<field name="qty_outgoing"/>
+								<field name="qty_virtual"/>
+								<field name="qty_to_procurement" class="oe_inline"/>
+							</tree>
+						</field>
+					</group>
+					<!--<group col="3">
+						<group class="oe_right oe_form" col="2">
+							<field name="qty_to_sincan" class="oe_inline"/>
+							<field name="qty_available_sincan"/>
+							<field name="qty_incoming_sincan"/>
+							<field name="qty_outgoing_sincan"/>
+							<field name="qty_virtual_sincan"/>
+						</group>
+						<group string="Satışlar">
+							<field name="sale_qty30days" />
+							<field name="sale_qty180days" />
+							<field name="sale_qty360days" />
+						</group>
+						<group class="oe_right oe_form" col="2">
+							<field name="qty_to_merkez" class="oe_inline"/>
+							<field name="qty_available_merkez"/>
+							<field name="qty_incoming_merkez"/>
+							<field name="qty_outgoing_merkez"/>
+							<field name="qty_virtual_merkez"/>
+						</group>
+					</group>-->
+					<notebook>
+            			<page name="production" string="Manufacturing Orders">
+								<field name="production_ids" widget="many2many">
+									<tree>
+										<field name="name"/>
+										<field name="date_planned"/>
+										<field name="product_id"/>
+										<field name="product_qty"/>
+										<!--<field name="product_uom" groups="product.group_uom"/>
+					                    <field name="routing_id" groups="mrp.group_mrp_routings"/>-->
+					                    <field name="location_src_id"/>
+   								        <field name="state"/>
+									</tree>
+								</field>
+            			</page>
+            		</notebook>
+            		<footer>
+                        <button name="action_create" string="Create Procurement" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+	            </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

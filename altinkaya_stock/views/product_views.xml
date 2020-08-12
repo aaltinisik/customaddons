@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_normal_form_view_altinkaya_stock" model="ir.ui.view">
+              <field name="name">Altinkaya Product Customization</field>
+              <field name="model">product.product</field>
+              <field name="inherit_id" ref="product.product_normal_form_view"/>
+              <field name="priority" eval="40"/>
+              <field name="arch" type="xml">
+                  <xpath expr="//field[@name='attribute_value_ids']" position="before">
+                      <field name="domain_attribute_value_ids" invisible="1"/>
+                  </xpath>
+                  <xpath expr="//field[@name='attribute_value_ids']" position="attributes">
+                      <attribute name="readonly">0</attribute>
+                      <attribute name="domain">[('id','in',domain_attribute_value_ids)]</attribute>
+                      <attribute name="options">{'no_create':True,'no_edit':True}</attribute>
+                      <attribute name="placeholder">Product Attribute Values</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='product_tmpl_id']" position="attributes">
+                      <attribute name="readonly">0</attribute>
+                      <attribute name="invisible">0</attribute>
+                      <attribute name="placeholder">Product Template</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='product_tmpl_id']" position="before">
+                      <br/>
+                  </xpath>
+              </field>
+        </record>
+
+    </data>
+</odoo>
