@@ -24,6 +24,6 @@ class ResPartner(models.Model):
     
     #altinkaya
     
-    x_vergidairesi = fields.Char('Vergi Dairesi', size=64)
+    #x_vergidairesi = fields.Char('Vergi Dairesi', size=64)
     x_vergino = fields.Char('Vergi No', size=64)
     devir_yapildi = fields.Boolean('Devir yapıldı')

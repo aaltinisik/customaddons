@@ -14,7 +14,7 @@
  Tel: ${o.partner_id.phone or '' }
                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
 
-                                                                                                                    ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+                                                                                                                    ${o.partner_id.commercial_partner_id.tax_office_name or '' }
 
                                                                                                                     ${o.partner_id.commercial_partner_id.vat or '' }
        {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}
@@ -41,7 +41,7 @@
  Tel: ${o.partner_id.phone or '' }
                                                                                                                     ${time.strftime('%H:%M:%S', time.localtime(time.time()+10800))}
 
-                                                                                                                    ${o.partner_id.commercial_partner_id.x_vergidairesi or '' }
+                                                                                                                    ${o.partner_id.commercial_partner_id.tax_office_name or '' }
 
                                                                                                                     ${o.partner_id.commercial_partner_id.vat or '' }
       {% if o.invoice_id.number %} ${formatLang(o.invoice_id.date_invoice, date=True)} tarih ${o.invoice_id.number} sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.{% end %}

@@ -86,7 +86,7 @@ class wizard_partner_detail(models.TransientModel):
 #             sheet.write(row, 6, partner.z_payable_export or '')
             sheet.write(row, 7, partner.fax or '')
             sheet.write(row, 8, partner.vat or '')
-            sheet.write(row, 9, partner.x_vergidairesi or '')
+            sheet.write(row, 9, partner.tax_office_name or '')
             sheet.write(row, 10, partner.street or '')
             sheet.write(row, 11, partner.street2 or '')
             sheet.write(row, 12, partner.city or '')

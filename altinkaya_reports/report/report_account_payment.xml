@@ -51,8 +51,8 @@
 								<t t-if="o.partner_id.commercial_partner_id.phone"><span>Tel:<span t-field="o.partner_id.commercial_partner_id.phone"/></span></t>
 								<t t-if="o.partner_id.commercial_partner_id.fax"><span>Fax:<span t-field="o.partner_id.commercial_partner_id.fax"/></span></t>
 							</t><br/>
-							<t t-if="o.partner_id.commercial_partner_id.x_vergidairesi or o.partner_id.commercial_partner_id.vat">
-								<t t-if="o.partner_id.commercial_partner_id.x_vergidairesi"><span t-field="o.partner_id.commercial_partner_id.x_vergidairesi"/> V.D</t>
+							<t t-if="o.partner_id.commercial_partner_id.tax_office_name or o.partner_id.commercial_partner_id.vat">
+								<t t-if="o.partner_id.commercial_partner_id.tax_office_name"><span t-field="o.partner_id.commercial_partner_id.tax_office_name"/> V.D</t>
 								<t t-if="o.partner_id.commercial_partner_id.vat"><span t-field="o.partner_id.commercial_partner_id.vat"/></t>
 							</t>
 						</td>

@@ -8,6 +8,9 @@
             <field name="arch" type="xml">
                 <field name="vat" position="before">
                     <field name="tax_office_id" options="{'no_open': True}"/>
+
+					<field string="Tax Office Name" name="tax_office_name" />
+
                 </field>
             </field>
         </record>

@@ -82,6 +82,8 @@ class ResPartner(models.Model):
             'neighbourhood_name': self.neighbour_id.name or '',
             'region_name': self.region_id.name or '',
             'district_name': self.district_id.name or '',
+            'phone': self.phone or '',
+            'fax': self.fax or ''
         }
 
         for field in self._address_fields():

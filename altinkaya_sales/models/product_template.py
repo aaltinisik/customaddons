@@ -5,7 +5,6 @@ Created on Jan 17, 2019
 '''
 from odoo import models,fields,api
 from odoo.addons import decimal_precision as dp
-from odoo.tools.func import default
 
 #Aktarıldı
 class product_attribute_line(models.Model):

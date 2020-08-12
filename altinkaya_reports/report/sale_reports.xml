@@ -139,9 +139,9 @@
 										<strong >Phone:</strong><span  t-field="doc.partner_shipping_id.phone"/>
 									</t>
 								</span>
-								<span t-if="doc.partner_id.x_vergidairesi">
+								<span t-if="doc.partner_id.tax_office_name">
 									Tax Office:
-									<span t-field="doc.partner_id.x_vergidairesi"></span>
+									<span t-field="doc.partner_id.tax_office_name"></span>
 								</span>
 								<br />
 								<span t-if="doc.partner_id.vat">

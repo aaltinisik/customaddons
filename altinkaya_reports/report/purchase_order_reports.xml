@@ -177,7 +177,7 @@
 			<span t-esc="address.commercial_partner_id.name"/><br/>
 			<span t-esc="address.street"/><span t-esc="address.street2"/><br/>
 			<span t-esc="address.zip"/> <span t-esc="address.region_id.name"/> <span t-esc="address.district_id.name"/> <span t-esc="address.state_id.name"/> <span t-esc="address.country_id.name"/>
-			<br/><span t-esc="address.x_vergidairesi"/><span t-esc="address.vat"/><br/>
+			<br/><span t-esc="address.tax_office_name"/><span t-esc="address.vat"/><br/>
 			<span> Tel:<span t-esc="address.phone"/>  Fax:<span t-esc="address.fax"/></span>
 			</div>
 			<div class="col-3">

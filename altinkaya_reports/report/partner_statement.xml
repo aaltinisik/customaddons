@@ -123,7 +123,7 @@
 												t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')"
 												t-options="{'widget': 'date'}" />
 											<br />
-											<span t-esc="o.x_vergidairesi" />
+											<span t-esc="o.tax_office_name" />
 											<br />
 											<span t-esc="o.vat" />
 											<br />

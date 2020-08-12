@@ -612,8 +612,8 @@ msgid "Variant Name"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergidairesi
-#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergidairesi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__tax_office_name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__tax_office_name
 msgid "Vergi Dairesi"
 msgstr ""
 

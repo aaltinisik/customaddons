@@ -20,9 +20,7 @@
                     <field name="z_kat_email"/>
                 </xpath>
                 <!-- should place well onur -->
-                <xpath expr="//field[@name='vat']" position="after">
-					<field string="Tax Office Name" name="x_vergidairesi" />
-				</xpath>
+
 				<xpath expr="//field[@name='ref']" position="replace">
 					<field name="ref"/>
 				</xpath>

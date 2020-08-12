@@ -21,9 +21,12 @@ class ResPartnerTaxOffice(models.Model):
                                     string="Tax Office",
                                     ondelete='restrict')
 
+    tax_office_name = fields.Char('Tax Office', oldname='x_vergidairesi', size=64)
+
 
 class ResCompanyTaxOffice(models.Model):
     _inherit = "res.company"
 
     tax_office_id = fields.Many2one(related="partner_id.tax_office_id",
                                     string="Tax Office")
+    tax_office_name = fields.Char('Tax Office', related='partner_id.tax_office_name')
