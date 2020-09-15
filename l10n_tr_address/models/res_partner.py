@@ -33,7 +33,7 @@ class ResPartner(models.Model):
 
         return {}
 
-    #TDE check Onur
+
     @api.onchange('neighbour_id')
     def onchange_neighbour(self):
         neighbour_obj = self.env['address.neighbour']
@@ -71,6 +71,7 @@ class ResPartner(models.Model):
 
         # get the information that will be injected into the display format
         # get the address format
+
         address_format = self.country_id.address_format or \
               "%(street)s\n%(street2)s\n%(city)s %(state_code)s %(zip)s\n%(country_name)s"
         args = {

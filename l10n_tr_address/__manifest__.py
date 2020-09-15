@@ -4,8 +4,8 @@
     'summary': "Add custom field in Customer like District, Region, Neighbourhood",
     'description': """This Module is used to add custom field in res.partner Object""",
     'category': 'Partner',
-    'website':'http://www.codequarters.com',
-    'author': 'Kirankumar,Ahmet Altinisik,Onur UGUR,Codequarters',
+    'website':'https://github.com/yibudak',
+    'author': 'Yigit Budak, Kirankumar ,Ahmet Altinisik ,Onur UGUR, Codequarters',
     'external_dependencies': {'python': ['xlrd']},
     'depends': ['sale','base','contacts'],
     'data': [
