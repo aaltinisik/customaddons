@@ -16,12 +16,18 @@ class productproductLabel(models.TransientModel):
     short_code = fields.Char(string="Short Code",size=20)
     note = fields.Char(string="Note",size=40)
     pieces_in_pack = fields.Float(string="# in Cartoon")
+    qty_text = fields.Char('qty', compute='_compute_qty_text')
     label_to_print = fields.Integer(string='# of label to be printed', default=1)
     product_id = fields.Many2one('product.product', string="Product")
     barcode = fields.Char(string="Barcode")
     uom_name = fields.Char(string="UOM Name", size=10)
     batchcode = fields.Char(string="Batch Code",size=4)
 
+    @api.depends('pieces_in_pack')
+    def _compute_qty_text(self):
+        for l in self:
+            frac = l.pieces_in_pack - int(l.pieces_in_pack)
+            l.qty_text = frac > 0.0 and l.pieces_in_pack or int(l.pieces_in_pack - frac)
 
     def genBatchCode(self):
         DayCode = {
