@@ -14,7 +14,8 @@
 			</style>
 			<div class="header">
 				<div class="row"><!-- style="border:1px solid #dddddd" -->
-					<div class="col-5 text-center center">
+					<div class="col-5 text-center center" style="margin-top: 50px;">
+
 						<t
 							t-if="not (env.context.get('proforma', False) or is_pro_forma)">
 							<span t-if="doc.state in ['draft','sent']"
@@ -30,24 +31,23 @@
 						<t t-if="doc.partner_id.lang == 'tr_TR'">
 							<img t-if="doc.partner_id.lang == 'tr_TR'"
 								src="/altinkaya_reports/static/img/altinkaya.svg"
-								style="min-weight:480px;min-height:70px" />
+								style="height: 76px;" />
 							<br />
 							<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.
 								TİC. A.Ş.
 							</strong>
-							<br />
-							<div style="line-height:80%">
-								<span style="font-size:10pt">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik
+							<div style="line-height:90%">
+								<span style="font-size:12pt">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik
 									OSB. 06378
 								</span>
 								<br />
-								<span style="font-size:10pt">Tel:+90(312) 395 2768 Faks: +90(312) 395 2772
+								<span style="font-size:11pt">Tel:+90(312) 395 2768 Faks: +90(312) 395 2772
 									Yenimahalle/ANKARA
 								</span>
 								<br />
-								<span style="font-size:10pt">
+								<span style="font-size:11pt">
 									Ulus V.D. 0610422947
-									<strong> www.altinkaya.eu sales@altinkaya.eu</strong>
+									<strong> www.altinkaya.com.tr satis@altinkaya.tr</strong>
 								</span>
 								<br />
 							</div>
@@ -55,22 +55,21 @@
 						<t t-else="">
 							<img t-if="doc.partner_id.lang != 'tr_TR'"
 								src="/altinkaya_reports/static/img/altinkayaen.svg"
-								style="min-weight:480px;min-height:70px" />
+								style="height: 76px;" />
 							<br />
 							<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.
 								TİC. A.Ş.
 							</strong>
 							<br />
-							<div style="line-height:80%">
-								<span style="font-size:10pt">ADDRESS:1469. Sok. No:10 İVEDİK OSB. 06378
-									Yenimahalle ANKARA
+							<div style="line-height:90%">
+								<span style="font-size:11pt">ADDRESS:1469. Sok. No:10 İVEDİK OSB. 06378 Yenimahalle
 								</span>
 								<br />
-								<span style="font-size:10pt">TURKEY Phone:+90(312)395 2768 Fax:+90(312)395
+								<span style="font-size:11pt"> ANKARA TURKEY Phone:+90(312)395 2768 Fax:+90(312)395
 									2772
 								</span>
 								<br />
-								<span style="font-size:10pt">
+								<span style="font-size:11pt">
 									ULUS Tax Off 0610422947
 									<strong> www.altinkaya.eu sales@altinkaya.eu</strong>
 								</span>
@@ -79,7 +78,7 @@
 						</t>
 					</div>
 				</div>
-			</div>
+				</div>
 			<div class="page" style="font-size:11pt">
 				<div class="oe_structure" />
 				<div class="row mt32" style="width:%100;"><!-- style="border:1px solid #dddddd" -->
@@ -113,7 +112,7 @@
 					<div class="col-6 text-right">
 						<strong>
 							Date:
-							<span t-field="doc.create_date" />
+							<span t-field="doc.date_order" />
 						</strong>
 					</div>
 				</div>
@@ -141,22 +140,11 @@
 									<span t-if="doc.partner_shipping_id.district_id"  t-field="doc.partner_shipping_id.district_id" >,</span>
 									<span t-if="doc.partner_shipping_id.state_id.name"  t-field="doc.partner_shipping_id.state_id.name" >,</span>
 									<span t-if="doc.partner_shipping_id.zip" t-field="doc.partner_shipping_id.zip"/>
-									<br/>
 									<span t-field="doc.partner_shipping_id.country_id.name" />
 									<t t-if="doc.partner_shipping_id.phone">
 										<br/>
 										<strong >Phone:</strong><span  t-field="doc.partner_shipping_id.phone"/>
 									</t>
-								</span>
-								<span t-if="doc.partner_id.tax_office_name">
-									Tax Office:
-									<span t-field="doc.partner_id.tax_office_name"></span>
-								</span>
-								<br />
-								<span t-if="doc.partner_id.vat">
-									<t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'" />
-									:
-									<span t-field="doc.partner_id.vat" />
 								</span>
 
 							</td>
@@ -175,7 +163,6 @@
 								<span t-if="doc.partner_invoice_id.district_id"  t-field="doc.partner_invoice_id.district_id" >,</span>
 								<span t-if="doc.partner_invoice_id.state_id.name"  t-field="doc.partner_invoice_id.state_id.name" >,</span>
 								<span t-if="doc.partner_invoice_id.zip" t-field="doc.partner_invoice_id.zip"/>
-								<br/>
 								<span t-field="doc.partner_invoice_id.country_id.name" />
 								<t t-if="doc.partner_invoice_id.phone">
 									<br/>
@@ -186,12 +173,18 @@
 									<strong>Tax Office:</strong>
 									<span t-field="doc.partner_id.tax_office_name"></span>
 								</t>
-								<t t-if="doc.partner_id.vat">
+								<ty t-if="doc.partner_id.vat">
+								<t t-if="doc.partner_id.lang == 'tr_TR'">
 									<br />
-									<strong t-esc="doc.company_id.country_id.vat_label or 'Tax ID'" />
-									:
+									<strong t-esc="doc.company_id.country_id.vat_label or 'Vergi Numarası:'" />
 									<span t-field="doc.partner_id.vat" />
 								</t>
+								<t t-else="">
+									<br />
+									<strong t-esc="doc.company_id.country_id.vat_label or 'Tax ID:'" />
+									<span t-field="doc.partner_id.vat" />
+								</t>
+								</ty>
 							</td>
 						</tr>
 						<tr t-if="doc.carrier_id or doc.payment_term_id">
@@ -384,7 +377,7 @@
 					</span>
 				</p>
 				<p t-field="doc.note" >
-					<strong>Notes :</strong>
+					<strong>Notes:</strong>
 					<span t-field="doc.note"/>
 				</p>
 

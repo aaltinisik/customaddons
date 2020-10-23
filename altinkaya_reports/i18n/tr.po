@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-06 12:40+0000\n"
-"PO-Revision-Date: 2020-03-06 12:40+0000\n"
+"POT-Creation-Date: 2020-10-22 13:15+0000\n"
+"PO-Revision-Date: 2020-10-22 13:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -108,6 +108,18 @@ msgstr "<br/>\n"
 "										<strong>Telefon:</strong>"
 
 #. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
+msgid "<br/>\n"
+"									<strong>Phone:</strong>"
+msgstr ""
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
+msgid "<br/>\n"
+"									<strong>Tax Office:</strong>"
+msgstr ""
+
+#. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<br/>\n"
@@ -121,6 +133,14 @@ msgid "<br/>\n"
 "							<span>İvedik Osb</span>\n"
 "							<br/>\n"
 "							<span>06378 Yenimahalle / ANKARA</span>"
+msgstr ""
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
+msgid "<br/>\n"
+"							<strong style=\"font-size:12pt\">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.\n"
+"								TİC. A.Ş.\n"
+"							</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -160,16 +180,23 @@ msgid "<span style=\"font-size:10pt\">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.
 msgstr ""
 
 #. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchasequotation_document
+msgid "<span style=\"font-size:10pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>\n"
+"        			<span style=\"font-size:10pt\">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>\n"
+"        			<span style=\"font-size:10pt\">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
+msgstr ""
+
+#. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<span style=\"font-size:10pt\">ADDRESS:1469. Sok. No:10 İVEDİK OSB. 06378\n"
-"									Yenimahalle ANKARA\n"
+msgid "<span style=\"font-size:11pt\">ADDRESS:1469. Sok. No:10 İVEDİK OSB. 06378 Yenimahalle\n"
 "								</span>\n"
 "								<br/>\n"
-"								<span style=\"font-size:10pt\">TURKEY Phone:+90(312)395 2768 Fax:+90(312)395\n"
+"								<span style=\"font-size:11pt\"> ANKARA TURKEY Phone:+90(312)395 2768 Fax:+90(312)395\n"
 "									2772\n"
 "								</span>\n"
 "								<br/>\n"
-"								<span style=\"font-size:10pt\">\n"
+"								<span style=\"font-size:11pt\">\n"
 "									ULUS Tax Off 0610422947\n"
 "									<strong> www.altinkaya.eu sales@altinkaya.eu</strong>\n"
 "								</span>\n"
@@ -178,27 +205,19 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<span style=\"font-size:10pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik\n"
+msgid "<span style=\"font-size:12pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik\n"
 "									OSB. 06378\n"
 "								</span>\n"
 "								<br/>\n"
-"								<span style=\"font-size:10pt\">Tel:+90(312) 395 2768 Faks: +90(312) 395 2772\n"
+"								<span style=\"font-size:11pt\">Tel:+90(312) 395 2768 Faks: +90(312) 395 2772\n"
 "									Yenimahalle/ANKARA\n"
 "								</span>\n"
 "								<br/>\n"
-"								<span style=\"font-size:10pt\">\n"
+"								<span style=\"font-size:11pt\">\n"
 "									Ulus V.D. 0610422947\n"
-"									<strong> www.altinkaya.eu sales@altinkaya.eu</strong>\n"
+"									<strong> www.altinkaya.com.tr satis@altinkaya.tr</strong>\n"
 "								</span>\n"
 "								<br/>"
-msgstr ""
-
-#. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchasequotation_document
-msgid "<span style=\"font-size:10pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>\n"
-"        			<span style=\"font-size:10pt\">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>\n"
-"        			<span style=\"font-size:10pt\">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -233,11 +252,11 @@ msgstr "<span>\n"
 "											</span>\n"
 "											<br/>\n"
 "											<span>\n"
-"												<strong>Vergi Dairesi :</strong>\n"
+"												<strong>Vergi Dairesi:</strong>\n"
 "											</span>\n"
 "											<br/>\n"
 "											<span>\n"
-"												<strong>Vergi Nu :</strong>\n"
+"												<strong>Vergi Nu:</strong>\n"
 "											</span>\n"
 "											<br/>"
 
@@ -315,7 +334,7 @@ msgstr ""
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "<span>Disc. Unit Price</span>"
-msgstr ""
+msgstr "<span>İnd. Birim Fiyatı</span>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
@@ -333,7 +352,6 @@ msgid "<span>TGBATRIS</span>"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |\n"
 "								www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947\n"
@@ -352,6 +370,22 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |\n"
+"								www.altinkaya.com.tr | Ulus Vergi Dairesi 0610422947\n"
+"							</span>\n"
+"							<br/>\n"
+"							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006\n"
+"								2980 17 (TL)\n"
+"							</span>\n"
+"							<br/>\n"
+"							<span>\n"
+"								Hazırlayan : Altınkaya - Sayfa:\n"
+"								<span class=\"page\"/>\n"
+"							</span>\n"
+"							<br/>"
+msgstr ""
+
+#. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>Ulus VD:</span>\n"
 "									<br/>\n"
@@ -401,6 +435,18 @@ msgid "<strong>\n"
 msgstr "\"<strong>\n"
 "				Teslim Adresi<br/>\n"
 "			</strong>"
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "<strong><span>Ulus VD:</span></strong>\n"
+"									<br/>\n"
+"									<strong><span>Tel:</span></strong>\n"
+"									<br/>\n"
+"									<strong><span>Faks:</span></strong>\n"
+"									<br/>\n"
+"									<strong><span>Eposta:</span></strong>\n"
+"									<br/>"
+msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
@@ -499,7 +545,7 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<strong>Invoicing address</strong>\n"
+msgid "<strong>Invoice address</strong>\n"
 "								<br/>"
 msgstr "<strong>Fatura Adresi</strong>\n"
 "								<br/>"
@@ -533,8 +579,8 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<strong>Notes :</strong>"
-msgstr ""
+msgid "<strong>Notes:</strong>"
+msgstr "<strong>Notlar:</strong>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_picking_altinkaya
@@ -659,6 +705,38 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "<strong>Total</strong>"
 msgstr "<strong>Toplam</strong>"
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Balance:</strong>"
+msgstr "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Bakiye:</strong>"
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Credit:</strong>"
+msgstr "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Alacak:</strong>"
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Debit:</strong>"
+msgstr "<strong>Total</strong>\n"
+"												<br/>\n"
+"												<strong>Borç:</strong>"
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
+msgid "Number"
+msgstr "Numara"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
@@ -897,11 +975,6 @@ msgid "Client Order Ref:"
 msgstr "Müşteri Referansı"
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "Code"
-msgstr "Kod"
-
-#. module: altinkaya_reports
 #: model:ir.model,name:altinkaya_reports.model_res_partner
 msgid "Contact"
 msgstr "İletişim"
@@ -1014,6 +1087,12 @@ msgstr "Görünüm Adı"
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "Due Date"
 msgstr "Vade Tarihi"
+
+#. module: altinkaya_reports
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__use_secondary_currency
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__use_secondary_currency
+msgid "Ekstrede çift para birimi yazdır"
+msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.email_partner_statement_form_inherit
@@ -1206,7 +1285,7 @@ msgstr ""
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "Order"
-msgstr "Sipariş"
+msgstr "Proforma Fatura"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
@@ -1287,8 +1366,8 @@ msgstr "Cari"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "Payment Term:"
-msgstr "Ödeme Koşulu:"
+msgid "Payment Terms:"
+msgstr "Ödeme Koşulu"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.altinkaya_hr_employee_annual_report_data_table
@@ -1335,6 +1414,11 @@ msgstr "Teklif N<sup>o</sup>:"
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.location_report_godex
 msgid "Raf:"
 msgstr ""
+
+#. module: altinkaya_reports
+#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
+msgid "Reference"
+msgstr "Referans"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchasequotation_document
@@ -1437,11 +1521,6 @@ msgid "Tarih:"
 msgstr ""
 
 #. module: altinkaya_reports
-#: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "Tax Office:"
-msgstr "Vergi Dairesi"
-
-#. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_payment_receipt_document_altinkaya
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
 msgid "Tel:"
@@ -1486,12 +1565,6 @@ msgstr "Toplam Fiyat"
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
 msgid "Unit Price"
 msgstr "Birim Fiyat"
-
-#. module: altinkaya_reports
-#: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__use_secondary_currency
-#: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__use_secondary_currency
-msgid "Use Secondary Currency"
-msgstr "2. Para Birimini Kullan"
 
 #. module: altinkaya_reports
 #: model:ir.model,name:altinkaya_reports.model_res_users
