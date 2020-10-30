@@ -84,12 +84,12 @@
                                 <td><h6>Operatör Adı: <span t-field="o.x_operator"/></h6></td>
                             </tr>
                              <tr><td>
-                                 <h6>Başlama Tarih Saat: </h6>
+                                 <h6>Başlama Tarih Saat: <span t-field="o.date_start2"/> </h6>
                             </td>
-                                <td><h6>Bitiş Tarih Saat: </h6></td>
+                                <td><h6>Bitiş Tarih Saat: <span t-field="o.date_finished2"/> </h6></td>
                             </tr>
  <tr><td>
-     <h2>Üretilen Adet: </h2>
+     <h2>Üretilen Adet: <!-- TODO: product_qty? --> </h2>
 
                             </td>
 
@@ -115,7 +115,7 @@
                          <thead>
                             <tr>
                                 <th><strong>Üretimde Kullanılacak Ürünler</strong></th>
-                                <th class="text-right"><strong>Quantity</strong></th>
+                                <th class="text-right"><strong>Quantity </strong></th>
                                 <th class="text-center" >
                                     <strong>Kaynak</strong>
                                 </th>

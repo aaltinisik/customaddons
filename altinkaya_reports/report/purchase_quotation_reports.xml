@@ -5,27 +5,27 @@
         <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
         <div class="header">
         	<div class="row" style="border:1px solid #dddddd">
-        		<div class="col-5 align-middle" style="font-size:36pt">
+        		<div class="col-5 align-middle" style="font-size:36pt;margin-top:50px;margin-left:50px;">
         			<h4>Request for Quotation</h4>
         		</div>
         		<div class="col-7">
         			<t t-if="o.partner_id.lang == 'tr_TR'">
         				<img t-if="o.partner_id.lang == 'tr_TR'" src="/altinkaya_reports/static/img/altinkaya.svg" 
-        				style="min-weight:480px;min-height:70px"/><br/>
+        				style="height: 76px;"/><br/>
         			<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong> <br/>
         			<div style="line-height:80%">
-        			<span style="font-size:10pt">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>
+        			<span style="font-size:12pt">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>
         			<span style="font-size:10pt">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>
-        			<span style="font-size:10pt">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>
+        			<span style="font-size:11pt">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>
         			</div>
         			</t>
         			<t t-else="">
-        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.svg" style="min-weight:480px;min-height:70px"/><br/>
+        			 <img t-if="o.partner_id.lang != 'tr_TR'" src="/altinkaya_reports/static/img/altinkayaen.svg" style="height: 76px;"/><br/>
         			 <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN. TİC. A.Ş.</strong>  <br/>
         			<div style="line-height:80%">
-        			 <span style="font-size:10pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>
-        			<span style="font-size:10pt">TURKEY         Phone:+90(312)395 2768           Fax:+90(312)395 2772</span><br/>
-        			<span style="font-size:10pt">ULUS Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>
+        			 <span style="font-size:12pt">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle</span><br/>
+        			<span style="font-size:10pt">  ANKARA TURKEY         Phone:+90(312)395 2768           Fax:+90(312)395 2772</span><br/>
+        			<span style="font-size:11pt">ULUS Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>
 					</div>
 					</t>         		
         		</div>
@@ -73,11 +73,11 @@
 					
 					</tr>	
 					<tr t-if="o.partner_id.phone or o.partner_id.fax">
-						<td colspan="3" > 
+						<td colspan="3" >
 						<t t-if="o.partner_id.phone">
 						Phone:<span t-field="o.partner_id.phone"/></t><t t-if="o.partner_id.fax"> Fax:<span t-field="o.partner_id.fax"/></t>
 						</td>
-					</tr>		 
+					</tr>
 				 </tbody>
 				
 				
@@ -91,7 +91,7 @@
                     <tr>
                     	<th><strong>Code</strong></th>
                         <th><strong>Description of Goods</strong></th>
-                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>Quantity</strong></th>
                         <th class="text-right"><strong>UOM</strong></th>
                         <th class="text-right"><strong>Unit Price</strong></th>
                         <th class="text-right"><strong>Amount</strong></th>
@@ -149,8 +149,12 @@
 			</t>
 			<div class="row">
 			<div class="col">
-			INCOTERM	FOB <br/>
-			Please send us your quotation for the items above.<br/>	
+				<t t-if="o.partner_id.lang != 'tr_TR'">
+						INCOTERM	FOB <br/>
+						Please send us your quotation for the items above.<br/>
+        			</t>
+
+			Lütfen bize yukarıdaki ürünler için teklifinizi gönderin.<br/>
 			</div>
 			</div>
 			<div class="row">
