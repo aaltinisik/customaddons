@@ -39,26 +39,45 @@ class wizard_partner_detail(osv.osv_memory):
     def print_report(self, cr, uid, ids, context=None):
         record = self.browse(cr, uid, ids[0], context=context)
         partner_obj = self.pool.get('res.partner')
-        query = self.pool.get('account.move.line')._query_get(cr, uid, context=context)
+      #  query = self.pool.get('account.move.line')._query_get(cr, uid, context=context)
         if context and context.get('active_ids'):
             partner_ids = tuple(context['active_ids'])
+            cr.execute("""select partner_id, type, case when type = 'receivable' then balance else -1*balance  end
+                            from (SELECT l.partner_id, a.type, SUM(l.debit-l.credit) as balance
+                                  FROM account_move_line l
+                                  LEFT JOIN account_account a ON (l.account_id=a.id)
+                                  LEFT JOIN res_partner rp on l.partner_id = rp.id
+                                  WHERE a.type IN ('receivable','payable')
+                                  AND l.partner_id in %s
+                                  AND l.date >= %s
+                                  AND l.date <= %s
+                                  AND rp.is_company = true
+                                  GROUP BY l.partner_id, a.type ) as res where balance > 0;""",
+                       (partner_ids, record.start_date, record.end_date))
         else:
-            partner_ids = tuple(self.pool.get('res.partner').search(cr, uid, [], context=context))
-        cr.execute("""SELECT l.partner_id, a.type, SUM(l.debit-l.credit)
-                      FROM account_move_line l
-                      LEFT JOIN account_account a ON (l.account_id=a.id)
-                      WHERE a.type IN ('receivable','payable')
-                      AND l.partner_id IN %s
-                      AND l.date >= %s
-                      AND l.date <= %s
-                      GROUP BY l.partner_id, a.type""", (partner_ids, record.start_date, record.end_date))
-        result = {}
-        for id in partner_ids:
-            result[id] = {'receivable': 0, 'payable': 0}
+            #partner_ids = tuple(self.pool.get('res.partner').search(cr, uid, [], context=context))
+            cr.execute("""select partner_id, type, case when type = 'receivable' then balance else -1*balance  end
+                            from (SELECT l.partner_id, a.type, SUM(l.debit-l.credit) as balance
+                                  FROM account_move_line l
+                                  LEFT JOIN account_account a ON (l.account_id=a.id)
+                                  LEFT JOIN res_partner rp on l.partner_id = rp.id
+                                  WHERE a.type IN ('receivable','payable')
+                                  AND l.date >= %s
+                                  AND l.date <= %s
+                                  AND rp.is_company = true
+                                  GROUP BY l.partner_id, a.type ) as res where balance > 0;""",
+                       (record.start_date, record.end_date))
+
+
+        result = {} #{pid: {'receivable': 0, 'payable': 0} for pid in range(1,1000)}
+
         for pid,type,val in cr.fetchall():
-            for v in result:
-                if v == pid:
-                    result[pid][type] = (type=='receivable') and val or -val
+            r = result.get(pid, {'receivable': 0, 'payable': 0} )
+            r[type] = val
+            result[pid] = r
+         #   for v in result:
+         #       if v == pid:
+         #           result[pid][type] = (type=='receivable') and val or -val
         fl = StringIO()
         wbk = xlwt.Workbook()
         sheet = wbk.add_sheet('Customer Payment Details')
@@ -80,8 +99,6 @@ class wizard_partner_detail(osv.osv_memory):
         row = 1
         for res in result.items():
             partner = partner_obj.browse(cr, uid, res[0])
-            if not partner.is_company:
-                continue
             sheet.write(row, 0, partner.name)
             sheet.write(row, 1, partner.phone or '')
             sheet.write(row, 2, res[1]['payable'])
