@@ -99,10 +99,10 @@
 				<tr>
 					<th class="text-center" style="width:190px">SEVK NO</th>
 					<th class="text-center" style="width:500px">ALICI</th>
-					<th class="text-center" style="width:150px">Kargo Şekli</th>
-					<th class="text-center" style="width:100px">Şehir</th>
-					<th class="text-center" style="width:150px">Koli#</th>
-					<th class="text-center" style="width:100px">Desi</th>
+					<th class="text-center" style="width:150px">KARGO ŞEKLİ</th>
+					<th class="text-center" style="width:100px">ŞEHİR</th>
+					<th class="text-center" style="width:150px">KOLİ</th>
+					<th class="text-center" style="width:100px">DESİ</th>
 				</tr>
 				<tr  t-foreach="docs" t-as="o">
 					<td class="text-center"><span t-esc="o.document_number"/><br/>

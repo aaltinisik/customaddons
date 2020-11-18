@@ -30,7 +30,9 @@ class wizard_import_script(models.TransientModel):
         nei_obj = self.env['address.neighbour']
         neighbours = []
         for row_no in range(sheet.nrows):
-            line = (lambda row:isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value), sheet.row(row_no))[1]
+            line = (lambda row:isinstance(row.value, str) and
+                               row.value.encode('utf-8') or str(row.value),
+                    sheet.row(row_no))[1]
             if line:
                 try:
                     
@@ -38,27 +40,31 @@ class wizard_import_script(models.TransientModel):
                     if not con_id:
                         con_id = con_obj.create({'name': line[0].value})
                     
-                    state_id = state_obj.search([('name', '=', line[1].value), ('country_id', '=', con_id.id)], limit=1)
+                    state_id = state_obj.search([('name', '=', line[1].value),
+                                                 ('country_id', '=', con_id.id)], limit=1)
                     if not state_id:
                         raise Exception("İl bulunamıyor : %s "%(line[1].value.capitalize()))
                     
-                    dist_id = dist_obj.search([('name', '=', line[2].value ), ('state_id', '=', state_id.id)], limit=1)
+                    dist_id = dist_obj.search([('name', '=', line[2].value ),
+                                               ('state_id', '=', state_id.id)], limit=1)
                     if not dist_id:
                         dist_id = dist_obj.create({'name': line[2].value,
                                                    'state_id': state_id.id or False})
-                    region_id = reg_obj.search([('name', '=', line[3].value), ('district_id', '=', dist_id.id)], limit=1)
+                    region_id = reg_obj.search([('name', '=', line[3].value),
+                                                ('district_id', '=', dist_id.id)], limit=1)
                     if not region_id:
                         region_id = reg_obj.create({'name': line[3].value,
                                                     'district_id': dist_id.id or False})
                     
-                    nei_id = nei_obj.search([('name', '=', line[4].value), ('region_id', '=', region_id.id)], limit=1)
+                    nei_id = nei_obj.search([('name', '=', line[4].value),
+                                             ('region_id', '=', region_id.id)], limit=1)
                     if not nei_id:
                         
                         neighbours.append({'name': line[4].value,
                                                  'code': line[5].value,
                                                  'region_id': region_id.id or False})
                 except Exception as e:
-                    _logger.error('Import Hatası !!! %s ' %(str(e)) )        
+                    _logger.error('Import Error !!! %s ' %(str(e)) )        
                         
         nei_obj.create(neighbours)           
                                                      

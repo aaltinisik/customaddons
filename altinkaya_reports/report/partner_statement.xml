@@ -4,6 +4,14 @@
 		<!-- <t t-call="web.html_container">
 			<t t-call="web.basic_layout"> -->
 			<t t-set="lang" t-value="user.lang"/>
+		<style>
+				.table-bordered thead th {
+					border: 1px solid black !important;
+				}
+				.table-bordered th, .table-bordered td {
+					border: 1px solid black !important;
+				}
+		</style>
 				<div class="header" style="font-size:10pt">
 					<div class="row" style="border-bottom:2px solid black;margin">
 						<div class="col-7">
@@ -28,13 +36,13 @@
 							<br />
 							<div class="row">
 								<div class="col-4 text-left">
-									<span>Ulus VD:</span>
+									<strong><span>Ulus VD:</span></strong>
 									<br />
-									<span>Tel:</span>
+									<strong><span>Tel:</span></strong>
 									<br />
-									<span>Faks:</span>
+									<strong><span>Faks:</span></strong>
 									<br />
-									<span>Eposta:</span>
+									<strong><span>Eposta:</span></strong>
 									<br />
 								</div>
 								<div class="col-8 text-right">
@@ -61,7 +69,7 @@
 						style="border-top:2px solid black;font-size:10pt">
 						<div class="col-12 text-center">
 							<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |
-								www.altinkaya.com.tr | Ulus Vegi Dairesi 0610422947
+								www.altinkaya.com.tr | Ulus Vergi Dairesi 0610422947
 							</span>
 							<br />
 							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006
@@ -99,9 +107,10 @@
 											<span>
 												<strong>Tel:</strong>
 												<t t-esc="o.phone" />
-
+											<t t-if="o.fax">
 												<strong>Fax:</strong>
 												<span t-esc="o.fax" />
+											</t>
 
 											</span>
 										</td>
@@ -110,13 +119,13 @@
 												<strong>Date:</strong>
 											</span>
 											<br />
-											<span>
-												<strong>Tax Office :</strong>
-											</span>
+											<t t-if="o.tax_office_name">
+												<strong>Tax Office:</strong>
+											</t>
 											<br />
-											<span>
-												<strong>VAT :</strong>
-											</span>
+											<t t-if="o.vat">
+												<strong>VAT:</strong>
+											</t>
 											<br />
 										</td>
 										<td>
@@ -138,7 +147,7 @@
 							<div class="col-12">
 								<table class="table table-bordered">
 									<tr>
-										<th>NO</th>
+										<th>No</th>
 										<th>Number</th>
 										<th>Date</th>
 										<th>Due Date</th>
@@ -209,7 +218,9 @@
 										</t>
 									</t>
 									<t t-else="">
-										<t t-set="sblc" t-value="0" />
+										<t t-set="toplamBakiye" t-value="0" />
+										<t t-set="toplamBorc" t-value="0" />
+										<t t-set="toplamAlacak" t-value="0" />
 										<t t-set="sdc" t-value="'A'" />
 										<t t-foreach="o._get_statement_data()" t-as="s">
 											<tr style="line-height:%80">
@@ -245,7 +256,9 @@
 														<span t-esc="s['dc']" />
 													</td>
 												<t t-value="s['dc']" t-set="sdc" />
-												<t t-value="'%.2f' %s['balance']" t-set="sblc" />
+												<t t-value="'%.2f' %s['balance']" t-set="toplamBakiye" />
+												<t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
+												<t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
 											</tr>
 										</t>
 										<tr>
@@ -254,10 +267,28 @@
 											<td style="padding:0;"></td>
 											<td style="padding:0;"></td>
 											<td style="padding:0;"></td>
-											<td style="padding:0;">Total</td>
-											<td style="padding:0;"></td>
 											<td class="text-right" style="padding:0;">
-												<span t-esc="'%,.2f'.format(sblc) "
+												<strong style="font-size:8pt;">Total</strong>
+												<br/>
+												<strong style="font-size:8pt;">Debit:</strong>
+												<br/>
+												<span t-esc="'{:,}'.format(float(toplamBorc))"
+												 />
+											</td>
+											<td class="text-right" style="padding:0;">
+												<strong style="font-size:8pt;">Total</strong>
+												<br/>
+												<strong style="font-size:8pt;">Credit:</strong>
+												<br/>
+												<span t-esc="'{:,}'.format(float(toplamAlacak))"
+												 />
+											</td>
+											<td class="text-right" style="padding:0;">
+												<strong style="font-size:8pt;">Total</strong>
+												<br/>
+												<strong style="font-size:8pt;">Balance:</strong>
+												<br/>
+												<span t-esc="'{:,}'.format(float(toplamBakiye))"
 												 />
 											</td>
 											<td class="text-right" style="padding:0;">
@@ -269,6 +300,7 @@
 							</div>
 						</div>
 					</div>
+		<!-- TODO: toplamlar tablo dışına çıkartılacak ve font küçülecek. -->
 	</template>
 	<template
 		id="altinkaya_reports.report_partner_statement"

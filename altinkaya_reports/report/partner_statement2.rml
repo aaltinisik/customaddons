@@ -80,7 +80,7 @@
       <blockTable colWidths="139mm,25mm,20mm" style="Table_Partner_Address">
       <tr><td><para style="terp_default_8">[[ o.street ]], [[ o.street2 ]],[[ o.city ]],[[ o.state_id.name ]]-[[ o.zip ]] [[ o.country_id.name ]]</para></td>
       <td><para style="terp_default_8_right_align"><b>Vergi Dairesi :</b></para></td>
-     <td><para style="terp_default_8">[[ o.tax_office_name ]]</para></td></tr>
+     <td><para style="terp_default_8">[[ o.tax  _office_name ]]</para></td></tr>
     </blockTable>
     <blockTable colWidths="10mm,59mm,10mm,60mm,25mm,20mm" style="Table_Partner_Address">
     <tr><td><para style="terp_default_8"><b>Tel :</b></para></td>
