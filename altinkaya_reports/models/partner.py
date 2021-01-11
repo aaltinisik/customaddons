@@ -37,12 +37,8 @@ class Partner(models.Model):
         statement_dict = {}
         balance, seq = 0.0, 0
         Currency = self.env['res.currency']
-        if self.env.context.get('date_start',False) and self.env.context.get('date_end',False):
-            end_date = self.env.context.get('date_end')
-            start_date = self.env.context.get('date_start')
-        else:
-            end_date = date(date.today().year, 12, 31)
-            start_date = date(date.today().year, 1, 1)
+        end_date = date(date.today().year, 12, 31)
+        start_date = date(1985, 1, 1)
         move_type = ('payable','receivable')
         self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
                         l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
@@ -119,27 +115,26 @@ class Partner(models.Model):
     def _get_statement_data(self,data=None):
         statement_data = []
         balance, seq = 0.0, 0
-        if self.env.context.get('date_start',False) and self.env.context.get('date_end',False):
-            end_date = self.env.context.get('date_end')
-            start_date = self.env.context.get('date_start')
-        else:
-            end_date = date(date.today().year, 12, 31)
-            start_date = date(date.today().year, 1, 1)
+        Currency = self.env['res.currency']
+        end_date = date(date.today().year, 12, 31)
+        start_date = date(1985, 1, 1)
         move_type = ('payable','receivable')
-        self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit FROM account_move_line AS l \
-                        LEFT JOIN account_account a ON (l.account_id=a.id) \
-                        LEFT JOIN account_move am ON (l.move_id=am.id) \
-                        LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
-                        LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
-                        WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = '+ str(self.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
-                        'GROUP BY aj.name,move_id,am.name,am.state,l.date,l.date_maturity \
-                         ORDER BY l.date',(str(start_date),str(end_date)))
+        self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
+                                l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
+                                FROM account_move_line AS l \
+                                LEFT JOIN account_account a ON (l.account_id=a.id) \
+                                LEFT JOIN account_move am ON (l.move_id=am.id) \
+                                LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
+                                LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
+                                WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = ' + str(self.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
+                            'GROUP BY aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
+                             ORDER BY l.date , l.currency_id ', (str(start_date), str(end_date)))
         for each_dict in self.env.cr.dictfetchall():
             seq += 1
             balance = (each_dict['debit'] - each_dict['credit']) + balance
             debit = 0.0
             credit = 0.0
-
+            currency_id = Currency.browse(each_dict['company_currency_id'])
             if  (each_dict['debit'] - each_dict['credit']) > 0.0:
                 debit = (each_dict['debit'] - each_dict['credit'])
             else:
@@ -156,6 +151,7 @@ class Partner(models.Model):
                 'balance': abs(balance) or 0.0,
                 'dc': balance > 0.01 and 'B' or 'A',
                 'total': balance or 0.0,
+                'currency_symbol': currency_id['symbol'],
             })
         return statement_data
     

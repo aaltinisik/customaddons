@@ -25,7 +25,7 @@
 							<br />
 							<span>İvedikosb Mah. 1469. sk, No:10 </span>
 							<br />
-							<span>İvedik Osb</span>
+							<span>İvedik OSB</span>
 							<br />
 							<span>06378 Yenimahalle / ANKARA</span>
 						</div>
@@ -77,7 +77,7 @@
 							</span>
 							<br />
 							<span>
-								Hazırlayan : Altınkaya - Sayfa:
+								Prepared By: ALTINKAYA - Page:
 								<span class="page" />
 							</span>
 							<br />
@@ -107,6 +107,7 @@
 											<span>
 												<strong>Tel:</strong>
 												<t t-esc="o.phone" />
+												<br/>
 											<t t-if="o.fax">
 												<strong>Fax:</strong>
 												<span t-esc="o.fax" />
@@ -121,12 +122,11 @@
 											<br />
 											<t t-if="o.tax_office_name">
 												<strong>Tax Office:</strong>
+												<br />
 											</t>
-											<br />
 											<t t-if="o.vat">
 												<strong>VAT:</strong>
 											</t>
-											<br />
 										</td>
 										<td>
 											<span
@@ -144,7 +144,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-12">
+							<div class="col-12" style="font-size=5pt;">
 								<table class="table table-bordered">
 									<tr>
 										<th>No</th>
@@ -161,6 +161,9 @@
 									<t t-if="o.use_secondary_currency">
 										<t t-foreach="o._get_statement_data_currency()"
 											t-as="s_dict">
+											<t t-set="toplamBakiye" t-value="0" />
+											<t t-set="toplamBorc" t-value="0" />
+											<t t-set="toplamAlacak" t-value="0" />
 											<t t-set="sblc" t-value="0" />
 											<t t-set="sdc" t-value="'C'" />
 											<t t-foreach="s_dict_value" t-as="s">
@@ -197,23 +200,34 @@
 													</td>
 													<t t-value="s['dc']" t-set="sdc" />
 													<t t-value="s['balance']" t-set="sblc" />
+													<t t-value="'%.2f' %s['balance']" t-set="toplamBakiye" />
+													<t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
+													<t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
 												</tr>
 											</t>
 											<tr>
-												<td style="padding:0;"></td>
-												<td style="padding:0;"></td>
-												<td style="padding:0;"></td>
-												<td style="padding:0;"></td>
-												<td style="padding:0;"></td>
-												<td style="padding:0;">Total</td>
-												<td style="padding:0;"></td>
-												<td class="text-right" style="padding:0;">
-													<span t-esc="sblc"
-														t-options='{"widget": "monetary", "display_currency":s_dict}' />
-												</td>
-												<td class="text-right" style="padding:0;">
-													<span t-esc="sdc" />
-												</td>
+											<td style="padding:0;"></td>
+											<td style="padding:0;"></td>
+											<td style="padding:0;"></td>
+											<td style="padding:0;"></td>
+											<td class="text-right" style="padding:0;">
+												TOTAL
+											</td>
+											<td class="text-right" style="padding:0;">
+												<span t-esc="'{:,.2f}'.format(float(toplamBorc))"
+												 />
+											</td>
+											<td class="text-right" style="padding:0;">
+												<span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
+												 />
+											</td>
+											<td class="text-right" style="padding:0;">
+												<span t-esc="'{:,}'.format(float(toplamBakiye))"
+												 />
+											</td>
+											<td class="text-right" style="padding:0;">
+												<span t-esc="sdc" />
+											</td>
 											</tr>
 										</t>
 									</t>
@@ -266,29 +280,19 @@
 											<td style="padding:0;"></td>
 											<td style="padding:0;"></td>
 											<td style="padding:0;"></td>
-											<td style="padding:0;"></td>
 											<td class="text-right" style="padding:0;">
-												<strong style="font-size:8pt;">Total</strong>
-												<br/>
-												<strong style="font-size:8pt;">Debit:</strong>
-												<br/>
-												<span t-esc="'{:,}'.format(float(toplamBorc))"
+												TOTAL
+											</td>
+											<td class="text-right" style="padding:0;">
+												<span t-esc="'{:,.2f}'.format(float(toplamBorc))"
 												 />
 											</td>
 											<td class="text-right" style="padding:0;">
-												<strong style="font-size:8pt;">Total</strong>
-												<br/>
-												<strong style="font-size:8pt;">Credit:</strong>
-												<br/>
-												<span t-esc="'{:,}'.format(float(toplamAlacak))"
+												<span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
 												 />
 											</td>
 											<td class="text-right" style="padding:0;">
-												<strong style="font-size:8pt;">Total</strong>
-												<br/>
-												<strong style="font-size:8pt;">Balance:</strong>
-												<br/>
-												<span t-esc="'{:,}'.format(float(toplamBakiye))"
+												<span t-esc="'{:,.2f}'.format(float(toplamBakiye))"
 												 />
 											</td>
 											<td class="text-right" style="padding:0;">
