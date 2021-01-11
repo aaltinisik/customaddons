@@ -117,7 +117,7 @@ class Partner(models.Model):
         balance, seq = 0.0, 0
         Currency = self.env['res.currency']
         end_date = date(date.today().year, 12, 31)
-        start_date = date(1985, 1, 1)
+        start_date = date(date.today().year, 1, 1)
         move_type = ('payable','receivable')
         self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
                                 l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
