@@ -41,6 +41,46 @@ class account_invoice(osv.Model):
         
         return res
 
+    def _amount8_untaxed(self, cr, uid, ids, field, arg, context=None):
+        res = dict.fromkeys(ids, False)
+        for invoice in self.browse(cr, uid, ids, context=context):
+            amount = 0.0
+            for tax in invoice.tax_line:
+                if tax.name == u'KDV %8':
+                    amount = amount + tax.base
+            res[invoice.id] = amount
+        return res
+
+    def _amount18_untaxed(self, cr, uid, ids, field, arg, context=None):
+        res = dict.fromkeys(ids, False)
+        for invoice in self.browse(cr, uid, ids, context=context):
+            amount = 0.0
+            for tax in invoice.tax_line:
+                if tax.name == u'KDV %18':
+                    amount = amount + tax.base
+            res[invoice.id] = amount
+        return res
+
+
+    def _amount8_tax(self, cr, uid, ids, field, arg, context=None):
+        res = dict.fromkeys(ids, False)
+        for invoice in self.browse(cr, uid, ids, context=context):
+            amount = 0.0
+            for tax in invoice.tax_line:
+                if tax.name == u'KDV %8':
+                    amount = amount + tax.amount
+            res[invoice.id] = amount
+        return res
+
+    def _amount18_tax(self, cr, uid, ids, field, arg, context=None):
+        res = dict.fromkeys(ids, False)
+        for invoice in self.browse(cr, uid, ids, context=context):
+            amount = 0.0
+            for tax in invoice.tax_line:
+                if tax.name == u'KDV %18':
+                    amount = amount + tax.amount
+            res[invoice.id] = amount
+        return res
 
     _columns = {
         'x_serino': fields.char(
@@ -57,8 +97,11 @@ class account_invoice(osv.Model):
             'Shipping Address'
             ),
         'altinkaya_payment_url': fields.function(_altinkaya_payment_url, type='char', string='Altinkaya Payment Url'),
-                }
+        'amount8_untaxed': fields.function(_amount8_untaxed, type='float', string='Amount 8 untaxed',readonly=True, store=False),
+        'amount18_untaxed': fields.function(_amount18_untaxed, type='float', string='Amount 18 untaxed',readonly=True, store=False),
+        'amount18_tax': fields.function(_amount18_tax, type='float', string='Amount 18 tax',readonly=True, store=False),
+        'amount8_tax': fields.function(_amount8_tax, type='float', string='Amount 8 tax',readonly=True, store=False),
+    }
 
-    
 
 account_invoice()
