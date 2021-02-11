@@ -52,7 +52,7 @@ class wizard_partner_detail(osv.osv_memory):
                                   AND l.date >= %s
                                   AND l.date <= %s
                                   AND rp.is_company = true
-                                  GROUP BY l.partner_id, a.type ) as res where balance > 0;""",
+                                  GROUP BY l.partner_id, a.type ) as res where balance != 0;""",
                        (partner_ids, record.start_date, record.end_date))
         else:
             #partner_ids = tuple(self.pool.get('res.partner').search(cr, uid, [], context=context))
@@ -65,7 +65,7 @@ class wizard_partner_detail(osv.osv_memory):
                                   AND l.date >= %s
                                   AND l.date <= %s
                                   AND rp.is_company = true
-                                  GROUP BY l.partner_id, a.type ) as res where balance > 0;""",
+                                  GROUP BY l.partner_id, a.type ) as res where balance != 0;""",
                        (record.start_date, record.end_date))
 
 
