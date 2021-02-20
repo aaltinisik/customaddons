@@ -24,17 +24,13 @@
   			<field name="inherit_id" ref="account.invoice_supplier_form"/>
   			<field name="name">account.invoice.supplier.form.altinkaya</field>
   			<field name="arch" type="xml">
-  				<xpath expr="//field[@name='fiscal_position_id']" position="attributes">
-  					<attribute name="invisible">1</attribute>
+  				<xpath expr="//field[@name='fiscal_position_id']" position="replace">
   				</xpath>
-  				<xpath expr="//field[@name='journal_id']" position="attributes">
-  					<attribute name="invisible">1</attribute>
+  				<xpath expr="//field[@name='journal_id']" position="replace">
   				</xpath>
-  				<xpath expr="//field[@name='partner_bank_id']" position="attributes">
-  					<attribute name="invisible">1</attribute>
+  				<xpath expr="//field[@name='partner_bank_id']" position="replace">
   				</xpath>
-  				<xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='account_id']" position="attributes">
-  					<attribute name="invisible">1</attribute>
+  				<xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='account_id']" position="replace">
   				</xpath>
   				
   				<xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='payment_term_id']" position="after">
@@ -94,17 +90,13 @@
                  <xpath expr="//field[@name='date_invoice']" position="after">
                  	<field name="supplier_invoice_number"  attrs="{'invisible': [('type','=','out_invoice')]}">  </field> 
           	     </xpath>
-          	      <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
-          	      	<attribute name="invisible">1</attribute>
+          	      <xpath expr="//field[@name='fiscal_position_id']" position="replace">
           	      </xpath>
-          	      <xpath expr="//field[@name='total_balance']" position="attributes">
-          	      	<attribute name="invisible">1</attribute>
+          	      <xpath expr="//field[@name='total_balance']" position="replace">
           	      </xpath>
-          	      <xpath expr="//field[@name='journal_id']" position="attributes">
-          	      	<attribute name="invisible">1</attribute>
+          	      <xpath expr="//field[@name='journal_id']" position="replace">
           	      </xpath>
-          	      <xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='account_id']" position="attributes">
-          	      	<attribute name="invisible">1</attribute>
+          	      <xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='account_id']" position="replace">
           	      </xpath> 
           	     <xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='incoterm_id']" position="after">
   					<field name='receiver'/>
