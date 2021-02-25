@@ -65,7 +65,7 @@
 				</div>
 				<div class="footer">
 					<div class="row"
-						style="border-top:2px solid black;font-size:14pt">
+						style="border-top:2px solid black;font-size:10pt">
 						<div class="col-12 text-center">
 							<span>Telefon: +90 312 395 2768 | Faks: +90 312 395 2772 |
 								www.altinkaya.com.tr | Ulus Vergi Dairesi 0610422947
@@ -77,7 +77,7 @@
 							<br />
 							<span>
 								Prepared By: ALTINKAYA - Page:
-								<span class="page" />
+								<span class="page" />/<span class="topage" />
 							</span>
 							<br />
 						</div>
