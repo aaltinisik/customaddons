@@ -41,8 +41,9 @@ class Product(models.Model):
 
     @api.one
     def _find_active_bom(self):
-        self.active_bom = self.pool.get('mrp.bom')._bom_find(self._cr, self._uid, product_id=self.id,
-                                                             product_tmpl_id=self.product_tmpl_id.id)
+        return #TODO migrationu engellemesin diye
+        # self.active_bom = self.pool.get('mrp.bom')._bom_find(self._cr, self._uid, product_id=self.id,
+        #                                                      product_tmpl_id=self.product_tmpl_id.id)
 
     
 #    type_variant = fields.Selection([('product','Stockable Product'),('consu','Consumable'),('service','Service')], string="Product Type", default=False,store=True)
