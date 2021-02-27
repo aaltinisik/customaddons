@@ -23,7 +23,7 @@
                                                                                                                     <t t-esc="o.partner_id.commercial_partner_id.tax_office_name"/>
 
                                                                                                                     <t t-esc="o.partner_id.commercial_partner_id.vat"/>
-       <t t-if="o.invoice_ids[0].number"> <t t-esc="o.invoice_ids[0].date_invoice"/>     tarih <t t-esc="o.invoice_ids[0].number"/> sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.</t>
+       <t t-if="o.invoice_ids"> <t t-esc="o.invoice_ids[0].date_invoice"/>     tarih <t t-esc="o.invoice_ids[0].number"/> sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.</t>
 
 
 
