@@ -7,13 +7,13 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def _guess_main_lang(self):
+        super(ProductTemplate, self)._guess_main_lang()
         turkish = self.env.ref('base.lang_tr')
         if turkish.active:
             code = turkish.code
         else:
             code = self.env['res.lang'].search([], limit=1).code
-        return super(ProductTemplate, self)._guess_main_lang(code)
-
+        return code
 
 class Product(models.Model):
     _inherit = "product.product"
