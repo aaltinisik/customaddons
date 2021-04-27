@@ -2,8 +2,6 @@
 
 from odoo import models, fields, api
 from odoo.tools.translate import _
-
-
 from werkzeug import url_encode
 import hashlib
 
@@ -73,8 +71,8 @@ class SaleOrder(models.Model):
                     "tutar": tutar,
                     "ref": order.partner_id.commercial_partner_id.ref,
                     "currency": order.currency_id.name,
-                    "lang": order.partner_id.lan,
-                    "hashtr": hashlib.sha1(order.currency_id.name + order.partner_id.commercial_partner_id.ref + eposta + tutar + order.name + order.company_id.hash_code).hexdigest().upper(),
+                    "lang": order.partner_id.lang,
+                    "hashtr": hashlib.sha1((order.currency_id.name + order.partner_id.commercial_partner_id.ref + eposta + tutar + order.name + order.company_id.hash_code).encode('utf-8')).hexdigest().upper(),
                     }
             order.altinkaya_payment_url = "?" + url_encode(params)
         
@@ -201,7 +199,3 @@ class sale_order_line(models.Model):
 #         #delete the line with original product which is not relevant anymore     
 #         if to_unlink_ids:
 #             to_unlink_ids.unlink()
-            
-
-    
-  
