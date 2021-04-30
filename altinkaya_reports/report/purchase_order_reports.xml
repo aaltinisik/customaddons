@@ -187,8 +187,8 @@
 				</tr>
            		<tr class="text-center">
            		<td >
-           		 		<span t-field="o.validator_id.name"/><br/>
-           		 		<span t-field="o.validator_id.email"/><br/>
+           		 		<span t-field="o.user_id.name"/><br/>
+           		 		<span t-field="o.user_id.email"/><br/>
            		 		<br/>
            		 		<br/>
            		</td>
