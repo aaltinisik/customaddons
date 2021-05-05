@@ -21,10 +21,11 @@ class ProductPriceType(models.Model):
             if not (field.name,field.field_description) in res:
                 res.append((field.name,field.field_description))
         return res
-    
+
     name = fields.Char(string="Name",required=True)
     field = fields.Selection(selection = lambda self:self._compute_selection_fields(),string="Field",required=True)
     active = fields.Boolean(string="Active",default=True)
+    currency = fields.Many2one('res.currency', 'Currency', select=True, required=True)
 
 
 
@@ -179,12 +180,9 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
+            price_type = self.env['product.price.type'].search([('field', '=', rule.base)])[0]
             if suitable_rule and suitable_rule.compute_price != 'fixed' and suitable_rule.base != 'pricelist':
-                if suitable_rule.base == 'standard_price':
-                    cur = product.cost_currency_id
-                else:
-                    cur = product.currency_id
-                #price = cur._convert(price, self.currency_id, self.env.user.company_id, date, round=False)
+                price = product.currency_id._compute(price_type.currency, self.currency_id, price, round=False)
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
 
@@ -201,15 +199,15 @@ class ProductPriclelistItem(models.Model):
         ('list_price', _('Public Price')),
         ('standard_price', _('Cost')),
         ('pricelist', _('Other Pricelist'))]
-        
-        
+
+
         price_types = self.env['product.price.type'].search([('active','=',True)])
         for price_type in price_types:
             if not (price_type.field,price_type.name) in res:
-                res.append((price_type.field,price_type.name))    
-        return res        
+                res.append((price_type.field,price_type.name))
+        return res
                 
-    
+
     base = fields.Selection(selection = lambda self: self._compute_base())
     x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
     

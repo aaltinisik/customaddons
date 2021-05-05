@@ -10,6 +10,7 @@
 						<group>
 							<field name="name" required="1"/>
 							<field name="field" required="1"/>
+							<field name="currency"/>
 							<field name="active" />
 						</group>
 					</group>
@@ -24,6 +25,7 @@
 			<tree>
 				<field name="name" required="1"/>
 				<field name="field" required="1"/>
+				<field name="currency" required="1"/>
 				<field name="active" />
 			</tree>
 		</field>
