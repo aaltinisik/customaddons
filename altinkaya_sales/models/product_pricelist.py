@@ -180,8 +180,9 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
-            price_type = self.env['product.price.type'].search([('field', '=', rule.base)])[0]
-            if suitable_rule and suitable_rule.compute_price != 'fixed' and suitable_rule.base != 'pricelist':
+            price_type = self.env['product.price.type'].search([('field', '=', rule.base)], limit=1)
+            if suitable_rule and price_type.currency != self.currency_id and suitable_rule.compute_price != 'fixed' and\
+                    suitable_rule.base != 'pricelist':
                 price = product.currency_id._compute(price_type.currency, self.currency_id, price, round=False)
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
