@@ -3,4 +3,5 @@
 #Created on Mar 5, 2018
 #
 #@author: dogan
-import mrp_bom
+#
+from . import models

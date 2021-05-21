@@ -31,9 +31,11 @@ MRP - Dynamic Raw Materials Calculation
     """,
     'author': 'CODEQUARTERS',
     'website': 'http://www.codequarters.com',
-    'depends': ['mrp_hook',
-                'product_attribute_types'
-                ],
+    'depends': [
+        'mrp',
+#         'mrp_hook',
+        'product_attribute_types'
+        ],
     'data': ['views/mrp_bom_view.xml',
              ],
     'installable': True,
