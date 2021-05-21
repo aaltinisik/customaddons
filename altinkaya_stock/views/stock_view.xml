@@ -36,6 +36,12 @@
 	                    <field name='x_hazirlayan'/>
 	                    <field name='x_durum'/>
                   </xpath>
+
+                  <xpath expr="//field[@name='origin']" position="after">
+	                    <field name='teslimat_ucreti'/>
+	                    <field name="desi"></field>
+	                    <field name='koli_adedi'/>
+                  </xpath>
                   
                   <xpath expr="//field[@name='note']" position='after'>
                         <field name="comment_irsaliye" placeholder="İrsaliyeye eklenecek not..." class="oe_inline"/>
