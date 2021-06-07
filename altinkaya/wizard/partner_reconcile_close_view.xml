@@ -12,6 +12,7 @@
             			<field name="customer"/>
             			<field name="supplier"/>
             			<field name="partner_id" domain="[('parent_id','=',False)]"/>
+						<field name="partner_limit"/>
             		</group>
             		
             		<group string="Date Selection">

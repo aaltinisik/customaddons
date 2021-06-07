@@ -22,6 +22,7 @@ class PartnerReconcileClose(models.TransientModel):
     customer = fields.Boolean('Customer')
     supplier = fields.Boolean('Supplier')
     partner_id = fields.Many2one('res.partner', string='Partner')
+    partner_limit = fields.Char('Number of partners to process',default='1000')
     transfer_journal_id = fields.Many2one('account.journal', string='Transfer Journal', required=True)
     transfer_account_id = fields.Many2one('account.account', string='Transfer Account', required=True)
     transfer_description = fields.Char('Transfer description', required=True)
@@ -82,7 +83,7 @@ class PartnerReconcileClose(models.TransientModel):
             if self.customer and self.supplier:
                 partner_domain.extend(['|', ('customer', '=', True), ('supplier', '=', True)])
 
-            partner_ids = self.env['res.partner'].search(partner_domain)
+            partner_ids = self.env['res.partner'].search(partner_domain,limit=int(self.partner_limit))
 
         closing_move_id = move_obj.create({
             'period_id': self.closing_period_id.id,
