@@ -59,8 +59,7 @@
 										<field name="date_planned"/>
 										<field name="product_id"/>
 										<field name="product_qty"/>
-										<!--<field name="product_uom" groups="product.group_uom"/>
-					                    <field name="routing_id" groups="mrp.group_mrp_routings"/>-->
+					                    <field name="routing_id" groups="mrp.group_mrp_routings"/>
 					                    <field name="location_src_id"/>
    								        <field name="state"/>
 									</tree>
