@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 <template id="location_report_godex" name="location report godex">
-<t t-if="user.context_def_label_printer=='GODEX'">
+<t t-if="user.context_def_label_printer.type=='GODEX'">
 ^Q50,3
 ^W104
 ^H10
@@ -38,7 +38,7 @@ E
 ^P1
 E</t>
 </t>
-<t t-if="user.context_def_label_printer=='GODEX300'">
+<t t-if="user.context_def_label_printer.type=='GODEX300'">
 ^Q50,3
 ^W104
 ^H10

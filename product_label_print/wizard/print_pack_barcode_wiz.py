@@ -12,7 +12,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
     label_ids = fields.Many2many('label.twoinrow', string="Labels")
     skip_first = fields.Boolean('Skip First Label')
     restrict_single = fields.Boolean('Restrict to single product', default=False)
-
+    printer_type = 'GODEX300'
     single_label_id = fields.Many2one('product.product.label',compute='_compute_single_label')
     single_label_name = fields.Char(string="Name",related='single_label_id.name')
     single_label_nameL1 = fields.Char(string="NameL1",related='single_label_id.nameL1')
@@ -27,8 +27,8 @@ class PrintPackBarcodeWizard(models.TransientModel):
     single_label_product_id = fields.Many2one('product.product', string="Product", related='single_label_id.product_id')
     single_label_barcode = fields.Char(string="Barcode", related='single_label_id.barcode')
     single_label_uom_name = fields.Char(string="UOM Name", related='single_label_id.uom_name')
-    
-    
+
+
     @api.one
     @api.depends('product_label_ids')
     def _compute_single_label(self):
@@ -108,6 +108,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
         last_label = self.product_label_ids[0]
         leap_label = False
         Label_Res = []
+       # Label_Res.append(self.env.user.context_def_label_printer.type)
         label_template_obj = self.env['label.twoinrow']
         for product_label in self.product_label_ids:
             labels_to_print = product_label.label_to_print
@@ -161,6 +162,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
                 })
             Label_Res.append(Label_l.id)
         self.label_ids =[(6, 0, Label_Res)]
+        self.printer_type = self.env.user.context_def_label_printer.type
         return False
 
 
@@ -177,19 +179,18 @@ class PrintPackBarcodeWizard(models.TransientModel):
             'report_name': 'label_product_product',
             'datas' : datas,
         }
-        
-        
+
+
 
         return self.env.ref('product_label_print.label_product_product')\
             .with_context(active_model='print.pack.barcode.wiz').report_action(docids=self)
 
 
 
-    #tde Fix onur you should select printer or get user default label printer
     @api.multi
     def print_label(self):
         self.generate_labels()
-        iractionreport=self.env['printing.printer'].search([('id','=',1)])
-        report = iractionreport.print_document(self.env.ref('product_label_print.label_product_product'),b'content to print',doc_form="txt")
+        printer = self.env.user.context_def_label_printer
+        printer.print_document('product_label_print.label_product_product', self.env.ref('product_label_print.label_product_product').with_context(active_model='print.pack.barcode.wiz').report_action(docids=self),doc_form="txt")
         return {'type':'ir.actions.act_window_close'}
 

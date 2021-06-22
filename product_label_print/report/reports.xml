@@ -6,7 +6,6 @@
             string="Product Label (GODEX)"
             name="product_label_print.product_label_report"
             file="product_label_print.product_label_report"
-            report_type="qweb-text"
         />
 
 </data>
