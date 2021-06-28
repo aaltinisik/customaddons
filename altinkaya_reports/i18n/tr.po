@@ -1624,7 +1624,7 @@ msgstr ""
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.altinkaya_hr_employee_annual_report_data_table
 msgid "Yorum     (Kutulara 1 çok kötü – 10 çok iyi  aralığında puan verin, yorum kutusuna değerlendirmenizi yapın. Zarfı kapatıp size formu verene elden iade edin)"
-msgstr ""
+msgstr "Yorum     (Kutulara 1 çok kötü – 10 çok iyi  aralığında puan verin, yorum kutusuna değerlendirmenizi yapın. Zarfı kapatıp size formu verene elden iade edin)"
 
 #. module: altinkaya_reports
 #: model:ir.actions.report,name:altinkaya_reports.list_employee_annual_report

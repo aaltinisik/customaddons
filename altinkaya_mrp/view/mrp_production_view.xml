@@ -41,13 +41,13 @@
     <record id="mrp_enjek_menu" model="ir.actions.act_window">
         <field name="name">Enjeksiyon İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",1]]</field>
+        <field name="domain" >[["routing_id","=",1]]</field>
     </record>
-    <menuitem id="menu_mrp_enjeksiyon_workcenter"
+    <menuitem id="menu_mrp_enjeksiyon_production"
             name="Enjeksiyon İşleri"
             action="mrp_enjek_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -58,13 +58,13 @@
     <record id="mrp_cnc_menu" model="ir.actions.act_window">
         <field name="name">CNC Kesim İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",2]]</field>
+        <field name="domain" >[["routing_id","=",2]]</field>
     </record>
-    <menuitem id="menu_mrp_cnc_workcenter"
+    <menuitem id="menu_mrp_cnc_production"
             name="CNC Kesim İşleri"
             action="mrp_cnc_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -75,13 +75,13 @@
     <record id="mrp_profil_menu" model="ir.actions.act_window">
         <field name="name">Profil Kesim İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_m ode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",3]]</field>
+        <field name="domain" >[["routing_id","=",8]]</field>
     </record>
-    <menuitem id="menu_mrp_profil_workcenter"
+    <menuitem id="menu_mrp_profil_production"
             name="Profil Kesim İşleri"
             action="mrp_profil_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -92,13 +92,13 @@
     <record id="mrp_kalip_menu" model="ir.actions.act_window">
         <field name="name">Kalıp Atölyesi İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",4]]</field>
+        <field name="domain" >[["routing_id","=",4]]</field>
     </record>
-    <menuitem id="menu_mrp_kalip_workcenter"
+    <menuitem id="menu_mrp_kalip_production"
             name="Kalıp Atölyesi İşleri"
             action="mrp_kalip_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -109,13 +109,13 @@
     <record id="mrp_sac_menu" model="ir.actions.act_window">
         <field name="name">Sac Atölyesi İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",5]]</field>
+        <field name="domain" >[["routing_id","=",10]]</field>
     </record>
-    <menuitem id="menu_mrp_sac_workcenter"
+    <menuitem id="menu_mrp_sac_production"
             name="Sac Atölyesi İşleri"
             action="mrp_sac_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -126,13 +126,13 @@
     <record id="mrp_depo_menu" model="ir.actions.act_window">
         <field name="name">Depo Montaj İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",6]]</field>
+        <field name="domain" >[["routing_id","=",3]]</field>
     </record>
-    <menuitem id="menu_mrp_depo_workcenter"
+    <menuitem id="menu_mrp_depo_production"
             name="Depo Montaj İşleri"
             action="mrp_depo_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -143,13 +143,13 @@
     <record id="mrp_ayrintili_menu" model="ir.actions.act_window">
         <field name="name">Ayrıntılı Montaj İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",7]]</field>
+        <field name="domain" >[["routing_id","=",6]]</field>
     </record>
-    <menuitem id="menu_mrp_ayrintili_workcenter"
+    <menuitem id="menu_mrp_ayrintili_production"
             name="Ayrıltılı Montaj İşleri"
             action="mrp_ayrintili_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -160,13 +160,13 @@
     <record id="mrp_cnctorna_menu" model="ir.actions.act_window">
         <field name="name">CNC Torna İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",8]]</field>
+        <field name="domain">[["routing_id","=",5]]</field>
     </record>
-    <menuitem id="menu_mrp_cnctorna_workcenter"
+    <menuitem id="menu_mrp_cnctorna_production"
             name="CNC Torna İşleri"
             action="mrp_cnctorna_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -177,13 +177,13 @@
     <record id="mrp_sayma_menu" model="ir.actions.act_window">
         <field name="name">Sayma Paketleme İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",9]]</field>
+        <field name="domain" >[["routing_id","=",7]]</field>
     </record>
-    <menuitem id="menu_mrp_sayma_workcenter"
+    <menuitem id="menu_mrp_sayma_production"
             name="Sayma Paketleme İşleri"
             action="mrp_sayma_menu"
             parent="mrp.menu_mrp_manufacturing"
@@ -194,13 +194,13 @@
     <record id="mrp_gorsel_menu" model="ir.actions.act_window">
         <field name="name">Görsel Baskı İşleri</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">mrp.workorder</field>
+        <field name="res_model">mrp.production</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
 		<field name="priority">1</field>
-        <field name="domain" >[["workcenter_id","=",10]]</field>
+        <field name="domain" >[["routing_id","=",16]]</field>
     </record>
-    <menuitem id="menu_mrp_gorsel_workcenter"
+    <menuitem id="menu_mrp_gorsel_production"
             name="Görsel Baskı İşleri"
             action="mrp_gorsel_menu"
             parent="mrp.menu_mrp_manufacturing"
