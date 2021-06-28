@@ -19,14 +19,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_pieces_in_pack
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__pieces_in_pack
 msgid "# in Cartoon"
-msgstr "koli #"
+msgstr "Ürün Miktarı"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__copies_to_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_label_to_print
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__label_to_print
 msgid "# of label to be printed"
-msgstr ""
+msgstr "Etiket Adedi"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_barcode
@@ -56,12 +56,12 @@ msgstr "Oluşturulma"
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_default_code
 msgid "Default Code"
-msgstr ""
+msgstr "Ürün Kodu"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__default_code
 msgid "Default_code"
-msgstr ""
+msgstr "Ürün Kodu"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__display_name
@@ -73,24 +73,24 @@ msgstr "Görünüm Adı"
 #. module: product_label_print
 #: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Do not print first label"
-msgstr ""
+msgstr "İlk Etiketi Atla"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__id
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__id
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__label1
 msgid "Label 1"
-msgstr ""
+msgstr "Etiket 1"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__label2
 msgid "Label 2"
-msgstr ""
+msgstr "Etiket 2"
 
 #. module: product_label_print
 #: model:ir.model,name:product_label_print.model_label_twoinrow
@@ -100,7 +100,7 @@ msgstr ""
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__label_ids
 msgid "Labels"
-msgstr ""
+msgstr "Etiketler"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow____last_update
@@ -173,7 +173,7 @@ msgstr "Etiket Yazdır"
 #. module: product_label_print
 #: model_terms:ir.ui.view,arch_db:product_label_print.stock_move_tree_print_product_label
 msgid "Print Product Label"
-msgstr ""
+msgstr "Ürün Etiketi Yazdır"
 
 #. module: product_label_print
 #: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:53
@@ -192,24 +192,24 @@ msgstr "Ürün"
 #: code:addons/product_label_print/wizard/print_pack_barcode_wiz.py:57
 #, python-format
 msgid "Product : %s not have default code"
-msgstr ""
+msgstr "Ürün: %s bir ürün koduna sahip değil"
 
 #. module: product_label_print
 #: model:ir.actions.report,name:product_label_print.label_product_product
 msgid "Product Label (GODEX)"
-msgstr ""
+msgstr "Urun Etiketi (GODEX)"
 
 #. module: product_label_print
 #: model:ir.actions.act_window,name:product_label_print.action_print_pack_barcode_wiz
 #: model:ir.model,name:product_label_print.model_print_pack_barcode_wiz
 #: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Product Label Print"
-msgstr "Barkod Etiketi Yazdır"
+msgstr "Ürün Etiketi Yazdır"
 
 #. module: product_label_print
 #: model:ir.model,name:product_label_print.model_product_product_label
 msgid "Product Product Label"
-msgstr ""
+msgstr "Ürün Etiketi"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__product_label_ids
@@ -230,7 +230,7 @@ msgstr "Kısa Kod"
 #. module: product_label_print
 #: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Show Label"
-msgstr ""
+msgstr "Etiketi Göster"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_id

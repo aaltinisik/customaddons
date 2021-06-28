@@ -7,22 +7,12 @@
             <field name="arch" type="xml">
                 <form string="Product Label Print">
                     <sheet>
-                    	<field name="restrict_single" invisible="1"/>
-                    	<field name="single_label_id" invisible="1"/>
-                        <group colspan="8" attrs="{'invisible':[('restrict_single','=',True)]}">
-                            <field name="product_label_ids" nolabel="1" >
-                                <tree editable="true">
-                                     <field name="default_code" readonly="1"/>
-                                    <field name="barcode" readonly="1"/>
-                                     <field name="name" readonly="1"/>
-                                     <field name="note" />
-                                     <field name="pieces_in_pack"/>
-                                     <field name="label_to_print"/>
-
-                                </tree>
+                        <group>
+                            <field name="product_label_ids">
+                                <field name="note" />
+                                <field name="pieces_in_pack"/>
+                                <field name="label_to_print"/>
                             </field>
-                        </group>
-                        <group attrs="{'invisible':[('restrict_single','=',False)]}">
                         	<field name="single_label_default_code" readonly="1"/>
                             <field name="single_label_barcode" readonly="1"/>
                             <field name="single_label_name" readonly="1"/>

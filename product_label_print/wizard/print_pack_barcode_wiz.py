@@ -12,7 +12,6 @@ class PrintPackBarcodeWizard(models.TransientModel):
     label_ids = fields.Many2many('label.twoinrow', string="Labels")
     skip_first = fields.Boolean('Skip First Label')
     restrict_single = fields.Boolean('Restrict to single product', default=False)
-    printer_type = 'GODEX300'
     single_label_id = fields.Many2one('product.product.label',compute='_compute_single_label')
     single_label_name = fields.Char(string="Name",related='single_label_id.name')
     single_label_nameL1 = fields.Char(string="NameL1",related='single_label_id.nameL1')
@@ -21,20 +20,24 @@ class PrintPackBarcodeWizard(models.TransientModel):
     single_label_nameL4 = fields.Char(string="NameL3",related='single_label_id.nameL4')
     single_label_default_code = fields.Char(string="Default Code",related='single_label_id.default_code')
     single_label_short_code = fields.Char(string="Short Code",related='single_label_id.short_code')
-    single_label_note = fields.Char(string="Note",related='single_label_id.note')
-    single_label_pieces_in_pack = fields.Float(string="# in Cartoon", related='single_label_id.pieces_in_pack')
-    single_label_label_to_print = fields.Integer(string='# of label to be printed', related='single_label_id.label_to_print')
     single_label_product_id = fields.Many2one('product.product', string="Product", related='single_label_id.product_id')
     single_label_barcode = fields.Char(string="Barcode", related='single_label_id.barcode')
     single_label_uom_name = fields.Char(string="UOM Name", related='single_label_id.uom_name')
-
+    single_label_note = fields.Char(string="Note",related='single_label_id.note', readonly=False)
+    single_label_pieces_in_pack = fields.Float(string="# in Cartoon", related='single_label_id.pieces_in_pack', readonly=False)
+    single_label_label_to_print = fields.Integer(string='# of label to be printed', related='single_label_id.label_to_print', readonly=False)
+    printer_type = fields.Char(string='User Printer Type', compute='_get_user_printer_type', store=False)
 
     @api.one
     @api.depends('product_label_ids')
     def _compute_single_label(self):
         if self.product_label_ids:
             self.single_label_id = self.product_label_ids[0]
-    
+
+    @api.depends('printer_type')
+    def _get_user_printer_type(self):
+        self.printer_type = self.env.user.context_def_label_printer.type
+
     @api.model
     def default_get(self, fields):
         ''' 
@@ -89,13 +92,13 @@ class PrintPackBarcodeWizard(models.TransientModel):
                     'nameL2': nameL[2],
                     'nameL3': nameL[3],
                     'nameL4': nameL[4],
-                'default_code': product_id.default_code,
+                    'default_code': product_id.default_code,
                     'short_code': shortcode,
                     'note': '',
                     'label_to_print': 1,
                     'barcode': product_id.barcode,
                     'uom_name': product_id.uom_id.name,
-                    'product_id': product_id.id
+                    'product_id': product_id.id,
             })
             product_ids.append(product_label_id.id)
         res.update({'product_label_ids': [(6, 0, product_ids)] or [],
@@ -108,9 +111,9 @@ class PrintPackBarcodeWizard(models.TransientModel):
         last_label = self.product_label_ids[0]
         leap_label = False
         Label_Res = []
-       # Label_Res.append(self.env.user.context_def_label_printer.type)
         label_template_obj = self.env['label.twoinrow']
         for product_label in self.product_label_ids:
+            product_label.pieces_in_pack = product_label.pieces_in_pack if product_label.product_id.uom_id.category_id.id != 1 else int(product_label.pieces_in_pack)
             labels_to_print = product_label.label_to_print
             while labels_to_print > 0:
                 if self.skip_first:
@@ -145,7 +148,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
                         'label2': product_label.id,
                         'copies_to_print': labels_to_print/2,
                     })
-                    labels_to_print = labels_to_print - ((labels_to_print/2)*2)
+                    labels_to_print = labels_to_print - (int(labels_to_print/2)*2)
                     Label_Res.append(Label_l.id)
                 if labels_to_print == 1:
                     leap_label = True
@@ -161,8 +164,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
                 'copies_to_print': 1,
                 })
             Label_Res.append(Label_l.id)
-        self.label_ids =[(6, 0, Label_Res)]
-        self.printer_type = self.env.user.context_def_label_printer.type
+        self.label_ids = [(6, 0, Label_Res)]
         return False
 
 
@@ -191,6 +193,8 @@ class PrintPackBarcodeWizard(models.TransientModel):
     def print_label(self):
         self.generate_labels()
         printer = self.env.user.context_def_label_printer
-        printer.print_document('product_label_print.label_product_product', self.env.ref('product_label_print.label_product_product').with_context(active_model='print.pack.barcode.wiz').report_action(docids=self),doc_form="txt")
+        printer.print_document('product_label_print.label_product_product',
+                               self.env.ref('product_label_print.label_product_product').render_qweb_text([self.id],
+                               data={})[0],doc_form="txt")
         return {'type':'ir.actions.act_window_close'}
 
