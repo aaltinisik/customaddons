@@ -204,62 +204,62 @@ msgstr ""
 #: model:ir.model,name:product_label_print.model_print_pack_barcode_wiz
 #: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Product Label Print"
-msgstr ""
+msgstr "Ürün Etiketi Yazdır"
 
 #. module: product_label_print
 #: model:ir.model,name:product_label_print.model_product_product_label
 msgid "Product Product Label"
-msgstr ""
+msgstr "Ürün Etiketi"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__product_label_ids
 msgid "Products"
-msgstr ""
+msgstr "Ürünler"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__restrict_single
 msgid "Restrict to single product"
-msgstr ""
+msgstr "Tek ürünle kısıtla"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_short_code
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__short_code
 msgid "Short Code"
-msgstr ""
+msgstr "Kod"
 
 #. module: product_label_print
 #: model_terms:ir.ui.view,arch_db:product_label_print.view_print_pack_barcode_form
 msgid "Show Label"
-msgstr ""
+msgstr "Etiketi göster"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_id
 msgid "Single Label"
-msgstr ""
+msgstr "Tek etiket"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__skip_first
 msgid "Skip First Label"
-msgstr ""
+msgstr "İlk etiketi atla"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__first_label_empty
 msgid "Skip first label in row"
-msgstr ""
+msgstr "İlk etiketi atla"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_label_twoinrow__second_label_empty
 msgid "Skip second label in row"
-msgstr ""
+msgstr "İkinci etiketi atla"
 
 #. module: product_label_print
 #: model:ir.model,name:product_label_print.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Stok Hareketi"
 
 #. module: product_label_print
 #: model:ir.model.fields,field_description:product_label_print.field_print_pack_barcode_wiz__single_label_uom_name
 #: model:ir.model.fields,field_description:product_label_print.field_product_product_label__uom_name
 msgid "UOM Name"
-msgstr ""
+msgstr "Kategori Adı"
 
