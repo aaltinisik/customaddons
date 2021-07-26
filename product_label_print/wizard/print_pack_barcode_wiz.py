@@ -34,7 +34,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
         if self.product_label_ids:
             self.single_label_id = self.product_label_ids[0]
 
-    @api.depends('printer_type')
+    @api.depends('label_ids')
     def _get_user_printer_type(self):
         self.printer_type = self.env.user.context_def_label_printer.type
 

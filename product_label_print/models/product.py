@@ -41,7 +41,7 @@ class productproductLabel(models.TransientModel):
         '2035': 'J', '2036': 'K', '2037': 'L', '2038': 'Z', '2039': 'X', '2040': 'C', '2041': 'V', '2042': 'B',
     }
 
-    @api.depends('batch_code')
+    @api.depends('product_id')
     def gen_batch_code(self):
         today = date.today()
         self.batch_code = "%s%s%s%s" % (self.day_code[str(today.day)],
