@@ -82,7 +82,7 @@
 				<xpath
 					expr="/form/sheet/group/group//field[@name='source_id']"
 					position="attributes">
-					<attribute name="string">Edinme Kaynağı</attribute>
+					<attribute name="string">Kaynak</attribute>
 				</xpath>
 				<!-- <xpath expr="/form/sheet/group/group//field[@name='payment_term_id']" 
 					position="replace"/> <xpath expr="//field[@name='partner_shipping_id']" position="after"> 
