@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--  Run Schedulers -->
+        <record id="mass_delete_product_wizard" model="ir.ui.view">
+            <field name="name">Mass delete passive products</field>
+            <field name="model">mass.delete.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Mass delete passive products">
+                    <p>
+                        Check all passive products to delete.
+                    </p>
+                    <footer>
+                        <button name="massdelete_product" string="Mass delete product" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Mass delete Products"
+            res_model="mass.delete.wiz"
+            src_model="product.product"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            groups="product_mass_delete.massdelete_product"
+            id="wiz_action_massdelete_product"/>
+
+    </data>
+</openerp>
