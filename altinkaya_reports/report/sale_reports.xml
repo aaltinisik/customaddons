@@ -105,7 +105,7 @@
 						<t t-if="doc.client_order_ref">
 							<h5>
 								Client Order Ref:
-								<span t-field="doc.client_order_ref"></span>
+								<span t-field="doc.client_order_ref"/>
 							</h5>
 						</t>
 					</div>
@@ -119,10 +119,10 @@
 				<div class="row mt8">
 					<table class="table table-borderless">
 						<tr>
-							<!-- t-if="doc.partner_shipping_id == doc.partner_invoice_id and doc.partner_invoice_id 
+							<!-- t-if="doc.partner_shipping_id == doc.partner_invoice_id and doc.partner_invoice_id
 								!= doc.partner_id or doc.partner_shipping_id != doc.partner_invoice_id" -->
 							<td style="padding:0;">
-								<!-- <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing 
+								<!-- <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing
 									and shipping address:</strong> -->
 
 								<strong>Shipping address</strong>
@@ -171,7 +171,7 @@
 								<t t-if="doc.partner_id.tax_office_name">
 									<br />
 									<strong>Tax Office:</strong>
-									<span t-field="doc.partner_id.tax_office_name"></span>
+									<span t-field="doc.partner_id.tax_office_name"/>
 								</t>
 								<ty t-if="doc.partner_id.vat">
 								<t t-if="doc.partner_id.lang == 'tr_TR'">
@@ -477,7 +477,7 @@
 										</td>
 										<td>
 											<strong>TR 30 0006 2000 4810 0009 0970 55</strong>
-											
+
 										</td>
 									</t>
 									<t t-if="doc.currency_id.name == 'EUR'">
@@ -487,7 +487,7 @@
 										</td>
 										<td>
 											<strong>TR 84 0006 2000 4810 0009 0970 53</strong>
-											
+
 										</td>
 									</t>
 								</tr>
@@ -640,17 +640,17 @@
 
 					</div>
 
-					<!-- <div class="row" style="page-break-inside:avoid;"> <table class="table 
-						table-bordered" style="width:%100"> <thead> <tr> <th class="text-center"> 
-						<strong>Seller</strong> </th> <th class="text-center"> <strong>Buyer Approval</strong> 
-						</th> </tr> </thead> <tbody> <tr> <td class="text-center" style="width:%50"> 
-						ALTINKAYA Enclosures For Electronics <br /> <span t-field="doc.user_id.name"></span> 
-						<br /> <br /> </td> <td style="width:%50"> <br /> <br /> <br /> </td> </tr> 
+					<!-- <div class="row" style="page-break-inside:avoid;"> <table class="table
+						table-bordered" style="width:%100"> <thead> <tr> <th class="text-center">
+						<strong>Seller</strong> </th> <th class="text-center"> <strong>Buyer Approval</strong>
+						</th> </tr> </thead> <tbody> <tr> <td class="text-center" style="width:%50">
+						ALTINKAYA Enclosures For Electronics <br /> <span t-field="doc.user_id.name"></span>
+						<br /> <br /> </td> <td style="width:%50"> <br /> <br /> <br /> </td> </tr>
 						</tbody> </table> </div> -->
 
 
 				</t>
-				
+
 				<div style="page-break-inside:avoid;width:%100">
 						<div class="row">
 							<div class="col-6 text-center"
@@ -679,7 +679,7 @@
 							</div>
 						</div>
 					</div>
-				
+
 			</div>
 			<div class="footer">
 				<div class="row">
