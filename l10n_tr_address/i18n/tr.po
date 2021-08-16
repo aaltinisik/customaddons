@@ -170,14 +170,14 @@ msgstr "Posta Kodu"
 #: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__region_id
 #: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
 msgid "Region"
-msgstr "Bölge"
+msgstr "Semt"
 
 #. module: l10n_tr_address
 #: model:ir.actions.act_window,name:l10n_tr_address.action_region
 #: model:ir.model,name:l10n_tr_address.model_address_region
 #: model:ir.ui.menu,name:l10n_tr_address.region_menu
 msgid "Regions"
-msgstr "Bölgeler"
+msgstr "Semtler"
 
 #. module: l10n_tr_address
 #: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__state_id
