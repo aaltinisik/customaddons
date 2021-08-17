@@ -10,8 +10,6 @@
      'depends' : ['sale', 'sales_team', 'crm','sale_cancel_reason'],
     'data': [
             'data/altinkaya_category_data.xml',
-            'security/altinkaya_security.xml',
-            'security/ir.model.access.csv',
             'views/res_users.xml',
             ],
     'demo': [],

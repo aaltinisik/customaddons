@@ -50,7 +50,16 @@
 		                 </tree>
 		             </field>
                 </page>
+                <page string="User Groups">
+                	<!-- <label for="rule_groups"/> -->
+	                 <field name="groups_id">
+		                 <tree string="Groups of the user" edit="false" create="false" >
+		                     <field name="category_id"/>
+							 <field name="display_name"/>
 
+		                 </tree>
+		             </field>
+                </page>
 			
 			</xpath>
 		
