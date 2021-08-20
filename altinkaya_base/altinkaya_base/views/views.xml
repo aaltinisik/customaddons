@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="altinkaya_base.list">
+      <field name="name">altinkaya_base list</field>
+      <field name="model">altinkaya_base.altinkaya_base</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="altinkaya_base.action_window">
+      <field name="name">altinkaya_base window</field>
+      <field name="res_model">altinkaya_base.altinkaya_base</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="altinkaya_base.action_server">
+      <field name="name">altinkaya_base server</field>
+      <field name="model_id" ref="model_altinkaya_base_altinkaya_base"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="altinkaya_base" id="altinkaya_base.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="altinkaya_base.menu_1" parent="altinkaya_base.menu_root"/>
+    <menuitem name="Menu 2" id="altinkaya_base.menu_2" parent="altinkaya_base.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="altinkaya_base.menu_1_list" parent="altinkaya_base.menu_1"
+              action="altinkaya_base.action_window"/>
+    <menuitem name="Server to list" id="altinkaya_base" parent="altinkaya_base.menu_2"
+              action="altinkaya_base.action_server"/>
+    -->
+  </data>
+</odoo>
