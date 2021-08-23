@@ -31,4 +31,3 @@ class ProductProduct(models.Model):
 
         return super(ProductProduct, self).unlink()
 
-
