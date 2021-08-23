@@ -53,16 +53,16 @@ class CreateProcurementMove(models.TransientModel):
 
     procurement_qty_ids = fields.One2many('create.procurement.move.location', 'wizard_id', string='Quantities')
 
-    # qty_to_sincan = fields.Float('Quantity to Sincan Depo')
-    # qty_to_merkez = fields.Float('Quantity to Merkez Depo')
-    # qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
-    # qty_available_sincan = fields.Float('Sincan Depo Mevcut', related='product_id.qty_available_sincan')
-    # qty_incoming_merkez = fields.Float('Merkez Depo Gelen', related='product_id.qty_incoming_merkez')
-    # qty_incoming_sincan = fields.Float('Sincan Depo Gelen', related='product_id.qty_incoming_sincan')
-    # qty_outgoing_merkez = fields.Float('Merkez Depo Giden', related='product_id.qty_outgoing_merkez')
-    # qty_outgoing_sincan = fields.Float('Sincan Depo Giden', related='product_id.qty_outgoing_sincan')
-    # qty_virtual_merkez = fields.Float('Merkez Depo Tahmini', related='product_id.qty_virtual_merkez')
-    # qty_virtual_sincan = fields.Float('Sincan Depo Tahmini', related='product_id.qty_virtual_sincan')
+    qty_to_sincan = fields.Float('Tedarik')
+    qty_to_merkez = fields.Float('Tedarik')
+    qty_available_merkez = fields.Float('Mevcut', related='product_id.qty_available_merkez')
+    qty_available_sincan = fields.Float('Mevcut', related='product_id.qty_available_sincan')
+    qty_incoming_merkez = fields.Float('Gelen', related='product_id.qty_incoming_merkez')
+    qty_incoming_sincan = fields.Float('Gelen', related='product_id.qty_incoming_sincan')
+    qty_outgoing_merkez = fields.Float('Giden', related='product_id.qty_outgoing_merkez')
+    qty_outgoing_sincan = fields.Float('Giden', related='product_id.qty_outgoing_sincan')
+    qty_virtual_merkez = fields.Float('Tahmini', related='product_id.qty_virtual_merkez')
+    qty_virtual_sincan = fields.Float('Tahmini', related='product_id.qty_virtual_sincan')
 
     production_ids = fields.Many2many('mrp.production',string='Manufacturing Orders', compute='_compute_productions')
     transfers_to_customer_ids = fields.Many2many('stock.move',string='Transfers to Customers',
@@ -70,9 +70,9 @@ class CreateProcurementMove(models.TransientModel):
     pending_orderline_ids = fields.Many2many('sale.order.line', string='Pending Orders',
                                              compute='_compute_pending_orderlines')
 
-    # sale_qty30days = fields.Float(u'Son 1 ayda satılan', related='move_id.product_id.sale_qty30days', readonly=True, store=False)
-    # sale_qty180days = fields.Float(u'Son 6 ayda satılan', related='move_id.product_id.sale_qty180days', readonly=True, store=False)
-    # sale_qty360days = fields.Float(u'Son 1 senede satılan', related='move_id.product_id.sale_qty360days', readonly=True, store=False)
+    sale_qty30days = fields.Float(u'Son 1 ayda satılan', related='move_id.product_id.sale_qty30days', readonly=True, store=False)
+    sale_qty180days = fields.Float(u'Son 6 ayda satılan', related='move_id.product_id.sale_qty180days', readonly=True, store=False)
+    sale_qty360days = fields.Float(u'Son 1 senede satılan', related='move_id.product_id.sale_qty360days', readonly=True, store=False)
 
     @api.multi
     @api.depends('product_id')

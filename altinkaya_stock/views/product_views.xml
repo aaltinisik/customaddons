@@ -27,6 +27,17 @@
                   </xpath>
               </field>
         </record>
+        <record id="product_variant_button_altinkaya_stock" model="ir.ui.view">
+            <field name="name">Altinkaya Product Variant Button</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='150']" position="attributes">
+                    <attribute name="attrs">{'invisible':0}</attribute>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>
