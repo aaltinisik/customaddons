@@ -77,19 +77,19 @@ class Product(models.Model):
         return [('id', 'in', self.with_context({'location':21})._search_qty_available(operator, value))]
 
     def _search_qty_enjek(self, operator, value):
-        return [('id', 'in', self.with_context({'location':29})._search_qty_available(operator, value))]
+        return [('id', 'in', self.with_context({'location':28})._search_qty_available(operator, value))]
 
     def _search_qty_montaj(self, operator, value):
-        return [('id', 'in', self.with_context({'location':53})._search_qty_available(operator, value))]
+        return [('id', 'in', self.with_context({'location':52})._search_qty_available(operator, value))]
 
     def _search_qty_cnc(self, operator, value):
-        return [('id', 'in', self.with_context({'location':61})._search_qty_available(operator, value))]
+        return [('id', 'in', self.with_context({'location':60})._search_qty_available(operator, value))]
 
     def _search_qty_boya(self, operator, value):
-        return [('id', 'in', self.with_context({'location':45})._search_qty_available(operator, value))]
+        return [('id', 'in', self.with_context({'location':44})._search_qty_available(operator, value))]
 
     def _search_qty_metal(self, operator, value):
-        return [('id', 'in', self.with_context({'location':37})._search_qty_available(operator, value))]
+        return [('id', 'in', self.with_context({'location':36})._search_qty_available(operator, value))]
 
     def _search_qty_maske(self, operator, value):
         return [('id', 'in', self.with_context({'location':114})._search_qty_available(operator, value))]
@@ -111,10 +111,10 @@ class Product(models.Model):
     def _compute_custom2_available(self):
         for product in self:
             product.qty_available_montaj = product.with_context({'location':53}).qty_available
-            product.qty_available_enjek = product.with_context({'location':29}).qty_available
-            product.qty_available_cnc = product.with_context({'location':61}).qty_available
-            product.qty_available_boya = product.with_context({'location':45}).qty_available
-            product.qty_available_metal = product.with_context({'location':37}).qty_available
+            product.qty_available_enjek = product.with_context({'location':28}).qty_available
+            product.qty_available_cnc = product.with_context({'location':60}).qty_available
+            product.qty_available_boya = product.with_context({'location':44}).qty_available
+            product.qty_available_metal = product.with_context({'location':36}).qty_available
             product.qty_available_maske = product.with_context({'location':114}).qty_available
             
             
