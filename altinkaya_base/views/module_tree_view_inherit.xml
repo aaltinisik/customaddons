@@ -6,20 +6,9 @@
             <field name="model">ir.module.module</field>
             <field name="inherit_id" ref="base.module_tree"/>
             <field name="arch" type="xml">
-                <tree position="replace">
-                    <tree decoration-info="state=='to upgrade' or state=='to install'"
-                          decoration-danger="state=='uninstalled'"
-                          decoration-muted="state=='uninstallable'"
-                          create="false" string="Apps">
-                        <field name="shortdesc"/>
-                        <field name="name"/>
-                        <field name="author"/>
-                        <field name="website"/>
-                        <field name="installed_version"/>
-                        <field name="state"/>
-                        <field name="category_id" invisible="1"/>
-                    </tree>
-                </tree>
+                <field name="name" position="replace">
+                    <field name="name"/>
+                </field>
             </field>
         </record>
     </data>
