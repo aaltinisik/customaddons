@@ -15,7 +15,7 @@
 
     'data': [
         # 'security/ir.model.access.csv',
-        'views/open_module_tree.xml',
+        'views/apps_view_inherit.xml',
         'views/module_tree_view_inherit.xml'
     ],
     'installable': True
