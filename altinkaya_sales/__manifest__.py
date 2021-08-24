@@ -30,6 +30,7 @@
     'website': 'http://www.codequarters.com',
     'data': [
              'security/ir.model.access.csv',
+             'views/sale_workflow_new_menus_actions.xml',
              'views/sales_order_view.xml',
              'views/res_partner_views.xml',
              'views/product_views.xml',
