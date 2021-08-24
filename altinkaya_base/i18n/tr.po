@@ -1,0 +1,795 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_sales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-24 13:21+0000\n"
+"PO-Revision-Date: 2021-08-24 13:21+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_sales
+#: model:mail.template,body_html:altinkaya_sales.email_template_edi_sale_altinkaya
+msgid "\n"
+"<div style=\"font-size:13px;font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Hello, ${object.partner_id.name}</p>\n"
+"    \n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from Altinkaya Enclosures For Electronics: </p>\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;<strong style=\"font-weight:bolder;\">REFERENCES</strong><br>\n"
+"       &nbsp;&nbsp;Order number: <strong style=\"font-weight:bolder;\">${object.name}</strong><br>\n"
+"       &nbsp;&nbsp;Order total: <strong style=\"font-weight:bolder;\">${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br>\n"
+"       &nbsp;&nbsp;Order date: ${object.date_order}<br>\n"
+"       % if object.origin:\n"
+"       &nbsp;&nbsp;Order reference: ${object.origin}<br>\n"
+"       % endif\n"
+"       % if object.client_order_ref:\n"
+"       &nbsp;&nbsp;Your reference: ${object.client_order_ref}<br>\n"
+"       % endif\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Prepared By: <a href=\"mailto:${object.user_id.email or ''}?subject=Order%20${object.name}\" style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);\">${object.user_id.name}</a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+" % if object.state in ('draft', 'sent'):\n"
+"    <br>\n"
+"        <a style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);margin-left: 120px;\" href=\"https://www.altinkaya.com.tr/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
+"            <img src=\"https://www.altinkaya.com.tr/payment/images/pay_now.gif\" style=\"border-style:none;vertical-align:middle;\">\n"
+"        </a><br><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">It is also possible to make your payment by clicking \"Pay Now\" button above. <br>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
+"    <br>\n"
+"    % endif       \n"
+"\n"
+"    <br>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">If you have any question, do not hesitate to contact us.</p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><strong style=\"font-weight:bolder;\">You can reply this email to contact us.</strong></p>\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Thank you for choosing Altinkaya!</p>\n"
+"    <br>\n"
+"    <br>\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"font-size:1.40833rem;color:inherit;line-height:1.2;font-weight:bold;font-family:inherit;margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"            <strong style=\"font-weight:bolder;text-transform:uppercase;\">ALTINKAYA ENCLOSURES FOR ELECTRONICS</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"        % if object.company_id.street:\n"
+"            ${object.company_id.street}<br>\n"
+"        % endif\n"
+"        % if object.company_id.street2:\n"
+"            ${object.company_id.street2}<br>\n"
+"        % endif\n"
+"        % if object.company_id.city or object.company_id.zip:\n"
+"            ${object.company_id.zip} ${object.company_id.city}<br>\n"
+"        % endif\n"
+"        % if object.company_id.country_id:\n"
+"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} Turkey<br>\n"
+"        % endif\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Phone:&nbsp; ${object.company_id.phone}<br>Fax&nbsp;&nbsp;:&nbsp; ${object.company_id.fax}\n"
+"\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">\n"
+"                Web :&nbsp;<a href=\"http://www.altinkaya.eu\" style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);\">www.altinkaya.eu</a>\n"
+"            </div>\n"
+"        %endif\n"
+"        <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"></p>\n"
+"    </div>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2016a_iscilik
+msgid " kullanılan eski Minimum İşcilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:mail.template,report_name:altinkaya_sales.email_template_edi_sale_altinkaya
+msgid "${(object.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:mail.template,subject:altinkaya_sales.email_template_edi_sale_altinkaya
+msgid "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
+msgstr "${object.company_id.name} ${object.state in ('Taslak', 'Gönderilmiş') and 'Fiyat Teklifi' or 'Satış Siparişi'} (Ref ${object.name or 'n/a' })"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_2014
+msgid "2014 Eski Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_2014_iscilik
+msgid "2014 Min İşçcilik Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_2014_iscilik
+msgid "2014 işçilik Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_2014_iscilik
+msgid "2014 yılında kullanılan birim işçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2014_iscilik
+msgid "2014 yılında kullanılan eski Minimum İşçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_2014
+msgid "2014 yılında kullanılan eski fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_2016a
+msgid "2015 Ekim Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_2016a_iscilik
+msgid "2015 Ekim Min İscilik TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_2016a_iscilik
+msgid "2015 Ekim birim işçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_2016a
+msgid "2015 Ekim fiyati TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_2016a_iscilik
+msgid "2015 Ekim isçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_2015a
+msgid "2015 Ocak Eski Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_2015a_iscilik
+msgid "2015 Ocak Min İşçcilik TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_2015a
+msgid "2015 Ocak eski fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_2015a_iscilik
+msgid "2015 Ocak işçilik Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_2015a_iscilik
+msgid "2015 Ocak kullanılan birim işçilik fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2015a_iscilik
+msgid "2015 Ocak kullanılan eski Minimum İşçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_2016b
+msgid "2016 Aralık Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_2016b_iscilik
+msgid "2016 Aralık Min İsçilik TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2016b_iscilik
+msgid "2016 Aralık Minimum İşçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_2016b_iscilik
+msgid "2016 Aralık birim işçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_2016b
+msgid "2016 Aralık fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_2016b_iscilik
+msgid "2016 Aralık isçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kamp_2016A
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kamp_2016A
+msgid "2016 Katalog için arandı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kamp_2016A
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kamp_2016A
+msgid "2016 Temmuz Katalog gönderme kampanyası icin arandi."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kamp_2017A
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kamp_2017A
+msgid "2017 Adres güncelleme için arandı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_2017
+msgid "2017 Aralık Fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_2017_iscilik
+msgid "2017 Aralık Min İsçilik TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2017_iscilik
+msgid "2017 Aralık Minimum İşçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_2017_iscilik
+msgid "2017 Aralık birim işçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_2017
+msgid "2017 Aralık fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_2017_iscilik
+msgid "2017 Aralık isçilik fiyatı TL"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kamp_2017A
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kamp_2017A
+msgid "2017 Temmuz Adres günceleme için arandı."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "<span class=\"oe_form_field\" attrs=\"{'invisible':[('set_product','=',False)]}\">This is a set product</span>"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__active
+msgid "Active"
+msgstr "Aktif"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__altinkaya_payment_url
+msgid "Altinkaya Payment Url"
+msgstr "Altınkaya Ödeme URL'i"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__attr_price
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__attr_price
+msgid "Attr. Value Price"
+msgstr "Nitlk Değ. Fiyatı"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template_attribute_line__attr_val_price_coef
+msgid "Attribute value coefficient used to compute product price based on attribute value."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_base_price
+msgid "Base Price"
+msgstr "Temel Ücret"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_pricelist_item__base
+msgid "Base price for computation.\n"
+"Public Price: The base price will be the Sale/public Price.\n"
+"Cost Price : The base price will be the cost price.\n"
+"Other Pricelist : Computation of the base price based on another Pricelist."
+msgstr "Hesaplama için temel fiyat.\n"
+"Perakende Fiyatı: Temel fiyat Satış/Perakende Fiyatı olacak.\n"
+"Maliyet Fiyatı: Temel fiyat maliyet fiyatı olacak.\n"
+"Diğer Fiyat Listeleri: Başka Fiyat Listesini baz alan temel fiyatın hesaplanması."
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template_attribute_line__attr_base_price
+msgid "Base price used to compute product price based on attribute value."
+msgstr "Özellik fiyatına göre ürün fiyatını hesaplamak için kullanılan taban fiyat."
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_item__base
+msgid "Based on"
+msgstr "Buna göre"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_iscilik_fiyat
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_tl_fiyat
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_iscilik_fiyat
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_tl_fiyat
+msgid "Birim işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_guncel_fiyat
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_guncel_fiyat
+msgid "Bu seçenek seçili ise fiyatı yenidir."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_res_company
+msgid "Companies"
+msgstr "Şirketler"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_res_partner
+msgid "Contact"
+msgstr "İletişim"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "Copy to Sale"
+msgstr ""
+
+#. module: altinkaya_sales
+#: code:addons/altinkaya_sales/models/product_pricelist.py:201
+#, python-format
+msgid "Cost"
+msgstr "Maliyet"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_date
+msgid "Created on"
+msgstr "Oluşturulma"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__currency
+msgid "Currency"
+msgstr "Para Birimi"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_category__custom_products
+msgid "Custom Products"
+msgstr "Özelleştirilebir Ürünler"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__default_procurement_wh_id
+msgid "Default Procurement Warehouse"
+msgstr "Varsayılan Tedarik Deposu"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__devir_yapildi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__devir_yapildi
+msgid "Devir yapıldı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__display_name
+msgid "Display Name"
+msgstr "Görünüm"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_dolar
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_fiyat_dolar
+msgid "Dolar Fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_dolar
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_fiyat_dolar
+msgid "Dolarla satılan ürünlerin fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_iscilik_fiy
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_min_iscilik_fiy
+msgid "En Az Toplam işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_cep
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_cep
+msgid "Eski Cep"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_fax
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_fax
+msgid "Eski Faks"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_old_tel
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_old_tel
+msgid "Eski Tel"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_euro
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_fiyat_euro
+msgid "Euro Fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_fiyat_euro
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_fiyat_euro
+msgid "Euro ile satılırken kullanılan temel fiyat"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__field
+msgid "Field"
+msgstr "Alan"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_guncel_fiyat
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_guncel_fiyat
+msgid "Fiyat Güncel"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_item__x_guncelleme
+msgid "Guncelleme Kodu"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__has_production_bom
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__has_production_bom
+msgid "Has production BoM"
+msgstr "Üretim BOM "
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_company__hash_code
+msgid "Hash Comm Code"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "History"
+msgstr "Geçmiş"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__id
+msgid "ID"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_tel_kampanya
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_tel_kampanya
+msgid "Kampanyalarda Aranmayacak"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_email
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_email
+msgid "Katalog E-mail"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_postalandi
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_postalandi
+msgid "Katalog Posta ile gönderildi."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_postala
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_postala
+msgid "Katalog Posta ile gönderilecek."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_postala
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_postala
+msgid "Katalog Postala"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_kat_postalandi
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_kat_postalandi
+msgid "Katalog Postalandi"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_kat_email
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_kat_email
+msgid "Katalog email ile gönderilecek."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_category__x_guncelleme
+msgid "Kategori Referansi"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "Kaynak"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
+msgid "Last Modified on"
+msgstr "S"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_uid
+msgid "Last Updated by"
+msgstr "Son güncelleyen"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_date
+msgid "Last Updated on"
+msgstr "Son Güncelleme"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__production_ids
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "Manufacturing Orders"
+msgstr "Üretim Emirleri"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_iscilik_fiy
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_min_iscilik_fiy
+msgid "Minimum işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
+msgid "Name"
+msgstr "Adı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.actions.act_window,help:altinkaya_sales.action_quotations_and_orders
+msgid "No orders and quotations found."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Notes"
+msgstr "Uyarılar"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
+msgid "Old Prices"
+msgstr "Eski Fiyatlar"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__sale_line_history
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_acespritech
+msgid "Old Sales"
+msgstr "Geçmiş Satışlar"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__date_order
+msgid "Order Date"
+msgstr "Sipariş Tarihi"
+
+#. module: altinkaya_sales
+#: code:addons/altinkaya_sales/models/product_pricelist.py:202
+#, python-format
+msgid "Other Pricelist"
+msgstr "Diğer Fiyat Listesi"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_cari_urun
+msgid "Partner Product"
+msgstr "İş Ortağı Ürünü"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_product__attr_price
+#: model:ir.model.fields,help:altinkaya_sales.field_product_template__attr_price
+msgid "Price calculated based on the product's attribute values."
+msgstr "Fiyat, ürünün nitelik değerlerine göre hesaplanır."
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_price_type
+msgid "Price type"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_pricelist
+msgid "Pricelist"
+msgstr "Fiyat Listesi"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_pricelist_item
+msgid "Pricelist Item"
+msgstr "Fiyat Listesi Öğesi"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
+msgid "Prices"
+msgstr "Fiyatlar"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_category
+msgid "Product Category"
+msgstr "Ürün Kategorisi"
+
+#. module: altinkaya_sales
+#: model:ir.actions.act_window,name:altinkaya_sales.action_product_price_type
+msgid "Product Price Type"
+msgstr "Fiyat Türü"
+
+#. module: altinkaya_sales
+#: model:ir.ui.menu,name:altinkaya_sales.menu_product_price_type
+msgid "Product Price Types"
+msgstr "Fiyat Türleri"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_template
+msgid "Product Template"
+msgstr "Ürün Şablonu"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_template_attribute_line
+msgid "Product Template Attribute Line"
+msgstr "Ürün Şablon Nitelik Satırı"
+
+#. module: altinkaya_sales
+#: code:addons/altinkaya_sales/models/product_pricelist.py:200
+#, python-format
+msgid "Public Price"
+msgstr "Satış Fiyatı"
+
+#. module: altinkaya_sales
+#: model:ir.actions.act_window,name:altinkaya_sales.action_quotations_and_orders
+#: model:ir.ui.menu,name:altinkaya_sales.menu_sale_quotations_and_orders
+msgid "Quotations And Orders"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_sale_order
+msgid "Sale Order"
+msgstr "Satış Siparişi"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Satış Sipariş Satırı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
+msgid "Sales Price"
+msgstr "Satış Fiyatı"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_product
+msgid "Set product?"
+msgstr "Set Ürünü?"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_partner__z_tel_kampanya
+#: model:ir.model.fields,help:altinkaya_sales.field_res_users__z_tel_kampanya
+msgid "Seçili ise telefon kampanyalarında aranmayacak."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__show_custom_products
+msgid "Show Custom Products"
+msgstr "Özelleştirilebilir Ürünleri Göster"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Tags..."
+msgstr "Etiketler..."
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_v2_to_v12_views
+msgid "Tax Position"
+msgstr "Vergi Koşulu"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_tl_fiyat
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_tl_fiyat
+msgid "USD Fiyatı"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__use_in_pricing
+msgid "Use in pricing"
+msgstr "Fiyatlamada kullan"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_res_company__hash_code
+msgid "Used in comm with ext services"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_res_users
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_val_price_coef
+msgid "Value Price Multiplier"
+msgstr "N.Değeri Fiyat Çarpanı"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__name_variant
+msgid "Variant Name"
+msgstr "Varyant Adı"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergino
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergino
+msgid "Vergi No"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Warning on the Invoice"
+msgstr "Faturada Uyarı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Warning on the Picking"
+msgstr "Transferde Uyarı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Warning on the Purchase Order"
+msgstr "Satınalma Siparişinde Uyarı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
+msgid "Warning on the Sales Order"
+msgstr "Satış Siparişinde Uyarı"
+
+#. module: altinkaya_sales
+#: model_terms:ir.actions.act_window,help:altinkaya_sales.action_quotations_and_orders
+msgid "You can select all quotations and orders in batch,<br>\n"
+"                or check every order and quotation one by one."
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_iscilik_fiyat
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_iscilik_fiyat
+msgid "işçilik Fiyatı USD"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_product_pricelist_type
+msgid "product.pricelist.type"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_contact_name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_contact_name
+msgid "İlgili Kişi"
+msgstr ""
+
