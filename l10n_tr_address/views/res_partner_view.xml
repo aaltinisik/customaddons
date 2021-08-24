@@ -16,7 +16,7 @@
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                 <field name="street2" placeholder="Street 2..." class="o_address_street"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                        <field name="city" placeholder="City" string="City" style="width:150px;"/>
+                        <field name="city" placeholder="City" string="City" style="width:150px;" attrs="{'invisible': [('country_id', '=', 224)]}"/> <!-- hide if Turkey selected as country -->
                         <field name="region_id" placeholder="Region" nolabel="1" options="{'no_open': True}" style="width:120px;" class="oe_no_button"  context="{'district_id': district_id}"/>
                         <field name="district_id" placeholder="District" nolabel="1" options="{'no_open': True}" style="width:130px;" class="oe_no_button" context="{'state_id': state_id}"/>
                         <field name="zip" placeholder="ZIP" style="width:100px;" />
