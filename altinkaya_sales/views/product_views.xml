@@ -116,5 +116,25 @@
 			</field>
 		</record>
 
+		<!--Hide Multiple Fields From Product Variants List View-->
+		<record id="product_product_tree_hide_fields" model="ir.ui.view">
+			<field name="name">product.product.tree.hide.fields</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_product_tree_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//tree/field[@name='standard_price']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='virtual_available']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='incoming_qty']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='outgoing_qty']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
 	</data>
 </odoo>
