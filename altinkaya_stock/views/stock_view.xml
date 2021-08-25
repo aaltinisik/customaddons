@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <menuitem
+            name="Ürün Kategorileri"
+            action="product.product_category_action_form"
+            id="menu_product_category_on_stock"
+            parent="stock.menu_stock_inventory_control"
+            sequence="16" />
+
     <data>
 
         <record id="view_warehouse_inherit_altinkaya" model="ir.ui.view">

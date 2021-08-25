@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+	<menuitem action="product.product_category_action_form"
+			  name="Ürün Kategorileri"
+			  id="menu_product_category_on_mrp"
+			  parent="mrp.menu_mrp_bom"
+			  sequence="16"/>
 	<data>
 		<record id="mrp_bom_form_inherit_parameter" model="ir.ui.view">
 			<field name="inherit_id" ref="mrp.mrp_bom_form_view" />
