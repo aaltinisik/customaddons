@@ -39,12 +39,9 @@
             <xpath expr="/form/sheet/notebook/page[@name='general_information']" position="after">
             	<page name="Prices" string="Prices">
             		<group col="1">
-						<group string="Güncel Fiyatlar">
-		               		<field name="attr_price"/>
-			               	<field name="v_tl_fiyat"></field>
-		                    <field name="v_fiyat_dolar"></field>
-		               </group>
+
             			<group name="old_price" string="Old Prices">
+							<field name="v_tl_fiyat"></field>
 							<field name="v_guncel_fiyat"></field>
 							<field name="v_fiyat_euro"></field>
 							<field name="v_iscilik_fiyat"></field>
@@ -75,12 +72,19 @@
             
             </xpath>
 
-			<xpath expr="//field[@name='origin_country_id']" position="before">
+			<xpath expr="//field[@name='valuation']" position="before">
+				<field name="attr_price"/>
+				<field name="v_fiyat_dolar"></field>
 				<field name="v_cari_urun"></field>
             </xpath>
 
 			<xpath expr="//group[@name='old_price']" position="inside">
     			<xpath expr="//field[@name='lst_price']" position="move"/>
+			</xpath>
+
+			<xpath expr="//group[@name='properties']" position="before">
+    			<xpath expr="//group[2]/label[1]" position="move"/>
+				<xpath expr="//group[2]/div[1]" position="move"/>
 			</xpath>
 
            <!-- <xpath expr="//field[@name='description']" position="after">
