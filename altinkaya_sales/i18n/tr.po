@@ -352,7 +352,7 @@ msgstr "Altınkaya Ödeme URL'i"
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__attr_price
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__attr_price
 msgid "Attr. Value Price"
-msgstr "Nitlk Değ. Fiyatı"
+msgstr "Nitelik Değer Fiyatı"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_template_attribute_line__attr_val_price_coef
