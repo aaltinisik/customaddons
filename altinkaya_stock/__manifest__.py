@@ -17,6 +17,7 @@
         'views/delivery_carrier_views.xml',
         'wizard/wizard_create_procurement_move.xml',
         'wizard/wizard_make_mts_move.xml',
+        'views/stock_warehouse_orderpoint_view.xml',
     ],
     'installable' : True,
     'auto_install' : False,

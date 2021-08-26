@@ -11,7 +11,7 @@
             	<xpath expr="//form//sheet" position="inside">
                    <group>
                    
-                    <group string="Sales">
+                    <group name="sales" string="Sales">
                         <field name="sale_qty30days" />
                         <field name="sale_qty180days" />
                         <field name="sale_qty360days" />
