@@ -33,7 +33,7 @@
 	    </record>
 
         <record id="contacts.action_contacts" model="ir.actions.act_window">
-            <field name="domain">[('customer','=',True), ('parent_id', '=', False)]</field>
+            <field name="context">{'search_default_customer':1}</field>
         </record>
 
 </odoo>
