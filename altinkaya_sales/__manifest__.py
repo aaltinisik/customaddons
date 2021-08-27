@@ -19,26 +19,27 @@
 #
 ##############################################################################
 {
-    'name' : 'Altinkaya Sale Order Extensions',
-    'version' : '12.0',
+    'name': 'Altinkaya Sale Order Extensions',
+    'version': '12.0',
     'category': 'General',
-    'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax', 'altinkaya_roles', 'altinkaya_mrp'],
-    'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.',
+    'depends': ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax', 'altinkaya_roles', 'altinkaya_mrp'],
+    'author': 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı',
     'description': """
     Sales Order Customization
     """,
     'website': 'http://www.codequarters.com',
     'data': [
-             'security/ir.model.access.csv',
-             'views/sales_order_view.xml',
-             'views/res_partner_views.xml',
-             'views/product_views.xml',
-             'views/pricelist.xml',
-             "views/res_partner.xml",
-             "data/mail_data.xml"
-            ],
+        'security/ir.model.access.csv',
+        'views/sale_workflow_new_menus_actions.xml',
+        'views/sales_order_view.xml',
+        'views/res_partner_views.xml',
+        'views/product_views.xml',
+        'views/pricelist.xml',
+        "views/res_partner.xml",
+        "data/mail_data.xml"
+    ],
     'demo': [],
     'installable': True,
     'auto_install': False,
-    
+
 }

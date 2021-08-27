@@ -19,6 +19,7 @@
         'wizard/wizard_make_mts_move.xml',
         'views/stock_warehouse_orderpoint_view.xml',
         'views/mrp_production_view.xml',
+
     ],
     'installable' : True,
     'auto_install' : False,
