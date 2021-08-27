@@ -51,8 +51,8 @@ class MrpProduction(models.Model):
     procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
     product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
              readonly=True)
-    
-    
+
+
     @api.multi
     def _generate_moves(self):
         if self.env.context.get("context",{}).get("migration",False):

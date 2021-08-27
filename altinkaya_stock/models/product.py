@@ -118,9 +118,9 @@ class Product(models.Model):
             product.qty_available_maske = product.with_context({'location':114}).qty_available
             
             
-            
-    
-    
+
+
+
 
 
 class mrpProduction(models.Model):
