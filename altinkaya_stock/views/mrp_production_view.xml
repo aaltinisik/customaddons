@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_production_form_inherit_print_product_label" model="ir.ui.view">
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="name">mrp.production.form.inherit.label</field>
+            <field name="model">mrp.production</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="x_operator" position="after">
+                    <div colspan="2">
+                        <group col="2">
+                            <group class="oe_form">
+                                <field name="qty_available_sincan" string="Sincan"/>
+                                <field name="qty_available_merkez" string="Merkez"/>
+                                <field name="qty_available_enjek" string="Enjeksiyon"/>
+                                <field name="qty_available_montaj" string="Montaj"/>
+                            </group>
+
+                            <group class="oe_form">
+                                <field name="qty_available_cnc" string="CNC"/>
+                                <field name="qty_available_metal" string="Metal"/>
+                                <field name="qty_available_boya" string="Boya"/>
+                            </group>
+                        </group>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
