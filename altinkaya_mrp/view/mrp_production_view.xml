@@ -36,26 +36,6 @@
                 <xpath expr="//field[@name='routing_id']" position="after">
                     <field name="x_note"/>
                 </xpath>
-                <field name="x_operator" position="after">
-                    <div colspan="2">
-                        <group col="2">
-                            <group class="oe_right oe_form" col="2">
-                                <field name="qty_available_sincan" string="Sincan"/>
-                                <field name="qty_available_merkez" string="Merkez"/>
-                                <field name="qty_available_enjek" string="Enjeksiyon"/>
-                                <field name="qty_available_montaj" string="Montaj"/>
-                            </group>
-
-                            <group class="oe_right oe_form" col="2">
-                                <field name="qty_available_cnc" string="CNC"/>
-                                <field name="qty_available_metal" string="Metal"/>
-                                <field name="qty_available_boya" string="Boya"/>
-                            </group>
-
-
-                        </group>
-                    </div>
-                </field>
             </field>
         </record>
 

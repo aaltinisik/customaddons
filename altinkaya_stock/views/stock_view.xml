@@ -8,6 +8,7 @@
             parent="stock.menu_stock_inventory_control"
             sequence="16"/>
 
+
     <data>
 
         <record id="view_warehouse_inherit_altinkaya" model="ir.ui.view">
