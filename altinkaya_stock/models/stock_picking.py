@@ -68,7 +68,7 @@ class StockPicking(models.Model):
                                      u'Siparişi Hazırlayan',readonly=True )
     comment_irsaliye = fields.Text('İrsaliye Notu')
     hazirlayan = fields.Many2one('hr.employee', 'Sevki Hazırlayan')
-    teslim_alan = fields.Char('Malı Teslim Alan Ad Soyad', size=32)
+    teslim_alan = fields.Char('Malı Teslim Alan', size=32)
     teslimat_ucreti = fields.Float('Teslimat Ücreti')
     desi = fields.Float('Desi')
     koli_adedi = fields.Integer('Koli Adedi')    
