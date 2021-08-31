@@ -775,3 +775,10 @@ msgstr ""
 msgid "İlgili kişi"
 msgstr ""
 
+#. module: altinkaya_sales
+#. openerp-web
+#: code:addons/sale/static/src/js/product_configurator_controller.js:129
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+#, python-format
+msgid "Confirm"
+msgstr ""
