@@ -782,3 +782,10 @@ msgstr ""
 #, python-format
 msgid "Confirm"
 msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:product.field_product_product__default_code
+#: model:ir.model.fields,field_description:product.field_product_template__default_code
+#: model:ir.model.fields,field_description:stock.field_stock_production_lot__ref
+msgid "Internal Reference"
+msgstr ""
