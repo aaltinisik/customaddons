@@ -433,7 +433,7 @@ msgstr "Oluşturulma"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_category__custom_products
 msgid "Custom Products"
-msgstr "Özelleştirilebir Ürünler"
+msgstr "Özel Ürünler"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__default_procurement_wh_id
@@ -733,7 +733,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__show_custom_products
 msgid "Show Custom Products"
-msgstr "Özelleştirilebilir Ürünleri Göster"
+msgstr "Özel Ürünler"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya

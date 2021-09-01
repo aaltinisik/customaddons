@@ -49,11 +49,12 @@
 				</xpath>
 				<!-- <xpath expr="//field[@name='payment_term']"
 						position='replace' /> -->
-				<xpath
-					expr="//field[@name='order_line']/form//field[@name='product_id']"
-					position="before">
+				<xpath expr="//field[@name='order_line']/form//div[@name='product_tmpl_ids']"
+					position="after">
+					<label for="show_custom_products"/>
+					<div>
 					<field name="show_custom_products" />
-
+					</div>
 				</xpath>
 
 				<xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
