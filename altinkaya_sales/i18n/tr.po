@@ -362,7 +362,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_base_price
 msgid "Base Price"
-msgstr "Temel Ücret"
+msgstr "Fiyat Bazı"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_pricelist_item__base
