@@ -804,3 +804,8 @@ msgstr ""
 #: selection:sale.order,state:0
 msgid "Locked"
 msgstr ""
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+msgid "Unlock"
+msgstr ""
