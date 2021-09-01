@@ -859,3 +859,8 @@ msgstr "Ürün Kodu"
 #: model_terms:ir.ui.view,arch_db:product_harmonized_system.hs_code_view_form
 msgid "H.S. Code"
 msgstr "GTİP"
+
+#. module: sale
+#: selection:sale.order,state:0
+msgid "Locked"
+msgstr "Yapıldı"
