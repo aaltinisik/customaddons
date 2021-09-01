@@ -759,7 +759,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__use_in_pricing
 msgid "Use in pricing"
-msgstr "Fiyatlamada kullan"
+msgstr "Fiyatta"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_company__hash_code
