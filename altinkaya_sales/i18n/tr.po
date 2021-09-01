@@ -774,7 +774,7 @@ msgstr "Kullanıcılar"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_val_price_coef
 msgid "Value Price Multiplier"
-msgstr "N.Değeri Fiyat Çarpanı"
+msgstr "Fiyat Çarpanı"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__name_variant
