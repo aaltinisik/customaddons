@@ -239,3 +239,9 @@ msgstr "Ürün Şablonları"
 #: model:ir.ui.menu,name:stock.product_product_menu
 msgid "Product Variants"
 msgstr "Ürünler"
+
+#. module: altinkaya_stock
+#: model_terms:ir.ui.view,arch_db:product.product_template_kanban_view
+#: model_terms:ir.ui.view,arch_db:product.product_template_only_form_view
+msgid "Variants"
+msgstr "Çeşitler"
