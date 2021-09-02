@@ -230,3 +230,12 @@ msgstr ""
 msgid "İthal Eksik"
 msgstr ""
 
+#. module: altinkaya_stock
+#: model:ir.ui.menu,name:stock.menu_product_variant_config_stock
+msgid "Products"
+msgstr "Ürün Şablonları"
+
+#. module: altinkaya_stock
+#: model:ir.ui.menu,name:stock.product_product_menu
+msgid "Product Variants"
+msgstr "Ürünler"
