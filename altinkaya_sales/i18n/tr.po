@@ -869,3 +869,8 @@ msgstr "Yapıldı"
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Unlock"
 msgstr "Siparişi İptal Et"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sale.field_sale_report__weight
+msgid "Gross Weight"
+msgstr "Bürüt Ağırlık"
