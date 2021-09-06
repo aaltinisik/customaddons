@@ -268,3 +268,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase.field_purchase_report__weight
 msgid "Gross Weight"
 msgstr ""
+
+#. module: altinkaya_stock
+#: model:ir.model.fields,field_description:stock.field_stock_move__backorder_id
+#: model:ir.model.fields,field_description:stock.field_stock_picking__backorder_id
+msgid "Back Order of"
+msgstr ""
