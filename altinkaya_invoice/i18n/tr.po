@@ -242,7 +242,7 @@ msgstr "Teslim Alan"
 #. module: altinkaya_invoice
 #: model:ir.ui.menu,name:altinkaya_invoice.menu_wizard_partner_reconcile_close
 msgid "Reconcile Close"
-msgstr "Reconcile Kapama"
+msgstr "Uzlaşmayı Kapama"
 
 #. module: altinkaya_invoice
 #: model:ir.actions.act_window,name:altinkaya_invoice.action_partner_reconcile_close
