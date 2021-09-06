@@ -873,4 +873,5 @@ msgstr "Siparişi İptal Et"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:sale.field_sale_report__weight
 msgid "Gross Weight"
+<<<<<<< HEAD
 msgstr "Brüt Ağırlık"
