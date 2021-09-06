@@ -814,3 +814,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale.field_sale_report__weight
 msgid "Gross Weight"
 msgstr ""
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "Free sign up"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "On invitation"
+msgstr ""
