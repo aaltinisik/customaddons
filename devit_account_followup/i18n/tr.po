@@ -371,7 +371,7 @@ msgstr "Ödenecek Tutar"
 #. module: devit_account_followup
 #: model:ir.model.fields,field_description:devit_account_followup.field_res_partner__payment_amount_overdue
 msgid "Amount Overdue"
-msgstr ""
+msgstr "Geciken Tutar"
 
 #. module: devit_account_followup
 #: code:addons/devit_account_followup/models/account_followup.py:337
