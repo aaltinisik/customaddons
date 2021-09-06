@@ -263,3 +263,8 @@ msgstr "Otomatik olarak oluştur"
 #: model_terms:ir.ui.view,arch_db:stock.product_template_form_view_procurement_button
 msgid "Product Moves"
 msgstr "Ürün Hareketleri"
+
+#. module: altinkaya_stock
+#: model:ir.model.fields,field_description:purchase.field_purchase_report__weight
+msgid "Gross Weight"
+msgstr "Brüt Ağırlık"
