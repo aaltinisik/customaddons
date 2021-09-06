@@ -826,3 +826,8 @@ msgstr ""
 #: selection:website,auth_signup_uninvited:0
 msgid "On invitation"
 msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sales_team.field_crm_team__team_type
+msgid "Team Type"
+msgstr ""
