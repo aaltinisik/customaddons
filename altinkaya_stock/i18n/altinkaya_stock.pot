@@ -255,3 +255,11 @@ msgstr "Tedarikler"
 #: selection:product.template,no_create_variants:0
 msgid "Use Odoo's default variant management"
 msgstr ""
+
+#. module: altinkaya_stock
+#: model:ir.actions.act_window,name:stock.stock_move_line_action
+#: model:ir.ui.menu,name:stock.stock_move_line_menu
+#: model_terms:ir.ui.view,arch_db:stock.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock.product_template_form_view_procurement_button
+msgid "Product Moves"
+msgstr ""
