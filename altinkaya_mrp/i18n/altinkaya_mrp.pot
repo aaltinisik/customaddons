@@ -289,3 +289,8 @@ msgstr ""
 #: selection:mrp.bom,type:0
 msgid "Manufacture this product"
 msgstr ""
+
+#. module: altinkaya_mrp
+#: model_terms:ir.ui.view,arch_db:mrp.oee_loss_tree_view
+msgid "Blocking Reasons"
+msgstr ""
