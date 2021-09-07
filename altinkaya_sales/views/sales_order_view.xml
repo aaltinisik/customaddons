@@ -70,24 +70,26 @@
 				</xpath>
 
 				<xpath
-					expr="/form/sheet/group/group//field[@name='payment_mode_id']"
-					position="after">
+					expr="/form/sheet/group/group//field[@name='pricelist_id']"
+					position="before">
 					<field name="create_uid" readonly="1" />
 				</xpath>
 
 				<xpath
-					expr="/form/sheet/group/group//field[@name='payment_mode_id']"
+					expr="/form/sheet/group/group//field[@name='pricelist_id']"
 					position="before">
 					<field name="source_id" can_create="true" can_write="true" modifiers="{}"/>
 				</xpath>
+
 				<xpath
 					expr="/form/sheet/group/group//field[@name='source_id']"
 					position="attributes">
 					<attribute name="string">Kaynak</attribute>
 				</xpath>
-				<!-- <xpath expr="/form/sheet/group/group//field[@name='payment_term_id']" 
-					position="replace"/> <xpath expr="//field[@name='partner_shipping_id']" position="after"> 
-					<field name="payment_term_id"/> </xpath> -->
+
+				<xpath expr="/form/sheet/group/group//field[@name='payment_term_id']"
+					position="replace"/> <xpath expr="//field[@name='partner_shipping_id']" position="after">
+					<field name="payment_term_id"/> </xpath>
 
 
 			</field>
