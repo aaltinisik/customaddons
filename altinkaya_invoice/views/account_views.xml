@@ -149,6 +149,28 @@
              </field>
 		
 </record>
+<record id="altinkaya_invoice_form_hide_fields" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="priority" eval="17"/>
+            <field name="name">altinkaya.invoice.form.hide.fields</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/h1" position="replace">
+                    <h1 class="mt0">
+                        <div>
+                            <field name="number"
+                                   placeholder="Leave blank for new number!" class="oe_inline"
+                                   attrs="{'readonly': [('state','not in',('draft',))]}"/>
+                        </div>
+                    </h1>
+                </xpath>
 
+                <xpath expr="//page[@name='other_info']/group/group/field[@name='name']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
 </data>
 </odoo>
