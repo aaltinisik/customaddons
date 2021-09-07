@@ -433,7 +433,7 @@ msgstr "Oluşturulma"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_category__custom_products
 msgid "Custom Products"
-msgstr "Özelleştirilebir Ürünler"
+msgstr "Özel Ürünler"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__default_procurement_wh_id
@@ -733,7 +733,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__show_custom_products
 msgid "Show Custom Products"
-msgstr "Özelleştirilebilir Ürünleri Göster"
+msgstr "Özel Ürünler"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
@@ -869,3 +869,25 @@ msgstr "Yapıldı"
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Unlock"
 msgstr "Siparişi İptal Et"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sale.field_sale_report__weight
+msgid "Gross Weight"
+msgstr "Brüt Ağırlık"
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "Free sign up"
+msgstr "Ücretsiz kaydolma"
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "On invitation"
+msgstr "Davetiye ile"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sales_team.field_crm_team__team_type
+msgid "Team Type"
+msgstr "Ekip Türü"

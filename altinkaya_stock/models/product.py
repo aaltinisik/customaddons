@@ -47,17 +47,16 @@ class Product(models.Model):
     qty_virtual_merkez = fields.Float('Merkez Depo Tahmini',compute='_compute_custom_available')
 
 
-    active_bom =  fields.Many2one('mrp.bom', string='Active Bom',
-        compute='_find_active_bom', readonly=True, store=False)
-
-    routing_id = fields.Many2one('mrp.routing', string='Rota',
-        related='active_bom.routing_id',readonly=True)
-
-    @api.one
-    def _find_active_bom(self):
-        return #TODO migrationu engellemesin diye
-        # self.active_bom = self.pool.get('mrp.bom')._bom_find(self._cr, self._uid, product_id=self.id,
-        #                                                      product_tmpl_id=self.product_tmpl_id.id)
+    # active_bom =  fields.Many2one('mrp.bom', string='Active Bom',
+    #     compute='_find_active_bom', readonly=True, store=False)
+    #
+    # routing_id = fields.Many2one('mrp.routing', string='Rota',
+    #     related='active_bom.routing_id',readonly=True)
+    #
+    # @api.one
+    # def _find_active_bom(self):
+    #     self.active_bom = self.pool.get('mrp.bom')._bom_find(self._cr, self._uid, product_id=self.id,
+    #                                                          product_tmpl_id=self.product_tmpl_id.id)
 
     
 #    type_variant = fields.Selection([('product','Stockable Product'),('consu','Consumable'),('service','Service')], string="Product Type", default=False,store=True)

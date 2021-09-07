@@ -809,3 +809,25 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Unlock"
 msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sale.field_sale_report__weight
+msgid "Gross Weight"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "Free sign up"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "On invitation"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sales_team.field_crm_team__team_type
+msgid "Team Type"
+msgstr ""

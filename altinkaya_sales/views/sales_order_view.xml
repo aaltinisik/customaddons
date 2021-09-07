@@ -49,11 +49,12 @@
 				</xpath>
 				<!-- <xpath expr="//field[@name='payment_term']"
 						position='replace' /> -->
-				<xpath
-					expr="//field[@name='order_line']/form//field[@name='product_id']"
-					position="before">
+				<xpath expr="//field[@name='order_line']/form//div[@name='product_tmpl_ids']"
+					position="after">
+					<label for="show_custom_products"/>
+					<div>
 					<field name="show_custom_products" />
-
+					</div>
 				</xpath>
 
 				<xpath expr="//field[@name='order_line']/form//field[@name='product_id']" position="after">
@@ -69,24 +70,26 @@
 				</xpath>
 
 				<xpath
-					expr="/form/sheet/group/group//field[@name='payment_mode_id']"
-					position="after">
+					expr="/form/sheet/group/group//field[@name='pricelist_id']"
+					position="before">
 					<field name="create_uid" readonly="1" />
 				</xpath>
 
 				<xpath
-					expr="/form/sheet/group/group//field[@name='payment_mode_id']"
+					expr="/form/sheet/group/group//field[@name='pricelist_id']"
 					position="before">
 					<field name="source_id" can_create="true" can_write="true" modifiers="{}"/>
 				</xpath>
+
 				<xpath
 					expr="/form/sheet/group/group//field[@name='source_id']"
 					position="attributes">
 					<attribute name="string">Kaynak</attribute>
 				</xpath>
-				<!-- <xpath expr="/form/sheet/group/group//field[@name='payment_term_id']" 
-					position="replace"/> <xpath expr="//field[@name='partner_shipping_id']" position="after"> 
-					<field name="payment_term_id"/> </xpath> -->
+
+				<xpath expr="/form/sheet/group/group//field[@name='payment_term_id']"
+					position="replace"/> <xpath expr="//field[@name='partner_shipping_id']" position="after">
+					<field name="payment_term_id"/> </xpath>
 
 
 			</field>
@@ -177,7 +180,19 @@
             </field>
         </record>
 
-
-
+		<!--Hide Fields in Sale Order Tree View-->
+		<record id="sale_order_tree_hide_fields" model="ir.ui.view">
+			<field name="name">sale.order.tree.hide.fields</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+			<field name="arch" type="xml">
+				<xpath expr="//tree/field[@name='commitment_date']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='expected_date']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
 	</data>
 </odoo>

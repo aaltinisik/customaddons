@@ -255,3 +255,22 @@ msgstr "Tedarikler"
 #: selection:product.template,no_create_variants:0
 msgid "Use Odoo's default variant management"
 msgstr "Otomatik olarak oluştur"
+
+#. module: altinkaya_stock
+#: model:ir.actions.act_window,name:stock.stock_move_line_action
+#: model:ir.ui.menu,name:stock.stock_move_line_menu
+#: model_terms:ir.ui.view,arch_db:stock.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock.product_template_form_view_procurement_button
+msgid "Product Moves"
+msgstr "Ürün Hareketleri"
+
+#. module: altinkaya_stock
+#: model:ir.model.fields,field_description:purchase.field_purchase_report__weight
+msgid "Gross Weight"
+msgstr "Brüt Ağırlık"
+
+#. module: altinkaya_stock
+#: model:ir.model.fields,field_description:stock.field_stock_move__backorder_id
+#: model:ir.model.fields,field_description:stock.field_stock_picking__backorder_id
+msgid "Back Order of"
+msgstr "Ön Teslimat"
