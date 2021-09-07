@@ -2,7 +2,7 @@
     'name': 'Altinkaya Stock',
     'version': '12.0',
     'website': 'https://www.altinkaya.com.tr',
-    'author':'Ahmet Altınışık,OnurUgur,Codequarters',
+    'author':'Ahmet Altınışık,OnurUgur,Codequarters,Yavuz Avcı',
     'category': 'Stock',
     'summary': 'add specialized stock extensions',
     'description': """

@@ -362,7 +362,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_base_price
 msgid "Base Price"
-msgstr "Temel Ücret"
+msgstr "Fiyat Bazı"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_pricelist_item__base
@@ -759,7 +759,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__use_in_pricing
 msgid "Use in pricing"
-msgstr "Fiyatlamada kullan"
+msgstr "Fiyatta"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_company__hash_code
@@ -774,7 +774,7 @@ msgstr "Kullanıcılar"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template_attribute_line__attr_val_price_coef
 msgid "Value Price Multiplier"
-msgstr "N.Değeri Fiyat Çarpanı"
+msgstr "Fiyat Çarpanı"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__name_variant
@@ -835,3 +835,59 @@ msgstr ""
 msgid "İlgili kişi"
 msgstr ""
 
+#. module: altinkaya_sales
+#. openerp-web
+#: code:addons/sale/static/src/js/product_configurator_controller.js:129
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+#, python-format
+msgid "Confirm"
+msgstr "Onayla"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:product.field_product_product__default_code
+#: model:ir.model.fields,field_description:product.field_product_template__default_code
+#: model:ir.model.fields,field_description:stock.field_stock_production_lot__ref
+msgid "Internal Reference"
+msgstr "Ürün Kodu"
+
+#. module: altinkaya_sales
+#: model:ir.model,name:product_harmonized_system.model_hs_code
+#: model:ir.model.fields,field_description:product_harmonized_system.field_hs_code__hs_code
+#: model:ir.model.fields,field_description:product_harmonized_system.field_product_category__hs_code_id
+#: model:ir.model.fields,field_description:product_harmonized_system.field_product_product__hs_code_id
+#: model:ir.model.fields,field_description:product_harmonized_system.field_product_template__hs_code_id
+#: model_terms:ir.ui.view,arch_db:product_harmonized_system.hs_code_view_form
+msgid "H.S. Code"
+msgstr "GTİP"
+
+#. module: sale
+#: selection:sale.order,state:0
+msgid "Locked"
+msgstr "Yapıldı"
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+msgid "Unlock"
+msgstr "Siparişi İptal Et"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sale.field_sale_report__weight
+msgid "Gross Weight"
+msgstr "Brüt Ağırlık"
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "Free sign up"
+msgstr "Ücretsiz kaydolma"
+
+#. module: altinkaya_sales
+#: selection:res.config.settings,auth_signup_uninvited:0
+#: selection:website,auth_signup_uninvited:0
+msgid "On invitation"
+msgstr "Davetiye ile"
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:sales_team.field_crm_team__team_type
+msgid "Team Type"
+msgstr "Ekip Türü"

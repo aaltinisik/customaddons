@@ -232,7 +232,7 @@ msgstr "Ödemeler"
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_delivery
 #: model_terms:ir.ui.view,arch_db:altinkaya_invoice.invoice_altinkaya_inherit_supplier_from
 msgid "Pickings"
-msgstr "Transfer Listeleri"
+msgstr "İrsaliyeler"
 
 #. module: altinkaya_invoice
 #: model:ir.model.fields,field_description:altinkaya_invoice.field_account_invoice__receiver

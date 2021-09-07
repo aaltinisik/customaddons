@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Altınkaya Custom View Updates",
+    'name': "Altinkaya Base & Custom View Updates",
     'summary': """
-        Includes inherited base views.
+        Includes base module translations and inherited base views.
         """,
     'description': """        
     """,
