@@ -178,7 +178,19 @@
             </field>
         </record>
 
-
-
+		<!--Hide Fields in Sale Order Tree View-->
+		<record id="sale_order_tree_hide_fields" model="ir.ui.view">
+			<field name="name">sale.order.tree.hide.fields</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+			<field name="arch" type="xml">
+				<xpath expr="//tree/field[@name='commitment_date']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='expected_date']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
 	</data>
 </odoo>
