@@ -3,24 +3,24 @@
 from odoo import models, fields, api
 
 
-#TODO: @dogan bence bu verilerin workcentera tasinmasi gerek uzerinde olmasi gerekli. 
+#TODO: @dogan bence bu verilerin workcentera tasinmasi gerek uzerinde olmasi gerekli.
 class x_makine(models.Model):
     _name = 'x.makine'
     _description="X Makine"
-        
-        
+
+
     x_group = fields.Char(
-            'Bolum',
+            'Bölüm',
             size=128,
             )
     x_kod =  fields.Char(
             'Makine Kodu',
             size=128)
     x_name = fields.Char(
-            'Makine Adi',
+            'Makine Adı',
             size=128)
     name =  fields.Char(
-            'Makine Adi',
+            'Makine Numarası',
             size=128)
 
 class MrpProduction(models.Model):

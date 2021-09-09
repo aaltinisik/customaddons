@@ -4,7 +4,7 @@
     'version' : '12.0',
     'category': 'General',
     'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery','partner_fax','stock_invoice_picking'],
-    'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.',
+    'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı',
     'description': """
         * Provides Invoice Address
         * Provides Delivery Address

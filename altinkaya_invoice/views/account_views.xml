@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<data>
+    <data>
 
-	<record id="view_account_payment_form_altinkaya" model="ir.ui.view">
+        <record id="view_account_payment_form_altinkaya" model="ir.ui.view">
             <field name="name">account.payment.form</field>
             <field name="model">account.payment</field>
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
-            	<xpath expr="//field[@name='communication']" position="after">
-            		<field name="x_cek_no" readonly="1" />
-					<field name="x_cek_banka" readonly="1" />
-					<field name="date_due"  readonly="1"/>
-					<field name="x_cek_vergi" readonly="1" />
-            	</xpath>
+                <xpath expr="//field[@name='communication']" position="after">
+                    <field name="x_cek_no" readonly="1"/>
+                    <field name="x_cek_banka" readonly="1"/>
+                    <field name="date_due" readonly="1"/>
+                    <field name="x_cek_vergi" readonly="1"/>
+                </xpath>
             </field>
+
     </record>
 	
 	
@@ -32,7 +33,7 @@
   				</xpath>
   				<xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='account_id']" position="replace">
   				</xpath>
-  				
+
   				<xpath expr="/form/sheet/notebook/page[@name='other_info']//field[@name='payment_term_id']" position="after">
   					<field domain="[('partner_id', '=', commercial_partner_id)]" name="partner_bank_id" string="Bank Account" context="{'default_partner_id': commercial_partner_id}" attrs="{'invisible': [('type', '!=', 'in_invoice')]}"/>
   				</xpath>
@@ -78,10 +79,13 @@
 	<record id="invoice_altinkaya_inherit_delivery" model="ir.ui.view">
  			<field name="model">account.invoice</field>
  			<field name="type">form</field>
+			<field name="priority" eval="71"/>
   			<field name="inherit_id" ref="account.invoice_form"/>
-  			<field name="priority" eval="17"/>
   			<field name="name">account.invoice.inherit_612</field>
              <field name="arch" type="xml">
+				<field name="partner_shipping_id" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            	</field>
                  <xpath expr="//field[@name='partner_id']" position="before">
                  <field name="carrier_id"/>
                  <field name="address_contact_id" string="Teslimat Adresi" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}" />
@@ -93,6 +97,14 @@
           	      <xpath expr="//field[@name='fiscal_position_id']" position="replace">
           	      </xpath>
           	      <xpath expr="//field[@name='total_balance']" position="replace">
+          	      </xpath>
+				 <xpath expr="//field[@name='incoterms_id']" position="after">
+					 	<xpath expr="//field[@name='team_id']" position="move">
+          	      		</xpath>
+          	      </xpath>
+				 <xpath expr="//group[@name='einvoice_info']" position="inside">
+					 	<xpath expr="//field[@name='issue_time']" position="move">
+          	      		</xpath>
           	      </xpath>
           	      <xpath expr="//field[@name='journal_id']" position="replace">
           	      </xpath>
@@ -137,6 +149,28 @@
              </field>
 		
 </record>
+<record id="altinkaya_invoice_form_hide_fields" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="priority" eval="17"/>
+            <field name="name">altinkaya.invoice.form.hide.fields</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/h1" position="replace">
+                    <h1 class="mt0">
+                        <div>
+                            <field name="number"
+                                   placeholder="Leave blank for new number!" class="oe_inline"
+                                   attrs="{'readonly': [('state','not in',('draft',))]}"/>
+                        </div>
+                    </h1>
+                </xpath>
 
+                <xpath expr="//page[@name='other_info']/group/group/field[@name='name']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
 </data>
 </odoo>

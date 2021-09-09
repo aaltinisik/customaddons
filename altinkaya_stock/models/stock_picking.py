@@ -26,14 +26,12 @@ class StockPicking(models.Model):
 
     @api.multi
     def open_sales_order(self):
-        return {
-            'res_id':self.sale_id.id,
-            'view_type':'form',
-            'view_mode':'form',
-            'res_model':'sale.order',
-            'type':'ir.actions.act_window',
-            'target':'current',
-        }
+        self.ensure_one()
+        action = self.env.ref('sale.action_orders').read()[0]
+        form = self.env.ref('sale.view_order_form')
+        action['views'] = [(form.id, 'form')]
+        action['res_id'] = self.sale_id.id
+        return action
 
 
     x_durum = fields.Selection(

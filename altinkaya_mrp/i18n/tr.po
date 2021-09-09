@@ -268,3 +268,29 @@ msgstr ""
 msgid "x.makine"
 msgstr ""
 
+#. module: altinkaya_mrp
+#: model:ir.actions.act_window,name:mrp.mrp_bom_form_action
+#: model:ir.ui.menu,name:mrp.menu_mrp_bom_form_action
+msgid "Bills of Materials"
+msgstr "Ürün Ağaçları"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,field_description:mrp.field_mrp_bom__type
+msgid "BoM Type"
+msgstr "Ürün Ağacı Türü"
+
+#. module: altinkaya_mrp
+#: model_terms:ir.ui.view,arch_db:mrp.view_mrp_bom_filter
+#: selection:mrp.bom,type:0
+msgid "Kit"
+msgstr "Set"
+
+#. module: altinkaya_mrp
+#: selection:mrp.bom,type:0
+msgid "Manufacture this product"
+msgstr "Normal"
+
+#. module: altinkaya_mrp
+#: model_terms:ir.ui.view,arch_db:mrp.oee_loss_tree_view
+msgid "Blocking Reasons"
+msgstr "Engellenme Sebepleri"
