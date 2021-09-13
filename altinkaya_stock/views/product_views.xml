@@ -36,6 +36,10 @@
                 <xpath expr="//button[@name='150']" position="attributes">
                     <attribute name="attrs">{'invisible':0}</attribute>
                 </xpath>
+                <xpath expr="//div[@name='options']" position='inside'>
+                    <xpath expr="//field[@name='categ_id']" position='move'>
+                    </xpath>
+                </xpath>
             </field>
         </record>
 
