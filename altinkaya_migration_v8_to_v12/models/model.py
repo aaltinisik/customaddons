@@ -10,7 +10,7 @@ from odoo import models,fields,api
 class MigrationMapping(models.AbstractModel):
     _name = "migration.mapping"
     
-    v8_id = fields.Integer(string="V8 ID",store=True)
+    v8_id = fields.Integer(string="V8 ID",store=True, readonly=True)
 
 
     
