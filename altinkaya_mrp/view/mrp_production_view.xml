@@ -30,6 +30,7 @@
                 </xpath>
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="sale_id" readonly="1"/>
+                    <field name="procurement_group_id"/>
                     <field name="x_makine"/>
                     <field name="x_operator"/>
                 </xpath>
@@ -37,6 +38,17 @@
                     <field name="x_note"/>
                 </xpath>
             </field>
+        </record>
+
+        <record id="mrp_production_tree_view_priority" model="ir.ui.view">
+        <field name="name">MRP Production Tree View Priorityr</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="date_planned_start" position="after">
+                <field name="priority"/>
+            </field>
+        </field>
         </record>
 
         <record id="mrp_enjek_menu" model="ir.actions.act_window">
