@@ -106,7 +106,7 @@ msgstr "Cari Borç/Alacak Dökümü"
 #. module: partner_payment_detail
 #: model:ir.ui.menu,name:partner_payment_detail.menu_payment_detail
 msgid "Partner Payment detail"
-msgstr "İş Ortağı Ödemi Detayı"
+msgstr "İş Ortağı Ödeme Detayı"
 
 #. module: partner_payment_detail
 #: model_terms:ir.ui.view,arch_db:partner_payment_detail.wizard_partner_detail_form
