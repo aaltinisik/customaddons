@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="view_replenish_priority" model="ir.ui.view">
+            <field name="name">Product Replenish Priority</field>
+            <field name="model">product.replenish</field>
+            <field name="inherit_id" ref="stock.view_product_replenish"/>
+            <field name="arch" type="xml">
+                <field name="date_planned" position="after">
+                    <field name="priority"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
