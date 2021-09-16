@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_split_picking_line_window" model="ir.ui.view">
+        <field name="model">split.stock.move.picking</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="move_id" invisible="1"/>
+                    <field name="product_id"/>
+                    <field name="requested_qty"/>
+                    <field name="uom"/>
+                    <field name="qty" class="oe_inline"/>
+                    <field name="after_split_qty"/>
+
+                </group>
+                <footer>
+                    <button name="action_split" class="btn btn-primary" string="Böl" type="object"/>
+                    or
+                    <button special="cancel" class="btn btn-secondary" string="İptal"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+            id="action_stock_split_picking_line"
+            res_model="split.stock.move.picking"
+            src_model="stock.picking"
+            target="new"
+            name="Satırı Böl"
+            view_id="view_stock_split_picking_line_window"
+            context="{'default_move_id': active_id}"
+            domain="[('move_id','=', active_id)]"
+    />
+
+</odoo>

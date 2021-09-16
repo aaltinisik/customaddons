@@ -18,4 +18,4 @@ class ProcurementGroup(models.Model):
             getattr(rule, '_run_%s' % action)(product_id, product_qty, product_uom, location_id, name, origin, values)
         else:
             _logger.error("The method _run_%s doesn't exist on the procument rules" % action)
-        return True
+        return
