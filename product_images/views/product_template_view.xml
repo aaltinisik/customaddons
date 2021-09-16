@@ -24,10 +24,10 @@
 	                                     <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
 	                                 </div>-->
 									 <div t-if="record.mimetype.value != 'image/png'">
-										 <img t-att-src="'/product_images/static/description/icon.png'"></img>
+										 <img t-att-alt="Icon" t-att-src="'/product_images/static/description/icon.png'"></img>
 									 </div>
 	                                 <div t-if="record.mimetype.value == 'image/png'">
-	                                     <img t-att-src="kanban_image('ir.attachment', 'datas', record.id.value)"/>
+	                                     <img class="o_kanban_image" t-att-alt="record.id.value" t-att-src="kanban_image('ir.attachment', 'datas', record.id.raw_value)"/>
 	                                 </div>
 
 	                             </div>
@@ -93,7 +93,7 @@
                 	<field name="image_tmpl_ids" nolabel="1" mode="kanban" readonly="1"/>
                     <field name="altinkaya_image_variant_ids" nolabel="1" mode="kanban" 
                     	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}">
-		                
+
 		                <form>
 		                	<sheet>
 		                		<label for="name"></label>
