@@ -54,12 +54,4 @@ class MakeMtsMove(models.TransientModel):
         self.move_id.move_orig_ids = False
         self.move_id._action_confirm()
         self.move_id._action_assign()
-        
-        # if order_state != 'shipping_except' and sale_order.state == 'shipping_except':
-        #     sale_order.state = order_state
-
-        # if invoice_state != self.move_id.invoice_state:
-        #     self.move_id.invoice_state = invoice_state
-                
-        return {}
 
