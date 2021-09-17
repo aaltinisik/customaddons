@@ -28,7 +28,10 @@ class MrpProduction(models.Model):
     #group_id = fields.Many2one('procurement.group',string='Producrement Group', related='move_prod_id.group_id')
     mo_printed = fields.Boolean('Manufacting Order Printed', default=False)
     sale_id = fields.Many2one('sale.order',string="Sale Order")
-    
+    order_line = fields.One2many('sale.order.line', compute='_compute_line_ids', readonly=True)
+
+    def _compute_line_ids(self):
+        self.order_line = self.sale_id.order_line
     date_planned = fields.Datetime('Scheduled Date')
     date_start2 = fields.Datetime('Start Date')
     date_finished2 = fields.Datetime('End Date')
