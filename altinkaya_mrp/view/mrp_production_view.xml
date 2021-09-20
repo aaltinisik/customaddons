@@ -7,6 +7,9 @@
             <field name="model">mrp.production</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_unreserve']" position="after">
+                    <button name="button_print_prod_order" string="Print Production Order" type="object"/>
+                </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <button class="oe_inline oe_stat_button" name="action_print_product_label" type="object"
                             icon="fa-barcode" string="Print Barcode"/>

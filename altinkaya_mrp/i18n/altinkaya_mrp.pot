@@ -294,3 +294,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mrp.oee_loss_tree_view
 msgid "Blocking Reasons"
 msgstr ""
+
+#. module: altinkaya_mrp
+#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_production_form_inherit_print_product_label
+msgid "Print Production Order"
+msgstr ""
