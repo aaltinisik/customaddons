@@ -50,13 +50,10 @@ class CreateProcurementMove(models.TransientModel):
     product_id = fields.Many2one('product.product',string='Product', related='move_id.product_id', readonly=True)
     
     move_qty = fields.Float('Demand Quantity', related='move_id.product_uom_qty', readonly=True)
-    procure_move = fields.Boolean('Tedarik bu harekete mi oluşturulsun',default=True)
+    procure_move = fields.Boolean('Harekete Tedarik Oluştur',default=True)
     uom = fields.Many2one('uom.uom', string='UoM', related='move_id.product_uom', readonly=True)
 
     # procurement_qty_ids = fields.One2many('create.procurement.move.location', 'wizard_id', string='Quantities')
-
-    priority = fields.Selection([('0', 'Acil Değil'), ('1', 'Normal'), ('2', 'Acil'), ('3', 'Çok Acil')],
-                                'Öncelik', default='1')
 
     qty_to_sincan = fields.Float('Tedarik')
     qty_to_merkez = fields.Float('Tedarik')
@@ -106,27 +103,35 @@ class CreateProcurementMove(models.TransientModel):
     @api.multi
     def action_create(self):
         self.ensure_one()
+        if self.procure_move:
+            if self.move_id.warehouse_id.id == 1:
+                self.create_procurement_merkez(
+                    group_id=self.move_id.group_id,
+                    qty=self.move_id.product_uom_qty
+                )
+            elif self.move_id.warehouse_id.id == 2:
+                self.create_procurement_sincan(
+                    group_id=self.move_id.group_id,
+                    qty=self.move_id.product_uom_qty
+                )
+            self.move_id._do_unreserve()
+            self.move_id.procure_method = 'make_to_order'
+            self.move_id.write({'state': 'waiting'})
         if self.qty_to_sincan or self.qty_to_merkez:
-            if self.procure_move:
-                self.move_id._do_unreserve()
-                self.move_id.procure_method = 'make_to_order'
-                self.move_id.write({'state': 'waiting'})
-
             if self.qty_to_sincan > 0.0:
                 self.create_procurement_sincan()
             if self.qty_to_merkez > 0.0:
                 self.create_procurement_merkez()
-        else:
-            raise UserError(_(
-                "Tedarik icin miktar belirtmediniz."))
+
 
     @api.multi
-    def create_procurement_sincan(self):
+    def create_procurement_sincan(self, group_id=None, qty=None):
         self.ensure_one()
         warehouse = self.env['stock.warehouse'].search([('id', '=', 2)])
-        group_id = self.env["procurement.group"].create({
-            'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
-        })
+        if not group_id:
+            group_id = self.env["procurement.group"].create({
+                'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
+            })
         values = {
             'company_id': warehouse.company_id,
             'date_planned': self.move_id.date_expected,
@@ -135,22 +140,22 @@ class CreateProcurementMove(models.TransientModel):
             'route_ids': self.move_id.product_id.route_ids,
             'warehouse_id': warehouse,
         }
-        product_qty = self.qty_to_sincan
+        product_qty = qty if qty else self.qty_to_sincan
         product_uom = self.uom
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        priorty = self.priority if self.priority else 1
         self.env['procurement.group']._run(
-            product, product_qty, product_uom, location, "/", origin, values, priorty)
+            product, product_qty, product_uom, location, "/", origin, values)
 
     @api.multi
-    def create_procurement_merkez(self):
+    def create_procurement_merkez(self, group_id=None, qty=None):
         self.ensure_one()
         warehouse = self.env['stock.warehouse'].search([('id', '=', 1)])
-        group_id = self.env["procurement.group"].create({
-            'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
-        })
+        if not group_id:
+            group_id = self.env["procurement.group"].create({
+                'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
+            })
         values = {
             'company_id': warehouse.company_id,
             'date_planned': self.move_id.date_expected,
@@ -159,11 +164,10 @@ class CreateProcurementMove(models.TransientModel):
             'route_ids': self.move_id.product_id.route_ids,
             'warehouse_id': warehouse,
         }
-        product_qty = self.qty_to_merkez
+        product_qty = qty if qty else self.qty_to_merkez
         product_uom = self.uom
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        priorty = self.priority if self.priority else 1
-        self.env['procurement.group']._run(
-            product, product_qty, product_uom, location, "/", origin, values, priorty)
+        self.env['procurement.group'].run(
+            product, product_qty, product_uom, location, "/", origin, values)
