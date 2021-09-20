@@ -16,7 +16,6 @@
             				<field name="uom" class="oe_inline"/>
             			</div>
 						<field name="procure_move"/>
-						<field name="priority" class="oe_inline"/>
             		</group>
 					<group string="Satışlar">
 							<field name="sale_qty30days" />
