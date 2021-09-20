@@ -7,11 +7,6 @@
             <field name="model">mrp.production</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <xpath expr="//notebook" position="inside">
-                    <page name="sale_order_lines" string="Sipariş Kalemleri">
-                            <field name="order_line" mode="tree"/>
-                    </page>
-                </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <button class="oe_inline oe_stat_button" name="action_print_product_label" type="object"
                             icon="fa-barcode" string="Print Barcode"/>
