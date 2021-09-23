@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
+<odoo>
 <data>
 
 
@@ -20,13 +20,8 @@
 	                        <div class="oe_kanban_vignette">
 	                        	<a type="open">
 	                             <div class="product_image">
-	                                 <!--<div t-if="record.file_type_icon.value != 'webimage'">
-	                                     <img t-att-src="'/mail/static/src/img/mimetypes/' + record.file_type_icon.value + '.png'"></img>
-	                                 </div>-->
-									 <div t-if="record.mimetype.value != 'image/png'">
-										 <img t-att-alt="Icon" t-att-src="'/product_images/static/description/icon.png'"></img>
-									 </div>
-	                                 <div t-if="record.mimetype.value == 'image/png'">
+
+	                                 <div t-if="record.mimetype">
 	                                     <img class="o_kanban_image" t-att-alt="record.id.value" t-att-src="kanban_image('ir.attachment', 'datas', record.id.raw_value)"/>
 	                                 </div>
 
@@ -118,4 +113,4 @@
     
 
 </data>
-</openerp>
+</odoo>
