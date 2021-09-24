@@ -3,8 +3,16 @@
 <template id="report_purchasequotation_document">
     <t t-call="web.basic_layout">
         <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+		<style>
+			.table-bordered thead th {
+				border: 1px solid black !important;
+			}
+			.table-bordered th, .table-bordered td {
+				border: 1px solid black !important;
+			}
+		</style>
         <div class="header">
-        	<div class="row" style="border:1px solid #dddddd">
+        	<div class="row" style="border:1px solid white">
         		<div class="col-5 align-middle" style="font-size:36pt;margin-top:50px;margin-left:50px;">
         			<h4>Request for Quotation</h4>
         		</div>
@@ -34,15 +42,15 @@
         <div class="page">
             <div class="oe_structure"/>
 			<div class="row">
-				<table class="table table-bordered">
+				<table class="table">
 				 <tbody>
-				 	<tr>
+				 	<tr style="border:solid white;">
 				 		<td colspan="3">
-				 			To:<strong t-field="o.partner_id.name"/>
+				 			To:&#160;<strong t-field="o.partner_id.name"/>&#160;
 				 			<span t-field="o.partner_id.email"/>
 				 		</td>
 				 	</tr>
-					<tr>
+					<tr style="border:solid white;">
 						<td style="width:500px">
 						   <span t-field="o.partner_id.commercial_partner_id.display_name"/>
 						</td>
@@ -53,7 +61,7 @@
 						  <span t-field="o.date_order" t-options=""/>
 						</td>
 					</tr>	
-					<tr>
+					<tr style="border:solid white;">
 						<td>
 						<span>
 						<span t-field="o.partner_id.neighbour_id"/>
@@ -72,7 +80,7 @@
 						</td>
 					
 					</tr>	
-					<tr t-if="o.partner_id.phone or o.partner_id.fax">
+					<tr style="border:solid white;" t-if="o.partner_id.phone or o.partner_id.fax">
 						<td colspan="3" >
 						<t t-if="o.partner_id.phone">
 						Phone:<span t-field="o.partner_id.phone"/></t><t t-if="o.partner_id.fax"> Fax:<span t-field="o.partner_id.fax"/></t>
@@ -89,7 +97,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                    	<th><strong>Code</strong></th>
                         <th><strong>Description of Goods</strong></th>
                         <th class="text-right"><strong>Quantity</strong></th>
                         <th class="text-right"><strong>UOM</strong></th>
@@ -99,22 +106,21 @@
                 </thead>
                 <tbody>
                     <tr t-foreach="o.order_line" t-as="order_line">
-                    	<td>
-                    		<span t-field="order_line.product_id.default_code"/>
-                    	</td>
                         <td>
-                            <span t-field="order_line.name"/>
+                            <span t-field="order_line.product_id.default_code"/>&#160;
+							<span t-field="order_line.name"/>
                         </td>
                         <td class="text-right">
                             <span t-field="order_line.product_qty"/>
-                            
                         </td>
                         <td>
                         	<span t-field="order_line.product_uom" groups="uom.group_uom"/>
                         </td>
                     	<td>
+                    		<span t-field="order_line.price_unit"/>
                     	</td>
                     	<td>
+                    		<span t-field="order_line.price_subtotal"/>
                     	</td>
                     </tr>
                 </tbody>
@@ -123,20 +129,26 @@
              <div class="clearfix">
                 <div id="total" class="row" name="total">
                     <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
-                        <table class="table table-bordered">
-                            <tr class="border-black o_subtotal" style="">
+                        <table class="table">
+                            <tr class="o_subtotal" style="border:solid white;">
                                 <td><strong>Subtotal</strong></td>
-                                <td style="width:140px" class="text-right">
+                                <td style="width:140px;border:solid white;" class="text-right">
+									<span t-field="o.amount_untaxed"
+										  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </td>
                             </tr>
-                            <tr class="border-black">
+                            <tr style="border:solid white;">
                                 <td><strong>Taxes</strong></td>
-                                <td style="width:140px" class="text-right">
+                                <td style="width:140px;border:solid white;" class="text-right">
+									<span t-field="o.amount_tax"
+										  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </td>
                             </tr>
-                            <tr class="border-black o_total">
+                            <tr style="border:solid white;">
                                 <td><strong>Total</strong></td>
-                                <td style="width:140px" class="text-right">
+                                <td style="width:140px border:solid white;" class="text-right">
+									<span t-field="o.amount_total"
+										  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </td>
                             </tr>
                         </table>
@@ -169,7 +181,7 @@
            				Seller
            		</td>
 			</tr>           	
-				<tr>
+				<tr style="height:150px;">
 				<td >
 					<span t-field="o.user_id.name">
 					</span>

@@ -19,7 +19,7 @@
 						<t
 							t-if="not (env.context.get('proforma', False) or is_pro_forma)">
 							<span t-if="doc.state in ['draft','sent']"
-								style="font-size:24pt">Quotation </span>
+								style="font-size:24pt;font-weight:bold;">QUOTATION </span>
 							<span t-if="doc.state not in ['draft','sent','cancel']"
 								style="font-size:24pt">Order </span>
 						</t>
@@ -663,7 +663,7 @@
 							</div>
 
 						</div>
-						<div class="row">
+						<div class="row" style="height:150px">
 							<div class="col-6 text-center"
 								style="border:1px solid black;">
 								ALTINKAYA Enclosures For Electronics
