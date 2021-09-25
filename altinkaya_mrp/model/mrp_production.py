@@ -168,7 +168,10 @@ class MrpProduction(models.Model):
 #         self.env.cr.commit()
 #         res2 = self.action_assign()
 #         return res
-    
+
+    @api.multi
+    def button_print_prod_order(self):
+        return self.env.ref('mrp.action_report_production_order').report_action(self)
     
     @api.multi
     def action_print_product_label(self):
