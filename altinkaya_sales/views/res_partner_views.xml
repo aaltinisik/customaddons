@@ -18,6 +18,7 @@
                     <field name="z_kat_postala"/>
                     <field name="z_kat_postalandi"/>
                     <field name="z_kat_email"/>
+                    <field name="z_receivable_export"/>
                 </xpath>
                 <!-- should place well onur -->
 

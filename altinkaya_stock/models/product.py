@@ -3,7 +3,31 @@ from odoo import models, fields, api, _
 
 
 class ProductTemplate(models.Model):
+    _inherit = 'product.category'
+
+    currency_id = fields.Many2one(
+        string='Currency', readonly=False, comodel_name='res.currency')
+
+class ProductTemplate(models.Model):
     _inherit = "product.template"
+
+    @api.multi
+    def _compute_currency_id(self):
+        main_company = self.env['res.company']._get_main_company()
+        for template in self:
+            if template.categ_id.currency_id:
+                template.currency_id = template.categ_id.currency_id.id
+            else:
+                template.currency_id = template.company_id.sudo().currency_id.id or main_company.currency_id.id
+
+    @api.multi
+    def _compute_cost_currency_id(self):
+        main_company = self.env['res.company']._get_main_company()
+        for template in self:
+            if template.categ_id.currency_id:
+                template.cost_currency_id = template.categ_id.currency_id.id
+            else:
+                template.cost_currency_id = template.company_id.sudo().currency_id.id or main_company.currency_id.id
 
     @api.multi
     def _guess_main_lang(self):
