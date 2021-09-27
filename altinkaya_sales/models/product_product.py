@@ -33,8 +33,7 @@ class productProduct(models.Model):
     #altinkaya
     v_fiyat_dolar = fields.Float("Dolar Fiyatı",digits=dp.get_precision('Product Price'),help="Dolarla satılan ürünlerin fiyatı")
     v_fiyat_euro = fields.Float("Euro Fiyatı",digits=dp.get_precision('Product Price'),help="Euro ile satılırken kullanılan temel fiyat")
-    
-    
+
     @api.depends('product_tmpl_id')
     def _compute_attr_based_price(self):
         res = {}
@@ -47,7 +46,7 @@ class productProduct(models.Model):
                 if att_val.attribute_id.id in priced_attributes:
                     val += priced_attributes[att_val.attribute_id.id]['base_price'] +  priced_attributes[att_val.attribute_id.id]['price_coef'] * att_val.numeric_value
             if val is 0.0:
-                val = product.v_tl_fiyat
+                val = product.v_fiyat_dolar
             product.attr_price = val
             
     
