@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+      <record id="stock_warehouse_form_inherit_document_number" model="ir.ui.view">
+          <field name="name">stock.warehouse.form.inherit.document_number</field>
+          <field name="model">stock.warehouse</field>
+          <field name="inherit_id" ref="stock.view_warehouse"/>
+          <field name="arch" type="xml">
+              <data>
+                  <xpath expr="//field[@name='code']" position="after">
+                      <field name="waybill_sequence"/>
+                      <field name="waybill_number"/>
+                      <field name="waybill_printer"/>
+                  </xpath>
+                </data>
+          </field>
+      </record>
+      <record id="stock_picking_form_inherit_document_number" model="ir.ui.view">
+          <field name="name">stock.picking.form.inherit.document_number</field>
+          <field name="model">stock.picking</field>
+          <field name="inherit_id" ref="stock.view_picking_form"/>
+          <field name="arch" type="xml">
+              <data>
+                  <xpath expr="//field[@name='origin']" position="after">
+                      <field name="document_number"/>
+                  </xpath>
+                </data>
+          </field>
+      </record>
+  </data>
+</odoo>
