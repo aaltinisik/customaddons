@@ -50,7 +50,10 @@ class PrintWaybillWizard(models.TransientModel):
             waybill_number = waybill_number + picking_id.document_page_count
 
         self.waybill_number = waybill_number
-
-        return self.env.ref('stock_waybill_print.waybill_report')\
-            .with_context(active_model='stock_waybill_print.print_waybill_wizard').report_action(docids=self)
-
+        printer = self.warehouse_id.waybill_printer
+        if not printer:
+            raise Warning(_('You need to set a waybill printer in order to print.'))
+        printer.print_document('stock_waybill_print.waybill_report',
+                               self.env.ref('stock_waybill_print.waybill_report').render_qweb_text([self.id],
+                               data={})[0],doc_form="txt")
+        return {'type': 'ir.actions.act_window_close'}
