@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="stock_waybill_report">
+            <t t-foreach="docs" t-as="o">
+                <t t-translation="off">
+
+
+
+
+<t t-esc="' ' * 16"></t><t t-if="o.picking_id.carrier_id">Sevk Yöntemi:<t t-esc="o.picking_id.carrier_id.name or ''"></t></t>
+
+<t t-esc="o.picking_id.partner_id.display_name"></t>
+
+<t t-esc="o.picking_id.partner_id.neighbour_id.name or ''"></t><t t-esc="o.picking_id.partner_id.street or ''"></t>
+
+<t t-esc="o.picking_id.partner_id.street2 or ''"></t> <t t-esc="o.picking_id.partner_id.region_id.name or ''"></t>
+
+<t t-esc="o.picking_id.partner_id.zip or ''"></t> <t t-esc="o.picking_id.partner_id.city or ''"></t> <t t-esc="o.picking_id.partner_id.district_id.name or ''"></t> / <t t-esc="o.picking_id.partner_id.state_id.name or ''"></t><t t-esc="' ' * (111-(len(o.picking_id.partner_id.zip or '')+len(o.picking_id.partner_id.city or '')+len(o.picking_id.partner_id.district_id.name or '')+len(o.picking_id.partner_id.state_id.name or '')))"></t><t t-esc="o.picking_id.date_done.strftime('%d.%m.%Y')"></t>
+
+Tel: <t t-esc="o.picking_id.partner_id.phone or ''"></t>
+
+<t t-esc="' ' * 116"></t><t t-esc="time.strftime('%H:%M:%S', time.localtime(time.time()+10800))"></t>
+
+
+
+<t t-esc="' ' * 116"></t><t t-esc="o.picking_id.partner_id.commercial_partner_id.tax_office_name or ''"></t>
+
+
+
+<t t-esc="' ' * 116"></t><t t-esc="o.picking_id.partner_id.commercial_partner_id.vat or ''"></t>
+<t t-esc="' ' * 7"></t><t t-if="o.picking_id.invoice_ids.number"><t t-esc="o.picking_id.invoice_ids.date_invoice"></t> tarih <t t-esc="o.picking_id.invoice_ids.number"></t> sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.</t>
+
+<t t-esc="' ' * 27"></t><t t-if="len(o.picking_id.move_lines.ids) > 24">Sayfa 1/<t t-esc="((int(len(o.picking_id.move_lines.ids))/-24)*-1)"></t></t>
+
+
+
+
+
+
+<t t-esc="' ' * 5"></t>[KODU]<t t-esc="' ' * 8"></t>MALZEME AÇIKLAMASI<t t-esc="' ' * 56"></t>MİKTAR<t t-esc="' ' * 5"></t>SİPARİŞ NO
+
+<t t-foreach="o.picking_id.move_lines" t-as="orderitem"><t t-if="(((o.picking_id.move_lines.ids.index(orderitem.id)%23)==1) and (o.picking_id.move_lines.ids.index(orderitem.id)!=1))">
+
+<t t-esc="' ' * 63"></t>Sayfa <t t-esc="((int(o.picking_id.move_lines.ids.index(orderitem.id)-1)/-24)*-1)/((int(len(o.picking_id.move_lines.ids))/-24)*-1)"></t>
+
+<t t-esc="' ' * 16"></t><t t-if="o.picking_id.carrier_id">Sevk Yöntemi:<t t-esc="o.picking_id.carrier_id.name or ''"></t></t>
+
+<t t-esc="o.picking_id.partner_id.display_name"></t>
+
+<t t-esc="o.picking_id.partner_id.neighbour_id.name or ''"></t><t t-esc="o.picking_id.partner_id.street or ''"></t>
+
+<t t-esc="o.picking_id.partner_id.street2 or ''"></t> <t t-esc="o.picking_id.partner_id.region_id.name or ''"></t>
+
+<t t-esc="o.picking_id.partner_id.zip or ''"></t> <t t-esc="o.picking_id.partner_id.city or ''"></t> <t t-esc="o.picking_id.partner_id.district_id.name or ''"></t> / <t t-esc="o.picking_id.partner_id.state_id.name or ''"></t><t t-esc="' ' * (111-(len(o.picking_id.partner_id.zip or '')+len(o.picking_id.partner_id.city or '')+len(o.picking_id.partner_id.district_id.name or '')+len(o.picking_id.partner_id.state_id.name or '')))"></t><t t-esc="o.picking_id.date_done.strftime('%d.%m.%Y')"></t>
+
+Tel: <t t-esc="o.picking_id.partner_id.phone or ''"></t>
+
+<t t-esc="' ' * 116"></t><t t-esc="time.strftime('%H:%M:%S', time.localtime(time.time()+10800))"></t>
+
+
+
+<t t-esc="' ' * 116"></t><t t-esc="o.picking_id.partner_id.commercial_partner_id.tax_office_name or ''"></t>
+
+
+
+<t t-esc="' ' * 116"></t><t t-esc="o.picking_id.partner_id.commercial_partner_id.vat or ''"></t>
+<t t-esc="' ' * 7"></t><t t-if="o.picking_id.invoice_ids.number"><t t-esc="o.picking_id.invoice_ids.date_invoice"></t> tarih <t t-esc="o.picking_id.invoice_ids.number"></t> sayılı faturaya istinaden düzenlenen sevk irsaliyesidir.</t>
+
+<t t-esc="' ' * 11"></t>Sayfa <t t-esc="(((int(o.picking_id.move_lines.ids.index(orderitem.id))-1)/-24)*-1)+1"></t>
+
+<t t-esc="' ' * 5"></t>[KODU]<t t-esc="' ' * 8"></t>MALZEME AÇIKLAMASI<t t-esc="' ' * 56"></t>MİKTAR<t t-esc="' ' * 5"></t>SİPARİŞ NO
+
+<t t-esc="' ' * 21"></t>Sayfa <t t-esc="(((int(o.picking_id.move_lines.ids.index(orderitem.id))-1)/-24)*-1)+1"></t>'den Devam
+</t>
+<t t-esc="orderitem.product_id.display_name[:80].ljust(80)"></t><t t-esc="' ' * 6"></t><t t-esc="str(orderitem.product_uom_qty).rjust(8) or ''"></t><t t-esc="orderitem.product_uom.name.ljust(8) or ''"></t><t t-if="o.picking_id.sale_id.client_order_ref"><t t-esc="o.picking_id.sale_id.client_order_ref[:12]  or '' "></t></t><t t-if="o.picking_id.sale_id.name"><t t-esc="o.picking_id.sale_id.name[:10]  or '' "></t></t>
+</t>
+<t t-esc="' ' * 70"></t>-----------------Liste Sonu--------------------
+<t t-if="o.picking_id.comment_irsaliye">Not:<t t-esc="o.picking_id.comment_irsaliye or ''"></t></t>
+
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+		<report id="waybill_report"
+            model="stock_waybill_print.print_waybill_wizard"
+            string="Waybill Print"
+            name="stock_waybill_print.stock_waybill_report"
+            file="stock_waybill_print.stock_waybill_report"
+            report_type="qweb-text"
+        />
+
+</data>
+</odoo>

@@ -193,6 +193,8 @@ class PrintPackBarcodeWizard(models.TransientModel):
     def print_label(self):
         self.generate_labels()
         printer = self.env.user.context_def_label_printer
+        if not printer:
+            raise Warning(_('You need to set a label printer in order to print.'))
         printer.print_document('product_label_print.label_product_product',
                                self.env.ref('product_label_print.label_product_product').render_qweb_text([self.id],
                                data={})[0],doc_form="txt")
