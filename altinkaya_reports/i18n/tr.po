@@ -1403,7 +1403,7 @@ msgstr "İş Ortağı"
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.view_partner_statement_wizard
 #: model:mail.template,subject:altinkaya_reports.email_template_edi_send_statement
 msgid "Partner Statement"
-msgstr "Extre"
+msgstr "Ekstre"
 
 #. module: altinkaya_reports
 #: model:ir.model,name:altinkaya_reports.model_partner_statement_wizard
@@ -1413,7 +1413,7 @@ msgstr ""
 #. module: altinkaya_reports
 #: model:ir.actions.act_window,name:altinkaya_reports.action_view_partner_statement_wizard
 msgid "Partner Statement with Dates"
-msgstr "Extre(Aralıklı)"
+msgstr "Ekstre(Aralıklı)"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
@@ -1445,7 +1445,7 @@ msgstr "Yazdır"
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.view_partner_statement_wizard
 msgid "Print Partner Statement"
-msgstr "Cari Extresini Yazdır"
+msgstr "Cari Ekstresini Yazdır"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document

@@ -140,10 +140,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Pickings">
-                     		<field name="picking_ids"/>
-                     </page>
-                        
+
                         
           	     </xpath>  
              </field>

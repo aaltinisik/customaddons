@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_confirm_payment_form" model="ir.ui.view">
+        <field name="name">Confirm Payment</field>
+        <field name="model">sale.confirm.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="transaction_id" invisible="1"/>
+                        <field name="acquirer_id" />
+                        <field name="amount" />
+                        <field name="payment_date" />
+                        <field name="currency_id" />
+                    </group>
+
+                </group>
+                <footer>
+                    <button name="do_confirm" string="Add Payment" type="object" class="oe_highlight" />
+                    or
+                    <button name="add_payment_and_confirm" string="Add Payment and Confirm Sale" type="object" class="oe_highlight" />
+                    or
+                    <button name="print_report" string="Add Payment, Confirm Sale and Print Receipt" type="object" class="oe_highlight" />
+                    or
+                    <button string="_Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <act_window
+    id="action_confirm_payment_sale"
+    res_model="sale.confirm.payment"
+    src_model="sale.order"
+    multi="True"
+    target="new"
+    name="Confirm Payment"
+    view_id="view_sale_confirm_payment_form"
+/>
+
+</odoo>
