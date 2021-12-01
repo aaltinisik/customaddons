@@ -10,13 +10,6 @@
         />
         <data>
 
-		<report id="stock_picking_irsaliye"
-            model="stock.picking"
-            string="Sevk Irsaliyesi"
-            name="altinkaya_reports.stock_picking_delivery"
-            file="altinkaya_reports.stock_picking_delivery"
-            report_type="qweb-text"
-        />
         <report
             id="stock_pickingaltinkaya"
             model="stock.picking"

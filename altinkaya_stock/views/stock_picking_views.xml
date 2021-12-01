@@ -18,6 +18,24 @@
             </field>
         </record>
 
+
+
+<!--<record id="view_picking_force_assign" model="ir.ui.view">-->
+<!--    <field name="name">Stock picking force assign</field>-->
+<!--    <field name="model">stock.picking</field>-->
+<!--    <field name="inherit_id" ref="stock.view_picking_form" />-->
+<!--    <field name="arch" type="xml">-->
+<!--        <button name ="button_validate" position="after">-->
+<!--            <button name="force_assign"-->
+<!--                    string="Force Availability"-->
+<!--                    attrs="{'invisible':[('state', 'in', ['draft', 'assigned', 'done', 'cancel'])]}"-->
+<!--                    groups="stock.group_stock_user"-->
+<!--                    type="object"/>-->
+<!--        </button>-->
+<!--    </field>-->
+<!--</record>-->
+
+
         <!--<record id="view_move_tree_inherit_move_name" model="ir.ui.view">
             <field name="name">stock.move.tree.inherit.altinkaya</field>
             <field name="model">stock.move</field>

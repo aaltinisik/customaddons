@@ -1,5 +1,8 @@
-from odoo import api, models, fields
+from odoo import api, models, fields, _
+from odoo.exceptions import UserError
 
+import logging
+_logger = logging.getLogger(__name__)
 
 class ProcurementGroup(models.Model):
     _inherit = "procurement.group"

@@ -14,6 +14,7 @@ from odoo.exceptions import UserError
 class ProductPriceType(models.Model):
     _name = "product.price.type"
     _description = "Price type"
+
     def _compute_selection_fields(self):
         res = []
         fields = self.env['ir.model.fields'].search([('model','in',['product.product']),('ttype','=','float')])
@@ -144,7 +145,7 @@ class ProductPricelist(models.Model):
                     if not cat:
                         continue
 
-                if rule.base == -1 and rule.base_pricelist_id:
+                if rule.base == '-1' and rule.base_pricelist_id:
                     price_tmp = rule.base_pricelist_id._compute_price_rule([(product, qty, partner)], date, uom_id)[product.id][0]  # TDE: 0 = price, 1 = rule
                     price = rule.base_pricelist_id.currency_id._convert(price_tmp, self.currency_id, self.env.user.company_id, date, round=False)
                 else:
@@ -181,10 +182,11 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
-            price_type = self.env['product.price.type'].search([('id', '=', rule.base)], limit=1)
-            if suitable_rule and price_type.currency != self.currency_id and suitable_rule.compute_price != 'fixed' and\
-                    suitable_rule.base != 'pricelist':
-                price = product.currency_id._compute(price_type.currency, self.currency_id, price, round=False)
+            if rule.base != '-1':
+                price_type = self.env['product.price.type'].search([('id', '=', rule.base)], limit=1)
+                if suitable_rule and price_type.currency != self.currency_id and suitable_rule.compute_price != 'fixed' and\
+                        suitable_rule.base != '-1':
+                    price = product.currency_id._compute(price_type.currency, self.currency_id, price, round=False)
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
 
@@ -197,14 +199,14 @@ class ProductPriclelistItem(models.Model):
     
     
     def _compute_base(self):
-        res = [(-1, _('Other Pricelist'))]
+        res = [('-1', _('Other Pricelist'))]
 
 
         price_types = self.env['product.price.type'].search([('active','=',True)])
         for price_type in price_types:
             if not (price_type.id,price_type.name) in res:
-                res.append((price_type.id,price_type.name))
-        return res
+                res.append((str(price_type.id), price_type.name))
+            return res
                 
 
     base = fields.Selection(selection = lambda self: self._compute_base())

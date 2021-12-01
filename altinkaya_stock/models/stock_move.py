@@ -11,15 +11,11 @@ class StockMove(models.Model):
     qty_available_sincan = fields.Float('Sincan Depo Mevcut', related='product_id.qty_available_sincan')
     qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
 
-#TODO: check method
-    # @api.model
-    # def _prepare_procurement_from_move(self, move):
-    #     res = super(StockMove, self)._prepare_procurement_from_move(move)
-    #     if res and 'sale_line_id' not in res:
-    #         sale_line_id = move.procurement_id.sale_line_id.id or move.raw_material_production_id.move_prod_id.procurement_id.sale_line_id.id
-    #         res.update({'sale_line_id': sale_line_id})
-    #
-    #     return res
+    # def force_assign(self, moves):
+    #     moves = self.env['stock.move'].search([('id', 'in', moves)])
+    #     for move in moves:
+    #         move.write({'state': 'assigned'})
+    #     return True
 
     @api.multi
     def action_create_procurement(self):

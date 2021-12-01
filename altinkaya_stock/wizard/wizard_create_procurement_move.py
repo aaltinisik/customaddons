@@ -145,7 +145,7 @@ class CreateProcurementMove(models.TransientModel):
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        self.env['procurement.group']._run(
+        self.env['procurement.group'].run(
             product, product_qty, product_uom, location, "/", origin, values)
 
     @api.multi

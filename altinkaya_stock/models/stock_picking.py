@@ -69,7 +69,16 @@ class StockPicking(models.Model):
     teslim_alan = fields.Char('Malı Teslim Alan', size=32)
     teslimat_ucreti = fields.Float('Teslimat Ücreti')
     desi = fields.Float('Desi')
-    koli_adedi = fields.Integer('Koli Adedi')    
+    koli_adedi = fields.Integer('Koli Adedi')
+
+    # def force_assign(self):
+    #     for pick in self:
+    #         move_ids = [x.id for x in pick.move_lines if x.state in ['confirmed', 'waiting']]
+    #         self.env['stock.move'].force_assign(moves=move_ids)
+    #         # pick.button_validate()
+    #     return True
+
+
     #TODO @dogan: invoice picking
 #     def _prepare_shipping_invoice_line(self, cr, uid, picking, invoice, context=None):
 #         res = super(stock_picking, self)._prepare_shipping_invoice_line(cr, uid, picking, invoice, context=context)

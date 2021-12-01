@@ -20,7 +20,6 @@
              'report/report_list_mrp.xml',
              'report/report_stock_delivery_carrier.xml',
              'report/report_hr_employee_annual.xml',
-             'report/stock_picking_delivery.xml',
              'report/partner_statement.xml',
              'report/partner_statement_wizard.xml',
 #              'report/partner_statement_currency.xml',
