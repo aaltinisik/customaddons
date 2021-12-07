@@ -37,6 +37,10 @@
                     <field name="acquirer_id" />
                 </div>
                 <field name="payment_status" />
+                <field name="payment_ids" widget="many2many_tags"
+                       options="{'open': True, 'limit': 10}"
+                       attrs="{'invisible':[('payment_status','=', 'without')]}"/>
+
             </xpath>
 
 

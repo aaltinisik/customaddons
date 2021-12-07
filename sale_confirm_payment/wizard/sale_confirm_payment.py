@@ -61,7 +61,8 @@ class SaleConfirmPayment(models.TransientModel):
             transaction._set_transaction_pending()
             transaction._set_transaction_done()
             transaction._post_process_after_done()
-
+        if transaction:
+            order.payment_ids = [(4, transaction.payment_id.id)]
         return transaction
 
     def add_payment_and_confirm(self):
