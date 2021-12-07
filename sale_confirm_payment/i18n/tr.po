@@ -47,6 +47,11 @@ msgid "Amount Payment"
 msgstr "Ödeme Tutarı"
 
 #. module: sale_confirm_payment
+#: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_order__payment_ids
+msgid "Payments"
+msgstr "Ödemeler"
+
+#. module: sale_confirm_payment
 #: selection:sale.order,payment_status:0
 msgid "Authorized"
 msgstr "Yetkilendirilmiş"
