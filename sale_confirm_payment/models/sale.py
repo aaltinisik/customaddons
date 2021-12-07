@@ -6,6 +6,7 @@ class SaleOrder(models.Model):
 
     acquirer_id = fields.Many2one("payment.acquirer", related="transaction_ids.acquirer_id", store=True)
     payment_amount = fields.Monetary(string="Amount Payment", compute="_compute_payment")
+    payment_ids = fields.Many2many('account.payment', string='Payments', readonly=True)
 
     payment_status = fields.Selection(
         [
