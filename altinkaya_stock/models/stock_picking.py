@@ -71,12 +71,12 @@ class StockPicking(models.Model):
     desi = fields.Float('Desi')
     koli_adedi = fields.Integer('Koli Adedi')
 
-    # def force_assign(self):
-    #     for pick in self:
-    #         move_ids = [x.id for x in pick.move_lines if x.state in ['confirmed', 'waiting']]
-    #         self.env['stock.move'].force_assign(moves=move_ids)
-    #         # pick.button_validate()
-    #     return True
+    def force_assign(self):
+        for pick in self:
+            move_ids = [x for x in pick.move_lines if x.state in ['confirmed', 'waiting']]
+            self.env['stock.move'].force_assign(moves=move_ids)
+            pick.button_validate()
+        return True
 
 
     #TODO @dogan: invoice picking
