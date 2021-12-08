@@ -1,5 +1,4 @@
 from odoo import models, fields, api
-from odoo.tools import float_is_zero
 
 
 
@@ -11,11 +10,20 @@ class StockMove(models.Model):
     qty_available_sincan = fields.Float('Sincan Depo Mevcut', related='product_id.qty_available_sincan')
     qty_available_merkez = fields.Float('Merkez Depo Mevcut', related='product_id.qty_available_merkez')
 
-    # def force_assign(self, moves):
-    #     moves = self.env['stock.move'].search([('id', 'in', moves)])
-    #     for move in moves:
-    #         move.write({'state': 'assigned'})
-    #     return True
+    def force_assign(self, moves):
+        for move in moves:
+            move.move_line_ids.create({
+                'product_id': move.product_id.id,
+                'location_id': move.location_id.id,
+                'location_dest_id': move.location_dest_id.id,
+                'product_uom_qty': 0.0,
+                'qty_done': move.product_uom_qty,
+                'product_uom_id': move.product_uom.id,
+                'state': 'confirmed',
+                'picking_id': move.picking_id.id,
+                'move_id': move.id,
+            })
+        return True
 
     @api.multi
     def action_create_procurement(self):
