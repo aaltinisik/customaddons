@@ -206,10 +206,13 @@ class ProductPriclelistItem(models.Model):
         for price_type in price_types:
             if not (price_type.id,price_type.name) in res:
                 res.append((str(price_type.id), price_type.name))
-            return res
+        return res
                 
 
     base = fields.Selection(selection = lambda self: self._compute_base())
+    base_pricelist_id = fields.Many2one(
+        comodel_name='product.pricelist', string='Other PL',
+        help="Other pricelist on which this item is based.")
     x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
     
     
