@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_invoice_zirve_masraf_fatura" model="xlsx.template">
+        <field name="res_model">report.account.invoice</field>
+        <field name="fname">zirve_masraf_fatura.xlsx</field>
+        <field name="name">Zirve Masraf Fatura Şablonu</field>
+        <field name="description">Zirve Muhasebe programına uygun biçimde faturaların içeri aktarılabilmesini sağlayan Excel şablonu.</field>
+        <field name="input_instruction">
+            {
+                '__EXPORT__': {
+                    'Fatura': {  # sheet can be name (string) or index (integer)
+                        'results': {  # prefix with _CONT_ to continue rows from previous row field
+                            'A2': 'date_invoice${value or ""}#{align=left;style=date}',
+                            'B2': 'number${value or ""}#{align=left;style=text}',
+                            'C2': 'journal_id.name${value or ""}#{align=left;style=text}',
+                            'D2': 'z_tevkifatli_mi${"Yes" if value else "No"}#{align=left;style=text}',
+                            'E2': 'journal_id.name${value or ""}#{align=left;style=text}',
+                            'F2': 'partner_id.name${value or ""}#{align=left;style=text}',
+                            'G2': '${"\'%s" % (object.partner_id.vat or "")}#{align=left;style=text}',
+                            'H2': 'partner_id.vat${value or ""}#{align=left;style=text}',
+                            'I2': 'amount_untaxed${"%.2f" % value or ""}#{align=left;style=text}',
+                            'J2': '${"" or ""}#{align=left;style=text}',
+                            'K2': '${"" or ""}#{align=left;style=text}',
+                            'L2': '${"" or ""}#{align=left;style=text}',
+                            'M2': '${"" or ""}#{align=left;style=text}',
+                            'N2': '${"" or ""}#{align=left;style=text}',
+                            'O2': '${"" or ""}#{align=left;style=text}',
+                            'P2': 'amount_untaxed${"\'%.2f" % value or ""}#{align=left;style=text}',
+                            'Q2': '${"" or ""}#{align=left;style=text}',
+                            'R2': 'amount_tax${"\'%.2f" % value or ""}#{align=left;style=text}',
+                            'S2': '${"" or ""}#{align=left;style=text}',
+                            'T2': 'amount_total${"\'%.2f" % value or ""}#{align=left;style=text}',
+                        },
+                    },
+                },
+            }
+        </field>
+    </record>
+
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('account_invoice_zirve_masraf_fatura')]"/>
+    </function>
+</odoo>

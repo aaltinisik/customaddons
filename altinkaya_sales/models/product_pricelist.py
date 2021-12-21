@@ -210,9 +210,6 @@ class ProductPriclelistItem(models.Model):
                 
 
     base = fields.Selection(selection = lambda self: self._compute_base())
-    base_pricelist_id = fields.Many2one(
-        comodel_name='product.pricelist', string='Other PL',
-        help="Other pricelist on which this item is based.")
     x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
     
     
