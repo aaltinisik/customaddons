@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <report id='action_report_purchaseorder_excel'
+            string='Purchase Order (.xlsx)'
+            model='purchase.order'
+            name='purchase_order_en.xlsx'
+            file='export_purchase_order_xlsx'
+            print_report_name="('Altinkaya_PO_%s' % (object.name))"
+            report_type='excel'
+    />
+
+    <report id='action_report_purchaseorder_excel_tr'
+            string='Satınalma Siparişi (.xlsx)'
+            model='purchase.order'
+            name='purchase_order_tr.xlsx'
+            file='export_purchase_order_xlsx'
+            print_report_name="('Altinkaya_satinalma_%s' % (object.name))"
+            report_type='excel'
+    />
+
+    <report id='action_report_purchaseorder_rfq_excel'
+            string='Request for Quotation (.xlsx)'
+            model='purchase.order'
+            name='po_rfq_en.xlsx'
+            file='export_purchase_order_xlsx'
+            print_report_name="('Altinkaya_RFQ_%s' % (object.name))"
+            report_type='excel'
+    />
+
+    <report id='action_report_purchaseorder_rfq_excel_tr'
+            string='Teklif Talebi (.xlsx)'
+            model='purchase.order'
+            name='po_rfq_tr.xlsx'
+            file='export_purchase_order_xlsx'
+            print_report_name="('Altinkaya_Talep_%s' % (object.name))"
+            report_type='excel'
+    />
+
+</odoo>
