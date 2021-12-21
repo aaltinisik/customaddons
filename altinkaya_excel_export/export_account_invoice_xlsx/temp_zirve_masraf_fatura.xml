@@ -14,7 +14,7 @@
                             'B2': 'number${value or ""}#{align=left;style=text}',
                             'C2': 'journal_id.name${value or ""}#{align=left;style=text}',
                             'D2': 'z_tevkifatli_mi${"Yes" if value else "No"}#{align=left;style=text}',
-                            'E2': 'journal_id.name${value or ""}#{align=left;style=text}',
+                            'E2': '${"%s" % object.journal_id.name or ""}#{align=left;style=text}',
                             'F2': 'partner_id.name${value or ""}#{align=left;style=text}',
                             'G2': '${"\'%s" % (object.partner_id.vat or "")}#{align=left;style=text}',
                             'H2': 'partner_id.vat${value or ""}#{align=left;style=text}',
