@@ -12,15 +12,31 @@
                         <field name="amount" />
                         <field name="payment_date" />
                         <field name="currency_id" />
+                        <field name="order_id" invisible="1"/>
+                        <field name="order_state" invisible="1"/>
                     </group>
 
                 </group>
                 <footer>
-                    <button name="do_confirm" string="Add Payment" type="object" class="oe_highlight" />
-                    or
-                    <button name="add_payment_and_confirm" string="Add Payment and Confirm Sale" type="object" class="oe_highlight" />
-                    or
-                    <button name="print_report" string="Add Payment, Confirm Sale and Print Receipt" type="object" class="oe_highlight" />
+                    <button name="do_confirm"
+                            string="Add Payment"
+                            type="object"
+                            class="oe_highlight" />
+                    <button name="add_payment_and_confirm"
+                            string="Add Payment and Confirm Sale"
+                            type="object"
+                            attrs="{'invisible':[('order_state', 'in', ['done', 'cancel'])]}"
+                            class="oe_highlight" />
+                    <button name="print_report"
+                            string="Add Payment, Confirm Sale and Print Receipt"
+                            type="object"
+                            attrs="{'invisible':[('order_state', 'in', ['done', 'cancel'])]}"
+                            class="oe_highlight" />
+                    <button name="print_report"
+                            string="Add Payment and Print Receipt"
+                            type="object"
+                            attrs="{'invisible':[('order_state', 'not in', ['done', 'cancel'])]}"
+                            class="oe_highlight" />
                     or
                     <button string="_Cancel" class="oe_link" special="cancel" />
                 </footer>

@@ -36,6 +36,18 @@
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 	</record>
+
+	<record id="pricelist_base_list_id" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form.base</field>
+            <field name="model">product.pricelist.item</field>
+			<field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='base_pricelist_id']" position="attributes">
+					<attribute name="invisible">0</attribute>
+				</xpath>
+			</field>
+	</record>
+
 	<menuitem id="menu_product_price_type" parent="sale.menu_sale_config" name="Product Price Types" action="action_product_price_type" sequence="8" />
 	
 </odoo>
