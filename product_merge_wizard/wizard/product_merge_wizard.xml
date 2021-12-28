@@ -30,11 +30,12 @@
                         	</field>
                         	
                         </group>
-                    </sheet>
                     <footer>
                         <button name="action_merge" type="object" string="Merge" class="oe_highlight"/>
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
+                    </sheet>
+
                 </form>
             </field>
         </record>
@@ -47,7 +48,7 @@
             <field name="view_type">form</field>
             <field name="view_id" ref="view_product_merge_wizard_form"/>
             <field name="context">{}</field>
-            <field name="target">current</field>
+            <field name="target">new</field>
         </record>
 
         <menuitem action="product_merge_wizard_action"

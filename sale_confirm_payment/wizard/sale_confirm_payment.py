@@ -13,6 +13,17 @@ class SaleConfirmPayment(models.TransientModel):
     amount = fields.Monetary(string="Amount", required=True)
     currency_id = fields.Many2one("res.currency")
     payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
+    order_id = fields.Many2one(comodel_name="sale.order",
+                                compute='_compute_sale_id')
+    order_state = fields.Selection(
+        related='order_id.state', readonly=True, store=True,
+        string="State")
+
+    @api.one
+    @api.depends('transaction_id')
+    def _compute_sale_id(self):
+        active_id = self.env.context.get("active_id", False)
+        self.order_id = self.env["sale.order"].browse(active_id)
 
     @api.model
     def default_get(self, fields_list):
@@ -34,9 +45,6 @@ class SaleConfirmPayment(models.TransientModel):
 
     def do_confirm(self):
 
-        active_id = self.env.context.get("active_id", False)
-        order = self.env["sale.order"].browse(active_id)
-
         if self.amount <= 0:
             raise UserError(_("Then amount must be positive"))
 
@@ -47,9 +55,9 @@ class SaleConfirmPayment(models.TransientModel):
                 {
                     "amount": self.amount,
                     "acquirer_id": self.acquirer_id.id,
-                    "acquirer_reference": order.name,
-                    "partner_id": order.partner_id.id,
-                    "sale_order_ids": [(4, order.id, False)],
+                    "acquirer_reference": self.order_id.name,
+                    "partner_id": self.order_id.partner_id.id,
+                    "sale_order_ids": [(4, self.order_id.id, False)],
                     "currency_id": self.currency_id.id,
                     "date": self.payment_date,
                     "state": "draft",
@@ -62,7 +70,7 @@ class SaleConfirmPayment(models.TransientModel):
             transaction._set_transaction_done()
             transaction._post_process_after_done()
         if transaction:
-            order.payment_ids = [(4, transaction.payment_id.id)]
+            self.order_id.payment_ids = [(4, transaction.payment_id.id)]
         return transaction
 
     def add_payment_and_confirm(self):
@@ -70,9 +78,8 @@ class SaleConfirmPayment(models.TransientModel):
         active_id = self.env.context.get("active_id", False)
         if not active_id:
             raise UserError(_("Please select a sale order"))
-        order = self.env["sale.order"].browse(active_id)
-        if order.state not in ['done', 'cancel']:
-            order.action_confirm()
+        if self.order_id.state not in ['done', 'cancel']:
+            self.order_id.action_confirm()
         return transaction
 
     def print_report(self):

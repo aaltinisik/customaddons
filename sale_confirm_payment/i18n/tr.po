@@ -37,6 +37,11 @@ msgid "Add Payment, Confirm Sale and Print Receipt"
 msgstr "Ödeme Kaydet, Siparişi Onayla ve Makbuz Bas"
 
 #. module: sale_confirm_payment
+#: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
+msgid "Add Payment and Print Receipt"
+msgstr "Ödeme Kaydet ve Makbuz Bas"
+
+#. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__amount
 msgid "Amount"
 msgstr "Tutar"
@@ -173,5 +178,5 @@ msgstr "_İptal"
 #. module: sale_confirm_payment
 #: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
 msgid "or"
-msgstr "yada"
+msgstr "ya da"
 
