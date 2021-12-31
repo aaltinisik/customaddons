@@ -118,7 +118,7 @@ class ProductPricelist(models.Model):
 
             # if Public user try to access standard price from website sale, need to call price_compute.
             # TDE SURPRISE: product can actually be a template
-            price = product.price_compute('list_price')[product.id]
+            # price = product.price_compute('list_price')[product.id]
 
             price_uom = self.env['uom.uom'].browse([qty_uom_id])
             for rule in items:
@@ -182,11 +182,9 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
-            if rule.base != '-1':
-                price_type = self.env['product.price.type'].search([('id', '=', rule.base)], limit=1)
-                if suitable_rule and price_type.currency != self.currency_id and suitable_rule.compute_price != 'fixed' and\
-                        suitable_rule.base != '-1':
-                    price = product.currency_id._compute(price_type.currency, self.currency_id, price, round=False)
+            if suitable_rule and suitable_rule.currency_id != self.currency_id and suitable_rule.compute_price != 'fixed' and \
+                    suitable_rule.base != '-1':
+                price = product.currency_id._compute(suitable_rule.currency_id, self.currency_id, price, round=False)
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
 
@@ -199,7 +197,8 @@ class ProductPriclelistItem(models.Model):
     
     
     def _compute_base(self):
-        res = [('-1', _('Other Pricelist'))]
+        res = [('-1', _('Other Pricelist')),
+               ('list_price', _('List Price'))]
 
 
         price_types = self.env['product.price.type'].search([('active','=',True)])
