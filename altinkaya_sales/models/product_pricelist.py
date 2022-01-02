@@ -120,6 +120,7 @@ class ProductPricelist(models.Model):
             # TDE SURPRISE: product can actually be a template
             # price = product.price_compute('attr_price')[product.id]
             price = 0.0
+
             price_uom = self.env['uom.uom'].browse([qty_uom_id])
             for rule in items:
                 if rule.min_quantity and qty_in_product_uom < rule.min_quantity:
@@ -185,6 +186,7 @@ class ProductPricelist(models.Model):
             if suitable_rule and suitable_rule.currency_id != price_type.currency and suitable_rule.compute_price != 'fixed' and \
                     suitable_rule.base != '-1':
                 price = product.currency_id._convert(price, suitable_rule.currency_id, self.env.user.company_id, date, round=False)
+
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
 
