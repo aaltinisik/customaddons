@@ -102,6 +102,10 @@ class productProduct(osv.Model):
             u"2017 Aralık Min İsçilik TL",
             digits_compute=dp.get_precision('Product Price'),
             help=u"2017 Aralık Minimum İşçilik fiyatı TL"),
+        'purchase_price': fields.float(
+            u"Satinalma Fiyati",
+            digits_compute=dp.get_precision('Product Price'),
+            help=u"Satinalma Fiyatı"),
         'attr_price': fields.function(_compute_attr_based_price, digits_compute=dp.get_precision('Product Price'), string=u"Attr. Value Price",
                                       type='float',
 #             store={

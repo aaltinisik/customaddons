@@ -12,8 +12,8 @@ while true; do
 	echo -e "stopping odoo server"
         sudo systemctl stop odoo
         echo -e "Updating Modules"
-        cd /opt/odoo/odoo-server
-        /opt/odoo/odoo-server/openerp-server -d $1 -u $2 --stop-after-init --config=/etc/odoo-server.conf --workers=0 --max-cron-threads=0
+        cd /opt/odoo/V8/odoo-server
+        /opt/odoo/V8/odoo-server/openerp-server -d $1 -u $2 --stop-after-init --config=/etc/odoo-8.conf --workers=0 --max-cron-threads=0
 	sudo tail  /var/log/odoo/odoo-server.log
         echo *e "Starting odoo server"
 	sudo systemctl start odoo
