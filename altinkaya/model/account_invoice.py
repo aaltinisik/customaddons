@@ -48,6 +48,7 @@ class account_invoice(osv.Model):
             for tax in invoice.tax_line:
                 if tax.name == u'KDV %8':
                     amount = amount + tax.base
+            amount = amount * invoice.currency_at_date
             res[invoice.id] = amount
         return res
 
@@ -58,6 +59,7 @@ class account_invoice(osv.Model):
             for tax in invoice.tax_line:
                 if tax.name == u'KDV %18':
                     amount = amount + tax.base
+            amount = amount * invoice.currency_at_date
             res[invoice.id] = amount
         return res
 
@@ -69,6 +71,7 @@ class account_invoice(osv.Model):
             for tax in invoice.tax_line:
                 if tax.name == u'KDV %8':
                     amount = amount + tax.amount
+            amount = amount * invoice.currency_at_date
             res[invoice.id] = amount
         return res
 
@@ -79,6 +82,7 @@ class account_invoice(osv.Model):
             for tax in invoice.tax_line:
                 if tax.name == u'KDV %18':
                     amount = amount + tax.amount
+            amount = amount * invoice.currency_at_date
             res[invoice.id] = amount
         return res
 

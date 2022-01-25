@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp.osv import osv, fields
+import openerp.addons.decimal_precision as dp
 import math
 
 
@@ -32,7 +33,7 @@ class account_invoice(osv.osv):
         'total_land': fields.integer('Total Land Weight'),
         'total_air': fields.integer('Total Air Weight'),
         'waybillno': fields.char('Way Bill no.', size=64),
-        'currency_at_date': fields.float('Currency Rate'),
+        'currency_at_date': fields.float('Currency Rate',digits_compute=dp.get_precision('Product Price')),
         'carrier_id':fields.many2one('delivery.carrier', "Carrier"),
         'total_num_pack': fields.integer('Total Packages'),
         'time_invoice': fields.datetime('Invoice Confirm Time', readonly=True, states={'draft':[('readonly',False)]}, select=True, help="Keep empty to use the current time"),
