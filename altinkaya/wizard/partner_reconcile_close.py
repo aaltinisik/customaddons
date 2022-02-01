@@ -114,12 +114,12 @@ class PartnerReconcileClose(models.TransientModel):
                     balance = sum([ml.debit - ml.credit for ml in lines])
                     date_due = max(lines.mapped('date_maturity'))
                     
-                    if balance > 0:
+                    if balance > 0.01:
                         debit = balance
                         credit = 0.0
                         self_credit = balance
                         self_debit = 0.0
-                    elif balance < 0:
+                    elif balance < -0.01:
                         debit = 0.0
                         credit = -balance
                         self_credit = 0.0
@@ -172,8 +172,8 @@ class PartnerReconcileClose(models.TransientModel):
                         'partner_id': partner.id,
                     })
 
-                    move_line_obj._remove_move_reconcile(lines.ids)
-                    lines.reconcile()
+#                    move_line_obj._remove_move_reconcile(lines.ids)
+#                    lines.reconcile()
 
                 partner.devir_yapildi = True
                 _logger.error('Partner reconcilation done. Partner: %s \n\n' % partner.name)
@@ -182,6 +182,7 @@ class PartnerReconcileClose(models.TransientModel):
             except Exception, e:
                 _logger.exception(
                     'Partner reconciliation wizard error. Partner: %s \n\n %s' % (partner.name, e.message))
+                partner.devir_yapildi = False
 
         closing_move_id.post()
         opening_move_id.post()
