@@ -116,6 +116,7 @@ class StockPickingCreateInvoice(models.TransientModel):
             'name': name,
             'reference': reference,
             'origin': picking.name,
+            'address_contact_id': picking.partner_id.id,
             'type': inv_type,
             'account_id': account_id.id,
             'partner_id': self.partner_invoice_id.id,

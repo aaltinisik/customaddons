@@ -2,7 +2,7 @@
 <odoo>
 
     <menuitem
-            name="Ürün Kategorileri"
+            name="Product Categories"
             action="product.product_category_action_form"
             id="menu_product_category_on_stock"
             parent="stock.menu_stock_inventory_control"
