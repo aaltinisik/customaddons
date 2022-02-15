@@ -22,7 +22,7 @@ class productProduct(models.Model):
     v_2017_iscilik = fields.Float(u"2017 Aralık isçilik fiyatı TL",digits=dp.get_precision('Product Price'),help=u"2017 Aralık birim işçilik fiyatı TL")
     v_min_2017_iscilik = fields.Float(u"2017 Aralık Min İsçilik TL",digits=dp.get_precision('Product Price'),help=u"2017 Aralık Minimum İşçilik fiyatı TL")
     attr_price =  fields.Float(compute="_compute_attr_based_price", digits=dp.get_precision('Product Price'), string=u"Attr. Value Price",help=u"Price calculated based on the product's attribute values.")
-
+    purchase_price = fields.Float("Satınalma Fiyatı",digits=dp.get_precision('Product Price'),help="Satınalma Fiyatı")
     v_cari_urun = fields.Many2one('res.partner',"Partner Product")
     v_tl_fiyat = fields.Float("USD Fiyatı",digits=dp.get_precision('Product Price'),help="Birim işçilik Fiyatı USD")
     v_iscilik_fiyat = fields.Float("işçilik Fiyatı USD",digits=dp.get_precision('Product Price'),help=u"Birim işçilik Fiyatı USD")
