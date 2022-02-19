@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="partner_working_with_mult_curr" model="ir.ui.view">
+            <field name="name">partner.second.curr.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
+					<field name="has_secondary_curr" />
+				    <field name="secondary_curr_id" attrs="{'invisible':[('has_secondary_curr','=',False)]}"
+                                                    domain="[('id', '!=', 32)]"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

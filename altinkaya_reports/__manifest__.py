@@ -26,7 +26,7 @@
 #              'report/partner_statement_currency_wizard.xml',
              'wizard/partner_statement_wizard_view.xml',
              'views/res_users_views.xml',
-             'views/partner_view.xml',
+             # 'views/partner_view.xml',
              'report/reports.xml',
              'report/paperformat.xml',
              'data/partner_data.xml',

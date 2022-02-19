@@ -14,7 +14,7 @@
                 </xpath>
                 <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
                 
-                	<field name="use_secondary_currency"/>
+                	<field name="has_secondary_curr"/>
                 
                 </xpath>
             </field>

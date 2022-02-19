@@ -119,9 +119,9 @@ class CreateProcurementMove(models.TransientModel):
             self.move_id.write({'state': 'waiting'})
         if self.qty_to_sincan or self.qty_to_merkez:
             if self.qty_to_sincan > 0.0:
-                self.create_procurement_sincan()
+                self.create_procurement_sincan(group_id=self.move_id.group_id)
             if self.qty_to_merkez > 0.0:
-                self.create_procurement_merkez()
+                self.create_procurement_merkez(group_id=self.move_id.group_id)
 
 
     @api.multi
@@ -145,7 +145,7 @@ class CreateProcurementMove(models.TransientModel):
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        self.env['procurement.group'].run(
+        group_id.run(
             product, product_qty, product_uom, location, "/", origin, values)
 
     @api.multi
@@ -169,5 +169,5 @@ class CreateProcurementMove(models.TransientModel):
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        self.env['procurement.group'].run(
+        group_id.run(
             product, product_qty, product_uom, location, "/", origin, values)

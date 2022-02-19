@@ -155,7 +155,7 @@
 										<th></th>
 									</tr>
 									<t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
-									<t t-if="o.use_secondary_currency">
+									<t t-if="o.has_secondary_curr">
 										<t t-foreach="o._get_statement_data_currency()"
 											t-as="s_dict">
 											<t t-set="toplamBakiye" t-value="0" />
