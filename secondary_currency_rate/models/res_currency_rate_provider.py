@@ -43,8 +43,6 @@ class ResCurrencyRateProviderSecondRate(models.Model):
 
         _logger.debug("TCMB sent a valid XML file")
 
-        date_string = dom.get('Date')
-        rate_date = str(datetime.strptime(date_string, "%m/%d/%Y").date())
         currency_data = {}
         rate_type = self.service_rate_type
         second_rate_type = self.second_service_rate_type
@@ -54,7 +52,7 @@ class ResCurrencyRateProviderSecondRate(models.Model):
             rates = [curr_data['rate_ref'] / x or 1.0 for x in curr_data['rate_currency']]
             currency_data[currency] = rates
 
-        return rate_date, currency_data
+        return currency_data
 
 
     @api.multi
