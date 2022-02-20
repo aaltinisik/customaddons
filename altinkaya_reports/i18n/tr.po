@@ -1074,8 +1074,8 @@ msgid "Due Date"
 msgstr "Vade Tarihi"
 
 #. module: altinkaya_reports
-#: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__use_secondary_currency
-#: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__use_secondary_currency
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_partner__has_secondary_curr
+#: model:ir.model.fields,field_description:altinkaya_reports.field_res_users__has_secondary_curr
 msgid "Ekstrede çift para birimi yazdır"
 msgstr ""
 

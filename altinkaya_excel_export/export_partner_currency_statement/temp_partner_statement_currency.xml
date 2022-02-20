@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="partner_statement_dovizli_eks" model="xlsx.template">
+        <field name="res_model">report.partner.statement</field>
+        <field name="fname">partner_statement_currency.xlsx</field>
+        <field name="name">Cari Dövizli Ekstre Şablonu</field>
+        <field name="description">Müşterilerin dövizli ekstresini excel olarak basan şablon.</field>
+        <field name="input_instruction">
+                        {
+                '__EXPORT__': {
+                    'Ekstre': {  # sheet can be name (string) or index (integer)
+                        '_HEAD_': {
+                            'B2': 'partner_id.name${value or ""}#{align=left;vert-align=center;style=text}',
+                            'H2': 'partner_id.tax_office_name${value or ""}#{align=full_center;style=text}',
+                            'J2': 'partner_id.vat${value or ""}#{align=full_center;style=text}',
+                            'L2': 'date_now${value.strftime("%d.%m.%Y") or ""}#{align=full_center;style=text}',
+                            'B3': 'partner_id.phone${value or ""}#{align=left;vert-align=center;style=text}',
+                            'B3': 'partner_id.phone${value or ""}#{align=left;vert-align=center;style=text}',
+                            'H6': '${"%s%.2f" % (object.partner_id.secondary_curr_id.symbol, object.sec_curr_total) or "%s0.00" (object.partner_id.secondary_curr_id.symbol)}#{align=right;style=text}',
+                            'I6': 'sec_curr_dc${value or ""}#{align=full_center;style=text}',
+                            'L6': '${"%s%.2f" % (object.default_currency.symbol, object.total) or "%s0.00" (object.default_currency.symbol)}#{align=right;style=text}',
+                            'M6': 'dc${value or ""}#{align=full_center;style=text}',
+                        },
+                        'results': {  # prefix with _CONT_ to continue rows from previous row field
+                            'A5': 'sequence${value or ""}#{border=thin_border;align=center;style=text}',
+                            'B5': 'number${value or ""}#{border=thin_border;align=left;style=text}',
+                            'C5': 'date${value or ""}#{border=thin_border;align=left;style=text}',
+                            'D5': 'due_date${value or ""}#{border=thin_border;align=left;style=text}',
+                            'E5': 'description${value or ""}#{border=thin_border;align=left;style=text}',
+                            'F5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_debit) or "%s0.00" (object.secondary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'G5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_credit) or "%s0.00" (object.secondary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'H5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_balance) or "%s0.00" (object.secondary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'I5': 'sec_curr_dc${value or ""}#{border=thin_border;align=center;style=text}',
+                            'J5': '${"%s%.2f" % (object.primary_currency.symbol, object.debit) or "%s0.00" (object.primary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'K5': '${"%s%.2f" % (object.primary_currency.symbol, object.credit) or "%s0.00" (object.primary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'L5': '${"%s%.2f" % (object.primary_currency.symbol, object.balance) or "%s0.00" (object.primary_currency.symbol)}#{border=thin_border;align=right;style=text}',
+                            'M5': 'dc${value or ""}#{border=thin_border;align=center;style=text}',
+                        },
+                    },
+                },
+            }
+        </field>
+    </record>
+
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('partner_statement_dovizli_eks')]"/>
+    </function>
+</odoo>
