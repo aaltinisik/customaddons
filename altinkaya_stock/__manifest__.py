@@ -13,6 +13,7 @@
     'data': [
         'views/stock_picking_views.xml',
         'views/stock_view.xml',
+        'views/sale_view.xml',
         'views/product_views.xml',
         'views/delivery_carrier_views.xml',
         'wizard/wizard_create_procurement_move.xml',

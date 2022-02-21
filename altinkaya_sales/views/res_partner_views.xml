@@ -35,7 +35,7 @@
 								<field name="sale_warn" nolabel="1" modifiers="{}"/>
 								<field name="sale_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('sale_warn', '!=', False), ('sale_warn','!=','no-message')],'readonly':[('sale_warn','=','no-message')]}" modifiers="{'required':[['sale_warn','!=',false],['sale_warn','!=','no-message']],'readonly':[['sale_warn','=','no-message']]}"/>
 							</group>
-							<group colspan="2" col="2" invisible="1" modifiers="{'invisible':true}">
+							<group colspan="2" col="2" modifiers="{}">
 								<separator string="Warning on the Purchase Order" colspan="4" modifiers="{}"/>
 								<field name="purchase_warn" nolabel="1" modifiers="{}"/>
 								<field name="purchase_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('purchase_warn', '!=', False), ('purchase_warn','!=','no-message')],'readonly':[('purchase_warn','=','no-message')]}" modifiers="{'required':[['purchase_warn','!=',false],['purchase_warn','!=','no-message']],'readonly':[['purchase_warn','=','no-message']]}"/>
