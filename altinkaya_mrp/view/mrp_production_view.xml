@@ -37,7 +37,11 @@
                     <field name="x_makine"/>
                     <field name="x_operator"/>
                 </xpath>
+                <xpath expr="//field[@name='routing_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': 1}</attribute>
+                </xpath>
                 <xpath expr="//field[@name='routing_id']" position="after">
+                    <field name="process_id"/>
                     <field name="x_note"/>
                 </xpath>
             </field>
@@ -92,7 +96,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",1]</field>
+            <field name="domain">[["process_id","=",1]]</field>
+            <field name="context">{'search_default_todo':1}</field>
         </record>
 
         <menuitem id="menu_mrp_enjeksiyon_production"
@@ -110,7 +115,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",2]]</field>
+            <field name="domain">[["process_id","=",2]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_cnc_production"
@@ -128,7 +134,8 @@
             <field name="view_type">form</field>
             <field name="view_m ode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",8]]</field>
+            <field name="domain">[["process_id","=",8]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         
@@ -147,7 +154,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",4]]</field>
+            <field name="domain">[["process_id","=",4]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_kalip_production"
@@ -165,7 +173,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",10]]</field>
+            <field name="domain">[["process_id","=",10]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_sac_production"
@@ -183,7 +192,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",3]]</field>
+            <field name="domain">[["process_id","=",3]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_depo_production"
@@ -201,7 +211,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",6]]</field>
+            <field name="domain">[["process_id","=",6]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_ayrintili_production"
@@ -219,7 +230,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",5]]</field>
+            <field name="domain">[["process_id","=",5]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_cnctorna_production"
@@ -237,7 +249,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",7]]</field>
+            <field name="domain">[["process_id","=",7]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_sayma_production"
@@ -255,7 +268,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["routing_id","=",16]]</field>
+            <field name="domain">[["process_id","=",16]]</field>
+            <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_gorsel_production"
