@@ -91,6 +91,13 @@
                  <field name="address_contact_id" string="Teslimat Adresi" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True}" />
                  </xpath>
 
+                 <xpath expr="//field[@name='comment']" position="replace">
+					 <group string="Notes">
+						 <field name="comment"/>
+						 <field name="comment_einvoice"/>
+					</group>
+          	     </xpath>
+
                  <xpath expr="//field[@name='date_invoice']" position="after">
                  	<field name="supplier_invoice_number"  attrs="{'invisible': [('type','=','out_invoice')]}">  </field> 
           	     </xpath>
