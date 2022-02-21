@@ -60,7 +60,7 @@ class MrpProduction(models.Model):
 
     @api.model
     def _update_existing_record(self):
-        productions = self.env['mrp.production'].search([['process_id', '=', False]])
+        productions = self.env['mrp.production'].search([('process_id', '=', False)])
         for production in productions:
             production.process_id = production.bom_id.routing_id.id
 
