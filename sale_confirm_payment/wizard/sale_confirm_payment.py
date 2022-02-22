@@ -13,17 +13,16 @@ class SaleConfirmPayment(models.TransientModel):
     amount = fields.Monetary(string="Amount", required=True)
     currency_id = fields.Many2one("res.currency")
     payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
-    order_id = fields.Many2one(comodel_name="sale.order",
-                                compute='_compute_sale_id')
+    order_id = fields.Many2one(comodel_name="sale.order")
     order_state = fields.Selection(
         related='order_id.state', readonly=True, store=True,
         string="State")
 
-    @api.one
-    @api.depends('transaction_id')
-    def _compute_sale_id(self):
-        active_id = self.env.context.get("active_id", False)
-        self.order_id = self.env["sale.order"].browse(active_id)
+    # @api.one
+    # @api.depends('transaction_id')
+    # def _compute_sale_id(self):
+    #     active_id = self.env.context.get("active_id", False)
+    #     self.order_id = self.env["sale.order"].browse(active_id)
 
     @api.model
     def default_get(self, fields_list):
@@ -34,6 +33,7 @@ class SaleConfirmPayment(models.TransientModel):
 
         order = self.env["sale.order"].browse(active_id)
         defaults["currency_id"] = order.currency_id.id
+        defaults['order_id'] = active_id
 
         tx = order.sudo().transaction_ids.get_last_transaction()
         if tx and tx.state in ["pending", "authorized"]:

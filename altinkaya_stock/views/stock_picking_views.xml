@@ -7,33 +7,48 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']" position="after">
-	            	<field name="qty_available_merkez" string="Merkez" />
+                <xpath expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']"
+                       position="after">
+                    <field name="qty_available_merkez" string="Merkez"/>
                     <field name="qty_available_sincan" string="Sincan"/>
-	                <button name="action_create_procurement" type="object" string="Tedarik"
-	                	attrs="{'invisible':[('state','in',['waiting','done','cancel'])]}"/>
-	            	<button name="action_make_mts" type="object" string="Stoktan Al"
-	            		attrs="{'invisible':['|',('state','!=','waiting'),('state','in',['done','cancel'])]}"/>
+                    <button name="action_create_procurement" type="object" string="Tedarik"
+                            attrs="{'invisible':[('state','in',['waiting','done','cancel'])]}"/>
+                    <button name="action_make_mts" type="object" string="Stoktan Al"
+                            attrs="{'invisible':['|',('state','!=','waiting'),('state','in',['done','cancel'])]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_form_inherit_carrier" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit.carrier</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">100</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='carrier_id']" position="replace">
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="carrier_id"/>
                 </xpath>
             </field>
         </record>
 
 
-
-<record id="view_picking_force_assign" model="ir.ui.view">
-    <field name="name">Stock picking force assign</field>
-    <field name="model">stock.picking</field>
-    <field name="inherit_id" ref="stock.view_picking_form" />
-    <field name="arch" type="xml">
-        <button name ="button_validate" position="after">
-            <button name="force_assign"
-                    string="Uygunluğu Zorla"
-                    attrs="{'invisible':[('state', 'in', ['draft', 'assigned', 'done', 'cancel'])]}"
-                    groups="altinkaya_stock.stock_force_avail_button"
-                    type="object"/>
-        </button>
-    </field>
-</record>
+        <record id="view_picking_force_assign" model="ir.ui.view">
+            <field name="name">Stock picking force assign</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="button_validate" position="after">
+                    <button name="force_assign"
+                            string="Uygunluğu Zorla"
+                            attrs="{'invisible':[('state', 'in', ['draft', 'assigned', 'done', 'cancel'])]}"
+                            groups="altinkaya_stock.stock_force_avail_button"
+                            type="object"/>
+                </button>
+            </field>
+        </record>
 
 
         <!--<record id="view_move_tree_inherit_move_name" model="ir.ui.view">
@@ -55,14 +70,14 @@
             </field>
         </record>-->
 
-		<!--<record id="view_move_form_inherit_origin_moves" model="ir.ui.view">
+        <!--<record id="view_move_form_inherit_origin_moves" model="ir.ui.view">
             <field name="name">stock.move.form.inherit.altinkaya</field>
             <field name="model">stock.move</field>
             <field name="inherit_id" ref="stock.view_move_form"/>
             <field name="arch" type="xml">
-	            <button name="action_cancel" position="after">
-	            	<button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
-	            </button>
+                <button name="action_cancel" position="after">
+                    <button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
+                </button>
             </field>
         </record>
 
@@ -71,9 +86,9 @@
             <field name="model">stock.move</field>
             <field name="inherit_id" ref="stock.view_move_picking_form"/>
             <field name="arch" type="xml">
-	            <button name="do_unreserve" position="after">
-	            	<button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
-	            </button>
+                <button name="do_unreserve" position="after">
+                    <button name="action_view_origin_moves" string="Preceding Moves" type="object"/>
+                </button>
             </field>
         </record>-->
 
@@ -82,41 +97,41 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_internal_search"/>
             <field name="arch" type="xml">
-              <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
-                   <separator/> 
-                        <filter string="Today's Deliveries" name="todaydel"
-                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00')),
-                                  ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" /> 
-
-                        <filter string="Yesterday's Deliveries" name="yesterdaydel"
-                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 00:00:00')),
-                               ('date_done','&lt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 23:59:59'))]" />
-
-                        <filter string="last 3 day's Deliveries" name="threedaydel"
-                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-2)).strftime('%Y-%m-%d 00:00:00')),
-                                ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]" />
-
-                        <filter string="last Week's Deliveries" name="lastweekdel"
-                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(weeks=-1,days=0)).strftime('%Y-%m-%d 00:00:00')),
-                               ('date_done','&lt;=',(context_today()+relativedelta(weeks=-1,days=5)).strftime('%Y-%m-%d 23:59:59'))]" />
-
-
-                        <filter string="last Month's Deliveries" name="lastmonthdel"
-                        domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01 00:00:00')),
-                                 ('date_done','&lt;',time.strftime('%Y-%m-01 00:00:00'))]" /> 
-
-                        <filter string="This Month's Deliveries" name="thismonthdel" 
-                        domain="[('picking_type_code', '=', 'outgoing'), ('date_done','&gt;=',(context_today()).strftime('%Y-%m-01 00:00:00'))]" />
+                <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
                     <separator/>
-                                          <filter string="Two Weeks ago" name="twoweeks"
-                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-2)).strftime('%Y-%m-%d 00:00:00'))]" />
+                    <filter string="Today's Deliveries" name="todaydel"
+                            domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00')),
+                                  ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]"/>
 
-                                          <filter string="Four weeks ago" name="fourweeks"
-                        domain="[('date','&lt;',(context_today()+relativedelta(weeks=-4)).strftime('%Y-%m-%d 00:00:00'))]" />
+                    <filter string="Yesterday's Deliveries" name="yesterdaydel"
+                            domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 00:00:00')),
+                               ('date_done','&lt;=',(context_today()+relativedelta(days=-1)).strftime('%Y-%m-%d 23:59:59'))]"/>
 
-                  <separator/>
+                    <filter string="last 3 day's Deliveries" name="threedaydel"
+                            domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(days=-2)).strftime('%Y-%m-%d 00:00:00')),
+                                ('date_done','&lt;=',(context_today()+relativedelta(days=0)).strftime('%Y-%m-%d 23:59:59'))]"/>
 
-              </xpath>
+                    <filter string="last Week's Deliveries" name="lastweekdel"
+                            domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()+relativedelta(weeks=-1,days=0)).strftime('%Y-%m-%d 00:00:00')),
+                               ('date_done','&lt;=',(context_today()+relativedelta(weeks=-1,days=5)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="last Month's Deliveries" name="lastmonthdel"
+                            domain="[('picking_type_code', '=', 'outgoing'), '&amp;', ('date_done','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01 00:00:00')),
+                                 ('date_done','&lt;',time.strftime('%Y-%m-01 00:00:00'))]"/>
+
+                    <filter string="This Month's Deliveries" name="thismonthdel"
+                            domain="[('picking_type_code', '=', 'outgoing'), ('date_done','&gt;=',(context_today()).strftime('%Y-%m-01 00:00:00'))]"/>
+                    <separator/>
+                    <filter string="Two Weeks ago" name="twoweeks"
+                            domain="[('date','&lt;',(context_today()+relativedelta(weeks=-2)).strftime('%Y-%m-%d 00:00:00'))]"/>
+
+                    <filter string="Four weeks ago" name="fourweeks"
+                            domain="[('date','&lt;',(context_today()+relativedelta(weeks=-4)).strftime('%Y-%m-%d 00:00:00'))]"/>
+
+                    <separator/>
+
+                </xpath>
             </field>
         </record>
     </data>
