@@ -34,7 +34,8 @@ class MrpProduction(models.Model):
     date_start2 = fields.Datetime('Start Date')
     date_finished2 = fields.Datetime('End Date')
     priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')],string='Priority',default="0")
-    process_id = fields.Many2one('mrp.routing', string='Rota', readonly=True, compute='_get_process_id', store=True)
+#    process_id = fields.Many2one('mrp.routing', string='Rota', readonly=True, compute='_get_process_id', store=True)
+    process_id = fields.Many2one('mrp.routing', string='Rota', readonly=True, related="bom_id.routing_id", store=True)
     x_operator = fields.Many2one(
             'hr.employee',
             'Uretimi Yapan Operator'
