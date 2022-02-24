@@ -77,8 +77,14 @@ class PrintPackBarcodeWizard(models.TransientModel):
                      2:'',
                      3:'',
                      4:''}
-
-            for word in product_id.name.split():
+            
+            variable_attributes = product_id.attribute_line_ids.filtered(lambda l: len(l.value_ids) > 1).mapped('attribute_id')
+            variant = product_id.attribute_value_ids._variant_name(variable_attributes)
+            if variant:
+                fullname = product_id.name + '(' + variant + ')'
+            else:
+                fullname = product_id.name
+            for word in fullname.split():
                 if len(nameL[nameline]+' '+word) < 27:
                     nameL[nameline]=(nameL[nameline]+' '+word).strip()
                 else:
