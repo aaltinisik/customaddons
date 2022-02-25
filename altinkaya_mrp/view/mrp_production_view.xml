@@ -96,7 +96,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["process_id","=",1]]</field>
+            <field name="domain">[["process_id","ilike","enjeksiyon"]]</field>
             <field name="context">{'search_default_todo':1}</field>
         </record>
 
@@ -185,38 +185,20 @@
                   sequence="0"/>
 
 
-        <record id="mrp_depo_menu" model="ir.actions.act_window">
-            <field name="name">Depo Montaj İşleri</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="priority">1</field>
-            <field name="domain">[["process_id","=",3]]</field>
-            <field name="context">{'search_default_todo':1}</field>
-
-        </record>
-        <menuitem id="menu_mrp_depo_production"
-                  name="Depo Montaj İşleri"
-                  action="mrp_depo_menu"
-                  parent="mrp.menu_mrp_manufacturing"
-                  groups="mrp.group_mrp_routings"
-                  sequence="0"/>
-
 
         <record id="mrp_ayrintili_menu" model="ir.actions.act_window">
-            <field name="name">Ayrıntılı Montaj İşleri</field>
+            <field name="name">Montaj İşleri</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mrp.production</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="priority">1</field>
-            <field name="domain">[["process_id","=",6]]</field>
+            <field name="domain">["|",["process_id","ilike","basit montaj"],["process_id","ilike","ayrıntılı montaj"]]</field>
             <field name="context">{'search_default_todo':1}</field>
 
         </record>
         <menuitem id="menu_mrp_ayrintili_production"
-                  name="Ayrıltılı Montaj İşleri"
+                  name="Montaj İşleri"
                   action="mrp_ayrintili_menu"
                   parent="mrp.menu_mrp_manufacturing"
                   groups="mrp.group_mrp_routings"
