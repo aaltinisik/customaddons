@@ -132,7 +132,7 @@
                                                 <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 200, 15)" style="width:200px;height:15px"/>
                                             </span>
                                         <span t-field="line.product_id.code"/>
-                                        <span t-field="line.product_id.name"/>
+                                        <span t-field="line.product_id.display_name"/>
                                     </td>
 
                                     <td class="text-right">
@@ -176,6 +176,7 @@
                     </table>
 
 					<t t-set="routes" t-value="o.get_product_route()"/>
+					<t t-if="routes">
 					<table class="table table-condensed" t-if="routes" >
                     <thead>
                         <tr><th colspan="2" style="border-bottom: 2px solid black;"><strong>Mamül Ürün Rotası</strong></th></tr>
@@ -229,6 +230,7 @@
                                 </tr>
                         </tbody>
                     </table>
+					</t>
 
                     
 

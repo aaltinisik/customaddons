@@ -94,13 +94,13 @@
                                     <t t-if="o.picking_type_id.code != 'incoming'"><th><strong>Kaynak</strong></th></t>
                                     <t t-if="o.picking_type_id.code != 'outgoing'"><th><strong>Hedef</strong></th></t>
                                     <th><strong>Barkod</strong></th>
-
+                                    <th><strong>Rezerve Konum</strong></th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr t-foreach="o.move_lines" t-as="move">
                                     <t>
-                                        <td><span style="font-size:14px;">[<t t-esc="move.product_id.default_code"/>]</span><br/><span style="font-size:13px;"><t t-esc="move.product_id.name"/></span></td>
+                                        <td><span style="font-size:13px;"><t t-esc="move.product_id.display_name"/></span></td>
                                         <td class="text-right" style="font-size:12px;">
 
                                             <t>
@@ -116,7 +116,7 @@
                                         <t t-if="o.picking_type_id.code != 'outgoing'"><td><span t-field="move.location_dest_id"/></td></t>
                                         <t t-if="o.picking_type_id.code != 'incoming'" >
                                         	<td style="line-height: 1;"><span  style="font-size:12px;">
-                                        			<span t-field="move.location_id"/><br/>Stokta:<span t-field="move.product_id.qty_available"/>
+                                        			<span t-field="move.location_id"/><br/>Stokta:<t t-esc="'%.0f'%move.product_id.qty_available" /><span/>
                                         			<span t-field="move.product_id.uom_id.name"/><br/>
                                         		</span>
                                         		
@@ -128,15 +128,15 @@
                                             </span>
                                         </td>
 
-<!--                                         <t t-if="len(move.reserved_quant_ids) > 0"><td style="line-height: 1;"> -->
-<!--                                         				<ul style="list-style:none;"> -->
-<!--                                         					<li t-foreach="move.reserved_quant_ids" t-as="res_quant"> -->
-<!-- 		                                        				<span style="font-size:11px;"> -->
-<!-- 			                                        				<t t-esc="res_quant.location_id.name"/>:<t t-esc="res_quant.qty"/> -->
-<!-- 			                                        			</span> -->
-<!-- 			                                        		</li> -->
-<!--                                         				</ul></td> -->
-<!--                                         			</t> -->
+                                         <t t-if="move.has_move_lines"><td style="line-height: 1;">
+                                         				<ul style="list-style:none;">
+                                         					<li t-foreach="move.move_line_ids" t-as="quant">
+ 		                                        				<span style="font-size:11px;">
+ 			                                        				<t t-esc="quant.location_id.name"/>:<t t-esc="quant.product_uom_qty"/>
+ 			                                        			</span>
+ 			                                        		</li>
+                                         				</ul></td>
+                                         			</t>
 
                                     </t>
                                 </tr>

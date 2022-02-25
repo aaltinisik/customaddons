@@ -19,7 +19,6 @@
         "view/mrp_bom_views.xml",
         'view/x_makine_views.xml',
         'wizard/mrp_cancel_wizard_view.xml',
-        'data/data.xml',
     ],
     'demo': [],
     'test': [],
