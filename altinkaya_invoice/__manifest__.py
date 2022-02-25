@@ -3,7 +3,7 @@
     'name' : 'altinkaya Invoice',
     'version' : '12.0',
     'category': 'General',
-    'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery','partner_fax','stock_invoice_picking'],
+    'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax'],
     'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı',
     'description': """
         * Provides Invoice Address

@@ -16,10 +16,10 @@ class AccountInvoice(models.Model):
     x_comment_export = fields.Text('ihracaat fatura notu')
     z_tevkifatli_mi = fields.Boolean(';TEVKiFATLI', help="Eger fatura tevkifatli fatura ise bu alan secilmeli Sadece zirve programi transferinde kullanilmaktadir.")
 
-    carrier_id=fields.Many2one('delivery.carrier', 'Carrier')
+    carrier_id = fields.Many2one('delivery.carrier', 'Carrier')
        
     x_serino = fields.Char('Fatura No',size=64)
-    x_teslimat =  fields.Char('Teslimat Kisaltmasi',size=64)
+    x_teslimat = fields.Char('Teslimat Kisaltmasi',size=64)
     address_contact_id = fields.Many2one('res.partner','Shipping Address')
     altinkaya_payment_url = fields.Char(compute='_compute_altinkaya_payment_url', string='Altinkaya Payment Url')
     receiver = fields.Char(string="Reciever")
@@ -29,12 +29,14 @@ class AccountInvoice(models.Model):
         help="The reference of this invoice as provided by the supplier.",
         readonly=True, states={'draft': [('readonly', False)]})
     
-    waiting_picking_ids = fields.One2many('stock.picking',string="Waiting Pickings",compute="_compute_waiting_picking_ids")
-    
-    
+    waiting_picking_ids = fields.One2many('stock.picking', string="Waiting Pickings",
+                                          compute="_compute_waiting_picking_ids")
+
     def _compute_waiting_picking_ids(self):
         
-        stocks = self.env['stock.picking'].search([('partner_id','=',self.partner_id.id),('picking_type_id.code','=','incoming'),('invoice_status','=','to_invoice')])
+        stocks = self.env['stock.picking'].search([('partner_id', '=', self.partner_id.id),
+                                                   ('picking_type_id.code', '=', 'incoming'),
+                                                   ('invoice_status', '=', 'to_invoice')])
         
         return stocks
     
