@@ -34,7 +34,6 @@ class MrpProduction(models.Model):
     date_start2 = fields.Datetime('Start Date')
     date_finished2 = fields.Datetime('End Date')
     priority = fields.Selection([('0','Not urgent'),('1','Normal'),('2','Urgent'),('3','Very Urgent')],string='Priority',default="0")
-#    process_id = fields.Many2one('mrp.routing', string='Rota', readonly=True, compute='_get_process_id', store=True)
     process_id = fields.Many2one('mrp.routing', string='Rota', readonly=True, related="bom_id.routing_id", store=True)
     x_operator = fields.Many2one(
             'hr.employee',
@@ -53,17 +52,6 @@ class MrpProduction(models.Model):
     procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
     product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
              readonly=True)
-
-    @api.multi
-    def _get_process_id(self):
-        for production in self:
-            production.process_id = production.bom_id.routing_id.id
-
-    @api.model
-    def _update_existing_record(self):
-        productions = self.env['mrp.production'].search([('process_id', '=', False)])
-        for production in productions:
-            production.process_id = production.bom_id.routing_id.id
 
     @api.multi
     def _generate_moves(self):
