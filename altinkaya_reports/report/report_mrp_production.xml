@@ -176,7 +176,7 @@
                     </table>
 
 					<t t-set="routes" t-value="o.get_product_route()"/>
-					<t t-if="routes">
+					<t t-if="len(routes) == 2">
 					<table class="table table-condensed" t-if="routes" >
                     <thead>
                         <tr><th colspan="2" style="border-bottom: 2px solid black;"><strong>Mamül Ürün Rotası</strong></th></tr>
