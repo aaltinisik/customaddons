@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="partner_accounts_export" model="ir.ui.view">
+            <field name="name">partner.accounts.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
+					<field name="z_payable_export"/>
+                    <field name="z_receivable_export"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
