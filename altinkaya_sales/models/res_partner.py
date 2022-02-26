@@ -11,7 +11,6 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     z_old_tel = fields.Char('Eski Tel', size=64, required=False)
-    z_receivable_export = fields.Char('Receivable Export', size=64, required=False)
     z_old_fax = fields.Char('Eski Faks', size=64, required=False)
     z_old_cep = fields.Char('Eski Cep', size=64, required=False)
     z_contact_name = fields.Char('İlgili Kişi', size=64, required=False)

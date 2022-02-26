@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name' : 'altinkaya Invoice',
+    'name' : 'Altinkaya Invoice',
     'version' : '12.0',
     'category': 'General',
-    'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax'],
+    'depends' : ['base', 'sale', 'stock', 'sale_stock', 'delivery'],
     'author' : 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı',
     'description': """
         * Provides Invoice Address
@@ -15,6 +15,7 @@
     'website': 'http://www.codequarters.com',
     'data': [
              'views/account_views.xml',
+             'views/res_partner_view.xml',
              'wizard/partner_reconcile_close_view.xml',
             ],
     'demo': [],
