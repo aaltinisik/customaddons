@@ -36,7 +36,7 @@ class AccountInvoice(models.Model):
         
         stocks = self.env['stock.picking'].search([('partner_id', '=', self.partner_id.id),
                                                    ('picking_type_id.code', '=', 'incoming'),
-                                                   ('invoice_status', '=', 'to_invoice')])
+                                                   ('invoice_state', '=', '2binvoiced')])
         
         return stocks
     
