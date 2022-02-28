@@ -103,6 +103,11 @@ class CreateProcurementMove(models.TransientModel):
     @api.multi
     def action_create(self):
         self.ensure_one()
+        if (self.move_id.state == 'cancel'):
+            self.move_id.write({'state': 'draft',
+                                'procure_method': 'make_to_stock'})
+            self.move_id._action_confirm()
+
         if self.procure_move:
             if self.move_id.warehouse_id.id == 1:
                 self.create_procurement_merkez(

@@ -71,3 +71,39 @@ class StockMove(models.Model):
             'domain': [('move_dest_ids', 'in', self.id)],
             'target': 'current'
         }
+
+#     def _action_cancel(self):
+#         def find_orig_move_ids(moves):
+#             orig_moves = moves | moves.mapped('production_id.move_raw_ids')
+#             for move in moves:
+#                 orig_moves |= self.find_orig_move_ids(move.move_orig_ids)
+#             return orig_moves
+# ,
+#         orig_move_ids = find_orig_move_ids(self.mapped('move_orig_ids'))
+#
+#         res = super(StockMove, self)._action_cancel()
+#         if orig_move_ids:
+#             orig_move_ids._action_cancel()
+#             #orig_move_ids.mapped('production_id').action_cancel()
+#
+#         return res
+
+    def find_orig_move_ids(self,moves):
+        orig_moves = moves
+        for move in moves:
+            if move.move_orig_ids:
+                orig_moves |= self.find_orig_move_ids(move.move_orig_ids)
+            if move.production_id.move_raw_ids:
+                orig_moves |= self.find_orig_move_ids(move.production_id.move_raw_ids)
+        return orig_moves
+
+    def cancel_move_origs(self, move_id):
+        moves_with_origs = self.find_orig_move_ids(move_id)
+        moves_with_origs = moves_with_origs.filtered(lambda m: m.state not in ['done', 'cancel'])
+
+        moves_no_production = moves_with_origs.filtered(lambda m: not m.production_id)
+        productions = moves_with_origs.mapped('production_id')
+        productions = productions.filtered(lambda p: p.state not in ['progress', 'done', 'cancel'])
+        for production in productions:
+            production.action_cancel()
+        moves_no_production._action_cancel()

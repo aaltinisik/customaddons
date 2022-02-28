@@ -28,17 +28,21 @@ class MakeMtsMove(models.TransientModel):
     def find_orig_move_ids(self,moves):
         orig_moves = moves
         for move in moves:
-            orig_moves |= self.find_orig_move_ids(move.move_orig_ids)
+            if move.move_orig_ids:
+                orig_moves |= self.find_orig_move_ids(move.move_orig_ids)
+            if move.production_id.move_raw_ids:
+                orig_moves |= self.find_orig_move_ids(move.production_id.move_raw_ids)
         return orig_moves
 
     def cancel_move_origs(self, move_id):
         moves_with_origs = self.find_orig_move_ids(move_id)
         moves_with_origs = moves_with_origs.filtered(lambda m: m.state not in ['done', 'cancel'])
-        # set the propagate field to False, so it will be possible to cancel the moves separately.
-        moves_with_origs.write({'propagate': False})
+
         moves_no_production = moves_with_origs.filtered(lambda m: not m.production_id)
         productions = moves_with_origs.mapped('production_id')
-        productions.filtered(lambda p: p.state not in ['progress', 'done', 'cancel']).action_cancel()
+        productions = productions.filtered(lambda p: p.state not in ['progress', 'done', 'cancel'])
+        for production in productions:
+            production.action_cancel()
         moves_no_production._action_cancel()
 
     @api.multi
@@ -48,10 +52,13 @@ class MakeMtsMove(models.TransientModel):
         order_state = sale_order.state
         #invoice_state = self.invoice_status
 
+        propagate = self.move_id.propagate
+        # set the propagate field to False, so it will be possible to cancel the moves separately.
+        self.move_id.write({'propagate': False})
         self.cancel_move_origs(self.move_id)
-        #self.move_id._action_cancel()
+#        self.move_id._action_cancel()
         self.move_id.procure_method = 'make_to_stock'
-        self.move_id.move_orig_ids = False
+        self.move_id.propagate = propagate
         self.move_id._action_confirm()
         self.move_id._action_assign()
 
