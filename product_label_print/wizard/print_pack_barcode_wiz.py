@@ -78,7 +78,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
                      3:'',
                      4:''}
 
-            variable_attributes = product_id.attribute_line_ids.filtered(lambda l: len(l.value_ids) > 1).mapped('attribute_id')
+            variable_attributes = product_id.attribute_line_ids.filtered(lambda l: len(l.value_ids) > 0).mapped('attribute_id')
             variant = product_id.attribute_value_ids._variant_name(variable_attributes)
             if variant:
                 fullname = product_id.name + '(' + variant + ')'
