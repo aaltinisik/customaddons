@@ -12,17 +12,17 @@ class ResPartner(models.Model):
     def create(self, vals):
         if not vals.get('ref') and self._needsRef(vals=vals):
             vals['ref'] = self._get_next_ref(vals=vals)
-        if vals['ref'] and vals['country_id'] and vals['customer'] or vals['supplier']:
-            country_id = self.env['res.country'].browse(vals['country_id'])
-            if country_id.code != 'TR':
-                z_receivable_export = '120.Y%s' % (vals['ref'].strip() or '')
-                z_payable_export = '320.Y%s' % (vals['ref'].strip() or '')
-            else:
-                z_receivable_export = '120.%s' % (vals['ref'].strip() or '')
-                z_payable_export = '320.%s' % (vals['ref'].strip() or '')
-            vals.update({
-                'ref': vals['ref'],
-                'z_receivable_export': z_receivable_export,
-                'z_payable_export': z_payable_export
-            })
+            if vals['ref'] and vals['customer'] or vals['supplier']:
+                country_id = self.env['res.country'].browse(vals['country_id'])
+                if country_id and country_id.code != 'TR':
+                    z_receivable_export = '120.Y%s' % (vals['ref'].strip() or '')
+                    z_payable_export = '320.Y%s' % (vals['ref'].strip() or '')
+                else:
+                    z_receivable_export = '120.%s' % (vals['ref'].strip() or '')
+                    z_payable_export = '320.%s' % (vals['ref'].strip() or '')
+                vals.update({
+                    'ref': vals['ref'],
+                    'z_receivable_export': z_receivable_export,
+                    'z_payable_export': z_payable_export
+                })
         return super(ResPartner, self).create(vals)
