@@ -12,9 +12,9 @@
                     <field name="qty_available_merkez" string="Merkez"/>
                     <field name="qty_available_sincan" string="Sincan"/>
                     <button name="action_create_procurement" type="object" string="Tedarik"
-                            attrs="{'invisible':[('state','in',['waiting','done','cancel'])]}"/>
+                            attrs="{'invisible':[('state','in',['waiting','done'])]}"/>
                     <button name="action_make_mts" type="object" string="Stoktan Al"
-                            attrs="{'invisible':['|',('state','!=','waiting'),('state','in',['done','cancel'])]}"/>
+                            attrs="{'invisible':[('state', 'not in', ['waiting','cancel'])]}"/>
                 </xpath>
             </field>
         </record>
