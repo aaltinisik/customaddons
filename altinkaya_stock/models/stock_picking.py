@@ -70,6 +70,16 @@ class StockPicking(models.Model):
     teslimat_ucreti = fields.Float('Teslimat Ücreti')
     desi = fields.Float('Desi')
     koli_adedi = fields.Integer('Koli Adedi')
+    country_id = fields.Many2one('res.country',
+                                       string='Country',
+                                       related='partner_id.country_id',
+                                       store=True,
+                                       )
+    partner_invoice_id = fields.Many2one('res.partner',
+                                       string='Invoice Address',
+                                       related='sale_id.partner_invoice_id',
+                                       store=True,
+                                       )
 
     def force_assign(self):
         for pick in self:
