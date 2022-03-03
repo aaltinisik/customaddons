@@ -127,8 +127,8 @@
           	     </xpath>
           	     
           	      <xpath expr="/form/sheet/group/group/label[@for='currency_id']" position="before">
-          	        <field domain="[('company_id', '=', company_id),('internal_type','=', 'receivable'), ('deprecated', '=', False)]" name="account_id" groups="account.group_account_user"/>
-          	     	<field name="journal_id" groups="account.group_account_user" options="{'no_create': True}" attrs="{'readonly':[('move_name','!=',False)]}"/>
+          	        <field domain="[('company_id', '=', company_id),('internal_type','=', 'receivable'), ('deprecated', '=', False)]" name="account_id"/>
+          	     	<field name="journal_id" options="{'no_create': True}" attrs="{'readonly':[('move_name','!=',False)]}"/>
                     </xpath> 
           	     
           	     <xpath expr="/form/sheet/notebook/page[@name='other_info']" position="after">
