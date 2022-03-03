@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models,api,fields
+from odoo import models, api, fields
 
 
 class StockPicking(models.Model):
@@ -33,37 +33,36 @@ class StockPicking(models.Model):
         action['res_id'] = self.sale_id.id
         return action
 
-
     x_durum = fields.Selection(
-                                    [('1',u'İthal Eksik'),
-                                     ('2',u'CNC Kesimde'),
-                                     ('3',u'Enjeksiyonda'),
-                                     ('4',u'Montajda'),
-                                     ('5',u'Çıkacak'),
-                                     ('6',u'ACİL'),
-                                     ('7',u'Müsteriyi Bekliyor'),
-                                     ('8',u'Profil Kesimde'),
-                                     ('9', u'Sac Üretiminde'),
-                                     ('A', u'Boyada'),
-                                     ('B', u'Piyasadan Teminde')
-                                     ],
-                                     'Durumu', index=True)
+        [('1', u'İthal Eksik'),
+         ('2', u'CNC Kesimde'),
+         ('3', u'Enjeksiyonda'),
+         ('4', u'Montajda'),
+         ('5', u'Çıkacak'),
+         ('6', u'ACİL'),
+         ('7', u'Müsteriyi Bekliyor'),
+         ('8', u'Profil Kesimde'),
+         ('9', u'Sac Üretiminde'),
+         ('A', u'Boyada'),
+         ('B', u'Piyasadan Teminde')
+         ],
+        'Durumu', index=True)
     x_hazirlayan = fields.Selection(
-                                    [("Asim",u"Asım"),
-                                     ("Muhammet",u"Muhammet"),
-                                     ("Harun",u"Harun"),
-                                     ("Bilal", u"Bilal"),
-                                     ("Saffet",u"Saffet"),
-                                     ("Esra", u"Esra"),
-                                     ("Selma", u"Selma"),
-                                     (u"Uğur", u"Uğur"),
-                                     (u"Çağrı", u"Çağrı"),
-                                     ("Hatice", u"Hatice"),
-                                     ("Muhsin", u"Muhsin"),
-                                     ("Muharrem",u"Muharrem"),
-                                     ("Sefer","Sefer")
-                                     ],
-                                     u'Siparişi Hazırlayan',readonly=True )
+        [("Asim", u"Asım"),
+         ("Muhammet", u"Muhammet"),
+         ("Harun", u"Harun"),
+         ("Bilal", u"Bilal"),
+         ("Saffet", u"Saffet"),
+         ("Esra", u"Esra"),
+         ("Selma", u"Selma"),
+         (u"Uğur", u"Uğur"),
+         (u"Çağrı", u"Çağrı"),
+         ("Hatice", u"Hatice"),
+         ("Muhsin", u"Muhsin"),
+         ("Muharrem", u"Muharrem"),
+         ("Sefer", "Sefer")
+         ],
+        u'Siparişi Hazırlayan', readonly=True)
     comment_irsaliye = fields.Text('İrsaliye Notu')
     hazirlayan = fields.Many2one('hr.employee', 'Sevki Hazırlayan')
     teslim_alan = fields.Char('Malı Teslim Alan', size=32)
@@ -71,15 +70,20 @@ class StockPicking(models.Model):
     desi = fields.Float('Desi')
     koli_adedi = fields.Integer('Koli Adedi')
     country_id = fields.Many2one('res.country',
-                                       string='Country',
-                                       related='partner_id.country_id',
-                                       store=True,
-                                       )
+                                 string='Country',
+                                 related='partner_id.country_id',
+                                 store=True,
+                                 )
     partner_invoice_id = fields.Many2one('res.partner',
-                                       string='Invoice Address',
-                                       related='sale_id.partner_invoice_id',
-                                       store=True,
-                                       )
+                                         string='Invoice Address',
+                                         related='sale_id.partner_invoice_id',
+                                         store=True,
+                                         )
+    sales_uid = fields.Many2one('res.users',
+                               string='Sales Person',
+                               related='sale_id.create_uid',
+                               store=True,
+                               )
 
     def force_assign(self):
         for pick in self:
@@ -87,15 +91,3 @@ class StockPicking(models.Model):
             self.env['stock.move'].force_assign(moves=move_ids)
             pick.button_validate()
         return True
-
-
-    #TODO @dogan: invoice picking
-#     def _prepare_shipping_invoice_line(self, cr, uid, picking, invoice, context=None):
-#         res = super(stock_picking, self)._prepare_shipping_invoice_line(cr, uid, picking, invoice, context=context)
-#         if picking.carrier_id:
-#             invoice.carrier_id = picking.carrier_id
-#         if res and res.get('name',False) and ['name'].__contains__('Teslim'):
-#             invoice.address_contact_id = ''
-#         if res and res.get('price_unit',0.0) <= 0.0:
-#             return None
-#         return res
