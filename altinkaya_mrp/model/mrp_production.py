@@ -50,8 +50,8 @@ class MrpProduction(models.Model):
             string='Makine',
             readonly=1)
     procurement_group_name = fields.Char(compute='_get_procurement_group_name',string="Procurement Group",readonly=True)
-    product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
-             readonly=True)
+    # product_pickings = fields.Many2many(compute="_get_product_pickings",string="Product Pickings", relation='stock.picking',
+    #          readonly=True)
 
     @api.multi
     def _generate_moves(self):
@@ -182,6 +182,15 @@ class MrpProduction(models.Model):
                                   'active_ids':[self.product_id.id]}})
         return action
 
+
+    @api.multi
+    def action_create_procurement(self):
+        return {}
+
+
+    @api.multi
+    def action_make_mts(self):
+        return {}
 
 
     #TDE Stay Unported

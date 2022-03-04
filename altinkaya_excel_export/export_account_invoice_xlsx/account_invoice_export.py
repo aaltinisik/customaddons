@@ -18,7 +18,6 @@ class ReportAccountInvoice(models.TransientModel):
     )
 
     @api.multi
-    @api.depends('results')
     def _get_invoices(self):
         selected_ids = self.env.context.get('active_ids', [])
         ids = self.env['account.invoice'].browse(selected_ids)

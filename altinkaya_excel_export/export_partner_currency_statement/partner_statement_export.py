@@ -43,7 +43,6 @@ class ReportPartnerStatement(models.TransientModel):
     )
 
     @api.multi
-    @api.depends('results')
     def _get_lines(self):
         for rec in self:
             rec.results, rec.total, rec.sec_curr_total, rec.dc, rec.sec_curr_dc = self._get_statement_data(
