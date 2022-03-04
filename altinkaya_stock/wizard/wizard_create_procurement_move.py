@@ -109,70 +109,57 @@ class CreateProcurementMove(models.TransientModel):
             self.move_id._action_confirm()
 
         if self.procure_move:
-            if self.move_id.warehouse_id.id == 1:
-                self.create_procurement_merkez(
-                    group_id=self.move_id.group_id,
-                    qty=self.move_id.product_uom_qty
-                )
-            elif self.move_id.warehouse_id.id == 2:
-                self.create_procurement_sincan(
-                    group_id=self.move_id.group_id,
-                    qty=self.move_id.product_uom_qty
-                )
+            self.create_procurement(group_id=self.move_id.group_id,
+                                    location_id=self.move_id.warehouse_id.id,
+                                    qty=self.move_id.product_uom_qty)
+
             self.move_id._do_unreserve()
             self.move_id.procure_method = 'make_to_order'
             self.move_id.write({'state': 'waiting'})
-        if self.qty_to_sincan or self.qty_to_merkez:
-            if self.qty_to_sincan > 0.0:
-                self.create_procurement_sincan(group_id=self.move_id.group_id)
-            if self.qty_to_merkez > 0.0:
-                self.create_procurement_merkez(group_id=self.move_id.group_id)
+
+        if self.qty_to_sincan > 0.0:
+            self.create_replenishment(location_id=2, qty=self.qty_to_sincan)
+
+        if self.qty_to_merkez > 0.0:
+            self.create_replenishment(location_id=1, qty=self.qty_to_merkez)
+
+    @api.multi
+    def create_replenishment(self, location_id, qty):
+        self.ensure_one()
+        warehouse = self.env['stock.warehouse'].search([('id', '=', location_id)])
+        group_id = self.env["procurement.group"].create({
+            'name': u"%s" % (warehouse.name + " Manuel: " + self.env.user.name),
+        })
+
+        values = {
+            'group_id': group_id,
+            'warehouse_id': warehouse,
+        }
+        product_qty = qty
+        product_uom = self.uom
+        product = self.product_id
+        location = warehouse.lot_stock_id
+        origin = "Manuel" + str(self.env.user.id)
+        group_id.run(product, product_qty, product_uom, location, "/", origin, values)
 
 
     @api.multi
-    def create_procurement_sincan(self, group_id=None, qty=None):
+    def create_procurement(self, group_id, location_id, qty):
         self.ensure_one()
-        warehouse = self.env['stock.warehouse'].search([('id', '=', 2)])
+        warehouse = self.env['stock.warehouse'].search([('id', '=', location_id)])
         if not group_id:
             group_id = self.env["procurement.group"].create({
-                'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
+                'name': u"%s" % warehouse.name + " Açan: " + self.env.user.name,
             })
         values = {
-            'company_id': warehouse.company_id,
             'date_planned': self.move_id.date_expected,
             'move_dest_ids': self.move_id,
             'group_id': group_id,
-            'route_ids': self.move_id.product_id.route_ids,
             'warehouse_id': warehouse,
         }
-        product_qty = qty if qty else self.qty_to_sincan
+        product_qty = qty
         product_uom = self.uom
         product = self.product_id
         location = warehouse.lot_stock_id
         origin = self.move_id.picking_id.name or "/"
-        group_id.run(
-            product, product_qty, product_uom, location, "/", origin, values)
-
-    @api.multi
-    def create_procurement_merkez(self, group_id=None, qty=None):
-        self.ensure_one()
-        warehouse = self.env['stock.warehouse'].search([('id', '=', 1)])
-        if not group_id:
-            group_id = self.env["procurement.group"].create({
-                'name': u"%s" % (warehouse.name) + " Açan: " + self.env.user.name,
-            })
-        values = {
-            'company_id': warehouse.company_id,
-            'date_planned': self.move_id.date_expected,
-            'move_dest_ids': self.move_id,
-            'group_id': group_id,
-            'route_ids': self.move_id.product_id.route_ids,
-            'warehouse_id': warehouse,
-        }
-        product_qty = qty if qty else self.qty_to_merkez
-        product_uom = self.uom
-        product = self.product_id
-        location = warehouse.lot_stock_id
-        origin = self.move_id.picking_id.name or "/"
-        group_id.run(
-            product, product_qty, product_uom, location, "/", origin, values)
+        group_id.run(product, product_qty, product_uom, location, "/", origin, values)

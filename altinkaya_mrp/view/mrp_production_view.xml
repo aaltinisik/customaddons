@@ -154,23 +154,7 @@
                   sequence="0"/>
 
 
-        <record id="mrp_kalip_menu" model="ir.actions.act_window">
-            <field name="name">Kalıp Atölyesi İşleri</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="priority">1</field>
-            <field name="domain">[["process_id","=",4]]</field>
-            <field name="context">{'search_default_todo':1}</field>
 
-        </record>
-        <menuitem id="menu_mrp_kalip_production"
-                  name="Kalıp Atölyesi İşleri"
-                  action="mrp_kalip_menu"
-                  parent="mrp.menu_mrp_manufacturing"
-                  groups="mrp.group_mrp_routings"
-                  sequence="0"/>
 
 
         <record id="mrp_sac_menu" model="ir.actions.act_window">
@@ -231,23 +215,7 @@
                   sequence="0"/>
 
 
-        <record id="mrp_sayma_menu" model="ir.actions.act_window">
-            <field name="name">Sayma Paketleme İşleri</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="priority">1</field>
-            <field name="domain">[["process_id","=",7]]</field>
-            <field name="context">{'search_default_todo':1}</field>
 
-        </record>
-        <menuitem id="menu_mrp_sayma_production"
-                  name="Sayma Paketleme İşleri"
-                  action="mrp_sayma_menu"
-                  parent="mrp.menu_mrp_manufacturing"
-                  groups="mrp.group_mrp_routings"
-                  sequence="0"/>
 
 
         <record id="mrp_gorsel_menu" model="ir.actions.act_window">

@@ -18,29 +18,13 @@ class SplitStockMovePicking(models.TransientModel):
         if self.requested_qty - self.qty < 0.0:
             raise UserError(_(
                 "Bölmek istediğiniz miktar talep edilenden daha fazla."))
-
-        # copy as MTS
-        self.move_id.copy({'product_uom_qty': self.qty,
-                                 'created_production_id': 0,
-                                 'created_purchase_line_id': 0,
-                                 'procure_method': 'make_to_stock',
-                                 'state': 'confirmed',
-                                 # 'move_dest_ids': [
-                                 #     (4, self.move_id.move_dest_ids.id)] if self.move_id.move_dest_ids else False
-                                 })
+        self.move_id._do_unreserve()
+        new_move = self.move_id.copy({'product_uom_qty': self.qty})
+        new_move._action_confirm(merge=False)
         self.move_id.write({'product_uom_qty': self.move_id.product_uom_qty - self.qty})
-
-        # # üretim emri varsa
-        # if self.move_id.created_production_id:
-        #     self.env['change.production.qty'].create({
-        #         'mo_id': self.move_id.created_production_id.id,
-        #         'product_qty': self.move_id.created_production_id.product_qty - self.qty
-        #     }).change_prod_qty()
-        #
-        # # satınalma varsa
-        # if self.move_id.created_purchase_line_id:
-        #     self.move_id.created_purchase_line_id.write(
-        #         {'product_qty': self.move_id.created_purchase_line_id.product_uom_qty - self.qty})
+        self.move_id._action_confirm(merge=False)
+        self.move_id._action_assign()
+        new_move._action_assign()
 
     @api.onchange('qty')
     def calc_qty_after_split(self):
