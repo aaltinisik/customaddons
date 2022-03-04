@@ -26,7 +26,7 @@ class ProductPriceType(models.Model):
     name = fields.Char(string="Name",required=True)
     field = fields.Selection(selection = lambda self:self._compute_selection_fields(),string="Field",required=True)
     active = fields.Boolean(string="Active",default=True)
-    currency = fields.Many2one('res.currency', 'Currency', select=True, required=True)
+    currency = fields.Many2one('res.currency', 'Currency', required=True)
 
 
 
