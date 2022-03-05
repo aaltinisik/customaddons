@@ -110,7 +110,7 @@ class CreateProcurementMove(models.TransientModel):
 
         if self.procure_move:
             self.create_procurement(group_id=self.move_id.group_id,
-                                    location_id=self.move_id.warehouse_id.id,
+                                    location_id=self.move_id.location_id,
                                     qty=self.move_id.product_uom_qty)
 
             self.move_id._do_unreserve()
@@ -146,7 +146,7 @@ class CreateProcurementMove(models.TransientModel):
     @api.multi
     def create_procurement(self, group_id, location_id, qty):
         self.ensure_one()
-        warehouse = self.env['stock.warehouse'].search([('id', '=', location_id)])
+        warehouse = self.env['stock.warehouse'].search([('id', '=', location_id.get_warehouse().id)])
         if not group_id:
             group_id = self.env["procurement.group"].create({
                 'name': u"%s" % warehouse.name + " Açan: " + self.env.user.name,

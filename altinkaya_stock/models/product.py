@@ -70,6 +70,11 @@ class Product(models.Model):
     qty_virtual_sincan = fields.Float('Sincan Depo Tahmini',compute='_compute_custom_available')
     qty_virtual_merkez = fields.Float('Merkez Depo Tahmini',compute='_compute_custom_available')
 
+    def action_view_todo_moves(self):
+        self.ensure_one()
+        action = self.env.ref('altinkaya_stock.stock_move_line_action').read()[0]
+        action['domain'] = [('product_id', '=', self.id)]
+        return action
 
     # active_bom =  fields.Many2one('mrp.bom', string='Active Bom',
     #     compute='_find_active_bom', readonly=True, store=False)
