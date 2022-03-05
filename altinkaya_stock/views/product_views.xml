@@ -25,8 +25,34 @@
                   <xpath expr="//field[@name='product_tmpl_id']" position="before">
                       <br/>
                   </xpath>
+                  <button name="action_view_stock_move_lines" position="before">
+                       <button string="Yapılacak Hareketler"
+                            type="object"
+                            name= "action_view_todo_moves"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            class="oe_stat_button" icon="fa-arrows-v"
+                            groups="stock.group_stock_user"/>
+                  </button>
+
               </field>
         </record>
+
+    <record id="stock_move_line_action" model="ir.actions.act_window">
+            <field name="name">Yapılacak Hareketler</field>
+            <field name="res_model">stock.move</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="stock.view_move_tree_receipt_picking"/>
+            <field name="context">{'search_default_future': 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_empty_folder">
+                Bu ürün için yapılacak hareketleri yok.
+              </p>
+            </field>
+    </record>
+
+
         <record id="product_variant_button_altinkaya_stock" model="ir.ui.view">
             <field name="name">Altinkaya Product Variant Button</field>
             <field name="model">product.template</field>
