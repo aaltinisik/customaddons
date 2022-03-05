@@ -30,10 +30,6 @@ class ReportPartnerStatement(models.TransientModel):
     date_end = fields.Date('End Date', required=1, default=_default_date_end, store=True)
     date_now = fields.Date('Date', required=1, default=_default_date_now, store=True)
     partner_id = fields.Many2one('res.partner', string='Customer Name', default=_default_partner)
-    total = fields.Float('Balance', store=True)
-    dc = fields.Char('dc', store=True)
-    sec_curr_dc = fields.Char('sec_curr_dc', store=True)
-    sec_curr_total = fields.Float('Secondary Currency Balance', store=True)
     default_currency = fields.Many2one('res.currency', string='Currency', default=_default_comp_curr)
     results = fields.Many2many(
         comodel_name='partner.statement.lines',
@@ -45,8 +41,7 @@ class ReportPartnerStatement(models.TransientModel):
     @api.multi
     def _get_lines(self):
         for rec in self:
-            rec.results, rec.total, rec.sec_curr_total, rec.dc, rec.sec_curr_dc = self._get_statement_data(
-                self.partner_id)
+            rec.results = self._get_statement_data(self.partner_id)
 
     @api.multi
     def _get_statement_data(self, partner_id):
@@ -85,7 +80,7 @@ class ReportPartnerStatement(models.TransientModel):
                 credit = (each_dict['credit'] - each_dict['debit'])
 
             if partner.has_secondary_curr:
-                move_date = datetime.strptime(str(each_dict['date']), '%Y-%m-%d').strftime('%d.%m.%Y')
+                move_date = each_dict['date'].strftime("%Y-%m-%d")
                 cr.execute(
                     "SELECT rate\
                         FROM res_currency_rate\
@@ -123,9 +118,7 @@ class ReportPartnerStatement(models.TransientModel):
                     'secondary_currency': partner.secondary_curr_id.id,
                     'primary_currency': currency_id.id}).id)
 
-        sec_curr_dc = sec_curr_balance > 0.01 and 'B' or 'A'
-        dc = balance > 0.01 and 'B' or 'A'
-        return statement_data, balance or 0.00, sec_curr_balance or 0.00, dc, sec_curr_dc
+        return statement_data
 
 
 class StatementLines(models.TransientModel):
