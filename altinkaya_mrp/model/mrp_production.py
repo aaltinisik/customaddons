@@ -78,16 +78,16 @@ class MrpProduction(models.Model):
     def get_product_route(self):
         def _get_next_moves(move_id):
             if move_id:
-                next_moves = _get_next_moves(move_id.move_dest_ids)
+                next_moves = _get_next_moves(fields.first(move_id.move_dest_ids))
                 if next_moves:
                     return move_id | next_moves
                 else:
                     return move_id
             return False
         
-        if self.move_finished_ids:
+        if self.move_dest_ids:
             route = []
-            for m in _get_next_moves(self.move_finished_ids[0]):
+            for m in _get_next_moves(fields.first(self.move_dest_ids)):
                 if m.picking_id.id:
                     route.append(('picking',m.picking_id))
                 elif m.raw_material_production_id.id:
