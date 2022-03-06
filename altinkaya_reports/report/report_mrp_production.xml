@@ -127,51 +127,28 @@
                             <t t-if="o.move_raw_ids">
 
                                 <tr t-foreach="o.move_raw_ids" t-as="line">
-                                    <td>
+                                    <td style="font-size:12px; line-heigh:80%;">
                                           <span t-if="line.product_id and line.product_id.barcode">
                                                 <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 200, 15)" style="width:200px;height:15px"/>
                                             </span>
-                                        <span t-field="line.product_id.code"/>
                                         <span t-field="line.product_id.display_name"/>
                                     </td>
 
-                                    <td class="text-right">
+                                    <td style="font-size:12px;" class="text-right">
                                         <t>
                                         <t t-if="line.product_uom.category_id.id == 1"><t t-esc="'%.0f'%line.product_qty" /> <span t-field="line.product_uom.name" groups="product.group_uom"/></t>
                                          <t t-if="line.product_uom.category_id.id != 1"><span t-field="line.product_qty"/> <span t-field="line.product_uom.name" groups="product.group_uom"/></t>
                                       </t>
                                     </td>
 
-                                    <td class="text-center">
+                                    <td style="font-size:12px;" class="text-center">
                                         <span t-field="line.location_id.display_name"/>
                                     </td>
 
 
                                 </tr>
                             </t>
-<!--                             <t t-if="o.move_lines2"> -->
-<!--                                 <tr> -->
-<!--                                     <td colspan="4"><strong>Kullanılmış Ürünler</strong></td> -->
-<!--                                 </tr> -->
-<!--                                 <tr t-foreach="o.move_lines2" t-as="line2"> -->
-<!--                                     <td> -->
-<!--                                         <span t-field="line2.product_id.code"/> -->
-<!--                                         <span t-field="line2.product_id.name"/> -->
-<!--                                     </td> -->
-<!--                                     <td class="text-right"> -->
-<!--                                           <t> -->
-<!--                                         <t t-if="line2.product_uom.id in [1,19,29,30]"><t t-esc="'%.0f'%line2.product_qty" /> <span t-field="line2.product_uom.name" groups="product.group_uom"/></t> -->
-<!--                                          <t t-if="not(line2.product_uom.id in [1,19,29,30])"><span t-field="line2.product_qty"/> <span t-field="line2.product_uom.name" groups="product.group_uom"/></t> -->
-<!--                                       </t> -->
-<!--                                     </td> -->
-<!--                                     <td class="text-center" groups="stock.group_locations"> -->
-<!--                                         <span t-field="line2.location_id.name"/> -->
-<!--                                     </td> -->
-<!--                                     <td class="text-center" groups="stock.group_locations"> -->
-<!--                                         <span t-field="line2.location_dest_id.name"/> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                             </t> -->
+
                         </tbody>
                     </table>
 
@@ -220,9 +197,14 @@
 	                                    </td>
 	                                    <td style="border-color: #ffffff; text-align: left; vertical-align: center;">
 	                                    	<h4 style="margin-top: 2px;margin-bottom: 2px;font-size: 20px;">
-	                                    		<span t-field="route[1].name"/> : <span t-field="route[1].move_finished_ids.location_id"/> >> <span t-field="route[1].move_dest_ids.location_dest_id"/>
+	                                    		<span t-field="route[1].name"/> : <span t-field="route[1].move_dest_ids.location_id"/> >> <span t-field="route[1].move_dest_ids.location_dest_id"/>
 	                                    	</h4>
+											<t t-if="not o.move_dest_ids.raw_material_production_id">
 	                                     	<h6><span t-field="route[1].partner_id"/></h6>
+											</t>
+											<t t-if="o.move_dest_ids.raw_material_production_id">
+	                                     	<h6><span t-field="o.move_dest_ids.raw_material_production_id.product_id.display_name"/></h6>
+											</t>
 	                                    </td>
 	                                </t>
 
