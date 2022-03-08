@@ -85,6 +85,7 @@ class StockPicking(models.Model):
                                store=True,
                                )
     sale_note = fields.Text('Sale Note', related='sale_id.note', readonly=True)
+    trimmed_sale_note = fields.Text('Sale Note', compute='_compute_trimmed_sale_note', readonly=True, store=False)
 
     def force_assign(self):
         for pick in self:
@@ -92,3 +93,14 @@ class StockPicking(models.Model):
             self.env['stock.move'].force_assign(moves=move_ids)
             pick.button_validate()
         return True
+
+    @api.depends('sale_id.note')
+    def _compute_trimmed_sale_note(self):
+        """
+        Trims the sale note to the first 50 characters.
+        """
+        for pick in self:
+            if pick.sale_id.note and len(pick.sale_id.note) > 50:
+                pick.trimmed_sale_note = pick.sale_id.note[:50] + "..."
+            else:
+                pick.trimmed_sale_note = pick.sale_id.note
