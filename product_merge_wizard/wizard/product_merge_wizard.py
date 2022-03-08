@@ -56,7 +56,7 @@ class ProductMergeWizard(models.TransientModel):
         new_product_tmpl_id.with_context({'create_product_product': False}).write(vals)
 
         for product_line in self.product_line_ids:
-            product_line.product_id.attribute_value_ids = product_line.value_ids
+            product_line.product_id.attribute_value_ids = [(6,False,product_line.value_ids.ids)]
 
         product_tmpl_ids = self.mapped('product_line_ids.product_id.product_tmpl_id')
         product_ids = self.mapped('product_line_ids.product_id')
@@ -64,6 +64,8 @@ class ProductMergeWizard(models.TransientModel):
 
         for product_tmpl_id in product_tmpl_ids:
             if product_tmpl_id.product_variant_count == 0:
+                if product_tmpl_id.id != new_product_tmpl_id.id:
+                    product_tmpl_id.attribute_line_ids.unlink()
                 # update product references
                 self._update_refs(product_tmpl_id, new_product_tmpl_id)
                 product_tmpl_id.unlink()
@@ -240,8 +242,19 @@ class ProductMergeProductLine(models.TransientModel):
     @api.onchange('product_id')
     def onchange_product_id(self):
         self.value_ids = False
+        attribute_value_ids = self.env['product.attribute.value']
+
+
         attribute_ids = self.wizard_id.attribute_line_ids.mapped('attribute_id')
-        self.value_ids = [(6, False, self.product_id.attribute_value_ids.filtered(lambda av: av in attribute_ids))]
+        for value_from_product in self.product_id.attribute_value_ids:
+            if value_from_product.attribute_id in attribute_ids:
+                attribute_value_ids = attribute_value_ids | value_from_product
+                # Eksik özellikleri yukarya eklemek çalışmadı. güncelleme yapmıyor.
+                # for attribute_line in self.wizard_id.attribute_line_ids:
+                #     if value_from_product.attribute_id == attribute_line.attribute_id:
+                #         attribute_line.value_ids = [(6, False, (attribute_line.value_ids | value_from_product).ids)]
+
+        self.value_ids = [(6, False, attribute_value_ids.ids)]
 
     @api.onchange('value_ids')
     def onchange_value_ids(self):
