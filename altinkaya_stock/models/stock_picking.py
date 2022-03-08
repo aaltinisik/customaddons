@@ -84,6 +84,7 @@ class StockPicking(models.Model):
                                related='sale_id.create_uid',
                                store=True,
                                )
+    sale_note = fields.Text('Sale Note', related='sale_id.note', readonly=True)
 
     def force_assign(self):
         for pick in self:

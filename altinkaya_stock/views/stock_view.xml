@@ -55,6 +55,7 @@
 
                 <xpath expr="//field[@name='move_ids_without_package']" position='after'>
                     <group name="notes">
+                        <field name="sale_note"/>
                         <field name="comment_irsaliye" placeholder="İrsaliyeye eklenecek not..."/>
                         <field name="teslim_alan"/>
                     </group>
