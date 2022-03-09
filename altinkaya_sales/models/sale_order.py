@@ -149,6 +149,7 @@ class sale_order_line(models.Model):
 
         for line in self.filtered(lambda l: l.set_product == True and l.state in ['draft', 'sent']):
             bom_id = bom_obj._bom_find(product=line.product_id)
+            customer_lang = line.order_id.partner_id.lang
             if not bom_id:
                 continue
             #bom_id = bom_obj.browse(bom_id)
@@ -167,6 +168,7 @@ class sale_order_line(models.Model):
                     sol.product_uom_change()
                     sol._onchange_discount()
                     sol._compute_amount()
+                    sol.name = bom_line.product_id.with_context({'lang': customer_lang}).display_name
                     vals = sol._convert_to_write(sol._cache)
 
                     sol_id = self.create(vals)
