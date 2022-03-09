@@ -125,14 +125,14 @@ class sale_order_line(models.Model):
     
     @api.onchange('show_custom_products')
     def onchange_show_custom(self):
-        domain = []
+        domain = [('sale_ok','=',True)]
         self.product_tmpl_id = False
         self.product_id = False
         
         if not self.show_custom_products:
             custom_categories = self.env['product.category'].search([('custom_products','=',True)])
-            domain = [('categ_id','not in',custom_categories.ids)]
-            
+            domain = ['&',('sale_ok','=',True), ('categ_id','not in',custom_categories.ids)]
+
         return {'domain':{'product_tmpl_id':domain}}
     
 
