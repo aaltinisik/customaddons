@@ -80,12 +80,18 @@ class StockPicking(models.Model):
                                          store=True,
                                          )
     sales_uid = fields.Many2one('res.users',
-                               string='Sales Person',
-                               related='sale_id.create_uid',
-                               store=True,
-                               )
+                                string='Sales Person',
+                                related='sale_id.create_uid',
+                                store=True,
+                                )
     sale_note = fields.Text('Sale Note', related='sale_id.note', readonly=True)
     trimmed_sale_note = fields.Text('Sale Note', compute='_compute_trimmed_sale_note', readonly=True, store=False)
+    sale_carrier_id = fields.Many2one("delivery.carrier", string="Sale Carrier", related="sale_id.carrier_id",
+                                      track_visibility='onchange', readonly=False)
+
+    @api.onchange('sale_carrier_id')
+    def _onchange_sale_carrier_id(self):
+        self.carrier_id = self.sale_carrier_id
 
     def force_assign(self):
         for pick in self:
