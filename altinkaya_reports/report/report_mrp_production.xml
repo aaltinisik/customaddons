@@ -118,7 +118,7 @@
                                 <th><strong>Üretimde Kullanılacak Ürünler</strong></th>
                                 <th class="text-right"><strong>Quantity </strong></th>
                                 <th class="text-center" >
-                                    <strong>Kaynak</strong>
+                                    <strong>Kaynak Konum</strong>
                                 </th>
 
                             </tr>
@@ -128,7 +128,7 @@
                             <t t-if="o.move_raw_ids">
 
                                 <tr t-foreach="o.move_raw_ids" t-as="line">
-                                    <td style="font-size:12px; line-heigh:80%;">
+                                    <td style="font-size:11px; line-heigh:80%;">
                                           <span t-if="line.product_id and line.product_id.barcode">
                                                 <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 200, 15)" style="width:200px;height:15px"/>
                                             </span>
@@ -142,7 +142,7 @@
                                       </t>
                                     </td>
 
-                                    <td style="font-size:12px;" class="text-center">
+                                    <td style="font-size:10px;" class="text-center">
                                         <span t-field="line.location_id.display_name"/>
                                     </td>
 
