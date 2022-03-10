@@ -48,6 +48,9 @@
                             <div t-if="o.note" style="font-size:14px;">
                                 Not: <span style="font-size:14px;" t-field="o.note" />
                             </div>
+                            <div t-if="o.sale_note" style="font-size:14px;">
+                                Satış Notu: <span style="font-size:14px;" t-field="o.sale_note" />
+                            </div>
                             <table class="table table-condensed" style=";margin-bottom: 2px;">
                             <thead>
                                 <tr style="font-size:10px;">
