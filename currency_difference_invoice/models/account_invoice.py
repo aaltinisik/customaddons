@@ -2,11 +2,10 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools import float_compare
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
-
-    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False)
 
     def create(self, vals):
         if vals.get('currency_id', False) and vals.get('partner_id', False):
