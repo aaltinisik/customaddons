@@ -11,6 +11,6 @@ class AccountInvoice(models.Model):
         if vals.get('currency_id', False) and vals.get('partner_id', False):
             currency = self.env['res.currency'].browse(vals['currency_id'])
             partner = self.env['res.partner'].browse(vals['partner_id'])
-            if currency != partner.currency_id:
+            if currency != partner.secondary_curr_id:
                 raise ValidationError(_('The currency of the invoice must be the same as the currency of the partner.'))
         return super(AccountInvoice, self).create(vals)
