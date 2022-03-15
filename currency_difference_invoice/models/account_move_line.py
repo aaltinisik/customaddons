@@ -4,21 +4,21 @@ from odoo import models, fields, api
 from odoo.tools import float_is_zero, float_compare
 
 
-class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
-
-    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False,
-                                            compute='_compute_currency_difference_checked', store=False)
-    currency_difference_amount = fields.Monetary(string='Currency Difference Amount')
-
-    @api.depends('currency_difference_amount')
-    def _compute_currency_difference_checked(self):
-        prec = self.env['decimal.precision'].precision_get('Account')
-        for line in self:
-            if float_compare(line.currency_difference_amount, abs(line.amount_currency), precision_digits=prec):
-                line.currency_difference_checked = False
-            else:
-                line.currency_difference_checked = True
+# class AccountMoveLine(models.Model):
+#     _inherit = 'account.move.line'
+#
+#     currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False,
+#                                             compute='_compute_currency_difference_checked', store=False)
+#     currency_difference_amount = fields.Monetary(string='Currency Difference Amount')
+#
+#     @api.depends('currency_difference_amount')
+#     def _compute_currency_difference_checked(self):
+#         prec = self.env['decimal.precision'].precision_get('Account')
+#         for line in self:
+#             if float_compare(line.currency_difference_amount, abs(line.amount_currency), precision_digits=prec):
+#                 line.currency_difference_checked = False
+#             else:
+#                 line.currency_difference_checked = True
 
     # def create(self, vals):
     #     res = super(AccountMoveLine, self).create(vals)
