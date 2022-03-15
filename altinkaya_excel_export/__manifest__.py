@@ -25,7 +25,6 @@
         # Partner Statement
         'export_partner_currency_statement/temp_partner_statement_currency.xml',
         'export_partner_currency_statement/reports.xml',
-        'export_partner_currency_statement/res_partner_view.xml'
     ],
     'installable': True,
 }
