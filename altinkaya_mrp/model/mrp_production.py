@@ -66,6 +66,10 @@ class MrpProduction(models.Model):
             # Check for all draft moves whether they are mto or not
             production._adjust_procure_method()
             production.move_raw_ids._action_confirm()
+            production.move_raw_ids._action_assign()
+            production._adjust_procure_method()
+            production.move_raw_ids._action_confirm()
+            production.move_raw_ids._action_assign()
         return True
     
     
