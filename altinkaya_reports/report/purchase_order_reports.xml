@@ -55,10 +55,23 @@
                                 <tr>
                                     <td>
                                         <span>
-                                            <t t-esc="o.partner_id.neighbour_id or ''"/><t t-esc="o.partner_id.street or ''"/><br/>
-                                            <t t-if="o.partner_id.street2"><t t-esc="o.partner_id.street2"/><br/></t>
-                                            <t t-if="o.partner_id.region_id or o.partner_id.district_id"><t t-esc="o.partner_id.region_id or ''"/> <t t-esc="o.partner_id.district_id or ''"/><br/></t>
-                                            <t t-if="o.partner_id.state_id.name or o.partner_id.country_id.name"> <t t-esc="o.partner_id.state_id.name or ''"/> / <t t-esc="o.partner_id.country_id.name or ''"/></t>
+                                            <t t-esc="o.partner_id.neighbour_id or ''"/>
+                                            <t t-esc="o.partner_id.street or ''"/>
+                                            <br/>
+                                            <t t-if="o.partner_id.street2">
+                                                <t t-esc="o.partner_id.street2"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="o.partner_id.region_id or o.partner_id.district_id">
+                                                <t t-esc="o.partner_id.region_id or ''"/>
+                                                <t t-esc="o.partner_id.district_id or ''"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="o.partner_id.state_id.name or o.partner_id.country_id.name">
+                                                <t t-esc="o.partner_id.state_id.name or ''"/>
+                                                /
+                                                <t t-esc="o.partner_id.country_id.name or ''"/>
+                                            </t>
                                         </span>
                                         <br/>
                                     </td>

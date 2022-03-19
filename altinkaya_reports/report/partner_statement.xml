@@ -1,319 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<template id="report_partner_statement_document">
-		<!-- <t t-call="web.html_container">
-			<t t-call="web.basic_layout"> -->
-			<t t-set="lang" t-value="user.lang"/>
-		<style>
-				.table-bordered thead th {
-					border: 1px solid black !important;
-				}
-				.table-bordered th, .table-bordered td {
-					border: 1px solid black !important;
-				}
-		</style>
-				<div class="header" style="font-size:10pt">
-					<div class="row" style="border-bottom:2px solid black;margin">
-						<div class="col-7">
-							<img src="/altinkaya_reports/static/img/altinkaya.svg"
-								style="max-height:30px" />
-							<br />
-							<br />
-							<strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.
-								TİC. A.Ş.
-							</strong>
-							<br />
-							<span>İvedikosb Mah. 1469. sk, No:10 </span>
-							<br />
-							<span>İvedik OSB</span>
-							<br />
-							<span>06378 Yenimahalle / ANKARA</span>
-						</div>
-						<div class="col-5">
-							<strong class="text-right" style="font-size:16pt">PARTNER STATEMENT
-							</strong>
-							<br />
-							<br />
-							<div class="row">
-								<div class="col-4 text-left">
-									<strong><span>Ulus VD:</span></strong>
-									<br />
-									<strong><span>Tel:</span></strong>
-									<br />
-									<strong><span>Eposta:</span></strong>
-									<br />
-								</div>
-								<div class="col-8 text-right">
-									<span>0610422947</span>
-									<br />
-									<span>+90 312 395 2768</span>
-									<br />
-									<span>muhasebe@altinkaya.com.tr</span>
-									<br />
+    <template id="report_partner_statement_document">
+        <!-- <t t-call="web.html_container">
+            <t t-call="web.basic_layout"> -->
+        <t t-set="lang" t-value="user.lang"/>
+        <style>
+            .table-bordered thead th {
+            border: 1px solid black !important;
+            }
+            .table-bordered th, .table-bordered td {
+            border: 1px solid black !important;
+            }
+        </style>
+        <div class="header" style="font-size:10pt">
+            <div class="row" style="border-bottom:2px solid black;margin">
+                <div class="col-7">
+                    <img src="/altinkaya_reports/static/img/altinkaya.svg"
+                         style="max-height:30px"/>
+                    <br/>
+                    <br/>
+                    <strong style="font-size:12pt">ALTINKAYA ELEKTRONİK CİHAZ KUTULARI SAN.
+                        TİC. A.Ş.
+                    </strong>
+                    <br/>
+                    <span>İvedikosb Mah. 1469. sk, No:10</span>
+                    <br/>
+                    <span>İvedik OSB</span>
+                    <br/>
+                    <span>06378 Yenimahalle / ANKARA</span>
+                </div>
+                <div class="col-5">
+                    <strong class="text-right" style="font-size:16pt">PARTNER STATEMENT
+                    </strong>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-4 text-left">
+                            <strong>
+                                <span>Ulus VD:</span>
+                            </strong>
+                            <br/>
+                            <strong>
+                                <span>Tel:</span>
+                            </strong>
+                            <br/>
+                            <strong>
+                                <span>Eposta:</span>
+                            </strong>
+                            <br/>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span>0610422947</span>
+                            <br/>
+                            <span>+90 312 395 2768</span>
+                            <br/>
+                            <span>muhasebe@altinkaya.com.tr</span>
+                            <br/>
 
-								</div>
+                        </div>
 
-							</div>
+                    </div>
 
-						</div>
-					</div>
+                </div>
+            </div>
 
 
-				</div>
-				<div class="footer">
-					<div class="row"
-						style="border-top:2px solid black;font-size:10pt">
-						<div class="col-12 text-center">
-							<span>Telefon: +90 312 395 2768 |
-								www.altinkaya.com.tr |
-								Ulus Vergi Dairesi 0610422947
-							</span>
-							<br />
-							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006
-								2980 17 (TL)
-							</span>
-							<br />
-							<span>
-								Prepared By: ALTINKAYA - Page
-								<span class="page" />/<span class="topage" />
-							</span>
-							<br />
-						</div>
-					</div>
-				</div>
-				<!-- <t t-foreach="docs" t-as="o">
-					<t t-set="o" t-value="o.with_context(lang=o.lang)" /> -->
-					<div class="page" style="font-size=8pt;">
-						<div class="row">
-							<div class="col-12">
-								<table class="table table-sm table-borderless">
-									<tr>
-										<td>
-											<strong>
-												Partner:
-												<span t-esc="o.display_name" />
-											</strong>
-											<br />
-											<span>
-												<span t-esc="o._display_address()"></span>
-												<!-- <span t-esc="o.street" /> , <span t-esc="o.street2" /> , 
-													<span t-esc="o.city" /> <span t-esc="o.state_id.name" /> - <span t-esc="o.zip" 
-													/> , <span t-esc="o.country_id.name" /> -->
-											</span>
-											<br />
-											<span>
-												<strong>Tel:</strong>
-												<t t-esc="o.phone" />
-												<br/>
-											<t t-if="o.fax">
-												<strong>Fax:</strong>
-												<span t-esc="o.fax" />
-											</t>
+        </div>
+        <div class="footer">
+            <div class="row"
+                 style="border-top:2px solid black;font-size:10pt">
+                <div class="col-12 text-center">
+                    <span>Telefon: +90 312 395 2768 |
+                        www.altinkaya.com.tr |
+                        Ulus Vergi Dairesi 0610422947
+                    </span>
+                    <br/>
+                    <span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006
+                        2980 17 (TL)
+                    </span>
+                    <br/>
+                    <span>
+                        Prepared By: ALTINKAYA - Page
+                        <span class="page"/>/
+                        <span class="topage"/>
+                    </span>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <!-- <t t-foreach="docs" t-as="o">
+            <t t-set="o" t-value="o.with_context(lang=o.lang)" /> -->
+        <div class="page" style="font-size=8pt;">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <td>
+                                <strong>
+                                    Partner:
+                                    <span t-esc="o.display_name"/>
+                                </strong>
+                                <br/>
+                                <span>
+                                    <span t-esc="o._display_address()"></span>
+                                    <!-- <span t-esc="o.street" /> , <span t-esc="o.street2" /> ,
+                                        <span t-esc="o.city" /> <span t-esc="o.state_id.name" /> - <span t-esc="o.zip"
+                                        /> , <span t-esc="o.country_id.name" /> -->
+                                </span>
+                                <br/>
+                                <span>
+                                    <strong>Tel:</strong>
+                                    <t t-esc="o.phone"/>
+                                    <br/>
+                                    <t t-if="o.fax">
+                                        <strong>Fax:</strong>
+                                        <span t-esc="o.fax"/>
+                                    </t>
 
-											</span>
-										</td>
-										<td class="text-right">
-											<span>
-												<strong>Date:</strong>
-											</span>
-											<br />
-											<t t-if="o.tax_office_name">
-												<strong>Tax Office:</strong>
-												<br />
-											</t>
-											<t t-if="o.vat">
-												<strong>VAT:</strong>
-											</t>
-										</td>
-										<td>
-											<span
-												t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')"
-												t-options="{'widget': 'date'}" />
-											<br />
-											<span t-esc="o.tax_office_name" />
-											<br />
-											<span t-esc="o.vat" />
-											<br />
-										</td>
-									</tr>
-								</table>
+                                </span>
+                            </td>
+                            <td class="text-right">
+                                <span>
+                                    <strong>Date:</strong>
+                                </span>
+                                <br/>
+                                <t t-if="o.tax_office_name">
+                                    <strong>Tax Office:</strong>
+                                    <br/>
+                                </t>
+                                <t t-if="o.vat">
+                                    <strong>VAT:</strong>
+                                </t>
+                            </td>
+                            <td>
+                                <span
+                                        t-esc="datetime.datetime.strptime(context_timestamp(datetime.datetime.now()).strftime('%d/%m/%y %H:%M'),'%d/%m/%y %H:%M')"
+                                        t-options="{'widget': 'date'}"/>
+                                <br/>
+                                <span t-esc="o.tax_office_name"/>
+                                <br/>
+                                <span t-esc="o.vat"/>
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
 
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12" style="font-size=5pt;">
-								<table class="table table-bordered">
-									<tr>
-										<th>No</th>
-										<th>Number</th>
-										<th>Date</th>
-										<th>Due Date</th>
-										<th>Explanation</th>
-										<th>Debit</th>
-										<th>Credit</th>
-										<th>Balance</th>
-										<th></th>
-									</tr>
-									<t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
-									<t t-if="o.has_secondary_curr">
-										<t t-foreach="o._get_statement_data_currency()"
-											t-as="s_dict">
-											<t t-set="toplamBakiye" t-value="0" />
-											<t t-set="toplamBorc" t-value="0" />
-											<t t-set="toplamAlacak" t-value="0" />
-											<t t-set="sblc" t-value="0" />
-											<t t-set="sdc" t-value="'C'" />
-											<t t-foreach="s_dict_value" t-as="s">
-												<tr style="line-height:%80;">
-													<td style="font-size:10pt;padding:0;">
-														<span t-esc="s['seq']" />
-													</td>
-													<td style="padding:0;font-size:10pt;">
-														<span t-esc="s['number']" />
-													</td>
-													<td style="padding:0;font-size:10pt;">
-														<span t-esc="s['date']" />
-													</td>
-													<td style="padding:0;font-size:10pt;">
-														<span t-esc="s['due_date']" />
-													</td>
-													<td style="padding:0;font-size:10pt;">
-														<span t-esc="s['description']" />
-													</td>
-													<td  class="text-right" style="padding:0;font-size:10pt;">
-														<span  t-esc="s['debit']"
-															t-options='{"widget": "monetary", "display_currency":s["currency_id"]}' />
-													</td>
-													<td class="text-right"  style="padding:0;font-size:10pt;">
-														<span   t-esc="s['credit']"
-															t-options='{"widget": "monetary", "display_currency": s["currency_id"]}' />
-													</td>
-													<td class="text-right"  style="padding:0;font-size:10pt;">
-														<span  t-esc="s['balance']"
-															t-options='{"widget": "monetary", "display_currency": s["currency_id"]}' />
-													</td>
-													<td class="text-right" style="padding:0;font-size:10pt;">
-														<span t-esc="s['dc']" />
-													</td>
-													<t t-value="s['dc']" t-set="sdc" />
-													<t t-value="s['balance']" t-set="sblc" />
-													<t t-value="'%.2f' %s['balance']" t-set="toplamBakiye" />
-													<t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
-													<t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
-												</tr>
-											</t>
-											<tr>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												TOTAL
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,.2f}'.format(float(toplamBorc))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,}'.format(float(toplamBakiye))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="sdc" />
-											</td>
-											</tr>
-										</t>
-									</t>
-									<t t-else="">
-										<t t-set="toplamBakiye" t-value="0" />
-										<t t-set="toplamBorc" t-value="0" />
-										<t t-set="toplamAlacak" t-value="0" />
-										<t t-set="sdc" t-value="'A'" />
-										<t t-foreach="o._get_statement_data()" t-as="s">
-											<tr style="line-height:%80">
-												<td style="font-size:10pt;padding:0;">
-													<span t-esc="s['seq']" />
-												</td>
-												<td style="padding:0;font-size:10pt;">
-													<span t-esc="s['number']" />
-												</td>
-												<td style="padding:0;font-size:10pt;">
-													<span t-esc="s['date']" />
-												</td>
-												<td style="padding:0;font-size:10pt;">
-													<span t-esc="s['due_date']" />
-												</td>
-												<td style="padding:0;font-size:10pt;">
-													<span t-esc="s['description']" />
-												</td>
-												<td class="text-right" style="padding:0;font-size:10pt;">
-													<span t-raw="number_lang.format('%.2f', s['debit'],grouping=True, monetary=True)"
-													 />
-												</td>
-												<td class="text-right" style="padding:0;font-size:10pt;">
-													<span t-raw="number_lang.format('%.2f', s['credit'],grouping=True, monetary=True)"
-													 />
-												</td>
-												<td class="text-right" style="padding:0;font-size:10pt;">
-													<span t-raw="number_lang.format('%.2f', s['balance'],grouping=True, monetary=True)"
-													 />
-													<!-- t-options='{"widget": "monetary", "display_currency": None}' -->
-												</td>
-												<td class="text-right" style="padding:0;font-size:10pt;">
-														<span t-esc="s['dc']" />
-													</td>
-												<t t-value="s['dc']" t-set="sdc" />
-												<t t-value="'%.2f' %s['balance']" t-set="toplamBakiye" />
-												<t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
-												<t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
-											</tr>
-										</t>
-										<tr>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td style="padding:0;font-size:10pt;"></td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												TOTAL
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,.2f}'.format(float(toplamBorc))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="'{:,.2f}'.format(float(toplamBakiye))"
-												 />
-											</td>
-											<td class="text-right" style="padding:0;font-size:10pt;">
-												<span t-esc="sdc" />
-											</td>
-										</tr>
-									</t>
-								</table>
-							</div>
-						</div>
-					</div>
-		<!-- TODO: toplamlar tablo dışına çıkartılacak ve font küçülecek. -->
-	</template>
-	<template
-		id="altinkaya_reports.report_partner_statement"
-		priority="151">
-		<t t-call="web.html_container">
-			<t t-call="web.basic_layout">
-				<t t-foreach="docs" t-as="o">
-					<t
-						t-call="altinkaya_reports.report_partner_statement_document"
-						t-lang="o.lang" />
-				</t>
-			</t>
-		</t>
-	</template>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="font-size=5pt;">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>No</th>
+                            <th>Number</th>
+                            <th>Date</th>
+                            <th>Due Date</th>
+                            <th>Explanation</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Balance</th>
+                            <th></th>
+                        </tr>
+                        <t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
+                        <t t-if="o.has_secondary_curr">
+                            <t t-foreach="o._get_statement_data_currency()"
+                               t-as="s_dict">
+                                <t t-set="toplamBakiye" t-value="0"/>
+                                <t t-set="toplamBorc" t-value="0"/>
+                                <t t-set="toplamAlacak" t-value="0"/>
+                                <t t-set="sblc" t-value="0"/>
+                                <t t-set="sdc" t-value="'C'"/>
+                                <t t-foreach="s_dict_value" t-as="s">
+                                    <tr style="line-height:%80;">
+                                        <td style="font-size:10pt;padding:0;">
+                                            <span t-esc="s['seq']"/>
+                                        </td>
+                                        <td style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['number']"/>
+                                        </td>
+                                        <td style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['date']"/>
+                                        </td>
+                                        <td style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['due_date']"/>
+                                        </td>
+                                        <td style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['description']"/>
+                                        </td>
+                                        <td class="text-right" style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['debit']"
+                                                  t-options='{"widget": "monetary", "display_currency":s["currency_id"]}'/>
+                                        </td>
+                                        <td class="text-right" style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['credit']"
+                                                  t-options='{"widget": "monetary", "display_currency": s["currency_id"]}'/>
+                                        </td>
+                                        <td class="text-right" style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['balance']"
+                                                  t-options='{"widget": "monetary", "display_currency": s["currency_id"]}'/>
+                                        </td>
+                                        <td class="text-right" style="padding:0;font-size:10pt;">
+                                            <span t-esc="s['dc']"/>
+                                        </td>
+                                        <t t-value="s['dc']" t-set="sdc"/>
+                                        <t t-value="s['balance']" t-set="sblc"/>
+                                        <t t-value="'%.2f' %s['balance']" t-set="toplamBakiye"/>
+                                        <t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
+                                        <t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td style="padding:0;font-size:10pt;"></td>
+                                    <td style="padding:0;font-size:10pt;"></td>
+                                    <td style="padding:0;font-size:10pt;"></td>
+                                    <td style="padding:0;font-size:10pt;"></td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        TOTAL
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-esc="'{:,.2f}'.format(float(toplamBorc))"
+                                        />
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
+                                        />
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-esc="'{:,}'.format(float(toplamBakiye))"
+                                        />
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-esc="sdc"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-set="toplamBakiye" t-value="0"/>
+                            <t t-set="toplamBorc" t-value="0"/>
+                            <t t-set="toplamAlacak" t-value="0"/>
+                            <t t-set="sdc" t-value="'A'"/>
+                            <t t-foreach="o._get_statement_data()" t-as="s">
+                                <tr style="line-height:%80">
+                                    <td style="font-size:10pt;padding:0;">
+                                        <span t-esc="s['seq']"/>
+                                    </td>
+                                    <td style="padding:0;font-size:10pt;">
+                                        <span t-esc="s['number']"/>
+                                    </td>
+                                    <td style="padding:0;font-size:10pt;">
+                                        <span t-esc="s['date']"/>
+                                    </td>
+                                    <td style="padding:0;font-size:10pt;">
+                                        <span t-esc="s['due_date']"/>
+                                    </td>
+                                    <td style="padding:0;font-size:10pt;">
+                                        <span t-esc="s['description']"/>
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-raw="number_lang.format('%.2f', s['debit'],grouping=True, monetary=True)"
+                                        />
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-raw="number_lang.format('%.2f', s['credit'],grouping=True, monetary=True)"
+                                        />
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-raw="number_lang.format('%.2f', s['balance'],grouping=True, monetary=True)"
+                                        />
+                                        <!-- t-options='{"widget": "monetary", "display_currency": None}' -->
+                                    </td>
+                                    <td class="text-right" style="padding:0;font-size:10pt;">
+                                        <span t-esc="s['dc']"/>
+                                    </td>
+                                    <t t-value="s['dc']" t-set="sdc"/>
+                                    <t t-value="'%.2f' %s['balance']" t-set="toplamBakiye"/>
+                                    <t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
+                                    <t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td style="padding:0;font-size:10pt;"></td>
+                                <td style="padding:0;font-size:10pt;"></td>
+                                <td style="padding:0;font-size:10pt;"></td>
+                                <td style="padding:0;font-size:10pt;"></td>
+                                <td class="text-right" style="padding:0;font-size:10pt;">
+                                    TOTAL
+                                </td>
+                                <td class="text-right" style="padding:0;font-size:10pt;">
+                                    <span t-esc="'{:,.2f}'.format(float(toplamBorc))"
+                                    />
+                                </td>
+                                <td class="text-right" style="padding:0;font-size:10pt;">
+                                    <span t-esc="'{:,.2f}'.format(float(toplamAlacak))"
+                                    />
+                                </td>
+                                <td class="text-right" style="padding:0;font-size:10pt;">
+                                    <span t-esc="'{:,.2f}'.format(float(toplamBakiye))"
+                                    />
+                                </td>
+                                <td class="text-right" style="padding:0;font-size:10pt;">
+                                    <span t-esc="sdc"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- TODO: toplamlar tablo dışına çıkartılacak ve font küçülecek. -->
+    </template>
+    <template
+            id="altinkaya_reports.report_partner_statement"
+            priority="151">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t
+                            t-call="altinkaya_reports.report_partner_statement_document"
+                            t-lang="o.lang"/>
+                </t>
+            </t>
+        </t>
+    </template>
 </odoo>

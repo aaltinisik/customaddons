@@ -12,31 +12,31 @@ class ResPartner(models.Model):
     has_secondary_curr = fields.Boolean(string='Has secondary currency?', default=False)
     secondary_curr_id = fields.Many2one('res.currency', string='Currency')
 
-    def calc_difference_invoice(self):
-        prec = self.env['decimal.precision'].precision_get('Account')
-        if self.has_secondary_curr:
-
-            move_domain = [('partner_id', '=', self.id),
-                           ('journal_id', '=', self.company_id.currency_exchange_journal_id.id)]
-
-            difference_moves = self.env['account.move'].search(move_domain)
-            if difference_moves:
-                difference_inv = self.env['account.invoice'].create({'name': 'Difference Invoice',
-                                                                     'partner_id': self.id,
-                                                                     'journal_id': self.company_id.currency_exchange_journal_id.id,
-                                                                     'currency_id': self.company_id.currency_id.id})
-                inv_lines_to_create = []
-                for move in difference_moves:
-                    inv_lines_to_create.append({
-                        'name': move.name,
-                        'account_id': move.journal_id.default_credit_account_id.id,
-                        'price_unit': move.amount,
-                        #'invoice_line_tax_ids': [(6, 0, move.tax_ids.ids)], # faturanın tax'ı olması lazım
-                    })
-
-                if inv_lines_to_create:
-                    created_inv_lines = self.env['account.invoice.line'].create(inv_lines_to_create)
-                    difference_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
+    # def calc_difference_invoice(self):
+    #     prec = self.env['decimal.precision'].precision_get('Account')
+    #     if self.has_secondary_curr:
+    #
+    #         move_domain = [('partner_id', '=', self.id),
+    #                        ('journal_id', '=', self.company_id.currency_exchange_journal_id.id)]
+    #
+    #         difference_moves = self.env['account.move'].search(move_domain)
+    #         if difference_moves:
+    #             difference_inv = self.env['account.invoice'].create({'name': 'Difference Invoice',
+    #                                                                  'partner_id': self.id,
+    #                                                                  'journal_id': self.company_id.currency_exchange_journal_id.id,
+    #                                                                  'currency_id': self.company_id.currency_id.id})
+    #             inv_lines_to_create = []
+    #             for move in difference_moves:
+    #                 inv_lines_to_create.append({
+    #                     'name': move.name,
+    #                     'account_id': move.journal_id.default_credit_account_id.id,
+    #                     'price_unit': move.amount,
+    #                     #'invoice_line_tax_ids': [(6, 0, move.tax_ids.ids)], # faturanın tax'ı olması lazım
+    #                 })
+    #
+    #             if inv_lines_to_create:
+    #                 created_inv_lines = self.env['account.invoice.line'].create(inv_lines_to_create)
+    #                 difference_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
 
             # payments = line_obj.search(payments_domain)
             # lines_to_create = []
