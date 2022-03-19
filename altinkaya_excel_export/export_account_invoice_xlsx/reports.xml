@@ -10,19 +10,26 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='criteria']" position="after">
                 Faturaları, Zirve Yazılım sistemine uygun şekilde çıktı almak için aşağıdaki butonları kullanınız.
-                    <field name="results" invisible="1"/>
+                <field name="results" invisible="1"/>
             </xpath>
         </field>
     </record>
 
 
+    <act_window id="action_account_invoice_excel_export_gelir_fatura"
+                key2="client_action_multi" name="Gelir Fatura Excel"
+                res_model="report.account.invoice" src_model="account.invoice"
+                view_mode="form" target="new" view_type="form"
+                context="{'template_domain': [('res_model', '=', 'report.account.invoice'),
+                                 ('fname', '=', 'gelir_fatura.xlsx'),
+                                 ('gname', '=', False)]}"/>
+
         <act_window id="action_account_invoice_excel_export"
-            key2="client_action_multi" name="Zirve için Dışarı Aktar"
-            res_model="report.account.invoice" src_model="account.invoice"
-            view_mode="form" target="new" view_type="form"
-            context="{'template_domain': [('res_model', '=', 'report.account.invoice'),
+                key2="client_action_multi" name="Zirve Masraf Fatura"
+                res_model="report.account.invoice" src_model="account.invoice"
+                view_mode="form" target="new" view_type="form"
+                context="{'template_domain': [('res_model', '=', 'report.account.invoice'),
                                  ('fname', '=', 'zirve_masraf_fatura.xlsx'),
-                                 ('gname', '=', False)]}"
-/>
+                                 ('gname', '=', False)]}"/>
 
 </odoo>

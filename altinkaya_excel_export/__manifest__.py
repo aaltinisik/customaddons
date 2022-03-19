@@ -21,6 +21,7 @@
         'export_purchase_order_xlsx/temp_rfq_tr.xml',
         # Account
         'export_account_invoice_xlsx/temp_zirve_masraf_fatura.xml',
+        'export_account_invoice_xlsx/temp_gelir_fatura.xml',
         'export_account_invoice_xlsx/reports.xml',
         # Partner Statement
         'export_partner_currency_statement/temp_partner_statement_currency.xml',
