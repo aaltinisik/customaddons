@@ -54,7 +54,16 @@ class AccountInvoice(models.Model):
                     picking.write({'carrier_id':invoice.carrier_id.id})
            
         return res
-    
+
+    def action_invoice_open(self):
+        """write suppliers selected expense account to partner record and use it for next invoice """
+
+        for invoice in self:
+            if invoice.type == 'in_invoice' and fields.first(invoice.invoice_line_ids).account_id:
+                invoice.partner_id.write({"purchase_dafault_account_id": fields.first(invoice.invoice_line_ids).account_id.id})
+        return super(AccountInvoice, self).action_invoice_open()
+
+
     @api.depends('amount_total','partner_id','currency_id')
     def _compute_altinkaya_payment_url(self):
         for invoice in self:
