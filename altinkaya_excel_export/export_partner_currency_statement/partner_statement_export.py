@@ -47,6 +47,7 @@ class ReportPartnerStatement(models.TransientModel):
     def _get_statement_data(self, partner_id):
         cr = self.env.cr
         statement_data = []
+        diff_inv_journal = self.env['account.journal'].search([('code', '=', 'KFARK')], limit=1)
         balance, sec_curr_balance, seq = 0.00, 0.00, 0
         start_date = self.date_start
         partner = partner_id
@@ -56,7 +57,7 @@ class ReportPartnerStatement(models.TransientModel):
         if not partner.has_secondary_curr:
             raise UserError(_(
                 'Bu müşteri için dövizli ekstre çıkartamazsınız. Muhasebe bölümünden "Dövizle Çalışıyor" alanını aktif ediniz'))
-        cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
+        cr.execute('SELECT aj.id as journal_id, aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
                         l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
                         FROM account_move_line AS l \
                         LEFT JOIN account_account a ON (l.account_id=a.id) \
@@ -64,12 +65,13 @@ class ReportPartnerStatement(models.TransientModel):
                         LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
                         LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
                         WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = '+ str(partner.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
-                        'GROUP BY aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
+                        'GROUP BY aj.id,aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
                          ORDER BY l.date , l.currency_id ',(str(start_date),str(end_date)))
         for each_dict in self.env.cr.dictfetchall():
             seq += 1
             balance = (each_dict['debit'] - each_dict['credit']) + balance
             debit = 0.0
+            rate = 1.0
             credit = 0.0
             sec_curr_debit = 0.00
             sec_curr_credit = 0.00
@@ -79,7 +81,7 @@ class ReportPartnerStatement(models.TransientModel):
             else:
                 credit = (each_dict['credit'] - each_dict['debit'])
 
-            if partner.has_secondary_curr:
+            if partner.has_secondary_curr and each_dict['journal_id'] != diff_inv_journal.id:
                 move_date = each_dict['date'].strftime("%Y-%m-%d")
                 cr.execute(
                     "SELECT rate\
@@ -89,8 +91,6 @@ class ReportPartnerStatement(models.TransientModel):
                     ORDER BY name desc LIMIT 1", (partner.secondary_curr_id.id, move_date))
                 if cr.rowcount:
                     rate = cr.fetchall()[0][0]
-                else:
-                    rate = 1.00
 
                 sec_curr_debit = debit * rate
                 sec_curr_credit = credit * rate
@@ -109,6 +109,7 @@ class ReportPartnerStatement(models.TransientModel):
                     'credit': credit,
                     'sec_curr_debit': sec_curr_debit,
                     'sec_curr_credit': sec_curr_credit,
+                    'currency_rate': 1/rate,
                     'sec_curr_balance': abs(sec_curr_balance) or 0.00,
                     'sec_curr_dc': sec_curr_balance > 0.01 and 'B' or 'A',
                     'balance': abs(balance) or 0.0,
@@ -132,6 +133,7 @@ class StatementLines(models.TransientModel):
     debit = fields.Float('Debit')
     credit = fields.Float('Credit')
     balance = fields.Float('Balance')
+    currency_rate = fields.Float('Currency Rate')
     sec_curr_debit = fields.Float('Secondary Currency Debit')
     sec_curr_credit = fields.Float('Secondary Currency Credit')
     sec_curr_balance = fields.Float('Secondary Currency Balance')
