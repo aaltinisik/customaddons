@@ -7,7 +7,9 @@
         subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Long description of module's purpose
+        This module:
+        * adds main currency of payment in invoice forms widget
+        
     """,
 
     'author': "yibudak",
