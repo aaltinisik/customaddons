@@ -35,13 +35,15 @@ class ResPartner(models.Model):
             difference_amls = self.env['account.move.line'].search(difference_aml_domain)
             if difference_amls:
                 # taslak varsa taslağa ekle yoksa yeni oluştur
+                diff_inv_journal = self.env['account.journal'].search([('code', '=', 'KFARK')], limit=1)
+
                 dif_inv = inv_obj.search([('state', '=', 'draft'),
-                                          ('journal_id', '=', self.env.user.company_id.currency_exchange_journal_id.id),
+                                          ('journal_id', '=', diff_inv_journal.id),
                                           ('partner_id', '=', self.id),
                                           ('currency_id', '=', self.env.user.company_id.currency_id.id)])
                 if not dif_inv:
                     dif_inv = inv_obj.create({'partner_id': self.id,
-                                              'journal_id': self.env.user.company_id.currency_exchange_journal_id.id,
+                                              'journal_id': diff_inv_journal.id,
                                               'currency_id': self.env.user.company_id.currency_id.id})
                 inv_lines_to_create = []
                 for diff_aml in difference_amls:
@@ -59,7 +61,7 @@ class ResPartner(models.Model):
                         'difference_base_move_id': diff_aml.id,
                         'name': inv_line_name,
                         'uom_id': 1,
-                        'account_id': diff_aml.journal_id.default_credit_account_id.id,
+                        'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
                         'price_unit': amount if diff_aml.credit else -amount,
                         'moves_to_reconcile': [(6, False, moves_id_to_reconcile)],
                         'invoice_line_tax_ids': [
