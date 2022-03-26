@@ -9,34 +9,29 @@ class AccountMoveLine(models.Model):
 
     difference_checked = fields.Boolean(string='Currency Difference Checked', store=True)
 
-    def create(self, vals):
-        res = super(AccountMoveLine, self).create(vals)
-        for line in res:
-            line._calculate_amount_currency()
-        return res
-
-    def _calculate_amount_currency(self):
-        prec = self.env['decimal.precision'].precision_get('Account')
-        if float_is_zero(self.amount_currency, prec) and self.partner_id.has_secondary_curr and\
-                self.partner_id.secondary_curr_id != self.currency_id:
-            amount = self.amount_residual or 0.0 # amount_residual mi alınacak
-            currency_id = self.currency_id or self.company_id.currency_id
-            amount_currency = currency_id._convert(amount, self.partner_id.secondary_curr_id, self.company_id, self.date,
-                                                            round=False)
-            self.write({'amount_currency': amount_currency,
-                        'currency_id': self.partner_id.secondary_curr_id.id})
-
-        return True
+    # def create(self, vals):
+    #     res = super(AccountMoveLine, self).create(vals)
+    #     for line in res:
+    #         line._calculate_amount_currency()
+    #     return res
+    #
+    # def _calculate_amount_currency(self):
+    #     prec = self.env['decimal.precision'].precision_get('Account')
+    #     if float_is_zero(self.amount_currency, prec) and self.partner_id.has_secondary_curr and\
+    #             self.partner_id.secondary_curr_id != self.currency_id:
+    #         amount = self.amount_residual or 0.0 # amount_residual mi alınacak
+    #         currency_id = self.currency_id or self.company_id.currency_id
+    #         amount_currency = currency_id._convert(amount, self.partner_id.secondary_curr_id, self.company_id, self.date,
+    #                                                         round=False)
+    #         self.write({'amount_currency': amount_currency,
+    #                     'currency_id': self.partner_id.secondary_curr_id.id})
+    #
+    #     return True
 
 
     @api.multi
-    def check_full_reconcile(self):
-        """
-        This method check if a move is totally reconciled and if we need to create exchange rate entries for the move.
-        In case exchange rate entries needs to be created, one will be created per currency present.
-        In case of full reconciliation, all moves belonging to the reconciliation will belong to the same account_full_reconcile object.
-        """
-        # Get first all aml involved
+    def _check_full_reconcile(self, diff_aml=False):
+        partial_rec = self.env['account.partial.reconcile']
         todo = self.env['account.partial.reconcile'].search_read(['|', ('debit_move_id', 'in', self.ids), ('credit_move_id', 'in', self.ids)], ['debit_move_id', 'credit_move_id'])
         amls = set(self.ids)
         seen = set()
@@ -84,47 +79,50 @@ class AccountMoveLine(models.Model):
                 to_balance[aml.currency_id][0] += aml
                 to_balance[aml.currency_id][1] += aml.amount_residual != 0 and aml.amount_residual or aml.amount_residual_currency
 
-        # Check if reconciliation is total
-        # To check if reconciliation is total we have 3 differents use case:
-        # 1) There are multiple currency different than company currency, in that case we check using debit-credit
-        # 2) We only have one currency which is different than company currency, in that case we check using amount_currency
-        # 3) We have only one currency and some entries that don't have a secundary currency, in that case we check debit-credit
-        #   or amount_currency.
-        # 4) Cash basis full reconciliation
-        #     - either none of the moves are cash basis reconciled, and we proceed
-        #     - or some moves are cash basis reconciled and we make sure they are all fully reconciled
-
         digits_rounding_precision = amls[0].company_id.currency_id.rounding
         caba_reconciled_amls = cash_basis_partial.mapped('debit_move_id') + cash_basis_partial.mapped('credit_move_id')
         caba_connected_amls = amls.filtered(lambda x: x.move_id.tax_cash_basis_rec_id) + caba_reconciled_amls
         matched_percentages = caba_connected_amls._get_matched_percentage()
-        if (
-                (all(amls.mapped('tax_exigible')) or all(matched_percentages[aml.move_id.id] >= 1.0 for aml in caba_connected_amls))
-                and
-                (
-                    currency and float_is_zero(total_amount_currency, precision_rounding=currency.rounding) or
-                    multiple_currency and float_compare(total_debit, total_credit, precision_rounding=digits_rounding_precision) == 0
-                )
-        ):
+        partial_rec |= partial_rec.create(
+                partial_rec._prepare_exchange_diff_partial_reconcile(
+                    aml=to_balance[aml.currency_id][0],
+                    line_to_reconcile=diff_aml,
+                    currency=self.env.user.company_id.currency_id)
+            )
+        amls += diff_aml
+        partial_rec_ids += partial_rec.ids
+        # ACCOUNT MOVE LINE AMOUNT CURRENCY KALDIR DÜZELİCEK
+        self.env['account.full.reconcile'].create({
+            'partial_reconcile_ids': [(6, 0, partial_rec_ids)],
+            'reconciled_line_ids': [(6, 0, amls.ids)],
+            #    'exchange_move_id': invoice.move_id.id, bu hiçbir işimize yaramıyor ama
+            # uzlaştırmayı kaldırırken veya faturayı iptal ederken hata veriyor
+        })
 
-            exchange_move_id = False
-            # Eventually create a journal entry to book the difference due to foreign currency's exchange rate that fluctuates
-            if to_balance and any([not float_is_zero(residual, precision_rounding=digits_rounding_precision) for aml, residual in to_balance.values()]):
-                exchange_move = self.env['account.move'].create(
-                    self.env['account.full.reconcile']._prepare_exchange_diff_move(move_date=maxdate, company=amls[0].company_id))
-                part_reconcile = self.env['account.partial.reconcile']
-                for aml_to_balance, total in to_balance.values():
-                    if total:
-                        rate_diff_amls, rate_diff_partial_rec = part_reconcile.create_exchange_rate_entry(aml_to_balance, exchange_move)
-                        amls += rate_diff_amls
-                        partial_rec_ids += rate_diff_partial_rec.ids
-                    else:
-                        aml_to_balance.reconcile()
-                exchange_move.post()
-                exchange_move_id = exchange_move.id
-            #mark the reference of the full reconciliation on the exchange rate entries and on the entries
-            self.env['account.full.reconcile'].create({
-                'partial_reconcile_ids': [(6, 0, partial_rec_ids)],
-                'reconciled_line_ids': [(6, 0, amls.ids)],
-                'exchange_move_id': exchange_move_id,
-            })
+    @api.multi
+    def _reconcile(self, writeoff_acc_id=False, writeoff_journal_id=False, diff_aml=False):
+        # Empty self can happen if the user tries to reconcile entries which are already reconciled.
+        # The calling method might have filtered out reconciled lines.
+        if not self:
+            return True
+
+        self._check_reconcile_validity()
+        #reconcile everything that can be
+        remaining_moves = self.auto_reconcile_lines()
+
+        writeoff_to_reconcile = self.env['account.move.line']
+        #if writeoff_acc_id specified, then create write-off move with value the remaining amount from move in self
+        if writeoff_acc_id and writeoff_journal_id and remaining_moves:
+            all_aml_share_same_currency = all([x.currency_id == self[0].currency_id for x in self])
+            writeoff_vals = {
+                'account_id': writeoff_acc_id.id,
+                'journal_id': writeoff_journal_id.id
+            }
+            if not all_aml_share_same_currency:
+                writeoff_vals['amount_currency'] = False
+            writeoff_to_reconcile = remaining_moves._create_writeoff([writeoff_vals])
+            #add writeoff line to reconcile algorithm and finish the reconciliation
+            remaining_moves = (remaining_moves + writeoff_to_reconcile).auto_reconcile_lines()
+        # Check if reconciliation is total or needs an exchange rate entry to be created
+        (self + writeoff_to_reconcile)._check_full_reconcile(diff_aml=diff_aml)
+        return True
