@@ -265,8 +265,7 @@
                                                 <span t-field="line.product_uom" groups="uom.group_uom"/>
                                             </td>
                                             <td class="text-right" style="padding:0;">
-                                                <span t-field="line.price_unit"
-                                                      t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                                <span t-field="line.price_unit" />
                                             </td>
                                             <td t-if="display_discount" class="text-right"
                                                 style="padding:0;" groups="sale.group_discount_per_so_line">
@@ -274,8 +273,7 @@
                                             </td>
                                             <td t-if="display_discount" class="text-right"
                                                 style="padding:0;">
-                                                <span t-field="line.unit_discounted"
-                                                      t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                                <span t-field="line.unit_discounted" />
                                             </td>
                                             <td class="text-right o_price_total" style="padding:0;">
                                                 <span t-field="line.price_subtotal"

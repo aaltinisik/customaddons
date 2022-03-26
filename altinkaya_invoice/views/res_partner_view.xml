@@ -8,8 +8,21 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
+
+	              <field name="accounting_contact" domain="[('parent_id', '=', active_id)]" />
+                    <field name="purchase_dafault_account_id"/>
+
+                    <hr> </hr>
+
+
+
 					<field name="z_payable_export"/>
                     <field name="z_receivable_export"/>
+
+
+
+
+
                 </xpath>
             </field>
         </record>

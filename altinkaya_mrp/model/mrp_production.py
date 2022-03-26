@@ -67,9 +67,6 @@ class MrpProduction(models.Model):
             production._adjust_procure_method()
             production.move_raw_ids._action_confirm()
             production.move_raw_ids._action_assign()
-            production._adjust_procure_method()
-            production.move_raw_ids._action_confirm()
-            production.move_raw_ids._action_assign()
         return True
     
     

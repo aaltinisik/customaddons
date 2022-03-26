@@ -1,6 +1,13 @@
 from odoo import models, fields, api, _
 
 
+class StockQuant(models.Model):
+    _inherit = 'stock.quant'
+
+    categ_id = fields.Many2one('product.category', string='Category', related='product_id.product_tmpl_id.categ_id',
+                               readonly=True, store=True)
+
+
 class ProductTemplate(models.Model):
     _inherit = 'product.category'
 

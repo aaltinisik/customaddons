@@ -11,7 +11,7 @@
                     'Fatura': {  # sheet can be name (string) or index (integer)
                         'results': {  # prefix with _CONT_ to continue rows from previous row field
                             'A2': '${object.date_invoice.strftime("%d.%m.%Y") or ""}#{border=thin_border;align=left;style=date}',
-                            'B2': 'number${value or ""}#{border=thin_border;align=left;style=text}',
+                            'B2': 'supplier_invoice_number${value or ""}#{border=thin_border;align=left;style=text}',
                             'C2': 'journal_id.name${value or ""}#{border=thin_border;align=left;style=text}',
                             'D2': 'z_tevkifatli_mi${"Yes" if value else "No"}#{border=thin_border;align=left;style=text}',
                             'E2': '${"Tevkifatlı Alış" if object.z_tevkifatli_mi else object.journal_id.name}#{border=thin_border;align=left;style=text}',
