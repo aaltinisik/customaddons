@@ -9,24 +9,38 @@ class AccountMoveLine(models.Model):
 
     difference_checked = fields.Boolean(string='Currency Difference Checked', store=True)
 
-    # def create(self, vals):
-    #     res = super(AccountMoveLine, self).create(vals)
-    #     for line in res:
-    #         line._calculate_amount_currency()
-    #     return res
-    #
-    # def _calculate_amount_currency(self):
-    #     prec = self.env['decimal.precision'].precision_get('Account')
-    #     if float_is_zero(self.amount_currency, prec) and self.partner_id.has_secondary_curr and\
-    #             self.partner_id.secondary_curr_id != self.currency_id:
-    #         amount = self.amount_residual or 0.0 # amount_residual mi alınacak
-    #         currency_id = self.currency_id or self.company_id.currency_id
-    #         amount_currency = currency_id._convert(amount, self.partner_id.secondary_curr_id, self.company_id, self.date,
-    #                                                         round=False)
-    #         self.write({'amount_currency': amount_currency,
-    #                     'currency_id': self.partner_id.secondary_curr_id.id})
-    #
-    #     return True
+    def create(self, vals):
+
+        if isinstance(vals, list):
+            for val in vals:
+                if val.get('partner_id', False):
+                    self._calculate_amount_currency(val)
+
+        else:
+            if vals.get('partner_id', False):
+                self._calculate_amount_currency(vals)
+
+        return super(AccountMoveLine, self).create(vals)
+
+    def _calculate_amount_currency(self, vals):
+        partner_id = self.env['res.partner'].browse(vals['partner_id'])
+        prec = self.env['decimal.precision'].precision_get('Account')
+
+        if not vals.get('amount_currency', False):
+            vals['amount_currency'] = 0.0
+
+        if not vals.get('currency_id', False):
+            vals['currency_id'] = self.env.user.company_id.currency_id.id
+
+        if float_is_zero(vals['amount_currency'], prec) and partner_id.property_account_receivable_id.currency_id.id != vals['currency_id']:
+            amount = -vals['credit'] or vals['debit']
+            currency_id = self.env['res.currency'].browse(vals['currency_id'])
+            amount_currency = currency_id._convert(amount, partner_id.property_account_receivable_id.currency_id,
+                                                   self.env.user.company_id, vals.get('date', False) or fields.Date.today())
+            vals.update({'amount_currency': amount_currency,
+                        'currency_id': partner_id.property_account_receivable_id.currency_id.id})
+
+        return True
 
 
     @api.multi

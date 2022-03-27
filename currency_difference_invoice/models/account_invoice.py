@@ -56,16 +56,15 @@ class AccountInvoice(models.Model):
 
         for invoice in self:
             if invoice.invoice_line_ids and invoice.journal_id.code == 'KFARK':
-                for line in invoice.invoice_line_ids:
-                    for aml in line.mapped('difference_base_aml_id'):
-                        aml.write({'difference_checked': False})
+                for line in invoice.invoice_line_ids.filtered(lambda x: x.difference_base_aml_id):
+                    line.difference_base_aml_id.write({'difference_checked': False})
+
 
     @api.multi
     def unlink(self):
         for invoice in self:
             if invoice.invoice_line_ids and invoice.journal_id.code == 'KFARK':
-                for line in invoice.invoice_line_ids:
-                    for aml in line.mapped('difference_base_aml_id'):
-                        aml.write({'difference_checked': False})
+                for line in invoice.invoice_line_ids.filtered(lambda x: x.difference_base_aml_id):
+                    line.difference_base_aml_id.write({'difference_checked': False})
 
         return super(AccountInvoice, self).unlink()
