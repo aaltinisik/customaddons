@@ -60,7 +60,7 @@ class AccountInvoice(models.Model):
 
         for invoice in self:
             if invoice.type == 'in_invoice' and fields.first(invoice.invoice_line_ids).account_id:
-                invoice.partner_id.write({"purchase_dafault_account_id": fields.first(invoice.invoice_line_ids).account_id.id})
+                invoice.partner_id.write({"purchase_default_account_id": fields.first(invoice.invoice_line_ids).account_id.id})
         return super(AccountInvoice, self).action_invoice_open()
 
 
