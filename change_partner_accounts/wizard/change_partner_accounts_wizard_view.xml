@@ -12,11 +12,9 @@
                         <group>
                             <field name="partner_id"/>
                             <field name="account_receivable_id"
-                                   domain="[('internal_type', '=', 'receivable'), ('deprecated', '=', False),
-                                   ('id', '!=', 'partner_id.property_account_receivable_id.id')]"/>
+                                   domain="[('internal_type', '=', 'receivable'), ('deprecated', '=', False)]"/>
                             <field name="account_payable_id"
-                                   domain="[('internal_type', '=', 'payable'), ('deprecated', '=', False),
-                                   ('id', '!=', 'partner_id.property_account_payable_id.id')]"/>
+                                   domain="[('internal_type', '=', 'payable'), ('deprecated', '=', False)]"/>
 
                         </group>
                     </group>
