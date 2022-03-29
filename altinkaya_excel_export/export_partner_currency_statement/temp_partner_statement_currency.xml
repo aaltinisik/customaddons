@@ -15,9 +15,9 @@
                             'J2': 'partner_id.vat${value or ""}#{align=full_center;style=text}',
                             'L2': 'date_now${value.strftime("%d.%m.%Y") or ""}#{align=full_center;style=text}',
                             'B3': '${object.partner_id.phone or object.partner_id.mobile}#{align=left;vert-align=center;style=text}',
-                            'H6': '${"%s%.2f" % (object.partner_id.secondary_curr_id.symbol, object.results[-1].sec_curr_total) or "%s0.00" % object.partner_id.secondary_curr_id.symbol}#{align=right;style=text}',
+                            'H6': '${"%s%.2f" % (object.partner_id.property_account_receivable_id.currency_id.symbol, object.results[-1].sec_curr_total) or "%s0.00" % object.partner_id.property_account_receivable_id.currency_id.symbol}#{align=right;style=text}',
                             'I6': '${object.results[-1].sec_curr_dc or ""}#{align=full_center;style=text}',
-                            'K6': '${"%s%.2f" % (object.default_currency.symbol, object.results[-1].total) or "%s0.00" % object.default_currency.symbol}#{align=right;style=text}',
+                            'M6': '${"%s%.2f" % (object.default_currency.symbol, object.results[-1].total) or "%s0.00" % object.default_currency.symbol}#{align=right;style=text}',
                             'N6': '${object.results[-1].dc or ""}#{align=full_center;style=text}',
                         },
                         'results': {  # prefix with _CONT_ to continue rows from previous row field

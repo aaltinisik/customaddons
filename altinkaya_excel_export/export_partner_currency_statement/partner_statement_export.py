@@ -54,9 +54,9 @@ class ReportPartnerStatement(models.TransientModel):
         end_date = self.date_end
         currency = self.env['res.currency']
         move_type = ('payable', 'receivable')
-        if not partner.has_secondary_curr:
+        if not (partner.property_account_receivable_id.currency_id or partner.property_account_payable_id.currency_id):
             raise UserError(_(
-                'Bu müşteri için dövizli ekstre çıkartamazsınız. Muhasebe bölümünden "Dövizle Çalışıyor" alanını aktif ediniz'))
+                'Bu müşteri için dövizli ekstre çıkartamazsınız. Müşteri hesaplarının dövizli olduğunu kontrol ediniz.'))
         cr.execute('SELECT aj.id as journal_id, aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
                         l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
                         FROM account_move_line AS l \
@@ -64,9 +64,10 @@ class ReportPartnerStatement(models.TransientModel):
                         LEFT JOIN account_move am ON (l.move_id=am.id) \
                         LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
                         LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
-                        WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = '+ str(partner.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
-                        'GROUP BY aj.id,aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
-                         ORDER BY l.date , l.currency_id ',(str(start_date),str(end_date)))
+                        WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = ' + str(
+            partner.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
+                   'GROUP BY aj.id,aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
+                    ORDER BY l.date , l.currency_id ', (str(start_date), str(end_date)))
         for each_dict in self.env.cr.dictfetchall():
             seq += 1
             balance = (each_dict['debit'] - each_dict['credit']) + balance
@@ -81,14 +82,15 @@ class ReportPartnerStatement(models.TransientModel):
             else:
                 credit = (each_dict['credit'] - each_dict['debit'])
 
-            if partner.has_secondary_curr and each_dict['journal_id'] != diff_inv_journal.id:
+            if partner.property_account_receivable_id.currency_id and each_dict['journal_id'] != diff_inv_journal.id:
                 move_date = each_dict['date'].strftime("%Y-%m-%d")
                 cr.execute(
                     "SELECT rate\
                         FROM res_currency_rate\
                     WHERE currency_id = %s\
                     AND name <= %s\
-                    ORDER BY name desc LIMIT 1", (partner.secondary_curr_id.id, move_date))
+                    ORDER BY name desc LIMIT 1", (partner.property_account_receivable_id.currency_id.id,
+                                                  move_date))
                 if cr.rowcount:
                     rate = cr.fetchall()[0][0]
 
@@ -97,27 +99,27 @@ class ReportPartnerStatement(models.TransientModel):
                 sec_curr_balance = (sec_curr_debit - sec_curr_credit) + sec_curr_balance
 
             statement_data.append(self.env['partner.statement.lines'].create(vals_list={
-                    'sequence': seq,
-                    'number': each_dict['state'] == 'draft' and '*' + str(each_dict['move_id']) or each_dict['name'],
-                    'date': each_dict['date'] and datetime.strptime(str(each_dict['date']), '%Y-%m-%d').strftime(
-                        '%d.%m.%Y') or False,
-                    'due_date': each_dict['due_date'] and datetime.strptime(str(each_dict['due_date']),
-                                                                            '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                    'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict[
-                        'journal'],
-                    'debit': debit,
-                    'credit': credit,
-                    'sec_curr_debit': sec_curr_debit,
-                    'sec_curr_credit': sec_curr_credit,
-                    'currency_rate': 1/rate,
-                    'sec_curr_balance': abs(sec_curr_balance) or 0.00,
-                    'sec_curr_dc': sec_curr_balance > 0.01 and 'B' or 'A',
-                    'balance': abs(balance) or 0.0,
-                    'dc': balance > 0.01 and 'B' or 'A',
-                    'sec_curr_total': sec_curr_balance or 0.00,
-                    'total': balance or 0.0,
-                    'secondary_currency': partner.secondary_curr_id.id,
-                    'primary_currency': currency_id.id}).id)
+                'sequence': seq,
+                'number': each_dict['state'] == 'draft' and '*' + str(each_dict['move_id']) or each_dict['name'],
+                'date': each_dict['date'] and datetime.strptime(str(each_dict['date']), '%Y-%m-%d').strftime(
+                    '%d.%m.%Y') or False,
+                'due_date': each_dict['due_date'] and datetime.strptime(str(each_dict['due_date']),
+                                                                        '%Y-%m-%d').strftime('%d.%m.%Y') or False,
+                'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict[
+                    'journal'],
+                'debit': debit,
+                'credit': credit,
+                'sec_curr_debit': sec_curr_debit,
+                'sec_curr_credit': sec_curr_credit,
+                'currency_rate': 1 / rate,
+                'sec_curr_balance': abs(sec_curr_balance) or 0.00,
+                'sec_curr_dc': sec_curr_balance > 0.01 and 'B' or 'A',
+                'balance': abs(balance) or 0.0,
+                'dc': balance > 0.01 and 'B' or 'A',
+                'sec_curr_total': sec_curr_balance or 0.00,
+                'total': balance or 0.0,
+                'secondary_currency': partner.property_account_receivable_id.currency_id.id or currency_id.id,
+                'primary_currency': currency_id.id}).id)
 
         return statement_data
 
