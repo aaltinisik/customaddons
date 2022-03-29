@@ -2,9 +2,9 @@
 
 <odoo>
 
-    <record id="report_partner_statement" model="ir.ui.view">
-        <field name="name">report.partner.statement</field>
-        <field name="model">report.partner.statement</field>
+    <record id="report_partner_statement_currency" model="ir.ui.view">
+        <field name="name">report.partner.statement.currency</field>
+        <field name="model">report.partner.statement.currency</field>
         <field name="inherit_id" ref="excel_import_export.xlsx_report_view"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
@@ -19,13 +19,13 @@
     </record>
 
 
-        <act_window id="action_partner_statement_excel_export"
-            key2="client_action_multi" name="Cari Dövizli Ekstre"
-            res_model="report.partner.statement" src_model="res.partner"
-            view_mode="form" target="new" view_type="form"
-            context="{'template_domain': [('res_model', '=', 'report.partner.statement'),
+    <act_window id="action_partner_statement_currency_excel_export"
+                key2="client_action_multi" name="Cari Dövizli Ekstre"
+                res_model="report.partner.statement.currency" src_model="res.partner"
+                view_mode="form" target="new" view_type="form"
+                context="{'template_domain': [('res_model', '=', 'report.partner.statement.currency'),
                                  ('fname', '=', 'partner_statement_currency.xlsx'),
                                  ('gname', '=', False)]}"
-/>
+    />
 
 </odoo>

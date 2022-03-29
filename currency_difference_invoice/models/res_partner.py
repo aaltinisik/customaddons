@@ -9,24 +9,15 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    has_secondary_curr = fields.Boolean(string='Has secondary currency?', default=False)
-    secondary_curr_id = fields.Many2one('res.currency', string='Currency')
-
     def unreconcile_partners_amls(self):
-        if self.has_secondary_curr:
-            reconciled_amls_domain = [('partner_id', '=', self.id),
-                                      ('full_reconcile_id', '!=', False)]
-
-            reconciled_amls = self.env['account.move.line'].search(reconciled_amls_domain)
-            aml_to_unreconcile = self.env['account.move.line']
+        if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
+            reconciled_amls = self.env['account.move.line'].search([('partner_id', '=', self.id),
+                                                                    ('full_reconcile_id', '!=', False)])
             if reconciled_amls:
-                for reconcile_obj in [aml.full_reconcile_id for aml in reconciled_amls]:
-                    aml_to_unreconcile |= reconcile_obj.reconciled_line_ids
-
-                aml_to_unreconcile.remove_move_reconcile()
+                reconciled_amls.remove_move_reconcile()
 
     def calc_difference_invoice(self):
-        if self.has_secondary_curr:
+        if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
             inv_obj = self.env['account.invoice']
             diff_inv_journal = self.env['account.journal'].search([('code', '=', 'KFARK')], limit=1)
             draft_dif_inv = inv_obj.search([('state', '=', 'draft'),
@@ -112,4 +103,3 @@ class ResPartner(models.Model):
             return action_dict
 
         return False
-

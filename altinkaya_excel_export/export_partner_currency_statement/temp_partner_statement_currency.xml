@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="partner_statement_dovizli_eks" model="xlsx.template">
-        <field name="res_model">report.partner.statement</field>
+    <record id="partner_statement_currency" model="xlsx.template">
+        <field name="res_model">report.partner.statement.currency</field>
         <field name="fname">partner_statement_currency.xlsx</field>
-        <field name="name">Cari Dövizli Ekstre Şablonu</field>
+        <field name="name">Cari Dövizli Ekstre</field>
         <field name="description">Müşterilerin dövizli ekstresini excel olarak basan şablon.</field>
         <field name="input_instruction">
                         {
@@ -13,11 +13,14 @@
                             'B2': 'partner_id.name${value or ""}#{align=left;vert-align=center;style=text}',
                             'H2': 'partner_id.tax_office_name${value or ""}#{align=full_center;style=text}',
                             'J2': 'partner_id.vat${value or ""}#{align=full_center;style=text}',
-                            'L2': 'date_now${value.strftime("%d.%m.%Y") or ""}#{align=full_center;style=text}',
+                            'M2': 'date_now${value.strftime("%d.%m.%Y") or ""}#{align=full_center;style=text}',
                             'B3': '${object.partner_id.phone or object.partner_id.mobile}#{align=left;vert-align=center;style=text}',
-                            'H6': '${"%s%.2f" % (object.partner_id.property_account_receivable_id.currency_id.symbol, object.results[-1].sec_curr_total) or "%s0.00" % object.partner_id.property_account_receivable_id.currency_id.symbol}#{align=right;style=text}',
+                            'F4': '${"%s Borç" % object.partner_id.property_account_payable_id.currency_id.name}#{align=center;border=thin_border;style=text}',
+                            'G4': '${"%s Alacak" % object.partner_id.property_account_payable_id.currency_id.name}#{align=center;border=thin_border;style=text}',
+                            'H4': '${"%s Bakiye" % object.partner_id.property_account_payable_id.currency_id.name}#{align=center;border=thin_border;style=text}',
+                            'H6': '${object.results[-1].sec_curr_total or "0,00"}#{align=right;style=text}',
                             'I6': '${object.results[-1].sec_curr_dc or ""}#{align=full_center;style=text}',
-                            'M6': '${"%s%.2f" % (object.default_currency.symbol, object.results[-1].total) or "%s0.00" % object.default_currency.symbol}#{align=right;style=text}',
+                            'M6': '${object.results[-1].total or "0,00"}#{align=right;style=text}',
                             'N6': '${object.results[-1].dc or ""}#{align=full_center;style=text}',
                         },
                         'results': {  # prefix with _CONT_ to continue rows from previous row field
@@ -26,14 +29,14 @@
                             'C5': 'date${value or ""}#{border=thin_border;align=left;style=text}',
                             'D5': 'due_date${value or ""}#{border=thin_border;align=left;style=text}',
                             'E5': 'description${value or ""}#{border=thin_border;align=left;style=text}',
-                            'F5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_debit) or "%s0.00" % object.secondary_currency.symbol}#{border=thin_border;align=right;style=text}',
-                            'G5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_credit) or "%s0.00" % object.secondary_currency.symbol}#{border=thin_border;align=right;style=text}',
-                            'H5': '${"%s%.2f" % (object.secondary_currency.symbol, object.sec_curr_balance) or "%s0.00" % object.secondary_currency.symbol}#{border=thin_border;align=right;style=text}',
+                            'F5': '${object.sec_curr_debit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'G5': '${object.sec_curr_credit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'H5': '${object.sec_curr_balance or "0,00"}#{border=thin_border;align=right;style=text}',
                             'I5': 'sec_curr_dc${value or ""}#{border=thin_border;align=center;style=text}',
-                            'J5': '${"%.2f" % object.currency_rate or 1.00}#{border=thin_border;align=right;style=text}',
-                            'K5': '${"%s%.2f" % (object.primary_currency.symbol, object.debit) or "%s0.00" % object.primary_currency.symbol}#{border=thin_border;align=right;style=text}',
-                            'L5': '${"%s%.2f" % (object.primary_currency.symbol, object.credit) or "%s0.00" % object.primary_currency.symbol}#{border=thin_border;align=right;style=text}',
-                            'M5': '${"%s%.2f" % (object.primary_currency.symbol, object.balance) or "%s0.00" % object.primary_currency.symbol}#{border=thin_border;align=right;style=text}',
+                            'J5': '${object.currency_rate or "1.0000"}#{border=thin_border;align=right;style=text}',
+                            'K5': '${object.debit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'L5': '${object.credit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'M5': '${object.balance or "0,00"}#{border=thin_border;align=right;style=text}',
                             'N5': 'dc${value or ""}#{border=thin_border;align=center;style=text}',
                         },
                     },
@@ -43,6 +46,6 @@
     </record>
 
     <function model="xlsx.template" name="load_xlsx_template">
-        <value eval="[ref('partner_statement_dovizli_eks')]"/>
+        <value eval="[ref('partner_statement_currency')]"/>
     </function>
 </odoo>

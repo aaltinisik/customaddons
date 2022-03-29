@@ -3,10 +3,11 @@ import time
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from datetime import date, datetime
+from odoo.tools.misc import formatLang
 
 
-class ReportPartnerStatement(models.TransientModel):
-    _name = 'report.partner.statement'
+class ReportPartnerStatementCurrency(models.TransientModel):
+    _name = 'report.partner.statement.currency'
     _description = 'Wizard for report.partner.statement'
     _inherit = 'xlsx.report'
 
@@ -107,41 +108,19 @@ class ReportPartnerStatement(models.TransientModel):
                                                                         '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict[
                     'journal'],
-                'debit': debit,
-                'credit': credit,
-                'sec_curr_debit': sec_curr_debit,
-                'sec_curr_credit': sec_curr_credit,
-                'currency_rate': 1 / rate,
-                'sec_curr_balance': abs(sec_curr_balance) or 0.00,
+                'debit': formatLang(self.env, debit),
+                'credit': formatLang(self.env, credit),
+                'sec_curr_debit': formatLang(self.env, sec_curr_debit),
+                'sec_curr_credit': formatLang(self.env, sec_curr_credit),
+                'currency_rate': "%.4f" % (1/rate),
+                'sec_curr_balance': formatLang(self.env, abs(sec_curr_balance)) or "0,00",
                 'sec_curr_dc': sec_curr_balance > 0.01 and 'B' or 'A',
-                'balance': abs(balance) or 0.0,
+                'balance': formatLang(self.env, abs(balance)) or "0,00",
                 'dc': balance > 0.01 and 'B' or 'A',
-                'sec_curr_total': sec_curr_balance or 0.00,
-                'total': balance or 0.0,
+                'sec_curr_total': formatLang(self.env, sec_curr_balance) or "0,00",
+                'total': formatLang(self.env, balance) or "0,00",
                 'secondary_currency': partner.property_account_receivable_id.currency_id.id or currency_id.id,
                 'primary_currency': currency_id.id}).id)
 
         return statement_data
 
-
-class StatementLines(models.TransientModel):
-    _name = 'partner.statement.lines'
-
-    sequence = fields.Integer('Sequence')
-    number = fields.Char('Number')
-    date = fields.Char('Date')
-    due_date = fields.Char('Due Date')
-    description = fields.Char('Description')
-    debit = fields.Float('Debit')
-    credit = fields.Float('Credit')
-    balance = fields.Float('Balance')
-    currency_rate = fields.Float('Currency Rate')
-    sec_curr_debit = fields.Float('Secondary Currency Debit')
-    sec_curr_credit = fields.Float('Secondary Currency Credit')
-    sec_curr_balance = fields.Float('Secondary Currency Balance')
-    dc = fields.Char('dc')
-    sec_curr_dc = fields.Char('sec_curr_dc')
-    total = fields.Float('Total')
-    sec_curr_total = fields.Float('Secondary Currency Total')
-    primary_currency = fields.Many2one('res.currency')
-    secondary_currency = fields.Many2one('res.currency')

@@ -1,7 +1,6 @@
 import time
 
 from odoo import fields, models, api, _
-from odoo.exceptions import UserError
 from datetime import date, datetime
 from odoo.tools.misc import formatLang
 
@@ -82,10 +81,9 @@ class ReportPartnerStatement(models.TransientModel):
                 'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict['journal'],
                 'debit': formatLang(self.env, debit),
                 'credit': formatLang(self.env, credit),
-                'balance': formatLang(self.env, abs(balance)) or 0.0,
+                'balance': formatLang(self.env, abs(balance)) or "0,00",
                 'dc': balance > 0.01 and 'B' or 'A',
-                'total': formatLang(self.env, balance) or 0.0,
-                'currency_symbol': currency_id['symbol'],
+                'total': formatLang(self.env, balance) or "0,00",
             }).id)
 
         return statement_data

@@ -19,13 +19,13 @@
     </record>
 
 
-        <act_window id="action_partner_statement_excel_export"
-            key2="client_action_multi" name="Cari Ekstresi"
-            res_model="report.partner.statement" src_model="res.partner"
-            view_mode="form" target="new" view_type="form"
-            context="{'template_domain': [('res_model', '=', 'report.partner.statement'),
+    <act_window id="action_partner_statement_excel_export"
+                key2="client_action_multi" name="Cari Ekstresi"
+                res_model="report.partner.statement" src_model="res.partner"
+                view_mode="form" target="new" view_type="form"
+                context="{'template_domain': [('res_model', '=', 'report.partner.statement'),
                                  ('fname', '=', 'partner_statement.xlsx'),
                                  ('gname', '=', False)]}"
-/>
+    />
 
 </odoo>
