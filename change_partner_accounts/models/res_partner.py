@@ -25,6 +25,8 @@ class ResPartner(models.Model):
         """ Change partners receivable and payable account to USD and update move lines accordingly """
         receivable_usd = self.env['account.account'].search([('code', '=', '120.USD')], limit=1)
         payable_usd = self.env['account.account'].search([('code', '=', '320.USD')], limit=1)
+        old_receivable = self.property_account_receivable_id
+        old_payable = self.property_account_payable_id
         company_currency = self.env.user.company_id.currency_id
         if not (receivable_usd and payable_usd):
             raise UserError(_('Error in accounts definition'))
@@ -35,10 +37,10 @@ class ResPartner(models.Model):
 
             cr.execute(
                     """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                        receivable_usd.id, partner_id.id, receivable_try.id))
+                        receivable_usd.id, partner_id.id, old_receivable.id))
             cr.execute(
                     """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                        payable_usd.id, partner_id.id, payable_usd.id))
+                        payable_usd.id, partner_id.id, old_payable.id))
 
             partner_id.write({'property_account_receivable_id': receivable_usd.id,
                              'property_account_payable_id': payable_usd.id})
@@ -75,6 +77,8 @@ class ResPartner(models.Model):
         """ Change partners receivable and payable account to eur and update move lines accordingly """
         receivable_eur = self.env['account.account'].search([('code', '=', '120.EUR')], limit=1)
         payable_eur = self.env['account.account'].search([('code', '=', '320.EUR')], limit=1)
+        old_receivable = self.property_account_receivable_id
+        old_payable = self.property_account_payable_id
         company_currency = self.env.user.company_id.currency_id
         if not (receivable_eur and payable_eur):
             raise UserError(_('Error in accounts definition'))
@@ -85,10 +89,10 @@ class ResPartner(models.Model):
 
             cr.execute(
                     """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                        receivable_eur.id, partner_id.id, receivable_try.id))
+                        receivable_eur.id, partner_id.id, old_receivable.id))
             cr.execute(
                     """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                        payable_eur.id, partner_id.id, payable_eur.id))
+                        payable_eur.id, partner_id.id, old_payable.id))
 
             partner_id.write({'property_account_receivable_id': receivable_eur.id,
                              'property_account_payable_id': payable_eur.id})
@@ -118,4 +122,29 @@ class ResPartner(models.Model):
                                              amount_residual_currency,
                                              aml.id))
 
+            cr.commit()
+
+    @api.multi
+    def change_accounts_to_try(self):
+        """ Change partners receivable and payable account to company currency and donot update move lines """
+        receivable_try = self.env['account.account'].search([('code', '=', '120')], limit=1)
+        payable_try = self.env['account.account'].search([('code', '=', '320')], limit=1)
+        old_receivable = self.property_account_receivable_id
+        old_payable = self.property_account_payable_id
+
+        if not (receivable_try and payable_try):
+            raise UserError(_('Error in accounts definition'))
+
+        cr = self.env.cr
+        for partner_id in self:
+
+
+            cr.execute(
+                    """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
+                        receivable_try.id, partner_id.id, old_receivable.id))
+            cr.execute(
+                    """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
+                        payable_try.id, partner_id.id, old_payable.id))
+            partner_id.write({'property_account_receivable_id': receivable_try.id,
+                             'property_account_payable_id': payable_try.id})
             cr.commit()

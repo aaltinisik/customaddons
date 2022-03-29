@@ -9,8 +9,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='property_account_payable_id']" position="after">
                     <button name="change_accounts" type="object" string="Change Partner Accounts" />
-                    <button name="change_accounts_to_usd" type="object" string="Change Partner Accounts from TL to USD" />
-                    <button name="change_accounts_to_eur" type="object" string="Change Partner Accounts from TL to EURO" />
+                    <button name="change_accounts_to_usd" type="object" string="Change Partner Accounts to USD" />
+                    <button name="change_accounts_to_eur" type="object" string="Change Partner Accounts to EURO" />
+                    <button name="change_accounts_to_try" type="object" string="Change Partner Accounts to TL" />
                 </xpath>
             </field>
         </record>
