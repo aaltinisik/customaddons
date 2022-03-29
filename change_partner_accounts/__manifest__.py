@@ -23,7 +23,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/res_partner_view.xml',
-        'wizard/change_partner_accounts_wizard_view.xml',
+        'wizard/change_partner_accounts_usd_view.xml',
+        'wizard/change_partner_accounts_try_view.xml',
+        'wizard/change_partner_accounts_eur_view.xml',
     ],
 }
