@@ -10,7 +10,7 @@
                 <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']" position="after">
 
 	              <field name="accounting_contact" domain="[('parent_id', '=', active_id)]" />
-                    <field name="purchase_dafault_account_id"/>
+                    <field name="purchase_default_account_id"/>
 
                     <hr> </hr>
 

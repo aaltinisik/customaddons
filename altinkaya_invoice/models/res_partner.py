@@ -7,7 +7,7 @@ class ResPartner(models.Model):
     z_muhasebe_kodu = fields.Char('Zirve Muhasebe kodu', size=64, required=False, translate=False)
     z_receivable_export = fields.Char('Receivable Export', size=64, required=False)
     z_payable_export = fields.Char('Payable Export', size=64, required=False)
-    purchase_dafault_account_id = fields.Many2one('account.account', string='Purchase Default Account', required=False,
+    purchase_default_account_id = fields.Many2one('account.account', string='Purchase Default Account', required=False,
                                                   help=u"Satın alma işlemlerinde varsayılan muhasebe hesabı.")
     accounting_contact = fields.Many2one('res.partner', string='Accounting Contact', required=False)
 
