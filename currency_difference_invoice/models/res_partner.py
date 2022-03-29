@@ -112,3 +112,4 @@ class ResPartner(models.Model):
             return action_dict
 
         return False
+
