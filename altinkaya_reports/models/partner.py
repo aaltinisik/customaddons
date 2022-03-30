@@ -51,7 +51,7 @@ class Partner(models.Model):
                         WHEN INV.NUMBER IS NOT NULL THEN CONCAT(AJ.NAME,' ',INV.NUMBER)
                         ELSE AJ.NAME
         END AS DESCRIPTION,
-    
+
         CASE
                         WHEN (SUM(L.DEBIT) - SUM(L.CREDIT)) > 0 THEN ROUND((SUM(L.DEBIT) - SUM(L.CREDIT)),2)
                         ELSE 0.00
@@ -86,12 +86,11 @@ class Partner(models.Model):
         ORDER BY L.DATE,L.CURRENCY_ID""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
                                                 str(move_type))
 
+      currency_difference_accounts = self.env['account.account'].search([('code', 'in', ['646', '656', '646.F'])]).mapped('id')
         self.env.cr.execute(query)
-        currency_difference_account = self.env['account.account'].search([('code', '=', '320.USD')], limit=1).id
-
         for sl in self.env.cr.dictfetchall():
             seq += 1
-            if sl['account_id'] == currency_difference_account:
+            if sl['account_id'] in currency_difference_accounts:
                 # if line is currency difference currency values shall be cleared
                 sl['currency_rate'] = 0.0
                 sl['debit_currency'] = 0.0
@@ -117,7 +116,7 @@ class Partner(models.Model):
                     '%d.%m.%Y') or False,
                 'due_date': sl['due_date'] and datetime.strptime(str(sl['due_date']),
                                                                         '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(sl['decription']) >= 40 and sl['description'][0:40] or sl['description'],
+                'description': len(sl['description']) >= 40 and sl['description'][0:40] or sl['description'],
                 'debit': debit,
                 'credit': credit,
                 'balance': abs(balance) or 0.0,
