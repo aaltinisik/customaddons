@@ -33,124 +33,103 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data_currency(self, data=None):
-        statement_data = []
-        statement_dict = {}
-        balance, seq = 0.0, 0
-        Currency = self.env['res.currency']
-        end_date = date(date.today().year, 12, 31)
-        start_date = date(1985, 1, 1)
-        move_type = ('payable', 'receivable')
-        self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
-                        l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
-                        FROM account_move_line AS l \
-                        LEFT JOIN account_account a ON (l.account_id=a.id) \
-                        LEFT JOIN account_move am ON (l.move_id=am.id) \
-                        LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
-                        LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
-                        WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = ' + str(
-            self.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
-                            'GROUP BY aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
-                             ORDER BY l.date , l.currency_id ', (str(start_date), str(end_date)))
-        for each_dict in self.env.cr.dictfetchall():
-            #             if each_dict['currency_id'] and each_dict['amount_currency'] :
-            seq += 1
-
-            debit = 0.0
-            credit = 0.0
-            if each_dict['currency_id'] and each_dict['amount_currency']:
-                if (each_dict['debit'] - each_dict['credit']) > 0.0:
-                    debit = (each_dict['amount_currency'] - each_dict['credit'])
-                #                     balance = (each_dict['amount_currency'] - each_dict['credit']) + balance
-                else:
-                    credit = (each_dict['credit'] - each_dict['amount_currency'])
-                #                     balance = (each_dict['debit'] - each_dict['amount_currency']) + balance
-                currency_id = Currency.browse(each_dict['currency_id'])
-            else:
-                if (each_dict['debit'] - each_dict['credit']) > 0.0:
-                    debit = (each_dict['debit'] - each_dict['credit'])
-                else:
-                    credit = (each_dict['credit'] - each_dict['debit'])
-                #                 balance = (each_dict['debit'] - each_dict['credit']) + balance
-                currency_id = Currency.browse(each_dict['company_currency_id'])
-
-            statement_data.append({
-                'seq': seq,
-                'number': each_dict['state'] == 'draft' and '*' + str(each_dict['move_id']) or each_dict['name'],
-                'date': each_dict['date'] and datetime.strptime(str(each_dict['date']), '%Y-%m-%d').strftime(
-                    '%d.%m.%Y') or False,
-                'due_date': each_dict['due_date'] and datetime.strptime(str(each_dict['due_date']),
-                                                                        '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict['journal'],
-                'debit': debit,
-                'credit': credit,
-                'balance': abs(balance) or 0.0,
-                'dc': balance > 0.01 and 'D' or 'C',
-                'total': balance or 0.0,
-                'currency_id': currency_id,
-            })
-
-        for s in statement_data:
-            if not s['currency_id'] in statement_dict:
-                statement_dict[s['currency_id']] = []
-
-            statement_dict[s['currency_id']].append(s)
-
-        for currency in statement_dict:
-            balance = 0.0
-            for s in statement_dict[currency]:
-                balance = (s['debit'] - s['credit']) + balance
-                s.update({
-                    'balance': abs(balance) or 0.0,
-                    'dc': balance > 0.01 and 'D' or 'C',
-
-                })
-
-        return statement_dict
+        return _get_statement_sata(self)
 
     @api.multi
     def _get_statement_data(self, data=None):
         statement_data = []
         balance, seq = 0.0, 0
+        currency_balance = 0.0
         Currency = self.env['res.currency']
         end_date = date(date.today().year, 12, 31)
         start_date = date(date.today().year, 1, 1)
         move_type = ('payable', 'receivable')
-        self.env.cr.execute('SELECT aj.name as journal, l.date_maturity as due_date, l.date, am.name, am.state, move_id, SUM(l.debit) AS debit, SUM(l.credit) AS credit,\
-                                l.amount_currency as amount_currency,l.currency_id as currency_id,l.company_currency_id as company_currency_id\
-                                FROM account_move_line AS l \
-                                LEFT JOIN account_account a ON (l.account_id=a.id) \
-                                LEFT JOIN account_move am ON (l.move_id=am.id) \
-                                LEFT JOIN account_journal aj ON (am.journal_id=aj.id) \
-                                LEFT JOIN account_account_type at ON (a.user_type_id =at.id) \
-                                WHERE (l.date BETWEEN %s AND %s) AND l.partner_id = ' + str(
-            self.commercial_partner_id.id) + ' AND  at.type IN ' + str(move_type) +
-                            'GROUP BY aj.name,move_id,am.name,am.state,l.date,l.date_maturity ,l.amount_currency,l.currency_id,l.company_currency_id\
-                             ORDER BY l.date , l.currency_id ', (str(start_date), str(end_date)))
-        for each_dict in self.env.cr.dictfetchall():
+
+        query = """SELECT L.DATE,
+        AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER,	L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
+        CASE
+                        WHEN INV.NUMBER IS NOT NULL THEN CONCAT(AJ.NAME,' ',INV.NUMBER)
+                        ELSE AJ.NAME
+        END AS DESCRIPTION,
+    
+        CASE
+                        WHEN (SUM(L.DEBIT) - SUM(L.CREDIT)) > 0 THEN ROUND((SUM(L.DEBIT) - SUM(L.CREDIT)),2)
+                        ELSE 0.00
+        END AS DEBIT,
+        CASE
+                        WHEN SUM(L.DEBIT) - SUM(L.CREDIT) < 0 THEN -1 * ROUND((SUM(L.DEBIT) - SUM(L.CREDIT)),2)
+                        ELSE 0.00
+        END AS CREDIT,
+        CASE
+                        WHEN   ABS(SUM (L.AMOUNT_CURRENCY)) > 0 THEN  ROUND(ABS(SUM(L.DEBIT) - SUM(L.CREDIT))/ABS(SUM (L.AMOUNT_CURRENCY)),5)
+                        ELSE 0.00
+        END AS currency_rate,
+        CASE
+                        WHEN ROUND(SUM (L.AMOUNT_CURRENCY),4) > 0 THEN ROUND(SUM (L.AMOUNT_CURRENCY),4)
+                        ELSE 0.00
+        END AS DEBIT_currency,
+        CASE
+                        WHEN ROUND(SUM (L.AMOUNT_CURRENCY),4) < 0 THEN -1 * ROUND(SUM (L.AMOUNT_CURRENCY),4)
+                        ELSE 0.00
+        END AS CREDIT_currency,
+        ROUND(SUM (L.AMOUNT_CURRENCY),4) AS AMOUNT_CURRENCY,AM.STATE,L.CURRENCY_ID AS CURRENCY_ID,
+        L.COMPANY_CURRENCY_ID AS COMPANY_CURRENCY_ID,AJ.ID AS JOURNAL_ID,L.ACCOUNT_ID AS ACCOUNT_ID
+        FROM ACCOUNT_MOVE_LINE AS L
+        LEFT JOIN ACCOUNT_ACCOUNT A ON (L.ACCOUNT_ID = A.ID) LEFT JOIN ACCOUNT_MOVE AM ON (L.MOVE_ID = AM.ID)
+        LEFT JOIN ACCOUNT_JOURNAL AJ ON (AM.JOURNAL_ID = AJ.ID) LEFT JOIN ACCOUNT_ACCOUNT_TYPE AT ON (A.USER_TYPE_ID = AT.ID)
+        LEFT JOIN ACCOUNT_INVOICE INV ON (L.INVOICE_ID = INV.ID)
+        WHERE (L.DATE BETWEEN '{0}' AND '{1}')
+        AND L.PARTNER_ID = {2}
+        AND AT.TYPE IN {3}
+        GROUP BY AJ.NAME,	L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
+        INV.NUMBER,	AJ.ID,	L.ACCOUNT_ID
+        ORDER BY L.DATE,L.CURRENCY_ID""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
+                                                str(move_type))
+
+        self.env.cr.execute(query)
+        currency_difference_account = self.env['account.account'].search([('code', '=', '320.USD')], limit=1).id
+
+        for sl in self.env.cr.dictfetchall():
             seq += 1
-            balance = (each_dict['debit'] - each_dict['credit']) + balance
+            if sl['account_id'] == currency_difference_account:
+                # if line is currency difference currency values shall be cleared
+                sl['currency_rate'] = 0.0
+                sl['debit_currency'] = 0.0
+                sl['credit_currency'] = 0.0
+                sl['amount_currency'] = 0.0
+                sl['currency_id'] = sl['company_currency_id']
+
+            balance = (sl['debit'] - sl['credit']) + balance
+            currency_balance = (sl['debit_currency'] - sl['credit_currency']) + currency_balance
             debit = 0.0
             credit = 0.0
-            currency_id = Currency.browse(each_dict['company_currency_id'])
-            if (each_dict['debit'] - each_dict['credit']) > 0.0:
-                debit = (each_dict['debit'] - each_dict['credit'])
+            company_currency_id = Currency.browse(sl['company_currency_id'])
+            line_currency_id = Currency.browse(sl['currency_id'])
+            if (sl['debit'] - sl['credit']) > 0.0:
+                debit = (sl['debit'] - sl['credit'])
             else:
-                credit = (each_dict['credit'] - each_dict['debit'])
+                credit = (sl['credit'] - sl['debit'])
 
             statement_data.append({
                 'seq': seq,
-                'number': each_dict['state'] == 'draft' and '*' + str(each_dict['move_id']) or each_dict['name'],
-                'date': each_dict['date'] and datetime.strptime(str(each_dict['date']), '%Y-%m-%d').strftime(
+                'number': sl['name'],
+                'date': sl['date'] and datetime.strptime(str(sl['date']), '%Y-%m-%d').strftime(
                     '%d.%m.%Y') or False,
-                'due_date': each_dict['due_date'] and datetime.strptime(str(each_dict['due_date']),
+                'due_date': sl['due_date'] and datetime.strptime(str(sl['due_date']),
                                                                         '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(each_dict['journal']) >= 30 and each_dict['journal'][0:30] or each_dict['journal'],
+                'description': len(sl['decription']) >= 40 and sl['description'][0:40] or sl['description'],
                 'debit': debit,
                 'credit': credit,
                 'balance': abs(balance) or 0.0,
+                'credit_currency': sl['credit_currency'],
+                'debit_currency': sl['debit_currency'],
+                'currency_rate': sl['currency_rate'],
+                'currency_balance': abs(currency_balance) or 0.0,
+                'currency_dc': currency_balance > 0.01 and 'B' or 'A',
+                'line_currency_id': line_currency_id['symbol'],
                 'dc': balance > 0.01 and 'B' or 'A',
                 'total': balance or 0.0,
-                'currency_symbol': currency_id['symbol'],
+                'currency_symbol': company_currency_id['symbol'],
             })
         return statement_data
 
