@@ -9,18 +9,18 @@ class AccountMoveLine(models.Model):
 
     difference_checked = fields.Boolean(string='Currency Difference Checked', store=True)
 
-    def create(self, vals):
-
-        if isinstance(vals, list):
-            for val in vals:
-                if val.get('partner_id', False):
-                    self._calculate_amount_currency(val)
-
-        else:
-            if vals.get('partner_id', False):
-                self._calculate_amount_currency(vals)
-
-        return super(AccountMoveLine, self).create(vals)
+    # def create(self, vals):
+    #
+    #     if isinstance(vals, list):
+    #         for val in vals:
+    #             if val.get('partner_id', False):
+    #                 self._calculate_amount_currency(val)
+    #
+    #     else:
+    #         if vals.get('partner_id', False):
+    #             self._calculate_amount_currency(vals)
+    #
+    #     return super(AccountMoveLine, self).create(vals)
 
     def _calculate_amount_currency(self, vals):
         partner_id = self.env['res.partner'].browse(vals['partner_id'])
