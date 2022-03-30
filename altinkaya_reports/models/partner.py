@@ -86,7 +86,7 @@ class Partner(models.Model):
         ORDER BY L.DATE,L.CURRENCY_ID""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
                                                 str(move_type))
 
-      currency_difference_accounts = self.env['account.account'].search([('code', 'in', ['646', '656', '646.F'])]).mapped('id')
+        currency_difference_accounts = self.env['account.account'].search([('code', 'in', ['646', '656', '646.F'])]).mapped('id')
         self.env.cr.execute(query)
         for sl in self.env.cr.dictfetchall():
             seq += 1
