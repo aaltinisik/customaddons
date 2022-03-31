@@ -46,12 +46,17 @@ class Partner(models.Model):
         move_type = ('payable', 'receivable')
 
         query = """SELECT L.DATE,
-        AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER,	L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
-        CASE
-                        WHEN INV.NUMBER IS NOT NULL THEN CONCAT(AJ.NAME,' ',INV.NUMBER)
-                        ELSE AJ.NAME
-        END AS DESCRIPTION,
-
+    	AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER, INV.SUPPLIER_INVOICE_NuMBER,L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
+    
+    	CASE
+    					WHEN INV.SUPPLIER_INVOICE_NuMBER IS NOT NULL THEN INV.SUPPLIER_INVOICE_NuMBER
+    					ELSE INV.NUMBER
+    	END AS INNUMBER,    
+    
+    	CASE
+    					WHEN INV.NUMBER IS NOT NULL THEN AJ.NAME
+    					ELSE AJ.NAME
+    	END AS DESCIRIPTION,
         CASE
                         WHEN (SUM(L.DEBIT) - SUM(L.CREDIT)) > 0 THEN ROUND((SUM(L.DEBIT) - SUM(L.CREDIT)),2)
                         ELSE 0.00
@@ -82,7 +87,7 @@ class Partner(models.Model):
         AND L.PARTNER_ID = {2}
         AND AT.TYPE IN {3}
         GROUP BY AJ.NAME,	L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
-        INV.NUMBER,	AJ.ID,	L.ACCOUNT_ID
+        INV.NUMBER,INV.SUPPLIER_INVOICE_NUMBER,	AJ.ID,	L.ACCOUNT_ID
         ORDER BY L.DATE,L.CURRENCY_ID""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
                                                 str(move_type))
 
@@ -107,6 +112,10 @@ class Partner(models.Model):
             currency_balance = (sl['debit_currency'] - sl['credit_currency']) + currency_balance
             debit = 0.0
             credit = 0.0
+            if sl['innumber']:
+                description = sl['journal'] + ' ' + sl['innumber']
+            else:
+                description = sl['journal']
             company_currency_id = Currency.browse(sl['company_currency_id'])
             line_currency_id = Currency.browse(sl['currency_id'])
             if (sl['debit'] - sl['credit']) > 0.0:
@@ -121,7 +130,7 @@ class Partner(models.Model):
                     '%d.%m.%Y') or False,
                 'due_date': sl['due_date'] and datetime.strptime(str(sl['due_date']),
                                                                         '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(sl['description']) >= 40 and sl['description'][0:40] or sl['description'],
+                'description': len(description) >= 40 and description[0:40] or description,
                 'debit': debit,
                 'credit': credit,
                 'amount': debit - credit,
