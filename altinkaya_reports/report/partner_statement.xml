@@ -290,7 +290,6 @@
 									<table class="table table-bordered" style="table-layout:auto;">
 									<tr>
 										<th>#</th>
-										<th>Numara</th>
 										<th>Tarih</th>
 										<th>Vade Tarihi</th>
 										<th>Açıklama</th>
@@ -310,9 +309,6 @@
 											<tr>
 												<td class="text-center" style="min-width:15px;">
 													<span t-esc="s['seq']" />
-												</td>
-												<td>
-													<span t-esc="s['number']" />
 												</td>
 												<td>
 													<span t-esc="s['date']" />
@@ -347,7 +343,7 @@
 										</t>
 										<tr>
 											<td></td>
-											<td></td>
+
 											<td></td>
 											<td></td>
 											<td class="text-right">
