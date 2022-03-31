@@ -33,7 +33,7 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data_currency(self, data=None):
-        return _get_statement_sata(self)
+        return self._get_statement_data(self)
 
     @api.multi
     def _get_statement_data(self, data=None):
