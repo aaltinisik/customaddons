@@ -37,23 +37,49 @@ class ResPartner(models.Model):
             if difference_amls:
                 inv_lines_to_create = []
                 for diff_aml in difference_amls:
-                    inv_line_name = f"Kur Farkı / {diff_aml.payment_id.move_name} /" \
-                                    f" {diff_aml.invoice_id.display_name} {diff_aml.date.strftime('%d.%m.%Y')}"
-                    aml_tax = fields.first(diff_aml.invoice_id.tax_line_ids).tax_id
-                    amount = diff_aml.debit or diff_aml.credit
-                    if aml_tax and aml_tax.amount_type == 'percent':
-                        amount = (amount / (100.0 + aml_tax.amount)) * 100.0
+                    inv_ids = diff_aml.full_reconcile_id.reconciled_line_ids.filtered(lambda r: r.invoice_id).mapped(
+                        'invoice_id')
+                    kdv_18_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
+                                                                               r.tax_id.amount == 18).mapped('amount'))
 
-                    inv_lines_to_create.append({
-                        'difference_base_aml_id': diff_aml.id,
-                        'name': inv_line_name,
-                        'uom_id': 1,
-                        'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
-                        'price_unit': amount,
-                        'invoice_line_tax_ids': [
-                            (6, False, [aml_tax.id] if aml_tax else [self.env['account.tax'].search(
-                                [('type_tax_use', '=', 'sale'), ('amount', '=', 0.0)], limit=1).id])],
-                    })
+                    kdv_8_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
+                                                                              r.tax_id.amount == 8).mapped('amount'))
+
+                    rate_18 = round(100.0 * (kdv_18_taxes / 18.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
+                    rate_8 = round(100.0 * (kdv_8_taxes / 8.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
+                    if rate_18 > 0.001:
+                        inv_line_name = f"Kur Farkı KDV %18 {diff_aml.date.strftime('%d.%m.%Y')}"
+                        tax = self.env['account.tax'].search(
+                            [('type_tax_use', '=', 'sale'), ('amount', '=', 18.0), ('include_base_amount', '=', False)],
+                            limit=1)
+                        amount_untaxed = (diff_aml.debit or diff_aml.credit) * rate_18 / (1 + tax.amount / 100.0)
+                        inv_lines_to_create.append({
+                            'difference_base_aml_id': diff_aml.id,
+                            'name': inv_line_name,
+                            'uom_id': 1,
+                            'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
+                            'price_unit': amount_untaxed,
+                            'invoice_line_tax_ids': [
+                                (6, False, [tax.id])],
+                        })
+
+                    if rate_8 > 0.001:
+                        inv_line_name = f"Kur Farkı KDV %8 {diff_aml.date.strftime('%d.%m.%Y')}"
+                        tax = self.env['account.tax'].search(
+                            [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0), ('include_base_amount', '=', False)],
+                            limit=1)
+                        amount_untaxed = (diff_aml.debit or diff_aml.credit) * rate_8 / (1 + tax.amount / 100.0)
+                        inv_lines_to_create.append({
+                            'difference_base_aml_id': diff_aml.id,
+                            'name': inv_line_name,
+                            'uom_id': 1,
+                            'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
+                            'price_unit': amount_untaxed,
+                            'invoice_line_tax_ids': [
+                                (6, False, [self.env['account.tax'].search(
+                                    [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0)], limit=1).id])],
+                        })
+
                     diff_aml.write({'difference_checked': True})
 
                 if inv_lines_to_create:

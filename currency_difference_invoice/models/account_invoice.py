@@ -33,7 +33,7 @@ class AccountInvoice(models.Model):
             aml_to_reconcile = self.env['account.move.line']
             for inv_line in invoice.invoice_line_ids.filtered(lambda x: x.difference_base_aml_id):
 
-                aml_to_unreconcile |= inv_line.difference_base_aml_id.full_reconcile_id.reconciled_line_ids.filtered(lambda r: r.reconciled is True)
+                aml_to_unreconcile |= inv_line.difference_base_aml_id.full_reconcile_id.reconciled_line_ids
                 aml_to_reconcile |= inv_line.difference_base_aml_id.full_reconcile_id.reconciled_line_ids.filtered(lambda r: r.id != inv_line.difference_base_aml_id.id)
 
             if aml_to_unreconcile:

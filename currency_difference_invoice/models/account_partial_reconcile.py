@@ -25,43 +25,41 @@ class AccountPartialReconcile(models.Model):
         """
         partial_rec = self.env['account.partial.reconcile']
         aml_model = self.env['account.move.line']
-
+        total = sum(aml.amount_residual for aml in aml_to_fix)
         created_lines = self.env['account.move.line']
-        for aml in aml_to_fix:
-            #create the line that will compensate all the aml_to_fix
-            line_to_rec = aml_model.with_context(check_move_validity=False).create({
-                'name': _('Currency exchange rate difference'),
-                'debit': aml.amount_residual < 0 and -aml.amount_residual or 0.0,
-                'credit': aml.amount_residual > 0 and aml.amount_residual or 0.0,
-                'account_id': aml.account_id.id,
-                'move_id': move.id,
-                'currency_id': aml.currency_id.id,
-                'amount_currency': aml.amount_residual_currency and -aml.amount_residual_currency or 0.0,
-                'partner_id': aml.partner_id.id,
-                'invoice_id': aml.invoice_id.id,
-                'payment_id': aml.payment_id.id,
-            })
-            #create the counterpart on exchange gain/loss account
-            exchange_journal = move.company_id.currency_exchange_journal_id
-            aml_model.with_context(check_move_validity=False).create({
-                'name': _('Currency exchange rate difference'),
-                'debit': aml.amount_residual > 0 and aml.amount_residual or 0.0,
-                'credit': aml.amount_residual < 0 and -aml.amount_residual or 0.0,
-                'account_id': aml.amount_residual > 0 and exchange_journal.default_debit_account_id.id or exchange_journal.default_credit_account_id.id,
-                'move_id': move.id,
-                'currency_id': aml.currency_id.id,
-                'amount_currency': aml.amount_residual_currency and aml.amount_residual_currency or 0.0,
-                'partner_id': aml.partner_id.id,
-                'invoice_id': aml.invoice_id.id,
-                'payment_id': aml.payment_id.id,
-            })
+        currency_id = aml_to_fix[0].partner_id.property_account_receivable_id.currency_id
+        # amount_in_currency = self.env.user.company_id.currency_id._convert(abs(total), currency_id,
+        #                                            self.env.user.company_id,fields.Date.today())
+        # create the line that will compensate all the aml_to_fix
+        line_to_rec = aml_model.with_context(check_move_validity=False).create({
+            'name': _('Currency exchange rate difference'),
+            'debit': total < 0 and -total or 0.0,
+            'credit': total > 0 and total or 0.0,
+            'account_id': aml_to_fix[0].account_id.id,
+            'currency_id': currency_id.id,
+            'amount_currency': 0.0,
+            'move_id': move.id,
+            'partner_id': aml_to_fix[0].partner_id.id,
+        })
+        # create the counterpart on exchange gain/loss account
+        exchange_journal = move.company_id.currency_exchange_journal_id
+        aml_model.with_context(check_move_validity=False).create({
+            'name': _('Currency exchange rate difference'),
+            'debit': total > 0 and total or 0.0,
+            'credit': total < 0 and -total or 0.0,
+            'account_id': total > 0 and exchange_journal.default_debit_account_id.id or exchange_journal.default_credit_account_id.id,
+            'move_id': move.id,
+            'currency_id': currency_id.id,
+            'amount_currency': 0.0,
+            'partner_id': aml_to_fix[0].partner_id.id,
+        })
 
-            #reconcile all aml_to_fix
-            partial_rec |= self.create(
-                self._prepare_exchange_diff_partial_reconcile(
-                        aml=aml,
-                        line_to_reconcile=line_to_rec,
-                        currency=aml.currency_id or False)
-            )
-            created_lines |= line_to_rec
-        return created_lines, partial_rec
+        # # reconcile all aml_to_fix
+        # partial_rec |= self.create(
+        #     self._prepare_exchange_diff_partial_reconcile(
+        #         aml=aml,
+        #         line_to_reconcile=line_to_rec,
+        #         currency=aml.currency_id or False)
+        # )
+        created_lines |= line_to_rec
+        return created_lines

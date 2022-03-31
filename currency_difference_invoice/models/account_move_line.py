@@ -93,19 +93,8 @@ class AccountMoveLine(models.Model):
                 to_balance[aml.currency_id][0] += aml
                 to_balance[aml.currency_id][1] += aml.amount_residual != 0 and aml.amount_residual or aml.amount_residual_currency
 
-        digits_rounding_precision = amls[0].company_id.currency_id.rounding
-        caba_reconciled_amls = cash_basis_partial.mapped('debit_move_id') + cash_basis_partial.mapped('credit_move_id')
-        caba_connected_amls = amls.filtered(lambda x: x.move_id.tax_cash_basis_rec_id) + caba_reconciled_amls
-        matched_percentages = caba_connected_amls._get_matched_percentage()
-        partial_rec |= partial_rec.create(
-                partial_rec._prepare_exchange_diff_partial_reconcile(
-                    aml=to_balance[aml.currency_id][0],
-                    line_to_reconcile=diff_aml,
-                    currency=self.env.user.company_id.currency_id)
-            )
         amls += diff_aml
         partial_rec_ids += partial_rec.ids
-        # ACCOUNT MOVE LINE AMOUNT CURRENCY KALDIR DÜZELİCEK
         self.env['account.full.reconcile'].create({
             'partial_reconcile_ids': [(6, 0, partial_rec_ids)],
             'reconciled_line_ids': [(6, 0, amls.ids)],
