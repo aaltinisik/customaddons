@@ -157,16 +157,16 @@
 										<th>#</th>
 										<th>Tarih</th>
 										<th>Açıklama</th>
-										<th>Vade Tarihi</th>
+										<th>Vade T.</th>
 
 
-										<th><t t-esc="o.property_account_receivable_id.currency_id.name" /> Tutar</th>
+										<th><t t-esc="o.property_account_receivable_id.currency_id.symbol" /> Tutar</th>
 
-										<th><t t-esc="o.property_account_receivable_id.currency_id.name" /> Bakiye</th>
+										<th><t t-esc="o.property_account_receivable_id.currency_id.symbol" /> Bakiye</th>
 										<th></th>
-										<th><t t-esc="o.property_account_receivable_id.currency_id.name" />/TL</th>
-										<th>TL Tutar</th>
-										<th>TL Bakiye</th>
+										<th><t t-esc="o.property_account_receivable_id.currency_id.symbol" />/₺</th>
+										<th>₺ Tutar</th>
+										<th>₺ Bakiye</th>
 										<th></th>
 
 									</tr>
