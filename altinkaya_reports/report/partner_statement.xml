@@ -253,6 +253,24 @@
 											<td class="text-right">
 												TOPLAM
 											</td>
+
+											<td class="text-right">
+												<span t-esc="'{:,.2f}'.format(float(currency_toplamBorc))"
+												 />
+											</td>
+											<td class="text-right">
+												<span t-esc="'{:,.2f}'.format(float(currency_toplamAlacak))"
+												 />
+											</td>
+											<td class="text-right">
+												<span t-esc="'{:,.2f}'.format(float(currency_toplamBakiye))"
+												 />
+											</td>
+											<td class="text-center">
+												<span t-esc="c_sdc" />
+											</td>
+
+     										<td></td>
 											<td class="text-right">
 												<span t-esc="'{:,.2f}'.format(float(toplamBorc))"
 												 />
@@ -268,22 +286,8 @@
 											<td class="text-center">
 												<span t-esc="sdc" />
 											</td>
-                                            <td></td>
-                                        											<td class="text-right">
-												<span t-esc="'{:,.2f}'.format(float(currency_toplamBorc))"
-												 />
-											</td>
-											<td class="text-right">
-												<span t-esc="'{:,.2f}'.format(float(currency_toplamAlacak))"
-												 />
-											</td>
-											<td class="text-right">
-												<span t-esc="'{:,.2f}'.format(float(currency_toplamBakiye))"
-												 />
-											</td>
-											<td class="text-center">
-												<span t-esc="c_sdc" />
-											</td>
+
+
 										</tr>
 
 
