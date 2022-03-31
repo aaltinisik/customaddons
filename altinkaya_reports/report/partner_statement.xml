@@ -158,14 +158,16 @@
 										<th>Tarih</th>
 										<th>Açıklama</th>
 										<th>Vade Tarihi</th>
-										<th>TL Borç</th>
-										<th>TL Alacak</th>
-										<th>TL Bakiye</th>
-										<th></th>
-										<th><t t-esc="o.property_account_receivable_id.currency_id.name" />/TL</th>
+
+
 										<th><t t-esc="o.property_account_receivable_id.currency_id.name" /> Borç</th>
 										<th><t t-esc="o.property_account_receivable_id.currency_id.name" /> Alacak</th>
 										<th><t t-esc="o.property_account_receivable_id.currency_id.name" /> Bakiye</th>
+										<th></th>
+										<th><t t-esc="o.property_account_receivable_id.currency_id.name" />/TL</th>
+											<th>TL Borç</th>
+										<th>TL Alacak</th>
+										<th>TL Bakiye</th>
 										<th></th>
 
 									</tr>
@@ -192,6 +194,27 @@
 												<td>
 													<span t-esc="s['due_date']" />
 												</td>
+													<td class="text-right">
+													<span t-raw="number_lang.format('%.2f', s['debit_currency'],grouping=True, monetary=True)"
+													 />
+												</td>
+												<td class="text-right">
+													<span t-raw="number_lang.format('%.2f', s['credit_currency'],grouping=True, monetary=True)"
+													 />
+												</td>
+												<td class="text-right">
+													<span t-raw="number_lang.format('%.2f', s['currency_balance'],grouping=True, monetary=True)"
+													 />
+												</td>
+												<td class="text-center" style="min-width:15px">
+														<span t-esc="s['currency_dc']" />
+													</td>
+
+													<td class="text-right">
+														<span t-raw="number_lang.format('%.4f', s['currency_rate'])" />
+													</td>
+
+
 												<td class="text-right">
 													<span t-raw="number_lang.format('%.2f', s['debit'],grouping=True, monetary=True)"
 													 />
@@ -212,25 +235,9 @@
 												<t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
 												<t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
 
-												<td class="text-right">
-														<span t-raw="number_lang.format('%.4f', s['currency_rate'])" />
-													</td>
 
-													<td class="text-right">
-													<span t-raw="number_lang.format('%.2f', s['debit_currency'],grouping=True, monetary=True)"
-													 />
-												</td>
-												<td class="text-right">
-													<span t-raw="number_lang.format('%.2f', s['credit_currency'],grouping=True, monetary=True)"
-													 />
-												</td>
-												<td class="text-right">
-													<span t-raw="number_lang.format('%.2f', s['currency_balance'],grouping=True, monetary=True)"
-													 />
-												</td>
-												<td class="text-center" style="min-width:15px">
-														<span t-esc="s['currency_dc']" />
-													</td>
+
+
 												<t t-value="s['currency_dc']" t-set="c_sdc" />
 												<t  t-set="currency_toplamBakiye" t-value="'%.2f' %s['currency_balance']" />
 												<t t-set="currency_toplamBorc" t-value="currency_toplamBorc + s['debit_currency']"/>
