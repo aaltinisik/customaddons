@@ -2,19 +2,27 @@
 <odoo>
     <data>
 
-        <record id="partner_working_with_mult_curr" model="ir.ui.view">
-            <field name="name">partner.second.curr.form.view</field>
+        <record id="partner_currency_difference_view" model="ir.ui.view">
+            <field name="name">partner.currency.diff.form.view</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/sheet/notebook/page[@name='accounting']//field[@name='property_account_payable_id']"
-                       position="after">
-
-                    <button name="action_generate_currency_diff_invoice" type="object" string="Calculate Difference Invoice"
-                            attrs="{'invisible': [('parent_id','!=',False)]}" options="{}"/>
+                <group name="banks" position="before">
 
 
-                </xpath>
+                    <group string="Currency Difference" colspan="2" col="2"
+                           attrs="{'invisible': [('partner_currency_id', '=', 31)]}">
+                        <group>
+                            <field name="currency_difference_checked"/>
+                            <button name="action_generate_currency_diff_invoice" type="object"
+                                    string="Calculate Difference Invoice"
+                                    attrs="{'invisible': [('parent_id','!=',False)]}" options="{}"/>
+                        </group>
+                        <field name="currency_difference_amls"/>
+
+                    </group>
+
+                </group>
             </field>
         </record>
 
