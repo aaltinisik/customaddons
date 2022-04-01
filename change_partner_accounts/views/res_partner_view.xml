@@ -9,6 +9,8 @@
             <field name="arch" type="xml">
                 <field name="property_account_payable_id" position="after">
                     <field name="partner_currency_id"/>
+                    <field name="balance"/>
+                    <field name="currency_balance"/>
                 </field>
             </field>
         </record>

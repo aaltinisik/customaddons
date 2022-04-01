@@ -9,10 +9,14 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
                     <page name="reconcile_and_currency_difference" string="Reconcile and Currency Difference"
-                          attrs="{'invisible':[('account_id','!=', 546)]}">#TODO change this to the correct account
+                          attrs="{'invisible':[('journal_id','!=', 60)]}">#TODO change this to the correct account
                         <group name="reconcile_info" string="Reconcile"
                                attrs="{'invisible': [('full_reconcile_ids', '=', False)]}">
                             <field name="full_reconcile_ids" nolabel="1"/>
+
+                        </group>
+                        <group name="other_invoices_in_reconciles" string="Other invoices in reconciles">
+                            <field name="other_inv_in_reconciles" nolabel="1"/>
                         </group>
                     </page>
                 </xpath>
