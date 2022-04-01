@@ -187,7 +187,7 @@
 													<span t-esc="s['date']" />
 												</td>
 
-												<td style="max-width:150px;">
+												<td >
 													<span t-esc="s['description']" />
 												</td>
 												<td>
