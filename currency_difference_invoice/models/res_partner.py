@@ -46,7 +46,7 @@ class ResPartner(models.Model):
             if reconciled_amls:
                 reconciled_amls.remove_move_reconcile()
 
-    def calc_difference_invoice(self):
+    def calc_difference_invoice(self, date):
         if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
             inv_obj = self.env['account.invoice']
             diff_inv_journal = self.env['account.journal'].search([('code', '=', 'KFARK')], limit=1)
@@ -135,6 +135,7 @@ class ResPartner(models.Model):
 
                     created_inv_lines = self.env['account.invoice.line'].create(inv_lines_to_create)
                     dif_inv = inv_obj.create({'partner_id': self.id,
+                                              'date_invoice': date,
                                               'journal_id': diff_inv_journal.id,
                                               'currency_id': self.env.user.company_id.currency_id.id,
                                               'type': inv_type,
@@ -143,34 +144,5 @@ class ResPartner(models.Model):
                     dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
                     dif_inv._onchange_invoice_line_ids()
                     return dif_inv
-
-        return False
-
-    @api.multi
-    def action_generate_currency_diff_invoice(self):
-
-        self.ensure_one()
-        invoice = self.calc_difference_invoice()
-
-        if not invoice:
-            raise UserError(_('No invoice created!'))
-
-        if invoice.type == "out_invoice":
-            action = self.env.ref("account.action_invoice_tree1")
-        elif invoice.type == "out_refund":
-            action = self.env.ref("account.action_invoice_out_refund")
-
-        if action:
-            action_dict = action.read()[0]
-            form_view = [(self.env.ref('account.invoice_form').id, 'form')]
-            if 'views' in action_dict:
-                action_dict['views'] = form_view + [
-                    (state, view) for state, view in action[
-                        'views'] if view != 'form']
-            else:
-                action_dict['views'] = form_view
-            action_dict['res_id'] = invoice.id
-
-            return action_dict
 
         return False
