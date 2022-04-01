@@ -9,6 +9,23 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    @api.one
+    def _compute_currency_difference_amls(self):
+        difference_aml_domain = [('partner_id', '=', self.id),
+                                 ('journal_id', '=', self.company_id.currency_exchange_journal_id.id),
+                                 ('difference_checked', '=', False),
+                                 ('full_reconcile_id', '!=', False)]
+
+        difference_amls = self.env['account.move.line'].search(difference_aml_domain)
+        if len(difference_amls) > 0:
+            self.currency_difference_amls = difference_amls
+        else:
+            self.currency_difference_amls = False
+
+    currency_difference_amls = fields.Many2many('account.move.line', string='Currency Difference Move Lines',
+                                                 compute='_compute_currency_difference_amls')
+    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False)
+
     def unreconcile_partners_amls(self):
         if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
             reconciled_amls = self.env['account.move.line'].search([('partner_id', '=', self.id),
