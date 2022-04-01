@@ -22,19 +22,30 @@ class ResPartner(models.Model):
         else:
             self.currency_difference_amls = False
 
+    @api.multi
     @api.depends('currency_difference_amls')
     def _compute_difference_to_invoice(self):
-        if len(self.currency_difference_amls) > 0:
-            self.difference_to_invoice = True
-        else:
-            self.difference_to_invoice = False
+        for partner in self:
+            if len(partner.currency_difference_amls) > 0:
+                partner.difference_to_invoice = True
+            else:
+                partner.difference_to_invoice = False
+
+    @api.multi
+    def _value_search_diff_check(self, operator, value):
+        AccountMoveLine = self.env['account.move.line']
+        domain = [('difference_checked', '=', False),
+                  ('journal_id', '=', self.env.user.company_id.currency_exchange_journal_id.id)]
+
+        result = [res['partner_id'][0] for res in AccountMoveLine.read_group(domain, ['partner_id'], ['partner_id'])]
+        return [('id', 'in', result)]
 
     currency_difference_amls = fields.Many2many('account.move.line', string='Currency Difference Move Lines',
                                                 compute='_compute_currency_difference_amls')
 
     currency_difference_to_invoice = fields.Boolean(string='Currency Difference to invoice',
-                                                    compute='_compute_difference_to_invoice', default=True,
-                                                    store=False)
+                                                    compute='_compute_difference_to_invoice', default=False,
+                                                    store=False, search='_value_search_diff_check')
 
     currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False,
                                                  help='Manual check for currency difference')
@@ -139,6 +150,7 @@ class ResPartner(models.Model):
                                               'journal_id': diff_inv_journal.id,
                                               'currency_id': self.env.user.company_id.currency_id.id,
                                               'type': inv_type,
+                                              'billing_point_id': 3,
                                               'comment_einvoice': comment_einvoice})
 
                     dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
