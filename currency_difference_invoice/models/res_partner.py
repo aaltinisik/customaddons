@@ -22,9 +22,22 @@ class ResPartner(models.Model):
         else:
             self.currency_difference_amls = False
 
+    @api.depends('currency_difference_amls')
+    def _compute_difference_to_invoice(self):
+        if len(self.currency_difference_amls) > 0:
+            self.difference_to_invoice = True
+        else:
+            self.difference_to_invoice = False
+
     currency_difference_amls = fields.Many2many('account.move.line', string='Currency Difference Move Lines',
                                                 compute='_compute_currency_difference_amls')
-    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False)
+
+    currency_difference_to_invoice = fields.Boolean(string='Currency Difference to invoice',
+                                                    compute='_compute_difference_to_invoice', default=True,
+                                                    store=False)
+
+    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False,
+                                                 help='Manual check for currency difference')
 
     def unreconcile_partners_amls(self):
         if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
