@@ -36,6 +36,7 @@ class ResPartner(models.Model):
             difference_amls = self.env['account.move.line'].search(difference_aml_domain)
             if difference_amls:
                 inv_lines_to_create = []
+                comment_einvoice = 'Aşağıdaki faturaların kur farkıdır:\n'
                 for diff_aml in difference_amls:
                     inv_ids = diff_aml.full_reconcile_id.reconciled_line_ids.filtered(lambda r: r.invoice_id).mapped(
                         'invoice_id')
@@ -45,10 +46,11 @@ class ResPartner(models.Model):
                     kdv_8_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
                                                                               r.tax_id.amount == 8).mapped('amount'))
 
+                    comment_einvoice += f'{", ".join(inv_ids.mapped("number"))}'
                     rate_18 = round(100.0 * (kdv_18_taxes / 18.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
                     rate_8 = round(100.0 * (kdv_8_taxes / 8.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
                     if rate_18 > 0.001:
-                        inv_line_name = f"Kur Farkı KDV %18 {diff_aml.date.strftime('%d.%m.%Y')}"
+                        inv_line_name = f"Kur Farkı {diff_aml.date.strftime('%d.%m.%Y')}"
                         tax = self.env['account.tax'].search(
                             [('type_tax_use', '=', 'sale'), ('amount', '=', 18.0), ('include_base_amount', '=', False)],
                             limit=1)
@@ -64,7 +66,7 @@ class ResPartner(models.Model):
                         })
 
                     if rate_8 > 0.001:
-                        inv_line_name = f"Kur Farkı KDV %8 {diff_aml.date.strftime('%d.%m.%Y')}"
+                        inv_line_name = f"Kur Farkı {diff_aml.date.strftime('%d.%m.%Y')}"
                         tax = self.env['account.tax'].search(
                             [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0), ('include_base_amount', '=', False)],
                             limit=1)
@@ -93,7 +95,8 @@ class ResPartner(models.Model):
                     dif_inv = inv_obj.create({'partner_id': self.id,
                                               'journal_id': diff_inv_journal.id,
                                               'currency_id': self.env.user.company_id.currency_id.id,
-                                              'type': inv_type})
+                                              'type': inv_type,
+                                              'comment_einvoice': comment_einvoice})
 
                     dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
                     dif_inv._onchange_invoice_line_ids()
