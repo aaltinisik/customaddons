@@ -24,8 +24,8 @@ class ResPartner(models.Model):
                       AccountMoveLine.read_group(domain, ['partner_id', 'credit', 'debit', 'amount_currency'],
                                                  ['partner_id'], orderby='id'))
         for partner in self:
-            partner.balance = result[partner.id][0]
-            partner.currency_balance = result[partner.id][1]
+            partner.balance = result[partner.id][0] or 0.0
+            partner.currency_balance = result[partner.id][1] or 0.0
 
     partner_currency_id = fields.Many2one('res.currency', string='Partner Currency', readonly=True, store=True,
                                           compute='_get_partner_currency')
