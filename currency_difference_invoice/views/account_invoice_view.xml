@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_invoice_currency_diff_tab" model="ir.ui.view">
+            <field name="name">account.invoice.currency.diff.tab</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="reconcile_and_currency_difference" string="Reconcile and Currency Difference"
+                          attrs="{'invisible':[('account_id','!=', 546)]}">#TODO change this to the correct account
+                        <group name="reconcile_info" string="Reconcile"
+                               attrs="{'invisible': [('full_reconcile_ids', '=', False)]}">
+                            <field name="full_reconcile_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

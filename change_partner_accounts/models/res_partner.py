@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
-from odoo import models, api, _
+from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
+
+    @api.one
+    def _get_partner_currency(self):
+        if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
+            self.partner_currency_id = self.property_account_receivable_id.currency_id
+        else:
+            self.partner_currency_id = self.sudo().company_id.currency_id
+
+    partner_currency_id = fields.Many2one('res.currency', string='Partner Currency', readonly=True, store=True,
+                                            compute='_get_partner_currency')
 
     @api.one
     def change_accounts_to_usd(self):

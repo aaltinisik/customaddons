@@ -9,6 +9,23 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    @api.one
+    def _compute_currency_difference_amls(self):
+        difference_aml_domain = [('partner_id', '=', self.id),
+                                 ('journal_id', '=', self.company_id.currency_exchange_journal_id.id),
+                                 ('difference_checked', '=', False),
+                                 ('full_reconcile_id', '!=', False)]
+
+        difference_amls = self.env['account.move.line'].search(difference_aml_domain)
+        if len(difference_amls) > 0:
+            self.currency_difference_amls = difference_amls
+        else:
+            self.currency_difference_amls = False
+
+    currency_difference_amls = fields.Many2many('account.move.line', string='Currency Difference Move Lines',
+                                                 compute='_compute_currency_difference_amls')
+    currency_difference_checked = fields.Boolean(string='Currency Difference Checked', default=False)
+
     def unreconcile_partners_amls(self):
         if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
             reconciled_amls = self.env['account.move.line'].search([('partner_id', '=', self.id),
@@ -46,9 +63,14 @@ class ResPartner(models.Model):
                     kdv_8_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
                                                                               r.tax_id.amount == 8).mapped('amount'))
 
-                    comment_einvoice += f'{", ".join(inv_ids.mapped("number"))}'
                     rate_18 = round(100.0 * (kdv_18_taxes / 18.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
                     rate_8 = round(100.0 * (kdv_8_taxes / 8.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
+
+                    comment_einvoice += ', '.join(inv_id.supplier_invoice_number
+                                                  if inv_id.supplier_invoice_number
+                                                  else inv_id.number
+                                                  for inv_id in inv_ids)
+
                     if rate_18 > 0.001:
                         inv_line_name = "Kur Farkı"
                         tax = self.env['account.tax'].search(
@@ -61,9 +83,7 @@ class ResPartner(models.Model):
                             'uom_id': 1,
                             'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
                             'price_unit': amount_untaxed,
-                            'invoice_line_tax_ids': [
-                                (6, False, [tax.id])],
-                        })
+                            'invoice_line_tax_ids': [(6, False, [tax.id])]})
 
                     if rate_8 > 0.001:
                         inv_line_name = "Kur Farkı"
@@ -77,10 +97,7 @@ class ResPartner(models.Model):
                             'uom_id': 1,
                             'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
                             'price_unit': amount_untaxed,
-                            'invoice_line_tax_ids': [
-                                (6, False, [self.env['account.tax'].search(
-                                    [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0)], limit=1).id])],
-                        })
+                            'invoice_line_tax_ids': [(6, False, [tax.id])]})
 
                     diff_aml.write({'difference_checked': True})
 
