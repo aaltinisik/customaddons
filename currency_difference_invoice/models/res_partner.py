@@ -50,7 +50,7 @@ class ResPartner(models.Model):
                     rate_18 = round(100.0 * (kdv_18_taxes / 18.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
                     rate_8 = round(100.0 * (kdv_8_taxes / 8.0) / sum(inv_ids.mapped('amount_untaxed')), 3)
                     if rate_18 > 0.001:
-                        inv_line_name = f"Kur Farkı {diff_aml.date.strftime('%d.%m.%Y')}"
+                        inv_line_name = "Kur Farkı"
                         tax = self.env['account.tax'].search(
                             [('type_tax_use', '=', 'sale'), ('amount', '=', 18.0), ('include_base_amount', '=', False)],
                             limit=1)
@@ -66,7 +66,7 @@ class ResPartner(models.Model):
                         })
 
                     if rate_8 > 0.001:
-                        inv_line_name = f"Kur Farkı {diff_aml.date.strftime('%d.%m.%Y')}"
+                        inv_line_name = "Kur Farkı"
                         tax = self.env['account.tax'].search(
                             [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0), ('include_base_amount', '=', False)],
                             limit=1)
