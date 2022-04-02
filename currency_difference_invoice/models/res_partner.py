@@ -57,7 +57,7 @@ class ResPartner(models.Model):
             if reconciled_amls:
                 reconciled_amls.remove_move_reconcile()
 
-    def calc_difference_invoice(self, date):
+    def calc_difference_invoice(self, date, payment_term, billing_point):
         if self.property_account_receivable_id.currency_id and self.property_account_payable_id.currency_id:
             inv_obj = self.env['account.invoice']
             diff_inv_journal = self.env['account.journal'].search([('code', '=', 'KFARK')], limit=1)
@@ -150,7 +150,8 @@ class ResPartner(models.Model):
                                               'journal_id': diff_inv_journal.id,
                                               'currency_id': self.env.user.company_id.currency_id.id,
                                               'type': inv_type,
-                                              'billing_point_id': 3,
+                                              'billing_point_id': billing_point.id,
+                                              'payment_term_id': payment_term.id,
                                               'comment_einvoice': comment_einvoice})
 
                     dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
@@ -158,3 +159,17 @@ class ResPartner(models.Model):
                     return dif_inv
 
         return False
+
+    def action_generate_currency_diff_invoice(self):
+        view = self.env.ref('currency_difference_invoice.res_partner_create_difference_inv')
+        return {
+            'name': _('Create Currency Difference Invoice'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'create.currency.difference.invoices',
+            'views': [(view.id, 'form')],
+            'view_id': view.id,
+            'target': 'new',
+            'context': self.env.context,
+        }
