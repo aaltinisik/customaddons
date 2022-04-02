@@ -6,6 +6,8 @@ class CreateCurrencyDifferenceInvoices(models.TransientModel):
     _name = 'create.currency.difference.invoices'
 
     invoice_date = fields.Date(string='Invoice Date', required=True, default=fields.Date.context_today)
+    payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', required=True)
+    billing_point_id = fields.Many2one('account.billing.point', string='Billing Point', required=True)
 
     @api.multi
     def create_invoices(self):
@@ -14,7 +16,7 @@ class CreateCurrencyDifferenceInvoices(models.TransientModel):
         partners = self.env['res.partner'].browse(active_ids)
         invoices = self.env['account.invoice']
         for record in self.web_progress_iter(partners, msg="Müşterilerin kur farkı faturaları oluşturuluyor..."):
-            inv_id = record.calc_difference_invoice(self.invoice_date)
+            inv_id = record.calc_difference_invoice(self.invoice_date, self.payment_term_id, self.billing_point_id)
             if inv_id:
                 invoices |= inv_id
 
