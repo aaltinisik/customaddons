@@ -10,6 +10,8 @@
                     <p>This action will create an invoice for every selected partner.</p>
                     <group>
                         <field name="invoice_date"/>
+                        <field name="payment_term_id"/>
+                        <field name="billing_point_id"/>
                     </group>
                     <footer>
                         <button string="Create Invoices" name="create_invoices" type="object"

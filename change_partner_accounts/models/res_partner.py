@@ -24,15 +24,60 @@ class ResPartner(models.Model):
                       AccountMoveLine.read_group(domain, ['partner_id', 'credit', 'debit', 'amount_currency'],
                                                  ['partner_id'], orderby='id'))
         for partner in self:
-            partner.balance = result.get(partner.id, [0.0, 0.0])[0]
-            partner.currency_balance = result.get(partner.id, [0.0, 0.0])[1]
+            if result.get(partner.id, False):
+                partner.balance = result[partner.id][0]
+                partner.currency_balance = result[partner.id][1]
+
+    @api.multi
+    def _search_currency_balance(self, operator, operand):
+        if operator not in ('<', '=', '>', '>=', '<='):
+            return []
+        if type(operand) not in (float, int):
+            return []
+        sign = 1
+        move_type = ('payable', 'receivable')
+        self._cr.execute(f"""   SELECT partner.id
+                                FROM res_partner partner
+                                LEFT JOIN account_move_line aml ON aml.partner_id = partner.id
+                                RIGHT JOIN account_account acc ON aml.account_id = acc.id
+                                WHERE acc.internal_type in %s
+			                    AND NOT acc.deprecated AND acc.company_id = %s
+                                GROUP BY partner.id
+                                HAVING %s * COALESCE(SUM(aml.amount_currency), 0) {operator} %s""",
+                         (move_type, self.env.user.company_id.id, sign, operand))
+        res = self._cr.fetchall()
+        if not res:
+            return [('id', '=', '0')]
+        return [('id', 'in', [r[0] for r in res])]
+
+    @api.multi
+    def _search_balance(self, operator, operand):
+        if operator not in ('<', '=', '>', '>=', '<='):
+            return []
+        if type(operand) not in (float, int):
+            return []
+        sign = 1
+        move_type = ('payable', 'receivable')
+        self._cr.execute(f"""   SELECT partner.id
+                                    FROM res_partner partner
+                                    LEFT JOIN account_move_line aml ON aml.partner_id = partner.id
+                                    RIGHT JOIN account_account acc ON aml.account_id = acc.id
+                                    WHERE acc.internal_type in %s
+    			                    AND NOT acc.deprecated AND acc.company_id = %s
+                                    GROUP BY partner.id
+                                    HAVING %s * COALESCE(SUM(aml.debit-aml.credit), 0) {operator} %s""",
+                         (move_type, self.env.user.company_id.id, sign, operand))
+        res = self._cr.fetchall()
+        if not res:
+            return [('id', '=', '0')]
+        return [('id', 'in', [r[0] for r in res])]
 
     partner_currency_id = fields.Many2one('res.currency', string='Partner Currency', readonly=True, store=True,
                                           compute='_get_partner_currency')
 
-    balance = fields.Monetary(string='TRY Balance', compute='_compute_balances')
+    balance = fields.Monetary(string='TRY Balance', compute='_compute_balances', search=_search_balance)
     currency_balance = fields.Monetary(string='Partner Currency Balance', compute='_compute_balances',
-                                       currency_field='partner_currency_id')
+                                       currency_field='partner_currency_id', search=_search_currency_balance)
 
     @api.one
     def change_accounts_to_usd(self):
