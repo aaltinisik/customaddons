@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend ="mail.widget.Thread.Message">
+        <t t-jquery="p.o_mail_info" t-operation="append">
+            <span class="ks_edit_icon">
+             <i t-if="!message.isSystemNotification() and !message.needsModeration() and !message.shouldRedirectToAuthor() and message.ks_hasBody() and message.ks_edit_time_elapsed()"
+                    class="fa o_thread_icon o_thread_edit fa-pencil fa-lg"
+                    t-att-data-message-id="message.getID()" title="Edit" role="img" aria-label="Edit"/>
+            </span>
+            <span class="ks_delete_icon">
+                <i t-if="!message.isSystemNotification() and message.getType() !== 'notification' and !message.needsModeration() and !message.ks_shouldRedirectToAuthor() and message.ks_edit_time_elapsed_delete()"
+                    class="fa fa-lg fa-trash-o o_thread_icon o_thread_message_delete"
+                    t-att-data-message-id="message.getID()" title="Delete" role="img" aria-label="Delete"/>
+            </span>
+            <span class="ks_check_edited">
+                <t t-if="message.ks_getEditMessage() and !message.isSystemNotification() and !message.needsModeration() and !message.shouldRedirectToAuthor() and message.ks_hasBody()">
+                    <span>(Edited)</span>
+                </t>
+            </span>
+        </t>
+        <t t-jquery=".o_thread_message_sidebar" t-operation="after">
+            <span class="ks_edit_icon">
+            <i t-if="!displayAuthorMessages[message.getID()] and message.getType() !== 'notification' and !message.isSystemNotification() and !message.needsModeration() and !message.shouldRedirectToAuthor() and message.ks_hasBody() and message.ks_edit_time_elapsed()"
+                    class="fa o_thread_icon o_thread_edit fa-pencil fa-xs"
+                    t-att-data-message-id="message.getID()" title="Edit" role="img" aria-label="Edit"/>
+            </span>
+            <span class="ks_delete_icon">
+                <i t-if="!displayAuthorMessages[message.getID()] and message.getType() !== 'notification' and !message.isSystemNotification() and !message.needsModeration() and !message.ks_shouldRedirectToAuthor() and message.ks_edit_time_elapsed_delete()"
+                    class="fa fa-trash-o o_thread_icon o_thread_message_delete fa-xs"
+                    t-att-data-message-id="message.getID()" title="Delete" role="img" aria-label="Delete"/>
+            </span>
+            <span class="ks_check_edited">
+                <t t-if="message.ks_getEditMessage() and !displayAuthorMessages[message.getID()] and message.getType() !== 'notification' and !message.isSystemNotification() and !message.needsModeration() and !message.shouldRedirectToAuthor() and message.ks_hasBody()">
+                    <span>(Edited)</span>
+                </t>
+            </span>
+        </t>
+    </t>
+</templates>

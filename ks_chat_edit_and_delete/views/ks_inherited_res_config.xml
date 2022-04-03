@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.chat</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="100"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='business_documents']" position="before">
+                    <div class="app_settings_custom">
+                        <h2>Chat Edit/Delete</h2>
+                    </div>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="ks_chat_enable"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span>Enable</span>
+                            </div>
+                        </div>
+                        <div attrs="{'invisible':[('ks_chat_enable','=',False)]}" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="ks_admin_delete_access"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span>Allow Admin to delete any chat</span>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

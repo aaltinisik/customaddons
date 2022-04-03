@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+         <report id="action_report_logs"
+                 model="logs.action"
+                 string="Print Log Scheduled"
+                 report_type="qweb-pdf"
+                 file="app_script_cron_failure.report_logs_details"
+                 name="app_script_cron_failure.report_logs_details"
+                 menu="True"
+         />
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+             <script src="/ks_chat_edit_and_delete/static/src/js/ks_mail_extend.js" type="text/javascript"/>
+             <link href="/ks_chat_edit_and_delete/static/src/css/ks_edit_chat.css" rel="stylesheet" type="text/css"/>
+        </xpath>
+    </template>
+</odoo>

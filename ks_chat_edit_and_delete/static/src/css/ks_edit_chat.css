@@ -1,0 +1,149 @@
+.o_thread_edit{
+    cursor: pointer;
+    opacity: 1;
+    color: #adb5bd;
+}
+
+.o_attachments_list{
+    margin-top: 5px;
+}
+
+.o_thread_message_delete{
+    cursor: pointer;
+    opacity: 1;
+    color: #adb5bd;
+    margin-left: 5px;
+    margin-right: 3px;
+}
+
+.div_input{
+    display: flex;
+    flex-direction: column;
+}
+
+.o_input_chat{
+    width: 70%;
+    font-size: 14px;
+    float: left;
+    height: 35px;
+}
+
+.o_thread_update{
+    cursor: pointer;
+    color: #adb5bd;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.o_thread_update:hover{
+    color: #008000;
+}
+
+.o_thread_cancel{
+    cursor: pointer;
+    color: #adb5bd;
+    margin-left: 1px;
+    margin-top: 2px;
+}
+
+.o_thread_cancel:hover{
+    color: #FF0000;
+}
+
+.o_thread_smile{
+    border-style: solid;
+    height: 35px;
+    border-left: none;
+    border-top: 1px solid #969696eb;
+    border-right: 1px solid #969696eb;
+    border-bottom: 1px solid #969696eb;
+    position: relative;
+}
+
+.o_thread_smile:hover{
+    border-style: solid;
+    border-left: none;
+    border-top: 1px solid #969696eb;
+    border-right: 1px solid #969696eb;
+    border-bottom: 1px solid #969696eb;
+}
+
+.o_mail_emoji_container{
+    margin-top: 10px;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #7C7BAD;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.o_thread_message_core
+.ks_check_edited{
+    color: #adb5bd;
+    margin-right: 3px;
+    opacity: 1;
+}
+
+.ks_check_edited{
+    color: #adb5bd;
+    opacity: 1;
+}
+
+.ks_hide{
+    display: none;
+    padding:0;
+}
+.o_mail_info{
+    min-height: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.o_mail_info small{
+    margin: 2px 0px 0px 10px;
+
+}
+.o_mail_info span{
+    padding-left: 5px;
+}
+
+.o_mail_thread .o_thread_message, .o_mail_activity .o_thread_message {
+    overflow: hidden;
+}

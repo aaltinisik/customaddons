@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_logs_cron_job,access_logs_cron_job,app_script_cron_failure.model_logs_action,,1,1,1,1
