@@ -75,6 +75,10 @@ class ResPartner(models.Model):
                                      ('full_reconcile_id', '!=', False)]
 
             difference_amls = self.env['account.move.line'].search(difference_aml_domain)
+            if difference_amls and round((sum(difference_amls.mapped('debit'))-sum(difference_amls.mapped('credit'))),2) < 0:
+                inv_type = 'out_refund'
+            else:
+                inv_type = 'out_invoice'
             if difference_amls:
                 inv_lines_to_create = []
                 comment_einvoice = 'Aşağıdaki faturaların kur farkıdır:\n'
@@ -136,13 +140,6 @@ class ResPartner(models.Model):
                             'invoice_line_tax_ids': [(6, False, [tax_18.id])]})
 
                     diff_aml.write({'difference_checked': True})
-
-                if inv_lines_to_create:
-                    if sum(x['price_unit'] for x in inv_lines_to_create) < 0.0:
-                        # [x.update({'price_unit': -x['price_unit']}) for x in inv_lines_to_create]
-                        inv_type = 'out_refund'
-                    else:
-                        inv_type = 'out_invoice'
 
                     created_inv_lines = self.env['account.invoice.line'].create(inv_lines_to_create)
                     dif_inv = inv_obj.create({'partner_id': self.id,
