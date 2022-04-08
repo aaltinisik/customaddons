@@ -85,6 +85,8 @@ class ResPartner(models.Model):
     @api.one
     def change_accounts_to_usd(self):
         """ Change partners receivable and payable account to USD and update move lines accordingly """
+        if self.parent_id:
+            return self.parent_id.change_accounts_to_usd()
         receivable_usd = self.env['account.account'].search([('code', '=', '120.USD')], limit=1)
         payable_usd = self.env['account.account'].search([('code', '=', '320.USD')], limit=1)
         old_receivable = self.property_account_receivable_id
@@ -131,6 +133,8 @@ class ResPartner(models.Model):
     @api.one
     def change_accounts_to_eur(self):
         """ Change partners receivable and payable account to eur and update move lines accordingly """
+        if self.parent_id:
+            return self.parent_id.change_accounts_to_eur()
         receivable_eur = self.env['account.account'].search([('code', '=', '120.EUR')], limit=1)
         payable_eur = self.env['account.account'].search([('code', '=', '320.EUR')], limit=1)
         old_receivable = self.property_account_receivable_id
@@ -178,6 +182,8 @@ class ResPartner(models.Model):
     @api.one
     def change_accounts_to_try(self):
         """ Change partners receivable and payable account to company currency and donot update move lines """
+        if self.parent_id:
+            return self.parent_id.change_accounts_to_try()
         receivable_try = self.env['account.account'].search([('code', '=', '120')], limit=1)
         payable_try = self.env['account.account'].search([('code', '=', '320')], limit=1)
         old_receivable = self.property_account_receivable_id
