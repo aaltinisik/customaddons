@@ -13,6 +13,7 @@ class ChangePartnerAccountsTRY(models.TransientModel):
         for record in self.web_progress_iter(partners, msg="Müşterilerin hesapları değiştiriliyor..."):
             try:
                 record.change_accounts_to_try()
+                record._get_partner_currency()
                 self.env.cr.commit()
             except:
                 errors.append(record.display_name)
