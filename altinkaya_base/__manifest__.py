@@ -6,17 +6,15 @@
         """,
     'description': """        
     """,
-    'author': "Yavuz Avcı",
+    'author': "Yavuz Avcı, Yiğit Budak",
     'website': "https://www.altinkaya.com.tr/",
-    'category': 'Uncategorized',
+    'category': 'Web',
     'version': '0.1',
 
-    'depends': ['base'],
+    'depends': ['base', 'web', 'product', 'stock', 'sale', 'account'],
 
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/apps_view_inherit.xml',
-        'views/module_tree_view_inherit.xml'
+        'views/uom_widget_views.xml',
     ],
     'installable': True
 }
