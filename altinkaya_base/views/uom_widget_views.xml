@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_product_list_uom_widget" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit.uom.widget</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="qty_available_not_res" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="virtual_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_product_form_uom_widget" model="ir.ui.view">
+            <field name="name">product.product.form.inherit.uom.widget</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="virtual_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="purchased_product_qty" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="sales_count" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="mrp_product_qty" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="qty_available_not_res" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_list_uom_widget" model="ir.ui.view">
+            <field name="name">product.template.tree.inherit.uom.widget</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="qty_available_not_res" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="virtual_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_kanban_uom_widget" model="ir.ui.view">
+            <field name="name">product.template.kanban.inherit.uom.widget</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="qty_available_not_res" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_form_uom_widget" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.uom.widget</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="virtual_available" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="purchased_product_qty" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="sales_count" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <field name="qty_available_not_res" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="sale_order_form_uom_widget" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.uom.widget</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_form_uom_widget" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.uom.widget</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_invoice_form_uom_widget" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit.uom.widget</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="attributes">
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="mrp_production_list_uom_widget" model="ir.ui.view">
+            <field name="name">mrp.production.tree.inherit.uom.widget</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+            <field name="arch" type="xml">
+                <field name="product_qty" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom_id'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="mrp_production_kanban_uom_widget" model="ir.ui.view">
+            <field name="name">mrp.production.kanban.inherit.uom.widget</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_kanban_view" />
+            <field name="arch" type="xml">
+                <field name="product_qty" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom_id'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="mrp_production_form_uom_widget" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.uom.widget</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_qty" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom_id'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </field>
+                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='reserved_availability']"
+                    position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']" position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="stock_picking_form_uom_widget" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit.uom.widget</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']"
+                    position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='reserved_availability']"
+                    position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity_done']"
+                    position="attributes">
+                    <attribute name="options">{'uom_field': 'product_uom'}</attribute>
+                    <attribute name="widget">uom</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
