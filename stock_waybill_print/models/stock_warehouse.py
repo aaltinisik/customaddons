@@ -4,8 +4,9 @@ from odoo import models, fields, api
 class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
 
-    waybill_sequence = fields.Char(string='Waybill Sequence')
-    waybill_number = fields.Integer('Waybill Number')
+    waybill_sequence_id = fields.Many2one('ir.sequence',
+                                          domain="[('company_id', '=', company_id), ('code', '=', 'stock.waybill.print')]",
+                                          string='Waybill Sequence')
     waybill_printer = fields.Many2one(
        'printing.printer',
        string=u'İrsaliye Yazıcısı',

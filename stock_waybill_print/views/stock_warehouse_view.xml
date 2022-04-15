@@ -9,8 +9,7 @@
           <field name="arch" type="xml">
               <data>
                   <xpath expr="//field[@name='code']" position="after">
-                      <field name="waybill_sequence"/>
-                      <field name="waybill_number"/>
+                      <field name="waybill_sequence_id"/>
                       <field name="waybill_printer"/>
                   </xpath>
                 </data>
