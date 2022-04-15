@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-
+import re
 from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import Warning, UserError
@@ -55,8 +55,9 @@ class PrintWaybillWizard(models.TransientModel):
             raise Warning(_('You need to set a waybill printer in order to print.'))
 
         self.warehouse_id.waybill_sequence_id.sudo().write({'number_next_actual': waybill_number})
-
-        printer.print_document('stock_waybill_print.waybill_report',
-                               self.env.ref('stock_waybill_print.waybill_report').render_qweb_text([self.id],
-                               data={})[0], doc_form="txt")
+        data = self.env.ref('stock_waybill_print.waybill_report').render_qweb_text([self.id],
+                               data={})[0]
+        new_data = re.sub("\r?\n", "\r\n", data.decode('utf-8')).encode('cp857') # Fix for OKI
+        printer.print_document('stock_waybill_print.waybill_report', new_data,
+                               doc_form="txt")
         return {'type': 'ir.actions.act_window_close'}
