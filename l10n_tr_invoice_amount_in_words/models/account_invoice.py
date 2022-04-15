@@ -31,7 +31,8 @@ class AccountInvoice(models.Model):
     @api.one
     @api.depends('amount_total','currency_id')
     def _compute_invoice_amount_in_words(self):
-        self.invoice_amount_in_words = self.currency_id.with_context({'lang':self.company_id.partner_id.lang}).amount_to_text(
+        lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
+        self.invoice_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
 
@@ -45,7 +46,8 @@ class SaleOrder(models.Model):
     @api.one
     @api.depends('amount_total','currency_id')
     def _compute_sale_order_amount_in_words(self):
-        self.sale_order_amount_in_words = self.currency_id.with_context({'lang':self.partner_id.lang}).amount_to_text(
+        lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
+        self.sale_order_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
 
@@ -59,7 +61,8 @@ class PurchaseOrder(models.Model):
     @api.one
     @api.depends('amount_total','currency_id')
     def _compute_purchase_order_amount_in_words(self):
-        self.purchase_order_amount_in_words = self.currency_id.with_context({'lang':self.partner_id.lang}).amount_to_text(
+        lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
+        self.purchase_order_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
 
@@ -73,7 +76,8 @@ class AccountPayment(models.Model):
     @api.one
     @api.depends('amount','currency_id')
     def _compute_account_payment_amount_in_words(self):
-        self.account_payment_amount_in_words = self.currency_id.with_context({'lang':self.company_id.partner_id.lang}).amount_to_text(
+        lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
+        self.account_payment_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount)
 
 

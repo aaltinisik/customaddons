@@ -11,7 +11,8 @@
     'category': 'Web',
     'version': '0.1',
 
-    'depends': ['base', 'web', 'product', 'stock', 'sale', 'account', 'partner_ranking', 'altinkaya_stock'],
+    'depends': ['base', 'web', 'product', 'stock', 'sale', 'account', 'partner_ranking', 'altinkaya_stock', 'mrp',
+                'purchase'],
 
     'data': [
         'views/uom_widget_views.xml',
