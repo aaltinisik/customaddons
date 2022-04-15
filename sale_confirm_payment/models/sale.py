@@ -5,7 +5,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     acquirer_id = fields.Many2one("payment.acquirer", related="transaction_ids.acquirer_id", store=True)
-    payment_amount = fields.Monetary(string="Amount Payment", compute="_compute_payment")
+    payment_amount = fields.Monetary(string="Amount Payment", readonly=True)
     payment_ids = fields.Many2many('account.payment', string='Payments', readonly=True)
 
     payment_status = fields.Selection(
@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
             ("done", "Done"),
         ],
         default="without",
-        compute="_compute_payment",
+        readonly=True,
         store=True,
     )
 
@@ -28,9 +28,8 @@ class SaleOrder(models.Model):
         return action
 
     @api.depends("transaction_ids")
-    def _compute_payment(self):
+    def _compute_payment_state(self):
         for order in self:
-
             amount = 0
             transactions = order.sudo().transaction_ids.filtered(lambda a: a.state == "done")
             for invoice in order.invoice_ids:

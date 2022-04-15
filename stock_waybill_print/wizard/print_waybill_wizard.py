@@ -3,37 +3,31 @@
 
 from odoo import models, fields, api
 from odoo.tools.translate import _
-from odoo.exceptions import Warning
+from odoo.exceptions import Warning, UserError
+
 
 class PrintWaybillWizard(models.TransientModel):
     _name = 'stock_waybill_print.print_waybill_wizard'
-    
-    
-    @api.model
-    def default_warehouse(self):
-        picking_ids = self.env['stock.picking'].browse(self._context.get('active_ids',False))
-        
-        if not picking_ids:
-            raise Warning(_('No picking found to print'))
-        
-        if any(picking_ids.filtered(lambda p: p.state != 'done')):
-            raise Warning(_('You are trying to print pickings which are not done!'))
-        
-        if len(picking_ids.mapped('picking_type_id.warehouse_id')) > 1:
-            raise Warning(_('Your are trying to print pickings from multiple warehouses!'))
-        
-        return picking_ids[0].picking_type_id.warehouse_id
+
+    warehouse_id = fields.Many2one('stock.warehouse', readonly=True)
+    picking_id = fields.Many2one('stock.picking', readonly=True)
+    waybill_sequence = fields.Char('Sequence', readonly=False)
+    waybill_number = fields.Integer('Number', readonly=False)
 
     @api.model
-    def default_picking_id(self):
-        picking_ids = self.env['stock.picking'].browse(self._context.get('active_ids', False))
-        for picking in picking_ids:
-            return picking
+    def default_get(self, fields_list):
+        defaults = super(PrintWaybillWizard, self).default_get(fields_list)
+        active_id = self.env.context.get("active_id", False)
+        if not active_id:
+            raise UserError(_("Please select a picking."))
 
-    warehouse_id = fields.Many2one('stock.warehouse', default=default_warehouse)
-    picking_id = fields.Many2one('stock.picking', default=default_picking_id)
-    waybill_sequence = fields.Char('Sequence', related='warehouse_id.waybill_sequence', readonly=False)
-    waybill_number = fields.Integer('Number', related='warehouse_id.waybill_number', readonly=False)
+        picking = self.env["stock.picking"].browse(active_id)
+        defaults['picking_id'] = picking.id
+        defaults['warehouse_id'] = picking.picking_type_id.warehouse_id.id
+        defaults['waybill_sequence'] = 'e'
+        defaults['waybill_number'] = int(self.env['ir.sequence'].next_by_code('res.partner'))
+
+        return defaults
 
     def print_waybill(self):
         self.ensure_one()
@@ -55,5 +49,5 @@ class PrintWaybillWizard(models.TransientModel):
             raise Warning(_('You need to set a waybill printer in order to print.'))
         printer.print_document('stock_waybill_print.waybill_report',
                                self.env.ref('stock_waybill_print.waybill_report').render_qweb_text([self.id],
-                               data={})[0],doc_form="txt")
+                               data={})[0], doc_form="txt")
         return {'type': 'ir.actions.act_window_close'}
