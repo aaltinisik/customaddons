@@ -30,7 +30,6 @@ class AccountInvoice(models.Model):
     @api.depends('partner_id')
     def partner_balance(self, partner_id):
         partner = self.env['res.partner'].browse(partner_id)
-        balance = 0
         if partner.parent_id:
             balance = partner.parent_id.credit - partner.parent_id.debit
         else:
@@ -43,13 +42,12 @@ class AccountInvoice(models.Model):
             vals['total_balance'] = self.partner_balance(vals['partner_id'])
         return super(AccountInvoice, self).create( vals)
 
-    def write(self,vals):
+    def write(self, vals):
         for invoice in self:
-            partner_id = False
             if vals.get('partner_id'):
                 partner_id = vals['partner_id']
             else:
                 partner_id = invoice.partner_id.id
             vals['total_balance'] = self.partner_balance(partner_id)
-        return super(AccountInvoice, self).write( vals)
+        return super(AccountInvoice, self).write(vals)
 

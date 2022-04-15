@@ -18,12 +18,6 @@ class SaleConfirmPayment(models.TransientModel):
         related='order_id.state', readonly=True, store=True,
         string="State")
 
-    # @api.one
-    # @api.depends('transaction_id')
-    # def _compute_sale_id(self):
-    #     active_id = self.env.context.get("active_id", False)
-    #     self.order_id = self.env["sale.order"].browse(active_id)
-
     @api.model
     def default_get(self, fields_list):
         defaults = super(SaleConfirmPayment, self).default_get(fields_list)
@@ -71,6 +65,7 @@ class SaleConfirmPayment(models.TransientModel):
             transaction._post_process_after_done()
         if transaction:
             self.order_id.payment_ids = [(4, transaction.payment_id.id)]
+            self.order_id._compute_payment_state()
         return transaction
 
     def add_payment_and_confirm(self):
