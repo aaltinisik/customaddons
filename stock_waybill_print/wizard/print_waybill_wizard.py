@@ -22,6 +22,10 @@ class PrintWaybillWizard(models.TransientModel):
             raise UserError(_("Please select a picking."))
 
         picking = self.env["stock.picking"].browse(active_id)
+
+        if picking.state != 'done':
+            raise UserError(_("You can only print waybills for done pickings."))
+
         warehouse_id = picking.picking_type_id.warehouse_id
         if not warehouse_id.waybill_sequence_id:
             raise UserError(_("You need to set a waybill sequence in order to print."))
