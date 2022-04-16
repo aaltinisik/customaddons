@@ -63,3 +63,55 @@ class AccountPartialReconcile(models.Model):
         # )
         created_lines |= line_to_rec
         return created_lines
+
+class AccountFullReconcile(models.Model):
+    _inherit = "account.full.reconcile"
+
+    @api.multi
+    def get_report_data(self):
+        """Returns report dictionary for currency difference report for reconcilation"""
+
+        query = '''SELECT AML.DATE AS DATE,
+    	CASE
+    					WHEN INV.SUPPLIER_INVOICE_NUMBER IS NOT NULL THEN AJ.NAME || ' ' || INV.SUPPLIER_INVOICE_NUMBER
+    					WHEN INV.NUMBER IS NOT NULL THEN AJ.NAME || ' ' || INV.NUMBER
+    					ELSE AJ.NAME
+    	END AS DESCRIPTION,
+    	CASE
+    					WHEN (SUM(AML.DEBIT) - SUM(AML.CREDIT)) > 0 THEN ROUND((SUM(AML.DEBIT) - SUM(AML.CREDIT)),2)
+    					ELSE 0.00
+    	END AS DEBIT,
+    	CASE
+    					WHEN SUM(AML.DEBIT) - SUM(AML.CREDIT) < 0 THEN -1 * ROUND((SUM(AML.DEBIT) - SUM(AML.CREDIT)),2)
+    					ELSE 0.00
+    	END AS CREDIT,
+    	CASE
+					WHEN ABS(SUM (AML.AMOUNT_CURRENCY)) > 0 THEN ROUND(ABS(SUM(AML.DEBIT) - SUM(AML.CREDIT)) / ABS(SUM (AML.AMOUNT_CURRENCY)),5)
+					ELSE 0.00
+    	END AS CURRENCY_RATE,
+    	CASE
+					WHEN ROUND(SUM (AML.AMOUNT_CURRENCY),4) > 0 THEN ROUND(SUM (AML.AMOUNT_CURRENCY),4)
+					ELSE 0.00
+    	END AS DEBIT_CURRENCY,
+    	CASE
+					WHEN ROUND(SUM (AML.AMOUNT_CURRENCY),4) < 0 THEN -1 * ROUND(SUM (AML.AMOUNT_CURRENCY),4)
+					ELSE 0.00
+    	END AS CREDIT_CURRENCY,
+    	ROUND(SUM (AML.AMOUNT_CURRENCY),4) AS AMOUNT_CURRENCY,
+    	RC.SYMBOL AS SYMBOL
+    FROM ACCOUNT_MOVE_LINE AML
+    LEFT JOIN ACCOUNT_JOURNAL AJ ON AJ.ID = AML.JOURNAL_ID
+    LEFT JOIN ACCOUNT_INVOICE INV ON INV.ID = AML.INVOICE_ID
+    LEFT JOIN RES_CURRENCY RC ON RC.ID = AML.CURRENCY_ID
+    WHERE AML.FULL_RECONCILE_ID = {0}
+    GROUP BY AML.DATE,
+        AJ.NAME,
+    	INV.NUMBER,
+    	INV.SUPPLIER_INVOICE_NUMBER,
+    	RC.SYMBOL
+        ORDER BY AML.DATE,RC.SYMBOL'''.format(str(self.id))
+
+        self.env.cr.execute(query)
+        res = self.env.cr.dictfetchall()
+
+        return res

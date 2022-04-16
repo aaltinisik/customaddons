@@ -9,3 +9,5 @@ class StockLocation(models.Model):
                                              'location_id',
                                              'included_location_id',
                                              string='Included Locations')
+    
+    priority = fields.Integer('Removal Priority', help='high priority locations will be reserved first', default=10)
