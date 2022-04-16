@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-
+from odoo.tools import float_is_zero, float_compare
 
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
@@ -134,6 +134,36 @@ class Product(models.Model):
             product.qty_available_boya = product.with_context({'location': 44}).qty_available
             product.qty_available_metal = product.with_context({'location': 36}).qty_available
             product.qty_available_maske = product.with_context({'location': 114}).qty_available
+
+    @api.multi
+    def fix_quant_reservation(self):
+        StockQuant = self.env['stock.quant']
+        StockMoveLine = self.env['stock.move.line']
+        decimal_places = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        for product in self:
+            quants = StockQuant.search([('product_id', '=', product.id)])
+            for quant in quants:
+                move_lines = StockMoveLine.search(
+                    [
+                        ("product_id", "=", quant.product_id.id),
+                        ("location_id", "=", quant.location_id.id),
+                        ("lot_id", "=", quant.lot_id.id),
+                        ("package_id", "=", quant.package_id.id),
+                        ("owner_id", "=", quant.owner_id.id),
+                        ("product_qty", "!=", 0),
+                    ]
+                )
+                if quant.location_id.should_bypass_reservation():
+                    # If a quant is in a location that should bypass the reservation, its `reserved_quantity` field
+                    # should be 0.
+                    if not float_is_zero(quant.reserved_quantity, precision_digits=decimal_places):
+                        quant.write({"reserved_quantity": 0})
+                else:
+                    raw_reserved_qty = sum(move_lines.mapped('product_qty'))
+                    if float_compare(quant.reserved_quantity, raw_reserved_qty, precision_digits=decimal_places) != 0:
+                        quant.write({
+                            'reserved_quantity': raw_reserved_qty
+                        })
 
 
 class mrpProduction(models.Model):
