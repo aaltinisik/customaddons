@@ -7,3 +7,4 @@ from . import stock_orderpoint
 from . import sale_order_line
 from . import ir_actions_report
 from . import stock_location
+from . import stock_quant
