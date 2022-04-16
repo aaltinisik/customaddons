@@ -100,9 +100,11 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
+                    <button name="action_print_label" position="after">
+                	<button name="fix_quant_reservation" string="Fix Quant Reservation" type="object" icon="fa-refresh"/>
+                    </button>
 
 	            <xpath expr="//group[@name='operations']" position="before">
-
 					<group name="Merkezdepo" string="Merkez Depo">
 					<field name="qty_available_merkez" widget="uom"/>
 					<field name="qty_incoming_merkez" widget="uom"/>
@@ -115,6 +117,7 @@
 					<field name="qty_outgoing_sincan" widget="uom"/>
 					<field name="qty_virtual_sincan" widget="uom"/>
 					</group>
+
 
 	            </xpath>
 
