@@ -19,6 +19,7 @@
         'views/delivery_carrier_views.xml',
         'wizard/wizard_create_procurement_move.xml',
         'wizard/wizard_make_mts_move.xml',
+        'wizard/wizard_update_unreserved_quants.xml',
         'views/stock_warehouse_orderpoint_view.xml',
         'views/mrp_production_view.xml',
         "security/security_group.xml",
