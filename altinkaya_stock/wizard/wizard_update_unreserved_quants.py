@@ -20,49 +20,41 @@ class UpdateUnreservedQuants(models.TransientModel):
         """
         Fix unreserved quants.
         """
-        StockQuant = self.env['stock.quant']
-        StockMoveLine = self.env['stock.move.line']
         decimal_places = self.env['decimal.precision'].precision_get('Product Unit of Measure')
 
-        quant_query = """
-            SELECT *
+        self.env.cr.execute("""
+            SELECT product_id, location_id, owner_id, lot_id, package_id, reserved_quantity, id
             FROM stock_quant
-        """
-        self.env.cr.execute(quant_query)
+        """)
+        quant_keys = ['reserved_quantity', 'id']
         quants = self.env.cr.dictfetchall()
-        for quant in quants:
-            ml_query = """
+
+        self.env.cr.execute("""
+            SELECT id, usage, scrap_location from stock_location
+        """)
+        locations = {loc['id']: {'usage': loc['usage'], 'scrap_location': loc['scrap_location']} for loc in
+                     self.env.cr.dictfetchall()}
+        for quant in self.web_progress_iter(quants, msg="Quantlar düzeltiliyor..."):
+            quant = {k: v for k, v in quant.items() if v is not None}
+            location = locations[quant['location_id']]
+            ml_query = f"""
                 SELECT product_qty from stock_move_line
-                 WHERE product_id = %s
-                    AND location_id = %s
-                    AND lot_id = %s
-                    AND package_id = %s
-                    AND owner_id = %s
+                 WHERE {' AND '.join("%s = %s" % (k, v) for k, v in quant.items() if k not in quant_keys)}
                     AND product_qty > 0
             """
             self.env.cr.execute(ml_query)
             move_lines = self.env.cr.dictfetchall()
             if move_lines:
                 ml_qty = sum(ml['product_qty'] for ml in move_lines)
-                ml_qty
-                # move_lines = StockMoveLine.search(
-                #     [
-                #         ("product_id", "=", quant.product_id.id),
-                #         ("location_id", "=", quant.location_id.id),
-                #         ("lot_id", "=", quant.lot_id.id),
-                #         ("package_id", "=", quant.package_id.id),
-                #         ("owner_id", "=", quant.owner_id.id),
-                #         ("product_qty", "!=", 0),
-                #     ]
-                # )
-                # if quant.location_id.should_bypass_reservation():
-                #     # If a quant is in a location that should bypass the reservation, its `reserved_quantity` field
-                #     # should be 0.
-                #     if not float_is_zero(quant.reserved_quantity, precision_digits=decimal_places):
-                #         quant.write({"reserved_quantity": 0})
-                # else:
-                #     raw_reserved_qty = sum(move_lines.mapped('product_qty'))
-                #     if float_compare(quant.reserved_quantity, raw_reserved_qty, precision_digits=decimal_places) != 0:
-                #         quant.write({
-                #             'reserved_quantity': raw_reserved_qty
-                #         })
+
+                if location.get('usage') in ('supplier', 'customer', 'inventory', 'production') or\
+                        location.get('scrap_location'):
+                    if not float_is_zero(quant['reserved_quantity'], precision_digits=decimal_places):
+                        self.env.cr.execute(f"UPDATE stock_quant SET reserved_quantity = 0.0 where id = {quant['id']}")
+
+                else:
+                    if float_compare(quant['reserved_quantity'], ml_qty, precision_digits=decimal_places) != 0:
+                        self.env.cr.execute(f"UPDATE stock_quant SET reserved_quantity = {ml_qty}"
+                                            f"where id = {quant['id']}")
+
+        self.env.cr.commit()
