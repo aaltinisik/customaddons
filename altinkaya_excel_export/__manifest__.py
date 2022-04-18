@@ -29,6 +29,9 @@
         # Partner Statement Currency
         'export_partner_currency_statement/temp_partner_statement_currency.xml',
         'export_partner_currency_statement/reports.xml',
+        # Payment Excel
+        'export_account_payment_xlsx/reports.xml',
+        'export_account_payment_xlsx/temp_payments.xml',
     ],
     'installable': True,
 }

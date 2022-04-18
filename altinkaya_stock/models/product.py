@@ -136,7 +136,7 @@ class Product(models.Model):
             product.qty_available_maske = product.with_context({'location': 114}).qty_available
 
     @api.multi
-    def fix_quant_reservation(self):
+    def single_product_update_quant_reservation(self):
         StockQuant = self.env['stock.quant']
         StockMoveLine = self.env['stock.move.line']
         decimal_places = self.env['decimal.precision'].precision_get('Product Unit of Measure')
