@@ -24,63 +24,55 @@ from odoo import models, fields, api
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
-    
-    
-    
-    
+
     @api.one
-    @api.depends('amount_total','currency_id')
+    @api.depends('amount_total', 'currency_id')
     def _compute_invoice_amount_in_words(self):
         lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
         self.invoice_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
-
     invoice_amount_in_words = fields.Char(compute='_compute_invoice_amount_in_words',
-                                 string='Amount to Text')
+                                          string='Amount to Text')
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-    
-    
+
     @api.one
-    @api.depends('amount_total','currency_id')
+    @api.depends('amount_total', 'currency_id')
     def _compute_sale_order_amount_in_words(self):
         lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
         self.sale_order_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
-
     sale_order_amount_in_words = fields.Char(compute='_compute_sale_order_amount_in_words',
-                                 string='Amount to Text')
-    
+                                             string='Amount to Text')
+
+
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
-    
-    
+
     @api.one
-    @api.depends('amount_total','currency_id')
+    @api.depends('amount_total', 'currency_id')
     def _compute_purchase_order_amount_in_words(self):
         lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
         self.purchase_order_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount_total)
 
-
     purchase_order_amount_in_words = fields.Char(compute='_compute_purchase_order_amount_in_words',
-                                 string='Amount to Text')
-    
+                                                 string='Amount to Text')
+
+
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
-    
-    
+
     @api.one
-    @api.depends('amount','currency_id')
+    @api.depends('amount', 'currency_id')
     def _compute_account_payment_amount_in_words(self):
         lang = self.env.context.get('lang', self.sudo().company_id.partner_id.lang)
         self.account_payment_amount_in_words = self.currency_id.with_context({'lang': lang}).amount_to_text(
             self.amount)
 
-
     account_payment_amount_in_words = fields.Char(compute='_compute_account_payment_amount_in_words',
-                                 string='Amount to Text')
-
+                                                  string='Amount to Text')
