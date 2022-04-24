@@ -1,5 +1,6 @@
 from odoo import api, fields, models, tools, _
 
+
 class CurrencyRate(models.Model):
     _inherit = "res.currency.rate"
 
