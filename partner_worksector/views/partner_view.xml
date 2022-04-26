@@ -9,7 +9,16 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='sales_purchases']" position="after">
                     <page name="marketing" string="Marketing">
-                        <group string="Worksector">
+
+                        <group string="Main Worksector">
+
+                            <field name="main_worksector_id" nolabel="1" placeholder="Main Worksector" />
+
+                        </group>
+
+
+                        <group string="Other Worksectors">
+
                             <field name="worksector_ids" nolabel="1" >
                             </field>
                         </group>
@@ -28,8 +37,16 @@
                 <form>
                     <sheet>
                         <group>
+                            <field name="code"/>
                             <field name="name" required="1"/>
                             <field name="description"/>
+                            <field name="EUNACE_code"/>
+                            <field name="EUNACE_name"  />
+                            <field name="UKSIC_code"/>
+                            <field name="UKSIC_name"  />
+
+
+
                         </group>
                         <group string="Partner">
                             <field name="partner_ids"  nolabel="1"/>
@@ -46,9 +63,13 @@
             <field name="name">partner.worksector.tree</field>
             <field name="model">partner.worksector</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree   editable="top" >
+                    <field name="code" />
                     <field name="name" required="1"/>
-                    <field name="description"/>
+                    <field name="UKSIC_code" />
+                    <field name="UKSIC_name" />
+                      <field name="EUNACE_code" />
+                    <field name="EUNACE_name" />
                 </tree>
             </field>
         </record>
