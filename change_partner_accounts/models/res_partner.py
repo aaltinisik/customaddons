@@ -17,6 +17,7 @@ class ResPartner(models.Model):
                 partner.partner_currency_id = self.sudo().company_id.currency_id
 
     @api.multi
+    @api.depends('move_line_ids')
     def _compute_balances(self):
         AccountMoveLine = self.env['account.move.line']
         domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
@@ -30,6 +31,22 @@ class ResPartner(models.Model):
             if result.get(partner.id, False):
                 partner.balance = result[partner.id][0]
                 partner.currency_balance = result[partner.id][1]
+
+    @api.multi
+    @api.depends('move_line_ids')
+    def _compute_due_balances(self):
+        AccountMoveLine = self.env['account.move.line']
+        domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
+                  ('date', '>=', "%s-01-01" % fields.Date.today().year), ('date_maturity', '<=', fields.Date.today())]
+
+        result = dict((item['partner_id'][0], [item['debit'] - item['credit'], item['amount_currency']])
+                      for item in
+                      AccountMoveLine.read_group(domain, ['partner_id', 'credit', 'debit', 'amount_currency'],
+                                                 ['partner_id'], orderby='id'))
+        for partner in self:
+            if result.get(partner.id, False):
+                partner.balance_due = result[partner.id][0]
+                partner.currency_balance_due = result[partner.id][1]
 
     @api.multi
     def _search_currency_balance(self, operator, operand):
@@ -78,9 +95,13 @@ class ResPartner(models.Model):
     partner_currency_id = fields.Many2one('res.currency', string='Partner Currency', readonly=True, store=True,
                                           compute='_get_partner_currency')
 
-    balance = fields.Monetary(string='TRY Balance', compute='_compute_balances', search=_search_balance)
+    balance = fields.Monetary(string='TRY Balance', compute='_compute_balances', store=True)
     currency_balance = fields.Monetary(string='Partner Currency Balance', compute='_compute_balances',
-                                       currency_field='partner_currency_id', search=_search_currency_balance)
+                                       currency_field='partner_currency_id', store=True)
+
+    balance_due = fields.Monetary(string='TRY Balance Due', compute='_compute_due_balances', store=True)
+    currency_balance_due = fields.Monetary(string='Partner Currency Balance Due', compute='_compute_due_balances',
+                                       currency_field='partner_currency_id', store=True)
 
     @api.one
     def change_accounts_to_usd(self):
