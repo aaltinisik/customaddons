@@ -110,3 +110,28 @@ class StockPicking(models.Model):
                 pick.trimmed_sale_note = pick.sale_id.note[:50] + "..."
             else:
                 pick.trimmed_sale_note = pick.sale_id.note
+
+    @api.multi
+    def action_update_invoice_status_picking(self):
+        for picking in self.web_progress_iter(self, msg="Faturalar ve Satışlar Bağlanıyor..."):
+
+            if not picking.invoice_ids:
+                invoice_ids = self.env['account.invoice'].search([('origin', 'ilike', picking.name)]).mapped('id')
+                picking.write({'invoice_ids': [(6, 0, invoice_ids)]})
+
+            for move in picking.move_lines:
+                if not move.sale_line_id and picking.sale_id:
+                    move.write({'sale_line_id': picking.sale_id.order_line.filtered(
+                        lambda r: r.product_id.id == move.product_id.id).ids[0]})
+
+                invoice_lines = picking.invoice_ids.mapped('invoice_line_ids')
+
+                if not move.invoice_line_ids:
+                    move.write({'invoice_line_ids': [
+                        (6, 0, invoice_lines.filtered(lambda r: r.product_id.id == move.product_id.id).mapped('id'))]})
+
+                move.sale_line_id.write({'invoice_lines': [(6, 0, move.invoice_line_ids.ids)]})
+
+                for inv_line in move.invoice_line_ids:
+                    inv_line.write({'sale_line_ids': [(4, move.sale_line_id.id)]})
+            self.env.cr.commit()
