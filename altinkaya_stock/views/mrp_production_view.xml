@@ -15,12 +15,14 @@
                                 <field name="qty_available_merkez" string="Merkez" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                                 <field name="qty_available_enjek" string="Enjeksiyon" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                                 <field name="qty_available_montaj" string="Montaj" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
+                                <field name="qty_available_torna" string="Torna" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                             </group>
 
                             <group class="oe_form">
                                 <field name="qty_available_cnc" string="CNC" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                                 <field name="qty_available_metal" string="Metal" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                                 <field name="qty_available_boya" string="Boya" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
+                                <field name="qty_available_baski" string="Baskı" widget="uom" options="{'uom_field': 'product_uom_id'}"/>
                             </group>
                         </group>
                     </div>
