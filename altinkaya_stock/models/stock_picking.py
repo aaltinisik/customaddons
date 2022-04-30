@@ -114,13 +114,15 @@ class StockPicking(models.Model):
     @api.multi
     def action_update_invoice_status_picking(self):
         for picking in self.web_progress_iter(self, msg="Faturalar ve Satışlar Bağlanıyor..."):
+            if not picking.sale_id:
+                continue
 
             if not picking.invoice_ids:
                 invoice_ids = self.env['account.invoice'].search([('origin', 'ilike', picking.name)]).mapped('id')
                 picking.write({'invoice_ids': [(6, 0, invoice_ids)]})
 
             for move in picking.move_lines:
-                if not move.sale_line_id and picking.sale_id:
+                if not move.sale_line_id:
                     move.write({'sale_line_id': picking.sale_id.order_line.filtered(
                         lambda r: r.product_id.id == move.product_id.id).ids[0]})
 
