@@ -9,16 +9,11 @@ class PartnerWorksector(models.Model):
     
     description =  fields.Text(string="Description", translate=True)
 
-    code = fields.Char(string="USSIC Code", translate=False, size=8, description="USSIC Code consists of 8 digits number")
     name = fields.Char(string="US SIC Description", translate=True)
     partner_ids = fields.Many2many('res.partner', 'table_worksector_partner_rel', 'wid', 'partid', string="Partner")
     product_categ_ids = fields.Many2many('product.category', string="Category")
-    UKSIC_code = fields.Char(string="UKSIC Code")
-    UKSIC_name = fields.Char(string="UKSIC Name", translate=True)
-    EUNACE_code = fields.Char(string="EUNACE Code")
-    EUNACE_name = fields.Char(string="EUNACE Name", translate=True)
 
-    _order = 'code, id desc'
+    _order = 'id desc'
 
     @api.multi
     @api.depends('name', 'code')
