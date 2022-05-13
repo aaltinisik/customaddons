@@ -197,12 +197,23 @@ class AccountPayment(models.Model):
         res = super(AccountPayment, self)._compute_destination_account_id()
         for rec in self.filtered(
                 lambda x: not x.invoice_ids and x.payment_type != 'transfer'):
-            partner = self.partner_id.with_context(
-                force_company=self.company_id.id)
-            if self.partner_type == 'customer':
-                self.destination_account_id = (
+            partner = rec.partner_id.with_context(
+                force_company=rec.company_id.id)
+            if rec.partner_type == 'customer':
+                rec.destination_account_id = (
                     partner.property_account_receivable_id.id)
             else:
-                self.destination_account_id = (
+                rec.destination_account_id = (
                     partner.property_account_payable_id.id)
+
+            if not (rec.partner_type and rec.destination_account_id):
+                aml = rec.env['account.move.line'].search([('payment_id', '=', rec.id),
+                                                            ('account_id', 'not in',
+                                                             [rec.journal_id.default_debit_account_id.id,
+                                                              rec.journal_id.default_credit_account_id.id])], limit=1)
+                if aml:
+                    rec.destination_account_id = aml.account_id
+                else:
+                    rec.destination_account_id = rec.journal_id.default_debit_account_id or\
+                                                 rec.journal_id.default_credit_account_id
         return res
