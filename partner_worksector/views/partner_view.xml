@@ -37,14 +37,8 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="code"/>
                             <field name="name" required="1"/>
                             <field name="description"/>
-                            <field name="EUNACE_code"/>
-                            <field name="EUNACE_name"  />
-                            <field name="UKSIC_code"/>
-                            <field name="UKSIC_name"  />
-
 
 
                         </group>
@@ -64,12 +58,8 @@
             <field name="model">partner.worksector</field>
             <field name="arch" type="xml">
                 <tree   editable="top" >
-                    <field name="code" />
                     <field name="name" required="1"/>
-                    <field name="UKSIC_code" />
-                    <field name="UKSIC_name" />
-                      <field name="EUNACE_code" />
-                    <field name="EUNACE_name" />
+
                 </tree>
             </field>
         </record>
