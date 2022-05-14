@@ -24,26 +24,4 @@
                                  ('gname', '=', False)]}"/>
 
 
-    <record id="report_account_payment2" model="ir.ui.view">
-        <field name="name">report.account.payment</field>
-        <field name="model">report.account.payment</field>
-        <field name="inherit_id" ref="excel_import_export.xlsx_report_view"/>
-        <field name="mode">primary</field>
-        <field name="arch" type="xml">
-            <xpath expr="//group[@name='criteria']" position="after">
-                Ödemeleri, Zirve Yazılım sistemine uygun şekilde çıktı almak için aşağıdaki butonları kullanınız.
-                <field name="results" invisible="1"/>
-            </xpath>
-        </field>
-    </record>
-
-        <act_window id="action_account_payment_excel_export2"
-                key2="client_action_multi" name="Tedarikçi Ödemeler Excel"
-                res_model="report.account.payment" src_model="account.payment"
-                view_mode="form" target="new" view_type="form"
-                context="{'template_domain': [('res_model', '=', 'report.account.payment'),
-                                 ('fname', '=', 'payments2.xlsx'),
-                                 ('gname', '=', False)]}"/>
-
-
 </odoo>
