@@ -13,21 +13,6 @@ class PartnerWorksector(models.Model):
     partner_ids = fields.Many2many('res.partner', 'table_worksector_partner_rel', 'wid', 'partid', string="Partner")
     product_categ_ids = fields.Many2many('product.category', string="Category")
 
-    _order = 'id desc'
-
-    @api.multi
-    @api.depends('name', 'code')
-    def name_get(self):
-        result = []
-        for sector in self:
-            if sector.code:
-                name = sector.code + ' - ' + sector.name
-            else:
-                name = sector.name
-            result.append((sector.id, name))
-        return result
-
-
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -43,6 +28,6 @@ class ResPartner(models.Model):
             partner.target_product_categ_ids = self.env['product.category'].browse(set(lst))
 
     main_worksector_id = fields.Many2one('partner.worksector', string="Main Worksector",ondelete='restrict')
-    worksector_ids=fields.Many2many('partner.worksector', 'table_worksector_partner_rel', 'partid', 'wid', string="Worksector")
-    target_product_categ_ids=fields.Many2many('product.category', string="Target Product Category",compute="_compute_product_categ")
+    worksector_ids = fields.Many2many('partner.worksector', 'table_worksector_partner_rel', 'partid', 'wid', string="Worksector")
+    target_product_categ_ids = fields.Many2many('product.category', string="Target Product Category",compute="_compute_product_categ")
 

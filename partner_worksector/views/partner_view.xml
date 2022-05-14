@@ -15,10 +15,7 @@
                             <field name="main_worksector_id" nolabel="1" placeholder="Main Worksector" />
 
                         </group>
-
-
                         <group string="Other Worksectors">
-
                             <field name="worksector_ids" nolabel="1" >
                             </field>
                         </group>
@@ -39,8 +36,6 @@
                         <group>
                             <field name="name" required="1"/>
                             <field name="description"/>
-
-
                         </group>
                         <group string="Partner">
                             <field name="partner_ids"  nolabel="1"/>
