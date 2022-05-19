@@ -15,7 +15,7 @@ class ResPartner(models.Model):
     def create(self, vals):
         if not vals.get('ref') and self._needsRef(vals=vals):
             vals['ref'] = self._get_next_ref(vals=vals)
-            if vals['ref'] and vals['customer'] or vals['supplier']:
+            if vals.get('ref') and vals.get('country_id') and vals.get('customer') or vals.get('supplier'):
                 country_id = self.env['res.country'].browse(vals['country_id'])
                 if country_id and country_id.code != 'TR':
                     z_receivable_export = '120.Y%s' % (vals['ref'].strip() or '')
