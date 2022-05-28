@@ -66,9 +66,6 @@ class StockPicking(models.Model):
     comment_irsaliye = fields.Text('İrsaliye Notu')
     hazirlayan = fields.Many2one('hr.employee', 'Sevki Hazırlayan')
     teslim_alan = fields.Char('Malı Teslim Alan', size=32)
-    teslimat_ucreti = fields.Float('Teslimat Ücreti')
-    desi = fields.Float('Desi')
-    koli_adedi = fields.Integer('Koli Adedi')
     country_id = fields.Many2one('res.country',
                                  string='Country',
                                  related='partner_id.country_id',
