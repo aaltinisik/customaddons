@@ -29,8 +29,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="carrier_id" invisible="1" />
-                    <field name="sale_carrier_id" />
+                    <field name="carrier_id"/>
 
                 </xpath>
             </field>
