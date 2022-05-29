@@ -40,16 +40,10 @@
                 <xpath expr="//field[@name='partner_id']" position="replace">
                     <field name="partner_id"
                            context="{'show_address': 1}" options="{'always_reload': True}"/>
-                    <field name='carrier_id'/>
+                    <field name="carrier_id"/>
                     <field name="hazirlayan"></field>
                     <field name='x_hazirlayan' invisible="1"/>
                     <field name='x_durum'/>
-                </xpath>
-
-                <xpath expr="//field[@name='origin']" position="after">
-                    <field name='teslimat_ucreti'/>
-                    <field name="desi"></field>
-                    <field name='koli_adedi'/>
                 </xpath>
 
 
@@ -69,7 +63,6 @@
                 </xpath>
                 <field name="priority" position="replace"/>
                 <field name="date_done" position="replace"/>
-                <field name="carrier_id" position="replace"/>
 
                 <!--                      <xpath expr="//field[@name='date']" position="replace"> -->
                 <!--               			<field name="priority"/> -->

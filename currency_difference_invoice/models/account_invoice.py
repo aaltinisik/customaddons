@@ -67,6 +67,7 @@ class AccountInvoice(models.Model):
                                                                        r.account_id.internal_type in
                                                                        ('payable', 'receivable'))
                 aml_to_reconcile._reconcile(diff_aml=diff_aml)
+        return res
 
     @api.multi
     def action_invoice_cancel(self):
