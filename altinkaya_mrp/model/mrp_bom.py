@@ -29,6 +29,7 @@ class MrpBoM(models.Model):
                                  related='product_tmpl_id.categ_id',
                                  string='Category',
                                  store=True, readonly=True)
+    checked = fields.Boolean(string="Kontrol Edildi", help="Bileşenler ve ağırlıkları kontrol edildi.")
 
 #TODO: @dogan create work orders override
 #     @api.multi
