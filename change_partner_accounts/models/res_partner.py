@@ -45,8 +45,8 @@ class ResPartner(models.Model):
                                                  ['partner_id'], orderby='id'))
         for partner in self:
             if result.get(partner.id, False):
-                partner.balance_due = result[partner.id][0]
-                partner.currency_balance_due = result[partner.id][1]
+                partner.balance_due = result[partner.id][0] if result[partner.id][0] > 0 else 0
+                partner.currency_balance_due = result[partner.id][1] if result[partner.id][1] > 0 else 0
 
     @api.multi
     def _search_currency_balance(self, operator, operand):
