@@ -86,6 +86,8 @@ class Product(models.Model):
     qty_outgoing_merkez = fields.Float('Merkez Depo Giden', compute='_compute_custom_available')
     qty_virtual_sincan = fields.Float('Sincan Depo Tahmini', compute='_compute_custom_available')
     qty_virtual_merkez = fields.Float('Merkez Depo Tahmini', compute='_compute_custom_available')
+    qty_unreserved_sincan = fields.Float('Sincan Depo Rezervesiz', compute='_compute_custom_available')
+    qty_unreserved_merkez = fields.Float('Merkez Depo Rezervesiz', compute='_compute_custom_available')
 
     def action_view_todo_moves(self):
         self.ensure_one()
@@ -134,6 +136,8 @@ class Product(models.Model):
             product.qty_outgoing_merkez = product.with_context({'location': 12}).outgoing_qty
             product.qty_virtual_sincan = product.with_context({'location': 21}).virtual_available
             product.qty_virtual_merkez = product.with_context({'location': 12}).virtual_available
+            product.qty_unreserved_sincan = product.with_context({'location': 21}).qty_available_not_res
+            product.qty_unreserved_merkez = product.with_context({'location': 12}).qty_available_not_res
 
     @api.multi
     def _compute_custom2_available(self):
