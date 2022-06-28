@@ -115,17 +115,3 @@ class AccountFullReconcile(models.Model):
         res = self.env.cr.dictfetchall()
 
         return res
-
-    @api.multi
-    def unlink(self):
-        """ When removing a full reconciliation, we choose to remove partial reconciliations also
-
-        """
-        move_lines_to_full_unreconcile =  self.env['account.move.line']
-        for rec in self:
-            if rec.exists() and rec.reconciled_line_ids:
-                move_lines_to_full_unreconcile |= rec.reconciled_line_ids
-
-        res = super(AccountFullReconcile, self).unlink()
-        move_lines_to_full_unreconcile.remove_move_reconcile()
-        return res
