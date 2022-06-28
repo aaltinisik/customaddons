@@ -64,6 +64,7 @@ class AccountPartialReconcile(models.Model):
         created_lines |= line_to_rec
         return created_lines
 
+
 class AccountFullReconcile(models.Model):
     _inherit = "account.full.reconcile"
 
@@ -114,4 +115,18 @@ class AccountFullReconcile(models.Model):
         self.env.cr.execute(query)
         res = self.env.cr.dictfetchall()
 
+        return res
+
+    @api.multi
+    def unlink(self):
+        """ When removing a full reconciliation, we choose to remove partial reconciliations also
+
+        """
+        partial_rec_to_unlink = self.env['account.partial.reconcile']
+
+        for rec in self:
+            partial_rec_to_unlink |= rec.partial_reconcile_ids
+
+        res = super(AccountFullReconcile, self).unlink()
+        partial_rec_to_unlink.unlink()
         return res
