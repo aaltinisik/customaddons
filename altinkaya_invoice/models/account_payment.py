@@ -15,6 +15,8 @@ class AccountPayment(models.Model):
     amount_in_try = fields.Monetary(string='Amount In TRY', store=True,
                                     readonly=True, compute='_compute_amount_in_try')
 
+    statement_line_id = fields.Many2one('account.bank.statement.line', 'Bank Statement Line')
+
     def _compute_amount_in_try(self):
         for rec in self:
             if rec.currency_id != rec.company_id.currency_id:
