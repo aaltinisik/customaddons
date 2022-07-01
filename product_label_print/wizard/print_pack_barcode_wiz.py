@@ -89,6 +89,8 @@ class PrintPackBarcodeWizard(models.TransientModel):
                     nameL[nameline]=(nameL[nameline]+' '+word).strip()
                 else:
                     nameline = nameline +1
+                    if nameline > 4:
+                        break
                     nameL[nameline] = (nameL[nameline] + ' ' + word).strip()
 
 
