@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="assets_backend" name="allnatura_inventory assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/intero_reload_form/static/src/css/reload.css"/>
+	<script type="text/javascript" src="/intero_reload_form/static/src/js/reload.js"></script>
+        </xpath>
+    </template>
+</odoo>

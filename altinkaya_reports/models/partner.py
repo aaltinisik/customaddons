@@ -37,6 +37,8 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data(self, data=None):
+        statement_data2 = {}
+        currency_count = 0
         statement_data = []
         balance, seq = 0.0, 0
         currency_balance = 0.0
@@ -45,7 +47,7 @@ class Partner(models.Model):
         start_date = date(date.today().year, 1, 1)
         move_type = ('payable', 'receivable')
 
-        query = """SELECT L.DATE,
+        query = """SELECT L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
     	AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER, INV.SUPPLIER_INVOICE_NuMBER,L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
     
     	CASE
@@ -86,15 +88,26 @@ class Partner(models.Model):
         WHERE (L.DATE BETWEEN '{0}' AND '{1}')
         AND L.PARTNER_ID = {2}
         AND AT.TYPE IN {3}
-        GROUP BY AJ.NAME,	L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
+        GROUP BY AJ.NAME, A.CODE, A.CURRENCY_ID, L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
         INV.NUMBER,INV.SUPPLIER_INVOICE_NUMBER,	AJ.ID,	L.ACCOUNT_ID
-        ORDER BY L.DATE,L.CURRENCY_ID""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
-                                                str(move_type))
+        ORDER BY ACCOUNT_CURRENCY, L.DATE""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
+                                                    str(move_type))
 
-        currency_difference_accounts = self.env['account.account'].search([('code', 'in', ['646', '656', '646.F'])]).mapped('id')
-        currency_difference_to_invoice_journal = self.env['account.journal'].search([('code', '=', 'KRFRK')]).mapped('id')
+        currency_difference_accounts = self.env['account.account'].search(
+            [('code', 'in', ['646', '656', '646.F'])]).mapped('id')
+        currency_difference_to_invoice_journal = self.env['account.journal'].search([('code', '=', 'KRFRK')]).mapped(
+            'id')
         self.env.cr.execute(query)
-        for sl in self.env.cr.dictfetchall():
+        data = self.env.cr.dictfetchall()
+        onhand_currency_id = data[0]['account_currency']
+        for sl in data:
+
+            if onhand_currency_id != sl['account_currency']:
+                currency_count += 1
+                onhand_currency_id = sl['account_currency']
+                statement_data = []
+                balance, seq = 0.0, 0
+                currency_balance = 0.0
 
             if sl['journal_id'] in currency_difference_to_invoice_journal:
                 ## pass move line if item in currency difference journal
@@ -129,10 +142,11 @@ class Partner(models.Model):
                 'date': sl['date'] and datetime.strptime(str(sl['date']), '%Y-%m-%d').strftime(
                     '%d.%m.%Y') or False,
                 'due_date': sl['due_date'] and datetime.strptime(str(sl['due_date']),
-                                                                        '%Y-%m-%d').strftime('%d.%m.%Y') or False,
+                                                                 '%Y-%m-%d').strftime('%d.%m.%Y') or False,
                 'description': len(description) >= 40 and description[0:40] or description,
                 'debit': debit,
                 'credit': credit,
+                'account_code': sl['code'],
                 'amount': debit - credit,
                 'balance': abs(balance) or 0.0,
                 'credit_currency': sl['credit_currency'],
@@ -146,7 +160,8 @@ class Partner(models.Model):
                 'total': balance or 0.0,
                 'currency_symbol': company_currency_id['symbol'],
             })
-        return statement_data
+            statement_data2[currency_count] = statement_data
+        return statement_data2
 
     def email_statement(self, ):
         data_model = self.env['ir.model.data']
