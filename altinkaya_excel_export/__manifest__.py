@@ -32,6 +32,9 @@
         # Payment Excel
         'export_account_payment_xlsx/reports.xml',
         'export_account_payment_xlsx/temp_payments.xml',
+        # Move Line Excel
+        'export_account_move_line_xlsx/reports.xml',
+        'export_account_move_line_xlsx/temp_move_lines.xml',
     ],
     'installable': True,
 }
