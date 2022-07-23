@@ -1,0 +1,13 @@
+*.pyc
+*.po~
+
+/vm
+/deploy
+/.idea
+/config/vm/config.local.yaml
+
+index.lokalize
+lokalize-scripts
+.*project*
+.settings
+.directory
