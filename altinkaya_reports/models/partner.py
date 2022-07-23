@@ -147,6 +147,7 @@ class Partner(models.Model):
                 'debit': debit,
                 'credit': credit,
                 'account_code': sl['code'],
+                'account_currency': sl['account_currency'] or 31,
                 'amount': debit - credit,
                 'balance': abs(balance) or 0.0,
                 'credit_currency': sl['credit_currency'],
