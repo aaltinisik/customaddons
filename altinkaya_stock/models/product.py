@@ -53,6 +53,8 @@ class Product(models.Model):
     domain_attribute_value_ids = fields.Many2many('product.attribute.value',
                                                   compute='_compute_domain_attribute_value_ids')
 
+    move_count = fields.Float('Move Count', default=0.0)
+
     @api.multi
     @api.depends('product_tmpl_id', 'product_tmpl_id.valid_product_attribute_value_ids')
     def _compute_domain_attribute_value_ids(self):
