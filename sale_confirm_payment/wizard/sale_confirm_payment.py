@@ -14,9 +14,6 @@ class SaleConfirmPayment(models.TransientModel):
     currency_id = fields.Many2one("res.currency")
     payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
     order_id = fields.Many2one(comodel_name="sale.order")
-    order_state = fields.Selection(
-        related='order_id.state', readonly=True, store=True,
-        string="State")
 
     @api.model
     def default_get(self, fields_list):
