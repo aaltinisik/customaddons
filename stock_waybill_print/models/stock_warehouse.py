@@ -18,7 +18,7 @@ class StockWarehouse(models.Model):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    document_number = fields.Char(string='İrsaliye Numarası', help='Basılı irsaliye numarası')
+    # document_number = fields.Char(string='İrsaliye Numarası', help='Basılı irsaliye numarası')
     document_page_count = fields.Integer('Page Count', compute='_compute_page_count')
 
     @api.one
