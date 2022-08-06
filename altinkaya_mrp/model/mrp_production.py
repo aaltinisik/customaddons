@@ -195,10 +195,16 @@ class MrpProduction(models.Model):
         return {}
 
 
+    @api.multi
+    def action_set_production_started(self):
+        for production in self:
+            production.write({'state': 'planned'})
+
     #TDE Stay Unported
 #     @api.model
 #     def auto_print_mrp_orders(self):
-#         productions = self.search([('routing_id', '=', 'Profil Kesim'),
+#         productions = self.search([('routing_id', '=', 'Pr
+#         fofil Kesim'),
 #                                 ('state', 'in', ['confirmed', 'ready', 'in_production', 'done']),
 #                                 ('mo_printed', '=', False)],
 #                                   limit=20)
