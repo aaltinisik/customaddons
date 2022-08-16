@@ -79,7 +79,8 @@ class SaleOrder(models.Model):
     @api.multi
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
-        self.order_line.explode_set_contents()
+        for sale in self:
+            sale.order_line.explode_set_contents()
         return res
 
     @api.model
