@@ -30,7 +30,8 @@ class ShortURLYourls(models.Model):
     hostname = fields.Char(string='URL', required=True, help="Example: https://6sn.de")
     username = fields.Char(string='Username')
     password = fields.Char(string='Password')
-    shortened_urls = fields.Many2many('short.url.yourls.line', string='Shortened URLs', readonly=True)
+    shortened_urls = fields.One2many(string='Shortened URLs', comodel_name='short.url.yourls.line',
+                                     inverse_name='shorter_id', readonly=True)
     total_shortened_urls = fields.Integer(string='Total Shortened URLs', compute='_compute_total_shortened_urls')
 
     @api.model
@@ -55,16 +56,18 @@ class ShortURLYourls(models.Model):
             'password': self.password,
             'action': 'shorturl',
             'url': url,
-            'format': 'json'
+            'format': 'json',
         }
         response = requests.get(service_url, params=vals).json()
         if response.get('status') == 'success':
-            new_id = line_obj.create({
-                'short_url': response.get('shorturl'),
+            short_url = response.get('shorturl')
+            line_obj.create({
+                'short_url': short_url,
                 'long_url': url,
+                'shorter_id': self.id,
             }).id
-            self.write({'shortened_urls': [(4, new_id)]})
-            return response.get('shorturl')
+            # self.write({'shortened_urls': [(4, new_id)]})
+            return short_url
 
         return False
 
@@ -75,3 +78,4 @@ class ShortURLYourlsLine(models.Model):
 
     short_url = fields.Char(string='Short URL', readonly=True)
     long_url = fields.Char(string='Long URL', readonly=True)
+    shorter_id = fields.Many2one('short.url.yourls', string="YOURLS Provider", readonly=True)
