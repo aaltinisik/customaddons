@@ -138,7 +138,7 @@
                                     <t t-if="o.journal_id.type=='cash' and o.payment_method_code != 'received_third_check'">
                                         Nakit
                                     </t>
-                                    <t t-elif="o.payment_method_code == 'received_third_check'">ÇEK</t>
+                                   <t t-elif="o.journal_id.code=='CEK' or o.payment_method_code == 'received_third_check'">ÇEK</t>
                                     <t t-elif="o.journal_id.code=='POSG' or o.journal_id.code=='POSIS'">Kredi Kartı
                                         Ödemesi
                                     </t>
