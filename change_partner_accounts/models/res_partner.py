@@ -121,7 +121,7 @@ class ResPartner(models.Model):
         domain = ["&", "&",
                   "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
                   ("full_reconcile_id", "=", False)]
-
+        domain += [("journal_id.code","not in",("ADVR","KFARK"))]
         if partner_type == 'customer':
             domain += [('credit', '>', 0)]
         else:
