@@ -6,7 +6,6 @@ from odoo.exceptions import UserError
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-
     @api.multi
     @api.depends('property_account_receivable_id')
     def _get_partner_currency(self):
@@ -101,7 +100,56 @@ class ResPartner(models.Model):
 
     balance_due = fields.Monetary(string='TRY Balance Due', compute='_compute_due_balances', store=True)
     currency_balance_due = fields.Monetary(string='Partner Currency Balance Due', compute='_compute_due_balances',
-                                       currency_field='partner_currency_id', store=True)
+                                           currency_field='partner_currency_id', store=True)
+
+    @api.multi
+    def _compute_has_2breconciled(self):
+        for partner in self:
+            aml_to_reconcile = self.env['account.move.line'].search(
+                ["&", "&", "|", ("account_id.internal_type", "=", "payable"),
+                 ("account_id.internal_type", "=", "receivable"),
+                 ("full_reconcile_id", "=", False), ("partner_id", "=", partner.id)],
+                limit=2)
+            if len(aml_to_reconcile) > 0:
+                if partner.customer:
+                    partner.has_2breconciled_customer = True
+                if partner.supplier:
+                    partner.has_2breconciled_supplier = True
+
+    def _search_has_2breconciled(self, partner_type):
+        AccountMoveLine = self.env['account.move.line']
+        domain = ["&", "&",
+                  "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
+                  ("full_reconcile_id", "=", False)]
+
+        if partner_type == 'customer':
+            domain += [('credit', '>', 0)]
+        else:
+            domain += [('debit', '>', 0)]
+
+
+        result = [res['partner_id'][0] for res in AccountMoveLine.read_group(domain, ['partner_id'], ['partner_id'])]
+        return [('id', 'in', result)]
+
+    @api.multi
+    def _search_has_2breconciled_customer(self, operator, operand):
+        return self._search_has_2breconciled('customer')
+
+    @api.multi
+    def _search_has_2breconciled_supplier(self, operator, operand):
+        return self._search_has_2breconciled('supplier')
+
+    has_2breconciled_customer = fields.Boolean(string='To be reconciled customer',
+                                               compute='_compute_has_2breconciled',
+                                               search='_search_has_2breconciled_customer',
+                                               default=False,
+                                               store=False)
+
+    has_2breconciled_supplier = fields.Boolean(string='To be reconciled supplier',
+                                               compute='_compute_has_2breconciled',
+                                               search='_search_has_2breconciled_supplier',
+                                               default=False,
+                                               store=False)
 
     @api.one
     def change_accounts_to_usd(self):
