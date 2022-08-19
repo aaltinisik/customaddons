@@ -11,6 +11,8 @@
                     <field name="partner_currency_id"/>
                     <field name="balance"/>
                     <field name="currency_balance"/>
+                    <field name="has_2breconciled_customer"/>
+                    <field name="has_2breconciled_supplier"/>
                 </field>
             </field>
         </record>
