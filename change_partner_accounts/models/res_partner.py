@@ -104,29 +104,33 @@ class ResPartner(models.Model):
 
     @api.multi
     def _compute_has_2breconciled(self):
+        domain = ["&", "&", "&",
+                  "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
+                  ("full_reconcile_id", "=", False), ("journal_id.code", "not in", ("ADVR", "KFARK"))]
+
         for partner in self:
-            aml_to_reconcile = self.env['account.move.line'].search(
-                ["&", "&", "|", ("account_id.internal_type", "=", "payable"),
-                 ("account_id.internal_type", "=", "receivable"),
-                 ("full_reconcile_id", "=", False), ("partner_id", "=", partner.id)],
-                limit=2)
-            if len(aml_to_reconcile) > 0:
-                if partner.customer:
-                    partner.has_2breconciled_customer = True
-                if partner.supplier:
-                    partner.has_2breconciled_supplier = True
+            if partner.customer:
+                aml_to_reconcile = partner.env['account.move.line'].search(
+                    domain + [("partner_id", "=", partner.id), ("credit", ">", 0)], limit=2)
+
+                partner.has_2breconciled_customer = len(aml_to_reconcile) > 0
+
+            if partner.supplier:
+                aml_to_reconcile = partner.env['account.move.line'].search(
+                    domain + [("partner_id", "=", partner.id), ("debit", ">", 0)], limit=2)
+
+                partner.has_2breconciled_supplier = len(aml_to_reconcile) > 0
 
     def _search_has_2breconciled(self, partner_type):
         AccountMoveLine = self.env['account.move.line']
-        domain = ["&", "&",
+        domain = ["&", "&", "&",
                   "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
-                  ("full_reconcile_id", "=", False)]
+                  ("full_reconcile_id", "=", False), ("journal_id.code", "not in", ("ADVR", "KFARK"))]
 
         if partner_type == 'customer':
             domain += [('credit', '>', 0)]
         else:
             domain += [('debit', '>', 0)]
-
 
         result = [res['partner_id'][0] for res in AccountMoveLine.read_group(domain, ['partner_id'], ['partner_id'])]
         return [('id', 'in', result)]
