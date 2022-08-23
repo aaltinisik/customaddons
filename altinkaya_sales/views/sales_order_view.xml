@@ -26,7 +26,17 @@
 						<label for='invoice_ids' />
 						<field name='invoice_ids' />
 						<label for='picking_ids' />
-						<field name='picking_ids' />
+						<field name='picking_ids'>
+							<tree>
+								<field name='name' />
+								<field name='location_id' />
+								<field name='location_dest_id' />
+								<field name='date_done' />
+								<field name='carrier_id' />
+								<field name='state' />
+								<field name='hazirlayan' />
+							</tree>
+						</field>
 					</page>
 					<page string="Old Sales">
 						 <label for='sale_line_history' />
