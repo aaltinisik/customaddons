@@ -6,10 +6,55 @@ from werkzeug import url_encode
 import hashlib
 
 
+def _match_production_with_route(production):
+    route_id = production.process_id.id
+    if route_id:
+        if route_id == 14:  # KALIP
+            return 'molding'
+        elif route_id == 1:  # ENJEKSIYON
+            return 'injection'
+        elif route_id == 2:  # CNC
+            return 'cnc'
+        elif route_id == 16:  # GORSEL BASKI
+            return 'uv_printing'
+        elif route_id in [3, 6]:  # MONTAJ
+            return 'assembly'
+    else:
+        return 'mts'
+
+
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     production_ids = fields.Many2many('mrp.production', string='Manufacturing Orders', compute='_compute_productions')
+    production_state = fields.Selection([
+        ('mts', 'MTS'),
+        ('production_planned', 'Production Planned'),
+        ('molding', 'Molding'),
+        ('injection', 'Injection'),
+        ('cnc', 'CNC'),
+        ('uv_printing', 'UV Printing'),
+        ('assembly', 'Assembly'),
+        ('delivery', 'Delivery')], string='Production State', readonly=True, copy=False, default='mts',
+        index=True, track_visibility='onchange', compute="_compute_production_state", track_sequence=3)
+
+    @api.multi
+    def _compute_production_state(self):
+        for sale in self:
+            if sale.production_ids:
+                finished_productions = sale.production_ids.filtered(lambda p: p.state == 'done')
+                confirmed_productions = sale.production_ids.filtered(lambda p: p.state == 'confirmed')
+                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['planned', 'progress'])
+
+                if finished_productions and not (confirmed_productions or ongoing_productions):
+                    sale.production_state = 'delivery'
+                elif confirmed_productions and not ongoing_productions:
+                    sale.production_state = 'production_planned'
+                else:
+                    sale.production_state = _match_production_with_route(ongoing_productions)
+            else:
+                sale.production_state = 'mts'
+        return True
 
     @api.multi
     def _compute_productions(self):
@@ -71,7 +116,7 @@ class SaleOrder(models.Model):
                 "currency": order.currency_id.name,
                 "lang": order.partner_id.lang,
                 "hashtr": hashlib.sha1((
-                                                   order.currency_id.name + order.partner_id.commercial_partner_id.ref + eposta + tutar + order.name + order.company_id.hash_code).encode(
+                        order.currency_id.name + order.partner_id.commercial_partner_id.ref + eposta + tutar + order.name + order.company_id.hash_code).encode(
                     'utf-8')).hexdigest().upper(),
             }
             order.altinkaya_payment_url = "?" + url_encode(params)
@@ -90,7 +135,7 @@ class SaleOrder(models.Model):
         return res
 
 
-class sale_order_line(models.Model):
+class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     show_custom_products = fields.Boolean('Show Custom Products')

@@ -34,7 +34,7 @@
 								<field name='date_done' />
 								<field name='carrier_id' />
 								<field name='state' />
-								<field name='hazirlayan' />
+<!--								<field name='hazirlayan' />-->
 							</tree>
 						</field>
 					</page>
@@ -138,7 +138,13 @@
 				<xpath expr="//field[@name='payment_term_id']" position='replace' />
 				<xpath expr="//field[@name='partner_shipping_id']" position="after">
 					<field name="payment_term_id"/>
-
+				</xpath>
+				<xpath expr="/form/header" position="after">
+					<header attrs="{'invisible': [('production_state', '=', 'mts')]}">
+						<field name="production_state"
+							   widget="statusbar"
+							   statusbar_visible="production_planned,molding,injection,cnc,uv_printing,assembly,delivery"/>
+					</header>
 				</xpath>
 			</field>
 
