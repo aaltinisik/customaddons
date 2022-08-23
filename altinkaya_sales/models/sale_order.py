@@ -29,19 +29,21 @@ class SaleOrder(models.Model):
 
     production_ids = fields.Many2many('mrp.production', string='Manufacturing Orders', compute='_compute_productions')
     order_state = fields.Selection([
-        ('draft', 'Draft'),
-        ('sent', 'RFQ Sent'),
-        ('sale', 'Sales Order'),
-        ('production_planned', 'Production Planned'),
-        ('molding', 'Molding'),
-        ('injection', 'Injection'),
-        ('cnc', 'CNC'),
-        ('uv_printing', 'UV Printing'),
-        ('assembly', 'Assembly'),
-        ('at_warehouse', 'At Warehouse'),
-        ('on_transit', 'On Transit'),
-        ('delivered', 'Delivered'),
-        ('cancel', 'Cancelled'),], string='Order State', readonly=True, copy=False, default='draft',
+        ('draft', 'Taslak'),
+        ('sent', 'Teklif Gönderildi'),
+        ('sale', 'Satış Siparişi'),
+        ('production_planned', 'Üretimi Planlanmış'),
+        ('molding', 'Kalıphanede'),
+        ('injection', 'Enjeksiyonda'),
+        ('cnc', 'CNC Kesimde'),
+        ('uv_printing', 'Görsel Baskıda'),
+        ('assembly', 'Montajda'),
+        ('at_warehouse', 'Depoda'),
+        ('on_transit', 'Nakliyede'),
+        ('delivered', 'Teslim Edildi'),
+        ('done', 'Kilitli'),
+        ('completed', 'Tamamlandı'),
+        ('cancel', 'İptal'),], string='Sipariş Durumu', readonly=True, copy=False, default='draft',
         index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3)
 
     @api.multi
