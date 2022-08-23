@@ -5,12 +5,11 @@
         <record id="res_partner_form_view_marketing" model="ir.ui.view">
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
+            <field name="priority" eval="100"/>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='sales_purchases']" position="after">
-                    <page name="marketing" string="Marketing">
-
-                        <group string="Main Worksector">
+                <xpath expr="//page[@name='NACE']" position="inside">
+                        <group string="Main Worksector" name="marketing">
 
                             <field name="main_worksector_id" nolabel="1" placeholder="Main Worksector" />
 
@@ -22,7 +21,6 @@
                         <group string="Target Product Category">
                             <field name="target_product_categ_ids" nolabel="1"/>
                         </group>
-                    </page>
                 </xpath>
             </field>
         </record>
