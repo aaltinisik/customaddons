@@ -95,7 +95,7 @@ class Partner(models.Model):
 
         currency_difference_accounts = self.env['account.account'].search(
             [('code', 'in', ['646', '656', '646.F'])]).mapped('id')
-        currency_difference_to_invoice_journal = self.env['account.journal'].search([('code', '=', 'KRFRK')]).mapped(
+        currency_difference_to_invoice_journal = self.env['account.journal'].search([('code', 'in', ['ADVR', 'KRFRK'])]).mapped(
             'id')
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
