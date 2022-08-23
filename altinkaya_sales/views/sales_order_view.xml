@@ -140,10 +140,8 @@
 					<field name="payment_term_id"/>
 				</xpath>
 				<xpath expr="/form/header" position="after">
-					<header attrs="{'invisible': [('production_state', '=', 'mts')]}">
-						<field name="production_state"
-							   widget="statusbar"
-							   statusbar_visible="production_planned,molding,injection,cnc,uv_printing,assembly,delivery"/>
+					<header attrs="{'invisible': [('order_state', '=', 'draft')]}">
+						<field name="order_state" widget="statusbar" statusbar_visible="sent,sale,production_planned,molding,injection,cnc,uv_printing,assembly,at_warehouse,on_transit,delivered"/>
 					</header>
 				</xpath>
 			</field>

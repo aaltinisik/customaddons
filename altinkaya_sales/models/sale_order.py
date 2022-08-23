@@ -20,40 +20,67 @@ def _match_production_with_route(production):
         elif route_id in [3, 6]:  # MONTAJ
             return 'assembly'
     else:
-        return 'mts'
+        return 'at_warehouse'
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     production_ids = fields.Many2many('mrp.production', string='Manufacturing Orders', compute='_compute_productions')
-    production_state = fields.Selection([
-        ('mts', 'MTS'),
+    order_state = fields.Selection([
+        ('draft', 'Draft'),
+        ('sent', 'RFQ Sent'),
+        ('sale', 'Sales Order'),
         ('production_planned', 'Production Planned'),
         ('molding', 'Molding'),
         ('injection', 'Injection'),
         ('cnc', 'CNC'),
         ('uv_printing', 'UV Printing'),
         ('assembly', 'Assembly'),
-        ('delivery', 'Delivery')], string='Production State', readonly=True, copy=False, default='mts',
-        index=True, track_visibility='onchange', compute="_compute_production_state", track_sequence=3)
+        ('at_warehouse', 'At Warehouse'),
+        ('on_transit', 'On Transit'),
+        ('delivered', 'Delivered'),
+        ('cancel', 'Cancelled'),], string='Order State', readonly=True, copy=False, default='draft',
+        index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3)
 
     @api.multi
-    def _compute_production_state(self):
+    def _compute_order_state(self):
         for sale in self:
+            # SALE
+            if sale.state == 'draft':
+                sale.order_state = 'draft'
+            elif sale.state == 'sent':
+                sale.order_state = 'sent'
+            elif sale.state == 'sale':
+                sale.order_state = 'sale'
+            elif sale.state == 'cancel':
+                sale.order_state = 'cancel'
+                pass
+            else:
+                continue
+            # PRODUCTION
             if sale.production_ids:
                 finished_productions = sale.production_ids.filtered(lambda p: p.state == 'done')
                 confirmed_productions = sale.production_ids.filtered(lambda p: p.state == 'confirmed')
                 ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['planned', 'progress'])
 
                 if finished_productions and not (confirmed_productions or ongoing_productions):
-                    sale.production_state = 'delivery'
+                    sale.order_state = 'at_warehouse'
                 elif confirmed_productions and not ongoing_productions:
-                    sale.production_state = 'production_planned'
+                    sale.order_state = 'production_planned'
                 else:
-                    sale.production_state = _match_production_with_route(ongoing_productions)
-            else:
-                sale.production_state = 'mts'
+                    sale.order_state = _match_production_with_route(ongoing_productions)
+            # PICKING
+            elif sale.picking_ids:
+                outgoing_pickings = sale.picking_ids.filtered(lambda p:
+                                                              p.picking_type_code == 'outgoing' and p.state == 'done')
+                if outgoing_pickings:
+                    if any(p.delivery_state == 'customer_delivered' for p in outgoing_pickings):
+                        sale.order_state = 'delivered'
+                    else:
+                        sale.order_state = 'on_transit'
+                else:
+                    sale.order_state = 'at_warehouse'
         return True
 
     @api.multi
