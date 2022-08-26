@@ -9,7 +9,7 @@ import hashlib
 def _match_production_with_route(production):
     route_id = production.mapped('process_id')
     if route_id:
-        route_id = fields.first(production.sorted(key=lambda m: m.date_start, reverse=True)).process_id.id
+        route_id = fields.first(production.sorted(key=lambda m: m.write_date, reverse=True)).process_id.id
         if route_id == 14:  # KALIP
             return 'molding'
         elif route_id == 1:  # ENJEKSIYON
