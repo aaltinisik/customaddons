@@ -38,13 +38,14 @@ class Partner(models.Model):
     @api.multi
     def _get_statement_data(self, data=None):
         statement_data2 = {}
+        ctx = self._context.copy()
         currency_count = 0
         statement_data = []
         balance, seq = 0.0, 0
         currency_balance = 0.0
         Currency = self.env['res.currency']
-        end_date = date(date.today().year, 12, 31)
-        start_date = date(date.today().year, 1, 1)
+        end_date = ctx.get('date_end') or date(date.today().year, 12, 31)
+        start_date = ctx.get('date_start') or date(date.today().year, 1, 1)
         move_type = ('payable', 'receivable')
 
         query = """SELECT L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
