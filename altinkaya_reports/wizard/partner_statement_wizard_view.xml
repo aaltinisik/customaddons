@@ -31,5 +31,14 @@
             key2="client_print_multi"
             id="action_view_partner_statement_wizard"/>
 
+        <act_window name="Partner Statement (English) with Dates"
+            res_model="partner.statement.wizard"
+            src_model="res.partner"
+            view_mode="form"
+            target="new"
+            context="{'lang': 'en_US'}"
+            key2="client_print_multi"
+            id="action_view_partner_statement_wizard_en"/>
+
     </data>
 </odoo>
