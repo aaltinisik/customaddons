@@ -22,7 +22,8 @@
     'name': 'Altinkaya Sale Order Extensions',
     'version': '12.0',
     'category': 'General',
-    'depends': ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax', 'altinkaya_roles', 'altinkaya_mrp'],
+    'depends': ['base', 'sale', 'stock', 'sale_stock', 'delivery', 'partner_fax', 'altinkaya_roles', 'altinkaya_mrp',
+                'delivery_state'],
     'author': 'MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı',
     'description': """
     Sales Order Customization
