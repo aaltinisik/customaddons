@@ -15,8 +15,8 @@ def _match_production_with_route(production):
                 return 'molding'
             else:
                 return 'molding_waiting'
-        elif 1 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 1 and r.state in ['planned', 'progress'])):
+        elif 1 in process_ids or 11 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id in [1, 11] and r.state in ['planned', 'progress'])):
                 return 'injection'
             else:
                 return 'injection_waiting'
