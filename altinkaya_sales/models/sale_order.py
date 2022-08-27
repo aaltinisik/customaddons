@@ -1,37 +1,48 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo.tools.translate import _
+from datetime import datetime, timedelta
 from werkzeug import url_encode
 import hashlib
 
 
 def _match_production_with_route(production):
+    ongoing_state = ['planned', 'progress']
     production_ids = production.sorted(key=lambda m: m.id)
     if production_ids:
         process_ids = production_ids.mapped('process_id.id')
         if 14 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 14 and r.state in ['planned', 'progress'])):
+            if any(production_ids.filtered(lambda r: r.process_id.id == 14 and r.state in ongoing_state)):
                 return 'molding'
             else:
                 return 'molding_waiting'
-        elif 1 in process_ids or 11 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id in [1, 11] and r.state in ['planned', 'progress'])):
+        elif any(x in [1, 11] for x in process_ids):
+            if any(production_ids.filtered(lambda r: r.process_id.id in [1, 11] and r.state in ongoing_state)):
                 return 'injection'
             else:
                 return 'injection_waiting'
         elif 2 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 2 and r.state in ['planned', 'progress'])):
+            if any(production_ids.filtered(lambda r: r.process_id.id == 2 and r.state in ongoing_state)):
                 return 'cnc'
             else:
                 return 'cnc_waiting'
+        elif 10 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id == 10 and r.state in ongoing_state)):
+                return 'metal'
+            else:
+                return 'metal_waiting'
+        elif 5 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id == 5 and r.state in ongoing_state)):
+                return 'cnc_lathe'
+            else:
+                return 'cnc_lathe_waiting'
         elif 16 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 16 and r.state in ['planned', 'progress'])):
+            if any(production_ids.filtered(lambda r: r.process_id.id == 16 and r.state in ongoing_state)):
                 return 'uv_printing'
             else:
                 return 'uv_printing_waiting'
-        elif 3 in process_ids or 6 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id in [3, 6] and r.state in ['planned', 'progress'])):
+        elif any(x in [3, 6, 7] for x in process_ids):
+            if any(production_ids.filtered(lambda r: r.process_id.id in [3, 6, 7] and r.state in ongoing_state)):
                 return 'assembly'
             else:
                 return 'assembly_waiting'
@@ -42,7 +53,8 @@ def _match_production_with_route(production):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    production_ids = fields.Many2many('mrp.production', string='Manufacturing Orders', compute='_compute_productions')
+    production_ids = fields.One2many(string='Productions', comodel_name='mrp.production',
+                                     inverse_name='sale_id')
     order_state = fields.Selection([
         ('draft', 'Taslak'),
         ('sent', 'Teklif Gönderildi'),
@@ -51,6 +63,10 @@ class SaleOrder(models.Model):
         ('molding', 'Kalıphanede'),
         ('injection_waiting', 'Enjeksiyonda Bekliyor'),
         ('injection', 'Enjeksiyonda'),
+        ('metal_waiting', 'Preshane Bekliyor'),
+        ('metal', 'Preshane'),
+        ('cnc_lathe_waiting', 'CNC Torna Bekliyor'),
+        ('cnc_lathe', 'CNC Torna'),
         ('cnc_waiting', 'CNC Bekliyor'),
         ('cnc', 'CNC Kesimde'),
         ('uv_printing_waiting', 'Görsel Baskıda Bekliyor'),
@@ -60,16 +76,20 @@ class SaleOrder(models.Model):
         ('at_warehouse', 'Depoda'),
         ('on_transit', 'Nakliyede'),
         ('delivered', 'Teslim Edildi'),
-        ('done', 'Kilitli'),
         ('completed', 'Tamamlandı'),
-        ('cancel', 'İptal'),], string='Sipariş Durumu', readonly=True, copy=False, default='draft',
-        index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3)
+        ('cancel', 'İptal')], string='Sipariş Durumu', readonly=True, copy=False, default='draft',
+        index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3, store=True)
 
     @api.multi
+    @api.depends('state', 'picking_ids.state', 'production_ids.state')
     def _compute_order_state(self):
+        deadline = datetime.now() - timedelta(days=360)
         for sale in self:
             # SALE
-            if sale.state == 'draft':
+            if sale.confirmation_date and sale.confirmation_date < deadline:
+                sale.order_state = 'completed'
+                pass
+            elif sale.state == 'draft':
                 sale.order_state = 'draft'
             elif sale.state == 'sent':
                 sale.order_state = 'sent'
@@ -83,7 +103,8 @@ class SaleOrder(models.Model):
             # PRODUCTION
             if sale.production_ids:
                 finished_productions = sale.production_ids.filtered(lambda p: p.state == 'done')
-                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned', 'progress'])
+                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned',
+                                                                                         'progress'])
 
                 if finished_productions and not ongoing_productions:
                     sale.order_state = 'at_warehouse'
@@ -102,13 +123,7 @@ class SaleOrder(models.Model):
                     sale.order_state = 'at_warehouse'
         return True
 
-    @api.multi
-    def _compute_productions(self):
-        for so in self:
-            so.production_ids = self.env['mrp.production'].search([('sale_id', '=', so.id)])
-
     altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url', compute='_altinkaya_payment_url')
-
     sale_line_history = fields.One2many('sale.order.line', string="Old Sales", compute="_compute_sale_line_history")
 
     @api.multi
