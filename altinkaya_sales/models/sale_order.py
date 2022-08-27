@@ -7,19 +7,34 @@ import hashlib
 
 
 def _match_production_with_route(production):
-    route_id = production.mapped('process_id')
-    if route_id:
-        route_id = fields.first(production.sorted(key=lambda m: m.write_date, reverse=True)).process_id.id
-        if route_id == 14:  # KALIP
-            return 'molding'
-        elif route_id == 1:  # ENJEKSIYON
-            return 'injection'
-        elif route_id == 2:  # CNC
-            return 'cnc'
-        elif route_id == 16:  # GORSEL BASKI
-            return 'uv_printing'
-        elif route_id in [3, 6]:  # MONTAJ
-            return 'assembly'
+    production_ids = production.sorted(key=lambda m: m.id)
+    if production_ids:
+        process_ids = production_ids.mapped('process_id.id')
+        if 14 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id == 14 and r.state in ['planned', 'progress'])):
+                return 'molding'
+            else:
+                return 'molding_waiting'
+        elif 1 in process_ids or 11 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id in [1, 11] and r.state in ['planned', 'progress'])):
+                return 'injection'
+            else:
+                return 'injection_waiting'
+        elif 2 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id == 2 and r.state in ['planned', 'progress'])):
+                return 'cnc'
+            else:
+                return 'cnc_waiting'
+        elif 16 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id == 16 and r.state in ['planned', 'progress'])):
+                return 'uv_printing'
+            else:
+                return 'uv_printing_waiting'
+        elif 3 in process_ids or 6 in process_ids:
+            if any(production_ids.filtered(lambda r: r.process_id.id in [3, 6] and r.state in ['planned', 'progress'])):
+                return 'assembly'
+            else:
+                return 'assembly_waiting'
     else:
         return 'at_warehouse'
 
@@ -32,11 +47,15 @@ class SaleOrder(models.Model):
         ('draft', 'Taslak'),
         ('sent', 'Teklif Gönderildi'),
         ('sale', 'Satış Siparişi'),
-        ('production_planned', 'Üretimi Planlanmış'),
+        ('molding_waiting', 'Kalıphanede Bekliyor'),
         ('molding', 'Kalıphanede'),
+        ('injection_waiting', 'Enjeksiyonda Bekliyor'),
         ('injection', 'Enjeksiyonda'),
+        ('cnc_waiting', 'CNC Bekliyor'),
         ('cnc', 'CNC Kesimde'),
+        ('uv_printing_waiting', 'Görsel Baskıda Bekliyor'),
         ('uv_printing', 'Görsel Baskıda'),
+        ('assembly_waiting', 'Montajda Bekliyor'),
         ('assembly', 'Montajda'),
         ('at_warehouse', 'Depoda'),
         ('on_transit', 'Nakliyede'),
@@ -64,13 +83,10 @@ class SaleOrder(models.Model):
             # PRODUCTION
             if sale.production_ids:
                 finished_productions = sale.production_ids.filtered(lambda p: p.state == 'done')
-                confirmed_productions = sale.production_ids.filtered(lambda p: p.state == 'confirmed')
-                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['planned', 'progress'])
+                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned', 'progress'])
 
-                if finished_productions and not (confirmed_productions or ongoing_productions):
+                if finished_productions and not ongoing_productions:
                     sale.order_state = 'at_warehouse'
-                elif confirmed_productions and not ongoing_productions:
-                    sale.order_state = 'production_planned'
                 else:
                     sale.order_state = _match_production_with_route(ongoing_productions)
             # PICKING
