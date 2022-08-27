@@ -121,6 +121,11 @@
                     file="altinkaya_reports.report_partner_statement"
                     name="altinkaya_reports.report_partner_statement"/>
 
+            <report id="partner_statement_en_altinkaya"
+                    model="res.partner"
+                    string="Partner Statement English"
+                    file="altinkaya_reports.report_partner_statement_en"
+                    name="altinkaya_reports.report_partner_statement_en"/>
 
             <report id="partner_statement2_altinkaya"
                     model="partner.statement.wizard"
