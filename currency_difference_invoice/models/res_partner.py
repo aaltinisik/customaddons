@@ -142,18 +142,18 @@ class ResPartner(models.Model):
                     diff_aml.write({'difference_checked': True})
 
                     created_inv_lines = self.env['account.invoice.line'].create(inv_lines_to_create)
-                    dif_inv = inv_obj.create({'partner_id': self.id,
-                                              'date_invoice': date,
-                                              'journal_id': diff_inv_journal.id,
-                                              'currency_id': self.env.user.company_id.currency_id.id,
-                                              'type': inv_type,
-                                              'billing_point_id': billing_point.id,
-                                              'payment_term_id': payment_term.id,
-                                              'comment_einvoice': comment_einvoice})
+                dif_inv = inv_obj.create({'partner_id': self.id,
+                                          'date_invoice': date,
+                                          'journal_id': diff_inv_journal.id,
+                                          'currency_id': self.env.user.company_id.currency_id.id,
+                                          'type': inv_type,
+                                          'billing_point_id': billing_point.id,
+                                          'payment_term_id': payment_term.id,
+                                          'comment_einvoice': comment_einvoice})
 
-                    dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
-                    dif_inv._onchange_invoice_line_ids()
-                    return dif_inv
+                dif_inv.invoice_line_ids = [(6, False, [x.id for x in created_inv_lines])]
+                dif_inv._onchange_invoice_line_ids()
+                return dif_inv
 
         return False
 
