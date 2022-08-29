@@ -21,6 +21,7 @@
              'report/report_stock_delivery_carrier.xml',
              'report/report_hr_employee_annual.xml',
              'report/partner_statement.xml',
+             'report/partner_statement_en.xml',
              'report/partner_statement_wizard.xml',
 #              'report/partner_statement_currency.xml',
 #              'report/partner_statement_currency_wizard.xml',
