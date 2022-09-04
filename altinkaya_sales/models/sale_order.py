@@ -101,15 +101,10 @@ class SaleOrder(models.Model):
             else:
                 continue
             # PRODUCTION
-            if sale.production_ids:
-                finished_productions = sale.production_ids.filtered(lambda p: p.state == 'done')
-                ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned',
-                                                                                         'progress'])
-
-                if finished_productions and not ongoing_productions:
-                    sale.order_state = 'at_warehouse'
-                else:
-                    sale.order_state = _match_production_with_route(ongoing_productions)
+            ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned',
+                                                                                     'progress'])
+            if ongoing_productions:
+                sale.order_state = _match_production_with_route(ongoing_productions)
             # PICKING
             elif sale.picking_ids:
                 outgoing_pickings = sale.picking_ids.filtered(lambda p:
