@@ -108,7 +108,9 @@ class SaleOrder(models.Model):
             # PICKING
             elif sale.picking_ids:
                 outgoing_pickings = sale.picking_ids.filtered(lambda p:
-                                                              p.picking_type_code == 'outgoing' and p.state == 'done')
+                                                              p.picking_type_code == 'outgoing' and
+                                                              p.state == 'done' and
+                                                              p.invoice_state == 'invoiced')
                 if outgoing_pickings:
                     if any(p.delivery_state == 'customer_delivered' for p in outgoing_pickings):
                         sale.order_state = 'delivered'
