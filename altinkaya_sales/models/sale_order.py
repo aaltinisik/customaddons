@@ -81,7 +81,11 @@ class SaleOrder(models.Model):
         index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3, store=True)
 
     @api.multi
-    @api.depends('state', 'picking_ids.state', 'production_ids.state', 'picking_ids.delivery_state')
+    @api.depends('state',
+                 'picking_ids.state',
+                 'production_ids.state',
+                 'picking_ids.delivery_state',
+                 'picking_ids.invoice_state')
     def _compute_order_state(self):
         deadline = datetime.now() - timedelta(days=360)
         for sale in self:
