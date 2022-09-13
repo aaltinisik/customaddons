@@ -13,8 +13,7 @@ class AccountInvoice(models.Model):
                 invoice.full_reconcile_ids = invoice.invoice_line_ids.mapped(
                     'difference_base_aml_id').mapped('full_reconcile_id')
             elif invoice.state in ['open', 'in_payment', 'paid'] and invoice.invoice_line_ids:
-                invoice.full_reconcile_ids = invoice.move_id.line_ids.filtered(
-                    lambda r: r.account_id.internal_type == 'receivable').mapped('full_reconcile_id')
+                invoice.full_reconcile_ids = invoice.move_id.line_ids.mapped('full_reconcile_id')
             else:
                 invoice.full_reconcile_ids = False
 

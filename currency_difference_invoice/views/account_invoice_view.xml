@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
                     <page name="reconcile_and_currency_difference" string="Reconcile and Currency Difference"
-                          attrs="{'invisible':[('journal_id','!=', 60)]}">#TODO change this to the correct account
+                          attrs="{'invisible':[('journal_id','!=', 60)]}">
                         <group name="reconcile_info" string="Reconcile"
                                attrs="{'invisible': [('full_reconcile_ids', '=', False)]}">
                             <field name="full_reconcile_ids" nolabel="1"/>
