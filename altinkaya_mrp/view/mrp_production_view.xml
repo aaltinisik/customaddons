@@ -32,7 +32,7 @@
                     <field name="priority"/>
                     <field name="date_planned"/>
                     <field name="date_start2"/>
-                    <field name="date_finished2"/>
+                    <field name="date_finished2" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='availability']" position="after">
                     <field name="location_src_id"/>

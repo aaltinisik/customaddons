@@ -198,7 +198,8 @@ class MrpProduction(models.Model):
     @api.multi
     def action_set_production_started(self):
         for production in self:
-            production.write({'state': 'planned'})
+            production.write({'state': 'planned',
+                              'date_start2': fields.Datetime.now()})
 
     #TDE Stay Unported
 #     @api.model
