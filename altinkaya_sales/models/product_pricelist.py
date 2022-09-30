@@ -1,14 +1,13 @@
 # -*- encoding: utf-8 -*-
 #
-#Created on Jan 17, 2020
+# Created on Jan 17, 2020
 #
-#@author: dogan
+# @author: dogan
 #
-from odoo import models, fields, api,tools
+from odoo import models, fields, api, tools
 from odoo.tools.translate import _
 from itertools import chain
 from odoo.exceptions import UserError
-
 
 
 class ProductPriceType(models.Model):
@@ -17,22 +16,25 @@ class ProductPriceType(models.Model):
 
     def _compute_selection_fields(self):
         res = []
-        fields = self.env['ir.model.fields'].search([('model','in',['product.product']),('ttype','=','float')])
+        fields = self.env['ir.model.fields'].search([('model', 'in', ['product.product']), ('ttype', '=', 'float')])
         for field in fields:
-            if not (field.name,field.field_description) in res:
-                res.append((field.name,field.field_description))
+            if not (field.name, field.field_description) in res:
+                res.append((field.name, field.field_description))
         return res
 
-    name = fields.Char(string="Name",required=True)
-    field = fields.Selection(selection = lambda self:self._compute_selection_fields(),string="Field",required=True)
-    active = fields.Boolean(string="Active",default=True)
+    name = fields.Char(string="Name", required=True)
+    field = fields.Selection(selection=lambda self: self._compute_selection_fields(), string="Field", required=True)
+    active = fields.Boolean(string="Active", default=True)
     currency = fields.Many2one('res.currency', 'Currency', required=True)
 
 
-
 class ProductPricelist(models.Model):
-    _inherit="product.pricelist"
-    
+    _inherit = "product.pricelist"
+
+    list_type_use = fields.Selection([('sale', 'Sales'), ('purchase', 'Purchases')],
+                                     string='Use Type', required=True, default="sale",
+                                     help="Pricelist type used in sales or purchases")
+
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
         """ Low-level method - Mono pricelist, multi products
@@ -53,7 +55,8 @@ class ProductPricelist(models.Model):
         if uom_id:
             # rebrowse with uom if given
             products = [item[0].with_context(uom=uom_id) for item in products_qty_partner]
-            products_qty_partner = [(products[index], data_struct[1], data_struct[2]) for index, data_struct in enumerate(products_qty_partner)]
+            products_qty_partner = [(products[index], data_struct[1], data_struct[2]) for index, data_struct in
+                                    enumerate(products_qty_partner)]
         else:
             products = [item[0] for item in products_qty_partner]
 
@@ -100,6 +103,7 @@ class ProductPricelist(models.Model):
         results = {}
         for product, qty, partner in products_qty_partner:
             results[product.id] = 0.0
+            is_purchase_product = False
             suitable_rule = False
 
             # Final unit price is computed according to `qty` in the `qty_uom_id` UoM.
@@ -111,7 +115,8 @@ class ProductPricelist(models.Model):
             qty_in_product_uom = qty
             if qty_uom_id != product.uom_id.id:
                 try:
-                    qty_in_product_uom = self.env['uom.uom'].browse([self._context['uom']])._compute_quantity(qty, product.uom_id)
+                    qty_in_product_uom = self.env['uom.uom'].browse([self._context['uom']])._compute_quantity(qty,
+                                                                                                              product.uom_id)
                 except UserError:
                     # Ignored - incompatible UoM in context, use default product UoM
                     pass
@@ -128,7 +133,8 @@ class ProductPricelist(models.Model):
                 if is_product_template:
                     if rule.product_tmpl_id and product.id != rule.product_tmpl_id.id:
                         continue
-                    if rule.product_id and not (product.product_variant_count == 1 and product.product_variant_id.id == rule.product_id.id):
+                    if rule.product_id and not (
+                            product.product_variant_count == 1 and product.product_variant_id.id == rule.product_id.id):
                         # product rule acceptable on template if has only one variant
                         continue
                 else:
@@ -147,15 +153,21 @@ class ProductPricelist(models.Model):
                         continue
                 price_type = self.env['product.price.type'].search([('id', '=', rule.base)], limit=1)
                 if rule.base == '-1' and rule.base_pricelist_id:
-                    price_tmp = rule.base_pricelist_id._compute_price_rule([(product, qty, partner)], date, uom_id)[product.id][0]  # TDE: 0 = price, 1 = rule
-                    price = rule.base_pricelist_id.currency_id._convert(price_tmp, self.currency_id, self.env.user.company_id, date, round=False)
+                    price_tmp = \
+                    rule.base_pricelist_id._compute_price_rule([(product, qty, partner)], date, uom_id)[product.id][
+                        0]  # TDE: 0 = price, 1 = rule
+                    price = rule.base_pricelist_id.currency_id._convert(price_tmp, self.currency_id,
+                                                                        self.env.user.company_id, date, round=False)
+                elif len(product.seller_ids) > 0 and product.purchase_ok and self.list_type_use == 'purchase':
+                    supplier_price = product.seller_ids.filtered(lambda s: s.name.id == partner.id)
+                    price = supplier_price.price if supplier_price else 0.0
+                    is_purchase_product = True
                 else:
                     # if base option is public price take sale price else cost price of product
                     # price_compute returns the price in the context UoM, i.e. qty_uom_id
                     price = product.price_compute(price_type.field)[product.id]
 
                 convert_to_price_uom = (lambda price: product.uom_id._compute_price(price, price_uom))
-
 
                 if price is not False:
                     if rule.compute_price == 'fixed':
@@ -183,35 +195,28 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
-            if suitable_rule and suitable_rule.currency_id != price_type.currency and suitable_rule.compute_price != 'fixed' and \
-                    suitable_rule.base != '-1':
-                price = product.currency_id._convert(price, suitable_rule.currency_id, self.env.user.company_id, date, round=False)
-
+            compare_field = supplier_price.currency_id if is_purchase_product else price_type.currency
+            if suitable_rule and suitable_rule.currency_id != compare_field and suitable_rule.compute_price != 'fixed' and suitable_rule.base != '-1':
+                price = product.currency_id._convert(price, suitable_rule.currency_id, self.env.user.company_id, date,
+                                                     round=False)
 
             results[product.id] = (price, suitable_rule and suitable_rule.id or False)
 
         return results
 
 
-
 class ProductPriclelistItem(models.Model):
     _inherit = 'product.pricelist.item'
-    
-    
+
     def _compute_base(self):
         res = [('-1', _('Other Pricelist')),
                ('list_price', _('List Price'))]
 
-
-        price_types = self.env['product.price.type'].search([('active','=',True)])
+        price_types = self.env['product.price.type'].search([('active', '=', True)])
         for price_type in price_types:
-            if not (price_type.id,price_type.name) in res:
+            if not (price_type.id, price_type.name) in res:
                 res.append((str(price_type.id), price_type.name))
         return res
-                
 
-    base = fields.Selection(selection = lambda self: self._compute_base())
-    x_guncelleme = fields.Char('Guncelleme Kodu',size=64)
-    
-    
-    
+    base = fields.Selection(selection=lambda self: self._compute_base())
+    x_guncelleme = fields.Char('Guncelleme Kodu', size=64)
