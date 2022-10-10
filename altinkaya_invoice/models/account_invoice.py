@@ -59,6 +59,7 @@ class AccountInvoice(models.Model):
         """write suppliers selected expense account to partner record and use it for next invoice """
 
         for invoice in self:
+            invoice._onchange_invoice_line_ids()  # Recompute taxes
             if invoice.type == 'in_invoice' and fields.first(invoice.invoice_line_ids).account_id:
                 invoice.partner_id.write({"purchase_default_account_id": fields.first(invoice.invoice_line_ids).account_id.id})
         return super(AccountInvoice, self).action_invoice_open()
