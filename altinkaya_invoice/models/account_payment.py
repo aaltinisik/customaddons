@@ -12,15 +12,5 @@ class AccountPayment(models.Model):
     x_cek_no = fields.Char('Cek No', size=64)
     x_cek_banka = fields.Char('Cek banka Adi', size=64)
     date_due = fields.Date('Date Due')
-    amount_in_try = fields.Monetary(string='Amount In TRY', store=True,
-                                    readonly=True, compute='_compute_amount_in_try')
 
     statement_line_id = fields.Many2one('account.bank.statement.line', 'Bank Statement Line')
-
-    def _compute_amount_in_try(self):
-        for rec in self:
-            if rec.currency_id != rec.company_id.currency_id:
-                rec.amount_in_try = rec.currency_id._convert(
-                    rec.amount, rec.company_id.currency_id, rec.company_id, rec.payment_date)
-            else:
-                rec.amount_in_try = rec.amount

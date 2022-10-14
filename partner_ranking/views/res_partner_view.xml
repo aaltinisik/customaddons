@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
                 <field name="email" position="after">
-                    <field name="ranking" invisible="True"/>
+                    <field name="ranking" widget="text"/>
                 </field>
             </field>
         </record>
@@ -21,7 +21,7 @@
                <xpath expr="//group[@name='marketing']" position="inside">
                	<group>
                		<group>
-               		<field name="ranking" readonly="1"/>
+               		<field name="ranking" readonly="1" options="{'format': 0}"/>
                		</group>
 					<group>
 					</group>               	    

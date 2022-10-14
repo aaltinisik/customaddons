@@ -17,6 +17,7 @@
              'views/account_views.xml',
              'views/res_partner_view.xml',
              'wizard/partner_reconcile_close_view.xml',
+             'views/res_currency_rate_view.xml',
             ],
     'demo': [],
     'installable': True,
