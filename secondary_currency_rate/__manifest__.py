@@ -1,4 +1,3 @@
-
 {
     'name': 'Secondary Currency Rate with TCMB',
 
@@ -20,7 +19,8 @@
         'views/res_currency_view.xml',
         'views/res_currency_rate_view.xml',
         'views/res_currency_rate_provider.xml',
+        'views/res_partner_view.xml',
     ],
-    'installable' : True,
-    'auto_install' : False,
+    'installable': True,
+    'auto_install': False,
 }

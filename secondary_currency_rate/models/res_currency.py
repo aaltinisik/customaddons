@@ -1,15 +1,14 @@
 from odoo import models, fields, api
 import logging
 
-
 _logger = logging.getLogger(__name__)
 
 
-class ResCurrencySecond(models.Model):
+class ResCurrency(models.Model):
     _inherit = 'res.currency'
 
     second_rate = fields.Float(compute='_compute_second_rate', string='Second Rate', digits=(12, 6),
-                        help='The rate of the currency to the currency of rate 1.')
+                               help='The rate of the currency to the currency of rate 1.')
 
     @api.multi
     @api.depends('rate_ids.second_rate')
@@ -32,3 +31,11 @@ class ResCurrencySecond(models.Model):
         self._cr.execute(query, (date, company.id, tuple(self.ids)))
         currency_rates = dict(self._cr.fetchall())
         return currency_rates
+
+    def _get_rates(self, company, date):
+        use_second_rate_type = self._context.get('use_second_rate_type', False)
+        if use_second_rate_type:
+            result = self._get_second_rates(company, date)
+        else:
+            result = super(ResCurrency, self)._get_rates(company, date)
+        return result

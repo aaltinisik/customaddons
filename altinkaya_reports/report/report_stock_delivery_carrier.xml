@@ -94,7 +94,7 @@
                                     <th class="text-center" style="width:120px">ŞEHİR</th>
                                     <th class="text-center" style="width:100px">DESİ</th>
                                 </tr>
-                                <tr t-foreach="docs" t-as="o">
+                                <tr t-foreach="docs.sorted(lambda x: x.partner_id.display_name)" t-as="o">
                                     <td class="text-center">
                                         <span t-esc="o.display_name"/>
                                     </td>
