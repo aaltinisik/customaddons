@@ -8,7 +8,7 @@
     'description': """
      """,
     'depends': [
-        'stock','delivery'
+        'stock','delivery', 'delivery_integration_base'
     ],
     'data': [
         'views/stock_picking_views.xml',
