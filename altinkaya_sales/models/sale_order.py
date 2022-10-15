@@ -126,6 +126,18 @@ class SaleOrder(models.Model):
 
     altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url', compute='_altinkaya_payment_url')
     sale_line_history = fields.One2many('sale.order.line', string="Old Sales", compute="_compute_sale_line_history")
+    sale_currency_rate = fields.Float(string="Currency Rate", compute="_compute_sale_currency_rate", default=1.0,
+                                      digits=[16, 4])
+
+    @api.multi
+    @api.depends('currency_id', 'date_order')
+    def _compute_sale_currency_rate(self):
+        if self.partner_id and self.partner_id.use_second_rate_type:
+            curr_dict = self.currency_id.with_context(use_second_rate_type=True)._get_rates(self.env.user.company_id, self.date_order)
+        else:
+            curr_dict = self.currency_id._get_rates(self.env.user.company_id, self.date_order)
+        self.sale_currency_rate = 1 / curr_dict.get(self.currency_id.id, 1.0)
+        return True
 
     @api.multi
     def action_quotation_send(self):

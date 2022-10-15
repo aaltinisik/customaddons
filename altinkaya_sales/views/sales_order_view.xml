@@ -127,6 +127,11 @@
 				<xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="editable"/>
                 </xpath>
+
+				<group name="sale_pay" position="inside">
+					<field name="sale_currency_rate" />
+				</group>
+
 				<xpath
 					expr="/form/sheet/group/group//field[@name='validity_date']"
 					position="before">
