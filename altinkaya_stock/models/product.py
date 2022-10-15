@@ -81,6 +81,8 @@ class Product(models.Model):
                                        search='_search_qty_baski')
     qty_available_torna = fields.Float('Torna Depo Mevcut', compute='_compute_custom2_available',
                                        search='_search_qty_torna')
+    qty_available_kaplama = fields.Float('Kaplama Depo Mevcut', compute='_compute_custom2_available',
+                                        search='_search_qty_kaplama')
 
     qty_incoming_sincan = fields.Float('Sincan Depo Gelen', compute='_compute_custom_available')
     qty_incoming_merkez = fields.Float('Merkez Depo Gelen', compute='_compute_custom_available')
@@ -127,6 +129,9 @@ class Product(models.Model):
     def _search_qty_torna(self, operator, value):
         return [('id', 'in', self.with_context({'location': 5895})._search_qty_available(operator, value))]
 
+    def _search_qty_kaplama(self, operator, value):
+        return [('id', 'in', self.with_context({'location': 6362})._search_qty_available(operator, value))]
+
     @api.multi
     def _compute_custom_available(self):
         for product in self:
@@ -152,6 +157,7 @@ class Product(models.Model):
             product.qty_available_maske = product.with_context({'location': 114}).qty_available
             product.qty_available_baski = product.with_context({'location': 77}).qty_available
             product.qty_available_torna = product.with_context({'location': 5895}).qty_available
+            product.qty_available_kaplama = product.with_context({'location': 6362}).qty_available
 
     @api.multi
     def single_product_update_quant_reservation(self):
@@ -197,3 +203,4 @@ class mrpProduction(models.Model):
     qty_available_maske = fields.Float('Maske Depo Mevcut', related='product_id.qty_available_maske')
     qty_available_baski = fields.Float('Baskı Depo Mevcut', related='product_id.qty_available_baski')
     qty_available_torna = fields.Float('Torna Depo Mevcut', related='product_id.qty_available_torna')
+    qty_available_kaplama = fields.Float('Kaplama Depo Mevcut', related='product_id.qty_available_kaplama')
