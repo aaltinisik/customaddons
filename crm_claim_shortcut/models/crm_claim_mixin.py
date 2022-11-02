@@ -39,9 +39,39 @@ class CRMClaimMapping(models.AbstractModel):
             if claims:
                 action['res_id'] = claims.ids[0]
             else:
-                action["context"] = {
-                    "default_model_ref_id": "%s,%s" % (self._name, self.id)}
+                action["context"] = self._prepare_claim_context()
+
         return action
+
+    def _prepare_claim_context(self):
+        vals = {"default_model_ref_id": "%s,%s" % (self._name, self.id)}
+
+        if self._name == 'sale.order':
+            sale_order = self
+
+        elif self._name == 'account.invoice':
+            sale_order = fields.first(
+                self.mapped(
+                    'invoice_line_ids.sale_line_ids.order_id')) or False
+
+        elif self._name == 'stock.picking':
+            sale_order = fields.first(
+                self.mapped('move_lines.sale_line_id.order_id')) or False
+
+        else:
+            sale_order = False
+
+        if sale_order:
+            vals.update({
+                "default_partner_id": sale_order.partner_id.id or False,
+                "default_partner_phone": sale_order.partner_id.phone or False,
+                "default_email_from": sale_order.partner_id.email or False,
+                "default_user_id": sale_order.create_uid.id or False,
+                "default_team_id": sale_order.team_id.id or False,
+                "default_source_id": sale_order.source_id.id or False,
+                "default_carrier_id": sale_order.carrier_id.id or False,
+            })
+        return vals
 
 
 class CRMClaimSaleOrderMixin(models.Model):

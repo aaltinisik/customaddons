@@ -11,7 +11,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-reply-all"
-                        groups="base.group_user">
+                        groups="sales_team.group_sale_salesman">
                     <field name="crm_claim_count" widget="statinfo"
                            string="Claims"/>
                 </button>

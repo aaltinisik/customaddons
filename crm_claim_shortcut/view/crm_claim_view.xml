@@ -7,7 +7,8 @@
         <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
         <field name="arch" type="xml">
             <field name="date" position="before">
-                <field name="claim_department" />
+                <field name="source_id" />
+                <field name="carrier_id" />
             </field>
         </field>
     </record>
