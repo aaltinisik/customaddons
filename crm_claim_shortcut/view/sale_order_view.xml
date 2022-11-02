@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_crm" model="ir.ui.view">
+        <field name="name">sale.order.form.crm.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_claims"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-reply-all"
+                    groups="base.group_user">
+                        <field name="crm_claim_count" widget="statinfo" string="Claims"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
