@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_invoice_form_crm" model="ir.ui.view">
+        <field name="name">account.invoice.form.crm.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_claims"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-reply-all"
+                    groups="base.group_user">
+                        <field name="crm_claim_count" widget="statinfo" string="Claims"/>
+                </button>
+            </div>
+
+        </field>
+    </record>
+
+    <record id="view_invoice_form_supplier_crm" model="ir.ui.view">
+        <field name="name">account.invoice.form.supplier.crm.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/div" position="before">
+                <div class="oe_button_box" name="button_box">
+                <button name="action_view_claims"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-reply-all"
+                        groups="base.group_user">
+                    <field name="crm_claim_count" widget="statinfo"
+                           string="Claims"/>
+                </button>
+            </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

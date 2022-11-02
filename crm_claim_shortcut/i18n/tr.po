@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* crm_claim_shortcut
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-02 10:29+0000\n"
+"PO-Revision-Date: 2022-11-02 10:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_crm_claim_mapping
+msgid "Base model for CRM Claim - Odoo models integration"
+msgstr "CRM Talepler ve Odoo modelleri arasında bağlantı kurmak için temel model"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_crm_claim
+msgid "Claim"
+msgstr "Talep"
+
+#. module: crm_claim_shortcut
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_account_invoice__crm_claim_count
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_crm_claim_mapping__crm_claim_count
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_product_product__crm_claim_count
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_sale_order__crm_claim_count
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_stock_picking__crm_claim_count
+msgid "Claim Count"
+msgstr "Talep Sayısı"
+
+#. module: crm_claim_shortcut
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_account_invoice__crm_claim_ids
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_crm_claim_mapping__crm_claim_ids
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_product_product__crm_claim_ids
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_sale_order__crm_claim_ids
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_stock_picking__crm_claim_ids
+#: model_terms:ir.ui.view,arch_db:crm_claim_shortcut.view_invoice_form_crm
+#: model_terms:ir.ui.view,arch_db:crm_claim_shortcut.view_invoice_form_supplier_crm
+#: model_terms:ir.ui.view,arch_db:crm_claim_shortcut.view_order_form_crm
+#: model_terms:ir.ui.view,arch_db:crm_claim_shortcut.view_picking_form_crm
+#: model_terms:ir.ui.view,arch_db:crm_claim_shortcut.view_product_form_crm
+msgid "Claims"
+msgstr "Talepler"
+
+#. module: crm_claim_shortcut
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_crm_claim_mapping__display_name
+msgid "Display Name"
+msgstr "Görünüm"
+
+#. module: crm_claim_shortcut
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_crm_claim_mapping__id
+msgid "ID"
+msgstr "ID"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: crm_claim_shortcut
+#: model:ir.model.fields,field_description:crm_claim_shortcut.field_crm_claim_mapping____last_update
+msgid "Last Modified on"
+msgstr "S"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_sale_order
+msgid "Sale Order"
+msgstr "Satış Siparişi"
+
+#. module: crm_claim_shortcut
+#: model:ir.model,name:crm_claim_shortcut.model_stock_picking
+msgid "Transfer"
+msgstr "Sevk"
+

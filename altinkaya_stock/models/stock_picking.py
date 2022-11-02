@@ -134,3 +134,17 @@ class StockPicking(models.Model):
                 for inv_line in move.invoice_line_ids:
                     inv_line.write({'sale_line_ids': [(4, move.sale_line_id.id)]})
             self.env.cr.commit()
+
+    @api.multi
+    def open_record(self):
+        form_id = self.env.ref('stock.view_picking_form')
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.picking',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {},
+            'target': 'current',
+        }
