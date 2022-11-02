@@ -16,6 +16,7 @@
         'crm', 'crm_claim', 'sale', 'stock', 'account'
     ],
     'data': [
+        'view/crm_claim_view.xml',
         'view/sale_order_view.xml',
         'view/account_invoice_view.xml',
         'view/product_product_view.xml',
