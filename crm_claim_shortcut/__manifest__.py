@@ -13,7 +13,8 @@
     'application': False,
     'installable': True,
     'depends': [
-        'crm', 'crm_claim', 'sale', 'stock', 'account'
+        'crm', 'delivery_integration_base',
+        'delivery', 'utm', 'crm_claim', 'sale', 'stock', 'account'
     ],
     'data': [
         'view/crm_claim_view.xml',
