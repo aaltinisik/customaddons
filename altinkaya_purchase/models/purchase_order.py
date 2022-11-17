@@ -27,7 +27,7 @@ class PurchaseOrder(models.Model):
             dict = line._convert_to_write(line.read()[0])
             line2 = self.env['purchase.order.line'].new(dict)
             # we make this to isolate changed values:
-            line2.product_uom_change()
+            line2._onchange_quantity()
             line.write({
                 'price_unit': line2.price_unit,
             })
