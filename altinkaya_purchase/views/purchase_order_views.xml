@@ -12,7 +12,8 @@
                             type="object" attrs="{'invisible':[('state','not in', ['draft', 'sent'])]}"/>
                 </button>
                 <field name="origin" position="after">
-                    <field name="pricelist_id" groups="purchase.group_purchase_user"/>
+                    <field name="pricelist_id" groups="purchase.group_purchase_user"
+                    domain="[('list_type_use', '=', 'purchase')]"/>
                 </field>
             </field>
         </record>
