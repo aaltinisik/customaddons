@@ -72,22 +72,22 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "481"
+msgid "682"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "481-6298017"
+msgid "682-6294510"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "481-9097053"
+msgid "682-9074503"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "481-9097055"
+msgid "682-9074502"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -366,8 +366,8 @@ msgstr "<span>İsk.(%)</span>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<span>GARANTI BANK ,OSTIM BRANCH (481)</span>"
-msgstr "<span>GARANTI BANKASI ,OSTIM ŞUBESİ (481)</span>"
+msgid "<span>GARANTI BANK ,OSTIM BRANCH (682)</span>"
+msgstr "<span>GARANTI BANKASI ,OSTIM ŞUBESİ (682)</span>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
@@ -382,8 +382,8 @@ msgid "<span>Telefon: +90 312 395 2768 |\n"
 "								Ulus Vergi Dairesi 0610422947\n"
 "							</span>\n"
 "							<br/>\n"
-"							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006\n"
-"								2980 17 (TL)\n"
+"							<span>Garanti Bankası: 682-6294510 IBAN: TR40 0006 2000 6820 0006\n"
+"								2945 10 (TL)\n"
 "							</span>\n"
 "							<br/>\n"
 "							<span>\n"
@@ -396,8 +396,8 @@ msgstr "<span>Telefon: +90 312 395 2768 |\n"
 "								Ulus Vergi Dairesi 0610422947\n"
 "							</span>\n"
 "							<br/>\n"
-"							<span>Garanti Bankası: 481-6298017 IBAN: TR95 0006 2000 4810 0006\n"
-"								2980 17 (TL)\n"
+"							<span>Garanti Bankası: 682-6294510 IBAN: TR40 0006 2000 6820 0006\n"
+"								2945 10 (TL)\n"
 "							</span>\n"
 "							<br/>\n"
 "							<span>\n"
@@ -670,12 +670,12 @@ msgstr "<strong>KDV(%18)</strong>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<strong>TR 30 0006 2000 4810 0009 0970 55</strong>"
+msgid "<strong>TR 20 0006 2000 6820 0009 0745 02</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "<strong>TR 84 0006 2000 4810 0009 0970 53</strong>"
+msgid "<strong>TR 90 0006 2000 6820 0009 0745 03</strong>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -1296,7 +1296,7 @@ msgstr "Sipariş N<sup>o</sup>:"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "Ostim Şb."
+msgid "Ankara OSB Şb."
 msgstr ""
 
 #. module: altinkaya_reports
@@ -1502,22 +1502,22 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "TR300006200048100009097055"
+msgid "TR200006200068200009074502"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "TR840006200048100009097053"
+msgid "TR900006200068200009074503"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "TR95 0006 2000 4810 0006 2980 17"
+msgid "TR40 0006 2000 6820 0006 2945 10"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "TR950006200048100006298017"
+msgid "TR400006200068200006294510"
 msgstr ""
 
 #. module: altinkaya_reports
