@@ -61,14 +61,16 @@ class PurchaseOrderLine(models.Model):
 
     @api.multi
     def _get_display_price(self, product):
+        supplier_info = product.seller_ids.filtered(
+            lambda r: r.name == self.order_id.partner_id)
+        if not supplier_info:
+            raise UserError(
+                _('This supplier is not the supplier of this product.'
+                  ' You need to enter manual price.'))
         if self.order_id.pricelist_id.discount_policy == 'with_discount':
             return product.with_context(pricelist=self.order_id.pricelist_id.id, uom=self.product_uom.id).price
         product_context = dict(self.env.context, partner_id=self.order_id.partner_id.id, date=self.order_id.date_order,
                                uom=self.product_uom.id)
-        supplier_info = product.seller_ids.filtered(lambda r: r.name == self.order_id.partner_id)
-        if not supplier_info:
-            raise UserError(
-                _('This supplier is not the supplier of this product.'))
         final_price, rule_id = self.order_id.pricelist_id.with_context(product_context).get_product_price_rule(
             product or self.product_id, self.product_qty or 1.0, self.order_id.partner_id)
         price_currency = supplier_info.currency_id
