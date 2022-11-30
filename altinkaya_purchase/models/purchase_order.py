@@ -28,8 +28,10 @@ class PurchaseOrder(models.Model):
             dict = line._convert_to_write(line.read()[0])
             line2 = self.env['purchase.order.line'].new(dict)
             # we make this to isolate changed values:
-            line2._onchange_quantity()
+            line2.onchange_product_id()
             line.write({
+                'taxes_id': line2.taxes_id,
+                'name': line2.name,
                 'price_unit': line2.price_unit,
             })
         return True
@@ -63,10 +65,6 @@ class PurchaseOrderLine(models.Model):
     def _get_display_price(self, product):
         supplier_info = product.seller_ids.filtered(
             lambda r: r.name == self.order_id.partner_id)
-        if not supplier_info:
-            raise UserError(
-                _('This supplier is not the supplier of this product.'
-                  ' You need to enter manual price.'))
         if self.order_id.pricelist_id.discount_policy == 'with_discount':
             return product.with_context(pricelist=self.order_id.pricelist_id.id, uom=self.product_uom.id).price
         product_context = dict(self.env.context, partner_id=self.order_id.partner_id.id, date=self.order_id.date_order,
