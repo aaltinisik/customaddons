@@ -33,37 +33,36 @@ class Partner(models.Model):
         _logger.info(
             "\nScheduler started:: For partner ranking......................")
         # invoice_obj = self.env['account.invoice']
-        end_date = datetime.now().date()
-        start_date = end_date - timedelta(days=720)
-        self._cr.execute('''
+        start_date = datetime.now().date()
+        end_date = start_date - timedelta(days=720)
+        self.env.cr.execute('''
                             INSERT INTO res_partner_rank(partner_id, date_rank, rank, total)
-                            SELECT commercial_partner_id, '%s', 
-                                CASE  WHEN total > 0 THEN row_number() OVER(ORDER BY total DESC) 
+                            SELECT commercial_partner_id, '%s' as date_rank, 
+                                CASE  WHEN total > 20.001 THEN row_number() OVER(ORDER BY total DESC) 
                                 ELSE 999999 END
                             AS ranking,total FROM 
                             (
-
                                 select p.commercial_partner_id, coalesce(pir.total,0.0) as total
                                 from ( select distinct commercial_partner_id from res_partner) p 
                                 left join 
-                                    (select commercial_partner_id, SUM(price_total_usd) as total from  account_invoice_report 
+                                        (select commercial_partner_id, SUM(price_total_usd) as total from  account_invoice_report 
                                 WHERE 
                                     state not in ('draft', 'cancel','proforma','proforma2') AND
                                     type in('out_refund', 'out_invoice') AND
-                                    price_total_usd > 20 AND
                                     date >= '%s' 
                                     GROUP BY commercial_partner_id) pir
                                 on p.commercial_partner_id = pir.commercial_partner_id
-
                             ) as Rank
                         ''' % (
         start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d')))
 
-        self._cr.execute('''
+        self.env.cr.execute('''
                             UPDATE res_partner p set ranking = r.rank
                             from (SELECT * FROM res_partner_rank ORDER BY date_rank DESC) r 
                             WHERE p.commercial_partner_id = r.partner_id 
                         ''')
+
+        self.env.cr.commit()
 
 #         out_inv_datas = self._cr.fetchall()
 #         all_partners = self.env['res.partner'].search([]).ids
