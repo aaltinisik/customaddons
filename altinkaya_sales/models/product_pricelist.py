@@ -105,7 +105,7 @@ class ProductPricelist(models.Model):
             results[product.id] = 0.0
             is_purchase_product = False
             suitable_rule = False
-
+            price_type = self.env['product.price.type']
             # Final unit price is computed according to `qty` in the `qty_uom_id` UoM.
             # An intermediary unit price may be computed according to a different UoM, in
             # which case the price_uom_id contains that UoM.
