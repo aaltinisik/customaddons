@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="report_account_invoice_kviks" model="ir.ui.view">
+        <field name="name">report.account.invoice.kviks</field>
+        <field name="model">report.account.invoice.kviks</field>
+        <field name="inherit_id" ref="excel_import_export.xlsx_report_view"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='criteria']" position="after">
+                KVIKS sistemine uygun şekilde çıktı almak için aşağıdaki
+                butonları kullanınız.
+                <field name="results" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <act_window id="action_account_invoice_kviks_excel_export"
+                key2="client_action_multi" name="KVIKS Sevkiyat bildirimi"
+                res_model="report.account.invoice.kviks" src_model="account.invoice"
+                view_mode="form" target="new" view_type="form"
+                context="{'template_domain': [('res_model', '=', 'report.account.invoice.kviks'),
+                                 ('fname', '=', 'kviks.xlsx'),
+                                 ('gname', '=', False)]}"/>
+
+</odoo>
