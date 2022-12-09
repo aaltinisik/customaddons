@@ -35,6 +35,9 @@
         # Move Line Excel
         'export_account_move_line_xlsx/reports.xml',
         'export_account_move_line_xlsx/temp_move_lines.xml',
+        # Kviks Excel
+        'export_account_invoice_kviks_xlsx/reports.xml',
+        'export_account_invoice_kviks_xlsx/temp_kviks.xml',
     ],
     'installable': True,
 }
