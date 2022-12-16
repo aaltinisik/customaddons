@@ -40,9 +40,9 @@
                     </group>
                 </page>
             </xpath>
-            <xpath expr="//field[@name='attribute_line_ids']" position="after">
+            <xpath expr="//field[@name='no_create_variants']" position="after">
                 <button name="action_fill_missing_product_attrs"
-                        string="Create Missing Variants" type="object"
+                        string="Fill Missing Variants" type="object"
                         class="oe_highlight"/>
             </xpath>
         </field>

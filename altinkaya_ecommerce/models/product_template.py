@@ -48,7 +48,7 @@ class ProductTemplate(models.Model):
         for attr_line in self.mapped(lambda p: p.attribute_line_ids):
             if attr_line.required and len(attr_line.value_ids.ids) < 2:
                 raise ValidationError(_("You can not save required attributes"
-                                        "with single value. %s "
+                                        " with single value. %s "
                                         % attr_line.attribute_id.display_name))
         return res
 
