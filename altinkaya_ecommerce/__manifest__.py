@@ -11,7 +11,7 @@
     "website": "https://github.com/yibudak",
     "category": "Extensions",
     "depends": [
-        "product",
+        "product", "product_variant_configurator"
     ],
     "data": [
         'views/product_template_view.xml',
