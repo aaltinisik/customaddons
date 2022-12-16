@@ -23,26 +23,22 @@ class ProductTemplate(models.Model):
     website_attachment_ids = fields.Many2many(
         string="Website attachments",
         comodel_name="ir.attachment",
-        domain=lambda self, *args, **kwargs: (
-            self._domain_website_attachment_ids(*args, **kwargs)
-        ),
         help="Files publicly downloadable from the product eCommerce page.",
     )
 
-    @api.model
-    def _domain_website_attachment_ids(self):
-        """Get domain for website attachments."""
-        #Todo fix domain with no attachments
-        ctx_params = self.env.context.get('params', {})
-        domain = []
-
-        if ctx_params.get('id', False):
-            domain += [('res_id', '=', ctx_params['id'])]
-
-        if ctx_params.get('model', False):
-            domain += [('res_model', '=', ctx_params['model'])]
-
-        return domain
+    # @api.model
+    # def _domain_website_attachment_ids(self):
+    #     """Get domain for website attachments."""
+    #     ctx_params = self.env.context.get('params', {})
+    #     domain = []
+    #
+    #     if ctx_params.get('id', False):
+    #         domain += [('res_id', '=', ctx_params['id'])]
+    #
+    #     if ctx_params.get('model', False):
+    #         domain += [('res_model', '=', ctx_params['model'])]
+    #
+    #     return domain
 
     @api.multi
     def write(self, vals):
@@ -50,9 +46,9 @@ class ProductTemplate(models.Model):
         res = super(ProductTemplate, self).write(vals)
 
         for attr_line in self.mapped(lambda p: p.attribute_line_ids):
-            if len(attr_line.value_ids.ids) < 2:
-                raise ValidationError(_("You can not save attributes"
-                                        " with single value. %s "
+            if attr_line.required and len(attr_line.value_ids.ids) < 2:
+                raise ValidationError(_("You can not save required attributes"
+                                        "with single value. %s "
                                         % attr_line.attribute_id.display_name))
         return res
 
@@ -86,7 +82,6 @@ class ProductTemplate(models.Model):
         if not filled_variant_ids:
             raise ValidationError(_("No missing product variants found."))
 
-
         tree_view_id = self.env.ref('product.product_product_tree_view').id
         action = {
             'type': 'ir.actions.act_window',
@@ -94,6 +89,7 @@ class ProductTemplate(models.Model):
             'view_mode': 'tree,form',
             'name': _('Products'),
             'res_model': 'product.product',
-            'domain': "[('type', '=', 'product'), ('id', 'in', %s)]" % filled_variant_ids,
+            'domain': "[('type', '=', 'product'), ('id', 'in', %s)]"
+                      % filled_variant_ids,
         }
         return action
