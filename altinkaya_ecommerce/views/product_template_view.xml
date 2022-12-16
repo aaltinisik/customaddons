@@ -28,7 +28,9 @@
                             Only products attachments will be shown here.
                             Upload attachment first.
                         </div>
-                        <field name="website_attachment_ids" options="{'no_create': True, 'no_open': True}" nolabel="1">
+                        <field name="website_attachment_ids"
+                               domain="[('res_model', '=', 'product.template'), ('res_id', '=', active_id)]"
+                               options="{'no_create': True, 'no_open': True}" nolabel="1">
                             <tree>
                                 <field name="name"/>
                                 <field name="datas_fname"/>
@@ -38,7 +40,11 @@
                     </group>
                 </page>
             </xpath>
-
+            <xpath expr="//field[@name='no_create_variants']" position="after">
+                <button name="action_fill_missing_product_attrs"
+                        string="Fill Missing Variants" type="object"
+                        class="oe_highlight"/>
+            </xpath>
         </field>
     </record>
 
