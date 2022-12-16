@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='value_ids']/tree/field[@name='name']" position="after">
                 <field name="is_published" groups="product.group_product_variant" />
+                <field name="is_default" groups="product.group_product_variant" />
             </xpath>
         </field>
     </record>
@@ -20,8 +21,10 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="is_published" groups="product.group_product_variant" />
+                <field name="is_default" groups="product.group_product_variant" />
             </field>
         </field>
     </record>
+
 
 </data>
