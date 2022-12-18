@@ -5,23 +5,10 @@
         <field name="name">altinkaya.ecommerce.product.attribute.form.inherit</field>
         <field name="model">product.attribute</field>
         <field name="inherit_id" ref="product.product_attribute_view_form"/>
-        <field name="priority" eval="8"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='value_ids']/tree/field[@name='name']" position="after">
-                <field name="is_published" groups="product.group_product_variant" />
-                <field name="is_default" groups="product.group_product_variant" />
-            </xpath>
-        </field>
-    </record>
-
-    <record id="altinkaya_ecommerce_variants_tree_view" model="ir.ui.view">
-        <field name="name">altinkaya.ecommerce.variants.template.tree</field>
-        <field name="model">product.attribute.value</field>
-        <field name="inherit_id" ref="product.variants_tree_view"/>
-        <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="is_published" groups="product.group_product_variant" />
-                <field name="is_default" groups="product.group_product_variant" />
+            <field name="create_variant" position="after">
+                <field name="allow_filling" groups="product.group_product_variant" />
+                <field name="attribute_type" groups="product.group_product_variant" widget="radio" />
             </field>
         </field>
     </record>
