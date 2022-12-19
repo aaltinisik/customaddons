@@ -144,8 +144,8 @@ msgstr ""
 
 #. module: altinkaya_ecommerce
 #: selection:ir.attachment,usage:0
-msgid "IP67"
-msgstr ""
+msgid "IP Certificate"
+msgstr "IP Sertifikası"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_attribute__allow_filling
