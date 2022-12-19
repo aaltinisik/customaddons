@@ -8,7 +8,6 @@
         <field name="arch" type="xml">
             <field name="create_variant" position="after">
                 <field name="allow_filling" groups="product.group_product_variant" />
-                <field name="attribute_type" groups="product.group_product_variant" widget="radio" />
             </field>
         </field>
     </record>

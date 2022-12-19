@@ -3,3 +3,4 @@
 from . import product_attribute
 from . import product_template
 from . import product_feature
+from . import ir_attachment

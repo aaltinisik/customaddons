@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-19 05:10+0000\n"
-"PO-Revision-Date: 2022-12-19 05:10+0000\n"
+"POT-Creation-Date: 2022-12-19 07:41+0000\n"
+"PO-Revision-Date: 2022-12-19 07:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_ecommerce
+#: selection:ir.attachment,usage:0
+msgid "3D"
+msgstr ""
+
+#. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
 msgid "<i class=\"fa fa-info-circle\"/>\n"
 "                            Only products attachments will be shown here.\n"
 "                            Upload attachment first."
-msgstr ""
+msgstr "<i class=\"fa fa-info-circle\"/>\n"
+"                            Sadece ürün dosyaları burada görünür.\n"
+"                            İlk olarak ürüne dosya yükleyin."
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_attribute__allow_filling
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_attribute_line__allow_filling
 msgid "Allow Filling"
-msgstr ""
+msgstr "Nitelik Doldur"
 
 #. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
@@ -33,14 +41,9 @@ msgid "Altinkaya E-commerce"
 msgstr "Altınkaya E-commerec"
 
 #. module: altinkaya_ecommerce
-#: selection:product.attribute,attribute_type:0
-msgid "Attribute"
-msgstr ""
-
-#. module: altinkaya_ecommerce
-#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_attribute__attribute_type
-msgid "Attribute Type"
-msgstr ""
+#: model:ir.model,name:altinkaya_ecommerce.model_ir_attachment
+msgid "Attachment"
+msgstr "Ek"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_product_attribute_value
@@ -60,6 +63,11 @@ msgid "Created on"
 msgstr "Oluşturulma"
 
 #. module: altinkaya_ecommerce
+#: selection:ir.attachment,usage:0
+msgid "DXF"
+msgstr "DXF"
+
+#. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_attribute_line__default_value_id
 msgid "Default Value"
 msgstr "Varsayılan Değer"
@@ -67,7 +75,7 @@ msgstr "Varsayılan Değer"
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template_attribute_line__default_value_id
 msgid "Default value for the attribute."
-msgstr ""
+msgstr "Nitelik için varsayılan değer."
 
 #. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
@@ -94,19 +102,18 @@ msgstr "Görünüm Adı"
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line__feature_id
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value__feature_id
-#: selection:product.attribute,attribute_type:0
 msgid "Feature"
-msgstr ""
+msgstr "özellik"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value__product_feature_value_id
 msgid "Feature Value"
-msgstr ""
+msgstr "Özellik Değeri"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line__value_ids
 msgid "Feature Values"
-msgstr ""
+msgstr "Özellik Değerleri"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__feature_line_ids
@@ -127,15 +134,26 @@ msgid "Fill Missing Variants"
 msgstr "Eksik Varyantları Doldur"
 
 #. module: altinkaya_ecommerce
+#: selection:ir.attachment,usage:0
+msgid "General"
+msgstr "Genel"
+
+#. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line__id
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
+
+#. module: altinkaya_ecommerce
+#: selection:ir.attachment,usage:0
+msgid "IP67"
+msgstr "IP67"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_attribute__allow_filling
+#: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template_attribute_line__allow_filling
 msgid "If checked, attribute values will be filled automatically"
-msgstr ""
+msgstr "Eğer seçilirse ürünlerde nitelik değeri otomatik doldurulacaktır."
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_product__is_published
@@ -172,6 +190,11 @@ msgstr "Son Güncelleme"
 #, python-format
 msgid "No missing product variants found."
 msgstr "Eksik nitelikli ürün çeşidi bulunamadı."
+
+#. module: altinkaya_ecommerce
+#: selection:ir.attachment,usage:0
+msgid "PDF"
+msgstr "PDF"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_product_attribute
@@ -223,9 +246,9 @@ msgid "Set default value for attribute %s"
 msgstr "Nitelik için varsayılan değer ayarla %s"
 
 #. module: altinkaya_ecommerce
-#: model:ir.model.fields,help:altinkaya_ecommerce.field_product_attribute__attribute_type
-msgid "This field is used to distinguish between attributesand features. Default is attribute."
-msgstr "Bu alan ürün nitelik ve özelliklerini birbirinden ayırır."
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_ir_attachment__usage
+msgid "Usage"
+msgstr "Kullanımı"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value__name
