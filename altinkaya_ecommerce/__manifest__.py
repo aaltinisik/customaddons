@@ -4,6 +4,7 @@
 {
     "name": "Altinkaya E-commerce Extensions",
     "summary": "Product and sale e-commerce fields",
+    "description": "Bu modul ne yapar #TODO",
     "development_status": "Beta",
     "version": "12.0.1.0.1",
     "author": "Yiğit Budak",
@@ -14,8 +15,9 @@
         "product", "product_variant_configurator"
     ],
     "data": [
-        'views/product_template_view.xml',
+        "security/ir.model.access.csv",
         'views/product_attribute_view.xml',
+        'views/product_template_view.xml',
     ],
     'installable': True,
 
