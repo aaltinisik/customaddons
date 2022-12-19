@@ -100,3 +100,10 @@ class ProductTemplateAttributeLine(models.Model):
         comodel_name="product.attribute.value",
         help="Default value for the attribute.",
     )
+
+    allow_filling = fields.Boolean(
+        string="Allow Filling",
+        help="If checked, attribute values will be filled automatically",
+        related="attribute_id.allow_filling",
+        readonly=True,
+    )

@@ -11,12 +11,3 @@ class ProductAttribute(models.Model):
         help="If checked, attribute values will be filled automatically",
         default=True,
     )
-
-    attribute_type = fields.Selection(
-        [("attribute", "Attribute"), ("feature", "Feature")],
-        string="Attribute Type",
-        copy=True,
-        default="attribute",
-        help="This field is used to distinguish between attributes"
-        "and features. Default is attribute.",
-    )

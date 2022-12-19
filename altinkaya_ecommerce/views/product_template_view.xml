@@ -19,7 +19,7 @@
                     <group string="Features">
                         <field name="feature_line_ids"  nolabel="1" widget="one2many_list">
                             <tree string="Features" editable="bottom">
-                                <field name="feature_id" domain="[('attribute_type', '=', 'feature')]"/>
+                                <field name="feature_id"/>
                                 <field name="value_ids" widget="many2many_tags" options="{'no_create_edit': True}"
                                  domain="[('attribute_id', '=', feature_id)]" context="{'default_attribute_id': feature_id}"/>
                             </tree>
@@ -39,10 +39,11 @@
                         <field name="website_attachment_ids"
                                domain="[('res_model', '=', 'product.template'), ('res_id', '=', active_id)]"
                                options="{'no_create': True, 'no_open': True}" nolabel="1">
-                            <tree>
+                            <tree editable="bottom">
                                 <field name="name"/>
                                 <field name="datas_fname"/>
                                 <field name="type"/>
+                                <field name="usage"/>
                             </tree>
                         </field>
                     </group>
@@ -64,6 +65,7 @@
                ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='value_ids']" position="after">
+                <field name="allow_filling" />
                 <field name="default_value_id"
                  domain="[('attribute_id', '=', attribute_id)]"
                  groups="product.group_product_variant" />
