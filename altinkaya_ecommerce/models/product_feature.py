@@ -102,7 +102,6 @@ class ProductTemplateFeatureLine(models.Model):
                 ]
             )
 
-    @api.multi
     def unlink(self):
         for product_template_feature_line in self:
             self.env["product.template.feature.value"].search(
@@ -231,9 +230,7 @@ class ProductTemplateFeatureValue(models.Model):
     )
     sequence = fields.Integer("Sequence", related="product_feature_value_id.sequence")
 
-    @api.multi
     def name_get(self):
         return [
-            (value.id, "%s: %s" % (value.feature_id.name, value.name))
-            for value in self
+            (value.id, "%s: %s" % (value.feature_id.name, value.name)) for value in self
         ]

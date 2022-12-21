@@ -33,21 +33,6 @@ class ProductTemplate(models.Model):
         string="Features",
     )
 
-    @api.multi
-    def write(self, vals):
-        """Prevent saving attributes with single value."""
-        res = super(ProductTemplate, self).write(vals)
-
-        for attr_line in self.mapped(lambda p: p.attribute_line_ids):
-            if attr_line.required and len(attr_line.value_ids.ids) < 2:
-                raise ValidationError(
-                    _(
-                        "You can not save required attributes"
-                        " with single value. %s " % attr_line.attribute_id.display_name
-                    )
-                )
-        return res
-
     def action_fill_missing_product_attrs(self):
         """Fill missing product variants for published attribute values."""
         if len(self.product_variant_ids) == 1:
@@ -55,7 +40,9 @@ class ProductTemplate(models.Model):
                 _("You can not fill missing product of non" " variant product.")
             )
 
-        tmpl_attribute_lines = self.attribute_line_ids.filtered(lambda x: x.attribute_id.allow_filling)
+        tmpl_attribute_lines = self.attribute_line_ids.filtered(
+            lambda x: x.attribute_id.allow_filling
+        )
         required_attrs = tmpl_attribute_lines.mapped("attribute_id")
         filled_variant_ids = []
 
