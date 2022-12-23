@@ -13,7 +13,7 @@ class ResPartner(models.Model):
             if partner.property_account_receivable_id.currency_id:
                 partner.partner_currency_id = partner.property_account_receivable_id.currency_id
             else:
-                partner.partner_currency_id = self.sudo().company_id.currency_id
+                partner.partner_currency_id = partner.sudo().company_id.currency_id
 
     @api.multi
     @api.depends('move_line_ids')
