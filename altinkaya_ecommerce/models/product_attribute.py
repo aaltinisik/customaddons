@@ -11,3 +11,12 @@ class ProductAttribute(models.Model):
         help="If checked, attribute values will be filled automatically",
         default=True,
     )
+
+    visibility = fields.Selection(
+        selection=[
+            ('visible', 'Visible on eCommerce'),
+            ('hidden', 'Hidden'),
+        ],
+        string='Visibility',
+        default='visible',
+    )

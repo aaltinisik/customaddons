@@ -12,7 +12,7 @@ class IrAttachment(models.Model):
             ('dxf', 'DXF'),
             ('pdf', 'PDF'),
             ('3d', '3D'),
-            ('ip67', 'IP67'),
+            ('ip_certificate', 'IP Certificate'),
         ],
         string='Usage',
         default='general',
