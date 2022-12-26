@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_category_filmstrip_active"
+              inherit_id="website_sale.filmstrip_categories"
+              name="Categories Filmstrip">
+        <xpath expr="//div[@class='o_wsale_filmstip_container d-flex align-items-stretch mb-2 overflow-hidden']"
+               position="before">
+            <!-- Filter out passive categories -->
+            <t t-if="entries">
+                <t t-set="entries" t-value="entries.filtered(lambda e: e.is_published)"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

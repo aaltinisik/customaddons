@@ -5,3 +5,7 @@ from . import product_template
 from . import product_feature
 from . import product_product
 from . import ir_attachment
+from . import res_partner
+from . import ir_binary
+from . import product_category
+from . import product_public_category

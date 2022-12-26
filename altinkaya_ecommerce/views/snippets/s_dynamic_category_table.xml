@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_dynamic_category_table" name="Category Table">
+        <t t-call="website.s_dynamic_snippet_template">
+            <t t-set="snippet_name" t-value="'s_dynamic_category_table'"/>
+        </t>
+    </template>
+    <template id="s_dynamic_category_table_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="website.dynamic_snippet_carousel_options_template">
+                <t t-set="snippet_name" t-value="'dynamic_snippet_category_table'"/>
+                <t t-set="snippet_selector" t-value="'.s_dynamic_category_table'"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="s_dynamic_category_table_template_options" inherit_id="website.s_dynamic_snippet_options_template">
+        <xpath expr="//we-select[@data-name='filter_opt']" position="after">
+            <t t-if="snippet_name == 'dynamic_category_table'">
+                <we-select string="Category" data-name="product_category_opt" data-attribute-name="productCategoryId" data-no-preview="true">
+                    <we-button data-select-data-attribute="all">All Products</we-button>
+                    <we-button data-select-data-attribute="current">Current Category or All</we-button>
+                </we-select>
+            </t>
+        </xpath>
+    </template>
+
+    <record id="altinkaya_ecommerce.s_category_table_000_js" model="ir.asset">
+        <field name="name">Dynamic category table 000 JS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">altinkaya_ecommerce/static/src/snippets/s_dynamic_category_table/000.js</field>
+    </record>
+
+</odoo>

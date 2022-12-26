@@ -1,6 +1,7 @@
 # Copyright 2022 Yiğit Budak (https://github.com/yibudak)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models, _
+from collections import OrderedDict
+from odoo import fields, models, _
 from odoo.exceptions import ValidationError
 from odoo.tools.translate import html_translate
 
@@ -32,6 +33,11 @@ class ProductTemplate(models.Model):
         inverse_name="product_tmpl_id",
         string="Features",
     )
+
+    def _prepare_product_attachments_table(self):
+        """This method returns product attachments."""
+        attachments = self.sudo().website_attachment_ids
+        return attachments
 
     def action_fill_missing_product_attrs(self):
         """Fill missing product variants for published attribute values."""
@@ -94,3 +100,22 @@ class ProductTemplateAttributeLine(models.Model):
         related="attribute_id.allow_filling",
         readonly=True,
     )
+
+    def _prepare_categories_for_display(self):
+        """
+        This method adds feature lines to the product specifications.
+        """
+        res = super()._prepare_categories_for_display()
+        ptal = res.get(self.env["product.attribute.category"], False)
+        res[self.env["product.attribute.category"]] = []
+        if ptal:
+            tmpl_id = ptal[0].product_tmpl_id.sudo()
+            #  Attributes first
+            for line in ptal.filtered(lambda x: len(x.value_ids) > 0):
+                res[self.env["product.attribute.category"]].append(line)
+
+            ptfl = tmpl_id.feature_line_ids
+            for line in ptfl.filtered(lambda x: len(x.value_ids) > 0):
+                res[self.env["product.attribute.category"]].append(line)
+
+        return res

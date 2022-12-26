@@ -4,6 +4,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from odoo.osv import expression
+from collections import OrderedDict
 
 
 class ProductTemplateFeatureLine(models.Model):
@@ -29,6 +30,16 @@ class ProductTemplateFeatureLine(models.Model):
         required=True,
         index=True,
     )
+
+    attribute_id = fields.Many2one(
+        "product.attribute",
+        related="feature_id",
+        string="Attribute",
+        help="Not a real attribute. It's used on Odoo templates.",
+        readonly=True,
+        store=True,
+    )
+
     value_ids = fields.Many2many("product.attribute.value", string="Feature Values")
     product_template_value_ids = fields.Many2many(
         "product.template.feature.value",
@@ -234,3 +245,6 @@ class ProductTemplateFeatureValue(models.Model):
         return [
             (value.id, "%s: %s" % (value.feature_id.name, value.name)) for value in self
         ]
+
+    def _only_active(self):
+        return self
