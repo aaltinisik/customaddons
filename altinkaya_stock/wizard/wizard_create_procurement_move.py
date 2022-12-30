@@ -161,5 +161,5 @@ class CreateProcurementMove(models.TransientModel):
         product_uom = self.uom
         product = self.product_id
         location = warehouse.lot_stock_id
-        origin = self.move_id.picking_id.name or "/"
+        origin = self.move_id.origin or "/"
         group_id.run(product, product_qty, product_uom, location, "/", origin, values)
