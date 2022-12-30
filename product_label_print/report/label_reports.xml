@@ -19,38 +19,42 @@
 <t t-foreach="o.label_ids" t-as="label">
 ^L
 Dy2-me-dd
+Th:m:s
 <t t-if="not label.first_label_empty">
-Y5,12,tek_cicek
-Lo,5,64,382,66
-AT,74,0,61,65,0,0E,0,0,<t t-esc="label.label1.short_code[0:12]"/>
-AE,5,63,1,1,0,0E,[<t t-esc="label.label1.default_code"/>]
-AC,5,105,1,1,0,0E,<t t-raw="label.label1.nameL1[0:30] or ''"/>
-AC,5,133,1,1,0,0E,<t t-raw="label.label1.nameL2[0:30] or ''"/>
-AC,5,159,1,1,0,0E,<t t-raw="label.label1.nameL3[0:30] or ''"/>
-AC,5,184,1,1,0,0E,<t t-raw="label.label1.nameL4[0:30] or ''"/>
-AC,5,209,1,1,0,0E,<t t-raw="label.label1.note or ''"/>
-<t t-if="label.label1.pieces_in_pack > 0.0 ">
-AT, 20, 228, 82, 70, 0, 0E, 0, 0,<t t-esc="label.label1.pieces_in_pack if label.label1.product_id.uom_id.category_id.id != 1 else int(label.label1.pieces_in_pack) or ''"/> <t t-esc="label.label1.uom_name or ''"/>
+Y27,153,cicek705
+Dy2-me-dd
+Th:m:s
+AT,105,149,58,58,0,0,0,0,[<t t-esc="label.label1.default_code"/>]
+AD,27,217,1,1,0,0,<t t-raw="label.label1.nameL1[0:30] or ''"/>
+AD,27,251,1,1,0,0,<t t-raw="label.label1.nameL2[0:30] or ''"/>
+AD,27,285,1,1,0,0,<t t-raw="label.label1.nameL3[0:30] or ''"/>
+AD,27,319,1,1,0,0,<t t-raw="label.label1.nameL4[0:30] or ''"/>
+<t t-if="label.label1.pieces_in_pack > 0.0">
+AT,46,345,79,79,0,0,0,0,<t t-esc="label.label1.pieces_in_pack if label.label1.product_id.uom_id.category_id.id != 1 else int(label.label1.pieces_in_pack) or ''"/> <t t-esc="label.label1.uom_name or ''"/>
 </t>
-BE,15,299,3,6,75,0,1,<t t-esc="label.label1.barcode or ''"/>
-AB,330,360,1,1,0,0E,<t t-esc="label.label1.batch_code or ''"/>
+BE,30,431,5,12,123,0,1,<t t-esc="label.label1.barcode or ''"/>
+BQ,76,26,5,12,106,0,0,<t t-esc="label.label1.lot_id.name or ''"/>
+AD,399,381,1,1,0,0,Lot <t t-esc="label.label1.lot_id.name or ''"/>
 </t>
-<t t-if="not label.second_label_empty">
-Y420,12,tek_cicek
-Lo,420,64,792,66
-AT,484,0,61,65,0,0E,0,0,<t t-esc="label.label2.short_code[0:12]"/>
-AE,420,63,1,1,0,0E,[<t t-raw="label.label2.default_code"/>]
-AC,420,105,1,1,0,0E,<t t-raw="label.label2.nameL1[0:30] or ''"/>
-AC,420,133,1,1,0,0E,<t t-raw="label.label2.nameL2[0:30] or ''"/>
-AC,420,159,1,1,0,0E,<t t-raw="label.label2.nameL3[0:30] or ''"/>
-AC,420,184,1,1,0,0E,<t t-raw="label.label2.nameL4[0:30] or ''"/>
-AC,420,209,1,1,0,0E,<t t-raw="label.label1.note or ''"/>
+
+
+Y653,153,cicek705
+Dy2-me-dd
+Th:m:s
+AT,731,149,58,58,0,0,0,0,[<t t-esc="label.label2.default_code"/>]
+AD,653,217,1,1,0,0,<t t-raw="label.label2.nameL1[0:30] or ''"/>
+AD,653,251,1,1,0,0,<t t-raw="label.label2.nameL2[0:30] or ''"/>
+AD,653,285,1,1,0,0,<t t-raw="label.label2.nameL3[0:30] or ''"/>
+AD,653,319,1,1,0,0,<t t-raw="label.label2.nameL4[0:30] or ''"/>
 <t t-if="label.label2.pieces_in_pack > 0.0">
-AT, 420, 228, 82, 70, 0, 0E, 0, 0,<t t-esc="label.label2.pieces_in_pack if label.label2.product_id.uom_id.category_id.id != 1 else int(label.label2.pieces_in_pack) or ''"/> <t t-esc="label.label2.uom_name or ''"/>
+AT,672,345,79,79,0,0,0,0,<t t-esc="label.label2.pieces_in_pack if label.label2.product_id.uom_id.category_id.id != 1 else int(label.label2.pieces_in_pack) or ''"/> <t t-esc="label.label2.uom_name or ''"/>
 </t>
-BE,445,299,3,6,75,0,1,<t t-esc="label.label2.barcode or ''"/>
-AB,760,360,1,1,0,0E,<t t-esc="label.label1.batch_code or ''"/>
-</t>
+BE,656,431,5,12,123,0,1,<t t-esc="label.label2.barcode or ''"/>
+BQ,702,26,5,12,106,0,0,<t t-esc="label.label2.lot_id.name or ''"/>
+AD,1025,381,1,1,0,0,Lot <t t-esc="label.label2.lot_id.name or ''"/>
+
+
+
 ^P<t t-esc="label.copies_to_print"/>
 E
 </t>
@@ -71,45 +75,46 @@ E
 Dy2-me-dd
 Th:m:s
 <t t-if="not label.first_label_empty">
-Y26,16,tek_cicek
-Lo,22,97,576,100
-AT,121,0,104,104,0,0E,0,0,<t t-esc="label.label1.short_code[0:12]"/>
-AT,20,100,58,58,0,0E,0,0,[<t t-esc="label.label1.default_code"/>]
-AD,27,164,1,1,0,0E,<t t-raw="label.label1.nameL1[0:30] or ''"/>
-AD,27,198,1,1,0,0E,<t t-raw="label.label1.nameL2[0:30] or ''"/>
-AD,27,234,1,1,0,0E,<t t-raw="label.label1.nameL3[0:30] or ''"/>
-AD,27,272,1,1,0,0E,<t t-raw="label.label1.nameL4[0:30] or ''"/>
-AD,27,308,1,1,0,0E,<t t-raw="label.label1.note or ''"/>
-<t t-if="label.label1.pieces_in_pack > 0.0">
-AT,52,336,80,87,0,0E,0,0,<t t-esc="label.label1.pieces_in_pack if label.label1.product_id.uom_id.category_id.id != 1 else int(label.label1.pieces_in_pack) or ''"/> <t t-esc="label.label1.uom_name or ''"/>
-</t>
-BE,30,425,5,12,129,0,1,<t t-esc="label.label1.barcode or ''"/>
-AD,535,550,1,1,0,0E,<t t-esc="label.label1.batch_code or ''"/>
-</t>
-<t t-if="not label.second_label_empty">
-Y652,17,tek_cicek
-Lo,648,98,1202,101
+Y27,153,cicek705
 Dy2-me-dd
 Th:m:s
-AT,747,1,104,104,0,0E,0,0,<t t-esc="label.label2.short_code[0:12]"/>
-AT,646,101,58,58,0,0E,0,0,[<t t-esc="label.label2.default_code"/>]
-AD,653,165,1,1,0,0E,<t t-raw="label.label2.nameL1[0:30] or ''"/>
-AD,653,199,1,1,0,0E,<t t-raw="label.label2.nameL2[0:30] or ''"/>
-AD,653,235,1,1,0,0E,<t t-raw="label.label2.nameL3[0:30] or ''"/>
-AD,653,273,1,1,0,0E,<t t-raw="label.label2.nameL4[0:30] or ''"/>
-AD,653,309,1,1,0,0E,<t t-raw="label.label1.note or ''"/>
+AT,105,149,58,58,0,0,0,0,[<t t-esc="label.label1.default_code"/>]
+AD,27,217,1,1,0,0,<t t-raw="label.label1.nameL1[0:30] or ''"/>
+AD,27,251,1,1,0,0,<t t-raw="label.label1.nameL2[0:30] or ''"/>
+AD,27,285,1,1,0,0,<t t-raw="label.label1.nameL3[0:30] or ''"/>
+AD,27,319,1,1,0,0,<t t-raw="label.label1.nameL4[0:30] or ''"/>
+<t t-if="label.label1.pieces_in_pack > 0.0">
+AT,46,345,79,79,0,0,0,0,<t t-esc="label.label1.pieces_in_pack if label.label1.product_id.uom_id.category_id.id != 1 else int(label.label1.pieces_in_pack) or ''"/> <t t-esc="label.label1.uom_name or ''"/>
+</t>
+BE,30,431,5,12,123,0,1,<t t-esc="label.label1.barcode or ''"/>
+BQ,76,26,5,12,106,0,0,<t t-esc="label.label1.lot_id.name or ''"/>
+AD,399,381,1,1,0,0,Lot <t t-esc="label.label1.lot_id.name or ''"/>
+</t>
+
+
+Y653,153,cicek705
+Dy2-me-dd
+Th:m:s
+AT,731,149,58,58,0,0,0,0,[<t t-esc="label.label2.default_code"/>]
+AD,653,217,1,1,0,0,<t t-raw="label.label2.nameL1[0:30] or ''"/>
+AD,653,251,1,1,0,0,<t t-raw="label.label2.nameL2[0:30] or ''"/>
+AD,653,285,1,1,0,0,<t t-raw="label.label2.nameL3[0:30] or ''"/>
+AD,653,319,1,1,0,0,<t t-raw="label.label2.nameL4[0:30] or ''"/>
 <t t-if="label.label2.pieces_in_pack > 0.0">
-AT,678,337,80,87,0,0E,0,0,<t t-esc="label.label2.pieces_in_pack if label.label2.product_id.uom_id.category_id.id != 1 else int(label.label2.pieces_in_pack) or ''"/> <t t-esc="label.label2.uom_name or ''"/>
+AT,672,345,79,79,0,0,0,0,<t t-esc="label.label2.pieces_in_pack if label.label2.product_id.uom_id.category_id.id != 1 else int(label.label2.pieces_in_pack) or ''"/> <t t-esc="label.label2.uom_name or ''"/>
 </t>
-BE,656,425,5,12,129,0,1,<t t-esc="label.label2.barcode or ''"/>
-AD,1160,550,1,1,0,0E,<t t-esc="label.label1.batch_code or ''"/>
-</t>
+BE,656,431,5,12,123,0,1,<t t-esc="label.label2.barcode or ''"/>
+BQ,702,26,5,12,106,0,0,<t t-esc="label.label2.lot_id.name or ''"/>
+AD,1025,381,1,1,0,0,Lot <t t-esc="label.label2.lot_id.name or ''"/>
+
+
+
 ^P<t t-esc="label.copies_to_print"/>
 E
 </t>
 </t>
+    </t>
                 </t>
-            </t>
         </template>
     </data>
 </odoo>
