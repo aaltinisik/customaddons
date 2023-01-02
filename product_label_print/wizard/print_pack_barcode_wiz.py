@@ -267,7 +267,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
         elif model._name == "mrp.production":
             lot_id = model.move_finished_ids.mapped("move_line_ids.lot_id").filtered(
                 lambda x: x.product_id == model.product_id
-            )
+            ) or model.lot_id_to_create
             if not lot_id:
                 lot_id = self.env["stock.production.lot"].create(
                     {
