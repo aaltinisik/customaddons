@@ -83,6 +83,7 @@ class ResPartner(models.Model):
                 inv_lines_to_create = []
                 comment_einvoice = 'Aşağıdaki faturaların kur farkıdır:\n'
                 for diff_aml in difference_amls:
+                    amount_untaxed = diff_aml.debit or diff_aml.credit
                     inv_line_name = "Kur Farkı"
                     tax_18 = self.env['account.tax'].search(
                         [('type_tax_use', '=', 'sale'), ('amount', '=', 18.0), ('include_base_amount', '=', False)],
@@ -110,34 +111,30 @@ class ResPartner(models.Model):
                                                       for inv_id in inv_ids)
 
                         if rate_18 > 0.001:
-                            amount_untaxed = round((diff_aml.debit or diff_aml.credit) * rate_18 / (1 + tax_18.amount / 100.0), 2)
-                            inv_lines_to_create.append({
-                                'difference_base_aml_id': diff_aml.id,
-                                'name': inv_line_name,
-                                'uom_id': 1,
-                                'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
-                                'price_unit': amount_untaxed,
-                                'invoice_line_tax_ids': [(6, False, [tax_18.id])]})
+                            amount_untaxed = round(amount_untaxed * rate_18 / (1 + tax_18.amount / 100.0), 2)
+                            tax_ids = [(6, False, [tax_18.id])]
 
                         if rate_8 > 0.001:
-                            amount_untaxed = round((diff_aml.debit or diff_aml.credit) * rate_8 / (1 + tax_8.amount / 100.0), 2)
-                            inv_lines_to_create.append({
-                                'difference_base_aml_id': diff_aml.id,
-                                'name': inv_line_name,
-                                'uom_id': 1,
-                                'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
-                                'price_unit': amount_untaxed,
-                                'invoice_line_tax_ids': [(6, False, [tax_8.id])]})
+                            amount_untaxed = round(amount_untaxed * rate_8 / (1 + tax_8.amount / 100.0), 2)
+                            tax_ids = [(6, False, [tax_8.id])]
                     else:
                         comment_einvoice = ''
-                        amount_untaxed = (diff_aml.debit or diff_aml.credit) / (1 + tax_18.amount / 100.0)
-                        inv_lines_to_create.append({
-                            'difference_base_aml_id': diff_aml.id,
-                            'name': inv_line_name,
-                            'uom_id': 1,
-                            'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
-                            'price_unit': amount_untaxed,
-                            'invoice_line_tax_ids': [(6, False, [tax_18.id])]})
+                        amount_untaxed = amount_untaxed / (1 + tax_18.amount / 100.0)
+                        tax_ids = [(6, False, [tax_18.id])]
+
+                    if inv_type == "out_refund" and diff_aml.debit > 0:
+                        amount_untaxed = -amount_untaxed
+
+                    if inv_type == "out_invoice" and diff_aml.credit > 0:
+                        amount_untaxed = -amount_untaxed
+
+                    inv_lines_to_create.append({
+                        'difference_base_aml_id': diff_aml.id,
+                        'name': inv_line_name,
+                        'uom_id': 1,
+                        'account_id': self.env.user.company_id.currency_diff_inv_account_id.id,
+                        'price_unit': amount_untaxed,
+                        'invoice_line_tax_ids': tax_ids})
 
                     diff_aml.write({'difference_checked': True})
 
