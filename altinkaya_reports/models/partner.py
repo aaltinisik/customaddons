@@ -45,7 +45,12 @@ class Partner(models.Model):
         currency_balance = 0.0
         Currency = self.env['res.currency']
         end_date = ctx.get('date_end') or date(date.today().year, 12, 31)
-        start_date = ctx.get('date_start') or date(date.today().year, 1, 1)
+
+        if date.today().month < 5:
+            start_date = ctx.get('date_start') or date(date.today().year - 1, 1, 1)
+        else:
+            start_date = ctx.get('date_start') or date(date.today().year, 1, 1)
+
         move_type = ('payable', 'receivable')
 
         query = """SELECT L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
