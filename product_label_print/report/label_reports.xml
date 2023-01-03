@@ -75,7 +75,7 @@ E
 Dy2-me-dd
 Th:m:s
 <t t-if="not label.first_label_empty">
-Y27,153,cicek705
+Y27,153,cicek7052
 Dy2-me-dd
 Th:m:s
 AT,105,149,58,58,0,0,0,0,[<t t-esc="label.label1.default_code"/>]
@@ -92,7 +92,7 @@ AD,399,381,1,1,0,0,Lot <t t-esc="label.label1.lot_id.name or ''"/>
 </t>
 
 <t t-if="not label.second_label_empty">
-Y653,153,cicek705
+Y653,153,cicek7052
 Dy2-me-dd
 Th:m:s
 AT,731,149,58,58,0,0,0,0,[<t t-esc="label.label2.default_code"/>]
