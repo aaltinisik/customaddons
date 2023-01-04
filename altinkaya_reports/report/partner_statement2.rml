@@ -44,7 +44,7 @@
             <setFont name="DejaVuSans" size="18"/>
             <drawRightString x="20.0cm" y="28.0cm">CARİ HESAP EKSTRESİ</drawRightString>
             <setFont name="DejaVuSans" size="8"/>
-            <drawString x="14.8cm" y="27.2cm">Ulus VD:</drawString>
+            <drawString x="14.8cm" y="27.2cm">İvedik VD:</drawString>
             <drawRightString x="20cm" y="27.2cm">0610422947</drawRightString>
             <drawString x="14.8cm" y="26.8cm">Phone:</drawString>
             <drawRightString x="20cm" y="26.8cm">+90 312 395 2768</drawRightString>

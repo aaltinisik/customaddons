@@ -22,7 +22,7 @@
                             'B19': '${"ALTINKAYA ELEKTRONIK CIH. KUT.SAN.TIC.A.Ş." or ""}#{align=left;style=text}',
                             'B20': '${"1469 SOK NO:10 ivedik OSB" or ""}#{align=left;style=text}',
                             'B21': '${"Yenimahalle ANKARA / TURKEY" or ""}#{align=left;style=text}',
-                            'B22': '${"ULUS TAX OFFICE VAT 0610422947" or ""}#{align=left;style=text}',
+                            'B22': '${"İVEDİK TAX OFFICE VAT 0610422947" or ""}#{align=left;style=text}',
                             'B23': '${"Phone: +903123952768" or ""}#{align=left;style=text}',
                             'C14': '${"FOB" or ""}#{align=left;font=bold;style=text}',
                             'F9': '${"Total" or ""}#{align=right;font=bold;style=text}',
