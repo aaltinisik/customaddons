@@ -184,14 +184,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
 msgid "<span style=\"font-size:10pt\">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle  ANKARA </span><br/>\n"
 "        			<span style=\"font-size:10pt\">TURKEY         Phone:+90(312)395 2768           Fax:+90(312)395 2772</span><br/>\n"
-"        			<span style=\"font-size:10pt\">ULUS Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>"
+"        			<span style=\"font-size:10pt\">İVEDİK Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
 msgid "<span style=\"font-size:10pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>\n"
 "        			<span style=\"font-size:10pt\">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>\n"
-"        			<span style=\"font-size:10pt\">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
+"        			<span style=\"font-size:10pt\">İvedik V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -204,7 +204,7 @@ msgid "<span style=\"font-size:11pt\">ADDRESS:1469. Sok. No:10 İVEDİK OSB. 063
 "								</span>\n"
 "								<br/>\n"
 "								<span style=\"font-size:11pt\">\n"
-"									ULUS Tax Off 0610422947\n"
+"									İVEDİK Tax Off 0610422947\n"
 "									<strong> www.altinkaya.eu sales@altinkaya.eu</strong>\n"
 "								</span>\n"
 "								<br/>"
@@ -214,7 +214,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchasequotation_document
 msgid "<span style=\"font-size:12pt\">ADDRESS:1469.  Sok.  No:10  İVEDİK  OSB.  06378  Yenimahalle</span><br/>\n"
 "        			<span style=\"font-size:10pt\">  ANKARA TURKEY         Phone:+90(312)395 2768           Fax:+90(312)395 2772</span><br/>\n"
-"        			<span style=\"font-size:11pt\">ULUS Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>"
+"        			<span style=\"font-size:11pt\">İVEDİK Tax Off 0610422947 <b> www.altinkaya.eu sales@altinkaya.eu</b></span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -228,7 +228,7 @@ msgid "<span style=\"font-size:12pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 �
 "								</span>\n"
 "								<br/>\n"
 "								<span style=\"font-size:11pt\">\n"
-"									Ulus V.D. 0610422947\n"
+"									İvedik V.D. 0610422947\n"
 "									<strong> www.altinkaya.com.tr satis@altinkaya.tr</strong>\n"
 "								</span>\n"
 "								<br/>"
@@ -238,7 +238,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchasequotation_document
 msgid "<span style=\"font-size:12pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>\n"
 "        			<span style=\"font-size:10pt\">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>\n"
-"        			<span style=\"font-size:11pt\">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
+"        			<span style=\"font-size:11pt\">İvedik V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -250,7 +250,7 @@ msgstr "<span style=\"font-size:36pt;\">Pro-Forma Fatura </span>"
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_payment_receipt_document_altinkaya
 msgid "<span style=\"font-size:9pt\">Has Emek Sanayi Sitesi 1469. Sokak No:10 İvedik OSB. 06378</span><br/>\n"
 "		        			<span style=\"font-size:9pt\">Tel:+90(312) 395 2768   Faks: +90(312) 395 2772 Yenimahalle/ANKARA</span><br/>\n"
-"		        			<span style=\"font-size:10pt\">Ulus V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
+"		        			<span style=\"font-size:10pt\">İvedik V.D. 0610422947 www.altinkaya.com.tr satis@altinkaya.com.tr</span><br/>"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -379,7 +379,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
 msgid "<span>Telefon: +90 312 395 2768 |\n"
 "								www.altinkaya.com.tr |\n"
-"								Ulus Vergi Dairesi 0610422947\n"
+"								İvedik Vergi Dairesi 0610422947\n"
 "							</span>\n"
 "							<br/>\n"
 "							<span>Garanti Bankası: 682-6294510 IBAN: TR40 0006 2000 6820 0006\n"
@@ -393,7 +393,7 @@ msgid "<span>Telefon: +90 312 395 2768 |\n"
 "							<br/>"
 msgstr "<span>Telefon: +90 312 395 2768 |\n"
 "								www.altinkaya.com.tr |\n"
-"								Ulus Vergi Dairesi 0610422947\n"
+"								İvedik Vergi Dairesi 0610422947\n"
 "							</span>\n"
 "							<br/>\n"
 "							<span>Garanti Bankası: 682-6294510 IBAN: TR40 0006 2000 6820 0006\n"
@@ -408,7 +408,7 @@ msgstr "<span>Telefon: +90 312 395 2768 |\n"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_wizard_document
-msgid "<span>Ulus VD:</span>\n"
+msgid "<span>İvedik VD:</span>\n"
 "									<br/>\n"
 "									<span>Tel:</span>\n"
 "									<br/>\n"
@@ -457,7 +457,7 @@ msgstr "<strong>\n"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_partner_statement_document
-msgid "<strong><span>Ulus VD:</span></strong>\n"
+msgid "<strong><span>İvedik VD:</span></strong>\n"
 "									<br/>\n"
 "									<strong><span>Tel:</span></strong>\n"
 "									<br/>\n"

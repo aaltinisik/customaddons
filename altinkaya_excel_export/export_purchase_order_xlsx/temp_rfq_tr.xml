@@ -19,7 +19,7 @@
                             'B20': '${"%s" % (object.picking_type_id.warehouse_id.partner_id.name) or ""}#{style=text}',
                             'B21': '${"%s %s %s" % (object.picking_type_id.warehouse_id.partner_id.neighbour_id.name or "", object.picking_type_id.warehouse_id.partner_id.street or "", object.picking_type_id.warehouse_id.partner_id.street2 or "") or ""}#{style=text}',
                             'B22': '${"%s %s %s %s" % (object.picking_type_id.warehouse_id.partner_id.region_id.name or "", object.picking_type_id.warehouse_id.partner_id.zip or "", object.picking_type_id.warehouse_id.partner_id.district_id.name or "", object.picking_type_id.warehouse_id.partner_id.state_id.name or "")}#{style=text}',
-                            'B23': '${"Ulus V.D. %s" % (object.picking_type_id.warehouse_id.partner_id.vat) or ""}#{style=text}',
+                            'B23': '${"İvedik V.D. %s" % (object.picking_type_id.warehouse_id.partner_id.vat) or ""}#{style=text}',
                             'B24': '${"Tel: %s" % (object.picking_type_id.warehouse_id.partner_id.phone) or ""}#{align=left;style=text}',
                             'F9': '${"Toplam" or ""}#{align=right;font=bold;style=text}',
                             'F10': '${"KDV (%18)" or ""}#{align=right;font=bold;style=text}',
