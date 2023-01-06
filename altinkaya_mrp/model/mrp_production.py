@@ -7,7 +7,7 @@ from odoo import models, fields, api
 class x_makine(models.Model):
     _name = 'x.makine'
     _description="X Makine"
-
+    _order = "name"
 
     x_group = fields.Char(
             'Bölüm',
