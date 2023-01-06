@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["product", "connector_odoo", "website_sale"],
+    "depends": ["product", "website_sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/product_attribute_view.xml",
