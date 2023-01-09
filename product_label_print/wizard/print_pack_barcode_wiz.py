@@ -32,8 +32,11 @@ class PrintPackBarcodeWizard(models.TransientModel):
     single_label_barcode = fields.Char(
         string="Barcode", related="single_label_id.barcode"
     )
-    single_label_lot_id = fields.Many2one(
-        string="Product Lot", related="single_label_id.lot_id"
+    single_label_lot_ids = fields.Many2many(
+        string="Product Lot",
+        related="single_label_id.lot_ids",
+        readonly=False,
+        domain="[('product_id', '=', single_label_product_id)]",
     )
     single_label_uom_name = fields.Char(
         string="UOM Name", related="single_label_id.uom_name"
@@ -84,10 +87,10 @@ class PrintPackBarcodeWizard(models.TransientModel):
         model = self.env[active_model].browse(active_id)
         if model._name == "product.product":
             product_id = model
-            lot_id = self.env["stock.production.lot"]  # empty recordset
+            lot_ids = self.env["stock.production.lot"]  # empty recordset
         else:
             product_id = model.product_id
-            lot_id = self._get_lot_id(model)
+            lot_ids = self._get_lot_ids(model)
 
         if not product_id:
             raise UserError(_("No product found."))
@@ -137,7 +140,8 @@ class PrintPackBarcodeWizard(models.TransientModel):
                 "note": "",
                 "label_to_print": 1,
                 "barcode": product_id.barcode,
-                "lot_id": lot_id.id or False,
+                "lot_ids": [(6, 0, lot_ids.ids)] if lot_ids else False,
+                "model_ref_id": "%s,%s" % (model._name, model.id),
                 "uom_name": product_id.uom_id.name,
                 "product_id": product_id.id,
             }
@@ -160,6 +164,28 @@ class PrintPackBarcodeWizard(models.TransientModel):
                 if product_label.product_id.uom_id.category_id.id != 1
                 else int(product_label.pieces_in_pack)
             )
+            model = product_label.model_ref_id
+            if product_label.product_id.tracking != "none":
+                if len(product_label.lot_ids) > 1:
+                    raise UserError(
+                        _(
+                            "You can't print more than one lot per label."
+                            " Please select only one lot or leave it empty."
+                        )
+                    )
+                if len(product_label.lot_ids) == 0 and model._name == "mrp.production":
+                    lot_id = self.env["stock.production.lot"].create(
+                        {
+                            "product_id": model.product_id.id,
+                            "ref": model.origin,
+                        }
+                    )
+                    model.lot_id_to_create = lot_id.id
+                    product_label.lot_ids = [(6, 0, [lot_id.id])]
+                product_label.lot_id = fields.first(product_label.lot_ids)
+                if model._name == "mrp.production" and not model.lot_id_to_create:
+                    model.lot_id_to_create = product_label.lot_id.id
+
             labels_to_print = product_label.label_to_print
             while labels_to_print > 0:
                 if self.skip_first:
@@ -256,28 +282,27 @@ class PrintPackBarcodeWizard(models.TransientModel):
         )
         return {"type": "ir.actions.act_window_close"}
 
-    def _get_lot_id(self, model):
+    def _get_lot_ids(self, model):
         """Get the lot_id from models.
         If model is mrp.production, get the lot_id from the first,
         if not any lot_id, create one and save it.
         """
+        if model.product_id.tracking == "none":
+            return self.env["stock.production.lot"]  # empty recordset
 
         if model._name == "stock.production.lot":
             return model
+
         elif model._name == "mrp.production":
-            lot_id = model.move_finished_ids.mapped("move_line_ids.lot_id").filtered(
-                lambda x: x.product_id == model.product_id
-            ) or model.lot_id_to_create
-            if not lot_id:
-                lot_id = self.env["stock.production.lot"].create(
-                    {
-                        "product_id": model.product_id.id,
-                        "ref": model.origin,
-                    }
+            lot_ids = (
+                model.move_finished_ids.mapped("move_line_ids.lot_id").filtered(
+                    lambda x: x.product_id == model.product_id
                 )
-                model.lot_id_to_create = lot_id.id
+                or model.lot_id_to_create
+            )
+
         if model._name == "stock.move":
-            lot_id = model.mapped("move_line_ids.lot_id").filtered(
+            lot_ids = model.mapped("move_line_ids.lot_id").filtered(
                 lambda x: x.product_id == model.product_id
             )
-        return lot_id
+        return lot_ids
