@@ -166,6 +166,7 @@ class PrintPackBarcodeWizard(models.TransientModel):
             )
             model = product_label.model_ref_id
             if product_label.product_id.tracking != "none":
+
                 if len(product_label.lot_ids) > 1:
                     raise UserError(
                         _(
@@ -173,18 +174,21 @@ class PrintPackBarcodeWizard(models.TransientModel):
                             " Please select only one lot or leave it empty."
                         )
                     )
+
                 if len(product_label.lot_ids) == 0 and model._name == "mrp.production":
-                    lot_id = self.env["stock.production.lot"].create(
-                        {
-                            "product_id": model.product_id.id,
-                            "ref": model.origin,
-                        }
-                    )
-                    model.lot_id_to_create = lot_id.id
+                    if model.lot_id_to_create:
+                        lot_id = model.lot_id_to_create
+                    else:
+                        lot_id = self.env["stock.production.lot"].create(
+                            {
+                                "product_id": model.product_id.id,
+                                "ref": model.origin,
+                            }
+                        )
+                        model.lot_id_to_create = lot_id.id
                     product_label.lot_ids = [(6, 0, [lot_id.id])]
+
                 product_label.lot_id = fields.first(product_label.lot_ids)
-                if model._name == "mrp.production" and not model.lot_id_to_create:
-                    model.lot_id_to_create = product_label.lot_id.id
 
             labels_to_print = product_label.label_to_print
             while labels_to_print > 0:
