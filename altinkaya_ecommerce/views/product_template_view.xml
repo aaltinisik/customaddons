@@ -25,6 +25,9 @@
                             </tree>
                         </field>
                     </group>
+                    <group string="Short Description">
+                        <field name="short_public_description" nolabel="1" />
+                    </group>
                     <group string="Description">
                         <field name="public_description" nolabel="1" />
                     </group>

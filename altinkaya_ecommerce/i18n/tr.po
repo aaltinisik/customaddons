@@ -79,6 +79,11 @@ msgstr "Nitelik için varsayılan değer."
 
 #. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
+msgid "Short Description"
+msgstr "Kısa Açıklama"
+
+#. module: altinkaya_ecommerce
+#: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
 msgid "Description"
 msgstr "Açıklama"
 
