@@ -21,6 +21,11 @@ class ProductTemplate(models.Model):
         copy=False,
     )
 
+    short_public_description = fields.Text(
+        "Short Description for e-Commerce",
+        copy=False,
+    )
+
     website_attachment_ids = fields.Many2many(
         string="Website attachments",
         comodel_name="ir.attachment",
