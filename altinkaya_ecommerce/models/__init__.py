@@ -9,3 +9,5 @@ from . import res_partner
 from . import ir_binary
 from . import product_category
 from . import product_public_category
+from . import account_group
+from . import account_account

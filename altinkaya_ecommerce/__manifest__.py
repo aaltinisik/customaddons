@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["product", "website_sale"],
+    "depends": ["product", "website_sale", "website_sale_comparison"],
     "data": [
         "security/ir.model.access.csv",
         "views/product_attribute_view.xml",
@@ -26,13 +26,15 @@
         "templates/product_features_table.xml",
         "templates/product_category_filmstrip.xml",
         "templates/product_attributes_filter.xml",
+        "templates/product_template_hide_price.xml",
+        "templates/product_html_description.xml",
         # SNIPPETS
-        # "views/snippets/s_dynamic_category_table.xml",
+        "views/snippets/s_dynamic_category_table.xml",
     ],
-    # "assets": {
-    #     "website.assets_wysiwyg": [
-    #         "altinkaya_ecommerce/static/src/snippets/s_dynamic_category_table/options.js",
-    #     ],
-    # },
+    "assets": {
+        "website.assets_wysiwyg": [
+            "altinkaya_ecommerce/static/src/snippets/s_dynamic_category_table/options.js",
+        ],
+    },
     "installable": True,
 }

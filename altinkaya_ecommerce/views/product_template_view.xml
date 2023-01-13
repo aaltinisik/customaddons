@@ -25,6 +25,9 @@
                                        context="{'default_attribute_id': feature_id}"/>
                             </tree>
                         </field>
+                    <group string="Short Description">
+                        <field name="description_sale" position="move"/>
+                    </group>
                     <group string="Description">
                         <field name="public_description" colspan="2" nolabel="1" placeholder="Product description..."/>
                     </group>
@@ -48,12 +51,6 @@
                     </group>
                 </page>
             </xpath>
-            <xpath expr="//field[@name='attribute_line_ids']" position="before">
-                <button name="action_fill_missing_product_attrs"
-                        string="Fill Missing Variants" type="object"
-                        class="oe_highlight"/>
-            </xpath>
-
         </field>
     </record>
 
