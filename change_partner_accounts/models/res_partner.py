@@ -20,7 +20,7 @@ class ResPartner(models.Model):
     def _compute_balances(self):
         AccountMoveLine = self.env['account.move.line']
         domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
-                  ('date', '>=', "%s-01-01" % fields.Date.today().year)]
+                  ('date', '>=', "2021-01-01")]
 
         result = dict((item['partner_id'][0], [item['debit'] - item['credit'], item['amount_currency']])
                       for item in
@@ -36,7 +36,7 @@ class ResPartner(models.Model):
     def _compute_due_balances(self):
         AccountMoveLine = self.env['account.move.line']
         domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
-                  ('date', '>=', "%s-01-01" % fields.Date.today().year), ('date_maturity', '<=', fields.Date.today())]
+                  ('date', '>=', "2021-01-01"), ('date_maturity', '<=', fields.Date.today())]
 
         result = dict((item['partner_id'][0], [item['debit'] - item['credit'], item['amount_currency']])
                       for item in
