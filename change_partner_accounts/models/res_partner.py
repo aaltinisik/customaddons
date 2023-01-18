@@ -4,58 +4,88 @@ from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     @api.multi
-    @api.depends('property_account_receivable_id')
+    @api.depends("property_account_receivable_id")
     def _get_partner_currency(self):
         for partner in self:
             if partner.property_account_receivable_id.currency_id:
-                partner.partner_currency_id = partner.property_account_receivable_id.currency_id
+                partner.partner_currency_id = (
+                    partner.property_account_receivable_id.currency_id
+                )
             else:
                 partner.partner_currency_id = partner.sudo().company_id.currency_id
 
     @api.multi
-    @api.depends('move_line_ids')
+    @api.depends("move_line_ids")
     def _compute_balances(self):
-        AccountMoveLine = self.env['account.move.line']
-        domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
-                  ('date', '>=', "2021-01-01")]
+        AccountMoveLine = self.env["account.move.line"]
+        domain = [
+            ("partner_id", "in", self.ids),
+            ("account_id.internal_type", "in", ["receivable", "payable"]),
+            ("date", ">=", "2021-01-01"),
+        ]
 
-        result = dict((item['partner_id'][0], [item['debit'] - item['credit'], item['amount_currency']])
-                      for item in
-                      AccountMoveLine.read_group(domain, ['partner_id', 'credit', 'debit', 'amount_currency'],
-                                                 ['partner_id'], orderby='id'))
+        result = dict(
+            (
+                item["partner_id"][0],
+                [item["debit"] - item["credit"], item["amount_currency"]],
+            )
+            for item in AccountMoveLine.read_group(
+                domain,
+                ["partner_id", "credit", "debit", "amount_currency"],
+                ["partner_id"],
+                orderby="id",
+            )
+        )
         for partner in self:
             if result.get(partner.id, False):
                 partner.balance = result[partner.id][0]
                 partner.currency_balance = result[partner.id][1]
 
     @api.multi
-    @api.depends('move_line_ids')
+    @api.depends("move_line_ids")
     def _compute_due_balances(self):
-        AccountMoveLine = self.env['account.move.line']
-        domain = [('partner_id', 'in', self.ids), ('account_id.internal_type', 'in', ['receivable', 'payable']),
-                  ('date', '>=', "2021-01-01"), ('date_maturity', '<=', fields.Date.today())]
+        AccountMoveLine = self.env["account.move.line"]
+        domain = [
+            ("partner_id", "in", self.ids),
+            ("account_id.internal_type", "in", ["receivable", "payable"]),
+            ("date", ">=", "2021-01-01"),
+            ("date_maturity", "<=", fields.Date.today()),
+        ]
 
-        result = dict((item['partner_id'][0], [item['debit'] - item['credit'], item['amount_currency']])
-                      for item in
-                      AccountMoveLine.read_group(domain, ['partner_id', 'credit', 'debit', 'amount_currency'],
-                                                 ['partner_id'], orderby='id'))
+        result = dict(
+            (
+                item["partner_id"][0],
+                [item["debit"] - item["credit"], item["amount_currency"]],
+            )
+            for item in AccountMoveLine.read_group(
+                domain,
+                ["partner_id", "credit", "debit", "amount_currency"],
+                ["partner_id"],
+                orderby="id",
+            )
+        )
         for partner in self:
             if result.get(partner.id, False):
-                partner.balance_due = result[partner.id][0] if result[partner.id][0] > 0 else 0
-                partner.currency_balance_due = result[partner.id][1] if result[partner.id][1] > 0 else 0
+                partner.balance_due = (
+                    result[partner.id][0] if result[partner.id][0] > 0 else 0
+                )
+                partner.currency_balance_due = (
+                    result[partner.id][1] if result[partner.id][1] > 0 else 0
+                )
 
     @api.multi
     def _search_currency_balance(self, operator, operand):
-        if operator not in ('<', '=', '>', '>=', '<='):
+        if operator not in ("<", "=", ">", ">=", "<="):
             return []
         if type(operand) not in (float, int):
             return []
         sign = 1
-        move_type = ('payable', 'receivable')
-        self._cr.execute(f"""   SELECT partner.id
+        move_type = ("payable", "receivable")
+        self._cr.execute(
+            f"""   SELECT partner.id
                                 FROM res_partner partner
                                 LEFT JOIN account_move_line aml ON aml.partner_id = partner.id
                                 RIGHT JOIN account_account acc ON aml.account_id = acc.id
@@ -63,21 +93,23 @@ class ResPartner(models.Model):
 			                    AND NOT acc.deprecated AND acc.company_id = %s
                                 GROUP BY partner.id
                                 HAVING %s * COALESCE(SUM(aml.amount_currency), 0) {operator} %s""",
-                         (move_type, self.env.user.company_id.id, sign, operand))
+            (move_type, self.env.user.company_id.id, sign, operand),
+        )
         res = self._cr.fetchall()
         if not res:
-            return [('id', '=', '0')]
-        return [('id', 'in', [r[0] for r in res])]
+            return [("id", "=", "0")]
+        return [("id", "in", [r[0] for r in res])]
 
     @api.multi
     def _search_balance(self, operator, operand):
-        if operator not in ('<', '=', '>', '>=', '<='):
+        if operator not in ("<", "=", ">", ">=", "<="):
             return []
         if type(operand) not in (float, int):
             return []
         sign = 1
-        move_type = ('payable', 'receivable')
-        self._cr.execute(f"""   SELECT partner.id
+        move_type = ("payable", "receivable")
+        self._cr.execute(
+            f"""   SELECT partner.id
                                     FROM res_partner partner
                                     LEFT JOIN account_move_line aml ON aml.partner_id = partner.id
                                     RIGHT JOIN account_account acc ON aml.account_id = acc.id
@@ -85,192 +117,285 @@ class ResPartner(models.Model):
     			                    AND NOT acc.deprecated AND acc.company_id = %s
                                     GROUP BY partner.id
                                     HAVING %s * COALESCE(SUM(aml.debit-aml.credit), 0) {operator} %s""",
-                         (move_type, self.env.user.company_id.id, sign, operand))
+            (move_type, self.env.user.company_id.id, sign, operand),
+        )
         res = self._cr.fetchall()
         if not res:
-            return [('id', '=', '0')]
-        return [('id', 'in', [r[0] for r in res])]
+            return [("id", "=", "0")]
+        return [("id", "in", [r[0] for r in res])]
 
-    partner_currency_id = fields.Many2one('res.currency', string='Partner Currency', readonly=True, store=True,
-                                          compute='_get_partner_currency')
+    partner_currency_id = fields.Many2one(
+        "res.currency",
+        string="Partner Currency",
+        readonly=True,
+        store=True,
+        compute="_get_partner_currency",
+    )
 
-    balance = fields.Monetary(string='TRY Balance', compute='_compute_balances', store=True)
-    currency_balance = fields.Monetary(string='Partner Currency Balance', compute='_compute_balances',
-                                       currency_field='partner_currency_id', store=True)
+    balance = fields.Monetary(
+        string="TRY Balance", compute="_compute_balances", store=True
+    )
+    currency_balance = fields.Monetary(
+        string="Partner Currency Balance",
+        compute="_compute_balances",
+        currency_field="partner_currency_id",
+        store=True,
+    )
 
-    balance_due = fields.Monetary(string='TRY Balance Due', compute='_compute_due_balances', store=True)
-    currency_balance_due = fields.Monetary(string='Partner Currency Balance Due', compute='_compute_due_balances',
-                                           currency_field='partner_currency_id', store=True)
+    balance_due = fields.Monetary(
+        string="TRY Balance Due", compute="_compute_due_balances", store=True
+    )
+    currency_balance_due = fields.Monetary(
+        string="Partner Currency Balance Due",
+        compute="_compute_due_balances",
+        currency_field="partner_currency_id",
+        store=True,
+    )
 
     @api.multi
     def _compute_has_2breconciled(self):
-        domain = ["&", "&", "&",
-                  "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
-                  ("full_reconcile_id", "=", False), ("journal_id.code", "not in", ("ADVR", "KFARK"))]
+        domain = [
+            "&",
+            "&",
+            "&",
+            "|",
+            ("account_id.internal_type", "=", "payable"),
+            ("account_id.internal_type", "=", "receivable"),
+            ("full_reconcile_id", "=", False),
+            ("journal_id.code", "not in", ("ADVR", "KFARK")),
+        ]
 
         for partner in self:
             if partner.customer:
-                aml_to_reconcile = partner.env['account.move.line'].search(
-                    domain + [("partner_id", "=", partner.id), ("credit", ">", 0)], limit=2)
+                aml_to_reconcile = partner.env["account.move.line"].search(
+                    domain + [("partner_id", "=", partner.id), ("credit", ">", 0)],
+                    limit=2,
+                )
 
                 partner.has_2breconciled_customer = len(aml_to_reconcile) > 0
 
             if partner.supplier:
-                aml_to_reconcile = partner.env['account.move.line'].search(
-                    domain + [("partner_id", "=", partner.id), ("debit", ">", 0)], limit=2)
+                aml_to_reconcile = partner.env["account.move.line"].search(
+                    domain + [("partner_id", "=", partner.id), ("debit", ">", 0)],
+                    limit=2,
+                )
 
                 partner.has_2breconciled_supplier = len(aml_to_reconcile) > 0
 
     def _search_has_2breconciled(self, partner_type):
-        AccountMoveLine = self.env['account.move.line']
-        domain = ["&", "&", "&",
-                  "|", ("account_id.internal_type", "=", "payable"), ("account_id.internal_type", "=", "receivable"),
-                  ("full_reconcile_id", "=", False), ("journal_id.code", "not in", ("ADVR", "KFARK"))]
+        AccountMoveLine = self.env["account.move.line"]
+        domain = [
+            "&",
+            "&",
+            "&",
+            "|",
+            ("account_id.internal_type", "=", "payable"),
+            ("account_id.internal_type", "=", "receivable"),
+            ("full_reconcile_id", "=", False),
+            ("journal_id.code", "not in", ("ADVR", "KFARK")),
+        ]
 
-        if partner_type == 'customer':
-            domain += [('credit', '>', 0)]
+        if partner_type == "customer":
+            domain += [("credit", ">", 0)]
         else:
-            domain += [('debit', '>', 0)]
+            domain += [("debit", ">", 0)]
 
-        result = [res['partner_id'][0] for res in AccountMoveLine.read_group(domain, ['partner_id'], ['partner_id'])]
-        return [('id', 'in', result)]
+        result = [
+            res["partner_id"][0]
+            for res in AccountMoveLine.read_group(
+                domain, ["partner_id"], ["partner_id"]
+            )
+        ]
+        return [("id", "in", result)]
 
     @api.multi
     def _search_has_2breconciled_customer(self, operator, operand):
-        return self._search_has_2breconciled('customer')
+        return self._search_has_2breconciled("customer")
 
     @api.multi
     def _search_has_2breconciled_supplier(self, operator, operand):
-        return self._search_has_2breconciled('supplier')
+        return self._search_has_2breconciled("supplier")
 
-    has_2breconciled_customer = fields.Boolean(string='To be reconciled customer',
-                                               compute='_compute_has_2breconciled',
-                                               search='_search_has_2breconciled_customer',
-                                               default=False,
-                                               store=False)
+    has_2breconciled_customer = fields.Boolean(
+        string="To be reconciled customer",
+        compute="_compute_has_2breconciled",
+        search="_search_has_2breconciled_customer",
+        default=False,
+        store=False,
+    )
 
-    has_2breconciled_supplier = fields.Boolean(string='To be reconciled supplier',
-                                               compute='_compute_has_2breconciled',
-                                               search='_search_has_2breconciled_supplier',
-                                               default=False,
-                                               store=False)
+    has_2breconciled_supplier = fields.Boolean(
+        string="To be reconciled supplier",
+        compute="_compute_has_2breconciled",
+        search="_search_has_2breconciled_supplier",
+        default=False,
+        store=False,
+    )
 
     @api.one
     def change_accounts_to_usd(self):
-        """ Change partners receivable and payable account to USD and update move lines accordingly """
+        """Change partners receivable and payable account to USD and update move lines accordingly"""
         if self.parent_id:
             return self.parent_id.change_accounts_to_usd()
-        receivable_usd = self.env['account.account'].search([('code', '=', '120.USD')], limit=1)
-        payable_usd = self.env['account.account'].search([('code', '=', '320.USD')], limit=1)
+        receivable_usd = self.env["account.account"].search(
+            [("code", "=", "120.USD")], limit=1
+        )
+        payable_usd = self.env["account.account"].search(
+            [("code", "=", "320.USD")], limit=1
+        )
         old_receivable = self.property_account_receivable_id
         old_payable = self.property_account_payable_id
         company_currency = self.env.user.company_id.currency_id
         if not (receivable_usd and payable_usd):
-            raise UserError(_('Error in accounts definition'))
+            raise UserError(_("Error in accounts definition"))
 
         cr = self.env.cr
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                receivable_usd.id, self.id, old_receivable.id))
+                receivable_usd.id, self.id, old_receivable.id
+            )
+        )
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                payable_usd.id, self.id, old_payable.id))
+                payable_usd.id, self.id, old_payable.id
+            )
+        )
 
-        self.write({'property_account_receivable_id': receivable_usd.id,
-                    'property_account_payable_id': payable_usd.id})
+        self.write(
+            {
+                "property_account_receivable_id": receivable_usd.id,
+                "property_account_payable_id": payable_usd.id,
+            }
+        )
 
         currency_id = receivable_usd.currency_id
-        partner_amls = self.env['account.move.line'].search(["&", "&", "|", ("currency_id", "not in", [currency_id.id]),
-                                                             ("amount_currency", "=", 0),
-                                                             ("partner_id", "=", self.id),
-                                                             ("account_id", "in", [payable_usd.id, receivable_usd.id])])
+        partner_amls = self.env["account.move.line"].search(
+            [
+                "&",
+                "&",
+                "|",
+                ("currency_id", "not in", [currency_id.id]),
+                ("amount_currency", "=", 0),
+                ("partner_id", "=", self.id),
+                ("account_id", "in", [payable_usd.id, receivable_usd.id]),
+            ]
+        )
         for aml in partner_amls:
-            amount_currency = company_currency._convert(aml.debit - aml.credit,
-                                                        currency_id,
-                                                        self.env.user.company_id, aml.date)
+            amount_currency = company_currency._convert(
+                aml.debit - aml.credit, currency_id, self.env.user.company_id, aml.date
+            )
 
-            amount_residual_currency = company_currency._convert(aml.amount_residual,
-                                                                 currency_id,
-                                                                 self.env.user.company_id, aml.date)
+            amount_residual_currency = company_currency._convert(
+                aml.amount_residual, currency_id, self.env.user.company_id, aml.date
+            )
             cr.execute(
                 """ update account_move_line
                  SET
                   amount_currency = {0},
                   currency_id = {1},
                   amount_residual_currency = {2}
-                where id = {3}""".format(amount_currency,
-                                         currency_id.id,
-                                         amount_residual_currency,
-                                         aml.id))
+                where id = {3}""".format(
+                    amount_currency, currency_id.id, amount_residual_currency, aml.id
+                )
+            )
 
     @api.one
     def change_accounts_to_eur(self):
-        """ Change partners receivable and payable account to eur and update move lines accordingly """
+        """Change partners receivable and payable account to eur and update move lines accordingly"""
         if self.parent_id:
             return self.parent_id.change_accounts_to_eur()
-        receivable_eur = self.env['account.account'].search([('code', '=', '120.EUR')], limit=1)
-        payable_eur = self.env['account.account'].search([('code', '=', '320.EUR')], limit=1)
+        receivable_eur = self.env["account.account"].search(
+            [("code", "=", "120.EUR")], limit=1
+        )
+        payable_eur = self.env["account.account"].search(
+            [("code", "=", "320.EUR")], limit=1
+        )
         old_receivable = self.property_account_receivable_id
         old_payable = self.property_account_payable_id
         company_currency = self.env.user.company_id.currency_id
         if not (receivable_eur and payable_eur):
-            raise UserError(_('Error in accounts definition'))
+            raise UserError(_("Error in accounts definition"))
 
         cr = self.env.cr
 
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                receivable_eur.id, self.id, old_receivable.id))
+                receivable_eur.id, self.id, old_receivable.id
+            )
+        )
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                payable_eur.id, self.id, old_payable.id))
+                payable_eur.id, self.id, old_payable.id
+            )
+        )
 
-        self.write({'property_account_receivable_id': receivable_eur.id,
-                    'property_account_payable_id': payable_eur.id})
+        self.write(
+            {
+                "property_account_receivable_id": receivable_eur.id,
+                "property_account_payable_id": payable_eur.id,
+            }
+        )
 
         currency_id = receivable_eur.currency_id
-        partner_amls = self.env['account.move.line'].search(["|", ("currency_id", "not in", [currency_id.id]),
-                                                             ("amount_currency", "=", 0),
-                                                             ("partner_id", "=", self.id),
-                                                             ("account_id", "in", [payable_eur.id, receivable_eur.id])])
+        partner_amls = self.env["account.move.line"].search(
+            [
+                "|",
+                ("currency_id", "not in", [currency_id.id]),
+                ("amount_currency", "=", 0),
+                ("partner_id", "=", self.id),
+                ("account_id", "in", [payable_eur.id, receivable_eur.id]),
+            ]
+        )
         for aml in partner_amls:
-            amount_currency = company_currency._convert(aml.debit - aml.credit,
-                                                        currency_id,
-                                                        self.env.user.company_id, aml.date)
+            amount_currency = company_currency._convert(
+                aml.debit - aml.credit, currency_id, self.env.user.company_id, aml.date
+            )
 
-            amount_residual_currency = company_currency._convert(aml.amount_residual,
-                                                                 currency_id,
-                                                                 self.env.user.company_id, aml.date)
+            amount_residual_currency = company_currency._convert(
+                aml.amount_residual, currency_id, self.env.user.company_id, aml.date
+            )
             cr.execute(
                 """ update account_move_line
                  SET
                   amount_currency = {0},
                   currency_id = {1},
                   amount_residual_currency = {2}
-                where id = {3}""".format(amount_currency,
-                                         currency_id.id,
-                                         amount_residual_currency,
-                                         aml.id))
+                where id = {3}""".format(
+                    amount_currency, currency_id.id, amount_residual_currency, aml.id
+                )
+            )
 
     @api.one
     def change_accounts_to_try(self):
-        """ Change partners receivable and payable account to company currency and donot update move lines """
+        """Change partners receivable and payable account to company currency and donot update move lines"""
         if self.parent_id:
             return self.parent_id.change_accounts_to_try()
-        receivable_try = self.env['account.account'].search([('code', '=', '120')], limit=1)
-        payable_try = self.env['account.account'].search([('code', '=', '320')], limit=1)
+        receivable_try = self.env["account.account"].search(
+            [("code", "=", "120")], limit=1
+        )
+        payable_try = self.env["account.account"].search(
+            [("code", "=", "320")], limit=1
+        )
         old_receivable = self.property_account_receivable_id
         old_payable = self.property_account_payable_id
 
         if not (receivable_try and payable_try):
-            raise UserError(_('Error in accounts definition'))
+            raise UserError(_("Error in accounts definition"))
 
         cr = self.env.cr
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                receivable_try.id, self.id, old_receivable.id))
+                receivable_try.id, self.id, old_receivable.id
+            )
+        )
         cr.execute(
             """update account_move_line set account_id = {0} where partner_id = {1} and account_id = {2}""".format(
-                payable_try.id, self.id, old_payable.id))
-        self.write({'property_account_receivable_id': receivable_try.id,
-                    'property_account_payable_id': payable_try.id})
+                payable_try.id, self.id, old_payable.id
+            )
+        )
+        self.write(
+            {
+                "property_account_receivable_id": receivable_try.id,
+                "property_account_payable_id": payable_try.id,
+            }
+        )
