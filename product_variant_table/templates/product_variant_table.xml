@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_attribute_table" inherit_id="sale.variants">
+        <xpath expr="//ul[@t-attf-class='list-unstyled js_add_cart_variants mb-0 #{ul_class}']"
+               position="after">
+            <t t-if="len(product.product_variant_ids) &gt; 1">
+                <t t-set="variants" t-value="product.get_all_variants()"/>
+                <div class="container mb-2"
+                     style="overflow:auto;width:100%;">
+                    <table class="table table-bordered  table-striped text-center align-middle"
+                           id="product_variants_table">
+                        <thead style="background-color:#7C7BAD; color:white;">
+                            <tr>
+                                <th style="width:50px;"></th>
+                                <t t-foreach="product.attribute_line_ids"
+                                   t-as="p_attribute">
+                                    <th>
+                                        <t t-out="p_attribute.attribute_id.name"/>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="variants" t-as="variant">
+                                <tr class="product_variant">
+                                    <td class="text-start">
+                                        <input type="radio"
+                                               t-attf-class="form-check-input product-select"
+                                               t-att-checked="variant == variants[0]"
+                                               t-att-value="variant.id"
+                                               t-attf-name="product-variant-table-select"
+                                               t-att-vals="','.join(map(str, variant.product_template_attribute_value_ids.ids))"
+                                               t-att-data-value_id="variant.id"
+                                               t-att-data-value_name="variant.default_code"/>
+                                    </td>
+                                    <t t-foreach="product.attribute_line_ids"
+                                       t-as="p_attribute">
+                                        <t t-set="is_printed" t-value="False"/>
+                                        <t t-foreach="variant.product_template_attribute_value_ids"
+                                           t-as="p_attribute_value">
+
+                                            <t t-if="p_attribute_value.attribute_id == p_attribute.attribute_id">
+                                                <td>
+                                                    <t t-out="p_attribute_value.name"/>
+                                                    <t t-set="is_printed"
+                                                       t-value="True"/>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="not is_printed">
+                                            <td><i class="fa fa-times"/></td>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
