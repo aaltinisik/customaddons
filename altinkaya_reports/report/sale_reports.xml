@@ -378,22 +378,22 @@
                         <br/>
                         * Lütfen onaylamadan önce ürün modeli,rengi,adedi ve teslimat bilgilerini kontrol ediniz.
                     </p>
-                    <t t-if="doc.currency_id.name in ['USD','EUR']">
-                        <t t-if="doc.currency_id.name == 'USD'">
-                            <div class="row" style="padding-left:20%;">
-                                <strong style="padding-left:12px">USD HESAP BİLGİLERİMİZ:</strong>
-                            </div>
-                        </t>
-                        <t t-if="doc.currency_id.name == 'EUR'">
-                            <div class="row" style="padding-left:20%;">
-                                <strong style="padding-left:12px">EUR HESAP BİLGİLERİMİZ:</strong>
-                            </div>
-                        </t>
-                    </t>
+<!--                    <t t-if="doc.currency_id.name in ['USD','EUR']">-->
+<!--                        <t t-if="doc.currency_id.name == 'USD'">-->
+<!--                            <div class="row" style="padding-left:20%;">-->
+<!--                                <strong style="padding-left:12px">USD HESAP BİLGİLERİMİZ:</strong>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                        <t t-if="doc.currency_id.name == 'EUR'">-->
+<!--                            <div class="row" style="padding-left:20%;">-->
+<!--                                <strong style="padding-left:12px">EUR HESAP BİLGİLERİMİZ:</strong>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </t>-->
                     <div class="row">
                         <table class="table table-borderless"
                                style="page-break-inside:avoid;">
-                            <t t-if="doc.currency_id.name=='TRY'">
+                            <t t-if="1==1">
                                 <tr>
                                     <th class="text-left" rowspan="3"
                                         style="padding: 0;width: 20%;border-right: 2px solid black;">
@@ -460,54 +460,54 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.currency_id.name in ['USD','EUR']">
-                                <tr>
-                                    <th class="text-left" rowspan="2"
-                                        style="padding: 0;width: 20%;border-right: 2px solid black;">
-                                        <img width="75px" height="75px"
-                                                     style="margin-left: auto;
-                                                        margin-right: auto;
-                                                        display: block;"
-                                                     t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
-                                        <p style="font-weight: normal;
-                                                font-size: 12px;
-                                                margin-bottom: 0;
-                                                text-align: center;">
-                                                    Bizi değerlendirin
-                                                </p>
-                                    </th>
-                                    <th style="padding: 0;padding-left:12px;">
-                                        Banka Adı
-                                    </th>
-                                    <th style="padding: 0;">
-                                        Hesap No
-                                    </th>
-                                    <th style="padding: 0;">
-                                        IBAN
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0;padding-left:12px;">
-                                        Garanti Bankası
-                                    </td>
-                                    <t t-if="doc.currency_id.name == 'USD'">
-                                        <td style="padding: 0;">
-                                            682-9074502
-                                        </td>
-                                        <td style="padding: 0;">
-                                            <strong>TR20 0006 2000 6820 0009 0745 02</strong>
-                                        </td>
-                                    </t>
-                                    <t t-if="doc.currency_id.name == 'EUR'">
-                                        <td style="padding: 0;">
-                                            682-9074503
-                                        </td>
-                                        <td style="padding: 0;">
-                                            <strong>TR90 0006 2000 6820 0009 0745 03</strong>
-                                        </td>
-                                    </t>
-                                </tr>
-                            </t>
+<!--                            <t t-if="doc.currency_id.name in ['USD','EUR']">-->
+<!--                                <tr>-->
+<!--                                    <th class="text-left" rowspan="2"-->
+<!--                                        style="padding: 0;width: 20%;border-right: 2px solid black;">-->
+<!--                                        <img width="75px" height="75px"-->
+<!--                                                     style="margin-left: auto;-->
+<!--                                                        margin-right: auto;-->
+<!--                                                        display: block;"-->
+<!--                                                     t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>-->
+<!--                                        <p style="font-weight: normal;-->
+<!--                                                font-size: 12px;-->
+<!--                                                margin-bottom: 0;-->
+<!--                                                text-align: center;">-->
+<!--                                                    Bizi değerlendirin-->
+<!--                                                </p>-->
+<!--                                    </th>-->
+<!--                                    <th style="padding: 0;padding-left:12px;">-->
+<!--                                        Banka Adı-->
+<!--                                    </th>-->
+<!--                                    <th style="padding: 0;">-->
+<!--                                        Hesap No-->
+<!--                                    </th>-->
+<!--                                    <th style="padding: 0;">-->
+<!--                                        IBAN-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="padding: 0;padding-left:12px;">-->
+<!--                                        Garanti Bankası-->
+<!--                                    </td>-->
+<!--                                    <t t-if="doc.currency_id.name == 'USD'">-->
+<!--                                        <td style="padding: 0;">-->
+<!--                                            682-9074502-->
+<!--                                        </td>-->
+<!--                                        <td style="padding: 0;">-->
+<!--                                            <strong>TR20 0006 2000 6820 0009 0745 02</strong>-->
+<!--                                        </td>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="doc.currency_id.name == 'EUR'">-->
+<!--                                        <td style="padding: 0;">-->
+<!--                                            682-9074503-->
+<!--                                        </td>-->
+<!--                                        <td style="padding: 0;">-->
+<!--                                            <strong>TR90 0006 2000 6820 0009 0745 03</strong>-->
+<!--                                        </td>-->
+<!--                                    </t>-->
+<!--                                </tr>-->
+<!--                            </t>-->
                         </table>
                     </div>
                     <div style="page-break-inside:avoid;width:%100">
