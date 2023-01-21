@@ -47,7 +47,7 @@
                         <table class="table table-borderless">
                             <tbody>
                                 <tr>
-                                    <td style="text-align:left;width:70%;font-weight:bold;">
+                                    <td style="text-align:left;width:60%;font-weight:bold;">
                                         <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                                             <span t-if="doc.state not in ['draft','sent']"
                                                   style="font-size:1.75rem">
@@ -77,7 +77,7 @@
                                         </span>
                                         <span style="font-size:1.25rem" t-field="doc.client_order_ref"/>
                                     </td>
-                                    <td style="width: 30%;">
+                                    <td style="width: 40%;" class="text-right">
                                         <strong style="font-size:13pt">
                                             Tarih:
                                             <span t-field="doc.date_order"/>
@@ -384,12 +384,12 @@
                     </p>
                     <t t-if="doc.currency_id.name in ['USD','EUR']">
                         <t t-if="doc.currency_id.name == 'USD'">
-                            <div class="row">
+                            <div class="row" style="padding-left:30%;">
                                 <strong style="padding-left:12px">USD HESAP BİLGİLERİMİZ:</strong>
                             </div>
                         </t>
                         <t t-if="doc.currency_id.name == 'EUR'">
-                            <div class="row">
+                            <div class="row" style="padding-left:30%;">
                                 <strong style="padding-left:12px">EUR HESAP BİLGİLERİMİZ:</strong>
                             </div>
                         </t>
@@ -399,16 +399,32 @@
                                style="page-break-inside:avoid;">
                             <t t-if="doc.currency_id.name=='TRY'">
                                 <tr>
+                                    <th class="text-left" rowspan="3"
+                                        style="padding: 0;width: 30%;border-right: 2px solid black;">
+                                        <div style="width:100%;">
+                                            <div style="width:50%;float:right;">
+                                                <img width="75px" height="75px"
+                                                     style="margin-left: auto;
+                                                        margin-right: auto;
+                                                        display: block;"
+                                                     t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
+                                            </div>
+                                            <div style="width:50%;float:left;margin-top:1rem;">
+                                                <p style="font-weight: normal;
+                                                font-size: 12px;
+                                                margin-bottom: 0;
+                                                text-align: center;">
+                                                    Aldığınız hizmeti değerlendirmek için karekodu okutabilirsiniz.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </th>
                                     <th class="text-left" style="padding: 0;padding-left:12px;">
                                         <span>
                                             Banka Adı
                                         </span>
                                     </th>
-                                    <th class="text-left" style="padding: 0;">
-                                        <span>
-                                            Şube
-                                        </span>
-                                    </th>
+
                                     <th class="text-left" style="padding: 0;">
                                         <span>
                                             Şb.Kd.
@@ -430,9 +446,6 @@
                                         İş Bankası
                                     </td>
                                     <td style="padding: 0;">
-                                        Bulvar İvedik Şb.
-                                    </td>
-                                    <td style="padding: 0;">
                                         4384
                                     </td>
                                     <td style="padding: 0;">
@@ -447,9 +460,6 @@
                                         Garanti Bankası
                                     </td>
                                     <td style="padding: 0;">
-                                        Ankara OSB Şb.
-                                    </td>
-                                    <td style="padding: 0;">
                                         682
                                     </td>
                                     <td style="padding: 0;">
@@ -462,6 +472,26 @@
                             </t>
                             <t t-if="doc.currency_id.name in ['USD','EUR']">
                                 <tr>
+                                    <th class="text-left" rowspan="2"
+                                        style="padding: 0;width: 30%;border-right: 2px solid black;">
+                                        <div style="width:100%;">
+                                            <div style="width:50%;float:right;">
+                                                <img width="75px" height="75px"
+                                                     style="margin-left: auto;
+                                                        margin-right: auto;
+                                                        display: block;"
+                                                     t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
+                                            </div>
+                                            <div style="width:50%;float:left;margin-top:1rem;">
+                                                <p style="font-weight: normal;
+                                                font-size: 12px;
+                                                margin-bottom: 0;
+                                                text-align: center;">
+                                                    Aldığınız hizmeti değerlendirmek için karekodu okutabilirsiniz.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </th>
                                     <th style="padding: 0;padding-left:12px;">
                                         Banka Adı
                                     </th>
@@ -474,7 +504,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 0;padding-left:12px;">
-                                        Garanti Bankası, Ankara OSB Şubesi
+                                        Garanti Bankası
                                     </td>
                                     <t t-if="doc.currency_id.name == 'USD'">
                                         <td style="padding: 0;">
