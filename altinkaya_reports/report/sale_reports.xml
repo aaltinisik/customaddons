@@ -217,8 +217,7 @@
                             <thead>
                                 <tr>
                                     <t t-set="colspan" t-value="6"/>
-                                    <th class="text-center" style="padding:0;width:10%;">Kodu</th>
-                                    <th class="text-center" style="padding:0;width:50%">Açıklama</th>
+                                    <th class="text-center" style="padding:0;width:60%">Açıklama</th>
                                     <th class="text-center" style="padding:0;">Miktar</th>
                                     <th class="text-center" style="padding:0;">B. Fiyatı</th>
                                     <th t-if="display_discount" style="padding:0;"
@@ -253,9 +252,6 @@
                                     <tr
                                             t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                         <t t-if="not line.display_type">
-                                            <td style="padding:0;white-space:nowrap;">
-                                                <span t-field="line.product_id.default_code"/>
-                                            </td>
                                             <td style="padding:0;width:50%;">
                                                 <span t-field="line.name"/>
                                             </td>
@@ -771,8 +767,7 @@
                             <thead>
                                 <tr>
                                     <t t-set="colspan" t-value="6"/>
-                                    <th class="text-center" style="padding:0;width:10%;">Reference</th>
-                                    <th class="text-center" style="padding:0;width:50%">Description</th>
+                                    <th class="text-center" style="padding:0;width:60%">Description</th>
                                     <th class="text-center" style="padding:0;">Quantity</th>
                                     <th class="text-center" style="padding:0;">Unit Price</th>
                                     <th t-if="display_discount" style="padding:0;"
@@ -807,9 +802,7 @@
                                     <tr
                                             t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                         <t t-if="not line.display_type">
-                                            <td style="padding:0;white-space:nowrap;">
-                                                <span t-field="line.product_id.default_code"/>
-                                            </td>
+
                                             <td style="padding:0;">
                                                 <span t-field="line.name"/>
                                             </td>
