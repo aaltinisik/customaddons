@@ -11,6 +11,7 @@
         'stock','delivery', 'delivery_integration_base'
     ],
     'data': [
+        'views/stock_quant_view.xml',
         'views/stock_picking_views.xml',
         'views/stock_view.xml',
         'views/stock_location_view.xml',
