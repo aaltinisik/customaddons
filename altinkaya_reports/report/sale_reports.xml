@@ -384,12 +384,12 @@
                     </p>
                     <t t-if="doc.currency_id.name in ['USD','EUR']">
                         <t t-if="doc.currency_id.name == 'USD'">
-                            <div class="row" style="padding-left:30%;">
+                            <div class="row" style="padding-left:20%;">
                                 <strong style="padding-left:12px">USD HESAP BİLGİLERİMİZ:</strong>
                             </div>
                         </t>
                         <t t-if="doc.currency_id.name == 'EUR'">
-                            <div class="row" style="padding-left:30%;">
+                            <div class="row" style="padding-left:20%;">
                                 <strong style="padding-left:12px">EUR HESAP BİLGİLERİMİZ:</strong>
                             </div>
                         </t>
@@ -400,24 +400,18 @@
                             <t t-if="doc.currency_id.name=='TRY'">
                                 <tr>
                                     <th class="text-left" rowspan="3"
-                                        style="padding: 0;width: 30%;border-right: 2px solid black;">
-                                        <div style="width:100%;">
-                                            <div style="width:50%;float:right;">
-                                                <img width="75px" height="75px"
+                                        style="padding: 0;width: 20%;border-right: 2px solid black;">
+                                        <img width="75px" height="75px"
                                                      style="margin-left: auto;
                                                         margin-right: auto;
                                                         display: block;"
                                                      t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
-                                            </div>
-                                            <div style="width:50%;float:left;margin-top:1rem;">
-                                                <p style="font-weight: normal;
+                                        <p style="font-weight: normal;
                                                 font-size: 12px;
                                                 margin-bottom: 0;
                                                 text-align: center;">
-                                                    Aldığınız hizmeti değerlendirmek için karekodu okutabilirsiniz.
+                                                    Bizi değerlendirin
                                                 </p>
-                                            </div>
-                                        </div>
                                     </th>
                                     <th class="text-left" style="padding: 0;padding-left:12px;">
                                         <span>
@@ -473,24 +467,18 @@
                             <t t-if="doc.currency_id.name in ['USD','EUR']">
                                 <tr>
                                     <th class="text-left" rowspan="2"
-                                        style="padding: 0;width: 30%;border-right: 2px solid black;">
-                                        <div style="width:100%;">
-                                            <div style="width:50%;float:right;">
-                                                <img width="75px" height="75px"
+                                        style="padding: 0;width: 20%;border-right: 2px solid black;">
+                                        <img width="75px" height="75px"
                                                      style="margin-left: auto;
                                                         margin-right: auto;
                                                         display: block;"
                                                      t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
-                                            </div>
-                                            <div style="width:50%;float:left;margin-top:1rem;">
-                                                <p style="font-weight: normal;
+                                        <p style="font-weight: normal;
                                                 font-size: 12px;
                                                 margin-bottom: 0;
                                                 text-align: center;">
-                                                    Aldığınız hizmeti değerlendirmek için karekodu okutabilirsiniz.
+                                                    Bizi değerlendirin
                                                 </p>
-                                            </div>
-                                        </div>
                                     </th>
                                     <th style="padding: 0;padding-left:12px;">
                                         Banka Adı
