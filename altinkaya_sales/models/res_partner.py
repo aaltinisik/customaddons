@@ -1,31 +1,60 @@
-'''
+"""
 Created on Jan 16, 2019
 
 @author: cq
-'''
+"""
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    z_old_tel = fields.Char('Eski Tel', size=64, required=False)
-    z_old_fax = fields.Char('Eski Faks', size=64, required=False)
-    z_old_cep = fields.Char('Eski Cep', size=64, required=False)
-    z_contact_name = fields.Char('İlgili Kişi', size=64, required=False)
-    z_tel_kampanya = fields.Boolean('Kampanyalarda Aranmayacak', default=False,
-                                    help=u"Seçili ise telefon kampanyalarında aranmayacak.")
-    z_kamp_2016A = fields.Boolean('2016 Katalog için arandı',
-                                  help=u"2016 Temmuz Katalog gönderme kampanyası icin arandi.")
-    z_kamp_2017A = fields.Boolean('2017 Adres güncelleme için arandı', help=u"2017 Temmuz Adres günceleme için arandı.")
-    z_kat_postala = fields.Boolean('Katalog Postala', help=u"Katalog Posta ile gönderilecek.")
-    z_kat_postalandi = fields.Boolean('Katalog Postalandi', help=u"Katalog Posta ile gönderildi.")
-    z_kat_email = fields.Boolean('Katalog E-mail', help=u"Katalog email ile gönderilecek.")
-
-
+    z_old_tel = fields.Char("Eski Tel", size=64, required=False)
+    z_old_fax = fields.Char("Eski Faks", size=64, required=False)
+    z_old_cep = fields.Char("Eski Cep", size=64, required=False)
+    z_contact_name = fields.Char("İlgili Kişi", size=64, required=False)
+    z_tel_kampanya = fields.Boolean(
+        "Kampanyalarda Aranmayacak",
+        default=False,
+        help="Seçili ise telefon kampanyalarında aranmayacak.",
+    )
+    z_kamp_2016A = fields.Boolean(
+        "2016 Katalog için arandı",
+        help="2016 Temmuz Katalog gönderme kampanyası icin arandi.",
+    )
+    z_kamp_2017A = fields.Boolean(
+        "2017 Adres güncelleme için arandı",
+        help="2017 Temmuz Adres günceleme için arandı.",
+    )
+    z_kat_postala = fields.Boolean(
+        "Katalog Postala", help="Katalog Posta ile gönderilecek."
+    )
+    z_kat_postalandi = fields.Boolean(
+        "Katalog Postalandi", help="Katalog Posta ile gönderildi."
+    )
+    z_kat_email = fields.Boolean(
+        "Katalog E-mail", help="Katalog email ile gönderilecek."
+    )
+    v_cari_urun_count = fields.Integer(
+        "Carinin Urunleri", compute="_compute_v_cari_urun_count"
+    )
     # altinkaya
 
     # x_vergidairesi = fields.Char('Vergi Dairesi', size=64)
-    x_vergino = fields.Char('Vergi No', size=64)
-    devir_yapildi = fields.Boolean('Devir yapıldı')
+    x_vergino = fields.Char("Vergi No", size=64)
+    devir_yapildi = fields.Boolean("Devir yapıldı")
+
+    def action_view_v_cari_urun(self):
+        action = self.env.ref("stock.stock_product_normal_action").read()[0]
+        action["domain"] = [("v_cari_urun", "=", self.id),]
+        return action
+
+    @api.multi
+    def _compute_v_cari_urun_count(self):
+        for rec in self:
+            rec.v_cari_urun_count = self.env["product.product"].search_count(
+                [
+                    ("v_cari_urun", "=", rec.id),
+                ]
+            )
