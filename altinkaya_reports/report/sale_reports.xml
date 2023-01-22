@@ -374,7 +374,7 @@
                         <strong>Notlar:</strong>
                         <span t-field="doc.note"/>
                         <br/>
-                        * Özel üretimler ve işçilikli ürünler için adetlerde +-%5 değişiklik olabilir.
+                        * Özel üretimler ve işçilikli ürünler için adetlerde +-%10 değişiklik olabilir.
                         <br/>
                         * Lütfen onaylamadan önce ürün modeli,rengi,adedi ve teslimat bilgilerini kontrol ediniz.
                     </p>
@@ -442,7 +442,7 @@
                                         0012114
                                     </td>
                                     <td style="padding: 0;">
-                                        TR26 0006 4000 0014 3840 0121 14
+                                        TR26 0006 4000 0014 3840 0121 14 (TL)
                                     </td>
                                 </tr>
                                 <tr>
@@ -456,7 +456,7 @@
                                         6298017
                                     </td>
                                     <td style="padding: 0;">
-                                        TR40 0006 2000 6820 0006 2945 10
+                                        TR40 0006 2000 6820 0006 2945 10 (TL)
                                     </td>
                                 </tr>
                             </t>
