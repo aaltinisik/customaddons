@@ -21,7 +21,7 @@
 
 import time
 from datetime import date, datetime
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 from odoo import models, fields, api
 from odoo.tools.translate import _
 
@@ -106,7 +106,7 @@ class Partner(models.Model):
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
         if len(data) == 0:
-            raise UserError(_('No records found for your selection!'))
+            raise ValidationError(_('No records found for your selection!'))
         onhand_currency_id = data[0]['account_currency']
         for sl in data:
 
