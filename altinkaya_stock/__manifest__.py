@@ -15,6 +15,8 @@
         'views/stock_picking_views.xml',
         'views/stock_view.xml',
         'views/stock_location_view.xml',
+        'views/stock_location_route_views.xml',
+        'views/stock_rule_views.xml',
         'views/sale_view.xml',
         'views/product_views.xml',
         'views/delivery_carrier_views.xml',
