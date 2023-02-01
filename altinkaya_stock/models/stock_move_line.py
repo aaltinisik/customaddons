@@ -38,7 +38,7 @@ class StockMoveLine(models.Model):
                 "default_production_id": production_id or False,
                 "default_product_id": self.product_id.id,
                 "default_lot_id": self.lot_id.id or False,
-                "default_location_id": self.location_id.id,
+                "default_location_id": self.location_id.id or False,
             },
             "target": "new",
         }

@@ -289,9 +289,6 @@
                 <field name="virtual_available" position="attributes">
                     <attribute name="widget">uom</attribute>
                 </field>
-                <field name="purchased_product_qty" position="attributes">
-                    <attribute name="widget">uom</attribute>
-                </field>
                 <field name="sales_count" position="attributes">
                     <attribute name="widget">uom</attribute>
                 </field>
@@ -362,9 +359,6 @@
                     <attribute name="widget">uom</attribute>
                 </field>
                 <field name="virtual_available" position="attributes">
-                    <attribute name="widget">uom</attribute>
-                </field>
-                <field name="purchased_product_qty" position="attributes">
                     <attribute name="widget">uom</attribute>
                 </field>
                 <field name="sales_count" position="attributes">
