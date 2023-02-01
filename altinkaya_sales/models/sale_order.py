@@ -101,9 +101,9 @@ class SaleOrder(models.Model):
                 sale.order_state = 'sale'
             elif sale.state == 'cancel':
                 sale.order_state = 'cancel'
-                pass
-            else:
                 continue
+            else:
+                pass
             # PRODUCTION
             ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned',
                                                                                      'progress'])
