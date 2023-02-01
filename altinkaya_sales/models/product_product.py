@@ -128,6 +128,18 @@ class ProductProduct(models.Model):
         help="Euro ile satılırken kullanılan temel fiyat",
     )
 
+    v_fiyat_onceki = fields.Float(
+        "Önceki Fiyatı",
+        digits=dp.get_precision("Product Price"),
+        help="Önceki fiyatı",
+    )
+
+    v_fiyat_onceki_iscilik = fields.Float(
+        "Önceki İşçilik Fiyatı",
+        digits=dp.get_precision("Product Price"),
+        help="Önceki işçilik fiyatı",
+    )
+
     @api.depends("product_tmpl_id")
     def _compute_attr_based_price(self):
         res = {}

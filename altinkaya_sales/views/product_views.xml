@@ -62,6 +62,8 @@
 			                <field name="v_fiyat_2014"/>
 			                <field name="v_2014_iscilik"/>
 			                <field name="v_min_2014_iscilik"/>
+							<field name="v_fiyat_onceki" />
+							<field name="v_fiyat_onceki_iscilik" />
 							<field name="purchase_price"/>
 		               </group>
             		
