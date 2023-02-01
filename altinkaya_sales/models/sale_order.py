@@ -77,6 +77,7 @@ class SaleOrder(models.Model):
         ('on_transit', 'Nakliyede'),
         ('delivered', 'Teslim Edildi'),
         ('completed', 'Tamamlandı'),
+        ('return', 'İade'),
         ('cancel', 'İptal')], string='Sipariş Durumu', readonly=True, copy=False, default='draft',
         index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3, store=True)
 
@@ -92,7 +93,7 @@ class SaleOrder(models.Model):
             # SALE
             if sale.confirmation_date and sale.confirmation_date < deadline:
                 sale.order_state = 'completed'
-                pass
+                continue
             elif sale.state == 'draft':
                 sale.order_state = 'draft'
             elif sale.state == 'sent':
@@ -115,11 +116,15 @@ class SaleOrder(models.Model):
                                                               p.picking_type_code == 'outgoing' and
                                                               p.state == 'done' and
                                                               p.invoice_state == 'invoiced')
+                incoming_pickings = sale.picking_ids.filtered(lambda p:
+                                                                p.picking_type_code == 'incoming')
                 if outgoing_pickings:
                     if any(p.delivery_state == 'customer_delivered' for p in outgoing_pickings):
                         sale.order_state = 'delivered'
                     else:
                         sale.order_state = 'on_transit'
+                elif incoming_pickings:
+                    sale.order_state = 'return'
                 else:
                     sale.order_state = 'at_warehouse'
         return True
