@@ -140,6 +140,27 @@ class ProductProduct(models.Model):
         help="Önceki işçilik fiyatı",
     )
 
+    v_fiyat_nakliye = fields.Float(
+        "Nakliye Fiyatı",
+        compute="_compute_nakliye_fiyati",
+        digits=dp.get_precision("Product Price"),
+        help="Nakliye fiyatı",
+    )
+
+    @api.multi
+    def _compute_nakliye_fiyati(self):
+        for rec in self:
+            if self._context.get("sale_id"):
+                order = self.env["sale.order"].browse(self._context.get("sale_id"))
+                carrier_line = fields.first(
+                    order.order_line.filtered(lambda l: l.is_delivery)
+                )
+                if carrier_line:
+                    rec.v_fiyat_nakliye = carrier_line.price_unit
+            else:
+                rec.v_fiyat_nakliye = 0.0
+        return True
+
     @api.depends("product_tmpl_id")
     def _compute_attr_based_price(self):
         res = {}
