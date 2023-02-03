@@ -196,6 +196,12 @@ class ProductPricelist(models.Model):
                 break
             # Final price conversion into pricelist currency
             compare_field = supplier_price.currency_id if is_purchase_product else price_type.currency
+
+            # If we are calculating the price for carrier line, we need to use the currency of the sale order
+            if price_type and price_type.field == "v_fiyat_dolar" and self._context.get("sale_id"):
+                order = self.env["sale.order"].browse(self._context.get("sale_id"))
+                compare_field = order.currency_id
+
             if suitable_rule and suitable_rule.currency_id != compare_field and suitable_rule.compute_price != 'fixed' and suitable_rule.base != '-1':
                 price = product.currency_id._convert(price, suitable_rule.currency_id, self.env.user.company_id, date,
                                                      round=False)
