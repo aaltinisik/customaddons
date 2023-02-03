@@ -12,37 +12,44 @@ def _match_production_with_route(production):
     if production_ids:
         process_ids = production_ids.mapped('process_id.id')
         if 14 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 14 and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id == 14 and r.state in ongoing_state)):
                 return 'molding'
             else:
                 return 'molding_waiting'
         elif any(x in [1, 11] for x in process_ids):
-            if any(production_ids.filtered(lambda r: r.process_id.id in [1, 11] and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id in [1, 11] and r.state in ongoing_state)):
                 return 'injection'
             else:
                 return 'injection_waiting'
         elif 2 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 2 and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id == 2 and r.state in ongoing_state)):
                 return 'cnc'
             else:
                 return 'cnc_waiting'
         elif 10 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 10 and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id == 10 and r.state in ongoing_state)):
                 return 'metal'
             else:
                 return 'metal_waiting'
         elif 5 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 5 and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id == 5 and r.state in ongoing_state)):
                 return 'cnc_lathe'
             else:
                 return 'cnc_lathe_waiting'
         elif 16 in process_ids:
-            if any(production_ids.filtered(lambda r: r.process_id.id == 16 and r.state in ongoing_state)):
+            if any(production_ids.filtered(
+                    lambda r: r.process_id.id == 16 and r.state in ongoing_state)):
                 return 'uv_printing'
             else:
                 return 'uv_printing_waiting'
         elif any(x in [3, 6, 7] for x in process_ids):
-            if any(production_ids.filtered(lambda r: r.process_id.id in [3, 6, 7] and r.state in ongoing_state)):
+            if any(production_ids.filtered(lambda r: r.process_id.id in [3, 6,
+                                                                         7] and r.state in ongoing_state)):
                 return 'assembly'
             else:
                 return 'assembly_waiting'
@@ -53,7 +60,8 @@ def _match_production_with_route(production):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    production_ids = fields.One2many(string='Productions', comodel_name='mrp.production',
+    production_ids = fields.One2many(string='Productions',
+                                     comodel_name='mrp.production',
                                      inverse_name='sale_id')
     order_state = fields.Selection([
         ('draft', 'Taslak'),
@@ -78,8 +86,10 @@ class SaleOrder(models.Model):
         ('delivered', 'Teslim Edildi'),
         ('completed', 'Tamamlandı'),
         ('return', 'İade'),
-        ('cancel', 'İptal')], string='Sipariş Durumu', readonly=True, copy=False, default='draft',
-        index=True, track_visibility='onchange', compute="_compute_order_state", track_sequence=3, store=True)
+        ('cancel', 'İptal')], string='Sipariş Durumu', readonly=True, copy=False,
+        default='draft',
+        index=True, track_visibility='onchange', compute="_compute_order_state",
+        track_sequence=3, store=True)
 
     @api.multi
     @api.depends('state',
@@ -106,8 +116,9 @@ class SaleOrder(models.Model):
             else:
                 pass
             # PRODUCTION
-            ongoing_productions = sale.production_ids.filtered(lambda p: p.state in ['confirmed', 'planned',
-                                                                                     'progress'])
+            ongoing_productions = sale.production_ids.filtered(
+                lambda p: p.state in ['confirmed', 'planned',
+                                      'progress'])
             if ongoing_productions:
                 sale.order_state = _match_production_with_route(ongoing_productions)
             # PICKING
@@ -117,9 +128,11 @@ class SaleOrder(models.Model):
                                                               p.state == 'done' and
                                                               p.invoice_state == 'invoiced')
                 incoming_pickings = sale.picking_ids.filtered(lambda p:
-                                                                p.picking_type_code == 'incoming')
+                                                              p.picking_type_code == 'incoming' and
+                                                              p.location_id.usage == 'customer')
                 if outgoing_pickings:
-                    if any(p.delivery_state == 'customer_delivered' for p in outgoing_pickings):
+                    if any(p.delivery_state == 'customer_delivered' for p in
+                           outgoing_pickings):
                         sale.order_state = 'delivered'
                     else:
                         sale.order_state = 'on_transit'
@@ -129,9 +142,13 @@ class SaleOrder(models.Model):
                     sale.order_state = 'at_warehouse'
         return True
 
-    altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url', compute='_altinkaya_payment_url')
-    sale_line_history = fields.One2many('sale.order.line', string="Old Sales", compute="_compute_sale_line_history")
-    sale_currency_rate = fields.Float(string="Currency Rate", compute="_compute_sale_currency_rate", default=1.0,
+    altinkaya_payment_url = fields.Char(string='Altinkaya Payment Url',
+                                        compute='_altinkaya_payment_url')
+    sale_line_history = fields.One2many('sale.order.line', string="Old Sales",
+                                        compute="_compute_sale_line_history")
+    sale_currency_rate = fields.Float(string="Currency Rate",
+                                      compute="_compute_sale_currency_rate",
+                                      default=1.0,
                                       digits=[16, 4])
 
     @api.multi
@@ -139,9 +156,11 @@ class SaleOrder(models.Model):
     def _compute_sale_currency_rate(self):
         currency_id = self.currency_id or self.env.user.company_id.currency_id
         if self.partner_id and self.partner_id.use_second_rate_type:
-            curr_dict = currency_id.with_context(use_second_rate_type=True)._get_rates(self.env.user.company_id, self.date_order)
+            curr_dict = currency_id.with_context(use_second_rate_type=True)._get_rates(
+                self.env.user.company_id, self.date_order)
         else:
-            curr_dict = currency_id._get_rates(self.env.user.company_id, self.date_order)
+            curr_dict = currency_id._get_rates(self.env.user.company_id,
+                                               self.date_order)
         self.sale_currency_rate = 1 / curr_dict.get(currency_id.id, 1.0)
         return True
 
@@ -151,7 +170,9 @@ class SaleOrder(models.Model):
 
         ir_model_data = self.env['ir.model.data']
         try:
-            template_id = ir_model_data.get_object_reference('altinkaya_sales', 'email_template_edi_sale_altinkaya')[1]
+            template_id = ir_model_data.get_object_reference('altinkaya_sales',
+                                                             'email_template_edi_sale_altinkaya')[
+                1]
         except ValueError:
             template_id = False
 
@@ -167,7 +188,8 @@ class SaleOrder(models.Model):
 
         for sale in self:
             last_sale_lines = sale.env['sale.order.line'].search(
-                [('order_id.partner_id', '=', sale.partner_id.id), ('state', 'not in', ['draft', 'sent', 'cancelled'])],
+                [('order_id.partner_id', '=', sale.partner_id.id),
+                 ('state', 'not in', ['draft', 'sent', 'cancelled'])],
                 limit=50, order="id desc")
             sale.sale_line_history = last_sale_lines.ids
 
@@ -224,7 +246,9 @@ class SaleOrderLine(models.Model):
 
     def copy_line_to_active_order(self):
         sale = self.env['sale.order'].browse(
-            self.env.context.get('active_order_id') or self.env.context.get('params', {}).get('id'))
+            self.env.context.get('active_order_id') or self.env.context.get('params',
+                                                                            {}).get(
+                'id'))
         for line in self:
             sale.write({'order_line': [(0, 0, {
                 'name': line.name,
@@ -251,8 +275,10 @@ class SaleOrderLine(models.Model):
         self.product_id = False
 
         if not self.show_custom_products:
-            custom_categories = self.env['product.category'].search([('custom_products', '=', True)])
-            domain = ['&', ('sale_ok', '=', True), ('categ_id', 'not in', custom_categories.ids)]
+            custom_categories = self.env['product.category'].search(
+                [('custom_products', '=', True)])
+            domain = ['&', ('sale_ok', '=', True),
+                      ('categ_id', 'not in', custom_categories.ids)]
 
         return {'domain': {'product_tmpl_id': domain}}
 
@@ -267,7 +293,8 @@ class SaleOrderLine(models.Model):
         to_unlink_ids = self.env['sale.order.line']
         to_explode_again_ids = self.env['sale.order.line']
 
-        for line in self.filtered(lambda l: l.set_product == True and l.state in ['draft', 'sent']):
+        for line in self.filtered(
+                lambda l: l.set_product == True and l.state in ['draft', 'sent']):
             bom_id = bom_obj._bom_find(product=line.product_id)
             customer_lang = line.order_id.partner_id.lang
             if not bom_id:
@@ -288,7 +315,8 @@ class SaleOrderLine(models.Model):
                     sol.product_uom_change()
                     sol._onchange_discount()
                     sol._compute_amount()
-                    sol.name = bom_line.product_id.with_context({'lang': customer_lang}).display_name
+                    sol.name = bom_line.product_id.with_context(
+                        {'lang': customer_lang}).display_name
                     vals = sol._convert_to_write(sol._cache)
 
                     sol_id = self.create(vals)
