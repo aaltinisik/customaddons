@@ -21,6 +21,7 @@
         "views/res_partner_view.xml",
         "views/product_public_category_view.xml",
         "views/product_category_view.xml",
+        "views/sale_order_view.xml",
         # TEMPLATES
         "templates/product_attachments_table.xml",
         "templates/product_features_table.xml",

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_sales_order_form_v16">
+        <field name="name">sales order form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field eval="1098" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/header" position="after">
+                <header attrs="{'invisible': [('order_state', '=', 'draft')]}">
+                    <field name="order_state" widget="statusbar"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
