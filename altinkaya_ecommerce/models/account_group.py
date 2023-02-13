@@ -7,9 +7,9 @@ class AccountGroup(models.Model):
     _inherit = "account.group"
 
     # """We can use any length of prefix. So we are disabling the constraint."""
-    # _sql_constraints = [
-    #     ("check_length_prefix", "check(1=1)", "No error"),
-    # ]
+    _sql_constraints = [
+        ("check_length_prefix", "check(1=1)", "No error"),
+    ]
     #
     # def _search_code_prefix(self, operator, value):
     #     prefix = value.split(".")
@@ -42,11 +42,12 @@ class AccountGroup(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         """/addons/account/models/account_account.py line 853.
-         We don't need to fill code_prefix_end"""
+        We don't need to fill code_prefix_end"""
+        # Todo yigit: maybe it would be better if we disable the constraint
         res_ids = super(AccountGroup, self).create(vals_list)
         for rec in res_ids:
             if rec.code_prefix_start == rec.code_prefix_end:
-                rec.code_prefix_end = ''
+                rec.code_prefix_end = ""
         return res_ids
 
     # def _compute_code_prefix(self):

@@ -1,7 +1,7 @@
 # Copyright 2022 Yiğit Budak (https://github.com/yibudak)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from collections import OrderedDict
-from odoo import fields, models, _
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -47,6 +47,38 @@ class ProductTemplate(models.Model):
     #     )
     #     return res
     # NOTE: price field is missing. You need to add sale_price to template
+
+    @api.depends("attribute_line_ids.value_ids")
+    def _compute_valid_product_template_attribute_line_ids(self):
+        """Inherited to remove non-visible attributes from the combination."""
+        res = super(
+            ProductTemplate, self
+        )._compute_valid_product_template_attribute_line_ids()
+        for record in self:
+            lines = record.valid_product_template_attribute_line_ids
+            record.valid_product_template_attribute_line_ids = lines.filtered(
+                lambda x: x.attribute_id.visibility != "hidden"
+            )
+        return res
+
+    def action_fix_main_image(self):
+        """This method fixes main image of the active product."""
+        for product in self:
+            variant_img = fields.first(product.product_template_image_ids)
+            if variant_img:
+                product.image_1920 = variant_img.image_1920
+        return True
+
+    def _is_combination_possible(
+        self, combination, parent_combination=None, ignore_no_variant=False
+    ):
+        """Inherited to remove non-visible attributes from the combination."""
+        self.ensure_one()
+        return super(ProductTemplate, self)._is_combination_possible(
+            combination.filtered(lambda x: x.attribute_id.visibility != "hidden"),
+            parent_combination=parent_combination,
+            ignore_no_variant=ignore_no_variant,
+        )
 
 
 class ProductTemplateAttributeLine(models.Model):

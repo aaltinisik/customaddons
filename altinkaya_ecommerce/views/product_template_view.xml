@@ -14,6 +14,8 @@
             <xpath expr="//notebook" position="inside">
                 <page name="altinkaya_ecommerce" string="Altinkaya E-commerce">
                     <group>
+                        <button name="action_fix_main_image" type="object" string="Fix Main Image"
+                                class="oe_highlight"/>
                         <field name="is_published"/>
                     </group>
                         <field name="feature_line_ids" nolabel="1" widget="one2many">
