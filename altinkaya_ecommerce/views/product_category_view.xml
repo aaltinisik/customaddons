@@ -21,6 +21,7 @@
         <field name="arch" type="xml">
             <field name="parent_id" position="before">
                 <field name="sequence" />
+                <field name="is_published" />
             </field>
         </field>
     </record>
