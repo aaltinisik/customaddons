@@ -45,9 +45,16 @@ class ResPartner(models.Model):
     x_vergino = fields.Char("Vergi No", size=64)
     devir_yapildi = fields.Boolean("Devir yapıldı")
 
+    # country_id is required in res.partner
+    country_id = fields.Many2one(
+        "res.country", string="Country", ondelete="restrict", required=True
+    )
+
     def action_view_v_cari_urun(self):
         action = self.env.ref("stock.stock_product_normal_action").read()[0]
-        action["domain"] = [("v_cari_urun", "=", self.id),]
+        action["domain"] = [
+            ("v_cari_urun", "=", self.id),
+        ]
         return action
 
     @api.multi
