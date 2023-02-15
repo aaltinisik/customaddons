@@ -12,3 +12,9 @@ class ProductCategory(models.Model):
         default=100,
         help="Gives the sequence order when displaying a list of product categories.",
     )
+
+    is_published = fields.Boolean(
+        string="Published",
+        default=False,
+        help="If unchecked, it will allow you to hide the category without removing it.",
+    )
