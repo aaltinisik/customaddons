@@ -59,8 +59,10 @@
                                             </span>
 
                                             <td class="text-center">
-                                                <a t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}">
-                                                    <h4><i class="fa fa-download"/></h4>
+                                                <a t-attf-href="/web/content/#{attachment.id}?download=true">
+                                                    <h4>
+                                                        <i class="fa fa-download"/>
+                                                    </h4>
                                                 </a>
                                             </td>
                                         </tr>

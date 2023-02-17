@@ -61,14 +61,6 @@ class ProductTemplate(models.Model):
             )
         return res
 
-    def action_fix_main_image(self):
-        """This method fixes main image of the active product."""
-        for product in self:
-            variant_img = fields.first(product.product_template_image_ids)
-            if variant_img:
-                product.image_1920 = variant_img.image_1920
-        return True
-
     def _is_combination_possible(
         self, combination, parent_combination=None, ignore_no_variant=False
     ):
@@ -79,6 +71,25 @@ class ProductTemplate(models.Model):
             parent_combination=parent_combination,
             ignore_no_variant=ignore_no_variant,
         )
+
+    def _prepare_categories_with_features(self, categories):
+        """
+        This method adds feature lines to the product specifications.
+        If there are no ptal, it will create an empty list.
+        param categories: OrderedDict of attributes and their values
+        """
+        ptal = categories.get(self.env["product.attribute.category"], False)
+        #  Attributes first
+        categories = OrderedDict({self.env["product.attribute.category"]: []})
+        if ptal:
+            for line in ptal.filtered(lambda x: len(x.value_ids) > 0):
+                categories[self.env["product.attribute.category"]].append(line)
+
+        ptfl = self.sudo().feature_line_ids
+        for line in ptfl.filtered(lambda x: len(x.value_ids) > 0):
+            categories[self.env["product.attribute.category"]].append(line)
+
+        return categories
 
 
 class ProductTemplateAttributeLine(models.Model):
@@ -96,24 +107,3 @@ class ProductTemplateAttributeLine(models.Model):
         related="attribute_id.allow_filling",
         readonly=True,
     )
-
-    def _prepare_categories_for_display(self):
-        """
-        This method adds feature lines to the product specifications.
-        """
-        res = super(
-            ProductTemplateAttributeLine, self
-        )._prepare_categories_for_display()
-        ptal = res.get(self.env["product.attribute.category"], False)
-        res[self.env["product.attribute.category"]] = []
-        if ptal:
-            tmpl_id = ptal[0].product_tmpl_id.sudo()
-            #  Attributes first
-            for line in ptal.filtered(lambda x: len(x.value_ids) > 0):
-                res[self.env["product.attribute.category"]].append(line)
-
-            ptfl = tmpl_id.feature_line_ids
-            for line in ptfl.filtered(lambda x: len(x.value_ids) > 0):
-                res[self.env["product.attribute.category"]].append(line)
-
-        return res
