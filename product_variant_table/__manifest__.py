@@ -18,6 +18,7 @@
     "assets": {
         "web.assets_frontend": [
             "product_variant_table/static/src/js/variant_table.js",
+            "product_variant_table/static/src/scss/style.scss",
         ],
     },
     "installable": True,

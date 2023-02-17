@@ -7,9 +7,9 @@ odoo.define('product_variant_table.variant_handle', function (require) {
     var publicWidget = require('web.public.widget');
     var ajax = require('web.ajax');
     var VariantMixin = require('sale.VariantMixin');
-    require('website_sale.website_sale');
+    var WebsiteSale = require('website_sale.website_sale');
 
-    publicWidget.registry.VariantTableMixin = publicWidget.Widget.extend(VariantMixin, {
+    publicWidget.registry.VariantTableMixin = publicWidget.Widget.extend(VariantMixin, WebsiteSale, {
         selector: '.oe_website_sale',
         events: {
             'change input[name="product-variant-table-select"]': '_getCombinationInfoVariantTable'
@@ -40,7 +40,17 @@ odoo.define('product_variant_table.variant_handle', function (require) {
 
         _setUrlHash: function ($parent) {
             var $attributes = $parent.find('input.form-check-input.product-select:checked');
-            window.location.hash = 'attr=' + $attributes.attr('vals');
+            var $attribute_container = $parent.find('div.attribute_container');
+            $attribute_container.empty();
+            var vals = $attributes.attr('vals');
+            $.each(vals.split(","), function (index, value) {
+                $("<input/>").attr({
+                    'type': 'checkbox',
+                    'class': 'js_variant_change d-none',
+                    'checked': 'checked',
+                }).val(value).appendTo($attribute_container);
+            });
+            window.location.hash = 'attr=' + vals;
         },
 
         _applyHash: function () {
@@ -77,6 +87,10 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 this._setUrlHash(parent);
                 // this._checkExclusions(parent, [], combinationData.parent_exclusions);
             });
+        },
+
+        getSelectedVariantValues: function ($container) {
+            return [301, 302, 302];
         },
 
 
