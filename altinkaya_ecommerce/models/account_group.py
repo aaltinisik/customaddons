@@ -43,7 +43,6 @@ class AccountGroup(models.Model):
     def create(self, vals_list):
         """/addons/account/models/account_account.py line 853.
         We don't need to fill code_prefix_end"""
-        # Todo yigit: maybe it would be better if we disable the constraint
         res_ids = super(AccountGroup, self).create(vals_list)
         for rec in res_ids:
             if rec.code_prefix_start == rec.code_prefix_end:

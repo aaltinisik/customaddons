@@ -25,10 +25,8 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         start() {
             const def = this._super(...arguments);
             this._applyHash();
-            this.$el.find('input[name="product-variant-table-select"]').trigger('change');
-
+            this.$el.find('input[name="product-variant-table-select"]:checked').trigger('change');
             return def;
-            // this.$el.find('input[name="product-variant-table-select"]').trigger('change');
         },
         /**
          * @see onChangeVariant
@@ -45,6 +43,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             var vals = $attributes.attr('vals');
             $.each(vals.split(","), function (index, value) {
                 $("<input/>").attr({
+                    'value_id': value,
                     'type': 'checkbox',
                     'class': 'js_variant_change d-none',
                     'checked': 'checked',
@@ -68,9 +67,13 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                             $toSelect.prop('selected', true);
                         }
                     });
+
+
                 }
             }
         },
+
+
 
         _getCombinationInfoVariantTable: function (ev) {
             var selected_product_id = parseInt(ev.currentTarget.value);
@@ -84,17 +87,9 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 // ...this._getOptionalCombinationInfoParam($parent),
             }).then((combinationData) => {
                 this._onChangeCombination(ev, parent, combinationData);
-                this._setUrlHash(parent);
+                // this._setUrlHash(parent);
                 // this._checkExclusions(parent, [], combinationData.parent_exclusions);
             });
         },
-
-        getSelectedVariantValues: function ($container) {
-            return [301, 302, 302];
-        },
-
-
     });
-
-
 });

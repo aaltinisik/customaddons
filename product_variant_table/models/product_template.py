@@ -10,9 +10,9 @@ class ProductTemplate(models.Model):
     def get_all_variants(self):
         """Returns all available variants with ordered for the first attribute."""
         self.ensure_one()
+        tmpl_id = self.sudo()
         variants = self.env["product.product"]
-        for variant in self.product_variant_ids:
-
+        for variant in tmpl_id.product_variant_ids:
             if any(
                 [
                     c != "visible"
@@ -23,9 +23,13 @@ class ProductTemplate(models.Model):
             ):  # If any attribute is not visible, skip this variant
                 continue
 
+            if not variant.product_template_variant_value_ids:  # If no attributes, skip
+                continue
+
             if variant.active and variant.website_published:
                 variants |= variant
 
+        # return variants
         return variants.sorted(
             key=lambda v: v.product_template_attribute_value_ids[0].attribute_id.name
         )
