@@ -29,10 +29,14 @@
         "templates/product_attributes_filter.xml",
         "templates/product_template_hide_price.xml",
         "templates/product_html_description.xml",
+        "templates/product_template_high_quality_images.xml",
         # SNIPPETS
         "views/snippets/s_dynamic_category_table.xml",
     ],
     "assets": {
+        "web.assets_frontend": [
+            "altinkaya_ecommerce/static/src/css/custom_styles.scss",
+        ],
         "website.assets_wysiwyg": [
             "altinkaya_ecommerce/static/src/snippets/s_dynamic_category_table/options.js",
         ],

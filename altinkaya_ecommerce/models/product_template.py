@@ -91,6 +91,15 @@ class ProductTemplate(models.Model):
 
         return categories
 
+    def _get_image_holder(self):
+        """
+        Inherit to use product template image ids if there is one,
+        otherwise use product image_1920.
+        """
+        res = super(ProductTemplate, self)._get_image_holder()
+        main_image = fields.first(res.product_template_image_ids)
+        return main_image or res
+
 
 class ProductTemplateAttributeLine(models.Model):
     _inherit = "product.template.attribute.line"
