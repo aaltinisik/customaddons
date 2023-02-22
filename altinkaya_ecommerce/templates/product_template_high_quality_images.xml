@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Product list "/shop" -->
-    <template id="products_image_inherit" inherit_id="website_sale.products_item" name="Products images">
+    <template id="products_image_inherit" inherit_id="website_sale.products_item"
+              name="Products images">
         <xpath expr="//span[@t-field='image_holder.image_1920']" position="replace">
             <span t-field="image_holder.image_1920"
-                        t-options="{'widget': 'image', 'preview_image': image_type, 'itemprop': 'image', 'class': 'h-100 w-100 position-absolute'}"
-                        class="oe_product_image_img_wrapper d-flex h-100 justify-content-center align-items-center position-absolute"/>
+                  t-options="{'widget': 'image', 'preview_image': image_type, 'itemprop': 'image', 'class': 'h-100 w-100 position-absolute'}"
+                  class="oe_product_image_img_wrapper d-flex h-100 justify-content-center align-items-center position-absolute"/>
+        </xpath>
+    </template>
+
+    <!-- Product page "/shop/product/product-template"
+     Currently we don't use product.product image, it's OK to show product.template image
+     -->
+    <template id="products_page_image_inherit" inherit_id="website_sale.shop_product_images"
+              name="Products page images">
+        <xpath expr="//t[@t-set='product_images']" position="attributes">
+            <attribute name="t-value">product._get_images()</attribute>
         </xpath>
     </template>
 </odoo>
