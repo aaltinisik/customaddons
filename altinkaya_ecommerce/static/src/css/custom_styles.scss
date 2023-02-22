@@ -1,3 +1,8 @@
 header .navbar-brand, header .navbar-brand.logo {
     padding: 15px 0;
 }
+
+.navbar .navbar-collapse {
+    padding-top: 10px;
+    box-shadow: #BCBCBC 0px 1px 0px inset;
+}

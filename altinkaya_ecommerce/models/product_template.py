@@ -100,6 +100,17 @@ class ProductTemplate(models.Model):
         main_image = fields.first(res.product_template_image_ids)
         return main_image or res
 
+    def _get_images(self):
+        """
+        image_1920 and the first product.image are the same. So we need to
+        remove the first one from the list.
+        """
+        res = super(ProductTemplate, self)._get_images()
+        for record in res:
+            if isinstance(record, self.env["product.template"].__class__):
+                res.remove(record)
+        return res
+
 
 class ProductTemplateAttributeLine(models.Model):
     _inherit = "product.template.attribute.line"
