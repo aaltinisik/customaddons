@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_full_breadcrumb" inherit_id="website_sale.product"
+              name="Product Full Breadcrumb">
+        <xpath expr="//ol[@class='breadcrumb p-0 mb-2 m-lg-0']" position="replace">
+            <ol class="breadcrumb p-0 mb-2 m-lg-0">
+                <t t-set="categories" t-value="product._get_product_breadcrumb()"/>
+
+                <t t-foreach="categories" t-as="c">
+                    <li class="breadcrumb-item">
+                        <a t-att-href="keep('/shop/category/%s' % slug(c), category=0)"
+                           t-field="c.name"/>
+                    </li>
+                </t>
+
+                <li class="breadcrumb-item active">
+                    <span t-field="product.name"/>
+                </li>
+            </ol>
+        </xpath>
+    </template>
+
+</odoo>

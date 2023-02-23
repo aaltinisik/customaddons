@@ -18,4 +18,3 @@ class ProductCategory(models.Model):
         help="Gives the sequence order when displaying a list of product categories.",
         default=100,
     )
-

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <template id="product_attributes_body" inherit_id="website_sale.product"
               name="Product attributes table">
         <xpath expr="//div[@id='o_product_terms_and_share']" position="after">

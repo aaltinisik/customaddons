@@ -111,6 +111,27 @@ class ProductTemplate(models.Model):
                 res.remove(record)
         return res
 
+    def _get_product_breadcrumb(self):
+        """
+        This method is used to create product page breadcrumb.
+        """
+
+        def _get_parent(category):
+            """Recursively get parent categories."""
+            if category.parent_id:
+                return category.parent_id + _get_parent(category.parent_id)
+            return category
+
+        self.ensure_one()
+        tmpl_id = self.sudo()
+        Categories = self.env["product.public.category"]
+        base_categ = fields.first(tmpl_id.public_categ_ids)
+        if base_categ:
+            Categories |= base_categ
+            Categories |= _get_parent(base_categ)
+
+        return reversed(Categories)
+
 
 class ProductTemplateAttributeLine(models.Model):
     _inherit = "product.template.attribute.line"

@@ -30,6 +30,7 @@
         "templates/product_template_hide_price.xml",
         "templates/product_html_description.xml",
         "templates/product_template_high_quality_images.xml",
+        "templates/product_breadcrumb_full.xml",
         # SNIPPETS
         "views/snippets/s_dynamic_category_table.xml",
     ],
