@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["website", "website_sale"],
+    "depends": ["website", "http_routing", "website_sale"],
     "data": [
         # "security/ir.model.access.csv",
         # "views/product_attribute_view.xml",

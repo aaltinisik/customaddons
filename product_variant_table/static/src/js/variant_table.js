@@ -87,8 +87,8 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 // ...this._getOptionalCombinationInfoParam($parent),
             }).then((combinationData) => {
                 this._onChangeCombination(ev, parent, combinationData);
-                // this._setUrlHash(parent);
-                // this._checkExclusions(parent, [], combinationData.parent_exclusions);
+                this._setUrlHash(parent);
+                this._checkExclusions(parent, [], combinationData.parent_exclusions);
             });
         },
     });

@@ -4,27 +4,14 @@ from odoo.addons.http_routing.models import ir_http
 from unicode_tr.extras import slugify as slugify_tr
 
 
-def slug_tr(value):
+def slugify_one(s, max_length=0):
     """
     This method is used to generate a slug from a record or a string while respecting
     the Turkish characters.
     The original method is copied from odoo.addons.http_routing.models.ir_http
     """
-    try:
-        if not value.id:
-            raise ValueError("Cannot slug non-existent record %s" % value)
-        # [(id, name)] = value.name_get()
-        identifier, name = (
-            value.id,
-            getattr(value, "seo_name", False) or value.display_name,
-        )
-    except AttributeError:
-        # assume name_search result tuple
-        identifier, name = value
-    slugname = slugify_tr(name or "").strip().strip("-")
-    if not slugname:
-        return str(identifier)
-    return f"{slugname}-{identifier}"
+    slug_str = slugify_tr(s)
+    return slug_str[:max_length] if max_length > 0 else slug_str
 
 
-ir_http.slug = slug_tr
+ir_http.slugify_one = slugify_one
