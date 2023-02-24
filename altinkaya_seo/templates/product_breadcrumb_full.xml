@@ -8,7 +8,7 @@
 
                 <t t-foreach="categories" t-as="c">
                     <li class="breadcrumb-item">
-                        <a t-att-href="keep('/shop/category/%s' % slug(c), category=0)"
+                        <a t-att-href="keep('/urunler/%s' % slug(c), category=0)"
                            t-field="c.name"/>
                     </li>
                 </t>

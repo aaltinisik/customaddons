@@ -111,26 +111,29 @@ class ProductTemplate(models.Model):
                 res.remove(record)
         return res
 
-    def _get_product_breadcrumb(self):
+    def _get_combination_info(
+        self,
+        combination=False,
+        product_id=False,
+        add_qty=1,
+        pricelist=False,
+        parent_combination=False,
+        only_template=False,
+    ):
         """
-        This method is used to create product page breadcrumb.
+        Inherited to set free_qty to 999.
         """
-
-        def _get_parent(category):
-            """Recursively get parent categories."""
-            if category.parent_id:
-                return category.parent_id + _get_parent(category.parent_id)
-            return category
-
-        self.ensure_one()
-        tmpl_id = self.sudo()
-        Categories = self.env["product.public.category"]
-        base_categ = fields.first(tmpl_id.public_categ_ids)
-        if base_categ:
-            Categories |= base_categ
-            Categories |= _get_parent(base_categ)
-
-        return reversed(Categories)
+        res = super(ProductTemplate, self)._get_combination_info(
+            combination=combination,
+            product_id=product_id,
+            add_qty=add_qty,
+            pricelist=pricelist,
+            parent_combination=parent_combination,
+            only_template=only_template,
+        )
+        if res and "free_qty" in res:
+            res["free_qty"] = 999
+        return res
 
 
 class ProductTemplateAttributeLine(models.Model):
