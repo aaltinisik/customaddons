@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_turkish_title" inherit_id="website.layout"
+              name="Turkish title">
+        <xpath expr="//t[@t-set='additional_title']" position="replace">
+            <t t-set="additional_title" t-value="main_object.name_tr or main_object.name"/>
+        </xpath>
+    </template>
+
+</odoo>

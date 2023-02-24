@@ -11,8 +11,9 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["website", "http_routing", "website_sale"],
+    "depends": ["http_routing", "website", "website_sale"],
     "data": [
+        "views/ir_ui_view_views.xml",
         # "security/ir.model.access.csv",
         # "views/product_attribute_view.xml",
         # "views/product_template_view.xml",
@@ -21,7 +22,10 @@
         # "views/product_public_category_view.xml",
         # "views/product_category_view.xml",
         # "views/sale_order_view.xml",
-        # # TEMPLATES
+        # TEMPLATES
+        "templates/turkish_title.xml",
+        "templates/product_breadcrumb_full.xml",
+        "templates/grid_breadcrumb.xml",
         # "templates/product_attachments_table.xml",
         # "templates/product_features_table.xml",
         # "templates/product_category_filmstrip.xml",
