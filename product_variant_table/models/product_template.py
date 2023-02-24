@@ -29,9 +29,9 @@ class ProductTemplate(models.Model):
             if variant.active and variant.website_published:
                 variants |= variant
 
-        # return variants
+        # Sort variants by the attribute values.
         return variants.sorted(
-            key=lambda v: v.product_template_attribute_value_ids[0].attribute_id.name
+            key=lambda v: v.mapped('product_template_variant_value_ids.product_attribute_value_id.name')
         )
 
     # @api.model
