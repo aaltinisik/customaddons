@@ -132,7 +132,7 @@ class ProductTemplate(models.Model):
             only_template=only_template,
         )
         if res and "free_qty" in res:
-            res["free_qty"] = 999
+            res["free_qty"] = 99999
         return res
 
 
