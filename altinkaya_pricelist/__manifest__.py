@@ -13,13 +13,8 @@
     "category": "Extensions",
     "depends": ["product", "sale"],
     "data": [
-        # "security/ir.model.access.csv",
-        # "views/product_attribute_view.xml",
-        # "views/product_template_view.xml",
-        # "views/product_product_view.xml",
-        # "views/res_partner_view.xml",
-        # # TEMPLATES
-        # "templates/product_attachments_template.xml",
+        "views/product_product_view.xml",
+        "templates/product_price_table.xml",
     ],
     "installable": True,
 }
