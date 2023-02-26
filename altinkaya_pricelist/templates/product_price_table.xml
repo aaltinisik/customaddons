@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_price_table" inherit_id="website_sale.product"
+              name="Product Price Table">
+        <xpath expr="//div[@id='extra_info']/div[@class='row col-12']/div[@id='attachment_table']" position="before">
+            <div class="col-6 mb-2">
+                <table class="table table-bordered table-striped text-center align-middle rounded-3"
+                       id="product_price_table">
+                    <thead class="o_product_table_head">
+                        <tr>
+                            <th>Qty</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1-9</td>
+                            <td><span>₺ <span class="oe_currency_value">1.00</span></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>
