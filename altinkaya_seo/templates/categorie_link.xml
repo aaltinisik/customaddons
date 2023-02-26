@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- This view also makes category name full width. Not only for SEO -->
+    <template id="seo_categorie_link" inherit_id="website_sale.categorie_link" name="SEO Category Link">
+        <xpath expr="//div[@class='form-check d-inline-block']" position="attributes">
+            <attribute name="class" add="w-100" separator=" "/>
+            <attribute name="t-att-data-link-href">keep('/urunler/' + slug(c), category=0)</attribute>
+        </xpath>
+    </template>
+</odoo>
