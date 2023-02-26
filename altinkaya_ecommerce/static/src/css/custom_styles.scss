@@ -6,3 +6,21 @@ header .navbar-brand, header .navbar-brand.logo {
     padding-top: 10px;
     box-shadow: #BCBCBC 0px 1px 0px inset;
 }
+
+.wsale_products_categories_list .form-check-input[type="radio"] {
+    display: none;
+}
+
+.wsale_products_categories_list li.nav-item {
+    padding-top: 3px;
+    box-shadow: #ebebeb 0px 1px 0px inset;
+
+}
+
+li .form-check {
+    padding-left: 0;
+}
+
+.wsale_products_categories_list .accordion-button {
+    width: auto;
+}

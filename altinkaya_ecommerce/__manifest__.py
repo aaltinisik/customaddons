@@ -12,7 +12,13 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["product", "website_sale", "website_sale_comparison"],
+    "depends": [
+        "product",
+        "website_sale",
+        "website_sale_comparison",
+        "altinkaya_pricelist",
+        "altinkaya_seo",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/product_attribute_view.xml",
@@ -25,8 +31,7 @@
         # TEMPLATES
         "templates/product_attachments_table.xml",
         "templates/product_features_table.xml",
-        "templates/product_category_filmstrip.xml",
-        "templates/product_attributes_filter.xml",
+        # "templates/product_attributes_filter.xml", # Todo: Fix this
         "templates/product_template_hide_price.xml",
         "templates/product_html_description.xml",
         "templates/product_template_high_quality_images.xml",

@@ -7,7 +7,6 @@
                ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
             <group name="group_standard_price" position="inside">
-                <field name="sale_price" string="Sale Price"/>
                 <field name="v_cari_urun" string="Partner Special Product"/>
             </group>
         </field>

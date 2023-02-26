@@ -7,10 +7,8 @@ from collections import OrderedDict
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    sale_price = fields.Float(
-        string="Sale Price", help="Sale price for e-commerce sales"
-    )
-
+    # Override the field to remove the domain
+    product_template_variant_value_ids = fields.Many2many(domain=[])
     v_cari_urun = fields.Many2one("res.partner", string="Partner Special Product")
 
     def price_compute(
@@ -21,8 +19,6 @@ class ProductProduct(models.Model):
             "sale_price", uom=uom, currency=currency, company=company, date=date
         )
         return res
-
-    # Todo: default attr value olanları display_name de gizleyecek miyiz v12deki gibi?
 
     def _prepare_categories_for_display(self):
         """
