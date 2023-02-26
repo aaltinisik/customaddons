@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="seo_product_categories_list" inherit_id="website_sale.products_categories_list"
+              name="Product Categories List SEO">
+
+        <xpath expr="//div[@class='wsale_products_categories_list']" position="replace">
+            <div class="wsale_products_categories_list">
+                <ul class="nav d-flex flex-column my-2">
+                    <t t-foreach="categories.filtered(lambda c: c.is_published)" t-as="c">
+                        <t t-call="website_sale.categories_recursive"/>
+                    </t>
+                </ul>
+            </div>
+        </xpath>
+
+    </template>
+
+    <template id="seo_product_category_recursive" inherit_id="website_sale.categories_recursive" name="Category list">
+        <li class="nav-item mb-1">
+            <t t-call="website_sale.categorie_link"/>
+            <ul t-if="c.child_id" class="nav flex-column nav-hierarchy mt-1 ps-3">
+                <t t-foreach="c.child_id" t-as="c">
+                    <t t-if="not search or c.id in search_categories_ids">
+                        <t t-call="website_sale.categories_recursive"/>
+                    </t>
+                </t>
+            </ul>
+        </li>
+    </template>
+
+</odoo>

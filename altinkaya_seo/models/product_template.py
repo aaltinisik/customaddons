@@ -20,12 +20,15 @@ class ProductTemplate(models.Model):
             product.seo_name = slug(product)
 
     def _compute_website_url(self):
-        """Overwrite this method to use custom slug method."""
+        """Overwrite this method to use custom slug method.
+        NOTE: Only compute website url for published products.
+        """
         super(ProductTemplate, self)._compute_website_url()
         for product in self:
-            if product.id:
+            if product.id and product.is_published and product.public_categ_ids:
+                category = fields.first(product.public_categ_ids)
                 product.website_url = "/urunler/%s/%s" % (
-                    slug(product.public_categ_ids),
+                    slug(category),
                     slug(product),
                 )
 

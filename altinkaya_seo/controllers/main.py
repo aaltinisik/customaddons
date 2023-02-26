@@ -8,15 +8,16 @@ from odoo.http import request
 
 
 class WebsiteSaleSEOInherit(WebsiteSale):
-    def sitemap_shop(env, rule, qs):
-        if not qs or qs.lower() in "/shop":
-            yield {"loc": "/shop"}
+    def sitemap_categories(env, rule, qs):
+        if not qs or qs.lower() in "/urunler":
+            yield {"loc": "/urunler"}
 
         Category = env["product.public.category"]
-        dom = sitemap_qs2dom(qs, "/shop/category", Category._rec_name)
+        dom = sitemap_qs2dom(qs, "/urunler", Category._rec_name)
         dom += env["website"].get_current_website().website_domain()
+        dom += [("is_published", "=", True)]
         for cat in Category.search(dom):
-            loc = "/shop/category/%s" % slug(cat)
+            loc = "/urunler/%s" % slug(cat)
             if not qs or qs.lower() in loc:
                 yield {"loc": loc}
 
@@ -33,12 +34,25 @@ class WebsiteSaleSEOInherit(WebsiteSale):
         category = (
             request.env["product.public.category"]
             .sudo()
-            .search([("seo_name", "=", category_seo_name)], limit=1)
+            .search(
+                [
+                    ("seo_name", "=", category_seo_name),
+                    ("is_published", "=", True),
+                ],
+                limit=1,
+            )
         )
         product = (
             request.env["product.template"]
             .sudo()
-            .search([("seo_name", "=", product_seo_name)], limit=1)
+            .search(
+                [
+                    ("seo_name", "=", product_seo_name),
+                    ("public_categ_ids", "in", category.id),
+                    ("is_published", "=", True),
+                ],
+                limit=1,
+            )
         )
         if not (product and category):
             return request.not_found()
@@ -51,14 +65,14 @@ class WebsiteSaleSEOInherit(WebsiteSale):
     @http.route(
         [
             "/urunler",
-            "/urunler/sayfa/<int:page>",
+            "/urunler/page/<int:page>",
             "/urunler/<string:category_seo_name>",
-            "/urunler/<string:category_seo_name>/sayfa/<int:page>",
+            "/urunler/<string:category_seo_name>/page/<int:page>",
         ],
         type="http",
         auth="public",
         website=True,
-        sitemap=sitemap_shop,
+        sitemap=sitemap_categories,
     )
     def seo_shop(
         self,
@@ -75,7 +89,13 @@ class WebsiteSaleSEOInherit(WebsiteSale):
             category = (
                 request.env["product.public.category"]
                 .sudo()
-                .search([("seo_name", "=", category_seo_name)], limit=1)
+                .search(
+                    [
+                        ("seo_name", "=", category_seo_name),
+                        ("is_published", "=", True),
+                    ],
+                    limit=1,
+                )
             )
             if not category:
                 return request.not_found()

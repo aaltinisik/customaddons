@@ -23,9 +23,12 @@
         # "views/product_category_view.xml",
         # "views/sale_order_view.xml",
         # TEMPLATES
-        "templates/turkish_title.xml",
+        "templates/view_pages_title.xml",
         "templates/product_breadcrumb_full.xml",
         "templates/grid_breadcrumb.xml",
+        "templates/shop_category_title.xml",
+        "templates/product_categories_list.xml",
+        "templates/categorie_link.xml",
         # "templates/product_attachments_table.xml",
         # "templates/product_features_table.xml",
         # "templates/product_category_filmstrip.xml",
