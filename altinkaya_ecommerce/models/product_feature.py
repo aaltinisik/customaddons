@@ -59,7 +59,7 @@ class ProductTemplateFeatureLine(models.Model):
             )
         return True
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         res = super(ProductTemplateFeatureLine, self).create(values)
         res._update_product_template_feature_values()
