@@ -1,6 +1,7 @@
 # Copyright 2022 Yiğit Budak (https://github.com/yibudak)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from odoo import api, fields, models
+from odoo import api, models
+from collections import OrderedDict
 
 
 class ProductTemplate(models.Model):
@@ -31,32 +32,32 @@ class ProductTemplate(models.Model):
 
         # Sort variants by the attribute values.
         return variants.sorted(
-            key=lambda v: v.mapped('product_template_variant_value_ids.product_attribute_value_id.name')
+            key=lambda v: v.mapped(
+                "product_template_variant_value_ids.product_attribute_value_id.name"
+            )
         )
 
-    # @api.model
-    # def _build_variant_select_table(self):
-    #     """Build a table of product variants."""
-    #     self.ensure_one()
-    #     active_variant_ids = self.product_variant_ids.filtered(
-    #         lambda p: p.active and p.website_published
-    #     )
-    #     active_attr_ids = active_variant_ids.mapped("attribute_line_ids.attribute_id")
-    #     variant_table = {
-    #         "header": active_attr_ids,
-    #         "rows": [],
-    #     }
-    #
-    #     for product_variant in active_variant_ids:
-    #         row = {
-    #             "product_variant_id": product_variant,
-    #             "product_variant_values": [],
-    #         }
-    #         for attr in active_attr_ids:
-    #             row["product_variant_values"].append(
-    #                 product_variant.product_template_attribute_value_ids.filtered(
-    #                     lambda v: v.attribute_id == attr
-    #                 ).product_attribute_value_id
-    #             )
-    #         variant_table["rows"].append(row)
-    #     return variant_table
+    def new_method_yigit(self):
+        """This method groups variant attributes and returns a list of dictionaries.
+        returns: attribute that sorted by value_ids count.
+        """
+        self.ensure_one()
+        res = {}
+        tmpl_id = self.sudo()
+        for variant in tmpl_id.product_variant_ids:
+            ptav = variant.product_template_variant_value_ids
+            for ptav_id in ptav.filtered(
+                lambda x: x.attribute_id.visibility == "visible"
+            ):
+
+                if ptav_id.attribute_id not in res:
+                    res[ptav_id.attribute_id] = {
+                        "special_type": ptav_id.attribute_id.special_type,
+                        "value_ids": self.env["product.attribute.value"],
+                    }
+                res[ptav_id.attribute_id][
+                    "value_ids"
+                ] |= ptav_id.product_attribute_value_id
+
+        # sort by value_ids count return as dict
+        return OrderedDict(sorted(res.items(), key=lambda i: len(i[1])))

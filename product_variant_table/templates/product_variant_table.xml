@@ -1,58 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="product_attribute_table" inherit_id="sale.variants">
-        <xpath expr="//ul[@t-attf-class='list-unstyled js_add_cart_variants mb-0 #{ul_class}']"
-               position="replace">
+        <xpath expr="//ul[@t-attf-class='list-unstyled js_add_cart_variants mb-0 #{ul_class}']" position="replace">
             <div class="attribute_container d-none"></div>
-            <ul class="d-none js_add_cart_variants mb-0" t-att-data-attribute_exclusions="{'exclusions: []'}"/>
+            <ul class="d-none js_add_cart_variants mb-0"
+                t-att-data-attribute_exclusions="{'exclusions: []'}"/>
             <t t-if="len(product.product_variant_ids) &gt; 1">
-                <t t-set="variants" t-value="product.get_all_variants()"/>
+                <t t-set="product_attributes" t-value="product.new_method_yigit()"/>
                 <div class="container mb-2 rounded-3 o_table_container">
-                    <table class="table table-bordered  table-striped text-center align-middle"
-                           id="product_variants_table">
+                    <table class="table table-bordered  table-striped text-center align-middle" id="product_variants_table">
                         <thead class="o_product_table_head">
                             <tr>
                                 <th style="width:50px;"></th>
-                                <t t-foreach="product.attribute_line_ids.filtered(lambda a: a.attribute_id.visibility == 'visible')"
-                                   t-as="p_attribute">
+                                <t t-foreach="product_attributes.keys()" t-as="p_attribute">
                                     <th>
-                                        <t t-out="p_attribute.attribute_id.name"/>
+                                        <t t-out="p_attribute.name"/>
                                     </th>
                                 </t>
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="variants" t-as="variant">
-                                <tr class="product_variant">
-                                    <td class="text-start">
-                                        <input type="radio"
-                                               t-attf-class="form-check-input product-select"
-                                               t-att-checked="variant == variants[0]"
-                                               t-att-value="variant.id"
-                                               t-attf-name="product-variant-table-select"
-                                               t-att-vals="','.join(map(str, variant.product_template_attribute_value_ids.ids))"
-                                               t-att-data-value_id="variant.id"
-                                               t-att-data-value_name="variant.default_code"/>
-                                    </td>
-                                    <t t-foreach="product.attribute_line_ids.filtered(lambda a: a.attribute_id.visibility == 'visible')"
-                                       t-as="p_attribute">
-                                        <t t-set="is_printed" t-value="False"/>
-                                        <t t-foreach="variant.product_template_attribute_value_ids"
-                                           t-as="p_attribute_value">
-
-                                            <t t-if="p_attribute_value.attribute_id == p_attribute.attribute_id">
-                                                <td>
-                                                    <t t-out="p_attribute_value.name"/>
-                                                    <t t-set="is_printed"
-                                                       t-value="True"/>
-                                                </td>
-                                            </t>
+                            <t t-foreach="product_attributes.values()" t-as="attribute_values">
+                                <t t-if="attribute_values['special_type']">
+                                    <select t-attf-class="form-select product-select special_type">
+                                        <t t-foreach="sorted(attribute_values['value_ids'], key=lambda a: a.numeric_value)" t-as="val">
+                                            <option t-attf-value="#{val.id}">
+                                                <t t-out="val.name"/>
+                                            </option>
                                         </t>
-                                        <t t-if="not is_printed">
-                                            <td><i class="fa fa-times"/></td>
-                                        </t>
+                                    </select>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="attribute_values['value_ids']" t-as="val">
+                                        <tr class="product_variant">
+                                            <td class="text-start">
+                                                <input type="radio" t-attf-class="form-check-input product-select"/>
+                                            </td>
+                                            <td>
+                                                <t t-out="val.name"/>
+                                            </td>
+                                        </tr>
                                     </t>
-                                </tr>
+                                </t>
                             </t>
                         </tbody>
                     </table>
