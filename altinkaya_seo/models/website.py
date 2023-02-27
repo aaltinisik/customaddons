@@ -10,9 +10,12 @@ class Website(models.Model):
     def pager(self, url, total, page=1, step=30, scope=5, url_args=None):
         """Overwrite this method to use custom paths."""
         if "/shop/category" in url:
-            categ_slug = url.lstrip("/shop/category/")
+            categ_slug = url.split("/shop/category/")[-1]
             new_slug = "-".join(categ_slug.split("-")[:-1])
             url = "/urunler/%s" % new_slug
+
+        if "/shop" in url:
+            url = "/urunler"
 
         return super(Website, self).pager(
             url, total, page=page, step=step, scope=scope, url_args=url_args
