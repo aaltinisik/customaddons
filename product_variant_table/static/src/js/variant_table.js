@@ -9,6 +9,17 @@ odoo.define('product_variant_table.variant_handle', function (require) {
     var VariantMixin = require('sale.VariantMixin');
     var WebsiteSale = require('website_sale.website_sale');
 
+    publicWidget.registry.WebsiteSale.include({
+        /**
+         * We need to override this method to prevent the default behavior of
+         * the website_sale module.
+         * @override
+         */
+        triggerVariantChange: function () {
+            return true;
+        },
+    });
+
     publicWidget.registry.VariantTableMixin = publicWidget.Widget.extend(VariantMixin, WebsiteSale, {
         selector: '.oe_website_sale',
         events: {
@@ -37,7 +48,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
          */
 
         _setUrlHash: function ($parent) {
-            var $attributes = $parent.find('input.form-check-input.product-select:checked');
+            var $attributes = $parent.find('input[name="product-variant-table-select"]:checked');
             var $attribute_container = $parent.find('div.attribute_container');
             $attribute_container.empty();
             var vals = $attributes.attr('vals');
@@ -57,22 +68,15 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             if (hash) {
                 var params = $.deparam(hash);
                 if (params['attr']) {
-                    var attributeIds = params['attr'].split(',');
-                    var $inputs = this.$('input.form-check-input.product-select');
-                    _.each(attributeIds, function (id) {
-                        var $toSelect = $inputs.filter('[vals="' + id + '"]');
-                        if ($toSelect.is('input[type="radio"]')) {
-                            $toSelect.prop('checked', true);
-                        } else if ($toSelect.is('option')) {
-                            $toSelect.prop('selected', true);
-                        }
-                    });
-
+                    var attributeIds = params['attr'];
+                    var selectedInput = this.$('input[name="product-variant-table-select"][vals="'+ attributeIds +'"]')
+                    if (selectedInput) {
+                        selectedInput.prop('checked', true);
+                    }
 
                 }
             }
         },
-
 
 
         _getCombinationInfoVariantTable: function (ev) {
@@ -84,7 +88,6 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 'combination': [],
                 'add_qty': parseInt($('input[name="add_qty"]').val()),
                 'pricelist_id': this.pricelistId || false,
-                // ...this._getOptionalCombinationInfoParam($parent),
             }).then((combinationData) => {
                 this._onChangeCombination(ev, parent, combinationData);
                 this._setUrlHash(parent);
