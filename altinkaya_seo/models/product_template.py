@@ -54,3 +54,14 @@ class ProductTemplate(models.Model):
             Categories |= _get_parent(base_categ)
 
         return reversed(Categories)
+
+    @api.model
+    def _search_get_detail(self, website, order, options):
+        """
+        Overwrite this method to add `is_published` filter to base domain.
+        Todo yigit: maybe we don't need this method anymore.
+        """
+        res = super(ProductTemplate, self)._search_get_detail(website, order, options)
+        if res and "base_domain" in res:
+            res["base_domain"] += [[("is_published", "=", True), ("categ_id.is_published", "=", True)]]
+        return res
