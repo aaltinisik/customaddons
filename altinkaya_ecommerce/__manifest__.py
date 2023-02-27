@@ -30,7 +30,7 @@
         "views/sale_order_view.xml",
         # TEMPLATES
         "templates/product_attachments_table.xml",
-        "templates/product_features_table.xml",
+        "templates/product_attrs_features_table.xml",
         # "templates/product_attributes_filter.xml", # Todo: Fix this
         "templates/product_template_hide_price.xml",
         "templates/product_html_description.xml",

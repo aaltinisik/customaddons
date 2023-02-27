@@ -14,7 +14,6 @@ class ProductAttribute(models.Model):
 
     def _get_special_type_range(self):
         """Returns the range of special type attributes.
-        Todo yigit: maybe we should add numberic_value to attribute.value so we can avoid type conversion here.
         """
 
         self.ensure_one()

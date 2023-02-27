@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="product_features_body"
+              inherit_id="website_sale_comparison.product_attributes_body"
+              name="Product features table">
+
+        <xpath expr="//t[@t-set='categories']" position="after">
+            <t t-set="categories"
+               t-value="product._prepare_categories_with_features(categories)"/>
+        </xpath>
+
+        <xpath expr="//div[@id='product_specifications']" position="replace">
+            <div id="product_specifications">
+                <div class="row">
+                    <t t-foreach="categories" t-as="category">
+                        <div class="col-12">
+                            <table class="table">
+                                <t t-if="len(categories) > 1">
+                                    <tr>
+                                        <th class="text-start"
+                                            t-att-colspan="2">
+                                            <span t-if="category"
+                                                  t-field="category.name"/>
+                                            <span t-else="">Uncategorized</span>
+                                        </th>
+                                    </tr>
+                                </t>
+                                <tr t-foreach="categories[category]"
+                                    t-as="ptal">
+                                    <td class="w-25">
+                                        <span t-field="ptal.attribute_id.name"/>
+                                    </td>
+                                    <td class="w-75 text-muted">
+                                        <t t-if="not ptal.attribute_id.special_type">
+                                            <t t-foreach="ptal.value_ids"
+                                               t-as="pav">
+                                                <span t-field="pav.name"/>
+                                                <t t-if="not pav_last">,</t>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-esc="ptal.attribute_id._get_special_type_range()"></span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
