@@ -23,7 +23,9 @@ odoo.define('product_variant_table.variant_handle', function (require) {
     publicWidget.registry.VariantTableMixin = publicWidget.Widget.extend(VariantMixin, WebsiteSale, {
         selector: '.oe_website_sale',
         events: {
-            'change input[name="product-variant-table-select"]': '_getCombinationInfoVariantTable'
+            'change input[name="product-variant-table-select"]': '_getCombinationInfoVariantTable',
+            'change form .js_product:first input[name="add_qty"]': '_getCombinationInfoVariantTable',
+            'change select#special-attr-selector': '_getCombinationInfoVariantTable',
         },
 
         /**
@@ -50,6 +52,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         _setUrlHash: function ($parent) {
             var $attributes = $parent.find('input[name="product-variant-table-select"]:checked');
             var $attribute_container = $parent.find('div.attribute_container');
+            var $specialAttrSelector = $parent.find('#special-attr-selector');
             $attribute_container.empty();
             var vals = $attributes.attr('vals');
             $.each(vals.split(","), function (index, value) {
@@ -60,6 +63,18 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                     'checked': 'checked',
                 }).val(value).appendTo($attribute_container);
             });
+            if ($specialAttrSelector.length > 0) {
+                $("<input/>").attr({
+                    'value_id': $specialAttrSelector.val(),
+                    'type': 'checkbox',
+                    'class': 'js_variant_change d-none',
+                    'checked': 'checked',
+                }).val($specialAttrSelector.val()).appendTo($attribute_container);
+                if (vals) {
+                    vals += ',' + $specialAttrSelector.val();
+                }
+            }
+
             window.location.hash = 'attr=' + vals;
         },
 
@@ -73,6 +88,11 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                     if (selectedInput) {
                         selectedInput.prop('checked', true);
                     }
+                    var specialAttrSelector = this.$('#special-attr-selector');
+                    if (specialAttrSelector.length > 0) {
+                        var specialAttrId = attributeIds.split(',').pop();
+                        specialAttrSelector.val(specialAttrId);
+                    }
 
                 }
             }
@@ -80,18 +100,35 @@ odoo.define('product_variant_table.variant_handle', function (require) {
 
 
         _getCombinationInfoVariantTable: function (ev) {
-            var selected_product_id = parseInt(ev.currentTarget.value);
             var parent = $('div.js_product.js_main_product.mb-3');
+
+            let $combination_el;
+            var combinationArray = [];
+            var $specialAttrSelector = this.$el.find('#special-attr-selector');
+
+            if (ev.currentTarget.className !== 'form-check-input product-select') {
+                $combination_el = this.$el.find('input[name="product-variant-table-select"]:checked');
+            }
+            else {
+                $combination_el = $(ev.currentTarget);
+            }
+
+            combinationArray = $combination_el.attr('vals').split(',').map((str) => Number(str));
+
+            if($specialAttrSelector.length > 0) {
+                combinationArray.push(Number($specialAttrSelector.val()));
+            }
+
             return ajax.jsonRpc(this._getUri('/sale/get_combination_info_website'), 'call', {
                 'product_template_id': parseInt($('.product_template_id').val()),
-                'product_id': selected_product_id,
-                'combination': [],
+                'product_id': false,
+                'parent_combination': [],
+                'combination': combinationArray,
                 'add_qty': parseInt($('input[name="add_qty"]').val()),
                 'pricelist_id': this.pricelistId || false,
             }).then((combinationData) => {
                 this._onChangeCombination(ev, parent, combinationData);
                 this._setUrlHash(parent);
-                this._checkExclusions(parent, [], combinationData.parent_exclusions);
             });
         },
     });

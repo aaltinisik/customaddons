@@ -6,13 +6,14 @@
             <ul class="d-none js_add_cart_variants mb-0"
                 t-att-data-attribute_exclusions="{'exclusions: []'}"/>
             <t t-if="len(product.product_variant_ids) &gt; 1">
-                <t t-set="product_attributes" t-value="product.new_method_yigit()"/>
+                <t t-set="product_attributes" t-value="product._build_product_variant_table()"/>
                 <div class="container mb-2 rounded-3 o_table_container">
-                    <table class="table table-bordered  table-striped text-center align-middle" id="product_variants_table">
+                    <table class="table table-bordered  table-striped text-center align-middle"
+                           id="product_variants_table">
                         <thead class="o_product_table_head">
                             <tr>
                                 <th style="width:50px;"></th>
-                                <t t-foreach="product_attributes.keys()" t-as="p_attribute">
+                                <t t-foreach="product_attributes['header']" t-as="p_attribute">
                                     <th>
                                         <t t-out="p_attribute.name"/>
                                     </th>
@@ -20,28 +21,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="product_attributes.values()" t-as="attribute_values">
-                                <t t-if="attribute_values['special_type']">
-                                    <select t-attf-class="form-select product-select special_type">
-                                        <t t-foreach="sorted(attribute_values['value_ids'], key=lambda a: a.numeric_value)" t-as="val">
-                                            <option t-attf-value="#{val.id}">
-                                                <t t-out="val.name"/>
-                                            </option>
+                            <t t-set="first_combination" t-value="product_attributes['rows'][0]"/>
+                            <t t-foreach="product_attributes['rows']" t-as="attribute_values">
+                                <tr>
+                                    <td class="text-start">
+                                        <input type="radio"
+                                               t-attf-class="form-check-input product-select"
+                                               t-attf-name="product-variant-table-select"
+                                               t-att-checked="attribute_values == first_combination and 'checked' or None"
+                                               t-att-vals="','.join([str(x.id) for x in attribute_values])"
+                                        />
+                                    </td>
+                                    <t t-foreach="attribute_values" t-as="attr_val">
+                                        <t t-set="is_printed" t-value="False"/>
+                                        <t t-if="attr_val.attribute_id in product_attributes['header']">
+                                            <t t-set="is_printed" t-value="True"/>
+                                            <td t-esc="attr_val.name"></td>
                                         </t>
-                                    </select>
-                                </t>
-                                <t t-else="">
-                                    <t t-foreach="attribute_values['value_ids']" t-as="val">
-                                        <tr class="product_variant">
-                                            <td class="text-start">
-                                                <input type="radio" t-attf-class="form-check-input product-select"/>
-                                            </td>
+                                        <t t-if="not is_printed">
                                             <td>
-                                                <t t-out="val.name"/>
+                                                <i class="fa fa-times"/>
                                             </td>
-                                        </tr>
+                                        </t>
                                     </t>
-                                </t>
+                                    <t t-if="attribute_values == first_combination and product_attributes['has_special_attr']">
+                                        <td t-attf-rowspan="#{len(product_attributes['rows'])}">
+                                            <select class="form-select" id="special-attr-selector">
+                                                <t t-foreach="product_attributes['special_attr']" t-as="special_attr">
+                                                    <option t-att-value="special_attr.id" t-esc="special_attr.name"/>
+                                                </t>
+                                            </select>
+                                        </td>
+                                    </t>
+                                </tr>
                             </t>
                         </tbody>
                     </table>
