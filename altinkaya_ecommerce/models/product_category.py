@@ -18,3 +18,13 @@ class ProductCategory(models.Model):
         help="Gives the sequence order when displaying a list of product categories.",
         default=100,
     )
+
+    show_in_pricelist = fields.Boolean(
+        string="Show in Pricelist",
+        help="If checked, it will allow you to show the category in pricelist.",
+    )
+
+    pricelist_discount_scales = fields.Char(
+        string="Pricelist Discount Scales",
+        help="If you want to apply discount scales to the products in this category, ",
+    )

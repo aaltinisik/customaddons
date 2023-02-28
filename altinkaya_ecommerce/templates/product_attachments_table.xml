@@ -2,7 +2,7 @@
 <odoo>
     <template id="product_attributes_body" inherit_id="website_sale.product"
               name="Product attributes table">
-        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="before">
+        <xpath expr="//div[@id='o_product_terms_and_share']" position="after">
             <t t-set="attachments"
                t-value="product._prepare_product_attachments_table()"/>
             <t t-if="attachments">
