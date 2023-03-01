@@ -27,7 +27,7 @@
                                 </t>
                                 <tr t-foreach="categories[category]"
                                     t-as="ptal">
-                                    <td class="w-25">
+                                    <td class="w-25 attr_table_name">
                                         <span t-field="ptal.attribute_id.name"/>
                                     </td>
                                     <td class="w-75 text-muted">
