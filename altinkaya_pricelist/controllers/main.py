@@ -31,21 +31,29 @@ class WebsiteSaleInherit(WebsiteSale):
             price_scales = product.categ_id.pricelist_discount_scales
             if not price_scales:
                 return False
-            price_scales = [int(x) for x in price_scales.split(",")]
-            for idx, scale in enumerate(price_scales):
+
+            # initial scale is 1 qty
+            price_scales = [1] + [int(x) for x in price_scales.split(",")]
+            for idx, scale in enumerate(price_scales[:3]):
+                # compute a qty in scale
                 price = pricelist._compute_price_rule(
                     product, scale, uom=product.uom_id, date=fields.Datetime.now()
                 )
                 if price:
-                    start = price_scales[idx - 1] if idx > 0 else 1
+                    start = price_scales[idx]
+                    end = (
+                        "- %s" % (price_scales[idx + 1] - 1)
+                        # -1 because we want to show 1-9, 10-19, 20-29, 30+
+                        if idx + 1 < len(price_scales)
+                        else "+"
+                    )
 
                     pricelist_content.append(
                         {
-                            "qty": "%s - %s" % (start, price_scales[idx]),
+                            "qty": "%s%s" % (start, end),
                             "price": round(price[product.id][0], 2),
                         }
                     )
-            request.env["ir.ui.view"].clear_caches()
             table_html = (
                 request.env["ir.ui.view"]
                 .with_context(lang=request.env.context.get("lang") or "tr_TR")

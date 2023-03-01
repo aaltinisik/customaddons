@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 18:51+0000\n"
-"PO-Revision-Date: 2023-02-28 18:51+0000\n"
+"POT-Creation-Date: 2023-03-01 14:55+0000\n"
+"PO-Revision-Date: 2023-03-01 14:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,23 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_pricelist
-#: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table
-#: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table_html
-msgid "1-9"
-msgstr "1-9"
-
-#. module: altinkaya_pricelist
 #: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table_html
 msgid ""
-"<span>₺\n"
-"                            <span class=\"oe_currency_value\">1.00</span>\n"
-"                        </span>"
+"<span class=\"text-muted\" style=\"font-size:0.75rem;\">* Contact us for "
+"higher quantities.</span>"
 msgstr ""
-
-#. module: altinkaya_pricelist
-#: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table
-msgid "<span>₺ <span class=\"oe_currency_value\">1.00</span></span>"
-msgstr ""
+"<span class=\"text-muted\" style=\"font-size:0.75rem;\">* Daha yüksek "
+"alımlar için bizimle iletişime geçiniz.</span>"
 
 #. module: altinkaya_pricelist
 #: model:ir.model.fields,help:altinkaya_pricelist.field_product_pricelist_item__base
@@ -55,10 +45,9 @@ msgstr "Buna göre"
 #. module: altinkaya_pricelist
 #: model:ir.model.fields,help:altinkaya_pricelist.field_product_template__sale_price
 msgid "Dummy price field for product.template"
-msgstr ""
+msgstr "product.template için sahte fiyat alanı"
 
 #. module: altinkaya_pricelist
-#: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table
 #: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table_html
 msgid "Price"
 msgstr "Fiyat"
@@ -84,24 +73,23 @@ msgid "Product Variant"
 msgstr "Ürün Varyantı"
 
 #. module: altinkaya_pricelist
-#: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table
 #: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_price_table_html
-msgid "Qty"
-msgstr "Adet"
+msgid "Qty*"
+msgstr "Adet*"
 
 #. module: altinkaya_pricelist
 #: model:ir.model.fields,field_description:altinkaya_pricelist.field_product_product__sale_price
 #: model:ir.model.fields,field_description:altinkaya_pricelist.field_product_template__sale_price
 #: model_terms:ir.ui.view,arch_db:altinkaya_pricelist.product_template_form_pricelist
 msgid "Sale Price"
-msgstr ""
+msgstr "Satış Fiyatı"
 
 #. module: altinkaya_pricelist
 #: model:ir.model.fields,help:altinkaya_pricelist.field_product_product__sale_price
 msgid "Sale price for e-commerce sales"
-msgstr ""
+msgstr "E-ticaret için satış fiyatı"
 
 #. module: altinkaya_pricelist
 #: model:ir.model.fields.selection,name:altinkaya_pricelist.selection__product_pricelist_item__base__sale_price
 msgid "Website Sale Price"
-msgstr ""
+msgstr "Website Satış Fiyatı"

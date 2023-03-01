@@ -31,14 +31,20 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         /**
          * @constructor
          */
-        init: function (parent) {
+        init: function ($parent) {
             this._super.apply(this, arguments);
         },
 
         start() {
             const def = this._super(...arguments);
-            this._applyHash();
-            this.$el.find('input[name="product-variant-table-select"]:checked').trigger('change');
+            let $parent = this.$el;
+            if ($parent.find("#product_variants_table").length > 0) {
+                this._applyHash();
+                this.$el.find('input[name="product-variant-table-select"]:checked').trigger('change');
+                
+            } else {
+                $parent.find('form .js_product:first input[name="add_qty"]').trigger('change');
+            }
             return def;
         },
         /**
@@ -112,38 +118,41 @@ odoo.define('product_variant_table.variant_handle', function (require) {
 
 
         _getCombinationInfoVariantTable: function (ev) {
-            var parent = $('div.js_product.js_main_product.mb-3');
-
+            var $parent = $('div.js_product.js_main_product.mb-3');
             let $combination_el;
             var combinationArray = [];
+            var productId = false;
             var $specialAttrSelector = this.$el.find('#special-attr-selector');
 
-            if (ev.currentTarget.className !== 'form-check-input product-select') {
+            if ($parent.find("#product_variants_table").length > 0) {
+                // If product has combinations
+                // We need this if-else because we're overriding the default
+                // behavior of the website_sale module.
                 $combination_el = this.$el.find('input[name="product-variant-table-select"]:checked');
+                combinationArray = $combination_el.attr('vals').split(',').map((str) => Number(str));
+                if ($specialAttrSelector.length > 0) {
+                    combinationArray.push(Number($specialAttrSelector.val()));
+                }
             } else {
-                $combination_el = $(ev.currentTarget);
-            }
-
-            combinationArray = $combination_el.attr('vals').split(',').map((str) => Number(str));
-
-            if ($specialAttrSelector.length > 0) {
-                combinationArray.push(Number($specialAttrSelector.val()));
+                productId = parseInt($parent.find('input[name="product_id"]').val());
             }
 
             return ajax.jsonRpc(this._getUri('/sale/get_combination_info_website'), 'call', {
                 'product_template_id': parseInt($('.product_template_id').val()),
-                'product_id': false,
+                'product_id': productId,
                 'parent_combination': [],
                 'combination': combinationArray,
                 'add_qty': parseInt($('input[name="add_qty"]').val()),
                 'pricelist_id': this.pricelistId || false,
             }).then((combinationData) => {
-                this._onChangeCombination(ev, parent, combinationData);
-                this._setUrlHash(parent);
+                this._onChangeCombination(ev, $parent, combinationData);
+                if (combinationArray.length > 0) {
+                    this._setUrlHash($parent);
+                }
                 if (combinationData.is_combination_possible) {
-                    this._renderPricelistTable(parent, combinationData);
+                    this._renderPricelistTable($parent, combinationData);
                 } else {
-                    parent.find('.js_pricelist_table').html('');
+                    $parent.find('.js_pricelist_table').html('');
                 }
             });
         },
