@@ -99,16 +99,15 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         },
 
         _renderPricelistTable: function ($parent, combinationData) {
-            if (combinationData.is_combination_possible) {
-                return ajax.jsonRpc(this._getUri('/sale/get_combination_pricelist_info'), 'call', {
-                    'product_id': combinationData.product_id,
-                }).then((pricelistTable) => {
-                    if(pricelistTable.table_html) {
-                        $parent.find('.js_pricelist_table').html(pricelistTable.table_html);
-                    }
 
-                });
-            }
+            return ajax.jsonRpc(this._getUri('/sale/get_combination_pricelist_info'), 'call', {
+                'product_id': combinationData.product_id,
+            }).then((pricelistTable) => {
+                if (pricelistTable.table_html) {
+                    $parent.find('.js_pricelist_table').html(pricelistTable.table_html);
+                }
+
+            });
         },
 
 
@@ -141,7 +140,11 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             }).then((combinationData) => {
                 this._onChangeCombination(ev, parent, combinationData);
                 this._setUrlHash(parent);
-                this._renderPricelistTable(parent, combinationData);
+                if (combinationData.is_combination_possible) {
+                    this._renderPricelistTable(parent, combinationData);
+                } else {
+                    parent.find('.js_pricelist_table').html('');
+                }
             });
         },
     });
