@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cart_lines_full_ecommecre" inherit_id="website_sale.cart_lines"
+              name="Cart Lines Full">
+
+        <xpath expr="//th[@class='td-img']" position="after">
+            <th class="text-center td-qty">Unit Price</th>
+        </xpath>
+
+        <!-- TODO: add unit price to cart lines -->
+
+
+    </template>
+</odoo>
