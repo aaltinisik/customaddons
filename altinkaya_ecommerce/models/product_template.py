@@ -25,6 +25,7 @@ class ProductTemplate(models.Model):
     short_public_description = fields.Text(
         "Short Description for e-Commerce",
         copy=False,
+        translate=True,
     )
 
     website_attachment_ids = fields.Many2many(
