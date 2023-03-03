@@ -7,6 +7,7 @@ from odoo.tools.translate import html_translate
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
+    _order = "website_sequence asc, name"
 
     is_published = fields.Boolean(
         string="Is Published",
@@ -38,6 +39,25 @@ class ProductTemplate(models.Model):
         string="Features",
     )
 
+    website_sequence = fields.Integer(
+        "Website Sequence",
+        help="Determine the display order in the Website E-commerce",
+        default=lambda self: self._default_website_sequence(),
+        copy=False,
+    )
+
+    def _default_website_sequence(self):
+        """
+        This method is implemented from Odoo 16.0
+        Check the following link for more information:
+        https://6sn.de/websitesequence
+        """
+        self._cr.execute("SELECT MAX(website_sequence) FROM %s" % self._table)
+        max_sequence = self._cr.fetchone()[0]
+        if max_sequence is None:
+            return 10000
+        return max_sequence + 5
+
     @api.multi
     def write(self, vals):
         """Prevent saving attributes with single value."""
@@ -60,7 +80,9 @@ class ProductTemplate(models.Model):
                 _("You can not fill missing product of non" " variant product.")
             )
 
-        tmpl_attribute_lines = self.attribute_line_ids.filtered(lambda x: x.attribute_id.allow_filling)
+        tmpl_attribute_lines = self.attribute_line_ids.filtered(
+            lambda x: x.attribute_id.allow_filling
+        )
         required_attrs = tmpl_attribute_lines.mapped("attribute_id")
         filled_variant_ids = []
 
