@@ -70,41 +70,41 @@ class ProductPricelistItem(models.Model):
         ondelete={"sale_price": "set default"},
     )
 
-    def _compute_base_price(self, product, quantity, uom, date, target_currency):
-        """Compute the base price for a given rule
-
-        :param product: recordset of product (product.product/product.template)
-        :param float qty: quantity of products requested (in given uom)
-        :param uom: unit of measure (uom.uom record)
-        :param datetime date: date to use for price computation and currency conversions
-        :param target_currency: pricelist currency
-
-        :returns: base price, expressed in provided pricelist currency
-        :rtype: float
-        """
-        target_currency.ensure_one()
-        usd_currency = self.env.ref("base.USD")
-        rule_base = self.base or "list_price"
-        if rule_base == "pricelist" and self.base_pricelist_id:
-            price = self.base_pricelist_id._get_product_price(
-                product, quantity, uom, date
-            )
-            src_currency = self.base_pricelist_id.currency_id
-        elif rule_base == "standard_price":
-            src_currency = product.cost_currency_id
-            price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
-
-        elif rule_base == "sale_price":
-            src_currency = usd_currency
-            price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
-
-        else:  # list_price
-            src_currency = product.currency_id
-            price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
-
-        if src_currency != target_currency:
-            price = src_currency._convert(
-                price, target_currency, self.env.company, date, round=False
-            )
-
-        return price
+    # def _compute_base_price(self, product, quantity, uom, date, target_currency):
+    #     """Compute the base price for a given rule
+    #
+    #     :param product: recordset of product (product.product/product.template)
+    #     :param float qty: quantity of products requested (in given uom)
+    #     :param uom: unit of measure (uom.uom record)
+    #     :param datetime date: date to use for price computation and currency conversions
+    #     :param target_currency: pricelist currency
+    #
+    #     :returns: base price, expressed in provided pricelist currency
+    #     :rtype: float
+    #     """
+    #     target_currency.ensure_one()
+    #     usd_currency = self.env.ref("base.USD")
+    #     rule_base = self.base or "list_price"
+    #     if rule_base == "pricelist" and self.base_pricelist_id:
+    #         price = self.base_pricelist_id._get_product_price(
+    #             product, quantity, uom, date
+    #         )
+    #         src_currency = self.base_pricelist_id.currency_id
+    #     elif rule_base == "standard_price":
+    #         src_currency = product.cost_currency_id
+    #         price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
+    #
+    #     elif rule_base == "sale_price":
+    #         src_currency = usd_currency
+    #         price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
+    #
+    #     else:  # list_price
+    #         src_currency = product.currency_id
+    #         price = product.price_compute(rule_base, uom=uom, date=date)[product.id]
+    #
+    #     if src_currency != target_currency:
+    #         price = src_currency._convert(
+    #             price, target_currency, self.env.company, date, round=False
+    #         )
+    #
+    #     return price
