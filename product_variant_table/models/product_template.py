@@ -33,6 +33,9 @@ class ProductTemplate(models.Model):
                 lambda x: x.attribute_id.visibility == "visible"
             )
 
+            if not ptav:  # skip if there is no visible attribute
+                continue
+
             special_attr = ptav.filtered(lambda x: x.attribute_id.special_type)
             if special_attr:
                 # pop special attribute from ptav
