@@ -10,6 +10,32 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    def _search_nace_product_categ(self, operator, value):
+        return [
+            (
+                "secondary_nace_ids.product_categ_ids",
+                operator,
+                value,
+            )
+        ]
+
+    nace_product_categ_ids = fields.Many2many(
+        search="_search_nace_product_categ",
+    )
+
+    def _search_property_product_pricelist(self, operator, value):
+        """
+        Actually this is not a real property, but a computed field.
+        It takes too long to search for all partners and then filter them.
+        So we are searching for sale orders with the given pricelist.
+        """
+        so_list = self.env['sale.order'].search([('pricelist_id', operator, value)])
+        return [('id', 'in', so_list.mapped('partner_id').ids)]
+
+    property_product_pricelist = fields.Many2one(
+        search="_search_property_product_pricelist",
+    )
+
     z_old_tel = fields.Char("Eski Tel", size=64, required=False)
     z_old_fax = fields.Char("Eski Faks", size=64, required=False)
     z_old_cep = fields.Char("Eski Cep", size=64, required=False)
