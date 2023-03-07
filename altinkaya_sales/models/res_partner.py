@@ -10,6 +10,19 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    def _search_nace_product_categ(self, operator, value):
+        return [
+            (
+                "secondary_nace_ids.product_categ_ids",
+                operator,
+                value,
+            )
+        ]
+
+    nace_product_categ_ids = fields.Many2many(
+        search="_search_nace_product_categ",
+    )
+
     z_old_tel = fields.Char("Eski Tel", size=64, required=False)
     z_old_fax = fields.Char("Eski Faks", size=64, required=False)
     z_old_cep = fields.Char("Eski Cep", size=64, required=False)
