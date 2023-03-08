@@ -26,14 +26,21 @@ class ProductTemplate(models.Model):
             if attr_line.attribute_id.special_type:
                 table_content["has_special_attr"] = True
 
-        for variant in tmpl_id.product_variant_ids.filtered(
+        sale_variants = tmpl_id.product_variant_ids.filtered(
             lambda p: p.is_published and p.sale_ok
-        ):
+        )
+        variant_count = self._get_common_attr_count(sale_variants)
+
+        for variant in sale_variants:
             ptav = variant.product_template_variant_value_ids.filtered(
                 lambda x: x.attribute_id.visibility == "visible"
             )
 
             if not ptav:  # skip if there is no visible attribute
+                continue
+
+            if len(ptav) != variant_count:
+                # skip if there is no common attribute
                 continue
 
             special_attr = ptav.filtered(lambda x: x.attribute_id.special_type)
@@ -60,3 +67,16 @@ class ProductTemplate(models.Model):
         )
 
         return table_content
+
+    def _get_common_attr_count(self, variants):
+        """
+        This method returns the number of common attributes.
+        """
+        attr_counts = []
+        for variant in variants:
+            ptav = variant.product_template_variant_value_ids.filtered(
+                lambda x: x.attribute_id.visibility == "visible"
+            )
+            attr_counts.append(len(ptav))
+
+        return max(attr_counts)
