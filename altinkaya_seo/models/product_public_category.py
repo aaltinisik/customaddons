@@ -17,4 +17,6 @@ class ProductPublicCategory(models.Model):
     @api.depends("name")
     def _compute_seo_name(self):
         for category in self:
+            # we need to set it to empty string first
+            category.seo_name = ""
             category.seo_name = slug(category)
