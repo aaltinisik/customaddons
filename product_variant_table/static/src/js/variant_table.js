@@ -18,6 +18,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         triggerVariantChange: function () {
             return true;
         },
+
     });
 
     publicWidget.registry.VariantTableMixin = publicWidget.Widget.extend(VariantMixin, WebsiteSale, {
@@ -41,7 +42,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             if ($parent.find("#product_variants_table").length > 0) {
                 this._applyHash();
                 this.$el.find('input[name="product-variant-table-select"]:checked').trigger('change');
-                
+
             } else {
                 $parent.find('form .js_product:first input[name="add_qty"]').trigger('change');
             }
@@ -116,6 +117,15 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             });
         },
 
+
+        _updateProductImage: function ($productContainer, displayImage, productId, productTemplateId) {
+            /**
+             * Since we don't use specific product images for each combination,
+             * no need to update the product image.
+             * @override
+             */
+            return true;
+        },
 
         _getCombinationInfoVariantTable: function (ev) {
             var $parent = $('div.js_product.js_main_product.mb-3');
