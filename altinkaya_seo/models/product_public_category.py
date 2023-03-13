@@ -20,3 +20,12 @@ class ProductPublicCategory(models.Model):
             # we need to set it to empty string first
             category.seo_name = ""
             category.seo_name = slug(category)
+
+    def _search_render_results(self, fetch_fields, mapping, icon, limit):
+        results_data = super()._search_render_results(
+            fetch_fields, mapping, icon, limit
+        )
+        for data in results_data:
+            category = self.browse(data["id"])
+            data["url"] = "/urunler/%s" % category.seo_name
+        return results_data
