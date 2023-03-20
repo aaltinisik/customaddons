@@ -39,7 +39,7 @@
                                             </t>
                                         </t>
                                         <t t-else="">
-                                            <span t-esc="ptal.attribute_id._get_special_type_range()"></span>
+                                            <span t-esc="ptal.attribute_id._get_special_type_range(ptal)"></span>
                                         </t>
                                     </td>
                                 </tr>

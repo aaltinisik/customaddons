@@ -14,14 +14,6 @@
     "depends": ["http_routing", "website", "website_sale"],
     "data": [
         "views/ir_ui_view_views.xml",
-        # "security/ir.model.access.csv",
-        # "views/product_attribute_view.xml",
-        # "views/product_template_view.xml",
-        # "views/product_product_view.xml",
-        # "views/res_partner_view.xml",
-        # "views/product_public_category_view.xml",
-        # "views/product_category_view.xml",
-        # "views/sale_order_view.xml",
         # TEMPLATES
         "templates/view_pages_title.xml",
         "templates/product_breadcrumb_full.xml",
@@ -29,15 +21,7 @@
         "templates/shop_category_title.xml",
         "templates/product_categories_list.xml",
         "templates/categorie_link.xml",
-        # "templates/product_attachments_table.xml",
-        # "templates/product_features_table.xml",
-        # "templates/product_category_filmstrip.xml",
-        # "templates/product_attributes_filter.xml",
-        # "templates/product_template_hide_price.xml",
-        # "templates/product_html_description.xml",
-        # "templates/product_template_high_quality_images.xml",
-        # # SNIPPETS
-        # "views/snippets/s_dynamic_category_table.xml",
+        "templates/general_views.xml",
     ],
     "installable": True,
 }

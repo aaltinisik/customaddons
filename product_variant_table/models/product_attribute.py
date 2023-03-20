@@ -12,10 +12,10 @@ class ProductAttribute(models.Model):
         " This attribute will be treated as select input type.",
     )
 
-    def _get_special_type_range(self):
+    def _get_special_type_range(self, ptal):
         """Returns the range of special type attributes.
         """
 
         self.ensure_one()
-        value_list = [int(x) for x in self.value_ids.mapped("numeric_value")]
+        value_list = [int(x) for x in ptal.value_ids.mapped("numeric_value")]
         return "{} mm - {} mm".format(min(value_list), max(value_list))
