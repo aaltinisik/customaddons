@@ -42,7 +42,7 @@ class WebsiteSaleInherit(WebsiteSale):
                 if price:
                     start = price_scales[idx]
                     end = (
-                        "- %s" % (price_scales[idx + 1] - 1)
+                        " - %s" % (price_scales[idx + 1] - 1)
                         # -1 because we want to show 1-9, 10-19, 20-29, 30+
                         if idx + 1 < len(price_scales)
                         else "+"
