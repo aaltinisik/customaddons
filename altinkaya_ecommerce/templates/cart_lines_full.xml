@@ -3,29 +3,28 @@
     <template id="cart_lines_full_ecommerce" inherit_id="website_sale.cart_lines"
               name="Cart Lines Full">
 
+        <xpath expr="//th[@class='text-center td-price']" position="replace" />
+
+        <xpath expr="//th[@class='text-center td-qty']" position="before">
+            <th class="text-center td-price">Unit Price</th>
+        </xpath>
+
+        <xpath expr="//th[@class='text-center td-qty']" position="after">
+            <th class="text-center td-subtotal d-none d-md-table-cell">Subtotal</th>
+        </xpath>
+
+        <xpath expr="//td[@class='text-center td-qty']" position="after">
+            <td class="text-center td-subtotal d-none d-md-table-cell" name="subtotal">
+                <span t-field="line.price_subtotal"
+                          style="white-space: nowrap;"
+                          t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"/>
+            </td>
+        </xpath>
 
 
-<!--        <xpath expr="//th[@class='text-center td-price']" position="replace" />-->
-
-<!--        <xpath expr="//th[@class='text-center td-qty']" position="before">-->
-<!--            <th class="text-center td-price">Unit Price</th>-->
-<!--        </xpath>-->
-
-<!--        <xpath expr="//th[@class='text-center td-action']" position="before">-->
-<!--            <th class="text-center td-subtotal">Subtotal</th>-->
-<!--        </xpath>-->
-
-<!--        <xpath expr="//td[@class='td-action']" position="before">-->
-<!--            <span t-esc="line.price_subtotal"></span>-->
-<!--        </xpath>-->
-
-
-<!--        <xpath expr="//td[@class='td-product_name']" position="after">-->
-<!--            <xpath expr="//td[@name='price']" position="move" />-->
-<!--        </xpath>-->
-
-        <!-- TODO: add unit price to cart lines -->
-
+        <xpath expr="//td[@class='td-product_name']" position="after">
+            <xpath expr="//td[@name='price']" position="move" />
+        </xpath>
 
     </template>
 </odoo>
