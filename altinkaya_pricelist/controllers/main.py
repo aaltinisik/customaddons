@@ -22,8 +22,7 @@ class WebsiteSaleInherit(WebsiteSale):
 
         if request.env.context.get("website_id"):
             current_website = request.env["website"].get_current_website()
-            if not pricelist:
-                pricelist = current_website.get_current_pricelist()
+            pricelist = current_website.get_current_pricelist()
 
         if pricelist and post and post.get("product_id"):
             product_id = post.get("product_id")
