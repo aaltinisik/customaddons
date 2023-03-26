@@ -7,10 +7,9 @@ class Website(models.Model):
     _inherit = "website"
 
     def get_pricelist_available(self, show_visible=False):
-        """Return the list of pricelists that can be used on website for the current user.
-        Country restrictions will be detected with GeoIP (if installed).
-        :param bool show_visible: if True, we don't display pricelist where selectable is False (Eg: Code promo)
-        :returns: pricelist recordset
+        """
+        Override to show partner pricelist if it is not selectable.
+        Maybe we don't need this method since we have get_current_pricelist inherited.
         """
         self.ensure_one()
         website = self.with_company(self.company_id)
@@ -23,6 +22,18 @@ class Website(models.Model):
         website_pricelists = website.sudo().pricelist_ids
         pricelist_ids = website_pricelists.filtered(lambda pl: pl.selectable).ids
         if partner_pricelist:
-            pricelist_ids.append(partner_pricelist.id)
+            return partner_pricelist
 
         return self.env["product.pricelist"].browse(pricelist_ids)
+
+    def get_current_pricelist(self):
+        """
+        Returns the current pricelist for the current user.
+        If the user is logged in and has a pricelist set on the partner, it will be chosen.
+        """
+        res = super(Website, self).get_current_pricelist()
+        website = self.with_company(self.company_id)
+        partner = website.env.user.partner_id
+        if partner and partner.website_pricelist_id:
+            return partner.website_pricelist_id
+        return res
