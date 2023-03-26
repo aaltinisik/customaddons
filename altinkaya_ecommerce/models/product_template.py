@@ -79,6 +79,9 @@ class ProductTemplate(models.Model):
         for line in ptfl.filtered(lambda x: len(x.value_ids) > 0):
             categories[self.env["product.attribute.category"]].append(line)
 
+        if not categories[self.env["product.attribute.category"]]:
+            del categories[self.env["product.attribute.category"]]
+
         return categories
 
     def _get_image_holder(self):
