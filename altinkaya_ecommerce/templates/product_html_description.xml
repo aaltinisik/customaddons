@@ -5,7 +5,8 @@
               name="Description for products">
         <xpath expr="//div[@id='product_full_description']" position="replace">
             <div class="container">
-            <div itemprop="description" t-field="product.public_description" id="product_full_description"/>
+                <div itemprop="description" t-field="product.public_description"
+                     id="product_full_description"/>
             </div>
         </xpath>
     </template>

@@ -2,72 +2,67 @@
 <odoo>
     <template id="product_attributes_body" inherit_id="website_sale.product"
               name="Product attributes table">
-        <xpath expr="//div[@id='o_product_terms_and_share']" position="after">
+        <xpath expr="//div[@itemprop='description']" position="after">
             <t t-set="attachments"
                t-value="product._prepare_product_attachments_table()"/>
             <t t-if="attachments">
+                <style>
+                    .wrap {
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    }
+                </style>
                 <div id="extra_info" class="container">
-                    <div class="row col-12">
-                        <div class="col-8" id="attachment_table">
-                            <table class="table border rounded">
-                                <t t-foreach="attachments" t-as="attachment">
-                                    <tr>
-                                        <span t-if="attachment.usage == 'dxf'">
-                                            <td>
-                                                <h6>
-                                                    <i class="fa fa-file-zip-o"/>
-                                                    DXF
-                                                </h6>
-                                            </td>
-                                        </span>
-                                        <span t-if="attachment.usage == '3d'">
-                                            <td>
-                                                <h6>
-                                                    <i class="fa fa-cube"/>
-                                                    3D
-                                                </h6>
-                                            </td>
-                                        </span>
-                                        <span t-if="attachment.usage == 'pdf'">
-                                            <td>
-                                                <h6>
-                                                    <i class="fa fa-file-pdf-o"/>
-                                                    PDF
-                                                </h6>
-                                            </td>
-                                        </span>
-                                        <span t-if="attachment.usage == 'ip_certificate'">
-                                            <td>
-                                                <h6>
-                                                    <i class="fa fa-file-text-o"/>
-                                                    IP Certificate
-                                                </h6>
-                                            </td>
-                                        </span>
-                                        <span t-if="attachment.usage == 'general'">
-                                            <td>
-                                                <h6>
-                                                    <i class="fa fa-file"/>
-                                                    Other Attachment
-                                                </h6>
-                                            </td>
-                                        </span>
-                                        <td>
-                                            <h6>
-                                                <t t-esc="attachment.name"/>
-                                            </h6>
-                                        </td>
-                                        <td class="text-center">
-                                            <a t-attf-href="/web/content/#{attachment.id}?download=true">
-                                                <h4>
-                                                    <i class="fa fa-download"/>
-                                                </h4>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </table>
-                        </div>
+                    <div class="row">
+                        <t t-foreach="attachments" t-as="attachment">
+
+                            <div class="col-6 col-md-3 my-2 attachment-cell">
+                                <div class="wrap">
+                                    <span t-if="attachment.usage == 'dxf'">
+                                        <h6>
+                                            <i class="fa fa-file-zip-o"/>
+                                            DXF
+                                        </h6>
+                                    </span>
+                                    <span t-if="attachment.usage == '3d'">
+                                        <h6>
+                                            <i class="fa fa-cube"/>
+                                            3D
+                                        </h6>
+                                    </span>
+                                    <span t-if="attachment.usage == 'pdf'">
+                                        <h6>
+                                            <i class="fa fa-file-pdf-o"/>
+                                            PDF
+                                        </h6>
+                                    </span>
+                                    <span t-if="attachment.usage == 'ip_certificate'">
+                                        <h6>
+                                            <i class="fa fa-file-text-o"/>
+                                            IP Certificate
+                                        </h6>
+                                    </span>
+                                    <span t-if="attachment.usage == 'general'">
+                                        <h6>
+                                            <i class="fa fa-file"/>
+                                            Other Attachment
+                                        </h6>
+                                    </span>
+                                    <span>
+                                        <h6>
+                                            <t t-esc="attachment.name"/>
+                                        </h6>
+                                    </span>
+                                    <a t-attf-href="/web/content/#{attachment.id}?download=true">
+                                        <h4>
+                                            <i class="fa fa-download"/>
+                                        </h4>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </t>
+
                     </div>
                 </div>
             </t>
