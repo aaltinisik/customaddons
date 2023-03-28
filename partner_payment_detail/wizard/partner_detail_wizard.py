@@ -81,6 +81,8 @@ class wizard_partner_detail(models.TransientModel):
         sheet.write(0, 12, "ilce")
         sheet.write(0, 13, "il")
         sheet.write(0, 14, "ulke")
+        sheet.write(0, 15, "zirve borc hs.")
+        sheet.write(0, 16, "zirve alacak hs.")
         row = 1
         for res in result.items():
             partner = res[0]
@@ -101,6 +103,8 @@ class wizard_partner_detail(models.TransientModel):
             sheet.write(row, 12, partner.city or "")
             sheet.write(row, 13, partner.state_id.name or "")
             sheet.write(row, 14, partner.country_id.name or "")
+            sheet.write(row, 15,  partner.z_payable_export or "")
+            sheet.write(row, 16, partner.z_receivable_export or "")
             row += 1
         wbk.save(fl)
         fl.seek(0)

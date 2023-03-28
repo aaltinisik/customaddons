@@ -6,3 +6,4 @@ from . import product_feature
 from . import product_product
 from . import product_category
 from . import ir_attachment
+from . import res_partner
