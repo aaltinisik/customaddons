@@ -7,7 +7,7 @@
                t-value="product._prepare_product_attachments_table()"/>
             <t t-if="attachments">
                 <style>
-                    .wrap {
+                    .attachment-wrap {
                     border: 1px solid #ddd;
                     padding: 10px;
                     }
@@ -17,7 +17,7 @@
                         <t t-foreach="attachments" t-as="attachment">
 
                             <div class="col-6 col-md-3 my-2 attachment-cell">
-                                <div class="wrap">
+                                <div class="attachment-wrap">
                                     <span t-if="attachment.usage == 'dxf'">
                                         <h6>
                                             <i class="fa fa-file-zip-o"/>
