@@ -31,7 +31,7 @@
                                         <span t-field="ptal.attribute_id.name"/>
                                     </td>
                                     <td class="w-75 text-muted">
-                                        <t t-if="not ptal.attribute_id.special_type">
+                                        <t t-if="not ptal.attribute_id.grouped">
                                             <t t-foreach="ptal.value_ids"
                                                t-as="pav">
                                                 <span t-field="pav.name"/>
@@ -39,7 +39,7 @@
                                             </t>
                                         </t>
                                         <t t-else="">
-                                            <span t-esc="ptal.attribute_id._get_special_type_range(ptal)"></span>
+                                            <span t-esc="ptal.attribute_id._get_grouped_range(ptal)"></span>
                                         </t>
                                     </td>
                                 </tr>
