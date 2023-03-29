@@ -26,7 +26,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
         events: {
             'change input[name="product-variant-table-select"]': '_getCombinationInfoVariantTable',
             'change form .js_product:first input[name="add_qty"]': '_getCombinationInfoVariantTable',
-            'change select#special-attr-selector': '_getCombinationInfoVariantTable',
+            'change .special-attr-selector': '_getCombinationInfoVariantTable',
         },
 
         /**
@@ -56,13 +56,10 @@ odoo.define('product_variant_table.variant_handle', function (require) {
          * @returns {Deferred}
          */
 
-        _setUrlHash: function ($parent) {
-            var $attributes = $parent.find('input[name="product-variant-table-select"]:checked');
+        _setUrlHash: function ($parent, combinationArray) {
             var $attribute_container = $parent.find('div.attribute_container');
-            var $specialAttrSelector = $parent.find('#special-attr-selector');
             $attribute_container.empty();
-            var vals = $attributes.attr('vals');
-            $.each(vals.split(","), function (index, value) {
+            $.each(combinationArray, function (index, value) {
                 $("<input/>").attr({
                     'value_id': value,
                     'type': 'checkbox',
@@ -70,19 +67,8 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                     'checked': 'checked',
                 }).val(value).appendTo($attribute_container);
             });
-            if ($specialAttrSelector.length > 0) {
-                $("<input/>").attr({
-                    'value_id': $specialAttrSelector.val(),
-                    'type': 'checkbox',
-                    'class': 'js_variant_change d-none',
-                    'checked': 'checked',
-                }).val($specialAttrSelector.val()).appendTo($attribute_container);
-                if (vals) {
-                    vals += ',' + $specialAttrSelector.val();
-                }
-            }
 
-            window.location.hash = 'attr=' + vals;
+            window.location.hash = 'attr=' + combinationArray.join(",");
         },
 
         _applyHash: function () {
@@ -91,16 +77,18 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 var params = $.deparam(hash);
                 if (params['attr']) {
                     var attributeIds = params['attr'];
-                    var selectedInput = this.$('input[name="product-variant-table-select"][vals="' + attributeIds + '"]')
+                    var selectedInput = this.$('input[name="product-variant-table-select"][vals="' + attributeIds + '"]');
                     if (selectedInput) {
                         selectedInput.prop('checked', true);
                     }
-                    var specialAttrSelector = this.$('#special-attr-selector');
+                    var specialAttrSelector = this.$('.special-attr-selector');
                     if (specialAttrSelector.length > 0) {
-                        var specialAttrId = attributeIds.split(',').pop();
-                        specialAttrSelector.val(specialAttrId);
+                        let attrIds = attributeIds.split(',').slice(-specialAttrSelector.length).reverse();
+                        $(".special-attr-selector").each(function (idx, el) {
+                            let specialAttrId = attrIds.pop();
+                            $(el).val(specialAttrId);
+                        });
                     }
-
                 }
             }
         },
@@ -132,7 +120,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             let $combination_el;
             var combinationArray = [];
             var productId = false;
-            var $specialAttrSelector = this.$el.find('#special-attr-selector');
+            var $specialAttrSelector = this.$el.find('.special-attr-selector');
 
             if ($parent.find("#product_variants_table").length > 0) {
                 // If product has combinations
@@ -141,12 +129,14 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 $combination_el = this.$el.find('input[name="product-variant-table-select"]:checked');
                 combinationArray = $combination_el.attr('vals').split(',').map((str) => Number(str));
                 if ($specialAttrSelector.length > 0) {
-                    combinationArray.push(Number($specialAttrSelector.val()));
+                    $specialAttrSelector.each(function (idx, el) {
+                        combinationArray.push(Number($(el).val()));
+                    });
                 }
             } else {
                 productId = parseInt($parent.find('input[name="product_id"]').val());
             }
-
+            combinationArray = combinationArray.filter(Number);
             return ajax.jsonRpc(this._getUri('/sale/get_combination_info_website'), 'call', {
                 'product_template_id': parseInt($('.product_template_id').val()),
                 'product_id': productId,
@@ -157,7 +147,7 @@ odoo.define('product_variant_table.variant_handle', function (require) {
             }).then((combinationData) => {
                 this._onChangeCombination(ev, $parent, combinationData);
                 if (combinationArray.length > 0) {
-                    this._setUrlHash($parent);
+                    this._setUrlHash($parent, combinationArray);
                 }
                 if (combinationData.is_combination_possible) {
                     this._renderPricelistTable($parent, combinationData);

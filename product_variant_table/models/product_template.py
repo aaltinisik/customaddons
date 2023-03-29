@@ -14,8 +14,8 @@ class ProductTemplate(models.Model):
         table_content = {
             "header": [],
             "rows": [],
-            "has_special_attr": False,
-            "special_attr": set(),
+            "has_grouped_attr": False,
+            "grouped_attr": {},
         }
         tmpl_id = self.sudo()
 
@@ -23,8 +23,11 @@ class ProductTemplate(models.Model):
             if attr_line.attribute_id.visibility == "visible":
                 table_content["header"].append(attr_line.attribute_id)
 
-            if attr_line.attribute_id.special_type:
-                table_content["has_special_attr"] = True
+            if attr_line.attribute_id.grouped:
+                table_content["has_grouped_attr"] = True
+                table_content["grouped_attr"].update(
+                    {attr_line.attribute_id: set()}
+                )
 
         sale_variants = tmpl_id.product_variant_ids.filtered(
             lambda p: p.is_published and p.sale_ok
@@ -43,27 +46,34 @@ class ProductTemplate(models.Model):
                 # skip if there is no common attribute
                 continue
 
-            special_attr = ptav.filtered(lambda x: x.attribute_id.special_type)
-            if special_attr:
-                # pop special attribute from ptav
-                table_content["special_attr"].add(special_attr)
-                ptav -= special_attr
+            for grouped_attr in ptav.filtered(lambda x: x.attribute_id.grouped):
+                # pop grouped attribute from ptav
+                table_content["grouped_attr"][grouped_attr.attribute_id].add(
+                    grouped_attr
+                )
+                ptav -= grouped_attr
 
             table_content["rows"].append(ptav)
 
-        if table_content["has_special_attr"]:
-            # sort special rows by numeric value
-            table_content["special_attr"] = sorted(
-                table_content["special_attr"],
-                key=lambda x: x.product_attribute_value_id.numeric_value,
-            )
+        if table_content["has_grouped_attr"]:
+            # sort grouped rows by numeric value
+            for attr_id, attr_vals in table_content["grouped_attr"].items():
+                table_content["grouped_attr"][attr_id] = sorted(
+                    attr_vals,
+                    key=lambda x: x.product_attribute_value_id.numeric_value,
+                )
 
-        # group rows if there is special attribute, so it won't be repeated
+        # group normal attributes to avoid duplicates
         table_content["rows"] = list(set(table_content["rows"]))
         # sort rows by attribute names
         table_content["rows"] = sorted(
             table_content["rows"],
             key=lambda v: v.mapped("product_attribute_value_id.name"),
+        )
+        # sort table header to match with rows
+        table_content["header"] = sorted(
+            table_content["header"],
+            key=lambda x: x.grouped,
         )
 
         return table_content
