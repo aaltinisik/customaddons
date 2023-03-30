@@ -28,4 +28,4 @@ class ProductAttribute(models.Model):
                 min(value_list), max(value_list), ptal.attribute_id.group_suffix
             )
         else:
-            return ", ".join(str(x) for x in value_list)
+            return ", ".join(str(x) for x in ptal.value_ids.mapped("name"))
