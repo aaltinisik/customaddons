@@ -12,6 +12,10 @@ class Image(models.AbstractModel):
 
     @api.model
     def record_to_html(self, record, field_name, options):
+        """
+        Override to add lightbox support to product images on website.
+        Add lightbox: True to the options dict to enable lightbox.
+        """
         assert options["tagName"] != "img", (
             "Oddly enough, the root tag of an image field can not be img. "
             "That is because the image goes into the tag, or it gets the "
