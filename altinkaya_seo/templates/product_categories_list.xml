@@ -16,16 +16,19 @@
     </template>
 
     <template id="seo_product_category_recursive" inherit_id="website_sale.categories_recursive" name="Category list">
-        <li class="nav-item mb-1">
-            <t t-call="website_sale.categorie_link"/>
-            <ul t-if="c.child_id" class="nav flex-column nav-hierarchy mt-1 ps-3">
-                <t t-foreach="c.child_id" t-as="c">
-                    <t t-if="not search or c.id in search_categories_ids">
-                        <t t-call="website_sale.categories_recursive"/>
+        <xpath expr="//li[@class='nav-item mb-1']" position="replace">
+            <li class="nav-item mb-1">
+                <t t-call="website_sale.categorie_link"/>
+                <ul t-if="c.child_id.filtered(lambda c: c.is_published)" class="nav flex-column nav-hierarchy mt-1 ps-3">
+                    <t t-foreach="c.child_id.filtered(lambda c: c.is_published)" t-as="c">
+                        <t t-if="not search or c.id in search_categories_ids">
+                            <t t-call="website_sale.categories_recursive"/>
+                        </t>
                     </t>
-                </t>
-            </ul>
-        </li>
+                </ul>
+            </li>
+        </xpath>
+
     </template>
 
 </odoo>
