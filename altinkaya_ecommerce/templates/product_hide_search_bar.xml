@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="product_inherit_hide_searchbar" inherit_id="website_sale.product"
+              name="Product Inherit Hide Searchbar">
+        <xpath expr="//section[@id='product_detail']/div[@class='row align-items-center']" position="replace">
+            <div class="row align-items-center">
+                        <div class="col-lg-6 d-flex align-items-center">
+                            <div class="d-flex justify-content-between w-100">
+<!--                                <t t-call="website_sale.search">-->
+<!--                                    <t t-set="search" t-value="False"/>-->
+<!--                                    <t t-set="_form_classes" t-valuef="mb-2 mb-lg-0"/>-->
+<!--                                    <t t-set="_classes" t-value="'me-sm-2'"/>-->
+<!--                                </t>-->
+                                <t t-set="website_sale_pricelists" t-value="website.get_pricelist_available(show_visible=True)" />
+                                <t t-set="hasPricelistDropdown" t-value="website_sale_pricelists and len(website_sale_pricelists)&gt;1"/>
+                                <t t-call="website_sale.pricelist_list">
+                                    <t t-set="_classes" t-valuef="d-lg-inline ms-2"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex align-items-center">
+                            <ol class="breadcrumb p-0 mb-2 m-lg-0">
+                                <li class="breadcrumb-item o_not_editable">
+                                    <a t-att-href="keep(category=0)">All Products</a>
+                                </li>
+                                <li t-if="category" class="breadcrumb-item">
+                                    <a t-att-href="keep('/shop/category/%s' % slug(category), category=0)" t-field="category.name" />
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    <span t-field="product.name" />
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+        </xpath>
+    </template>
+</odoo>

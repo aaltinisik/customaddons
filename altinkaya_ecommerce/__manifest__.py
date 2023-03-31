@@ -36,6 +36,7 @@
         "templates/product_html_description.xml",
         "templates/product_template_high_quality_images.xml",
         "templates/hide_blog_page_title.xml",
+        "templates/product_hide_search_bar.xml",
         "templates/cart_lines_full.xml", # Todo: Fix this
         # SNIPPETS
         "views/snippets/s_dynamic_category_table.xml",
