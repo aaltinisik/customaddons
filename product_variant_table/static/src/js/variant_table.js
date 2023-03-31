@@ -149,6 +149,18 @@ odoo.define('product_variant_table.variant_handle', function (require) {
                 if (combinationArray.length > 0) {
                     this._setUrlHash($parent, combinationArray);
                 }
+                if (combinationData.barcode) {
+                    let $barcode = $("span[data-field-name='barcode']");
+                    if ($barcode.length > 0) {
+                        $barcode.text(combinationData.barcode);
+                    }
+                }
+                if (combinationData.default_code) {
+                    let $default_code = $("span[data-field-name='default_code']");
+                    if ($default_code.length > 0) {
+                        $default_code.text(combinationData.default_code);
+                    }
+                }
                 if (combinationData.is_combination_possible) {
                     this._renderPricelistTable($parent, combinationData);
                 } else {

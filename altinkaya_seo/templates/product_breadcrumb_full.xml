@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="product_full_breadcrumb" inherit_id="website_sale.product"
+    <template id="product_full_breadcrumb" inherit_id="altinkaya_ecommerce.product_inherit_hide_searchbar"
               name="Product Full Breadcrumb">
         <xpath expr="//ol[@class='breadcrumb p-0 mb-2 m-lg-0']" position="replace">
             <ol class="breadcrumb p-0 mb-2 m-lg-0">

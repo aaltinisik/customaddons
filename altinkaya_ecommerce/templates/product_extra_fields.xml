@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="product_extra_field_inherit" inherit_id="website_sale.ecom_show_extra_fields"
+              name="Product Extra Field Name">
+        <xpath expr="//span[@t-esc='product[field.name]']" position="attributes">
+            <attribute name="t-attf-data-field-name">#{field.name}</attribute>
+        </xpath>
+    </template>
+</odoo>

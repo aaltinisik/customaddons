@@ -18,4 +18,5 @@ class WebsiteAltinkayaVariantController(WebsiteSaleVariantController):
         if res.get("product_id"):
             product = request.env["product.product"].browse(res["product_id"])
             res["default_code"] = product.default_code or ""
+            res["barcode"] = product.barcode or ""
         return res
