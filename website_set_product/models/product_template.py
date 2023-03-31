@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
         "Set product?",
         compute="_compute_set_product",
         help="Is this product a set product?"
-        "If set, this product will not be shown in the shop.",
+        "If set, an alert will be shown on the product page.",
     )
 
     sub_component = fields.Boolean(
