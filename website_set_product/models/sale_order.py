@@ -12,4 +12,5 @@ class SaleOrder(models.Model):
         )
         if order_line and order_line.set_product:
             dummy_sol = order_line.explode_set_contents()
-        return dummy_sol
+            return dummy_sol
+        return order_line

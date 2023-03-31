@@ -43,10 +43,13 @@ class ProductTemplate(models.Model):
                   INNER JOIN mrp_bom_line bl ON b.id = bl.bom_id
                   WHERE b.type = 'phantom'
                 ) AS b ON p.id = b.product_tmpl_id
-                WHERE p.id IN {tuple(self.ids)}"""
-        self.env.cr.execute(query)
+                WHERE p.id IN %s"""
+        self.env.cr.execute(query, (tuple(self.ids),))
         result = self.env.cr.fetchall()
         if result:
             result = set([x[0] for x in result])
             for product in self:
                 product.sub_component = product.id in result
+        else:
+            for product in self:
+                product.sub_component = False
