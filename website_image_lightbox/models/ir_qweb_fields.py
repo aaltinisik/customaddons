@@ -88,7 +88,7 @@ class Image(models.AbstractModel):
                     '" data-lightbox="',
                     escape(record.product_tmpl_id.id),
                     '" data-title="',
-                    escape(record.product_tmpl_id.display_name),
+                    escape(record.product_tmpl_id.name),
                     '">',
                 ]
                 + img
