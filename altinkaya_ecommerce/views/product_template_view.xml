@@ -15,6 +15,8 @@
                 <page name="altinkaya_ecommerce" string="Altinkaya E-commerce">
                     <group>
                         <field name="is_published" />
+                        <field name="set_product" />
+                        <field name="sub_component" />
                     </group>
                     <group string="Features">
                         <field name="feature_line_ids"  nolabel="1" widget="one2many_list">
