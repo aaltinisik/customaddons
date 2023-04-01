@@ -11,7 +11,7 @@ class ProductPublicCategory(models.Model):
         comodel_name="website.page",
         string="Description Page",
         help="Page that contains the description of this category",
-        domain="[('website_id', '=', website_id)]",
+        # domain="[('website_id', '=', website_id)]",
     )
 
     def _compute_description(self):
