@@ -47,6 +47,16 @@ class ProductTemplate(models.Model):
         copy=False,
     )
 
+    set_product = fields.Boolean(
+        "Set Product?",
+        help="If set, an alert will be shown on the product page.",
+    )
+
+    sub_component = fields.Boolean(
+        "Sub Component?",
+        help="If set, this product will not be shown in the shop.",
+    )
+
     def _default_website_sequence(self):
         """
         This method is implemented from Odoo 16.0

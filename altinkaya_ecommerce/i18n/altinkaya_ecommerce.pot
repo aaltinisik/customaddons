@@ -171,6 +171,18 @@ msgid "Is Published"
 msgstr ""
 
 #. module: altinkaya_ecommerce
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__set_product
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template__set_product
+msgid "Set Product?"
+msgstr ""
+
+#. module: altinkaya_ecommerce
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__sub_component
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template__sub_component
+msgid "Sub Component?"
+msgstr ""
+
+#. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line____last_update
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value____last_update
 msgid "Last Modified on"
