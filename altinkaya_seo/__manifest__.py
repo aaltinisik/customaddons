@@ -19,6 +19,7 @@
         "templates/product_breadcrumb_full.xml",
         "templates/grid_breadcrumb.xml",
         "templates/shop_category_title.xml",
+        "templates/products_search_form.xml",
         "templates/product_categories_list.xml",
         "templates/categorie_link.xml",
         "templates/general_views.xml",

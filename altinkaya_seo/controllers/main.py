@@ -113,6 +113,11 @@ class WebsiteSaleSEOInherit(WebsiteSale):
             if not category:
                 return request.not_found()
 
+        # Since we're matching category by seo_name, we don't need to pass it to
+        # super().shop() as a parameter.
+        if post.get("category", False):
+            post.pop("category")
+
         return super(WebsiteSaleSEOInherit, self).shop(
             page=page,
             category=category,

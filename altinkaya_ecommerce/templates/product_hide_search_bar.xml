@@ -23,6 +23,7 @@
                                 <li class="breadcrumb-item o_not_editable">
                                     <a t-att-href="keep(category=0)">All Products</a>
                                 </li>
+                                <!-- NOTE: This section will be overrided by altinkaya_seo module. -->
                                 <li t-if="category" class="breadcrumb-item">
                                     <a t-att-href="keep('/shop/category/%s' % slug(category), category=0)" t-field="category.name" />
                                 </li>
