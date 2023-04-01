@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <template id="products_item_inherit" inherit_id="website_sale.products_item"
-              name="Products item">
-        <xpath expr="//div[@class='product_price']" position="attributes">
-            <attribute name="class">product_price d-none</attribute>
-        </xpath>
-    </template>
-</odoo>

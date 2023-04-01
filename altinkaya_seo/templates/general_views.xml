@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="altinkaya_seo_cart_button" inherit_id="website_sale.cart"
-              name="Continue To Shopping URL SEO Fix">
-        <xpath expr="//div[@class='d-flex justify-content-between']/div/a" position="attributes">
-            <attribute name="href">/urunler</attribute>
-        </xpath>
-    </template>
-</odoo>
