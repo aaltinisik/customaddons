@@ -183,6 +183,12 @@ msgid "Sub Component?"
 msgstr ""
 
 #. module: altinkaya_ecommerce
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__qty_increment_step
+#: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template__qty_increment_step
+msgid "Qty Increment Step"
+msgstr ""
+
+#. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line____last_update
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value____last_update
 msgid "Last Modified on"

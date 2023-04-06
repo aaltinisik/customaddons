@@ -57,6 +57,13 @@ class ProductTemplate(models.Model):
         help="If set, this product will not be shown in the shop.",
     )
 
+    qty_increment_step = fields.Integer(
+        string="Qty Increment Step",
+        default=1,
+        help="Set a step for product quantity increment in the product page."
+        " Set 0 to disable this feature.",
+    )
+
     def _default_website_sequence(self):
         """
         This method is implemented from Odoo 16.0
