@@ -13,7 +13,7 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         table_content = {
             "header": [],
-            "rows": [],
+            "rows": set(),
             "has_grouped_attr": False,
             "grouped_attr": {},
         }
@@ -25,9 +25,7 @@ class ProductTemplate(models.Model):
 
             if attr_line.attribute_id.grouped:
                 table_content["has_grouped_attr"] = True
-                table_content["grouped_attr"].update(
-                    {attr_line.attribute_id: set()}
-                )
+                table_content["grouped_attr"].update({attr_line.attribute_id: set()})
 
         sale_variants = tmpl_id.product_variant_ids.filtered(
             lambda p: p.is_published and p.sale_ok
@@ -53,7 +51,7 @@ class ProductTemplate(models.Model):
                 )
                 ptav -= grouped_attr
 
-            table_content["rows"].append(ptav)
+            table_content["rows"].add(ptav)
 
         if table_content["has_grouped_attr"]:
             # sort grouped rows by numeric value
@@ -63,11 +61,9 @@ class ProductTemplate(models.Model):
                     key=lambda x: x.product_attribute_value_id.numeric_value,
                 )
 
-        # group normal attributes to avoid duplicates
-        table_content["rows"] = list(set(table_content["rows"]))
         # sort rows by attribute names
         table_content["rows"] = sorted(
-            table_content["rows"],
+            list(table_content["rows"]),
             key=lambda v: v.mapped("product_attribute_value_id.name"),
         )
         # sort table header to match with rows
