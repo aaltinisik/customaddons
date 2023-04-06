@@ -34,7 +34,8 @@ class WebsiteSnippetFilter(models.Model):
                     .with_context(display_default_code=False)
                     .search(domain, limit=limit, order="website_sequence asc")
                 )
-        return products
+        # Filter out "No combination available" products
+        return products.filtered(lambda p: p._get_contextual_price_tax_selection())
 
     def _get_related_products(self, current_template, domain):
         """
