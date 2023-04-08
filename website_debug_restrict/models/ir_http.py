@@ -13,5 +13,7 @@ class HttpInherit(models.AbstractModel):
         Check if the user is in the debug group and if not, disable debug mode
         """
         super(HttpInherit, cls)._handle_debug()
-        if not request.env.user.has_group("website_debug_restrict.restrict_debug_mode"):
+        if request.env.user and not request.env.user.has_group(
+            "website_debug_restrict.restrict_debug_mode"
+        ):
             request.session.debug = ""
