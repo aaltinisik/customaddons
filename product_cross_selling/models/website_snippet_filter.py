@@ -53,5 +53,19 @@ class WebsiteSnippetFilter(models.Model):
             domain, order="website_sequence asc", limit=20
         )
         for tmpl in tmpl_ids:
-            products |= fields.first(tmpl.product_variant_ids)
+            variant = next(
+                (
+                    variant
+                    for variant in tmpl.product_variant_ids
+                    if not any(
+                        comb == "hidden"
+                        for comb in variant.mapped(
+                            "product_template_variant_value_ids.attribute_id.visibility"
+                        )
+                    )
+                ),
+                None,
+            )
+            if variant:
+                products |= variant
         return products
