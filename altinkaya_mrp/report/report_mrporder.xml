@@ -62,8 +62,7 @@
 
 
                                     <t>
-                                        <t t-if="o.product_uom.id in [1,19,29,30]"><t t-esc="'%.0f'%o.product_qty" /> <span t-field="o.product_uom.name" groups="product.group_uom"/></t>
-                                         <t t-if="not(o.product_uom.id in [1,19,29,30])"><span t-field="o.product_qty"/> <span t-field="o.product_uom.name" groups="product.group_uom"/></t>
+                                        <span t-esc="int(o.product_qty) if round(o.product_qty, 2).is_integer() else '{:.2f}'.format(o.product_qty)"/> <span t-field="o.product_uom.name" groups="product.group_uom"/>
                                       </t>
                         		    <span t-field="o.product_id.display_name"/>
 								</td>
@@ -136,8 +135,7 @@
 
                                     <td class="text-right">
                                         <t>
-                                        <t t-if="line.product_uom.id in [1,19,29,30]"><t t-esc="'%.0f'%line.product_qty" /> <span t-field="line.product_uom.name" groups="product.group_uom"/></t>
-                                         <t t-if="not(line.product_uom.id in [1,19,29,30])"><span t-field="line.product_qty"/> <span t-field="line.product_uom.name" groups="product.group_uom"/></t>
+                                         <span t-esc="int(line.product_qty) if round(line.product_qty, 2).is_integer() else '{:.2f}'.format(line.product_qty)"/> <span t-field="line.product_uom.name" groups="product.group_uom"/>
                                       </t>
                                     </td>
 
@@ -159,8 +157,7 @@
                                     </td>
                                     <td class="text-right">
                                           <t>
-                                        <t t-if="line2.product_uom.id in [1,19,29,30]"><t t-esc="'%.0f'%line2.product_qty" /> <span t-field="line2.product_uom.name" groups="product.group_uom"/></t>
-                                         <t t-if="not(line2.product_uom.id in [1,19,29,30])"><span t-field="line2.product_qty"/> <span t-field="line2.product_uom.name" groups="product.group_uom"/></t>
+                                        <span t-esc="int(line2.product_qty) if round(line2.product_qty, 2).is_integer() else '{:.2f}'.format(line2.product_qty)"/> <span t-field="line2.product_uom.name" groups="product.group_uom"/>
                                       </t>
                                     </td>
                                     <td class="text-center" groups="stock.group_locations">

@@ -75,14 +75,8 @@
 
 
                                         <t>
-                                            <t t-if="o.product_uom_id.category_id.id == 1">
-                                                <t t-esc="'%.0f'%o.product_qty"/>
-                                                <span t-field="o.product_uom_id.name"/>
-                                            </t>
-                                            <t t-if="o.product_uom_id.category_id.id != 1">
-                                                <span t-field="o.product_qty"/>
-                                                <span t-field="o.product_uom_id.name"/>
-                                            </t>
+                                            <t t-esc="int(o.product_qty) if round(o.product_qty, 2).is_integer() else '{:.2f}'.format(o.product_qty)"/>
+                                            <span t-field="o.product_uom_id.name"/>
                                         </t>
                                         <span t-field="o.product_id.display_name"/>
                                     </td>
@@ -190,14 +184,9 @@
 
                                         <td style="font-size:12px;" class="text-right">
                                             <t>
-                                                <t t-if="line.product_uom.category_id.id == 1">
-                                                    <t t-esc="'%.0f'%line.product_qty"/>
-                                                    <span t-field="line.product_uom.name" groups="product.group_uom"/>
-                                                </t>
-                                                <t t-if="line.product_uom.category_id.id != 1">
-                                                    <span t-field="line.product_qty"/>
-                                                    <span t-field="line.product_uom.name" groups="product.group_uom"/>
-                                                </t>
+                                                <t t-esc="int(line.product_qty) if round(line.product_qty, 2).is_integer() else '{:.2f}'.format(line.product_qty)"/>
+                                                <span t-field="line.product_uom.name" groups="product.group_uom"/>
+
                                             </t>
                                         </td>
 
