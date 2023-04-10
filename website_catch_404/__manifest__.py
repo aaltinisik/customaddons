@@ -16,9 +16,6 @@
     "depends": ["website"],
     "data": [
         "security/ir.model.access.csv",
-        # "security/res_users.xml",
-        # TEMPLATE
-        # "templates/cross_selling_on_all_products.xml",
         "views/website_views.xml",
         "views/website_404_errors_views.xml",
     ],
