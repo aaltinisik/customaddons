@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="previous_next_buttons" inherit_id="website_sale.product"
+              name="Set Product ALert">
+        <xpath expr="//div[@id='product_detail_main']"
+               position="before">
+            <t t-if="product.previous_product or product_next_product">
+                <div class="col-12 d-flex justify-content-end">
+                    <t t-if="product.previous_product">
+                        <a t-attf-href="#{product.previous_product.website_url}"
+                           class="btn btn-outline-secondary mx-1 navigation-btn">
+                            <i class="fa fa-arrow-left"/>
+                        </a>
+                    </t>
+                    <t t-if="product.next_product">
+                        <a t-attf-href="#{product.next_product.website_url}"
+                           class="btn btn-outline-secondary mx-1 navigation-btn">
+                            <i class="fa fa-arrow-right"/>
+                        </a>
+                    </t>
+                </div>
+            </t>
+
+        </xpath>
+    </template>
+</odoo>
