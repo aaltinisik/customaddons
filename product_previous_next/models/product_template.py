@@ -19,36 +19,48 @@ class ProductTemplate(models.Model):
     )
 
     """
-    ZIn website_sale module "featured" sort is reversed. So don't worry about the
+    In website_sale module "featured" sort is reversed. So don't worry about the
     computation with wrong domains.
     """
 
+    def _base_order_domain(self, website_id):
+        return [
+            ("sale_ok", "=", True),
+            ("is_published", "=", True),
+            ("categ_id.is_published", "=", True),
+            ("sub_component", "=", False),
+            ("public_categ_ids", "=", self.mapped("public_categ_ids.id")),
+            ("website_id", "in", [website_id.id, False]),
+        ]
+
     def _compute_next_product(self):
+        website_id = self.env["website"].get_current_website()
         for record in self:
+            base_dom = self._base_order_domain(website_id)
             next_product = self.env["product.template"].search(
                 [
                     "&",
-                    ("id", "!=", record.id),
-                    ("id", "<", record.id),
-                    ("is_published", "=", True),
-                    ("categ_id", "=", record.categ_id.id),
-                ],
+                    ("website_sequence", "!=", record.website_sequence),
+                    ("website_sequence", ">", record.website_sequence),
+                ]
+                + base_dom,
                 limit=1,
-                order="website_sequence desc, id desc",
+                order="is_published desc, website_sequence asc, id desc",
             )
             record.next_product = next_product
 
     def _compute_previous_product(self):
+        website_id = self.env["website"].get_current_website()
         for record in self:
+            base_dom = self._base_order_domain(website_id)
             previous_product = self.env["product.template"].search(
                 [
                     "&",
-                    ("id", "!=", record.id),
-                    ("id", ">", record.id),
-                    ("is_published", "=", True),
-                    ("categ_id", "=", record.categ_id.id),
-                ],
+                    ("website_sequence", "!=", record.website_sequence),
+                    ("website_sequence", "<", record.website_sequence),
+                ]
+                + base_dom,
                 limit=1,
-                order="website_sequence asc, id asc",
+                order="is_published desc, website_sequence asc, id desc",
             )
             record.previous_product = previous_product

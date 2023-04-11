@@ -11,5 +11,6 @@ class WebsiteSaleInherit(WebsiteSale):
 
         if search_result:
             search_result = search_result.filtered(lambda p: not p.sub_component)
+            product_count = len(search_result)
 
         return fuzzy_search_term, product_count, search_result

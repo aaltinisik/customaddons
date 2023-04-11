@@ -4,16 +4,18 @@
               name="Set Product ALert">
         <xpath expr="//div[@id='product_detail_main']"
                position="before">
-            <t t-if="product.previous_product or product_next_product">
+            <t t-set="product_previous_product" t-value="product.previous_product"/>
+            <t t-set="product_next_product" t-value="product.next_product"/>
+            <t t-if="product_previous_product or product_next_product">
                 <div class="col-12 d-flex justify-content-end">
-                    <t t-if="product.previous_product">
-                        <a t-attf-href="#{product.previous_product.website_url}"
+                    <t t-if="product_previous_product">
+                        <a t-attf-href="#{product_previous_product.website_url}"
                            class="btn btn-outline-secondary mx-1 navigation-btn">
                             <i class="fa fa-arrow-left"/>
                         </a>
                     </t>
-                    <t t-if="product.next_product">
-                        <a t-attf-href="#{product.next_product.website_url}"
+                    <t t-if="product_next_product">
+                        <a t-attf-href="#{product_next_product.website_url}"
                            class="btn btn-outline-secondary mx-1 navigation-btn">
                             <i class="fa fa-arrow-right"/>
                         </a>
