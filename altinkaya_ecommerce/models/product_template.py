@@ -64,6 +64,21 @@ class ProductTemplate(models.Model):
         " Set 0 to disable this feature.",
     )
 
+    def action_open_v16_product_page(self):
+        """
+        Open the product page in V16.
+        :return:
+        """
+        self.ensure_one()
+        base_url = "http://www.altinkaya.com.tr/web/product_v12_redirect?id=%s"
+        client_action = {
+            'type': 'ir.actions.act_url',
+            'name': "Product E-commerce Page",
+            'target': 'new',
+            'url': base_url % self.id,
+        }
+        return client_action
+
     def _compute_set_products(self):
         phantom_bom = (
             self.env["mrp.bom"]
