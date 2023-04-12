@@ -2,7 +2,9 @@
 
 from odoo import models, fields, api
 from odoo.addons import decimal_precision as dp
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
@@ -191,3 +193,49 @@ class ProductProduct(models.Model):
     def _compute_name_variant_report_name(self):
         result = self.with_context({"display_default_code": False}).name_get()
         return result
+
+    def _compute_set_product_price(self):
+        phantom_boms = self.env["mrp.bom"].search([("type", "=", "phantom")])
+        # line._convert_to_write(line.read()[0])
+        products_2compute = phantom_boms.mapped(
+            "product_tmpl_id.product_variant_ids"
+        ).filtered(lambda p: p.v_fiyat_dolar < 0.001)
+
+        dummy_so = self.env["sale.order"].create(
+            {
+                "name": "Phantom Bom Price Compute",
+                "partner_id": 12515,
+                "partner_invoice_id": 12515,
+                "partner_shipping_id": 12515,
+                "pricelist_id": 136,
+                "warehouse_id": 1,
+                "company_id": 1,
+            }
+        )
+        counter = 0
+        for product in products_2compute:
+            # Create a new sale order line
+            dummy_sol = self.env["sale.order.line"].create(
+                {
+                    "order_id": dummy_so.id,
+                    "product_id": product.id,
+                    "product_uom_qty": 1,
+                    "product_uom": product.uom_id.id,
+                }
+            )
+            # Explode the phantom bom
+            dummy_sol.explode_set_contents()
+            # Compute the price
+            dummy_so.recalculate_prices()
+            # Update the product price
+            _logger.info(
+                "Updating product price for product %s: %s -> %s"
+                % (product.name, product.v_fiyat_dolar, dummy_so.amount_untaxed)
+            )
+            product.v_fiyat_dolar = dummy_so.amount_untaxed
+            counter += 1
+            if counter == 50:
+                counter = 0
+                self.env.cr.commit()
+            # Clear sale order lines
+            dummy_so.order_line.unlink()

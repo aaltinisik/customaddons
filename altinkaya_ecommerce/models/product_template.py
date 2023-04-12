@@ -64,6 +64,42 @@ class ProductTemplate(models.Model):
         " Set 0 to disable this feature.",
     )
 
+    def _compute_set_products(self):
+        phantom_bom = (
+            self.env["mrp.bom"]
+            .sudo()
+            .search([("product_tmpl_id", "in", self.ids), ("type", "=", "phantom")])
+        )
+        for x in phantom_bom:
+            x.product_tmpl_id.set_product = True
+
+    def _compute_sub_component(self):
+        """
+        Multi record method to check if a product is a subcomponent of a set product.
+        """
+        query = f"""SELECT p.id, b.type
+                    FROM product_template p
+                    INNER JOIN (
+                      SELECT DISTINCT pp.product_tmpl_id, b.type
+                      FROM mrp_bom b
+                      INNER JOIN mrp_bom_line bl ON b.id = bl.bom_id
+                      INNER JOIN product_product pp ON bl.product_id = pp.id
+                      WHERE b.type = 'phantom'
+                    ) AS b ON p.id = b.product_tmpl_id
+                    WHERE p.id IN %s"""
+        self.env.cr.execute(query, (tuple(self.ids),))
+        result = self.env.cr.fetchall()
+        if result:
+            result = set([x[0] for x in result])
+            for product in self:
+                try:
+                    product.sub_component = product.id in result
+                except:
+                    pass
+        else:
+            for product in self:
+                product.sub_component = False
+
     def _default_website_sequence(self):
         """
         This method is implemented from Odoo 16.0
