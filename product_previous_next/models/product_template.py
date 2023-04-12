@@ -25,9 +25,10 @@ class ProductTemplate(models.Model):
 
     def _base_order_domain(self, website_id):
         return [
+            ("id", "!=", self.id),
             ("sale_ok", "=", True),
-            ("is_published", "=", True),
             ("categ_id.is_published", "=", True),
+            ("is_published", "=", True),
             ("sub_component", "=", False),
             ("public_categ_ids", "=", self.mapped("public_categ_ids.id")),
             ("website_id", "in", [website_id.id, False]),
@@ -36,12 +37,13 @@ class ProductTemplate(models.Model):
     def _compute_next_product(self):
         website_id = self.env["website"].get_current_website()
         for record in self:
-            base_dom = self._base_order_domain(website_id)
+            base_dom = record._base_order_domain(website_id)
             next_product = self.env["product.template"].search(
                 [
-                    "&",
-                    ("website_sequence", "!=", record.website_sequence),
+                    "|",
+                    ("website_sequence", "=", record.website_sequence),
                     ("website_sequence", ">", record.website_sequence),
+                    ("id", ">", record.id),
                 ]
                 + base_dom,
                 limit=1,
@@ -52,12 +54,13 @@ class ProductTemplate(models.Model):
     def _compute_previous_product(self):
         website_id = self.env["website"].get_current_website()
         for record in self:
-            base_dom = self._base_order_domain(website_id)
+            base_dom = record._base_order_domain(website_id)
             previous_product = self.env["product.template"].search(
                 [
-                    "&",
-                    ("website_sequence", "!=", record.website_sequence),
+                    "|",
+                    ("website_sequence", "=", record.website_sequence),
                     ("website_sequence", "<", record.website_sequence),
+                    ("id", "<", record.id),
                 ]
                 + base_dom,
                 limit=1,
