@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 13:12+0000\n"
-"PO-Revision-Date: 2023-04-12 13:12+0000\n"
+"POT-Creation-Date: 2023-04-14 06:23+0000\n"
+"PO-Revision-Date: 2023-04-14 06:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,17 @@ msgstr "Ek"
 #: model:ir.model,name:altinkaya_ecommerce.model_product_attribute_value
 msgid "Attribute Value"
 msgstr "Nitelik Değerleri"
+
+#. module: altinkaya_ecommerce
+#: code:addons/altinkaya_ecommerce/models/product_template.py:217
+#, python-format
+msgid "Attributes Missing Products"
+msgstr "Nitelikler Eksik Ürünler"
+
+#. module: altinkaya_ecommerce
+#: model:ir.ui.menu,name:altinkaya_ecommerce.menu_attribute_unfilled_products
+msgid "Attributes Unfilled Products"
+msgstr "Nitelik Doldurulmamış Ürünler"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_connector_odoo_unlink
@@ -111,7 +122,7 @@ msgstr "Görünüm sırasını belirle"
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_product__website_sequence
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template__website_sequence
 msgid "Determine the display order in the Website E-commerce"
-msgstr ""
+msgstr "E-Ticaret Web Sitesinde görüntüleme sırasını belirle"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_connector_odoo_unlink__display_name
@@ -162,12 +173,12 @@ msgstr "Genel"
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_category__sequence
 msgid "Gives the sequence order when displaying a list of product categories."
-msgstr ""
+msgstr "Ürün kategorilerinin listesini görüntülerken sıralama sırasını verir."
 
 #. module: altinkaya_ecommerce
 #: selection:product.attribute,visibility:0
 msgid "Hidden"
-msgstr ""
+msgstr "Gizli"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_connector_odoo_unlink__id
@@ -197,18 +208,18 @@ msgstr "Eğer işaretlenirse, ürün web sitesinde yayınlanacaktır."
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_product__set_product
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template__set_product
 msgid "If set, an alert will be shown on the product page."
-msgstr ""
+msgstr "Eğer seçilirse, ürün sayfasında bir uyarı gösterilecektir."
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_product__sub_component
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template__sub_component
 msgid "If set, this product will not be shown in the shop."
-msgstr ""
+msgstr "Eğer seçilirse bu ürün mağazada gösterilmeyecektir."
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_category__is_published
 msgid "If unchecked, it will allow you to hide the category without removing it."
-msgstr ""
+msgstr "Eğer işaretlenmezse, kategoriyi silmeden gizleyebilirsiniz."
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__is_published
@@ -238,6 +249,11 @@ msgid "Last Updated on"
 msgstr "Son Güncelleme"
 
 #. module: altinkaya_ecommerce
+#: model:ir.actions.server,name:altinkaya_ecommerce.action_get_unfilled_products
+msgid "List all unfilled products"
+msgstr "Doldurulmamış tüm ürünleri listele"
+
+#. module: altinkaya_ecommerce
 #: code:addons/altinkaya_ecommerce/models/product_template.py:176
 #, python-format
 msgid "No missing product variants found."
@@ -246,7 +262,7 @@ msgstr "Eksik nitelikli ürün çeşidi bulunamadı."
 #. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
 msgid "Open Sale Page"
-msgstr "Satış Sayfası"
+msgstr "Satış Sayfasını Aç"
 
 #. module: altinkaya_ecommerce
 #: selection:ir.attachment,usage:0
@@ -266,7 +282,7 @@ msgstr "Ürün Niteliği"
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_product_category
 msgid "Product Category"
-msgstr ""
+msgstr "Ürün Kategorisi"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_product_template_feature_line
@@ -299,7 +315,7 @@ msgstr "Ürün Şablon Nitelik Satırı"
 #: code:addons/altinkaya_ecommerce/models/product_template.py:183
 #, python-format
 msgid "Products"
-msgstr ""
+msgstr "Ürünler"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_category__is_published
@@ -328,7 +344,7 @@ msgstr "Set Ürün?"
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_product__qty_increment_step
 #: model:ir.model.fields,help:altinkaya_ecommerce.field_product_template__qty_increment_step
 msgid "Set a step for product quantity increment in the product page. Set 0 to disable this feature."
-msgstr ""
+msgstr "Ürün sayfasında ürün adet artış adımını ayarlayın. Bu özelliği devre dışı bırakmak için 0 ayarlayın."
 
 #. module: altinkaya_ecommerce
 #: code:addons/altinkaya_ecommerce/models/product_template.py:169
@@ -345,7 +361,7 @@ msgstr "Kısa Açıklama"
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__short_public_description
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template__short_public_description
 msgid "Short Description for e-Commerce"
-msgstr ""
+msgstr "e-Ticaret için Kısa Açıklama"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__sub_component
@@ -366,12 +382,12 @@ msgstr "Değer"
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_attribute__visibility
 msgid "Visibility"
-msgstr ""
+msgstr "Görünürlük"
 
 #. module: altinkaya_ecommerce
 #: selection:product.attribute,visibility:0
 msgid "Visible on eCommerce"
-msgstr ""
+msgstr "E-ticarette görünür"
 
 #. module: altinkaya_ecommerce
 #: model_terms:ir.ui.view,arch_db:altinkaya_ecommerce.altinkaya_ecommerce_product_template_form_view
@@ -382,13 +398,13 @@ msgstr "Websitesi Dosyaları"
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_res_partner__website_pricelist_id
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_res_users__website_pricelist_id
 msgid "Website Pricelist"
-msgstr ""
+msgstr "Website Fiyat Listesi"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__website_sequence
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template__website_sequence
 msgid "Website Sequence"
-msgstr ""
+msgstr "Website Sırası"
 
 #. module: altinkaya_ecommerce
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_product__website_attachment_ids
