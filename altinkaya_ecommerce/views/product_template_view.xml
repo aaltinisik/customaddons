@@ -87,5 +87,15 @@
         </field>
     </record>
 
+    <record model="ir.actions.server" id="action_get_unfilled_products">
+        <field name="name">List all unfilled products</field>
+        <field name="model_id" ref="model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_list_missing_product_attrs()</field>
+    </record>
+
+    <menuitem id="menu_attribute_unfilled_products" name="Attributes Unfilled Products"
+              action="action_get_unfilled_products"
+              parent="sale.product_menu_catalog" sequence="99"/>
 
 </data>

@@ -72,10 +72,10 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         base_url = "http://www.altinkaya.com.tr/web/product_v12_redirect?id=%s"
         client_action = {
-            'type': 'ir.actions.act_url',
-            'name': "Product E-commerce Page",
-            'target': 'new',
-            'url': base_url % self.id,
+            "type": "ir.actions.act_url",
+            "name": "Product E-commerce Page",
+            "target": "new",
+            "url": base_url % self.id,
         }
         return client_action
 
@@ -146,7 +146,7 @@ class ProductTemplate(models.Model):
         """Fill missing product variants for published attribute values."""
         if len(self.product_variant_ids) == 1:
             raise ValidationError(
-                _("You can not fill missing product of non" " variant product.")
+                _("You can not fill missing product of non variant product.")
             )
 
         tmpl_attribute_lines = self.attribute_line_ids.filtered(
@@ -184,6 +184,40 @@ class ProductTemplate(models.Model):
             "res_model": "product.product",
             "domain": "[('type', '=', 'product'), ('id', 'in', %s)]"
             % filled_variant_ids,
+        }
+        return action
+
+    def action_list_missing_product_attrs(self):
+        """List missing product variants for published attribute values."""
+        ProductProduct = self.env["product.product"]
+        tmpl_ids = self.env["product.template"].search(
+            [
+                ("is_published", "=", True),
+                ("categ_id.is_published", "=", True),
+            ]
+        )
+        for tmpl in tmpl_ids:
+            if tmpl.product_variant_count == 1:
+                continue
+            attribute_lines = tmpl.attribute_line_ids.filtered(
+                lambda x: x.attribute_id.allow_filling
+            )
+            required_attrs = attribute_lines.mapped("attribute_id")
+            for product in tmpl.product_variant_ids:
+                product_attrs = product.attribute_value_ids.mapped("attribute_id")
+                if not all(x in product_attrs.ids for x in required_attrs.ids):
+                    ProductProduct |= product
+
+        tree_view_id = self.env.ref("product.product_product_tree_view").id
+        form_view_id = self.env.ref("product.product_normal_form_view").id
+        action = {
+            "type": "ir.actions.act_window",
+            "views": [(tree_view_id, "tree"), (form_view_id, "form")],
+            "view_mode": "tree,form",
+            "name": _("Attributes Missing Products"),
+            "res_model": "product.product",
+            "domain": "[('type', '=', 'product'), ('id', 'in', %s)]"
+            % ProductProduct.ids,
         }
         return action
 

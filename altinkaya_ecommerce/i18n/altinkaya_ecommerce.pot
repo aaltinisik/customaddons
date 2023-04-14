@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 13:12+0000\n"
-"PO-Revision-Date: 2023-04-12 13:12+0000\n"
+"POT-Creation-Date: 2023-04-14 06:23+0000\n"
+"PO-Revision-Date: 2023-04-14 06:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,17 @@ msgstr ""
 #. module: altinkaya_ecommerce
 #: model:ir.model,name:altinkaya_ecommerce.model_product_attribute_value
 msgid "Attribute Value"
+msgstr ""
+
+#. module: altinkaya_ecommerce
+#: code:addons/altinkaya_ecommerce/models/product_template.py:217
+#, python-format
+msgid "Attributes Missing Products"
+msgstr ""
+
+#. module: altinkaya_ecommerce
+#: model:ir.ui.menu,name:altinkaya_ecommerce.menu_attribute_unfilled_products
+msgid "Attributes Unfilled Products"
 msgstr ""
 
 #. module: altinkaya_ecommerce
@@ -233,6 +244,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_line__write_date
 #: model:ir.model.fields,field_description:altinkaya_ecommerce.field_product_template_feature_value__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: altinkaya_ecommerce
+#: model:ir.actions.server,name:altinkaya_ecommerce.action_get_unfilled_products
+msgid "List all unfilled products"
 msgstr ""
 
 #. module: altinkaya_ecommerce
