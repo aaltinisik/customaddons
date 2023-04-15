@@ -96,6 +96,6 @@
 
     <menuitem id="menu_attribute_unfilled_products" name="Attributes Unfilled Products"
               action="action_get_unfilled_products"
-              parent="sale.product_menu_catalog" sequence="99"/>
+              parent="altinkaya_ecommerce.menu_sale_ecommerce_root" sequence="99"/>
 
 </data>

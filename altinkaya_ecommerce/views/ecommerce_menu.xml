@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <menuitem id="menu_sale_ecommerce_root" name="E-commerce" parent="sale.sale_menu_root" sequence="16"/>
+</data>

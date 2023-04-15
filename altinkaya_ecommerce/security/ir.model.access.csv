@@ -1,3 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 "access_features","Manage product features","model_product_template_feature_line","base.group_user",1,1,1,1
 "access_feature_values","Manage product feature values","model_product_template_feature_value","base.group_user",1,1,1,1
+access_res_partner_ecommerce_match_wizard,Manage res_partner_ecommerce_match_wizard,model_res_partner_ecommerce_match_wizard,"base.group_user",1,1,1,1
+access_res_partner_ecommerce_match_wizard_line,Manage res_partner_ecommerce_match_wizard_line,model_res_partner_ecommerce_match_wizard_line,"base.group_user",1,1,1,1
