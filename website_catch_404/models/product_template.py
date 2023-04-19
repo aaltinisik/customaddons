@@ -31,20 +31,26 @@ class ProductTemplate(models.Model):
                 }
             )
             dummy_product._compute_website_url()
-            self.env["website.rewrite"].create(
-                {
-                    "url_from": record.website_url,
-                    "url_to": dummy_product.website_url,
-                    "redirect_type": "301",
-                    "name": _("Product Name Changed"),
-                    "website_id": fields.first(
-                        record.mapped("public_categ_ids.website_id")
-                    ).id,
-                }
-            )
-            return True
+            if record.website_url != dummy_product.website_url:
+                self.env["website.rewrite"].create(
+                    {
+                        "url_from": record.website_url,
+                        "url_to": dummy_product.website_url,
+                        "redirect_type": "301",
+                        "product_tmpl_id": record.id,
+                        "name": _("Product Name Changed"),
+                        "website_id": fields.first(
+                            record.mapped("public_categ_ids.website_id")
+                        ).id,
+                    }
+                )
+        return True
 
     def write(self, vals):
-        if "name" in vals and vals.get("name") != self.name and self.is_published:
+        if (
+            vals.get("name", False)
+            and vals.get("name") != self.name
+            and self.is_published
+        ):
             self._create_redirection(vals)
         return super(ProductTemplate, self).write(vals)

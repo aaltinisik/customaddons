@@ -18,6 +18,7 @@
         "security/ir.model.access.csv",
         "views/website_views.xml",
         "views/website_404_errors_views.xml",
+        "views/website_rewrite_views.xml",
     ],
     "installable": True,
 }

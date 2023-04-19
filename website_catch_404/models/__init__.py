@@ -4,3 +4,4 @@ from . import ir_http
 from . import website_404_errors
 from . import website
 from . import product_template
+from . import website_rewrite
