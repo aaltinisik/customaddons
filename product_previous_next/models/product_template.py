@@ -23,39 +23,31 @@ class ProductTemplate(models.Model):
     computation with wrong domains.
     """
 
+    def _base_order_domain(self, website_id):
+        return [
+            ("sale_ok", "=", True),
+            ("categ_id.is_published", "=", True),
+            ("is_published", "=", True),
+            ("public_categ_ids", "=", self.mapped("public_categ_ids.id")),
+            ("website_id", "in", [website_id.id, False]),
+        ]
+
     def _compute_next_previous_product(self):
         self.ensure_one()
         website_id = self.env["website"].get_current_website()
-        query = """
-                SELECT 
-          pt.id, 
-          pt.website_sequence, 
-          pt.is_published, 
-          pt.categ_id, 
-          pt.website_id, 
-          pt.sub_component
-        FROM 
-          product_template AS pt 
-          JOIN product_public_category_product_template_rel AS rel ON pt.id = rel.product_template_id 
-          JOIN product_public_category AS ppc ON rel.product_public_category_id = ppc.id 
-          JOIN product_category AS pc ON pt.categ_id = pc.id 
-        WHERE 
-          pt.sale_ok = TRUE 
-          AND pc.is_published = TRUE 
-          AND pt.is_published = TRUE 
-          AND pt.sub_component = FALSE 
-          AND ppc.id IN %s
-          AND (
-            pt.website_id = %s 
-            OR pt.website_id IS NULL
-          )
-          ORDER BY pt.is_published desc, pt.website_sequence asc, pt.id desc
-          ;
-        """
+        domain = self._base_order_domain(website_id)
 
-        self.env.cr.execute(query, (tuple(self.public_categ_ids.ids), website_id.id))
-        results = self.env.cr.dictfetchall()
-        ordered_ids = [result["id"] for result in results]
+        if not self.env.user.has_group("base.group_user"):
+            domain.append(("sub_component", "=", False))
+
+        ordered_ids = (
+            self.env["product.template"]
+            .search(
+                domain,
+                order="is_published desc, website_sequence asc, id desc",
+            )
+            .ids
+        )
 
         # Find the previous and next product ids in the ordered list
         current_index = ordered_ids.index(self.id)
@@ -68,4 +60,3 @@ class ProductTemplate(models.Model):
             ordered_ids[next_index] if next_index < len(ordered_ids) else False
         )
         return True
-
