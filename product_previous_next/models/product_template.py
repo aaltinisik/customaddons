@@ -28,7 +28,7 @@ class ProductTemplate(models.Model):
             ("sale_ok", "=", True),
             ("categ_id.is_published", "=", True),
             ("is_published", "=", True),
-            ("public_categ_ids", "=", self.mapped("public_categ_ids.id")),
+            ("public_categ_ids", "in", self.mapped("public_categ_ids.id")),
             ("website_id", "in", [website_id.id, False]),
         ]
 
