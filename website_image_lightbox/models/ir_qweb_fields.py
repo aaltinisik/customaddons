@@ -85,10 +85,9 @@ class Image(models.AbstractModel):
                 [
                     '<a href="',
                     src_zoom or src,
-                    '" data-lightbox="',
-                    escape(record.product_tmpl_id.id),
+                    '" data-lightbox="product_image',
                     '" data-title="',
-                    escape(record.product_tmpl_id.name),
+                    escape(record.name),
                     '">',
                 ]
                 + img
