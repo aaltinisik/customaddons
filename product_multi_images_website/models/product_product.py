@@ -22,4 +22,4 @@ class ProductProduct(models.Model):
         variant_images = self.product_tmpl_id.image_ids.filtered(
             lambda i: self in i.product_variant_ids
         )
-        return variant_images + self.product_tmpl_id._get_images()
+        return set(variant_images + self.product_tmpl_id._get_images())
