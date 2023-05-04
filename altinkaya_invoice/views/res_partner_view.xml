@@ -18,6 +18,7 @@
 
                     <field name="z_payable_export"/>
                     <field name="z_receivable_export"/>
+                    <field name="devir_yapildi"/>
 
 
                 </xpath>

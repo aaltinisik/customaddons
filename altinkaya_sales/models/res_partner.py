@@ -69,7 +69,6 @@ class ResPartner(models.Model):
 
     # x_vergidairesi = fields.Char('Vergi Dairesi', size=64)
     x_vergino = fields.Char("Vergi No", size=64)
-    devir_yapildi = fields.Boolean("Devir yapıldı")
 
     # country_id is required in res.partner
     country_id = fields.Many2one(
