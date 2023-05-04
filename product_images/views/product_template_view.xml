@@ -39,76 +39,76 @@
         </field>
     </record>
         
-<!--    <record id="view_product_template_form_images" model="ir.ui.view">-->
-<!--        <field name="name">Product images</field>-->
-<!--        <field name="model">product.template</field>-->
-<!--        <field name="inherit_id" ref="product.product_template_only_form_view"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//notebook" position="inside">-->
-<!--                <page string="Altınkaya Images" name="image_ids">-->
-<!--                    <field name="image_tmpl_ids"-->
-<!--                           nolabel="1"-->
-<!--                           mode="kanban"-->
-<!--                           context="{'default_product_tmpl_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}"-->
-<!--                    >-->
+    <record id="view_product_template_form_images" model="ir.ui.view">
+        <field name="name">Product images</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Altınkaya Images" name="image_ids">
+                    <field name="image_tmpl_ids"
+                           nolabel="1"
+                           mode="kanban"
+                           context="{'default_product_tmpl_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}"
+                    >
 
-<!--		                <form>-->
-<!--		                	<sheet>-->
-<!--		                		<label for="name"></label>-->
-<!--		                	<h1><field name="name"/></h1>-->
-<!--		                	<group>-->
-<!--		                		<field name="type" invisible="1"/>-->
-<!--		                		<field name="datas" filename="datas_fname"/>-->
-<!--		                		<field name="datas_fname" invisible="1"/>-->
-<!--		                		<field name="product_tmpl_id" invisible="1"/>-->
-<!--		                	</group>-->
-<!--		                		-->
-<!--		                	</sheet>-->
-<!--		                	-->
-<!--		                </form>-->
-<!--		                -->
-<!--		                -->
-<!--                    </field>-->
-<!--                </page>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+		                <form>
+		                	<sheet>
+		                		<label for="name"></label>
+		                	<h1><field name="name"/></h1>
+		                	<group>
+		                		<field name="type" invisible="1"/>
+		                		<field name="datas" filename="datas_fname"/>
+		                		<field name="datas_fname" invisible="1"/>
+		                		<field name="product_tmpl_id" invisible="1"/>
+		                	</group>
+		                		
+		                	</sheet>
+		                	
+		                </form>
+		                
+		                
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
     
     
     
     
 
-<!--	<record id="view_product_product_form_images" model="ir.ui.view">-->
-<!--        <field name="name">Product images</field>-->
-<!--        <field name="model">product.product</field>-->
-<!--        <field name="inherit_id" ref="product.product_normal_form_view"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//notebook" position="inside">-->
-<!--                <page string="Altınkaya Images" name="image_ids">-->
-<!--                	<field name="image_tmpl_ids" nolabel="1" mode="kanban" readonly="1"/>-->
-<!--                    <field name="altinkaya_image_variant_ids" nolabel="1" mode="kanban" -->
-<!--                    	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}">-->
+	<record id="view_product_product_form_images" model="ir.ui.view">
+        <field name="name">Product images</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Altınkaya Images" name="image_ids">
+                	<field name="image_tmpl_ids" nolabel="1" mode="kanban" readonly="1"/>
+                    <field name="altinkaya_image_variant_ids" nolabel="1" mode="kanban" 
+                    	context="{'default_product_tmpl_id':product_tmpl_id,'default_product_id':id,'default_type':'binary', 'kanban_view_ref':'product_images.view_ir_attachment_kanban_product_images'}">
 
-<!--		                <form>-->
-<!--		                	<sheet>-->
-<!--		                		<label for="name"></label>-->
-<!--		                		<h1><field name="name"/></h1>-->
-<!--		                	<group>-->
-<!--		                		<field name="type" invisible="1"/>-->
-<!--		                		<field name="datas" filename="datas_fname"/>-->
-<!--		                		<field name="datas_fname" invisible="1"/>-->
-<!--		                		<field name="product_tmpl_id" invisible="1"/>-->
-<!--		                		<field name="product_id" invisible="1"/>-->
-<!--		                	</group>-->
-<!--		                		-->
-<!--		                	</sheet>-->
-<!--		                	-->
-<!--		                </form>-->
-<!--                    </field>-->
-<!--                </page>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>    -->
+		                <form>
+		                	<sheet>
+		                		<label for="name"></label>
+		                		<h1><field name="name"/></h1>
+		                	<group>
+		                		<field name="type" invisible="1"/>
+		                		<field name="datas" filename="datas_fname"/>
+		                		<field name="datas_fname" invisible="1"/>
+		                		<field name="product_tmpl_id" invisible="1"/>
+		                		<field name="product_id" invisible="1"/>
+		                	</group>
+		                		
+		                	</sheet>
+		                	
+		                </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>    
 
     
 

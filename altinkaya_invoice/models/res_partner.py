@@ -10,6 +10,7 @@ class ResPartner(models.Model):
     purchase_default_account_id = fields.Many2one('account.account', string='Purchase Default Account', required=False,
                                                   help=u"Satın alma işlemlerinde varsayılan muhasebe hesabı.")
     accounting_contact = fields.Many2one('res.partner', string='Accounting Contact', required=False)
+    devir_yapildi = fields.Boolean('Devir Yapıldı', default=False)
 
     @api.model
     def create(self, vals):
