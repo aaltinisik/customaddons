@@ -84,7 +84,7 @@ class ResPartnerEcommerceMatchWizardLine(models.TransientModel):
         string="Partner",
     )
     match_id = fields.Many2one(
-        "res.partner.ecommerce.match",
+        "res.partner.ecommerce.match.wizard",
         string="Match",
         required=True,
     )
