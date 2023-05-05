@@ -19,7 +19,9 @@ class ProductProduct(models.Model):
         Variant Extra Images, and the Template Extra Images.
         """
         self.ensure_one()
-        variant_images = self.product_tmpl_id.image_ids.filtered(
+        images = self.env["base_multi_image.image"]
+        images |= self.product_tmpl_id.image_ids.filtered(
             lambda i: self in i.product_variant_ids
         )
-        return set(variant_images + self.product_tmpl_id._get_images())
+        images |= self.product_tmpl_id._get_images()
+        return images
