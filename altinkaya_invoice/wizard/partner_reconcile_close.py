@@ -104,7 +104,8 @@ class PartnerReconcileClose(models.TransientModel):
                 partner_domain, limit=self.batch_size
             )
         move_mapping = {}
-        for journal in ["try", "usd", "eur"]:
+        for journal in partner_ids.mapped("partner_currency_id.name"):
+            journal = journal.lower()
             move_mapping[journal] = {
                 "opening_move_id": move_obj.create(
                     {
@@ -150,6 +151,9 @@ class PartnerReconcileClose(models.TransientModel):
                         ]
                     )
                     if len(lines) == 0:
+                        _logger.info(
+                            "Partner already reconciled: %s" % partner.name
+                        )
                         continue
                     balance = sum([ml.debit - ml.credit for ml in lines])
                     date_due = max(lines.mapped("date_maturity"))
@@ -174,8 +178,8 @@ class PartnerReconcileClose(models.TransientModel):
                                 "name": _("Closing"),
                                 "debit": self_debit,
                                 "credit": self_credit,
-                                "account_id": target_account_id,
-                                "amount_currency": amount_currency,
+                                "account_id": account.id,
+                                "amount_currency": -amount_currency,
                                 "date": self.closing_move_date,
                                 "date_maturity": date_due,
                                 "partner_id": partner.id,
@@ -187,7 +191,7 @@ class PartnerReconcileClose(models.TransientModel):
                                 "debit": debit,
                                 "credit": credit,
                                 "amount_currency": amount_currency,
-                                "account_id": target_account_id,
+                                "account_id": account.id,
                                 "date": self.closing_move_date,
                                 "date_maturity": date_due,
                                 "partner_id": partner.id,
@@ -215,7 +219,7 @@ class PartnerReconcileClose(models.TransientModel):
                                 "name": _("Opening"),
                                 "debit": self_debit,
                                 "credit": self_credit,
-                                "amount_currency": amount_currency,
+                                "amount_currency": -amount_currency,
                                 "account_id": target_account_id,
                                 "date": self.opening_move_date,
                                 "date_maturity": date_due,
@@ -228,7 +232,7 @@ class PartnerReconcileClose(models.TransientModel):
                     lines.reconcile()
 
                 partner.devir_yapildi = True
-                _logger.error(
+                _logger.info(
                     "Partner reconcilation done. Partner: %s \n\n" % partner.name
                 )
                 self._cr.commit()
@@ -244,4 +248,4 @@ class PartnerReconcileClose(models.TransientModel):
             closing_move_id.post()
             opening_move_id.post()
 
-        return {"type": "ir.actions.act_window_close"}
+        # return {"type": "ir.actions.act_window_close"}
