@@ -19,6 +19,8 @@ def from_binary_field_inherit(cls, record, field_name):
         if variant_images:
             image = variant_images[0]
             data_b64 = image[field_name]
+        else:
+            data_b64 = record.product_tmpl_id[field_name]
     if not data_b64:
         data_b64 = record[field_name]
 
