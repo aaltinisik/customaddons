@@ -24,4 +24,4 @@ class ProductProduct(models.Model):
             lambda i: self in i.product_variant_ids
         )
         images |= self.product_tmpl_id._get_images()
-        return images
+        return images.filtered(lambda i: i.is_published)

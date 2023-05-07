@@ -13,4 +13,4 @@ class ProductTemplate(models.Model):
         Override to add base_multi_image images to the list of images.
         """
         self.ensure_one()
-        return self.image_ids.filtered(lambda i: i.bind_ids)
+        return self.image_ids.filtered(lambda i: i.bind_ids and i.is_published)
