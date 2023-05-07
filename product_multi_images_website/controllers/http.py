@@ -19,7 +19,7 @@ def from_binary_field_inherit(cls, record, field_name):
         if variant_images:
             image = variant_images[0]
             data_b64 = image[field_name]
-    else:
+    if not data_b64:
         data_b64 = record[field_name]
 
     data = base64.b64decode(data_b64) if data_b64 else b""
