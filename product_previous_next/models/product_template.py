@@ -37,8 +37,9 @@ class ProductTemplate(models.Model):
         website_id = self.env["website"].get_current_website()
         domain = self._base_order_domain(website_id)
 
-        if not self.env.user.has_group("base.group_user"):
-            domain.append(("sub_component", "=", False))
+        # Todo: fix this. It's not working.
+        # if not self.env.user.has_group("base.group_user"):
+        #     domain.append(("sub_component", "=", False))
 
         ordered_ids = (
             self.env["product.template"]
