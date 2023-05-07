@@ -4,7 +4,7 @@
               name="Product Qty Increment Step">
         <xpath expr="//input[@name='add_qty']" position="before">
             <t t-set="step" t-value="product.qty_increment_step or add_qty or 1"/>
-            <span t-attf-data-increment-step="#{product.qty_increment_step}"></span>
+            <span t-attf-data-increment-step="#{product.qty_increment_step}" t-attf-class="d-none"></span>
         </xpath>
 
         <xpath expr="//input[@name='add_qty']" position="attributes">

@@ -56,15 +56,27 @@ odoo.define('product_qty_increment_step.qty_step', function (require) {
 
             qty = isNaN(qty) ? $incrementSize : qty;
 
-            const remainder = qty % $incrementSize;
-            if (remainder !== 0) {
-                // Round up to the nearest increment step value
-                qty += $incrementSize - remainder;
+            // Ensure the minimum quantity is equal to the increment size, and it's not zero or negative
+            if (qty <= $incrementSize) {
+                qty = $incrementSize;
             }
 
+            const remainder = qty % $incrementSize;
+            if (remainder !== 0) {
+                // Round to the nearest increment step value based on whether the value is increasing or decreasing
+                const prevQty = parseInt($input.data("prevQty"), 10) || $incrementSize;
+                if (qty < prevQty) {
+                    // Decreasing, round down to the nearest increment step value
+                    qty -= remainder;
+                } else {
+                    // Increasing, round up to the nearest increment step value
+                    qty += $incrementSize - remainder;
+                }
+            }
+
+            $input.data("prevQty", qty); // Store the previous quantity value
             $input.val(qty); // Update input value to formatted quantity
         }
-
     });
 
 });
