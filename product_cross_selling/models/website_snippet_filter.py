@@ -46,7 +46,10 @@ class WebsiteSnippetFilter(models.Model):
         domain = expression.AND(
             [
                 domain,
-                [("public_categ_ids", "in", public_categ_ids.ids)],
+                [
+                    ("public_categ_ids", "in", public_categ_ids.ids),
+                    ("id", "!=", current_template.id),
+                ],
             ]
         )
         tmpl_ids = self.env["product.template"].search(
