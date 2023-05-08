@@ -36,7 +36,8 @@
             </div>
 
             <!-- Return Policy -->
-            <div itemprop="hasMerchantReturnPolicy" itemtype="https://schema.org/MerchantReturnPolicy" itemscope="itemscope">
+            <div itemprop="hasMerchantReturnPolicy" itemtype="https://schema.org/MerchantReturnPolicy"
+                 itemscope="itemscope">
                 <meta itemprop="applicableCountry" content="TR"/>
                 <meta itemprop="returnPolicyCategory" content="https://schema.org/MerchantReturnFiniteReturnWindow"/>
                 <meta itemprop="merchantReturnDays" content="30"/>
@@ -45,6 +46,25 @@
             </div>
 
             <!-- Description -->
+
+            <!-- Price Valid Until -->
+            <meta itemprop="priceValidUntil" t-attf-content="#{website.price_validity_date.strftime('%Y-%m-%d')}"/>
+
+            <!-- Review and rating -->
+<!--            <div itemprop="review" itemtype="https://schema.org/Review" itemscope="itemscope">-->
+<!--                <div itemprop="author" itemtype="https://schema.org/Person" itemscope="itemscope">-->
+<!--                    <meta itemprop="name" content="Fred Benson"/>-->
+<!--                </div>-->
+<!--                <div itemprop="reviewRating" itemtype="https://schema.org/Rating" itemscope="itemscope">-->
+<!--                    <meta itemprop="ratingValue" content="4"/>-->
+<!--                    <meta itemprop="bestRating" content="5"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope="itemscope">-->
+<!--                <meta itemprop="reviewCount" content="89"/>-->
+<!--                <meta itemprop="ratingValue" content="4.4"/>-->
+<!--            </div>-->
+
 
         </xpath>
     </template>
