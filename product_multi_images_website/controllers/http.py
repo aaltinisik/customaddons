@@ -15,10 +15,14 @@ def from_binary_field_inherit(cls, record, field_name):
     """
     data_b64 = ""
     if record._name == "product.product":
-        variant_images = record.product_tmpl_id.image_ids.filtered(lambda p: record in p.product_variant_ids)
+        variant_images = record.product_tmpl_id.image_ids.filtered(
+            lambda p: record in p.product_variant_ids and p.is_published
+        )
         if variant_images:
             image = variant_images[0]
             data_b64 = image[field_name]
+        elif record.product_tmpl_id.image_ids:
+            data_b64 = fields.first(record.product_tmpl_id.image_ids)[field_name]
         else:
             data_b64 = record.product_tmpl_id[field_name]
     if not data_b64:
