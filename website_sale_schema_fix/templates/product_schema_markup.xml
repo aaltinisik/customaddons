@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="product_schema_markup" inherit_id="website_sale.product"
+    <template id="product_schema_markup" inherit_id="website_sale.product_price"
               name="Cross selling on all products">
-        <xpath expr="//div[@itemprop='description']" position="after">
+        <xpath expr="//div[@itemprop='offers']" position="inside">
 
             <!-- Brand -->
             <div itemprop="brand" itemtype="https://schema.org/Brand" itemscope="itemscope">
