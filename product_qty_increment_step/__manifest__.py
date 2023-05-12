@@ -14,7 +14,8 @@
     "depends": ["website", "website_sale", "altinkaya_ecommerce"],
     "data": [
         "views/product_template_view.xml",
-        "templates/product_quantity.xml"
+        "templates/cart_lines.xml",
+        "templates/product_quantity.xml",
     ],
     "assets": {
         "web.assets_frontend": [

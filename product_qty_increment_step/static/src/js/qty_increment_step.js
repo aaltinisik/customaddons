@@ -33,6 +33,7 @@ odoo.define('product_qty_increment_step.qty_step', function (require) {
         selector: '.oe_website_sale',
         events: {
             'change form .js_product:first input[name="add_qty"]': '_formatQtyWithStep',
+            'change table input.js_quantity.form-control.quantity': '_formatQtyWithStep',
         },
 
         /**
