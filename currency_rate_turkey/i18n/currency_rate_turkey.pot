@@ -1,0 +1,205 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* currency_rate_turkey
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-15 12:17+0000\n"
+"PO-Revision-Date: 2023-05-15 12:17+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: currency_rate_turkey
+#: selection:res.currency.rate.provider,service:0
+msgid "Altinkaynak"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__altinkaynak_buying
+msgid "Altinkaynak Buying"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__altinkaynak_buying_inverse
+msgid "Altinkaynak Buying Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__altinkaynak_selling
+msgid "Altinkaynak Selling"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__altinkaynak_selling_inverse
+msgid "Altinkaynak Selling Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider_altinkaynak.py:23
+#: selection:res.currency.rate.provider,service_rate_type:0
+#, python-format
+msgid "Buying"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: selection:res.currency.rate.provider,service:0
+msgid "Central Bank of the Republic of Turkey"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model,name:currency_rate_turkey.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model,name:currency_rate_turkey.model_res_currency
+msgid "Currency"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model,name:currency_rate_turkey.model_res_currency_rate
+msgid "Currency Rate"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_partner__property_rate_field
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_users__property_rate_field
+msgid "Currency Rate Field"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider.py:44
+#, python-format
+msgid "Currency Rate Provider \"%s\" failed to obtain data since %s until %s:\n"
+"%s"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider.py:43
+#, python-format
+msgid "Currency Rate Provider Failure"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model,name:currency_rate_turkey.model_res_currency_rate_provider
+msgid "Currency Rates Provider"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: selection:res.currency.rate.provider,service:0
+msgid "European Central Bank"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency__main_rate_field
+msgid "Main Rate Field"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider.py:52
+#, python-format
+msgid "N/A"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider_altinkaynak.py:88
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider_altinkaynak.py:99
+#, python-format
+msgid "No currency rate on %s"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model,name:currency_rate_turkey.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__second_rate
+msgid "Second Rate"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency__second_rate_field
+msgid "Second Rate Field"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider_altinkaynak.py:24
+#: selection:res.currency.rate.provider,service_rate_type:0
+#, python-format
+msgid "Selling"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate_provider__service_rate_type
+msgid "Service Rate Type"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate_provider__service
+msgid "Source Service"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_buying
+msgid "TCMB Banknote Buying"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_buying_inverse
+msgid "TCMB Banknote Buying Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_selling
+msgid "TCMB Banknote Selling"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_selling_inverse
+msgid "TCMB Banknote Selling Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_forex_buying
+msgid "TCMB Forex Buying"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_forex_buying_inverse
+msgid "TCMB Forex Buying Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_forex_selling
+msgid "TCMB Forex Selling"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,field_description:currency_rate_turkey.field_res_currency_rate__tcmb_forex_selling_inverse
+msgid "TCMB Forex Selling Inverse"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__altinkaynak_buying
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__altinkaynak_selling
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__second_rate
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_buying
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__tcmb_banknote_selling
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__tcmb_forex_buying
+#: model:ir.model.fields,help:currency_rate_turkey.field_res_currency_rate__tcmb_forex_selling
+msgid "The second rate of the currency to the currency of rate 1"
+msgstr ""
+
+#. module: currency_rate_turkey
+#: code:addons/currency_rate_turkey/models/res_currency_rate_provider.py:78
+#, python-format
+msgid "Unknown currency from %(provider)s: %(rate)s"
+msgstr ""
+
