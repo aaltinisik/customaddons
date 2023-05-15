@@ -11,7 +11,7 @@ class AccountPayment(models.Model):
     @api.multi
     def post(self):
         new_context = self._context.copy()
-        if self.partner_id.use_second_rate_type:
+        if self.partner_id.property_rate_type != "rate":
             new_context.update(
                 {
                     "rate_type": self.partner_id.property_rate_type,
