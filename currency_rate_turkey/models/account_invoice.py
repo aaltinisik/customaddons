@@ -9,10 +9,10 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_move_create(self):
         new_context = self._context.copy()
-        if self.partner_id.property_rate_type != "rate" and not self.use_custom_rate:
+        if self.partner_id.property_rate_field != "rate" and not self.use_custom_rate:
             new_context.update(
                 {
-                    "rate_type": self.partner_id.property_rate_type,
+                    "rate_type": self.partner_id.property_rate_field,
                 }
             )
         return super(
