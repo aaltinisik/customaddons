@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Teklifler-->
+    <record id="sale_views_search1" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit.sale1</field>
+        <field name="model">sale.order</field>
+        <!--        <field name="mode"></field>-->
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <filter name="filter_order_date" position="after">
+                <separator/>
+                <filter name="lastweek" string="Last Week"
+                        domain="[('date_order','&gt;=', (context_today() + relativedelta(weeks=-2, weekday=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('date_order','&lt;=', (context_today() + relativedelta(weeks=-1, weekday=5)).strftime('%Y-%m-%d 23:59:59'))]"/>
+            </filter>
+        </field>
+    </record>
+
+    <!--    Siparişler-->
+    <record id="sale_views_search2" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit.sale2</field>
+        <field name="model">sale.order</field>
+        <!-- <field name="mode"></field>-->
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='order_date']" position="after">
+                <separator/>
+                <filter name="lastweek" string="Last Week"
+                        domain="[('confirmation_date', '&gt;=', (context_today()+relativedelta(weeks=-2, weekday=0)).strftime('%Y-%m-%d 00:00:00')),
+                                 ('confirmation_date', '&lt;=', (context_today()+relativedelta(weeks=-1, weekday=5)).strftime('%Y-%m-%d 23:59:59'))]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

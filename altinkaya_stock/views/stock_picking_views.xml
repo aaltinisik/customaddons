@@ -88,9 +88,7 @@
 
                     <filter string="Four weeks ago" name="fourweeks"
                             domain="[('date','&lt;',(context_today()+relativedelta(weeks=-4)).strftime('%Y-%m-%d 00:00:00'))]"/>
-
                     <separator/>
-
                 </xpath>
             </field>
         </record>
