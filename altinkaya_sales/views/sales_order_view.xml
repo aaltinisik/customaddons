@@ -4,8 +4,7 @@
 
 		<!-- sales order form view -->
 
-		<record model='ir.ui.view'
-			id='view_sales_order_form_A'>
+		<record model='ir.ui.view' id='view_sales_order_form_A'>
 			<field name='name'>sales order form</field>
 			<field name='model'>sale.order</field>
 			<field name="inherit_id" ref="sale.view_order_form" />
