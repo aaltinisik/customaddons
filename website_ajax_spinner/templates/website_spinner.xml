@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_spinner" inherit_id="website.layout">
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <t t-if="website">
+                <div class="overlay" style="display:none;" id="spinner">
+                  <svg class="spinner" viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                  </svg>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
