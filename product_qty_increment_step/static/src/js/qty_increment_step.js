@@ -55,6 +55,11 @@ odoo.define('product_qty_increment_step.qty_step', function (require) {
             const $incrementSize = $input.closest('.input-group').find("span[data-increment-step]").data("increment-step");
             let qty = parseInt($input.val(), 10); // Parse input value to integer
 
+            // If the quantity is zero, return false (this means the user has deleted the input value)
+            if(qty === 0) {
+                return false;
+            }
+
             qty = isNaN(qty) ? $incrementSize : qty;
 
             // Ensure the minimum quantity is equal to the increment size, and it's not zero or negative
