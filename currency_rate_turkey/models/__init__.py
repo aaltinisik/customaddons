@@ -7,3 +7,4 @@ from . import res_currency_rate_provider_altinkaynak
 from . import account_payment
 from . import res_currency_rate
 from . import res_currency
+from . import sale_order

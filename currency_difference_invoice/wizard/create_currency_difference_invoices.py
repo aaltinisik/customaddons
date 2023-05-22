@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class CreateCurrencyDifferenceInvoices(models.TransientModel):
     _name = 'create.currency.difference.invoices'
+    _description = "Transient Model For Currency Difference Invoice"
 
     invoice_date = fields.Date(string='Invoice Date', required=True, default=fields.Date.context_today)
     payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', required=True)

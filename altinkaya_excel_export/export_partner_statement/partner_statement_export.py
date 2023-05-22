@@ -91,6 +91,7 @@ class ReportPartnerStatement(models.TransientModel):
 
 class StatementLines(models.TransientModel):
     _name = 'partner.statement.lines'
+    _description = "Transient model for partner statement"
 
     sequence = fields.Integer('Sequence')
     number = fields.Char('Number')
