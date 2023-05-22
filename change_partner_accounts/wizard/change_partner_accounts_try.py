@@ -3,6 +3,7 @@ from odoo import models, api, _
 
 class ChangePartnerAccountsTRY(models.TransientModel):
     _name = 'change.partner.accounts.try'
+    _description = "Wizard for changing partner accounts to TRY"
 
     @api.multi
     def change_partners_account_to_try(self):

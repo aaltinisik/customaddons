@@ -5,6 +5,7 @@ from odoo import models, fields, api, _
 import logging
 from sys import exc_info
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 from odoo.addons.currency_rate_turkey.models.res_currency_rate import RATE_FIELD_MAPPING
 
 
@@ -86,6 +87,23 @@ class ResCurrencyRateProviderSecondRate(models.Model):
                         is_main_rate = (
                             RATE_FIELD_MAPPING[rate_type] == currency.main_rate_field
                         )
+
+                        previous_rate = self._get_previous_rate(
+                            timestamp, provider, currency
+                        )
+
+                        if (
+                            float_compare(
+                                rate, 1.00, precision_digits=currency.decimal_places
+                            )
+                            == 0
+                            and previous_rate
+                        ):
+                            """
+                            If the rate is 1.00, we want to use previous rate
+                            """
+                            rate = previous_rate[RATE_FIELD_MAPPING[rate_type]]
+
                         record = CurrencyRate.search(
                             [
                                 ("company_id", "=", provider.company_id.id),
@@ -113,6 +131,19 @@ class ResCurrencyRateProviderSecondRate(models.Model):
                             if is_main_rate:
                                 vals["rate"] = rate
                             record = CurrencyRate.create(vals)
+                        self.env.cr.commit()
 
             if is_scheduled:
                 provider._schedule_next_run()
+
+    def _get_previous_rate(self, timestamp, provider, currency):
+        CurrencyRate = self.env["res.currency.rate"]
+        return CurrencyRate.search(
+            [
+                ("company_id", "=", provider.company_id.id),
+                ("currency_id", "=", currency.id),
+                ("name", "<", timestamp),
+            ],
+            limit=1,
+            order="name DESC",
+        )

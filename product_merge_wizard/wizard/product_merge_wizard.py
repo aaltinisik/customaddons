@@ -17,6 +17,7 @@ import psycopg2
 
 class ProductMergeWizard(models.TransientModel):
     _name = 'product.merge.wizard'
+    _description = 'Product Merge Wizard'
 
     product_tmpl_id = fields.Many2one('product.template', 'New Product Name', required=True)
     attribute_line_ids = fields.One2many('product.merge.wizard.attribute_line', 'wizard_id', string='Attributes')
@@ -224,6 +225,7 @@ class ProductMergeWizard(models.TransientModel):
 
 class ProductMergeAttributeLine(models.TransientModel):
     _name = 'product.merge.wizard.attribute_line'
+    _description = "Product merge wizard attribute line"
 
     wizard_id = fields.Many2one('product.merge.wizard', string='Wizard')
     attribute_id = fields.Many2one('product.attribute', string='Attribute')
@@ -234,6 +236,7 @@ class ProductMergeAttributeLine(models.TransientModel):
 
 class ProductMergeProductLine(models.TransientModel):
     _name = 'product.merge.wizard.product_line'
+    _description = "Product Merge Wizard Line"
 
     wizard_id = fields.Many2one('product.merge.wizard', string='Wizard')
     product_id = fields.Many2one('product.product', string='Product')
