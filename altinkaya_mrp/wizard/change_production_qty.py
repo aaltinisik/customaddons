@@ -41,7 +41,7 @@ class ChangeProductionQty(models.TransientModel):
                 abs(wizard.product_qty - wizard.mo_id.product_qty)
                 / wizard.mo_id.product_qty
                 >= 0.1
-            ):
+            ) and not self.env.user.has_group("altinkaya_mrp.change_production_qty"):
                 raise ValidationError(
                     _("You can only increase or decrease the quantity by 10%")
                 )
