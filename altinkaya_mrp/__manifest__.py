@@ -13,6 +13,7 @@
 
     """,
     'data': [
+        "security/mrp_security.xml",
         "security/ir.model.access.csv",
         "view/mrp_production_view.xml",
         "view/procurement_view.xml",
