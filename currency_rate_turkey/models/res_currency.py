@@ -22,31 +22,25 @@ class ResCurrency(models.Model):
         required=True,
     )
 
-    def _get_rates(self, company, end_date, batch_size=7):
+    def _get_rates(self, company, date):
         """
         Override to use custom rate field. Finds the last existing rate
         :param company:
-        :param end_date:
-        :param batch_size: The number of days to check at once
+        :param date:
         :return:
         """
-        start_date = end_date - timedelta(days=batch_size - 1)
+        # Look for the last seven days
+        dates = [(date - timedelta(days=i)) for i in range(7)]
 
-        while True:
-            # Create a list of dates for the current batch
-            dates = [start_date + timedelta(days=i) for i in range(batch_size)]
+        for date in reversed(dates):
+            rates_dict = self._get_rates_single(company, date)
+            if len(rates_dict) == 1 and rates_dict.get(31):
+                return rates_dict
+            if not all(value == 1.0 for value in rates_dict.values()):
+                return rates_dict
 
-            # Get rates for all dates in the batch
-            rates_dict_list = [self._get_rates_single(company, date) for date in dates]
-
-            # If any of the rates are not equal to 1.0, return the latest one
-            for rates_dict in reversed(rates_dict_list):
-                if not all(value == 1.0 for value in rates_dict.values()):
-                    return rates_dict
-
-            # If we didn't find any suitable rates, move to the next batch
-            end_date = start_date - timedelta(days=1)
-            start_date = end_date - timedelta(days=batch_size - 1)
+        # If we didn't find any suitable rates return the last existing rates
+        return self._get_rates_single(company, date)
 
     def _get_rates_single(self, company, date):
         rates_dict = {}
