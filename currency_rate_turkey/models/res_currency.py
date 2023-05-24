@@ -29,10 +29,15 @@ class ResCurrency(models.Model):
         :param date:
         :return:
         """
+        # If date is a string, convert it to date
+        # Workaround for reconciliation widget
+        if isinstance(date, str):
+            date = fields.Date.from_string(date)
+
         # Look for the last seven days
         dates = [(date - timedelta(days=i)) for i in range(7)]
 
-        for date in reversed(dates):
+        for date in dates:
             rates_dict = self._get_rates_single(company, date)
             if len(rates_dict) == 1 and rates_dict.get(31):
                 return rates_dict
