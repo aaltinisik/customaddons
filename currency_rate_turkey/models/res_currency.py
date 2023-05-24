@@ -1,6 +1,7 @@
 # Copyright 2023 Yiğit Budak (https://github.com/yibudak)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo import models, fields, api, _
+from datetime import timedelta
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -23,11 +24,25 @@ class ResCurrency(models.Model):
 
     def _get_rates(self, company, date):
         """
-        Override to use custom rate field
+        Override to use custom rate field. Finds the last existing rate
         :param company:
         :param date:
         :return:
         """
+        # Look for the last seven days
+        dates = [(date - timedelta(days=i)) for i in range(7)]
+
+        for date in reversed(dates):
+            rates_dict = self._get_rates_single(company, date)
+            if len(rates_dict) == 1 and rates_dict.get(31):
+                return rates_dict
+            if not all(value == 1.0 for value in rates_dict.values()):
+                return rates_dict
+
+        # If we didn't find any suitable rates return the last existing rates
+        return self._get_rates_single(company, date)
+
+    def _get_rates_single(self, company, date):
         rates_dict = {}
         for rec in self:
             query = """SELECT c.id,
