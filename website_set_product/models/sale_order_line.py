@@ -6,18 +6,20 @@ from odoo import models, fields, api
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    set_product = fields.Boolean("Set product?", compute="_compute_set_product")
+    set_product = fields.Boolean(
+        "Set product?", related="product_id.product_tmpl_id.set_product"
+    )
 
-    @api.depends("product_id")
-    def _compute_set_product(self):
-        bom_obj = self.env["mrp.bom"].sudo()
-        bom_dict = bom_obj._bom_find(products=self.product_id)
-        if not bom_dict:
-            self.set_product = False
-        if not bom_dict.get(self.product_id, False):
-            self.set_product = False
-        else:
-            self.set_product = bom_dict[self.product_id].type == "phantom"
+    # @api.depends("product_id")
+    # def _compute_set_product(self):
+    #     bom_obj = self.env["mrp.bom"].sudo()
+    #     bom_dict = bom_obj._bom_find(products=self.product_id)
+    #     if not bom_dict:
+    #         self.set_product = False
+    #     if not bom_dict.get(self.product_id, False):
+    #         self.set_product = False
+    #     else:
+    #         self.set_product = bom_dict[self.product_id].type == "phantom"
 
     def explode_set_contents(self):
         """Explodes order lines."""
