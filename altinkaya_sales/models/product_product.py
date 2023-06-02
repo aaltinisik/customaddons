@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.tools import float_is_zero
 from odoo.addons import decimal_precision as dp
 import logging
 
@@ -185,7 +186,7 @@ class ProductProduct(models.Model):
                         + priced_attributes[att_val.attribute_id.id]["price_coef"]
                         * att_val.numeric_value
                     )
-            if val is 0.0:
+            if float_is_zero(val, precision_digits=4):
                 val = product.v_fiyat_dolar
             product.attr_price = val
 
@@ -195,6 +196,11 @@ class ProductProduct(models.Model):
         return result
 
     def _compute_set_product_price(self):
+        """
+        we calculate the prices of set products with this method. it is not used in odoo.
+        we run it in a test environment and update the prices.
+        :return:
+        """
         phantom_boms = self.env["mrp.bom"].search([("type", "=", "phantom")])
         # line._convert_to_write(line.read()[0])
         products_2compute = phantom_boms.mapped(

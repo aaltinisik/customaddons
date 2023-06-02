@@ -11,8 +11,10 @@
                     <field name="product_tmpl_id"/>
                     <field name="product_qty"/>
                     <field name="product_uom_id"/>
-                    <field name="inherited_attribute_id"/>
-                    <field name="applied_on_variants" widget="many2many_tags"/>
+                    <field name="factor_attribute_id" />
+                    <field name="attribute_factor" />
+                    <field name="inherited_attribute_ids" widget="many2many_tags"/>
+                    <field name="attribute_value_ids" widget="many2many_tags"/>
                 </group>
             </form>
         </field>
@@ -24,16 +26,20 @@
         <field name="arch" type="xml">
             <tree string="MRP Bom Template Lines" editable="top">
                 <field name="bom_id" invisible="1"/>
+                <field name="bom_product_id" invisible="1"/>
                 <field name="sequence" widget="handle"/>
                 <field name="product_tmpl_id"/>
                 <field name="product_qty"/>
                 <field name="product_uom_id"/>
-                <field name="inherited_attribute_id"/>
-                <field name="applied_on_variants"
+                <field name="factor_attribute_id" />
+                <field name="attribute_factor" />
+                <field name="inherited_attribute_ids" widget="many2many_tags"/>
+                <field name="valid_product_attribute_value_wnva_ids" invisible="1" />
+                <field name="attribute_value_ids"
+                       domain="[('id', 'in', valid_product_attribute_value_wnva_ids)]"
+                       groups="product.group_product_variant"
                        widget="many2many_tags"
-                       options="{'no_create_edit': True}"
-                       domain="[('product_tmpl_id', '=', product_tmpl_id)]"
-                       context="{'default_product_tmpl_id': product_tmpl_id}"/>
+                       options="{'no_create_edit': True}"/>
             </tree>
         </field>
     </record>
@@ -45,7 +51,7 @@
         <field name="model">mrp.bom</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='bom_line_ids']" position="after">
-                <group string="Sub-products" attrs="{'invisible': [('type','!=','phantom')]}">
+                <group string="Sub-products">
                     <field name="bom_template_line_ids"
                            widget="one2many_list"
                            context="{'default_bom_id': active_id}"

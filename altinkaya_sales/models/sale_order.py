@@ -286,7 +286,6 @@ class SaleOrderLine(models.Model):
             customer_lang = line.order_id.partner_id.lang
             if not bom_id:
                 continue
-            # bom_id = bom_obj.browse(bom_id)
             if bom_id.type == 'phantom':
                 factor = line.product_uom._compute_quantity(line.product_qty,
                                                             bom_id.product_uom_id) / bom_id.product_qty
@@ -294,15 +293,16 @@ class SaleOrderLine(models.Model):
                                              picking_type=bom_id.picking_type_id)
 
                 for bom_line, data in lines:
+                    product = data['target_product']
                     sol = self.env['sale.order.line'].new()
                     sol.order_id = line.order_id
-                    sol.product_id = bom_line.product_id
+                    sol.product_id = product
                     sol.product_uom_qty = data['qty']  # data['qty']
                     sol.product_id_change()
                     sol.product_uom_change()
                     sol._onchange_discount()
                     sol._compute_amount()
-                    sol.name = bom_line.product_id.with_context(
+                    sol.name = product.with_context(
                         {'lang': customer_lang}).display_name
                     vals = sol._convert_to_write(sol._cache)
 

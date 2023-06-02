@@ -106,6 +106,7 @@ class PartnerReconcileClose(models.TransientModel):
         move_mapping = {}
         for journal in partner_ids.mapped("partner_currency_id.name"):
             journal = journal.lower()
+            # vade tarihi yapılacak todo:
             move_mapping[journal] = {
                 "opening_move_id": move_obj.create(
                     {
@@ -230,11 +231,10 @@ class PartnerReconcileClose(models.TransientModel):
                     )
                     lines.remove_move_reconcile()
                     lines.reconcile()
-
+                    _logger.info(
+                        "Partner reconcilation done. Partner: %s \n\n" % partner.name
+                    )
                 partner.devir_yapildi = True
-                _logger.info(
-                    "Partner reconcilation done. Partner: %s \n\n" % partner.name
-                )
                 self._cr.commit()
 
             except Exception as e:
