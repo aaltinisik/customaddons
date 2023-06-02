@@ -51,7 +51,12 @@ class ProductTemplate(models.Model):
         )
 
         # Find the previous and next product ids in the ordered list
-        current_index = ordered_ids.index(self.id)
+        try:
+            current_index = ordered_ids.index(self.id)
+        except ValueError:
+            self.previous_product = False
+            self.next_product = False
+            return True
         previous_index = current_index - 1
         next_index = current_index + 1
         self.previous_product = (
