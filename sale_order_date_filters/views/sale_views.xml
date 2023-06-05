@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--    Teklifler-->
+    <!--    Teklifler / Quotations-->
     <record id="sale_views_search1" model="ir.ui.view">
         <field name="name">sale.order.search.inherit.sale1</field>
         <field name="model">sale.order</field>
@@ -15,11 +15,14 @@
                 <filter name="lastmonth" string="Last Month"
                         domain="[('date_order','&gt;=', (context_today() + relativedelta(months=-1)).strftime('%Y-%m-01 00:00:00')),
                                  ('date_order','&lt;', context_today().strftime('%Y-%m-01 00:00:00'))]"/>
+                <filter name="lastyear" string="Last Year"
+                        domain="[('date_order','&gt;=', (context_today() + relativedelta(years=-1)).strftime('%Y-01-01 00:00:00')),
+                                 ('date_order','&lt;', context_today().strftime('%Y-01-01 00:00:00'))]"/>
             </filter>
         </field>
     </record>
 
-    <!--    Siparişler-->
+    <!--    Siparişler / Sales Orders-->
     <record id="sale_views_search2" model="ir.ui.view">
         <field name="name">sale.order.search.inherit.sale2</field>
         <field name="model">sale.order</field>
@@ -34,6 +37,12 @@
                 <filter name="lastmonth" string="Last Month"
                         domain="[('confirmation_date','&gt;=', (context_today() + relativedelta(months=-1)).strftime('%Y-%m-01 00:00:00')),
                                  ('confirmation_date','&lt;', context_today().strftime('%Y-%m-01 00:00:00'))]"/>
+                <filter name="lastyear" string="Last Year"
+                        domain="[('confirmation_date','&gt;=', (context_today() + relativedelta(years=-1)).strftime('%Y-01-01 00:00:00')),
+                                 ('confirmation_date','&lt;', context_today().strftime('%Y-01-01 00:00:00'))]"/>
+            </xpath>
+            <xpath expr="//filter[@name='order_date']" position="replace">
+                <filter string="Order Date Confirmation" name="order_date" date="confirmation_date"/>
             </xpath>
         </field>
     </record>
@@ -44,7 +53,7 @@
         <field name="inherit_id" ref="sale.view_sales_order_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//group/filter[@name='order_month']" position="after">
-                <filter string="Sipariş Durumu" name="orderstate" domain="[]"
+                <filter string="Order State" name="orderstate" domain="[]"
                         context="{'group_by':'order_state'}"/>
             </xpath>
         </field>
