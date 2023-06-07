@@ -2,7 +2,7 @@
 
 
 from odoo import fields, models, api
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import json
 
 
@@ -11,7 +11,7 @@ class WizarPartnerStatement(models.TransientModel):
     _description = "Partner Statement Wizard"
 
     def _default_date_start(self):
-        return date(date.today().year, 1, 1).strftime('%Y-%m-%d')
+        return date(date.today().year-1, 1, 1).strftime('%Y-%m-%d')
 
     def _default_date_end(self):
         return date(date.today().year, 12, 31).strftime('%Y-%m-%d')

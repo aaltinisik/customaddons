@@ -29,6 +29,9 @@ class ResCurrency(models.Model):
         :param date:
         :return:
         """
+        use_custom_rate = self._context.get("use_custom_rate", False)
+        custom_rate_currency_id = self._context.get("custom_rate_currency_id", False)
+
         # If date is a string, convert it to date
         # Workaround for reconciliation widget
         if isinstance(date, str):
@@ -36,16 +39,35 @@ class ResCurrency(models.Model):
 
         # Look for the last seven days
         dates = [(date - timedelta(days=i)) for i in range(7)]
-
+        rates = {}
         for date in dates:
+            rate_found = False
             rates_dict = self._get_rates_single(company, date)
+
+            # If we have only one rate and its Turkish Lira,
+            # we don't need to look for other rates
+            # to avoid recursion error
             if len(rates_dict) == 1 and rates_dict.get(31):
-                return rates_dict
+                rate_found = True
+
+            # We found suitable rates
             if not all(value == 1.0 for value in rates_dict.values()):
-                return rates_dict
+                rate_found = True
+
+            if rate_found:
+                rates = rates_dict
+                break
 
         # If we didn't find any suitable rates return the last existing rates
-        return self._get_rates_single(company, date)
+        if not rates:
+            rates = self._get_rates_single(company, date)
+
+        # Check for custom rate
+        for rate in self:
+            if use_custom_rate and rate.id == custom_rate_currency_id:
+                rates[rate.id] = self._context.get("custom_rate", False)
+
+        return rates
 
     def _get_rates_single(self, company, date):
         rates_dict = {}
