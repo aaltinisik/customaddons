@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="badge_on_menu_counter">
+
+        <div t-if="widget.count !== 0" class="menu_badge_counter pull-right" id="menu_counter">
+            <div class="menu_badge">
+                <t t-esc="widget.count"/>
+            </div>
+
+        </div>
+
+    </t>
+</template>
+

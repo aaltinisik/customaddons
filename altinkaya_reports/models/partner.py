@@ -27,7 +27,7 @@ from odoo.tools.translate import _
 
 
 class Partner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     # use_secondary_currency = fields.Boolean(string="Ekstrede çift para birimi yazdır",default=False)
 
@@ -43,15 +43,15 @@ class Partner(models.Model):
         statement_data = []
         balance, seq = 0.0, 0
         currency_balance = 0.0
-        Currency = self.env['res.currency']
-        end_date = ctx.get('date_end') or date(date.today().year, 12, 31)
+        Currency = self.env["res.currency"]
+        end_date = ctx.get("date_end") or date(date.today().year, 12, 31)
 
         if date.today().month < 5:
-            start_date = ctx.get('date_start') or date(date.today().year - 1, 1, 1)
+            start_date = ctx.get("date_start") or date(date.today().year - 1, 1, 1)
         else:
-            start_date = ctx.get('date_start') or date(date.today().year, 1, 1)
+            start_date = ctx.get("date_start") or date(date.today().year - 1, 1, 1)
 
-        move_type = ('payable', 'receivable')
+        move_type = ("payable", "receivable")
 
         query = """SELECT L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
     	AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER, INV.SUPPLIER_INVOICE_NuMBER,L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
@@ -96,84 +96,110 @@ class Partner(models.Model):
         AND AT.TYPE IN {3}
         GROUP BY AJ.NAME, A.CODE, A.CURRENCY_ID, L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
         INV.NUMBER,INV.SUPPLIER_INVOICE_NUMBER,	AJ.ID,	L.ACCOUNT_ID
-        ORDER BY ACCOUNT_CURRENCY, L.DATE""".format(str(start_date), str(end_date), str(self.commercial_partner_id.id),
-                                                    str(move_type))
+        ORDER BY ACCOUNT_CURRENCY, L.DATE""".format(
+            str(start_date),
+            str(end_date),
+            str(self.commercial_partner_id.id),
+            str(move_type),
+        )
 
-        currency_difference_accounts = self.env['account.account'].search(
-            [('code', 'in', ['646', '656', '646.F'])]).mapped('id')
-        currency_difference_to_invoice_journal = self.env['account.journal'].search([('code', 'in', ['ADVR', 'KRFRK'])]).mapped(
-            'id')
+        currency_difference_accounts = (
+            self.env["account.account"]
+            .search([("code", "in", ["646", "656", "646.F"])])
+            .mapped("id")
+        )
+        currency_difference_to_invoice_journal = (
+            self.env["account.journal"]
+            .search([("code", "in", ["ADVR", "KRFRK"])])
+            .mapped("id")
+        )
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
         if len(data) == 0:
-            raise ValidationError(_('No records found for your selection!'))
-        onhand_currency_id = data[0]['account_currency']
+            raise ValidationError(_("No records found for your selection!"))
+        onhand_currency_id = data[0]["account_currency"]
         for sl in data:
 
-            if onhand_currency_id != sl['account_currency']:
+            if onhand_currency_id != sl["account_currency"]:
                 currency_count += 1
-                onhand_currency_id = sl['account_currency']
+                onhand_currency_id = sl["account_currency"]
                 statement_data = []
                 balance, seq = 0.0, 0
                 currency_balance = 0.0
 
-            if sl['journal_id'] in currency_difference_to_invoice_journal:
+            if sl["journal_id"] in currency_difference_to_invoice_journal:
                 ## pass move line if item in currency difference journal
                 continue
             seq += 1
-            if sl['account_id'] in currency_difference_accounts:
+            if sl["account_id"] in currency_difference_accounts:
                 # if line is currency difference currency values shall be cleared
-                sl['currency_rate'] = 0.0
-                sl['debit_currency'] = 0.0
-                sl['credit_currency'] = 0.0
-                sl['amount_currency'] = 0.0
-                sl['currency_id'] = sl['company_currency_id']
+                sl["currency_rate"] = 0.0
+                sl["debit_currency"] = 0.0
+                sl["credit_currency"] = 0.0
+                sl["amount_currency"] = 0.0
+                sl["currency_id"] = sl["company_currency_id"]
 
-            balance = (sl['debit'] - sl['credit']) + balance
-            currency_balance = (sl['debit_currency'] - sl['credit_currency']) + currency_balance
+            balance = (sl["debit"] - sl["credit"]) + balance
+            currency_balance = (
+                sl["debit_currency"] - sl["credit_currency"]
+            ) + currency_balance
             debit = 0.0
             credit = 0.0
-            if sl['innumber']:
-                description = sl['journal'] + ' ' + sl['innumber']
+            if sl["innumber"]:
+                description = sl["journal"] + " " + sl["innumber"]
             else:
-                description = sl['journal']
-            company_currency_id = Currency.browse(sl['company_currency_id'])
-            line_currency_id = Currency.browse(sl['currency_id'])
-            if (sl['debit'] - sl['credit']) > 0.0:
-                debit = (sl['debit'] - sl['credit'])
+                description = sl["journal"]
+            company_currency_id = Currency.browse(sl["company_currency_id"])
+            line_currency_id = Currency.browse(sl["currency_id"])
+            if (sl["debit"] - sl["credit"]) > 0.0:
+                debit = sl["debit"] - sl["credit"]
             else:
-                credit = (sl['credit'] - sl['debit'])
+                credit = sl["credit"] - sl["debit"]
 
-            statement_data.append({
-                'seq': seq,
-                'number': sl['name'],
-                'date': sl['date'] and datetime.strptime(str(sl['date']), '%Y-%m-%d').strftime(
-                    '%d.%m.%Y') or False,
-                'due_date': sl['due_date'] and datetime.strptime(str(sl['due_date']),
-                                                                 '%Y-%m-%d').strftime('%d.%m.%Y') or False,
-                'description': len(description) >= 40 and description[0:40] or description,
-                'debit': debit,
-                'credit': credit,
-                'account_code': sl['code'],
-                'account_currency': sl['account_currency'] or 31,
-                'amount': debit - credit,
-                'balance': abs(balance) or 0.0,
-                'credit_currency': sl['credit_currency'],
-                'debit_currency': sl['debit_currency'],
-                'amount_currency': sl['debit_currency'] - sl['credit_currency'],
-                'currency_rate': sl['currency_rate'],
-                'currency_balance': abs(currency_balance) or 0.0,
-                'currency_dc': currency_balance > 0.01 and 'B' or 'A',
-                'line_currency_id': line_currency_id['symbol'],
-                'dc': balance > 0.01 and 'B' or 'A',
-                'total': balance or 0.0,
-                'currency_symbol': company_currency_id['symbol'],
-            })
+            statement_data.append(
+                {
+                    "seq": seq,
+                    "number": sl["name"],
+                    "date": sl["date"]
+                    and datetime.strptime(str(sl["date"]), "%Y-%m-%d").strftime(
+                        "%d.%m.%Y"
+                    )
+                    or False,
+                    "due_date": sl["due_date"]
+                    and datetime.strptime(str(sl["due_date"]), "%Y-%m-%d").strftime(
+                        "%d.%m.%Y"
+                    )
+                    or False,
+                    "description": len(description) >= 40
+                    and description[0:40]
+                    or description,
+                    "debit": debit,
+                    "credit": credit,
+                    "account_code": sl["code"],
+                    "account_currency": sl["account_currency"] or 31,
+                    "amount": debit - credit,
+                    "balance": abs(balance) or 0.0,
+                    "credit_currency": sl["credit_currency"],
+                    "debit_currency": sl["debit_currency"],
+                    "amount_currency": sl["debit_currency"] - sl["credit_currency"],
+                    "currency_rate": sl["currency_rate"],
+                    "currency_balance": abs(currency_balance) or 0.0,
+                    "currency_dc": currency_balance > 0.01 and "B" or "A",
+                    "line_currency_id": line_currency_id["symbol"],
+                    "dc": balance > 0.01 and "B" or "A",
+                    "total": balance or 0.0,
+                    "currency_symbol": company_currency_id["symbol"],
+                }
+            )
             statement_data2[currency_count] = statement_data
         return statement_data2
 
-    def email_statement(self, ):
-        data_model = self.env['ir.model.data']
-        template = data_model.get_object('altinkaya_reports', 'email_template_edi_send_statement')
+    def email_statement(
+        self,
+    ):
+        data_model = self.env["ir.model.data"]
+        template = data_model.get_object(
+            "altinkaya_reports", "email_template_edi_send_statement"
+        )
         mail_id = template.send_mail(self.id, force_send=True)
         return True

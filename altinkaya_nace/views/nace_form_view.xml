@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="res_partner_nace_search2">
+        <field name="name">res.partner.nace.search2</field>
+        <field name="model">res.partner.nace</field>
+        <field name="inherit_id" ref="l10n_eu_nace.res_partner_nace_form_view"/>
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="after">
+                <button class="oe_stat_button"
+                        type="object"
+                        name="action_view_nace_partners"
+                        icon="fa-user"
+                        options="{}"
+                        title="Partners">
+                    <field string="Partners"
+                           name="full_partner_count"
+                           widget="statinfo"
+                           modifiers="{'readonly':true}"/>
+                </button>
+            </button>
+        </field>
+    </record>
+</odoo>

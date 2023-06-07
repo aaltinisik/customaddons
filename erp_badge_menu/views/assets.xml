@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="assets_backend" name="Add Assets" inherit_id="web.assets_backend">
+        <xpath expr="script[last()]" position="after">
+            <script type="application/javascript" src="/erp_badge_menu/static/src/js/menu.js"/>
+            <link href="/erp_badge_menu/static/src/css/menu.css" rel="stylesheet" />
+        </xpath>
+    </template>
+</odoo>
