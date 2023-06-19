@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+        <record id="shipments" model="mail.channel">
+            <field name="name">Approved Shipments</field>
+            <field name="public">public</field>
+            <field name="description">A discussion channel for tracking confirmed export
+                sales.
+            </field>
+        </record>
+    </data>
+</odoo>
