@@ -114,12 +114,19 @@ class MrpBoM(models.Model):
         lines_done = []
         V |= set([product.product_tmpl_id.id])
 
-        bom_lines = [(bom_line, product, quantity, False) for bom_line in self.bom_line_ids]
+        bom_lines = [(bom_line, product, quantity, False, "bom_line") for bom_line in self.bom_line_ids]
+        # Add bom template lines
+        bom_lines += [(bom_line, product, quantity, False, "tmpl_line") for bom_line in self.bom_template_line_ids]
         for bom_line in self.bom_line_ids:
             V |= set([bom_line.product_id.product_tmpl_id.id])
             graph[product.product_tmpl_id.id].append(bom_line.product_id.product_tmpl_id.id)
+
+        # Add bom template lines
+        for bom_line in self.bom_template_line_ids:
+            V |= set([bom_line.product_tmpl_id.id])
+            graph[product.product_tmpl_id.id].append(bom_line.product_tmpl_id.id)
         while bom_lines:
-            current_line, current_product, current_qty, parent_line = bom_lines[0]
+            current_line, current_product, current_qty, parent_line, line_type = bom_lines[0]
             bom_lines = bom_lines[1:]
 
             if current_line._skip_bom_line(current_product):
@@ -134,7 +141,23 @@ class MrpBoM(models.Model):
                     qty_extra = (attribute_value_id.numeric_value * current_line.attribute_factor)
             
             line_quantity = current_qty * (current_line.product_qty + qty_extra)
-            bom = self._bom_find(product=current_line.product_id, picking_type=picking_type or self.picking_type_id, company_id=self.company_id.id)
+
+            if line_type == "bom_line":
+                line_product = current_line.product_id
+            else:
+                matched_attribute_ids = bom_line._match_inherited_attributes(product)
+                matched_value_ids = bom_line._match_attribute_values(product)
+                target_attribute_ids = product.attribute_value_ids.filtered(lambda a: a.attribute_id.id in matched_attribute_ids).ids + matched_value_ids
+                domain = [
+                    ("product_tmpl_id", "=", current_line.product_tmpl_id.id),
+                    ("attribute_value_ids", "in", target_attribute_ids),
+                ]
+                line_product = self.env["product.product"].search(domain, limit=1)
+                if not line_product:
+                    continue
+
+            bom = self._bom_find(product=line_product, picking_type=picking_type or self.picking_type_id, company_id=self.company_id.id)
+
             if bom.type == 'phantom':
                 converted_line_quantity = current_line.product_uom_id._compute_quantity(line_quantity / bom.product_qty, bom.product_uom_id)
                 bom_lines = [(line, current_line.product_id, converted_line_quantity, current_line) for line in bom.bom_line_ids] + bom_lines
@@ -149,7 +172,7 @@ class MrpBoM(models.Model):
                 # should be consumed.
                 rounding = current_line.product_uom_id.rounding
                 line_quantity = float_round(line_quantity, precision_rounding=rounding, rounding_method='UP')
-                lines_done.append((current_line, {'qty': line_quantity, 'product': current_product, 'original_qty': quantity, 'parent_line': parent_line}))
+                lines_done.append((current_line, {'target_product': line_product, 'qty': line_quantity, 'product': current_product, 'original_qty': quantity, 'parent_line': parent_line}))
 
         return boms_done, lines_done
 

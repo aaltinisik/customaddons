@@ -5,6 +5,7 @@ from odoo import models, fields, api, _
 import logging
 from sys import exc_info
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 from odoo.addons.currency_rate_turkey.models.res_currency_rate import RATE_FIELD_MAPPING
 
 
@@ -86,6 +87,7 @@ class ResCurrencyRateProviderSecondRate(models.Model):
                         is_main_rate = (
                             RATE_FIELD_MAPPING[rate_type] == currency.main_rate_field
                         )
+
                         record = CurrencyRate.search(
                             [
                                 ("company_id", "=", provider.company_id.id),
@@ -113,6 +115,7 @@ class ResCurrencyRateProviderSecondRate(models.Model):
                             if is_main_rate:
                                 vals["rate"] = rate
                             record = CurrencyRate.create(vals)
+                        self.env.cr.commit()
 
             if is_scheduled:
                 provider._schedule_next_run()

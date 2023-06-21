@@ -13,11 +13,13 @@
 
     """,
     'data': [
+        "security/mrp_security.xml",
         "security/ir.model.access.csv",
         "view/mrp_production_view.xml",
         "view/procurement_view.xml",
         "view/mrp_bom_views.xml",
         'view/x_makine_views.xml',
+        "view/mrp_bom_template_line_view.xml",
         'wizard/mrp_cancel_wizard_view.xml',
     ],
     'demo': [],

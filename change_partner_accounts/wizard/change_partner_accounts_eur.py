@@ -3,6 +3,7 @@ from odoo import models, api, _
 
 class ChangePartnerAccountsEUR(models.TransientModel):
     _name = 'change.partner.accounts.eur'
+    _description = "Change Partner Accounts to EUR Wizard"
 
     @api.multi
     def change_partners_account_to_eur(self):

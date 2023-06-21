@@ -8,6 +8,7 @@ from odoo.exceptions import Warning, UserError
 
 class PrintWaybillWizard(models.TransientModel):
     _name = 'stock_waybill_print.print_waybill_wizard'
+    _description = "Waybill print wizard"
 
     warehouse_id = fields.Many2one('stock.warehouse', readonly=True)
     picking_id = fields.Many2one('stock.picking', readonly=True)

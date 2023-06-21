@@ -3,6 +3,7 @@ from odoo.exceptions import Warning
 
 class ChangePartnerAccountsUSD(models.TransientModel):
     _name = 'change.partner.accounts.usd'
+    _description = "Changing partner accounts to USD Wizard"
 
     @api.multi
     def change_partners_account_to_usd(self):
