@@ -175,28 +175,42 @@ class SaleOrder(models.Model):
             # PICKING
             elif sale.picking_ids:
                 outgoing_pickings = sale.picking_ids.filtered(
-                    lambda p: p.picking_type_code == "outgoing"
-                    and p.state == "done"
-                    and p.invoice_state == "invoiced"
+                    lambda p: p.picking_type_code == "outgoing" and p.state == "done"
                 )
                 incoming_pickings = sale.picking_ids.filtered(
                     lambda p: p.picking_type_code == "incoming"
                     and p.location_id.usage == "customer"
                 )
-                if outgoing_pickings:
-                    if any(p.is_packaged for p in outgoing_pickings):
-                        sale.order_state = "packaged"
-                    elif any(
+                invoiced_pickings = outgoing_pickings.filtered(
+                    lambda p: p.invoice_state == "invoiced"
+                )
+
+                # Check the dispatched pickings
+                if invoiced_pickings:
+                    if any(
                         p.delivery_state == "customer_delivered"
-                        for p in outgoing_pickings
+                        for p in invoiced_pickings
                     ):
                         sale.order_state = "delivered"
                     else:
                         sale.order_state = "on_transit"
-                elif incoming_pickings:
-                    sale.order_state = "return"
+
+                # Check the packaged pickings
+                elif outgoing_pickings and any(
+                    p.is_packaged for p in outgoing_pickings
+                ):
+                    sale.order_state = "packaged"
+                # If there is no packaged or dispatched pickings
+                # set the order state to at_warehouse
                 else:
                     sale.order_state = "at_warehouse"
+
+                # Check the returned pickings
+                if incoming_pickings and incoming_pickings.filtered(
+                    lambda p: p.state == "done"
+                ):
+                    sale.order_state = "return"
+
         return True
 
     altinkaya_payment_url = fields.Char(
@@ -205,10 +219,12 @@ class SaleOrder(models.Model):
     sale_line_history = fields.One2many(
         "sale.order.line", string="Old Sales", compute="_compute_sale_line_history"
     )
-    sale_currency_rate = fields.Float(string="Currency Rate",
-                                      compute="_compute_sale_currency_rate",
-                                      default=1.0,
-                                      digits=[16, 4])
+    sale_currency_rate = fields.Float(
+        string="Currency Rate",
+        compute="_compute_sale_currency_rate",
+        default=1.0,
+        digits=[16, 4],
+    )
 
     @api.multi
     def action_quotation_send(self):
@@ -355,39 +371,45 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def explode_set_contents(self):
-        """ Explodes order lines.
-        """
+        """Explodes order lines."""
 
-        bom_obj = self.env['mrp.bom'].sudo()
+        bom_obj = self.env["mrp.bom"].sudo()
         prod_obj = self.env["product.product"].sudo()
         uom_obj = self.env["uom.uom"].sudo()
-        to_unlink_ids = self.env['sale.order.line']
-        to_explode_again_ids = self.env['sale.order.line']
+        to_unlink_ids = self.env["sale.order.line"]
+        to_explode_again_ids = self.env["sale.order.line"]
 
         for line in self.filtered(
-                lambda l: l.set_product == True and l.state in ['draft', 'sent']):
+            lambda l: l.set_product == True and l.state in ["draft", "sent"]
+        ):
             bom_id = bom_obj._bom_find(product=line.product_id)
             customer_lang = line.order_id.partner_id.lang
             if not bom_id:
                 continue
-            if bom_id.type == 'phantom':
-                factor = line.product_uom._compute_quantity(line.product_qty,
-                                                            bom_id.product_uom_id) / bom_id.product_qty
-                boms, lines = bom_id.explode(line.product_id, factor,
-                                             picking_type=bom_id.picking_type_id)
+            if bom_id.type == "phantom":
+                factor = (
+                    line.product_uom._compute_quantity(
+                        line.product_qty, bom_id.product_uom_id
+                    )
+                    / bom_id.product_qty
+                )
+                boms, lines = bom_id.explode(
+                    line.product_id, factor, picking_type=bom_id.picking_type_id
+                )
 
                 for bom_line, data in lines:
-                    product = data['target_product']
-                    sol = self.env['sale.order.line'].new()
+                    product = data["target_product"]
+                    sol = self.env["sale.order.line"].new()
                     sol.order_id = line.order_id
                     sol.product_id = product
-                    sol.product_uom_qty = data['qty']  # data['qty']
+                    sol.product_uom_qty = data["qty"]  # data['qty']
                     sol.product_id_change()
                     sol.product_uom_change()
                     sol._onchange_discount()
                     sol._compute_amount()
                     sol.name = product.with_context(
-                        {'lang': customer_lang}).display_name
+                        {"lang": customer_lang}
+                    ).display_name
                     vals = sol._convert_to_write(sol._cache)
 
                     sol_id = self.create(vals)
