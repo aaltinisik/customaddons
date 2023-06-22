@@ -121,6 +121,7 @@ class SaleOrder(models.Model):
             ("cutting_waiting", "Kesim Bekliyor"),
             # depo
             ("at_warehouse", "Depoda"),
+            ("packaged", "Paketlendi"),
             ("on_transit", "Nakliyede"),
             ("delivered", "Teslim Edildi"),
             ("completed", "Tamamlandı"),
@@ -145,6 +146,7 @@ class SaleOrder(models.Model):
         "production_ids.state",
         "picking_ids.delivery_state",
         "picking_ids.invoice_state",
+        "picking_ids.is_packaged",
     )
     def _compute_order_state(self):
         deadline = datetime.now() - timedelta(days=360)
@@ -182,7 +184,9 @@ class SaleOrder(models.Model):
                     and p.location_id.usage == "customer"
                 )
                 if outgoing_pickings:
-                    if any(
+                    if any(p.is_packaged for p in outgoing_pickings):
+                        sale.order_state = "packaged"
+                    elif any(
                         p.delivery_state == "customer_delivered"
                         for p in outgoing_pickings
                     ):
