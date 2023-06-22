@@ -158,7 +158,7 @@
 				</xpath>
 				<xpath expr="/form/header" position="after">
 					<header attrs="{'invisible': [('order_state', '=', 'draft')]}">
-						<field name="order_state" widget="statusbar" statusbar_visible="sent,sale,molding,injection,cnc,uv_printing,assembly,at_warehouse,on_transit,delivered"/>
+						<field name="order_state" widget="statusbar" statusbar_visible="sent,sale,molding,injection,cnc,uv_printing,assembly,at_warehouse,packaged,on_transit,delivered"/>
 					</header>
 				</xpath>
 			</field>
