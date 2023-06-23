@@ -380,7 +380,7 @@ class SaleOrderLine(models.Model):
         to_explode_again_ids = self.env["sale.order.line"]
 
         for line in self.filtered(
-            lambda l: l.set_product == True and l.state in ["01_draft", "sent"]
+            lambda l: l.set_product == True and l.state in ["draft", "sent"]
         ):
             bom_id = bom_obj._bom_find(product=line.product_id)
             customer_lang = line.order_id.partner_id.lang
