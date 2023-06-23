@@ -17,76 +17,76 @@ def _match_production_with_route(production):
                     lambda r: r.process_id.id == 14 and r.state in ongoing_state
                 )
             ):
-                return "molding"
+                return "06_molding"
             else:
-                return "molding_waiting"
+                return "04_molding_waiting"
         elif any(x in [1, 11] for x in process_ids):
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id in [1, 11] and r.state in ongoing_state
                 )
             ):
-                return "injection"
+                return "08_injection"
             else:
-                return "injection_waiting"
+                return "07_injection_waiting"
         elif 2 in process_ids:
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id == 2 and r.state in ongoing_state
                 )
             ):
-                return "cnc"
+                return "14_cnc"
             else:
-                return "cnc_waiting"
+                return "13_cnc_waiting"
         elif 10 in process_ids:
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id == 10 and r.state in ongoing_state
                 )
             ):
-                return "metal"
+                return "10_metal"
             else:
-                return "metal_waiting"
+                return "09_metal_waiting"
         elif 5 in process_ids:
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id == 5 and r.state in ongoing_state
                 )
             ):
-                return "cnc_lathe"
+                return "12_cnc_lathe"
             else:
-                return "cnc_lathe_waiting"
+                return "11_cnc_lathe_waiting"
         elif 16 in process_ids:
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id == 16 and r.state in ongoing_state
                 )
             ):
-                return "uv_printing"
+                return "16_uv_printing"
             else:
-                return "uv_printing_waiting"
+                return "15_uv_printing_waiting"
         elif any(x in [3, 6, 7] for x in process_ids):
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id in [3, 6, 7] and r.state in ongoing_state
                 )
             ):
-                return "assembly"
+                return "18_assembly"
             else:
-                return "assembly_waiting"
+                return "17_assembly_waiting"
         elif 8 in process_ids:
             if any(
                 production_ids.filtered(
                     lambda r: r.process_id.id == 8 and r.state in ongoing_state
                 )
             ):
-                return "cutting"
+                return "20_cutting"
             else:
-                return "cutting_waiting"
+                return "19_cutting_waiting"
         else:
-            return "production"
+            return "05_production"
     else:
-        return "at_warehouse"
+        return "21_at_warehouse"
 
 
 class SaleOrder(models.Model):
@@ -98,40 +98,40 @@ class SaleOrder(models.Model):
     order_state = fields.Selection(
         [
             # satış
-            ("draft", "Taslak"),
-            ("sent", "Teklif Gönderildi"),
-            ("sale", "Satış Siparişi"),
-            ("molding_waiting", "Kalıphanede Bekliyor"),
+            ("01_draft", "Taslak"),
+            ("02_sent", "Teklif Gönderildi"),
+            ("03_sale", "Satış Siparişi"),
+            ("04_molding_waiting", "Kalıphanede Bekliyor"),
             # üretim
-            ("production", "Üretimde"),
-            ("molding", "Kalıphanede"),
-            ("injection_waiting", "Enjeksiyonda Bekliyor"),
-            ("injection", "Enjeksiyonda"),
-            ("metal_waiting", "Preshane Bekliyor"),
-            ("metal", "Preshane"),
-            ("cnc_lathe_waiting", "CNC Torna Bekliyor"),
-            ("cnc_lathe", "CNC Torna"),
-            ("cnc_waiting", "CNC Bekliyor"),
-            ("cnc", "CNC Kesimde"),
-            ("uv_printing_waiting", "Görsel Baskıda Bekliyor"),
-            ("uv_printing", "Görsel Baskıda"),
-            ("assembly_waiting", "Montajda Bekliyor"),
-            ("assembly", "Montajda"),
-            ("cutting", "Kesimde"),
-            ("cutting_waiting", "Kesim Bekliyor"),
+            ("05_production", "Üretimde"),
+            ("06_molding", "Kalıphanede"),
+            ("07_injection_waiting", "Enjeksiyonda Bekliyor"),
+            ("08_injection", "Enjeksiyonda"),
+            ("09_metal_waiting", "Preshane Bekliyor"),
+            ("10_metal", "Preshane"),
+            ("11_cnc_lathe_waiting", "CNC Torna Bekliyor"),
+            ("12_cnc_lathe", "CNC Torna"),
+            ("13_cnc_waiting", "CNC Bekliyor"),
+            ("14_cnc", "CNC Kesimde"),
+            ("15_uv_printing_waiting", "Görsel Baskıda Bekliyor"),
+            ("16_uv_printing", "Görsel Baskıda"),
+            ("17_assembly_waiting", "Montajda Bekliyor"),
+            ("18_assembly", "Montajda"),
+            ("19_cutting_waiting", "Kesim Bekliyor"),
+            ("20_cutting", "Kesimde"),
             # depo
-            ("at_warehouse", "Depoda"),
-            ("packaged", "Paketlendi"),
-            ("on_transit", "Nakliyede"),
-            ("delivered", "Teslim Edildi"),
-            ("completed", "Tamamlandı"),
-            ("return", "İade"),
-            ("cancel", "İptal"),
+            ("21_at_warehouse", "Depoda"),
+            ("22_packaged", "Paketlendi"),
+            ("23_on_transit", "Nakliyede"),
+            ("24_delivered", "Teslim Edildi"),
+            ("25_completed", "Tamamlandı"),
+            ("26_return", "İade"),
+            ("27_cancel", "İptal"),
         ],
         string="Sipariş Durumu",
         readonly=True,
         copy=False,
-        default="draft",
+        default="01_draft",
         index=True,
         track_visibility="onchange",
         compute="_compute_order_state",
@@ -153,16 +153,16 @@ class SaleOrder(models.Model):
         for sale in self:
             # SALE
             if sale.confirmation_date and sale.confirmation_date < deadline:
-                sale.order_state = "completed"
+                sale.order_state = "25_completed"
                 continue
             elif sale.state == "draft":
-                sale.order_state = "draft"
+                sale.order_state = "01_draft"
             elif sale.state == "sent":
-                sale.order_state = "sent"
+                sale.order_state = "02_sent"
             elif sale.state == "sale":
-                sale.order_state = "sale"
+                sale.order_state = "03_sale"
             elif sale.state == "cancel":
-                sale.order_state = "cancel"
+                sale.order_state = "27_cancel"
                 continue
             else:
                 pass
@@ -191,25 +191,25 @@ class SaleOrder(models.Model):
                         p.delivery_state == "customer_delivered"
                         for p in invoiced_pickings
                     ):
-                        sale.order_state = "delivered"
+                        sale.order_state = "24_delivered"
                     else:
-                        sale.order_state = "on_transit"
+                        sale.order_state = "23_on_transit"
 
                 # Check the packaged pickings
                 elif outgoing_pickings and any(
                     p.is_packaged for p in outgoing_pickings
                 ):
-                    sale.order_state = "packaged"
+                    sale.order_state = "22_packaged"
                 # If there is no packaged or dispatched pickings
                 # set the order state to at_warehouse
                 else:
-                    sale.order_state = "at_warehouse"
+                    sale.order_state = "21_at_warehouse"
 
                 # Check the returned pickings
                 if incoming_pickings and incoming_pickings.filtered(
                     lambda p: p.state == "done"
                 ):
-                    sale.order_state = "return"
+                    sale.order_state = "26_return"
 
         return True
 
@@ -380,7 +380,7 @@ class SaleOrderLine(models.Model):
         to_explode_again_ids = self.env["sale.order.line"]
 
         for line in self.filtered(
-            lambda l: l.set_product == True and l.state in ["draft", "sent"]
+            lambda l: l.set_product == True and l.state in ["01_draft", "sent"]
         ):
             bom_id = bom_obj._bom_find(product=line.product_id)
             customer_lang = line.order_id.partner_id.lang
