@@ -8,7 +8,7 @@
     'description': """
      """,
     'depends': [
-        'stock','delivery', 'delivery_integration_base'
+        'stock','delivery', 'delivery_integration_base', 'altinkaya_sales'
     ],
     'data': [
         'views/stock_quant_view.xml',
