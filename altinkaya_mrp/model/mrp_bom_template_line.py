@@ -95,13 +95,12 @@ class MrpBomTemplateLine(models.Model):
         Do not skip bom line if inherited attributes are matched
         """
         self.ensure_one()
-        if self.inherited_attribute_ids and self._match_inherited_attributes(product):
-            if self.attribute_value_ids and not self._match_attribute_values(product):
-                return True
-            else:
-                return False
-        else:
+        if not self.inherited_attribute_ids or not self._match_inherited_attributes(
+            product
+        ):
             return True
+
+        return not self.attribute_value_ids or not self._match_attribute_values(product)
 
     def _match_inherited_attributes(self, product):
         """Match inherited attributes between bom line and product template"""
