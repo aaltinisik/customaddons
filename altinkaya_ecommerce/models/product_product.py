@@ -25,7 +25,7 @@ class ProductProduct(models.Model):
     def name_get(self):
         """Override name_get method to hide default attribute values from PTAL
         This is an Odoo method."""
-        super(ProductProduct, self).name_get()
+        # super(ProductProduct, self).name_get()
 
         def _name_get(d):
             name = d.get("name", "")
