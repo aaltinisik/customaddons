@@ -162,7 +162,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <strong>KDV(%18)</strong>
+                                        <strong>KDV</strong>
                                     </td>
                                     <td class="text-right">
                                         <span t-field="o.amount_tax"
@@ -400,7 +400,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <strong>TAX(%18)</strong>
+                                        <strong>TAX</strong>
                                     </td>
                                     <td class="text-right">
                                         <span t-field="o.amount_tax"
