@@ -34,6 +34,7 @@ class ResPartner(models.Model):
 
     property_product_pricelist = fields.Many2one(
         search="_search_property_product_pricelist",
+        company_dependent=True,
     )
 
     z_old_tel = fields.Char("Eski Tel", size=64, required=False)
