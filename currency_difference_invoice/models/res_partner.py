@@ -85,42 +85,42 @@ class ResPartner(models.Model):
                 for diff_aml in difference_amls:
                     amount_untaxed = diff_aml.debit or diff_aml.credit
                     inv_line_name = "Kur Farkı"
-                    tax_18 = self.env['account.tax'].search(
-                        [('type_tax_use', '=', 'sale'), ('amount', '=', 18.0), ('include_base_amount', '=', False)],
+                    tax_20 = self.env['account.tax'].search(
+                        [('type_tax_use', '=', 'sale'), ('amount', '=', 20.0), ('include_base_amount', '=', False)],
                         limit=1)
-                    tax_8 = self.env['account.tax'].search(
-                        [('type_tax_use', '=', 'sale'), ('amount', '=', 8.0), ('include_base_amount', '=', False)],
+                    tax_10 = self.env['account.tax'].search(
+                        [('type_tax_use', '=', 'sale'), ('amount', '=', 10.0), ('include_base_amount', '=', False)],
                         limit=1)
                     inv_ids = diff_aml.full_reconcile_id.reconciled_line_ids.filtered(lambda r: r.invoice_id).mapped(
                         'invoice_id')
                     if len(inv_ids) > 0:
-                        kdv_18_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
-                                                                                   r.tax_id.amount == 18).mapped(
+                        kdv_20_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
+                                                                                   r.tax_id.amount == 20).mapped(
                             'amount'))
 
-                        kdv_8_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
-                                                                                  r.tax_id.amount == 8).mapped(
+                        kdv_10_taxes = sum(inv_ids.mapped('tax_line_ids').filtered(lambda r:
+                                                                                  r.tax_id.amount == 10).mapped(
                             'amount'))
 
-                        rate_18 = round(100.0 * (kdv_18_taxes / 18.0) / sum(inv_ids.mapped('amount_untaxed')), 4)
-                        rate_8 = round(100.0 * (kdv_8_taxes / 8.0) / sum(inv_ids.mapped('amount_untaxed')), 4)
+                        rate_20 = round(100.0 * (kdv_20_taxes / 20.0) / sum(inv_ids.mapped('amount_untaxed')), 4)
+                        rate_10 = round(100.0 * (kdv_10_taxes / 10.0) / sum(inv_ids.mapped('amount_untaxed')), 4)
 
                         comment_einvoice += ', '.join(inv_id.supplier_invoice_number
                                                       if inv_id.supplier_invoice_number
                                                       else inv_id.number
                                                       for inv_id in inv_ids)
 
-                        if rate_18 > 0.001:
-                            amount_untaxed = round(amount_untaxed * rate_18 / (1 + tax_18.amount / 100.0), 2)
-                            tax_ids = [(6, False, [tax_18.id])]
+                        if rate_20 > 0.001:
+                            amount_untaxed = round(amount_untaxed * rate_20 / (1 + tax_20.amount / 100.0), 2)
+                            tax_ids = [(6, False, [tax_20.id])]
 
-                        if rate_8 > 0.001:
-                            amount_untaxed = round(amount_untaxed * rate_8 / (1 + tax_8.amount / 100.0), 2)
-                            tax_ids = [(6, False, [tax_8.id])]
+                        if rate_10 > 0.001:
+                            amount_untaxed = round(amount_untaxed * rate_10 / (1 + tax_10.amount / 100.0), 2)
+                            tax_ids = [(6, False, [tax_10.id])]
                     else:
                         comment_einvoice = ''
-                        amount_untaxed = amount_untaxed / (1 + tax_18.amount / 100.0)
-                        tax_ids = [(6, False, [tax_18.id])]
+                        amount_untaxed = amount_untaxed / (1 + tax_20.amount / 100.0)
+                        tax_ids = [(6, False, [tax_20.id])]
 
                     if inv_type == "out_refund" and diff_aml.debit > 0:
                         amount_untaxed = -amount_untaxed
