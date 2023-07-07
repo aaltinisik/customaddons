@@ -92,7 +92,7 @@ msgstr ""
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document
-msgid "6298017"
+msgid "6294510"
 msgstr ""
 
 #. module: altinkaya_reports
@@ -665,8 +665,8 @@ msgstr "<strong>Ara Toplam</strong>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_purchaseorder_document
-msgid "<strong>TAX(%18)</strong>"
-msgstr "<strong>KDV(%18)</strong>"
+msgid "<strong>TAX</strong>"
+msgstr "<strong>KDV</strong>"
 
 #. module: altinkaya_reports
 #: model_terms:ir.ui.view,arch_db:altinkaya_reports.report_saleorder_document

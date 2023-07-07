@@ -22,7 +22,7 @@
                             'B23': '${"İvedik V.D. %s" % (object.picking_type_id.warehouse_id.partner_id.vat) or ""}#{style=text}',
                             'B24': '${"Tel: %s" % (object.picking_type_id.warehouse_id.partner_id.phone) or ""}#{align=left;style=text}',
                             'F9': '${"Toplam" or ""}#{align=right;font=bold;style=text}',
-                            'F10': '${"KDV (%18)" or ""}#{align=right;font=bold;style=text}',
+                            'F10': '${"KDV" or ""}#{align=right;font=bold;style=text}',
                             'F11': '${"Genel Toplam" or ""}#{align=right;font=bold;style=text}',
                             'F20': '${"Satınalma Emri Onayı" or ""}#{font=bold;align=center;style=text}',
                             'F21': 'user_id.name${value or ""}#{align=center;style=text}',
