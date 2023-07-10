@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Make the logo bigger and make the website link adaptable according to partner's country-->
+    <template id="sale_portal_logo_size" inherit_id="portal.frontend_layout">
+        <xpath expr="//img[@t-att-title='res_company.name']" position="attributes">
+            <attribute name="style">height:80px!important;</attribute>
+        </xpath>
+        <xpath expr="//a[hasclass('navbar-brand', 'logo')]" position="attributes">
+            <attribute name="t-att-href">
+                ('https://www.altinkaya.com.tr' if sale_order.partner_id.lang == 'tr_TR'
+                else 'https://www.altinkaya.eu')
+            </attribute>
+        </xpath>
+    </template>
+
+<!--    Removes breadcrumbs in sale portal-->
+    <template id="sale_portal_remove_breadcrumbs" inherit_id="portal.portal_layout"
+              name="Removes breadcrumbs in sale portal">
+        <xpath expr="//div[hasclass('o_portal', 'container', 'mt-3')]"
+               position="replace"/>
+    </template>
+
+<!--    Removes sale note from sale portal-->
+    <template id="sale_portal_remove_sale_note"
+              inherit_id="sale.sale_order_portal_content"
+              name="Removes sale note in sale portal">
+        <xpath expr="//section[@id='terms']" position="replace"/>
+    </template>
+
+</odoo>

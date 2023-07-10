@@ -33,6 +33,8 @@
         "altinkaya_mrp",
         "delivery_state",
         "delivery_package_barcode",
+        "portal",
+        "sale_stock",
     ],
     "author": "MAkifOzdemir,Codequarters,Acespritech Solutions Pvt. Ltd.,Yavuz Avcı",
     "description": """
@@ -48,6 +50,9 @@
         "views/pricelist.xml",
         "views/res_partner.xml",
         "data/mail_data.xml",
+        "views/portal_templates.xml",
+        "data/sale_portal_data.xml",
+        "views/sale_portal_templates.xml",
     ],
     "demo": [],
     "installable": True,
