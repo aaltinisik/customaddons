@@ -99,7 +99,8 @@ class SurveyMapping(models.AbstractModel):
             survey_user_input = self.env["survey.user_input"].create(vals)
 
         survey_url = base_url + "/%s/survey/fill/%s/%s" % (
-            survey.default_lang_id.code or "tr_TR",
+            # survey.default_lang_id.code or "tr_TR",
+            survey_user_input.partner_id.lang or "tr_TR",
             slug(survey),
             survey_user_input.token,
         )
