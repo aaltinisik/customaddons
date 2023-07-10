@@ -917,16 +917,28 @@
                             </div>
                         </div>
                     </div>
-                    <p>
-                        <span>
-                            <strong>Say in:</strong>
-                            <strong style="font-style:italic" t-field="doc.sale_order_amount_in_words"/>
-                        </span>
-                    </p>
-                    <p t-field="doc.note">
-                        <strong style="font-size:12pt">Notes:</strong>
-                        <span style="font-size:12pt" t-field="doc.note"/>
-                    </p>
+                    <div class="row">
+                        <div style="width:80%;">
+                            <span>
+                                <strong>Say in:</strong>
+                                <strong style="font-style:italic"
+                                        t-field="doc.sale_order_amount_in_words"/>
+                            </span>
+
+                            <p t-field="doc.note">
+                                <strong style="font-size:12pt">Notes:</strong>
+                                <span style="font-size:12pt" t-field="doc.note"/>
+                            </p>
+                        </div>
+                        <div style="padding: 15px 0;width: 20%;">
+                            <img width="75px" height="75px"
+                                 style="margin-left: auto;margin-right: auto;display: block;"
+                                 t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
+                            <p style="font-weight: normal;font-size: 12px;margin-bottom: 0;text-align: center;">
+                                Rate us
+                            </p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <t t-if="doc.currency_id.name == 'TRY'">
