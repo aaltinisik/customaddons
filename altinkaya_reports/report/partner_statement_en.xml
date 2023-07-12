@@ -210,7 +210,7 @@
             <t t-set="toplamBakiye" t-value="0"/>
             <t t-set="toplamBorc" t-value="0"/>
             <t t-set="toplamAlacak" t-value="0"/>
-            <t t-set="sdc" t-value="'A'"/>
+            <t t-set="sdc" t-value="'C'"/>
             <t t-foreach="x" t-as="s">
                 <tr>
                     <td class="text-center" style="min-width:15px;">
@@ -299,11 +299,6 @@
                     Balance
                 </th>
                 <th></th>
-                <th><t t-esc="o.property_account_receivable_id.currency_id.symbol"/>/₺
-                </th>
-                <th>₺ Amount</th>
-                <th>₺ Balance</th>
-                <th></th>
 
             </tr>
             <t t-set="number_lang" t-value="env['res.lang']._lang_get(user.lang)"/>
@@ -313,7 +308,7 @@
             <t t-set="currency_toplamBakiye" t-value="0"/>
             <t t-set="currency_toplamBorc" t-value="0"/>
             <t t-set="currency_toplamAlacak" t-value="0"/>
-            <t t-set="sdc" t-value="'A'"/>
+            <t t-set="sdc" t-value="'C'"/>
             <t t-foreach="x" t-as="s">
                 <tr>
                     <td class="text-center" style="min-width:15px">
@@ -339,32 +334,16 @@
                         />
                     </td>
                     <td class="text-center" style="min-width:15px">
-                        <span t-esc="s['currency_dc']"/>
+                        <span t-esc="'D' if s['currency_dc'] == 'B' else 'C'"/>
                     </td>
 
-                    <td class="text-right">
-                        <span t-raw="number_lang.format('%.5f', s['currency_rate'])"/>
-                    </td>
-
-
-                    <td class="text-right">
-                        <span t-raw="number_lang.format('%.2f', s['amount'],grouping=True, monetary=True)"
-                        />
-                    </td>
-                    <td class="text-right">
-                        <span t-raw="number_lang.format('%.2f', s['balance'],grouping=True, monetary=True)"
-                        />
-                    </td>
-                    <td class="text-center" style="min-width:15px">
-                        <span t-esc="s['dc']"/>
-                    </td>
-                    <t t-value="s['dc']" t-set="sdc"/>
+                    <t t-value="'D' if s['currency_dc'] == 'B' else 'C'" t-set="sdc"/>
                     <t t-value="'%.2f' %s['balance']" t-set="toplamBakiye"/>
                     <t t-set="toplamBorc" t-value="toplamBorc + s['debit']"/>
                     <t t-set="toplamAlacak" t-value="toplamAlacak + s['credit']"/>
 
 
-                    <t t-value="s['currency_dc']" t-set="c_sdc"/>
+                    <t t-value="'D' if s['currency_dc'] == 'B' else 'C'" t-set="c_sdc"/>
                     <t t-set="currency_toplamBakiye" t-value="'%.2f' %s['currency_balance']"/>
                     <t t-set="currency_toplamBorc"
                        t-value="currency_toplamBorc + s['debit_currency']"/>
@@ -387,20 +366,6 @@
                 </td>
                 <td class="text-right">
                     <span t-esc="'{:,.2f}'.format(float(currency_toplamBakiye))"
-                    />
-                </td>
-                <td class="text-center">
-                    <span t-esc="c_sdc"/>
-                </td>
-
-                <td></td>
-                <td class="text-right">
-
-                </td>
-
-
-                <td class="text-right">
-                    <span t-esc="'{:,.2f}'.format(float(toplamBakiye))"
                     />
                 </td>
                 <td class="text-center">
