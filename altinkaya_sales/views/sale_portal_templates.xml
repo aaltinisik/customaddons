@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_order_portal_content_configurations_inherit" name="Sales Order Portal Show Partner"
+              inherit_id="sale.sale_order_portal_content">
+
+<!--        Changes invoice's widget-->
+        <xpath expr="//address[@t-field='sale_order.partner_invoice_id']"
+               position="attributes">
+            <attribute name="t-options">{"widget": "contact", "fields": ["address",
+                "name"], "no_marker": False}
+            </attribute>
+        </xpath>
+
+<!--        Changes invoice's widget-->
+        <xpath expr="//address[@t-field='sale_order.partner_shipping_id']"
+               position="attributes">
+            <attribute name="t-options">{"widget": "contact", "fields": ["address",
+                "name"], "no_marker": False}
+            </attribute>
+        </xpath>
+
+<!--        Adds partner to sale portal-->
+        <xpath expr="//div[@id='informations']/div[@class='row']/div[@class='col-lg-6'][1]"
+               position="before">
+            <div id="partner" class="col-lg-6">
+                <strong class="d-block mb-1">Partner</strong>
+                <address t-field="sale_order.partner_id"
+                         t-options='{"widget": "contact", "fields": ["name", "address", "phone", "mobile", "email"], "no_marker": False}'/>
+                <div style="height:20px"/>
+            </div>
+        </xpath>
+
+<!--        Adds sale_order.order_state to sale portal-->
+        <xpath expr="//div[@id='introduction']" position="inside">
+            <div class="my-2  text-info">
+                <i class="fa fa-spinner"/>
+                <strong>Order State:</strong>
+                <span t-field="sale_order.order_state"/>
+            </div>
+        </xpath>
+
+<!--        Adds a divider line-->
+        <xpath expr="//div[hasclass('row')]" position="before">
+            <hr/>
+        </xpath>
+
+<!--        Adds these fields to sale portal: (incoterm, destination_port, fiscal_position_id, warehouse_id, payment_term_id)-->
+        <xpath expr="//div[@id='informations']" position="after">
+            <div id="other info">
+                <hr/>
+                <t t-if="sale_order.incoterm and sale_order.destination_port">
+                    <div class="mb-1 row rounded col-lg-6 col-12"
+                         style="background-color: rgba(150, 150, 220, 0.2);">
+                        <div class="col-12 g-0 px-0">
+                            <t t-if="sale_order.incoterm">
+                                <strong>Incoterm:</strong>
+                                <span t-field="sale_order.incoterm"/>
+                            </t>
+                        </div>
+                        <div class="col-12 g-0 px-0">
+                            <t t-if="sale_order.destination_port">
+                                <strong>Destination Port:</strong>
+                                <span t-field="sale_order.destination_port"/>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="mb-1">
+                        <t t-if="sale_order.incoterm">
+                            <strong>Incoterm:</strong>
+                            <span t-field="sale_order.incoterm"/>
+                        </t>
+                    </div>
+                    <div class="mb-1">
+                        <t t-if="sale_order.destination_port">
+                            <strong>Destination Port:</strong>
+                            <span t-field="sale_order.destination_port"/>
+                        </t>
+                    </div>
+                </t>
+
+                <div class="mb-1">
+                    <t t-if="sale_order.fiscal_position_id">
+                        <strong>Fiscal Position:</strong>
+                        <span t-field="sale_order.fiscal_position_id"/>
+                    </t>
+                </div>
+                <div class="mb-1">
+                    <t t-if="sale_order.warehouse_id">
+                        <strong>Warehouse:</strong>
+                        <span t-field="sale_order.warehouse_id"/>
+                    </t>
+                </div>
+                <div class="mb-1">
+                    <t t-if="sale_order.payment_term_id">
+                        <strong>Payment Term:</strong>
+                        <span t-field="sale_order.payment_term_id"/>
+                    </t>
+                </div>
+
+                <div style="height: 10px;"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[strong[text()='Date:']]" position="attributes">
+            <attribute name="class">mb-1</attribute>
+        </xpath>
+    </template>
+
+    <template id="sale_portal_template_sidebar_show_make_payment_button_inherit"
+              inherit_id="sale.sale_order_portal_template"
+              name="Show the make payment button in sale portal's sidebar">
+
+<!--        Pay Now Button-->
+        <xpath expr="//li[@t-if='sale_order.user_id']"
+               position="inside">
+            <t t-set="paid_invoices"
+               t-value="sale_order.invoice_ids.filtered(lambda r: r.state == 'paid')"/>
+            <div class="row border-top my-1" t-if="not (paid_invoices or sale_order.payment_status == 'done')">
+                    <a class="btn btn-primary mx-auto mt-3"
+                       id="sale_order_pay_now_link" title="Pay Now"
+                       t-att-href="'https://www.altinkaya.com.tr/tahsilat/paymentform.php%s' % sale_order.altinkaya_payment_url">
+                        <i class="fa fa-credit-card"/>
+                        Pay Now
+                    </a>
+            </div>
+        </xpath>
+
+<!--        These xpath expressions hide the alerts in sale portal-->
+        <xpath expr="//div[@id='quote_content']/div[strong[text()='Thank You!']]"
+               position="replace"/>
+        <xpath expr="//div[@id='quote_content']/div[contains(., 'Your order is not in a state to be rejected')]"
+               position="replace"/>
+        <xpath expr="//div[@id='quote_content']/t[@t-if='sale_order.transaction_ids']"
+               position="replace"/>
+        <xpath expr="//div[@id='quote_content']/div[contains(., 'This quotation has been canceled.')]"
+               position="replace"/>
+        <xpath expr="//div[@id='quote_content']/div[strong[text()='This is a draft quotation.']]"
+               position="replace"/>
+        <xpath expr="//div[@id='quote_content']/div[contains(., 'This offer expired!')]"
+               position="replace"/>
+
+    </template>
+
+</odoo>
