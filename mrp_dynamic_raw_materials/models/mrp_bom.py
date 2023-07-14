@@ -145,14 +145,7 @@ class MrpBoM(models.Model):
             if line_type == "bom_line":
                 line_product = current_line.product_id
             else:
-                matched_attribute_ids = bom_line._match_inherited_attributes(product)
-                matched_value_ids = bom_line._match_attribute_values(product)
-                target_attribute_ids = product.attribute_value_ids.filtered(lambda a: a.attribute_id.id in matched_attribute_ids).ids + matched_value_ids
-                domain = [
-                    ("product_tmpl_id", "=", current_line.product_tmpl_id.id),
-                    ("attribute_value_ids", "in", target_attribute_ids),
-                ]
-                line_product = self.env["product.product"].search(domain, limit=1)
+                line_product = current_line._match_possible_variant(current_product)
                 if not line_product:
                     continue
 
