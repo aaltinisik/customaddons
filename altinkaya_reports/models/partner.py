@@ -145,10 +145,15 @@ class Partner(models.Model):
             ) + currency_balance
             debit = 0.0
             credit = 0.0
+
+            journal = self.env["account.journal"].browse(
+                sl["journal_id"]).with_context(
+                lang=self.commercial_partner_id.lang)
+
             if sl["innumber"]:
-                description = sl["journal"] + " " + sl["innumber"]
+                description = journal.name + " " + sl["innumber"]
             else:
-                description = sl["journal"]
+                description = journal.name
             company_currency_id = Currency.browse(sl["company_currency_id"])
             line_currency_id = Currency.browse(sl["currency_id"])
             if (sl["debit"] - sl["credit"]) > 0.0:
