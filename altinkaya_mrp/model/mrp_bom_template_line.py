@@ -14,10 +14,12 @@ class MrpBomTemplateLine(models.Model):
         related="product_tmpl_id.name",
         readonly=True,
     )
+
     sequence = fields.Integer(
         string="Sequence",
         default=100,
     )
+
     bom_id = fields.Many2one(
         "mrp.bom",
         string="Bom Template",
@@ -34,26 +36,29 @@ class MrpBomTemplateLine(models.Model):
         string="Product Template",
         required=True,
     )
+
     product_qty = fields.Float(
         string="Quantity",
         default=1.0,
         required=True,
     )
+
     product_uom_id = fields.Many2one(
         "uom.uom",
         string="Unit of Measure",
         required=True,
         default=lambda self: self.env.ref("uom.product_uom_unit"),
     )
+
     inherited_attribute_ids = fields.Many2many(
         "product.attribute",
         string="Inherited Attributes",
     )
 
-    attribute_value_ids = fields.Many2many(
-        "product.attribute.value",
-        string="Apply on Variants",
-    )
+    # attribute_value_ids = fields.Many2many(
+    #     "product.attribute.value",
+    #     string="Apply on Variants",
+    # )
 
     valid_product_attribute_value_wnva_ids = fields.Many2many(
         "product.attribute.value",
@@ -99,8 +104,9 @@ class MrpBomTemplateLine(models.Model):
             product
         ):
             return True
-
-        return not self.attribute_value_ids or not self._match_attribute_values(product)
+        else:
+            return False
+        # return not self.attribute_value_ids or not self._match_attribute_values(product)
 
     def _match_inherited_attributes(self, product):
         """Match inherited attributes between bom line and product template"""
@@ -110,10 +116,40 @@ class MrpBomTemplateLine(models.Model):
             & set(product.mapped("attribute_value_ids.attribute_id.id"))
         )
 
-    def _match_attribute_values(self, product):
-        """Match "Apply on Variants" attributes between bom line and product template"""
+    def _match_possible_variant(self, product):
+        """Match attribute values as much as possible between bom line and product"""
         self.ensure_one()
-        return list(
-            set(self.attribute_value_ids.ids)
-            & set(product.mapped("attribute_value_ids.id"))
+
+        def match_products(products, attr_val_list):
+            """Recursive function to match attribute values"""
+            if not attr_val_list:
+                return products
+            attr_val = attr_val_list[0]
+            return match_products(
+                products.filtered(lambda p: attr_val in p.attribute_value_ids),
+                attr_val_list[1:],
+            )
+
+        target_products = self.mapped("product_tmpl_id.product_variant_ids")
+
+        # Phase 1: match inherited attributes
+        common_attrs = product.attribute_value_ids.filtered(
+            lambda a: a.attribute_id in self.inherited_attribute_ids
         )
+        if not common_attrs:
+            return False
+        matched_products = match_products(target_products, common_attrs)
+        if not matched_products:
+            return False
+
+        # Phase 2: match additional attributes
+        line_attribute_ids = self.mapped(
+            "product_tmpl_id.attribute_line_ids.attribute_id"
+        )
+        additional_attr_vals = product.attribute_value_ids.filtered(
+            lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
+        )
+        matched_products = match_products(matched_products, additional_attr_vals)
+
+        # return single product if possible
+        return fields.first(matched_products) or False
