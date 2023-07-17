@@ -131,55 +131,34 @@ class ResPartner(models.Model):
                 inv_type = "out_invoice"
             if difference_amls:
                 inv_lines_to_create = []
+
+                # Get taxes
+                kdv_rates = [20, 10, 18, 8]
+                taxes_dict = {}
+                for kdv_rate in kdv_rates:
+                    tax = self.env["account.tax"].search(
+                        [
+                            ("type_tax_use", "=", "sale"),
+                            ("amount", "=", kdv_rate),
+                            ("include_base_amount", "=", False),
+                        ],
+                        limit=1,
+                    )
+                    if tax:
+                        taxes_dict[kdv_rate] = tax
+                    else:
+                        raise UserError(
+                            _("KDV %s oranlı vergi tanımlanmamış!") % kdv_rate
+                        )
+
                 comment_einvoice = "Aşağıdaki faturaların kur farkıdır:\n"
                 for diff_aml in difference_amls:
                     amount_untaxed = diff_aml.debit or diff_aml.credit
                     inv_line_name = "Kur Farkı"
-                    tax_20 = self.env["account.tax"].search(
-                        [
-                            ("type_tax_use", "=", "sale"),
-                            ("amount", "=", 20.0),
-                            ("include_base_amount", "=", False),
-                        ],
-                        limit=1,
-                    )
-                    tax_10 = self.env["account.tax"].search(
-                        [
-                            ("type_tax_use", "=", "sale"),
-                            ("amount", "=", 10.0),
-                            ("include_base_amount", "=", False),
-                        ],
-                        limit=1,
-                    )
                     inv_ids = diff_aml.full_reconcile_id.reconciled_line_ids.filtered(
                         lambda r: r.invoice_id
                     ).mapped("invoice_id")
                     if len(inv_ids) > 0:
-                        kdv_20_taxes = sum(
-                            inv_ids.mapped("tax_line_ids")
-                            .filtered(lambda r: r.tax_id.amount == 20)
-                            .mapped("amount")
-                        )
-
-                        kdv_10_taxes = sum(
-                            inv_ids.mapped("tax_line_ids")
-                            .filtered(lambda r: r.tax_id.amount == 10)
-                            .mapped("amount")
-                        )
-
-                        rate_20 = round(
-                            100.0
-                            * (kdv_20_taxes / 20.0)
-                            / sum(inv_ids.mapped("amount_untaxed")),
-                            4,
-                        )
-                        rate_10 = round(
-                            100.0
-                            * (kdv_10_taxes / 10.0)
-                            / sum(inv_ids.mapped("amount_untaxed")),
-                            4,
-                        )
-
                         comment_einvoice += ", ".join(
                             inv_id.supplier_invoice_number
                             if inv_id.supplier_invoice_number
@@ -187,23 +166,37 @@ class ResPartner(models.Model):
                             for inv_id in inv_ids
                         )
 
-                        if rate_20 > 0.001:
-                            amount_untaxed = round(
-                                amount_untaxed * rate_20 / (1 + tax_20.amount / 100.0),
-                                2,
+                        # Calculate tax distribution
+                        for rate in kdv_rates:
+                            total_tax_amount = sum(
+                                inv_ids.mapped("tax_line_ids")
+                                .filtered(lambda r: r.tax_id.amount == rate)
+                                .mapped("amount")
                             )
-                            tax_ids = [(6, False, [tax_20.id])]
-
-                        if rate_10 > 0.001:
-                            amount_untaxed = round(
-                                amount_untaxed * rate_10 / (1 + tax_10.amount / 100.0),
-                                2,
+                            tax_rate = round(
+                                100.0
+                                * (total_tax_amount / rate)
+                                / sum(inv_ids.mapped("amount_untaxed")),
+                                4,
                             )
-                            tax_ids = [(6, False, [tax_10.id])]
+                            if tax_rate > 0:
+                                tax_id = taxes_dict[rate]
+                                amount_untaxed = round(
+                                    amount_untaxed
+                                    * tax_rate
+                                    / (1 + tax_id.amount / 100.0),
+                                    2,
+                                )
+                                tax_ids = [(6, False, [tax_id.id])]
                     else:
+                        # If there is no invoice, then it is a difference between
+                        # the exchange rate of the invoice and the payment
+                        # Set the tax rate to 20%
                         comment_einvoice = ""
-                        amount_untaxed = amount_untaxed / (1 + tax_20.amount / 100.0)
-                        tax_ids = [(6, False, [tax_20.id])]
+                        amount_untaxed = amount_untaxed / (
+                            1 + taxes_dict[20].amount / 100.0
+                        )
+                        tax_ids = [(6, False, [taxes_dict[20].id])]
 
                     if inv_type == "out_refund" and diff_aml.debit > 0:
                         amount_untaxed = -amount_untaxed
