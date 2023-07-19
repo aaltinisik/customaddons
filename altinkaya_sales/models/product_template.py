@@ -3,12 +3,16 @@ Created on Jan 17, 2019
 
 @author: cq
 """
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
+from odoo.exceptions import UserError
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 # Aktarıldı
-class product_attribute_line(models.Model):
+class ProductTemplateAttributeLine(models.Model):
     _inherit = "product.template.attribute.line"
     attr_base_price = fields.Float(
         "Base Price",
@@ -79,3 +83,64 @@ class ProductTemplate(models.Model):
         self.has_production_bom = any(
             self.bom_ids.filtered(lambda b: b.type != "phantom")
         )
+
+    def compute_set_product_price(self):
+        """
+        Compute the price of the set product based on the price of its components.
+        It creates a dummy SO to compute the price of the components.
+        :return:
+        """
+        self.ensure_one()
+        phantom_boms = self.bom_ids.filtered(lambda b: b.type == "phantom")
+
+        if not phantom_boms:
+            raise UserError(
+                _(
+                    "No phantom BoM found for product %s. Please create"
+                    " a phantom BoM to compute the price of the set product."
+                    % self.name
+                )
+            )
+
+        products_2compute = self.product_variant_ids
+        date_now = fields.Datetime.now()
+        dummy_so = self.env["sale.order"].create(
+            {
+                "name": "Phantom Bom Price Compute: %s, %s"
+                % (self.id, date_now.strftime("%d-%m-%Y")),
+                "partner_id": 12515,  # Ahmet Altınışık test
+                "partner_invoice_id": 12515,
+                "partner_shipping_id": 12515,
+                "pricelist_id": 136,  # USD pricelist
+                "warehouse_id": 1,
+                "company_id": 1,
+                "currency_id": 2,  # USD
+                "date_order": fields.Datetime.now(),
+            }
+        )
+        for product in products_2compute:
+            # Create a new sale order line
+            dummy_sol = self.env["sale.order.line"].create(
+                {
+                    "order_id": dummy_so.id,
+                    "product_id": product.id,
+                    "product_uom_qty": 1,
+                    "product_uom": product.uom_id.id,
+                }
+            )
+            # Explode the phantom bom
+            dummy_sol.explode_set_contents()
+            # Compute the price
+            dummy_so.recalculate_prices()
+            # Update the product price
+            _logger.info(
+                "Updating product price for product %s: %s -> %s"
+                % (product.name, product.v_fiyat_dolar, dummy_so.amount_untaxed)
+            )
+            product.v_fiyat_dolar = dummy_so.amount_untaxed
+            # Clear sale order lines
+            dummy_so.order_line.unlink()
+        # Clear the dummy sale order
+        dummy_so.unlink()
+        self.env.cr.commit()
+        return True

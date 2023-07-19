@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 12:03+0000\n"
-"PO-Revision-Date: 2023-07-10 12:03+0000\n"
+"POT-Creation-Date: 2023-07-19 11:10+0000\n"
+"PO-Revision-Date: 2023-07-19 11:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,13 +18,13 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:mail.template,body_html:altinkaya_sales.email_template_edi_sale_altinkaya
 msgid "\n"
-"<div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;background-color: rgb(255, 255, 255);\">\n"
+"<div style=\"font-size:13px;font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "\n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">Hello, ${object.partner_id.name}</p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Hello, ${object.partner_id.name}</p>\n"
 "    \n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from Altinkaya Enclosures For Electronics:</p><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">portal link</p><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><font color=\"#222222\">${object.access_url}</font></p><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><font color=\"#222222\"><br></font><br></p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from Altinkaya Enclosures For Electronics: </p>\n"
 "\n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; border-left: 1px solid rgb(142, 0, 0); margin-left: 30px;\">\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
 "       &nbsp;&nbsp;<strong style=\"font-weight:bolder;\">REFERENCES</strong><br>\n"
 "       &nbsp;&nbsp;Order number: <strong style=\"font-weight:bolder;\">${object.name}</strong><br>\n"
 "       &nbsp;&nbsp;Order total: <strong style=\"font-weight:bolder;\">${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br>\n"
@@ -38,28 +38,34 @@ msgid "\n"
 "       % if object.user_id:\n"
 "       &nbsp;&nbsp;Prepared By: <a href=\"mailto:${object.user_id.email or ''}?subject=Order%20${object.name}\" style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);\">${object.user_id.name}</a>\n"
 "       % endif\n"
-"    </p><font color=\"#222222\" face=\"Lucica Grande, Ubuntu, Arial, Verdana, sans-serif\"><span style=\"font-size: 12px;\">\n"
+"    </p>\n"
 "\n"
 " % if object.state in ('draft', 'sent'):\n"
-"    </span></font><br>\n"
-"        <a style=\"text-decoration:none;background-color:transparent;color: rgb(124, 123, 173); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; text-decoration-thickness: auto; margin-left: 120px;\" href=\"https://www.altinkaya.com.tr/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
+"    <br>\n"
+"        <a style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);margin-left: 120px;\" href=\"https://www.altinkaya.com.tr/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
 "            <img src=\"https://www.altinkaya.com.tr/payment/images/pay_now.gif\" style=\"border-style:none;vertical-align:middle;\">\n"
-"        </a><br><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">It is also possible to make your payment by clicking \"Pay Now\" button above. <br>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
-"    <br><font color=\"#222222\" face=\"Lucica Grande, Ubuntu, Arial, Verdana, sans-serif\"><span style=\"font-size: 12px;\">\n"
+"        </a><br><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">It is also possible to make your payment by clicking \"Pay Now\" button above. <br>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
+"    <br>\n"
 "    % endif       \n"
 "\n"
-"    </span></font><br>\n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">If you have any question, do not hesitate to contact us.</p>\n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\"><strong style=\"font-weight:bolder;\">You can reply this email to contact us.</strong></p>\n"
+"    <br>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">If you have any question, do not hesitate to contact us.</p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><strong style=\"font-weight:bolder;\">You can reply this email to contact us.</strong></p>\n"
 "\n"
-"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;\">Thank you for choosing Altinkaya!</p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Thank you for choosing Altinkaya!</p>\n"
+"\n"
+"<p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">You can rate your customer experience at the following link.</p>\n"
+"            <a href=\"${object.survey_url}\" style=\"text-decoration:none;color:rgb(77, 119, 143);background-color:#875A7B; padding:8px 16px 8px 16px; color:#fff; border-radius:5px; font-size:13px\" data-original-title=\"\" title=\"\" aria-describedby=\"tooltip214341\">\n"
+"                Rate the Experience\n"
+"            </a>\n"
+"\n"
 "    <br>\n"
-"    <br>\n"
-"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; width: 375px; margin: 0px; padding: 0px; background-color: rgb(142, 0, 0); border-top-left-radius: 5px; border-top-right-radius: 5px; background-repeat: repeat-x;\">\n"
+"    <br><br><br>\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
 "        <h3 style=\"font-size:1.40833rem;color:inherit;line-height:1.2;font-weight:bold;font-family:inherit;margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
 "            <strong style=\"font-weight:bolder;text-transform:uppercase;\">ALTINKAYA ENCLOSURES FOR ELECTRONICS</strong></h3>\n"
 "    </div>\n"
-"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;color: rgb(34, 34, 34); font-family: &quot;Lucica Grande&quot;, Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: rgb(242, 242, 242);\">\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
 "        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
 "        % if object.company_id.street:\n"
 "            ${object.company_id.street}<br>\n"
@@ -279,7 +285,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_portal_template_sidebar_show_make_payment_button_inherit
 msgid "<i class=\"fa fa-credit-card\"/>\n"
-"                        Pay Now"
+"                    Pay Now"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -334,6 +340,16 @@ msgid "Altinkaya Payment Url"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Assembly"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Assembly Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__attr_price
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__attr_price
 msgid "Attr. Value Price"
@@ -383,22 +399,17 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Bekliyor"
+msgid "CNC Cutting"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Kesimde"
+msgid "CNC Cutting Queue"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Torna"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "CNC Torna Bekliyor"
+msgid "Canceled"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -410,6 +421,16 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_res_company
 msgid "Companies"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
+msgid "Compute Set Price"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Confirmed Sale Order"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -460,7 +481,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Depoda"
+msgid "Delivered"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -481,19 +502,19 @@ msgid "Dolarla satılan ürünlerin fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Done"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Draft"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_iscilik_fiy
 #: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_min_iscilik_fiy
 msgid "En Az Toplam işçilik Fiyatı USD"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Enjeksiyonda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Enjeksiyonda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -538,18 +559,18 @@ msgid "Fiyat Güncel"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Graphic Print Queue"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Graphic Print"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_item__x_guncelleme
 msgid "Guncelleme Kodu"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Görsel Baskıda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Görsel Baskıda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -575,12 +596,12 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Kalıphanede"
+msgid "Injection"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Kalıphanede Bekliyor"
+msgid "Injection Queue"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -636,16 +657,6 @@ msgid "Kaynak"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Kesim Bekliyor"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Kesimde"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -661,6 +672,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Lathe Queue"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Lathe Shop"
+msgstr ""
+
+#. module: altinkaya_sales
 #: code:addons/altinkaya_sales/models/product_pricelist.py:219
 #, python-format
 msgid "List Price"
@@ -672,19 +693,19 @@ msgid "Manufacturing Orders"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Metal Shop"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Metal Shop Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_iscilik_fiy
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_min_iscilik_fiy
 msgid "Minimum işçilik Fiyatı USD"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Montajda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Montajda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -704,14 +725,15 @@ msgid "Nakliye fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Nakliyede"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
 msgid "Name"
 msgstr ""
+
+#. module: altinkaya_sales
+#: code:addons/altinkaya_sales/models/product_template.py:98
+#, python-format
+msgid "No phantom BoM found for product %s. Please create a phantom BoM to compute the price of the set product."
+msgstr "Bu ürün için SET BoM bulunamadı. Lütfen SET BoM oluşturunuz."
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
@@ -730,8 +752,18 @@ msgid "Old Sales"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "On Transit"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__date_order
 msgid "Order Date"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__order_state
+msgid "Order State"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -742,7 +774,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Paketlendi"
+msgid "Packaged"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -756,13 +788,8 @@ msgid "Pay Now"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Preshane"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Preshane Bekliyor"
+#: model:ir.model,name:altinkaya_sales.model_portal_mixin
+msgid "Portal Mixin"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -834,6 +861,11 @@ msgid "Product Template Attribute Line"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Production"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__production_ids
 msgid "Productions"
 msgstr ""
@@ -844,8 +876,28 @@ msgid "Products"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Profile Cutting"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Profile Cutting Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: selection:product.pricelist,list_type_use:0
 msgid "Purchases"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Quotation"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Returned"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -875,11 +927,6 @@ msgid "Satınalma Fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Satış Siparişi"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_product
 msgid "Set product?"
 msgstr ""
@@ -896,23 +943,8 @@ msgid "Show Custom Products"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__order_state
-msgid "Sipariş Durumu"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
 msgid "Tags..."
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Tamamlandı"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Taslak"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -921,14 +953,9 @@ msgid "Tax Position"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Teklif Gönderildi"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Teslim Edildi"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
+msgid "This method will recalculate the prices of all variants within the current product template. Do you want to continue?"
+msgstr "Bu yöntem mevcut ürün şablonu içindeki tüm varyantların fiyatlarını yeniden hesaplar. Devam etmek istiyor musunuz?"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__property_product_pricelist
@@ -937,8 +964,13 @@ msgid "This pricelist will be used, instead of the default one, for sales to the
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:ir.model,name:altinkaya_sales.model_stock_picking
-msgid "Transfer"
+#: selection:sale.order,order_state:0
+msgid "Tool Production"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Tool Shop Queue"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -981,6 +1013,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergino
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergino
 msgid "Vergi No"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Warehouse"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -1035,23 +1072,8 @@ msgid "Önceki İşçilik Fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Üretimde"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "İade"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_contact_name
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_contact_name
 msgid "İlgili Kişi"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "İptal"
 msgstr ""
 
