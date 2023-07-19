@@ -1,8 +1,6 @@
 # Copyright 2022 Yiğit Budak (https://github.com/yibudak)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
-from itertools import groupby
-
 
 class MrpBomTemplateLine(models.Model):
     _name = "mrp.bom.template.line"
@@ -60,10 +58,10 @@ class MrpBomTemplateLine(models.Model):
     #     string="Apply on Variants",
     # )
 
-    valid_product_attribute_value_wnva_ids = fields.Many2many(
-        "product.attribute.value",
-        related="bom_product_id.valid_product_attribute_value_wnva_ids",
-    )
+    # valid_product_attribute_value_wnva_ids = fields.Many2many(
+    #     "product.attribute.value",
+    #     related="bom_product_id.valid_product_attribute_value_wnva_ids",
+    # )
 
     factor_attribute_id = fields.Many2one(
         "product.attribute",

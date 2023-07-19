@@ -29,6 +29,15 @@ def _match_production_with_route(production):
                 return "08_injection"
             else:
                 return "07_injection_waiting"
+        elif 8 in process_ids:
+            if any(
+                    production_ids.filtered(
+                        lambda r: r.process_id.id == 8 and r.state in ongoing_state
+                    )
+            ):
+                return "20_cutting"
+            else:
+                return "19_cutting_waiting"
         elif 2 in process_ids:
             if any(
                 production_ids.filtered(
@@ -74,15 +83,6 @@ def _match_production_with_route(production):
                 return "18_assembly"
             else:
                 return "17_assembly_waiting"
-        elif 8 in process_ids:
-            if any(
-                production_ids.filtered(
-                    lambda r: r.process_id.id == 8 and r.state in ongoing_state
-                )
-            ):
-                return "20_cutting"
-            else:
-                return "19_cutting_waiting"
         else:
             return "05_production"
     else:
@@ -98,37 +98,37 @@ class SaleOrder(models.Model):
     order_state = fields.Selection(
         [
             # satış
-            ("01_draft", "Taslak"),
-            ("02_sent", "Teklif Gönderildi"),
-            ("03_sale", "Satış Siparişi"),
-            ("04_molding_waiting", "Kalıphanede Bekliyor"),
+            ("01_draft", "Draft"),
+            ("02_sent", "Quotation"),
+            ("03_sale", "Confirmed Sale Order"),
+            ("04_molding_waiting", "Tool Shop Queue"),
             # üretim
-            ("05_production", "Üretimde"),
-            ("06_molding", "Kalıphanede"),
-            ("07_injection_waiting", "Enjeksiyonda Bekliyor"),
-            ("08_injection", "Enjeksiyonda"),
-            ("09_metal_waiting", "Preshane Bekliyor"),
-            ("10_metal", "Preshane"),
-            ("11_cnc_lathe_waiting", "CNC Torna Bekliyor"),
-            ("12_cnc_lathe", "CNC Torna"),
-            ("13_cnc_waiting", "CNC Bekliyor"),
-            ("14_cnc", "CNC Kesimde"),
-            ("15_uv_printing_waiting", "Görsel Baskıda Bekliyor"),
-            ("16_uv_printing", "Görsel Baskıda"),
-            ("17_assembly_waiting", "Montajda Bekliyor"),
-            ("18_assembly", "Montajda"),
-            ("19_cutting_waiting", "Kesim Bekliyor"),
-            ("20_cutting", "Kesimde"),
+            ("05_production", "Production"),
+            ("06_molding", "Tool Production"),
+            ("07_injection_waiting", "Injection Queue"),
+            ("08_injection", "Injection"),
+            ("09_metal_waiting", "Metal Shop Queue"),
+            ("10_metal", "Metal Shop"),
+            ("11_cnc_lathe_waiting", "Lathe Queue"),
+            ("12_cnc_lathe", "Lathe Shop"),
+            ("13_cnc_waiting", "CNC Cutting Queue"),
+            ("14_cnc", "CNC Cutting"),
+            ("15_uv_printing_waiting", "Graphic Print Queue"),
+            ("16_uv_printing", "Graphic Print"),
+            ("17_assembly_waiting", "Assembly Queue"),
+            ("18_assembly", "Assembly"),
+            ("19_cutting_waiting", "Profile Cutting Queue"),
+            ("20_cutting", "Profile Cutting"),
             # depo
-            ("21_at_warehouse", "Depoda"),
-            ("22_packaged", "Paketlendi"),
-            ("23_on_transit", "Nakliyede"),
-            ("24_delivered", "Teslim Edildi"),
-            ("25_completed", "Tamamlandı"),
-            ("26_return", "İade"),
-            ("27_cancel", "İptal"),
+            ("21_at_warehouse", "Warehouse"),
+            ("22_packaged", "Packaged"),
+            ("23_on_transit", "On Transit"),
+            ("24_delivered", "Delivered"),
+            ("25_completed", "Done"),
+            ("26_return", "Returned"),
+            ("27_cancel", "Canceled"),
         ],
-        string="Sipariş Durumu",
+        string="Order State",
         readonly=True,
         copy=False,
         default="01_draft",
