@@ -119,6 +119,9 @@ class ProductTemplate(models.Model):
             }
         )
         for product in products_2compute:
+            bom = self.env["mrp.bom"].sudo()._bom_find(product=product)
+            if not bom.type == "phantom":
+                continue
             # Create a new sale order line
             dummy_sol = self.env["sale.order.line"].create(
                 {
@@ -126,6 +129,7 @@ class ProductTemplate(models.Model):
                     "product_id": product.id,
                     "product_uom_qty": 1,
                     "product_uom": product.uom_id.id,
+                    "price_unit": product.v_fiyat_dolar,
                 }
             )
             # Explode the phantom bom
