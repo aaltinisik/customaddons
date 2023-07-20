@@ -12,7 +12,7 @@
             </attribute>
         </xpath>
 
-        <!--        Changes invoice's widget-->
+        <!--        Changes shipping's widget-->
         <xpath expr="//address[@t-field='sale_order.partner_shipping_id']"
                position="attributes">
             <attribute name="t-options">{"widget": "contact", "fields": ["address",
@@ -20,7 +20,7 @@
             </attribute>
         </xpath>
 
-        <!--        Adds partner to sale portal-->
+        <!--        Adds the partner right next to the addresses in the portal-->
         <xpath expr="//div[@id='informations']/div[@class='row']/div[@class='col-lg-6'][1]"
                position="before">
             <div id="partner" class="col-lg-6">
@@ -31,16 +31,32 @@
             </div>
         </xpath>
 
-        <!--        Adds sale_order.order_state to sale portal-->
+
         <xpath expr="//div[@id='introduction']" position="inside">
+            <!--        Adds sale_order.order_state to sale portal-->
             <div class="my-2  text-info">
                 <i class="fa fa-spinner"/>
                 <strong>Order State:</strong>
                 <span t-field="sale_order.order_state"/>
             </div>
+            <!--        Adds cargo trackings-->
+            <div>
+                <t t-set="trackable_pickings"
+                   t-value="sale_order.picking_ids.filtered(lambda p: p.carrier_tracking_url)"/>
+                <ul t-if="trackable_pickings">
+                    <li t-foreach="trackable_pickings" t-as="picking" style="margin-left:-19px;">
+                        <span t-esc="picking.carrier_id.name"/>
+                        <a class="btn btn-sm btn-info mx-auto mb-1" title="Cargo Tracking"
+                           t-att-href="picking.carrier_tracking_url">
+                            <i class="fa fa-truck"/>
+                            Where is my cargo?
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </xpath>
 
-        <!--        Adds a divider line-->
+        <!--        Visual improvements-->
         <xpath expr="//div[hasclass('row')]" position="before">
             <hr/>
         </xpath>
@@ -104,10 +120,12 @@
             </div>
         </xpath>
 
+        <!--        Visual improvements-->
         <xpath expr="//div[strong[text()='Date:']]" position="attributes">
             <attribute name="class">mb-1</attribute>
         </xpath>
 
+        <!--        Makes the invoice visible only if there is an einvoice-->
         <xpath expr="//t[@t-set='invoices']" position="attributes">
             <attribute name="t-value">[i for i in sale_order.invoice_ids if i.state not
                 in ['draft', 'cancel'] and i.einvoice_pdf_id]
@@ -133,20 +151,6 @@
                 </a>
             </div>
         </xpath>
-
-        <!--        These xpath expressions hide the alerts in sale portal-->
-        <xpath expr="//div[@id='quote_content']/div[strong[text()='Thank You!']]"
-               position="replace"/>
-        <xpath expr="//div[@id='quote_content']/div[contains(., 'Your order is not in a state to be rejected')]"
-               position="replace"/>
-        <xpath expr="//div[@id='quote_content']/t[@t-if='sale_order.transaction_ids']"
-               position="replace"/>
-        <xpath expr="//div[@id='quote_content']/div[contains(., 'This quotation has been canceled.')]"
-               position="replace"/>
-        <xpath expr="//div[@id='quote_content']/div[strong[text()='This is a draft quotation.']]"
-               position="replace"/>
-        <xpath expr="//div[@id='quote_content']/div[contains(., 'This offer expired!')]"
-               position="replace"/>
 
     </template>
 
