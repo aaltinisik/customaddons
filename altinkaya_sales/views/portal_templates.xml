@@ -11,16 +11,49 @@
                 else 'https://www.altinkaya.eu')
             </attribute>
         </xpath>
+
+        <!--        Hides bottom-right odoo branding in sale portal-->
+        <xpath expr="//div[@id='wrapwrap']/footer" position="replace"/>
     </template>
 
-<!--    Removes breadcrumbs in sale portal-->
+    <template id="portal_record_sidebar_change_brand_link"
+              inherit_id="portal.portal_record_sidebar">
+        <xpath expr="//div//div//div[hasclass('card-footer')]" position="replace">
+            <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
+                Powered by
+                <a target="_blank"
+                   t-att-href="('https://www.altinkaya.com.tr' if sale_order.partner_id.lang == 'tr_TR'
+                else 'https://www.altinkaya.eu')"
+                   title="Altınkaya">
+                    <img src="/web/static/src/img/logo.png" alt="Odoo Logo"
+                         height="15"/>
+                </a>
+            </div>
+
+            <!-- TODO samet: burası order_state'in altına gelecek -->
+<!--            <t t-set="trackable_pickings" t-value="sale_order.picking_ids.filtered(lambda p: p.carrier_tracking_url)"/>-->
+<!--            <ul t-if="trackable_pickings" class="list-group list-group-flush flex-wrap flex-row flex-lg-column">-->
+<!--                <li t-foreach="trackable_pickings" t-as="picking" class="list-group-item flex-grow-1 btn-group-vertical list-group">-->
+<!--                    <span t-esc="picking.carrier_id.name"/>-->
+<!--                    <a class="btn btn-sm btn-info mx-auto mb-2" title="Teslimat"-->
+<!--                       t-att-href="picking.carrier_tracking_url">-->
+<!--                        <i class="fa fa-truck"/>-->
+<!--                        Kargo Takibi-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+        </xpath>
+    </template>
+
+    <!--    Removes breadcrumbs in sale portal-->
     <template id="sale_portal_remove_breadcrumbs" inherit_id="portal.portal_layout"
               name="Removes breadcrumbs in sale portal">
         <xpath expr="//div[hasclass('o_portal', 'container', 'mt-3')]"
                position="replace"/>
     </template>
 
-<!--    Removes sale note from sale portal-->
+    <!--    Removes sale note from sale portal-->
     <template id="sale_portal_remove_sale_note"
               inherit_id="sale.sale_order_portal_content"
               name="Removes sale note in sale portal">

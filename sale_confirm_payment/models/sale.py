@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     acquirer_id = fields.Many2one("payment.acquirer", related="transaction_ids.acquirer_id", store=True)
     payment_amount = fields.Monetary(string="Amount Payment", readonly=True)
     payment_ids = fields.Many2many('account.payment', string='Payments', readonly=True)
-
+    # Todo samet: buralara bakılacak. payment_status 5-10 kuruş için partial kalıyor. belki compute yapabiliriz?
     payment_status = fields.Selection(
         [
             ("without", "Without"),
