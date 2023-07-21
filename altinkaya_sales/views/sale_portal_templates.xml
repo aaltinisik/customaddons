@@ -121,8 +121,8 @@
         </xpath>
 
         <!--        Visual improvements-->
-        <xpath expr="//div[strong[text()='Date:']]" position="attributes">
-            <attribute name="class">mb-1</attribute>
+        <xpath expr="//div[@id='informations']//div[@t-if='sale_order.validity_date']" position="attributes">
+            <attribute name="style">margin-top:-12px;</attribute>
         </xpath>
 
         <!--        Makes the invoice visible only if there is an einvoice-->
@@ -143,7 +143,7 @@
                t-value="sale_order.invoice_ids.filtered(lambda r: r.state == 'paid')"/>
             <div class="row border-top my-1"
                  t-if="not (paid_invoices or sale_order.payment_status == 'done')">
-                <a class="btn btn-primary mx-auto mt-3"
+                <a class="btn btn-success btn-lg mx-auto mt-3"
                    id="sale_order_pay_now_link" title="Pay Now"
                    t-att-href="'https://www.altinkaya.com.tr/tahsilat/paymentform.php%s' % sale_order.altinkaya_payment_url">
                     <i class="fa fa-credit-card"/>

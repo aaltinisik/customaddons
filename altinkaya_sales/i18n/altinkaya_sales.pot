@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 09:36+0000\n"
-"PO-Revision-Date: 2023-07-20 09:36+0000\n"
+"POT-Creation-Date: 2023-07-21 06:42+0000\n"
+"PO-Revision-Date: 2023-07-21 06:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -352,7 +352,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_portal_content_configurations_inherit
 msgid "<i class=\"fa fa-truck\"/>\n"
-"                            Kargo Takibi"
+"                            Where is my cargo?"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -406,6 +406,16 @@ msgid "Altinkaya Payment Url"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Assembly"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Assembly Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__attr_price
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__attr_price
 msgid "Attr. Value Price"
@@ -455,22 +465,22 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Bekliyor"
+msgid "CNC Cutting"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Kesimde"
+msgid "CNC Cutting Queue"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "CNC Torna"
+msgid "Canceled"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "CNC Torna Bekliyor"
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_portal_content_configurations_inherit
+msgid "Cargo Tracking"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -487,6 +497,11 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
 msgid "Compute Set Price"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Confirmed Sale Order"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -537,7 +552,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Depoda"
+msgid "Delivered"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -558,19 +573,19 @@ msgid "Dolarla satılan ürünlerin fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Done"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Draft"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_iscilik_fiy
 #: model:ir.model.fields,help:altinkaya_sales.field_product_template__v_min_iscilik_fiy
 msgid "En Az Toplam işçilik Fiyatı USD"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Enjeksiyonda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Enjeksiyonda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -615,18 +630,18 @@ msgid "Fiyat Güncel"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Graphic Print"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Graphic Print Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_item__x_guncelleme
 msgid "Guncelleme Kodu"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Görsel Baskıda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Görsel Baskıda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -652,12 +667,12 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Kalıphanede"
+msgid "Injection"
 msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Kalıphanede Bekliyor"
+msgid "Injection Queue"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -713,16 +728,6 @@ msgid "Kaynak"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Kesim Bekliyor"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Kesimde"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -738,6 +743,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Lathe Queue"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Lathe Shop"
+msgstr ""
+
+#. module: altinkaya_sales
 #: code:addons/altinkaya_sales/models/product_pricelist.py:219
 #, python-format
 msgid "List Price"
@@ -749,19 +764,19 @@ msgid "Manufacturing Orders"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Metal Shop"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Metal Shop Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_min_iscilik_fiy
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_template__v_min_iscilik_fiy
 msgid "Minimum işçilik Fiyatı USD"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Montajda"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Montajda Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -781,11 +796,6 @@ msgid "Nakliye fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Nakliyede"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
 msgid "Name"
 msgstr ""
@@ -802,11 +812,6 @@ msgid "Notes"
 msgstr ""
 
 #. module: altinkaya_sales
-#: model_terms:ir.ui.view,arch_db:altinkaya_sales.portal_record_sidebar_change_brand_link
-msgid "Odoo Logo"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
 msgid "Old Prices"
 msgstr ""
@@ -815,6 +820,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__sale_line_history
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_A
 msgid "Old Sales"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "On Transit"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -830,7 +840,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
-msgid "Paketlendi"
+msgid "Packaged"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -851,16 +861,6 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.portal_record_sidebar_change_brand_link
 msgid "Powered by"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Preshane"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Preshane Bekliyor"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -932,6 +932,11 @@ msgid "Product Template Attribute Line"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Production"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__production_ids
 msgid "Productions"
 msgstr ""
@@ -942,8 +947,28 @@ msgid "Products"
 msgstr ""
 
 #. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Profile Cutting"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Profile Cutting Queue"
+msgstr ""
+
+#. module: altinkaya_sales
 #: selection:product.pricelist,list_type_use:0
 msgid "Purchases"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Quotation"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Returned"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -973,11 +998,6 @@ msgid "Satınalma Fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Satış Siparişi"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_product
 msgid "Set product?"
 msgstr ""
@@ -1004,33 +1024,8 @@ msgid "Tags..."
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Tamamlandı"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Taslak"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_v2_to_v12_views
 msgid "Tax Position"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Teklif Gönderildi"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Teslim Edildi"
-msgstr ""
-
-#. module: altinkaya_sales
-#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_portal_content_configurations_inherit
-msgid "Teslimat"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -1042,6 +1037,16 @@ msgstr ""
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__property_product_pricelist
 #: model:ir.model.fields,help:altinkaya_sales.field_res_users__property_product_pricelist
 msgid "This pricelist will be used, instead of the default one, for sales to the current partner"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Tool Production"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Tool Shop Queue"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -1084,6 +1089,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__x_vergino
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__x_vergino
 msgid "Vergi No"
+msgstr ""
+
+#. module: altinkaya_sales
+#: selection:sale.order,order_state:0
+msgid "Warehouse"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -1138,22 +1148,7 @@ msgid "Önceki İşçilik Fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "Üretimde"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "İade"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__z_contact_name
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_contact_name
 msgid "İlgili Kişi"
-msgstr ""
-
-#. module: altinkaya_sales
-#: selection:sale.order,order_state:0
-msgid "İptal"
 msgstr ""
