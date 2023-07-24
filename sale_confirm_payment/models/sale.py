@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.tools import float_compare
 
 
 class SaleOrder(models.Model):
@@ -34,23 +35,29 @@ class SaleOrder(models.Model):
     @api.depends("transaction_ids")
     def _compute_payment_state(self):
         for order in self:
-            amount = 0
-            transactions = order.sudo().transaction_ids.filtered(
-                lambda a: a.state == "done"
+            # yigit: since we don't use payment.transaction in invoice, we can't use this code
+            # amount = 0
+            # transactions = order.sudo().transaction_ids.filtered(
+            #     lambda a: a.state == "done"
+            # )
+            # for invoice in order.invoice_ids:
+            #     amount += invoice.amount_total - invoice.residual
+            #     transactions = transactions - invoice.transaction_ids
+            payment_amount = sum(
+                order.sudo()
+                .transaction_ids.filtered(lambda a: a.state == "done")
+                .mapped("amount")
             )
-            for invoice in order.invoice_ids:
-                amount += invoice.amount_total - invoice.residual
-                transactions = transactions - invoice.transaction_ids
-            for transaction in transactions:
-                amount += transaction.amount
-            order.payment_amount = amount
-            if amount:
-                if amount < order.amount_total:
+            order.payment_amount = payment_amount
+            if payment_amount:
+                if float_compare(
+                    payment_amount, order.amount_total, precision_digits=0
+                ):
                     order.payment_status = "partial"
                 else:
                     order.payment_status = "done"
 
-            if not amount:
+            if not payment_amount:
                 order.payment_status = "without"
                 if order.transaction_ids:
                     order.payment_status = "initiated"
