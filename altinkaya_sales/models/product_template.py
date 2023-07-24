@@ -139,7 +139,7 @@ class ProductTemplate(models.Model):
             # Update the product price
             _logger.info(
                 "Updating product price for product %s: %s -> %s"
-                % (product.name, product.v_fiyat_dolar, dummy_so.amount_untaxed)
+                % (product.display_name, product.v_fiyat_dolar, dummy_so.amount_untaxed)
             )
             product.v_fiyat_dolar = dummy_so.amount_untaxed
             # Clear sale order lines
