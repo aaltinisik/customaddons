@@ -169,6 +169,10 @@ class ProductTemplate(models.Model):
                             _("Set default value for attribute %s" % attr.name)
                         )
                     product.attribute_value_ids |= default_attr_value
+                    if len(self.product_variant_ids.filtered(lambda p: p.attribute_value_ids == product.attribute_value_ids)) > 1:
+                        raise ValidationError(
+                            _("There is already a product with same attribute values. You might do something wrong.")
+                        )
                     tmpl_line.value_ids |= default_attr_value
                     filled_variant_ids.append(product.id)
 
