@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_claim" model="ir.ui.view">
+        <field name="name">form.crm.claim.inherit</field>
+        <field name="model">crm.claim</field>
+        <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+        <field name="arch" type="xml">
+            <field name="date" position="before">
+                <field name="source_id" />
+                <field name="carrier_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

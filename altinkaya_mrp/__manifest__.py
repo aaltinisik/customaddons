@@ -1,28 +1,18 @@
-# -*- coding: utf-8 -*-
+# Copyright 2023 Yiğit Budak (https://github.com/yibudak)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name': 'ALTINKAYA MRP Extensions',
-    'version': '1.0',
-    'author': 'OnurUgur,Dogan ALTUNBAY, CODEQUARTERS',
-    'website': 'http://www.codequarters.com',
-    'category': 'mrp',
-    'sequence': 1,
-    'summary': 'Altinkaya MRP module extensions',
-    'images': [],
-    'depends': ['mrp','stock','sale'],
-    'description': """
-
-    """,
-    'data': [
+    "name": "ALTINKAYA MRP Extension",
+    "summary": "Extra features for MRP Module",
+    "description": "This module adds extra features to MRP Module.",
+    "version": "16.0.1.0.1",
+    "author": "Yiğit Budak",
+    "license": "AGPL-3",
+    "website": "https://github.com/yibudak",
+    "category": "Extensions",
+    "depends": ["mrp"],
+    "data": [
         "security/ir.model.access.csv",
-        "view/mrp_production_view.xml",
-        "view/procurement_view.xml",
-        "view/mrp_bom_views.xml",
-        'view/x_makine_views.xml',
-        'wizard/mrp_cancel_wizard_view.xml',
+        "views/mrp_bom_template_line_views.xml",
     ],
-    'demo': [],
-    'test': [],
-    'installable': True,
-    'application': False,
-    'auto_install': False,
+    "installable": True,
 }

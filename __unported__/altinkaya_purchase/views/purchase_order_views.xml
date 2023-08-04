@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_form_altinkaya" model="ir.ui.view">
+            <field name="name">purchase.order.form.altinkaya</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <button name="button_confirm" position="after">
+                    <button name="recalculate_prices" class="ml-2 btn btn-default"
+                            string="Recalculate prices" Help="Apply the current pricelist"
+                            type="object" attrs="{'invisible':[('state','not in', ['draft', 'sent'])]}"/>
+                </button>
+                <field name="origin" position="after">
+                    <field name="pricelist_id" groups="purchase.group_purchase_user"
+                    domain="[('list_type_use', '=', 'purchase')]"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

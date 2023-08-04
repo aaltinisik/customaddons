@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* altinkaya_mrp
+# 	* altinkaya_mrp
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 11:33+0000\n"
-"PO-Revision-Date: 2019-03-25 11:33+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-07-14 13:39+0000\n"
+"PO-Revision-Date: 2023-07-14 13:39+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,284 +18,119 @@ msgstr ""
 #. module: altinkaya_mrp
 #: model:ir.model,name:altinkaya_mrp.model_mrp_bom
 msgid "Bill of Material"
-msgstr "Ürün Ağacı"
+msgstr "Ürün Reçetesi"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__bom_id
-msgid "BoM"
-msgstr "Ürün Ağacı"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom__bom_template_line_ids
+msgid "BoM Template Lines"
+msgstr ""
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__x_group
-msgid "Bolum"
-msgstr "Bölüm"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__bom_product_id
+msgid "Bom Product"
+msgstr "Bom Ürünü"
 
 #. module: altinkaya_mrp
-#: model:ir.actions.act_window,name:altinkaya_mrp.action_mrp_cancel_more
-msgid "Cancel Manufacturing Order"
-msgstr "Üretim Emrini İptal Eti"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__bom_id
+msgid "Bom Template"
+msgstr "Bom Şablonu"
 
 #. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_mrp_cancel_more
-msgid "Cancel Orders"
-msgstr "Emirleri iptal Et"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom__categ_id
-msgid "Category"
-msgstr "Kategori"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__create_uid
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__create_uid
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__create_uid
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__create_uid
 msgid "Created by"
 msgstr "Oluşturan"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__create_date
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__create_date
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__create_date
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__create_date
 msgid "Created on"
-msgstr "Oluşturulma"
+msgstr "Oluşturulma Tarihi"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__cycle_nbr
-msgid "Cycle Number"
-msgstr "Dönüş Numarası"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__hour_nbr
-msgid "Cycle Time(Hour)"
-msgstr "Dönüş Süresi(Saat)"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__display_name
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__display_name
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__display_name
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__display_name
 msgid "Display Name"
-msgstr "Görünüm Adı"
+msgstr "Adı"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__date_finished2
-msgid "End Date"
-msgstr "Bitiş Tarihi"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__id
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__id
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__id
-msgid "ID"
+#: model:ir.model.fields,help:altinkaya_mrp.field_mrp_bom_template_line__factor_attribute_id
+msgid "End product attribute to use for raw material calculation"
 msgstr ""
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter____last_update
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more____last_update
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine____last_update
-msgid "Last Modified on"
-msgstr "Son Güncelleme"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__attribute_factor
+msgid "Factor"
+msgstr "Faktör"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__write_uid
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__write_uid
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__write_uid
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__factor_attribute_id
+msgid "Factor Attribute"
+msgstr "Faktör Niteliği"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,help:altinkaya_mrp.field_mrp_bom_template_line__attribute_factor
+msgid "Factor to multiply by the numeric value of attribute"
+msgstr "Niteliklerin sayısal değerleri ile çarpılacak faktör"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__inherited_attribute_ids
+msgid "Inherited Attributes"
+msgstr "Devralınan Nitelikler"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line____last_update
+msgid "Last Modified on"
+msgstr "Son Değiştirme Tarihi"
+
+#. module: altinkaya_mrp
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__write_uid
 msgid "Last Updated by"
 msgstr "Son Güncelleyen"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__write_date
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_cancel_more__write_date
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__write_date
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__write_date
 msgid "Last Updated on"
-msgstr "Son Güncelleme"
+msgstr "Son Güncelleme Tarihi"
 
 #. module: altinkaya_mrp
-#: model:ir.actions.act_window,name:altinkaya_mrp.action_x_makine
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__x_makine_kod
-#: model:ir.ui.menu,name:altinkaya_mrp.menuitem_action_x_makine
-msgid "Makine"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.mrp_bom_template_line_tree_view
+msgid "MRP Bom Template Lines"
+msgstr "MRP Bom Şablonu Satırları"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__name
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__x_name
-msgid "Makine Adi"
-msgstr ""
+#: model:ir.model,name:altinkaya_mrp.model_mrp_bom_template_line
+msgid "Mrp Bom Template Lines"
+msgstr "Mrp Bom Şablonu Satırları"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_x_makine__x_kod
-msgid "Makine Kodu"
-msgstr ""
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__name
+msgid "Name"
+msgstr "İsim"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__mo_printed
-msgid "Manufacting Order Printed"
-msgstr "Üretim Emri Yazdırıldı"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__product_tmpl_id
+msgid "Product Template"
+msgstr "Ürün Şablonu"
 
 #. module: altinkaya_mrp
-#: selection:mrp.production,priority:0
-msgid "Normal"
-msgstr "Normal"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__product_qty
+msgid "Quantity"
+msgstr "Miktar"
 
 #. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__x_note
-msgid "Not"
-msgstr "Not"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__sequence
+msgid "Sequence"
+msgstr "Sıra"
 
 #. module: altinkaya_mrp
-#: selection:mrp.production,priority:0
-msgid "Not urgent"
-msgstr "Acil Değil"
+#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.mrp_bom_form_inherit_tmpl_line
+msgid "Sub-products"
+msgstr "Alt Ürünler"
 
 #. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_mrp_cancel_more
-msgid "Parameters"
-msgstr "Parametreler"
-
-#. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_production_form_inherit_print_product_label
-msgid "Print Barcode"
-msgstr "Barkod Yazdır"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__priority
-msgid "Priority"
-msgstr "Öncelik"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__procurement_group_name
-msgid "Procurement Group"
-msgstr "Tedarik Grubu"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__product_pickings
-msgid "Product Pickings"
-msgstr "Ürün Transferleri"
-
-#. module: altinkaya_mrp
-#: model:ir.model,name:altinkaya_mrp.model_mrp_production
-msgid "Production Order"
-msgstr "Üretim Emri"
-
-#. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_procurement_group_form_inherit_mrp
-msgid "Productions"
-msgstr "Üretimler"
-
-#. module: altinkaya_mrp
-#: model:ir.actions.act_window,name:altinkaya_mrp.do_view_productions
-msgid "Productions for Groups"
-msgstr "Tedarik grubunun Üretim Emirleri"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__sale_id
-msgid "Sale Order"
-msgstr "Satış Siparişi"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__date_planned
-msgid "Scheduled Date"
-msgstr "Planlanan Tarih"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,help:altinkaya_mrp.field_mrp_bom__categ_id
-msgid "Select category for the current product"
-msgstr "Geçerli ürün için kategori belirtin"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__date_start2
-msgid "Start Date"
-msgstr "Başlangıç Tarihi"
-
-#. module: altinkaya_mrp
-#: model:ir.model,name:altinkaya_mrp.model_stock_rule
-msgid "Stock Rule"
-msgstr "Stok Kuralı"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__time_stop
-msgid "Time After Prod."
-msgstr "Üretim sonrası Zaman"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__time_start
-msgid "Time Before Prod."
-msgstr "Üretim Öncesi Zaman"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__x_makine
-msgid "Uretim Yapilan Makine"
-msgstr "Üretim Yapılan Makine"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_production__x_operator
-msgid "Uretimi Yapan Operator"
-msgstr "Üretim Yapan Operator"
-
-#. module: altinkaya_mrp
-#: selection:mrp.production,priority:0
-msgid "Urgent"
-msgstr "Acil"
-
-#. module: altinkaya_mrp
-#: selection:mrp.production,priority:0
-msgid "Very Urgent"
-msgstr "Çok Acil"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_wcparameter__routing_wc_id
-msgid "Workcenter"
-msgstr "İş Merkezi"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom__wc_parameter_ids
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.mrp_bom_form_inherit_parameter
-msgid "Workcenter Parameters"
-msgstr "İş Merkezi Parametreleri"
-
-#. module: altinkaya_mrp
-#: model:ir.model,name:altinkaya_mrp.model_mrp_bom_wcparameter
-msgid "mrp.bom.wcparameter"
-msgstr ""
-
-#. module: altinkaya_mrp
-#: model:ir.model,name:altinkaya_mrp.model_mrp_cancel_more
-msgid "mrp.cancel.more"
-msgstr ""
-
-#. module: altinkaya_mrp
-#: model:ir.model,name:altinkaya_mrp.model_x_makine
-msgid "x.makine"
-msgstr ""
-
-#. module: altinkaya_mrp
-#: model:ir.actions.act_window,name:mrp.mrp_bom_form_action
-#: model:ir.ui.menu,name:mrp.menu_mrp_bom_form_action
-msgid "Bills of Materials"
-msgstr "Ürün Ağaçları"
-
-#. module: altinkaya_mrp
-#: model:ir.model.fields,field_description:mrp.field_mrp_bom__type
-msgid "BoM Type"
-msgstr "Ürün Ağacı Türü"
-
-#. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:mrp.view_mrp_bom_filter
-#: selection:mrp.bom,type:0
-msgid "Kit"
-msgstr "Set"
-
-#. module: altinkaya_mrp
-#: selection:mrp.bom,type:0
-msgid "Manufacture this product"
-msgstr "Normal"
-
-#. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:mrp.oee_loss_tree_view
-msgid "Blocking Reasons"
-msgstr "Engellenme Sebepleri"
-
-#. module: altinkaya_mrp
-#: model_terms:ir.ui.view,arch_db:altinkaya_mrp.view_production_form_inherit_print_product_label
-msgid "Print Production Order"
-msgstr "Üretim Emrini Yazdır"
+#: model:ir.model.fields,field_description:altinkaya_mrp.field_mrp_bom_template_line__product_uom_id
+msgid "Unit of Measure"
+msgstr "Ölçü Birimi"
