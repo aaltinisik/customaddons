@@ -3,6 +3,9 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from odoo.tools.translate import html_translate
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class ProductTemplate(models.Model):
@@ -63,6 +66,42 @@ class ProductTemplate(models.Model):
         help="Set a step for product quantity increment in the product page."
         " Set 0 to disable this feature.",
     )
+
+    default_variant_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Default Variant",
+        domain="[('product_tmpl_id', '=', id), ('is_published', '=', True)]",
+        store=True,
+        readonly=False,
+    )
+
+    def action_compute_default_variant(self):
+        """
+        Compute the default variant of the product based on the total sale quantity.
+        :return:
+        """
+        self.ensure_one()
+        sales_quant = {
+            p.id: p.sales_count
+            for p in self.product_variant_ids.filtered(lambda p: p.is_published)
+        }
+        if sales_quant:
+            default_variant = max(sales_quant, key=sales_quant.get)
+            self.default_variant_id = default_variant
+            _logger.info(
+                "Default variant of %s is set to %s",
+                self.name,
+                self.default_variant_id.display_name,
+            )
+        else:
+            self.default_variant_id = fields.first(self.product_variant_ids)
+            _logger.info(
+                "No variants found. Default variant of %s is set to %s",
+                self.name,
+                self.default_variant_id.display_name,
+            )
+        self.env.cr.commit()
+        return True
 
     def action_open_v16_product_page(self):
         """
@@ -169,9 +208,19 @@ class ProductTemplate(models.Model):
                             _("Set default value for attribute %s" % attr.name)
                         )
                     product.attribute_value_ids |= default_attr_value
-                    if len(self.product_variant_ids.filtered(lambda p: p.attribute_value_ids == product.attribute_value_ids)) > 1:
+                    if (
+                        len(
+                            self.product_variant_ids.filtered(
+                                lambda p: p.attribute_value_ids
+                                == product.attribute_value_ids
+                            )
+                        )
+                        > 1
+                    ):
                         raise ValidationError(
-                            _("There is already a product with same attribute values. You might do something wrong.")
+                            _(
+                                "There is already a product with same attribute values. You might do something wrong."
+                            )
                         )
                     tmpl_line.value_ids |= default_attr_value
                     filled_variant_ids.append(product.id)
