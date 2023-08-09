@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="filter_available_vlaues" inherit_id="website_sale.products_attributes"
+              name="Filter out the available attributes">
+
+        <!-- Filter out the non-available values -->
+        <xpath expr="//div[@t-if='a.value_ids and len(a.value_ids) &gt; 1']" position="before">
+            <t t-set="available_values" t-value="a.value_ids.filter_available_values(category)" />
+        </xpath>
+
+        <!-- Hide non-avabile attributes -->
+        <xpath expr="//div[@t-if='a.value_ids and len(a.value_ids) &gt; 1']" position="attributes">
+            <attribute name="t-if">available_values</attribute>
+        </xpath>
+
+        <!-- Selection filter -->
+        <xpath expr="//select/t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">available_values</attribute>
+        </xpath>
+
+        <!-- Radio and Pills filter -->
+        <xpath expr="//div[@class='flex-column mb-3']/t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">available_values</attribute>
+        </xpath>
+
+        <!-- Color filter -->
+        <xpath expr="//div[@class='mb-3']/t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">available_values</attribute>
+        </xpath>
+
+    </template>
+</odoo>
