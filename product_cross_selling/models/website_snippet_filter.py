@@ -18,7 +18,8 @@ class WebsiteSnippetFilter(models.Model):
             return products
         current_template = self.env["product.template"].browse(int(current_id))
         if current_template.exists():
-            excluded_products = website.sale_get_order().order_line.product_id
+            # Exlude current product and products in the cart
+            excluded_products = website.sale_get_order().mapped("order_line.product_id")
             excluded_products |= current_template.product_variant_ids
             related_products = self._get_related_products(current_template, domain)
             products = related_products - excluded_products
@@ -35,6 +36,7 @@ class WebsiteSnippetFilter(models.Model):
                     .search(domain, limit=limit, order="website_sequence asc")
                 )
         # Filter out "No combination available" products
+        # This method looks tricky, but it's the fastest (?) way to do it
         return products.filtered(lambda p: p._get_contextual_price_tax_selection())
 
     def _get_related_products(self, current_template, domain):
@@ -56,19 +58,22 @@ class WebsiteSnippetFilter(models.Model):
             domain, order="website_sequence asc", limit=20
         )
         for tmpl in tmpl_ids:
-            variant = next(
-                (
-                    variant
-                    for variant in tmpl.product_variant_ids
-                    if not any(
-                        comb == "hidden"
-                        for comb in variant.mapped(
-                            "product_template_variant_value_ids.attribute_id.visibility"
+            if tmpl.default_variant_id:
+                products |= tmpl.default_variant_id
+            else:
+                variant = next(
+                    (
+                        variant
+                        for variant in tmpl.product_variant_ids
+                        if not any(
+                            comb == "hidden"
+                            for comb in variant.mapped(
+                                "product_template_variant_value_ids.attribute_id.visibility"
+                            )
                         )
-                    )
-                ),
-                None,
-            )
-            if variant:
-                products |= variant
+                    ),
+                    None,
+                )
+                if variant:
+                    products |= variant
         return products
