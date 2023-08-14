@@ -1,5 +1,3 @@
-
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -12,7 +10,9 @@ class SaleConfirmPayment(models.TransientModel):
     acquirer_id = fields.Many2one("payment.acquirer", required=True)
     amount = fields.Monetary(string="Amount", required=True)
     currency_id = fields.Many2one("res.currency")
-    payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
+    payment_date = fields.Date(
+        string="Payment Date", required=True, default=fields.Date.context_today
+    )
     order_id = fields.Many2one(comodel_name="sale.order")
 
     @api.model
@@ -24,7 +24,7 @@ class SaleConfirmPayment(models.TransientModel):
 
         order = self.env["sale.order"].browse(active_id)
         defaults["currency_id"] = order.currency_id.id
-        defaults['order_id'] = active_id
+        defaults["order_id"] = active_id
 
         tx = order.sudo().transaction_ids.get_last_transaction()
         if tx and tx.state in ["pending", "authorized"]:
@@ -35,7 +35,6 @@ class SaleConfirmPayment(models.TransientModel):
         return defaults
 
     def do_confirm(self):
-
         if self.amount <= 0:
             raise UserError(_("Then amount must be positive"))
 
@@ -60,9 +59,6 @@ class SaleConfirmPayment(models.TransientModel):
             transaction._set_transaction_pending()
             transaction._set_transaction_done()
             transaction._post_process_after_done()
-        if transaction:
-            self.order_id.payment_ids = [(4, transaction.payment_id.id)]
-            self.order_id._compute_payment_state()
         return transaction
 
     def add_payment_and_confirm(self):
@@ -70,17 +66,21 @@ class SaleConfirmPayment(models.TransientModel):
         active_id = self.env.context.get("active_id", False)
         if not active_id:
             raise UserError(_("Please select a sale order"))
-        if self.order_id.state not in ['done', 'cancel']:
+        if self.order_id.state not in ["done", "cancel"]:
             self.order_id.action_confirm()
         return transaction
 
     def print_report(self):
         transaction = self.add_payment_and_confirm()
         data = {
-            'ids': transaction.payment_id.id,
-            'doc_ids': transaction.payment_id.id,
-            'model': 'account.payment',
-            'doc_model': self.env['account.payment']._name,
-            'form': transaction.payment_id.read()[0]}
-        return self.env.ref('account.action_report_payment_receipt'). \
-            with_context(active_model='account.payment').report_action(docids=data['doc_ids'])
+            "ids": transaction.payment_id.id,
+            "doc_ids": transaction.payment_id.id,
+            "model": "account.payment",
+            "doc_model": self.env["account.payment"]._name,
+            "form": transaction.payment_id.read()[0],
+        }
+        return (
+            self.env.ref("account.action_report_payment_receipt")
+            .with_context(active_model="account.payment")
+            .report_action(docids=data["doc_ids"])
+        )

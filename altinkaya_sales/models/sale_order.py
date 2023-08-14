@@ -31,9 +31,9 @@ def _match_production_with_route(production):
                 return "07_injection_waiting"
         elif 8 in process_ids:
             if any(
-                    production_ids.filtered(
-                        lambda r: r.process_id.id == 8 and r.state in ongoing_state
-                    )
+                production_ids.filtered(
+                    lambda r: r.process_id.id == 8 and r.state in ongoing_state
+                )
             ):
                 return "20_cutting"
             else:
