@@ -44,9 +44,11 @@
                 <t t-set="trackable_pickings"
                    t-value="sale_order.picking_ids.filtered(lambda p: p.carrier_tracking_url)"/>
                 <ul t-if="trackable_pickings">
-                    <li t-foreach="trackable_pickings" t-as="picking" style="margin-left:-19px;">
+                    <li t-foreach="trackable_pickings" t-as="picking"
+                        style="margin-left:-19px;">
                         <span t-esc="picking.carrier_id.name"/>
-                        <a class="btn btn-sm btn-info mx-auto mb-1" title="Cargo Tracking"
+                        <a class="btn btn-sm btn-info mx-auto mb-1"
+                           title="Cargo Tracking"
                            t-att-href="picking.carrier_tracking_url">
                             <i class="fa fa-truck"/>
                             Where is my cargo?
@@ -121,7 +123,8 @@
         </xpath>
 
         <!--        Visual improvements-->
-        <xpath expr="//div[@id='informations']//div[@t-if='sale_order.validity_date']" position="attributes">
+        <xpath expr="//div[@id='informations']//div[@t-if='sale_order.validity_date']"
+               position="attributes">
             <attribute name="style">margin-top:-12px;</attribute>
         </xpath>
 
@@ -132,19 +135,19 @@
             </attribute>
         </xpath>
     </template>
-    <template id="sale_portal_template_sidebar_show_make_payment_button_inherit"
-              inherit_id="sale.sale_order_portal_template"
-              name="Show the make payment button in sale portal's sidebar">
 
-        <!--        Pay Now Button-->
-        <xpath expr="//li[@t-if='sale_order.user_id']"
-               position="inside">
-            <t t-set="paid_invoices"
-               t-value="sale_order.invoice_ids.filtered(lambda r: r.state == 'paid')"/>
-            <button class="row border-top my-1" id="o_payment_form_pay" type="submit"
-                 >
-                öde
-            </button>
+    <template id="sale_order_sale_order_portal_template_inherit"
+              name="Sales Order Portal Inherit"
+              inherit_id="sale.sale_order_portal_template">
+
+        <!-- Change visual of payment button -->
+        <xpath expr="//a[@t-elif='sale_order.has_to_be_paid(True)']" position="replace">
+            <a t-elif="sale_order.has_to_be_paid(True)" role="button"
+               class="btn btn-success btn-block mb8 btn-lg" data-toggle="modal"
+               data-target="#modalaccept" href="#">
+                <i class="fa fa-credit-card"/>
+                Pay &amp;amp; Confirm
+            </a>
         </xpath>
 
     </template>

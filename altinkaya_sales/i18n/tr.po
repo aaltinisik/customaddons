@@ -6,14 +6,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 06:42+0000\n"
-"PO-Revision-Date: 2023-07-21 06:42+0000\n"
+"POT-Creation-Date: 2023-08-14 17:09+0000\n"
+"PO-Revision-Date: 2023-08-14 17:09+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: altinkaya_sales
+#: model:mail.template,body_html:altinkaya_sales.email_template_edi_sale_altinkaya
+msgid "\n"
+"<div style=\"font-size:13px;font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Hello, ${object.partner_id.name}</p>\n"
+"    \n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from Altinkaya Enclosures For Electronics: </p>\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;<strong style=\"font-weight:bolder;\">REFERENCES</strong><br>\n"
+"       &nbsp;&nbsp;Order number: <strong style=\"font-weight:bolder;\">${object.name}</strong><br>\n"
+"       &nbsp;&nbsp;Order total: <strong style=\"font-weight:bolder;\">${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br>\n"
+"       &nbsp;&nbsp;Order date: ${object.date_order}<br>\n"
+"       % if object.origin:\n"
+"       &nbsp;&nbsp;Order reference: ${object.origin}<br>\n"
+"       % endif\n"
+"       % if object.client_order_ref:\n"
+"       &nbsp;&nbsp;Your reference: ${object.client_order_ref}<br>\n"
+"       % endif\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Prepared By: <a href=\"mailto:${object.user_id.email or ''}?subject=Order%20${object.name}\" style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);\">${object.user_id.name}</a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+" % if object.state in ('draft', 'sent'):\n"
+"    <br>\n"
+"        <a style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);margin-left: 120px;\" href=\"https://www.altinkaya.com.tr/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
+"            <img src=\"https://www.altinkaya.com.tr/payment/images/pay_now.gif\" style=\"border-style:none;vertical-align:middle;\">\n"
+"        </a><br><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">It is also possible to make your payment by clicking \"Pay Now\" button above. <br>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
+"    <br>\n"
+"    % endif       \n"
+"\n"
+"    <br>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">If you have any question, do not hesitate to contact us.</p>\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><strong style=\"font-weight:bolder;\">You can reply this email to contact us.</strong></p>\n"
+"\n"
+"    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">Thank you for choosing Altinkaya!</p>\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"font-size:1.40833rem;color:inherit;line-height:1.2;font-weight:bold;font-family:inherit;margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"            <strong style=\"font-weight:bolder;text-transform:uppercase;\">ALTINKAYA ENCLOSURES FOR ELECTRONICS</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"        % if object.company_id.street:\n"
+"            ${object.company_id.street}<br>\n"
+"        % endif\n"
+"        % if object.company_id.street2:\n"
+"            ${object.company_id.street2}<br>\n"
+"        % endif\n"
+"        % if object.company_id.city or object.company_id.zip:\n"
+"            ${object.company_id.zip} ${object.company_id.city}<br>\n"
+"        % endif\n"
+"        % if object.company_id.country_id:\n"
+"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} Turkey<br>\n"
+"        % endif\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Phone:&nbsp; ${object.company_id.phone}<br>Fax&nbsp;&nbsp;:&nbsp; ${object.company_id.fax}\n"
+"\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">\n"
+"                Web :&nbsp;<a href=\"http://www.altinkaya.eu\" style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);\">www.altinkaya.eu</a>\n"
+"            </div>\n"
+"        %endif\n"
+"        <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"></p>\n"
+"    </div>\n"
+"<p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-top:15px;\">You can rate your customer experience at the following link.</p>\n"
+"            <a href=\"${object.survey_url}\" style=\"text-decoration:none;color:rgb(77, 119, 143);background-color:#875A7B; padding:8px 16px 8px 16px; color:#fff; border-radius:5px; font-size:13px\" \"=\"\">\n"
+"                Rate the Experience\n"
+" </a>\n"
+"</div>\n"
+"            "
+msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_product_product__v_min_2016a_iscilik
@@ -200,149 +278,11 @@ msgid "2017 Temmuz Adres günceleme için arandı."
 msgstr ""
 
 #. module: altinkaya_sales
-#: model:mail.template,body_html:altinkaya_sales.email_template_edi_sale_altinkaya
-msgid "<!-- <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Sayın ${object.partner_id.name},</p>\n"
-"\n"
-"<p>${object.state in ('draft', 'sent') and 'Öncelikle ürünlerimizle ilgilendiğiniz için teşekkür ederiz. İstemiş olduğunuz ürünlerle ilgili fiyat teklifimizi ekte bulabilirsiniz.' or 'Ekte işleme aldığımız siparişinize ait bilgileri içeren sipariş emrini bulabilirsiniz.'}</p> \n"
-"<p>${object.state in ('draft', 'sent') and 'Teklifimizi işleme alabilmemiz için bu e-postaya teklifimizi onayladığınızı belirten bir cevap gönderebilir ya da teklifimizi onaylayıp bize faks ile geri gönderebilirsiniz.' or 'Siparişinizi en kısa sürede hazırlamak için çalışıyoruz.'}</p>\n"
-"<p>${object.state in ('draft', 'sent') and 'Teklifimizle ' or 'Siparişinizle '}ilgili sormak istediğiniz soruları bu mesaja cevap vererek ya da <strong>0312 3952768</strong> nolu telefonumuzdan bizi arayarak sorabilirsiniz.</p>\n"
-"\n"
-" <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
-"       <strong>${object.state in ('draft', 'sent') and 'Teklif' or 'Sipariş'} Detayları</strong><br/>\n"
-"       ${object.state in ('draft', 'sent') and 'Teklif' or 'Sipariş'} Numarası: <strong>${object.name}</strong><br/>\n"
-"       ${object.state in ('draft', 'sent') and 'Teklif' or 'Sipariş'} Toplamı: <strong>${ \"{0:,.2f}\".format(object.amount_total).replace(\".\",\"%\").replace(\",\",\" \").replace(\"%\",\",\")} ${object.pricelist_id.currency_id.symbol}</strong><br/>\n"
-"       ${object.state in ('draft', 'sent') and 'Teklif' or 'Sipariş'} Tarihi: ${object.date_order.split('-')[2] + '-' + object.date_order.split('-')[1] + '-' + object.date_order.split('-')[0]}<br/>\n"
-"       % if object.origin:\n"
-"       ${object.state in ('draft', 'sent') and 'Teklif' or 'Sipariş'} Referansı: ${object.origin}<br/>\n"
-"       % endif\n"
-"       % if object.client_order_ref:\n"
-"       Sizin Referansınız: ${object.client_order_ref}<br/>\n"
-"       % endif\n"
-"       % if object.user_id:\n"
-"       ${object.state in ('draft', 'sent') and 'Teklifi' or 'Siparişi'} Hazırlayan : <a href=\"mailto:${object.user_id.email or ''}?subject=Order%20${object.name}\">${object.user_id.name}</a>\n"
-"       % endif\n"
-"    </p>\n"
-"\n"
-" % if object.state in ('draft', 'sent'):\n"
-"    <br/>\n"
-"        <a style=\"margin-left: 120px;\" href=\"http://www.altinkaya.eu/tahsilat/paymentform.php${object.altinkaya_payment_url}\">\n"
-"            <img src=\"https://www.altinkaya.eu/tahsilat/images/simdi_ode.gif\"/>\n"
-"        </a><br/><p>Dilerseniz yukarıdaki şimdi öde butonuna tıklayarak ödemenizi web sitemiz üzerinden kredi kartınızla kolay ve güvenli bir şekide yapabilirsiniz:</p>\n"
-"    <br/>\n"
-"    % endif   \n"
-"\n"
-"<br/>  \n"
-"    <div style=\"width: 450px; margin: 0px; padding: 0px; background-color: #AB0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
-"        <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
-"            <strong style=\"text-transform:uppercase;\">${object.company_id.name}</strong></h3>\n"
-"    </div>\n"
-"    <div style=\"width: 450px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
-"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
-"        % if object.company_id.partner_id:\n"
-"            ${object.company_id.partner_id.contact_address}<br/>\n"
-"        % endif\n"
-"        </span>\n"
-"        % if object.company_id.phone:\n"
-"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
-"                Telefon: ${object.company_id.phone} Faks: ${object.company_id.fax} \n"
-"            </div>\n"
-"        % endif\n"
-"        % if object.company_id.website:\n"
-"            <div>\n"
-"                Web :<a href=\"${object.company_id.website}\">${object.company_id.website}</a><br/>E-posta :<a href=\"mailto:satis@altinkaya.com.tr?subject=Siparis%20${object.name}\">satis@altinkaya.com.tr</a>\n"
-"            </div>\n"
-"        %endif\n"
-"        <p></p>\n"
-"    </div>\n"
-" <p>${object.state in ('draft', 'sent') and 'Değerli siparişlerinizi bekler iyi çalışmalar dileriz.' or 'Siparişiniz için teşekkür eder hayırlı işler dileriz.'}</p> \n"
-" \n"
-"</div> -->\n"
-"            \n"
-"            \n"
-"            \n"
-" <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"\n"
-"    <p>Hello, ${object.partner_id.name}</p>\n"
-"    \n"
-"    <p>Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from Altinkaya Enclosures For Electronics: </p>\n"
-"\n"
-"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
-"       <strong>REFERENCES</strong><br/>\n"
-"       Order number: <strong>${object.name}</strong><br/>\n"
-"       Order total: <strong>${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br/>\n"
-"       Order date: ${object.date_order}<br/>\n"
-"       % if object.origin:\n"
-"       Order reference: ${object.origin}<br/>\n"
-"       % endif\n"
-"       % if object.client_order_ref:\n"
-"       Your reference: ${object.client_order_ref}<br/>\n"
-"       % endif\n"
-"       % if object.user_id:\n"
-"       Prepared By: <a href=\"mailto:${object.user_id.email or ''}?subject=Order%20${object.name}\">${object.user_id.name}</a>\n"
-"       % endif\n"
-"       \n"
-"    </p>\n"
-"\n"
-" % if object.state in ('draft', 'sent'):\n"
-"    <br/>\n"
-"        <a style=\"margin-left: 120px;\" href=\"https://www.altinkaya.eu/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
-"            <img src=\"https://www.altinkaya.eu/payment/images/pay_now.gif\"/>\n"
-"        </a>\n"
-"        <br/><p>It is also possible to make your payment by clicking \"Pay Now\" button above. <br/>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
-"    <br/>\n"
-"    % endif       \n"
-"\n"
-"    <br/>\n"
-"    <p>If you have any question, do not hesitate to contact us.</p>\n"
-"    <p><strong>You can reply this email to contact us.</strong></p>\n"
-"\n"
-"    <p>Thank you for choosing Altinkaya!</p>\n"
-"    <br/>\n"
-"    <br/>\n"
-"    <div style=\"width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
-"        <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
-"            <strong style=\"text-transform:uppercase;\">ALTINKAYA ENCLOSURES FOR ELECTRONICS</strong></h3>\n"
-"    </div>\n"
-"    <div style=\"width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
-"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
-"        % if object.company_id.street:\n"
-"            ${object.company_id.street}<br/>\n"
-"        % endif\n"
-"        % if object.company_id.street2:\n"
-"            ${object.company_id.street2}<br/>\n"
-"        % endif\n"
-"        % if object.company_id.city or object.company_id.zip:\n"
-"            ${object.company_id.zip} ${object.company_id.city}<br/>\n"
-"        % endif\n"
-"        % if object.company_id.country_id:\n"
-"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} Turkey<br/>\n"
-"        % endif\n"
-"        </span>\n"
-"        % if object.company_id.phone:\n"
-"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
-"                Phone: ${object.company_id.phone}<br/>Fax ${object.company_id.fax}\n"
-"\n"
-"            </div>\n"
-"        % endif\n"
-"        % if object.company_id.website:\n"
-"            <div>\n"
-"                Web :<a href=\"http://www.altinkaya.eu\">www.altinkaya.eu</a>\n"
-"            </div>\n"
-"        %endif\n"
-"        <p/>\n"
-"    </div>\n"
-"</div> \n"
-"            "
-msgstr ""
-
-#. module: altinkaya_sales
-#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_portal_template_sidebar_show_make_payment_button_inherit
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_sale_order_portal_template_inherit
 msgid "<i class=\"fa fa-credit-card\"/>\n"
-"                    Pay Now"
+"                Pay &amp;amp; Confirm"
 msgstr "<i class=\"fa fa-credit-card\"/>\n"
-"                        Şimdi Öde"
+"                Öde &amp;amp; Onayla"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_portal_content_configurations_inherit
@@ -396,12 +336,17 @@ msgstr "<strong>Depo:</strong>"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__active
 msgid "Active"
-msgstr "Aktif"
+msgstr "Etkin"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.portal_record_sidebar_change_brand_link
 msgid "Altinkaya"
 msgstr ""
+
+#. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_portal_logo_size
+msgid "Altinkaya Enclosures for Electronics ©"
+msgstr "Altınkaya Elektronik Cihaz Kutuları ©"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__altinkaya_payment_url
@@ -503,7 +448,7 @@ msgstr "Şirketler"
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
 msgid "Compute Set Price"
-msgstr ""
+msgstr "Set Fiyatını Hesapla"
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
@@ -518,7 +463,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.view_sales_order_form_A
 msgid "Copy to Sale"
-msgstr ""
+msgstr "Satışa Kopyala"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__country_id
@@ -789,7 +734,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__nace_product_categ_ids
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__nace_product_categ_ids
 msgid "NACE Target Product Category"
-msgstr ""
+msgstr "NACE Hedef Ürün Kategorisi"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_nakliye
@@ -804,13 +749,13 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
 msgid "Name"
-msgstr "Adı"
+msgstr "İsim"
 
 #. module: altinkaya_sales
 #: code:addons/altinkaya_sales/models/product_template.py:98
 #, python-format
 msgid "No phantom BoM found for product %s. Please create a phantom BoM to compute the price of the set product."
-msgstr ""
+msgstr "Bu ürün (%s) için SET ürün ağacı bulunamadı. Lütfen SET ürün ağacı oluşturun."
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
@@ -839,6 +784,11 @@ msgid "Order Date"
 msgstr "Sipariş Tarihi"
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__order_state
+msgid "Order State"
+msgstr "Sipariş Durumu"
+
+#. module: altinkaya_sales
 #: code:addons/altinkaya_sales/models/product_pricelist.py:218
 #, python-format
 msgid "Other Pricelist"
@@ -853,11 +803,6 @@ msgstr "Paketlendi"
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_cari_urun
 msgid "Partner Product"
 msgstr "İş Ortağı Ürünü"
-
-#. module: altinkaya_sales
-#: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_portal_template_sidebar_show_make_payment_button_inherit
-msgid "Pay Now"
-msgstr "Şimdi Öde"
 
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_portal_mixin
@@ -915,7 +860,7 @@ msgstr "Ürün Kategorileri"
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_product_category
 msgid "Product Category"
-msgstr ""
+msgstr "Ürün Kategorisi"
 
 #. module: altinkaya_sales
 #: model:ir.actions.act_window,name:altinkaya_sales.action_product_price_type
@@ -945,7 +890,7 @@ msgstr "Üretimde"
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__production_ids
 msgid "Productions"
-msgstr ""
+msgstr "Üretimler"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
@@ -965,7 +910,7 @@ msgstr "Kesim Bekliyor"
 #. module: altinkaya_sales
 #: selection:product.pricelist,list_type_use:0
 msgid "Purchases"
-msgstr ""
+msgstr "Satın Alma"
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
@@ -985,7 +930,7 @@ msgstr "Satış Siparişi"
 #. module: altinkaya_sales
 #: selection:product.pricelist,list_type_use:0
 msgid "Sales"
-msgstr ""
+msgstr "Satış"
 
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_sale_order_line
@@ -1020,11 +965,6 @@ msgid "Show Custom Products"
 msgstr "Özelleştirilebilir Ürünleri Göster"
 
 #. module: altinkaya_sales
-#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__order_state
-msgid "Sipariş Durumu"
-msgstr ""
-
-#. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
 msgid "Tags..."
 msgstr "Etiketler..."
@@ -1037,7 +977,7 @@ msgstr "Vergi Koşulu"
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
 msgid "This method will recalculate the prices of all variants within the current product template. Do you want to continue?"
-msgstr ""
+msgstr "Bu yöntem, geçerli ürün şablonu içindeki tüm varyantların fiyatlarını yeniden hesaplar. Devam etmek istiyor musunuz?"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,help:altinkaya_sales.field_res_partner__property_product_pricelist
@@ -1158,3 +1098,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__z_contact_name
 msgid "İlgili Kişi"
 msgstr ""
+
