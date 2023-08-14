@@ -374,7 +374,7 @@
                         <strong>Notlar:</strong>
                         <span t-field="doc.note"/>
                         <br/>
-                        * Özel üretimler ve işçilikli ürünler için adetlerde +-%10 değişiklik olabilir.
+                        * Özel üretimler ve işçilikli ürünler için adetlerde +-%5 değişiklik olabilir.
                         <br/>
                         * Lütfen onaylamadan önce ürün modeli,rengi,adedi ve teslimat bilgilerini kontrol ediniz.
                     </p>

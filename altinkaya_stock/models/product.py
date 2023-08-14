@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.tools import float_is_zero, float_compare
+from odoo.exceptions import UserError
 
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
@@ -92,6 +93,21 @@ class Product(models.Model):
     qty_virtual_merkez = fields.Float('Merkez Depo Tahmini', compute='_compute_custom_available')
     qty_unreserved_sincan = fields.Float('Sincan Depo Rezervesiz', compute='_compute_custom_available')
     qty_unreserved_merkez = fields.Float('Merkez Depo Rezervesiz', compute='_compute_custom_available')
+
+
+    @api.onchange("attribute_value_ids")
+    def _onchange_attribute_value_ids(self):
+        """
+        This method prevents the user from creating a variant
+        with the same attribute values as an existing one.
+        :return: bool
+        """
+        for product in self:
+            other_variants = product.product_tmpl_id.product_variant_ids
+            if len(other_variants.filtered(lambda p: p.attribute_value_ids == product.attribute_value_ids)) > 1:
+                raise UserError(_('This variant already exists.'))
+        return {}
+
 
     def action_view_todo_moves(self):
         self.ensure_one()

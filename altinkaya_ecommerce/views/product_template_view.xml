@@ -15,6 +15,7 @@
                 <page name="altinkaya_ecommerce" string="Altinkaya E-commerce">
                     <group>
                         <field name="is_published" />
+                        <field name="default_variant_id" />
                         <field name="website_sequence" />
                         <field name="qty_increment_step" />
                         <field name="set_product" />
