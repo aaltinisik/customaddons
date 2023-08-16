@@ -7,13 +7,15 @@
         </xpath>
         <xpath expr="//a[hasclass('navbar-brand', 'logo')]" position="attributes">
             <attribute name="t-att-href">
-                ('https://www.altinkaya.com.tr' if lang == 'tr_TR' else 'https://www.altinkaya.eu')
+                ('https://www.altinkaya.com.tr' if lang == 'tr_TR' else
+                'https://www.altinkaya.eu')
             </attribute>
         </xpath>
-<!--                Hides bottom-right odoo branding in sale portal-->
+        <!--                Hides bottom-right odoo branding in sale portal-->
         <xpath expr="//div[@id='wrapwrap']//div[@id='footer']//div" position="replace">
             <div class="float-right mb16" t-ignore="true" t-if="not editable">
-                Altinkaya Enclosures for Electronics © <span t-esc="datetime.date.today().strftime('%Y')"/>
+                Altinkaya Enclosures for Electronics ©
+                <span t-esc="datetime.date.today().strftime('%Y')"/>
             </div>
         </xpath>
     </template>
@@ -22,6 +24,13 @@
     <template id="portal_record_sidebar_change_brand_link"
               inherit_id="portal.portal_record_sidebar">
         <xpath expr="//div//div//div[hasclass('card-footer')]" position="replace">
+            <div class="btn-toolbar list-group-item">
+                <a t-att-href="sale_order.survey_url"
+                   class="btn btn-info btn-block">
+                    <i class="fa fa-star"/>
+                    Rate your experience
+                </a>
+            </div>
             <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
                 Powered by
                 <a target="_blank"
