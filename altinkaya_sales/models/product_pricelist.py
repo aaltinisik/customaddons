@@ -159,7 +159,8 @@ class ProductPricelist(models.Model):
                     price = rule.base_pricelist_id.currency_id._convert(price_tmp, self.currency_id,
                                                                         self.env.user.company_id, date, round=False)
                 elif len(product.seller_ids) > 0 and product.purchase_ok and self.list_type_use == 'purchase':
-                    supplier_price = product.seller_ids.filtered(lambda s: s.name.id == partner.id)
+                    filtered_sellers = product.seller_ids.filtered(lambda s: s.name.id == partner.id)
+                    supplier_price = filtered_sellers[0] if filtered_sellers else None
                     price = supplier_price.price if supplier_price else 0.0
                     is_purchase_product = True
                 else:
