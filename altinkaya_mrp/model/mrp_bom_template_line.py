@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
 
+
 class MrpBomTemplateLine(models.Model):
     _name = "mrp.bom.template.line"
     _description = "Mrp Bom Template Lines"
@@ -53,15 +54,24 @@ class MrpBomTemplateLine(models.Model):
         string="Inherited Attributes",
     )
 
-    # attribute_value_ids = fields.Many2many(
-    #     "product.attribute.value",
-    #     string="Apply on Variants",
-    # )
+    attribute_value_ids = fields.Many2many(
+        comodel_name="product.attribute.value",
+        relation="mrp_bom_template_line_attribute_value_rel",
+        string="Apply on Variants",
+        store=True,
+    )
 
-    # valid_product_attribute_value_wnva_ids = fields.Many2many(
-    #     "product.attribute.value",
-    #     related="bom_product_id.valid_product_attribute_value_wnva_ids",
-    # )
+    target_attribute_value_ids = fields.Many2many(
+        comodel_name="product.attribute.value",
+        relation="mrp_bom_template_line_target_attribute_value_rel",
+        string="Target Attribute Values",
+        store=True,
+    )
+
+    valid_product_attribute_value_wnva_ids = fields.Many2many(
+        "product.attribute.value",
+        related="bom_product_id.valid_product_attribute_value_wnva_ids",
+    )
 
     factor_attribute_id = fields.Many2one(
         "product.attribute",
@@ -98,13 +108,18 @@ class MrpBomTemplateLine(models.Model):
         Do not skip bom line if inherited attributes are matched
         """
         self.ensure_one()
+        # Case 1: PC-460 attached itself in the BoM
+        if self.attribute_value_ids and self.target_attribute_value_ids:
+            return not (self.attribute_value_ids & product.attribute_value_ids)
+
+        # Case 2: When we have too many variants, and we don't want to create
+        # BoM line for them.
         if not self.inherited_attribute_ids or not self._match_inherited_attributes(
             product
         ):
             return True
-        else:
-            return False
-        # return not self.attribute_value_ids or not self._match_attribute_values(product)
+
+        return False
 
     def _match_inherited_attributes(self, product):
         """Match inherited attributes between bom line and product template"""
@@ -141,13 +156,18 @@ class MrpBomTemplateLine(models.Model):
             return False
 
         # Phase 2: match additional attributes
-        line_attribute_ids = self.mapped(
-            "product_tmpl_id.attribute_line_ids.attribute_id"
-        )
-        additional_attr_vals = product.attribute_value_ids.filtered(
-            lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
-        )
-        matched_products = match_products(matched_products, additional_attr_vals)
+        if self.attribute_value_ids:
+            matched_products = matched_products.filtered(
+                lambda p: self.target_attribute_value_ids in p.attribute_value_ids
+            )
+        else:
+            line_attribute_ids = self.mapped(
+                "product_tmpl_id.attribute_line_ids.attribute_id"
+            )
+            additional_attr_vals = product.attribute_value_ids.filtered(
+                lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
+            )
+            matched_products = match_products(matched_products, additional_attr_vals)
 
         # return single product if possible
         return fields.first(matched_products) or False
