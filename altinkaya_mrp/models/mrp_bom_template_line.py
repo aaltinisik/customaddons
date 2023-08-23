@@ -54,15 +54,26 @@ class MrpBomTemplateLine(models.Model):
         string="Inherited Attributes",
     )
 
-    # attribute_value_ids = fields.Many2many(
-    #     "product.attribute.value",
-    #     string="Apply on Variants",
-    # )
+    possible_product_template_attribute_value_ids = fields.Many2many(
+        "product.template.attribute.value",
+        compute="_compute_possible_product_template_attribute_value_ids",
+    )
 
-    # valid_product_attribute_value_wnva_ids = fields.Many2many(
-    #     "product.attribute.value",
-    #     related="bom_product_id.valid_product_attribute_value_wnva_ids",
-    # )
+    bom_product_template_attribute_value_ids = fields.Many2many(
+        "product.template.attribute.value",
+        string="Apply on Variants",
+        # ondelete="restrict",
+        relation="mrp_bom_template_line_attribute_value_rel",
+        domain="[('id', 'in', possible_product_template_attribute_value_ids)]",
+    )
+
+    target_bom_product_template_attribute_value_ids = fields.Many2many(
+        "product.template.attribute.value",
+        string="Target Attribute Values",
+        # ondelete="restrict",
+        relation="mrp_bom_template_line_target_attribute_value_rel",
+        domain="[('id', 'in', possible_product_template_attribute_value_ids)]",
+    )
 
     factor_attribute_id = fields.Many2one(
         "product.attribute",
@@ -72,6 +83,17 @@ class MrpBomTemplateLine(models.Model):
     attribute_factor = fields.Float(
         string="Factor", help="Factor to multiply by the numeric value of attribute"
     )
+
+    @api.depends(
+        "product_tmpl_id.attribute_line_ids.value_ids",
+        "product_tmpl_id.attribute_line_ids.attribute_id.create_variant",
+        "product_tmpl_id.attribute_line_ids.product_template_value_ids.ptav_active",
+    )
+    def _compute_possible_product_template_attribute_value_ids(self):
+        for line in self:
+            line.possible_product_template_attribute_value_ids = (
+                line.product_tmpl_id.valid_product_template_attribute_line_ids._without_no_variant_attributes().product_template_value_ids._only_active()
+            )
 
     @api.onchange("product_tmpl_id", "bom_product_id")
     def _product_onchange_domain(self):

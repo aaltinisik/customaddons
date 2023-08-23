@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["mrp"],
+    "depends": ["mrp", "product", "stock"],
     "data": [
         "security/ir.model.access.csv",
         "views/mrp_bom_template_line_views.xml",
