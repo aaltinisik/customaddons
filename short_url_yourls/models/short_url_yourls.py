@@ -59,8 +59,9 @@ class ShortURLYourls(models.Model):
             'format': 'json',
         }
         try:
-            response = requests.get(service_url, params=vals, timeout=5).json()
+            response = requests.get(service_url, params=vals, timeout=5)
             response.raise_for_status()
+            response = response.json()
         except requests.exceptions.HTTPError:
             return False
         if response.get('status') == 'success':
