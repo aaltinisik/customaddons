@@ -58,14 +58,18 @@ class ShortURLYourls(models.Model):
             'url': url,
             'format': 'json',
         }
-        response = requests.get(service_url, params=vals).json()
+        try:
+            response = requests.get(service_url, params=vals, timeout=5).json()
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            return False
         if response.get('status') == 'success':
             short_url = response.get('shorturl')
             line_obj.create({
                 'short_url': short_url,
                 'long_url': url,
                 'shorter_id': self.id,
-            }).id
+            })
             # self.write({'shortened_urls': [(4, new_id)]})
             return short_url
 
