@@ -24,6 +24,9 @@
                             domain="[('country_id.id', '!=','224'),('country_id.id', '!=','55'),('country_id', '!=',False)]"/>
                     <separator/>
 
+                    <filter string="Due Date" name="duedate"
+                            domain="[('date_due', '&lt;=', context_today().strftime('%Y-%m-%d'))]"/>
+
                 </xpath>
 
                 <!--  </filter> -->
