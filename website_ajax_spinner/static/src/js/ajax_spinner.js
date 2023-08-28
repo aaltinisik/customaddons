@@ -1,5 +1,10 @@
-odoo.define('your_module_name.loading_spinner', function(require) {
+odoo.define('your_module_name.loading_spinner', function (require) {
     'use strict';
+
+    // Check if the current URL contains '/shop/confirmation'
+    if (window.location.pathname.includes('/shop/confirmation')) {
+        return;  // Exit the module early, doing nothing
+    }
 
     var rpc = require('web.rpc');
     var AjaxService = require('web.AjaxService');
@@ -11,7 +16,7 @@ odoo.define('your_module_name.loading_spinner', function(require) {
     var originalRpc = rpc.query;
     var originalAjaxRpc = AjaxService.prototype.rpc;
 
-    rpc.query = function(options, kwargs) {
+    rpc.query = function (options, kwargs) {
         rpcCounter++;
 
         if ($spinner.css('display') !== 'block') {
@@ -20,11 +25,11 @@ odoo.define('your_module_name.loading_spinner', function(require) {
 
         var promise = originalRpc.apply(this, arguments);
 
-        promise.finally(function() {
+        promise.finally(function () {
             rpcCounter--;
 
             if (rpcCounter === 0) {
-                setTimeout(function() {
+                setTimeout(function () {
                     $spinner.hide();
                 }, 300);
             }
@@ -33,7 +38,7 @@ odoo.define('your_module_name.loading_spinner', function(require) {
         return promise;
     };
 
-    AjaxService.prototype.rpc = function(route, args) {
+    AjaxService.prototype.rpc = function (route, args) {
         rpcCounter++;
 
         if ($spinner.css('display') !== 'block') {
@@ -42,11 +47,11 @@ odoo.define('your_module_name.loading_spinner', function(require) {
 
         var promise = originalAjaxRpc.apply(this, arguments);
 
-        promise.finally(function() {
+        promise.finally(function () {
             rpcCounter--;
 
             if (rpcCounter === 0) {
-                setTimeout(function() {
+                setTimeout(function () {
                     $spinner.hide();
                 }, 300);
             }
