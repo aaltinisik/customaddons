@@ -20,6 +20,8 @@ class ProductTemplate(models.Model):
         "If set, this product will not be shown in the shop.",
     )
 
+    # WE ARE NOT USING THIS METHOD ANYMORE,
+    # INSTEAD WE ARE SETTING THE VALUE OF set_product FIELD MANUALLY
     # def _compute_set_product(self):
     #     phantom_bom = (
     #         self.env["mrp.bom"]

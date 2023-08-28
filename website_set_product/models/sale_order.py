@@ -11,6 +11,8 @@ class SaleOrder(models.Model):
             product_id, quantity, order_line, **kwargs
         )
         if order_line and order_line.set_product:
+            # since we have nothing to do with the return value of this method,
+            # we can just return a dummy sale order line
             dummy_sol = order_line.explode_set_contents()
             return dummy_sol
         return order_line
