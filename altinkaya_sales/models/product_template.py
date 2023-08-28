@@ -118,7 +118,7 @@ class ProductTemplate(models.Model):
                 "date_order": fields.Datetime.now(),
             }
         )
-        for product in products_2compute:
+        for product in self.web_progress_iter(products_2compute, msg="Set ürünlerin fiyatı hesaplanıyor..."):
             bom = self.env["mrp.bom"].sudo()._bom_find(product=product)
             if not bom.type == "phantom":
                 continue
