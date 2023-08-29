@@ -25,8 +25,6 @@ class SaleOrderLine(models.Model):
         """Explodes order lines."""
 
         bom_obj = self.env["mrp.bom"].sudo()
-        # prod_obj = self.env["product.product"].sudo()
-        # uom_obj = self.env["uom.uom"].sudo()
         to_unlink_ids = self.env["sale.order.line"]
         to_explode_again_ids = self.env["sale.order.line"]
 
@@ -57,7 +55,7 @@ class SaleOrderLine(models.Model):
                     sol = self.env["sale.order.line"].new()
                     sol.order_id = line.order_id
                     sol.product_id = bom_line.product_id
-                    sol.product_uom_qty = data["qty"]  # data['qty']
+                    sol.product_uom_qty = data["qty"]
                     # sol.product_id_change()
                     # sol.product_uom_change()
                     # sol._onchange_discount()
@@ -66,10 +64,19 @@ class SaleOrderLine(models.Model):
                         {"lang": customer_lang}
                     ).display_name
                     vals = sol._convert_to_write(sol._cache)
-
-                    sol_id = self.create(vals)
-                    to_explode_again_ids |= sol_id
-
+                    existing_sol = sol.order_id.order_line.filtered(
+                        lambda l: l.product_id == sol.product_id and l.id
+                    )
+                    if existing_sol:
+                        existing_sol.write(
+                            {
+                                "product_uom_qty": existing_sol.product_uom_qty
+                                + data["qty"]
+                            }
+                        )
+                    else:
+                        sol_id = self.create(vals)
+                        to_explode_again_ids |= sol_id
                 to_unlink_ids |= line
 
         # check if new moves needs to be exploded
