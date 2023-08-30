@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="filter_available_vlaues" inherit_id="website_sale.products_attributes"
+    <template id="filter_available_values" inherit_id="website_sale.products_attributes"
               name="Filter out the available attributes">
 
+        <!-- Hide filters when there is no category -->
+        <xpath expr="//div[@id='wsale_products_attributes_collapse']" position="attributes">
+            <attribute name="t-if">category</attribute>
+        </xpath>
+
         <!-- Filter out the non-available values -->
-        <xpath expr="//div[@t-if='a.value_ids and len(a.value_ids) &gt; 1']" position="before">
+        <xpath expr="//div[@class='accordion-item nav-item mb-1']" position="before">
             <t t-set="available_values" t-value="a.value_ids.filter_available_values(category)" />
         </xpath>
 
         <!-- Hide non-avabile attributes -->
-        <xpath expr="//div[@t-if='a.value_ids and len(a.value_ids) &gt; 1']" position="attributes">
+        <xpath expr="//div[@class='accordion-item nav-item mb-1']" position="attributes">
             <attribute name="t-if">available_values</attribute>
         </xpath>
 
         <!-- Selection filter -->
-        <xpath expr="//select/t[@t-foreach='a.value_ids']" position="attributes">
+        <xpath expr="//select[@name='attrib']/t[@t-as='v']" position="attributes">
             <attribute name="t-foreach">available_values</attribute>
         </xpath>
 
         <!-- Radio and Pills filter -->
-        <xpath expr="//div[@class='flex-column mb-3']/t[@t-foreach='a.value_ids']" position="attributes">
+        <xpath expr="//div[hasclass('mb-1')]/t" position="attributes">
             <attribute name="t-foreach">available_values</attribute>
         </xpath>
 
         <!-- Color filter -->
-        <xpath expr="//div[@class='mb-3']/t[@t-foreach='a.value_ids']" position="attributes">
+        <xpath expr="//div[@class='mb-3']/t" position="attributes">
             <attribute name="t-foreach">available_values</attribute>
         </xpath>
 
