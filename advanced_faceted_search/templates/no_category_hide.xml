@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="hide_faceted_search_no_category" inherit_id="website_sale.products_attributes"
-              name="Hide faceted search no category">
-        <xpath expr="//div[@id='wsale_products_attributes_collapse']" position="attributes">
-            <attribute name="t-if">category</attribute>
-        </xpath>
-    </template>
-</odoo>
