@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["website", "website_sale", "altinkaya_ecommerce"],
+    "depends": ["website_sale"],
     "data": [
         "templates/filter_available_values.xml",
         "templates/no_category_hide.xml"
