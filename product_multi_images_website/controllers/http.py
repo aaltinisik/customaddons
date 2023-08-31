@@ -15,7 +15,7 @@ def from_binary_field_inherit(cls, record, field_name):
     """
     data_b64 = ""
     if record._name == "product.product":
-        variant_images = record.product_tmpl_id.image_ids.filtered(
+        variant_images = record.sudo().product_tmpl_id.image_ids.filtered(
             lambda p: record in p.product_variant_ids and p.is_published
         )
         if variant_images:
