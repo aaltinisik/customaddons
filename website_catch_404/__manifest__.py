@@ -13,12 +13,13 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["website"],
+    "depends": ["website", "website_sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/website_views.xml",
         "views/website_404_errors_views.xml",
         "views/website_rewrite_views.xml",
+        "wizards/wizard_create_redirect_from_404_views.xml",
     ],
     "installable": True,
 }

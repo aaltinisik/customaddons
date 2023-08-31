@@ -27,9 +27,18 @@ class Website404Errors(models.Model):
         string="Website",
         ondelete="cascade",
     )
+    resolved = fields.Boolean(string="Resolved", default=False)
 
     @api.constrains("url")
     def _check_url(self):
         for record in self:
             if self.search_count([("name", "=", record.name)]) > 1:
                 raise ValidationError("URL must be unique.")
+
+    def action_create_redirect(self):
+        self.ensure_one()
+        aw_obj = self.env["ir.actions.act_window"]
+        action = aw_obj._for_xml_id(
+            "website_catch_404.wizard_create_redirect_from_404_action"
+        )
+        return action
