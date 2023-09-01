@@ -4,7 +4,7 @@
               name="Set Product ALert">
         <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="after">
             <t t-if="product.set_product">
-               <p class="alert alert-info">This is a SET product. It will be divided into sub-products when you add it to cart.</p>
+               <p class="alert alert-info"><i class="fa fa-info-circle"></i> This is a SET product. It will be divided into sub-products when you add it to cart.</p>
             </t>
         </xpath>
     </template>
