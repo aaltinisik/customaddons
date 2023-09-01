@@ -4,6 +4,17 @@
               name="Sales Order Portal Show Partner"
               inherit_id="sale.sale_order_portal_content">
 
+        <!-- UOM View Precision -->
+        <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
+            <t t-if="line.product_uom.id == 1">
+                <span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 0}'/>
+            </t>
+            <t t-else="">
+                <span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 2}'/>
+            </t>
+        </xpath>
+
+
         <!--        Changes invoice's widget-->
         <xpath expr="//address[@t-field='sale_order.partner_invoice_id']"
                position="attributes">
