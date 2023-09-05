@@ -9,7 +9,7 @@
                     <field name="match_lines" nolabel="1">
                         <tree editable="top" delete="0" create="0">
                             <field name="ecommerce_partner_id"/>
-                            <field name="partner_id" domain="[('parent_id', '=', False)]" required="True"/>
+                            <field name="partner_id" domain="[('parent_id', '=', False), ('ecommerce_partner', '=', False)]" required="True"/>
                         </tree>
                     </field>
                 </group>

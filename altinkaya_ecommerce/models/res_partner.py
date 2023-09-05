@@ -15,12 +15,12 @@ class ResPartner(models.Model):
         help="If checked, this partner is an e-commerce partner.",
     )
 
-    # @api.multi
-    # def name_get(self):
-    #     result = []
-    #     for partner in self:
-    #         if partner.ecommerce_partner:
-    #             result.append((partner.id, _("[E-Commerce]") + " " + partner.name))
-    #         else:
-    #             result.append((partner.id, partner.name))
-    #     return result
+    @api.multi
+    def name_get(self):
+        result = []
+        for partner in self:
+            if partner.ecommerce_partner:
+                result.append((partner.id, "[E] " + partner.name))
+            else:
+                result.append((partner.id, partner.name))
+        return result
