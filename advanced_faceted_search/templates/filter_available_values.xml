@@ -9,12 +9,12 @@
         </xpath>
 
         <!-- Filter out the non-available values -->
-        <xpath expr="//div[@class='accordion-item nav-item mb-1']" position="before">
+        <xpath expr="//div[hasclass('accordion-item', 'nav-item', 'mb-1')]" position="before">
             <t t-set="available_values" t-value="a.value_ids.filter_available_values(category)" />
         </xpath>
 
         <!-- Hide non-avabile attributes -->
-        <xpath expr="//div[@class='accordion-item nav-item mb-1']" position="attributes">
+        <xpath expr="//div[hasclass('accordion-item', 'nav-item', 'mb-1')]" position="attributes">
             <attribute name="t-if">available_values</attribute>
         </xpath>
 
@@ -29,7 +29,7 @@
         </xpath>
 
         <!-- Color filter -->
-        <xpath expr="//div[@class='mb-3']/t" position="attributes">
+        <xpath expr="//div[hasclass('mb-3')]/t" position="attributes">
             <attribute name="t-foreach">available_values</attribute>
         </xpath>
 
