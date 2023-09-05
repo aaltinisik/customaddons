@@ -17,10 +17,17 @@ class ResPartner(models.Model):
 
     @api.multi
     def name_get(self):
+        """
+        Inherit to add [E] prefix to e-commerce partners.
+        :return:
+        """
+        res = super(ResPartner, self).name_get()
         result = []
-        for partner in self:
-            if partner.ecommerce_partner:
-                result.append((partner.id, "[E] " + partner.name))
+        ecommerce_partners = self.filtered(lambda p: p.ecommerce_partner).ids
+        for partner in res:
+            if partner[0] in ecommerce_partners:
+                partner = (partner[0], "[E] " + partner[1])
             else:
-                result.append((partner.id, partner.name))
+                partner = (partner[0], partner[1])
+            result.append(partner)
         return result
