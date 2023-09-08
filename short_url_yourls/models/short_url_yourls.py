@@ -56,6 +56,7 @@ class ShortURLYourls(models.Model):
             'password': self.password,
             'action': 'shorturl',
             'url': url,
+            "title": "Odoo URL Shortener",
             'format': 'json',
         }
         try:
