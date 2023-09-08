@@ -6,11 +6,21 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     acquirer_id = fields.Many2one(
-        "payment.acquirer", related="transaction_ids.acquirer_id", store=True
+        "payment.acquirer",
+        related="transaction_ids.acquirer_id",
+        store=True,
     )
-    payment_amount = fields.Monetary(string="Amount Payment", readonly=True)
-    payment_ids = fields.Many2many("account.payment", string="Payments", readonly=True)
-
+    payment_amount = fields.Monetary(
+        string="Amount Payment",
+        readonly=True,
+        store=True,
+        compute="_compute_payment_state",
+    )
+    payment_ids = fields.Many2many(
+        "account.payment",
+        string="Payments",
+        readonly=True,
+    )
     payment_status = fields.Selection(
         [
             ("without", "Without"),
@@ -20,6 +30,7 @@ class SaleOrder(models.Model):
             ("done", "Done"),
         ],
         default="without",
+        compute="_compute_payment_state",
         readonly=True,
         store=True,
     )
@@ -66,3 +77,4 @@ class SaleOrder(models.Model):
                     )
                     if authorized_transaction_ids:
                         order.payment_status = "authorized"
+            return True
