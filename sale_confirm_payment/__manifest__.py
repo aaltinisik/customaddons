@@ -5,7 +5,7 @@
     "category": "Sales",
     "author": "yibudak, Terrabit",
     "website": "https://altinkaya.com.tr",
-    "depends": ["sale", "payment"],
+    "depends": ["sale", "payment", "altinkaya_sales"],
     "license": "LGPL-3",
     "data": ["views/sale_view.xml", "wizard/sale_confirm_payment_view.xml"],
     "maintainers": ["yibudak"],
