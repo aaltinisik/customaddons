@@ -52,15 +52,16 @@ class SaleOrderLine(models.Model):
                 )
 
                 for bom_line, data in lines:
+                    product = data["target_product"]
                     sol = self.env["sale.order.line"].new()
                     sol.order_id = line.order_id
-                    sol.product_id = bom_line.product_id
-                    sol.product_uom_qty = data["qty"]
+                    sol.product_id = product
+                    sol.product_uom_qty = data["qty"]  # data['qty']
                     # sol.product_id_change()
                     # sol.product_uom_change()
                     # sol._onchange_discount()
                     # sol._compute_amount()
-                    sol.name = bom_line.product_id.with_context(
+                    sol.name = product.with_context(
                         {"lang": customer_lang}
                     ).display_name
                     vals = sol._convert_to_write(sol._cache)

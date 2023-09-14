@@ -54,25 +54,18 @@ class MrpBomTemplateLine(models.Model):
         string="Inherited Attributes",
     )
 
-    possible_product_template_attribute_value_ids = fields.Many2many(
-        "product.template.attribute.value",
-        compute="_compute_possible_product_template_attribute_value_ids",
-    )
-
-    bom_product_template_attribute_value_ids = fields.Many2many(
-        "product.template.attribute.value",
-        string="Apply on Variants",
-        # ondelete="restrict",
+    attribute_value_ids = fields.Many2many(
+        comodel_name="product.attribute.value",
         relation="mrp_bom_template_line_attribute_value_rel",
-        domain="[('id', 'in', possible_product_template_attribute_value_ids)]",
+        string="Apply on Variants",
+        store=True,
     )
 
-    target_bom_product_template_attribute_value_ids = fields.Many2many(
-        "product.template.attribute.value",
-        string="Target Attribute Values",
-        # ondelete="restrict",
+    target_attribute_value_ids = fields.Many2many(
+        comodel_name="product.attribute.value",
         relation="mrp_bom_template_line_target_attribute_value_rel",
-        domain="[('id', 'in', possible_product_template_attribute_value_ids)]",
+        string="Target Attribute Values",
+        store=True,
     )
 
     factor_attribute_id = fields.Many2one(
@@ -83,17 +76,6 @@ class MrpBomTemplateLine(models.Model):
     attribute_factor = fields.Float(
         string="Factor", help="Factor to multiply by the numeric value of attribute"
     )
-
-    @api.depends(
-        "product_tmpl_id.attribute_line_ids.value_ids",
-        "product_tmpl_id.attribute_line_ids.attribute_id.create_variant",
-        "product_tmpl_id.attribute_line_ids.product_template_value_ids.ptav_active",
-    )
-    def _compute_possible_product_template_attribute_value_ids(self):
-        for line in self:
-            line.possible_product_template_attribute_value_ids = (
-                line.product_tmpl_id.valid_product_template_attribute_line_ids._without_no_variant_attributes().product_template_value_ids._only_active()
-            )
 
     @api.onchange("product_tmpl_id", "bom_product_id")
     def _product_onchange_domain(self):
@@ -121,20 +103,30 @@ class MrpBomTemplateLine(models.Model):
         Do not skip bom line if inherited attributes are matched
         """
         self.ensure_one()
+        # Case 1: PC-460 attached itself in the BoM
+        if self.attribute_value_ids and self.target_attribute_value_ids:
+            return not (
+                self.attribute_value_ids
+                & product.mapped(
+                    "product_template_variant_value_ids.product_attribute_value_id"
+                )
+            )
+
+        # Case 2: When we have too many variants, and we don't want to create
+        # BoM line for them.
         if not self.inherited_attribute_ids or not self._match_inherited_attributes(
             product
         ):
             return True
-        else:
-            return False
-        # return not self.attribute_value_ids or not self._match_attribute_values(product)
+
+        return False
 
     def _match_inherited_attributes(self, product):
         """Match inherited attributes between bom line and product template"""
         self.ensure_one()
         return list(
             set(self.inherited_attribute_ids.ids)
-            & set(product.mapped("attribute_value_ids.attribute_id.id"))
+            & set(product.mapped("product_template_variant_value_ids.attribute_id").ids)
         )
 
     def _match_possible_variant(self, product):
@@ -147,14 +139,16 @@ class MrpBomTemplateLine(models.Model):
                 return products
             attr_val = attr_val_list[0]
             return match_products(
-                products.filtered(lambda p: attr_val in p.attribute_value_ids),
+                products.filtered(
+                    lambda p: attr_val in p.product_template_variant_value_ids
+                ),
                 attr_val_list[1:],
             )
 
         target_products = self.mapped("product_tmpl_id.product_variant_ids")
 
         # Phase 1: match inherited attributes
-        common_attrs = product.attribute_value_ids.filtered(
+        common_attrs = product.product_template_variant_value_ids.filtered(
             lambda a: a.attribute_id in self.inherited_attribute_ids
         )
         if not common_attrs:
@@ -164,13 +158,21 @@ class MrpBomTemplateLine(models.Model):
             return False
 
         # Phase 2: match additional attributes
-        line_attribute_ids = self.mapped(
-            "product_tmpl_id.attribute_line_ids.attribute_id"
-        )
-        additional_attr_vals = product.attribute_value_ids.filtered(
-            lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
-        )
-        matched_products = match_products(matched_products, additional_attr_vals)
+        if self.attribute_value_ids:
+            matched_products = matched_products.filtered(
+                lambda p: self.target_attribute_value_ids
+                in p.product_template_variant_value_ids.mapped(
+                    "product_attribute_value_id"
+                )
+            )
+        else:
+            line_attribute_ids = self.mapped(
+                "product_tmpl_id.attribute_line_ids.attribute_id"
+            )
+            additional_attr_vals = product.product_template_variant_value_ids.filtered(
+                lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
+            )
+            matched_products = match_products(matched_products, additional_attr_vals)
 
         # return single product if possible
         return fields.first(matched_products) or False
