@@ -8,3 +8,5 @@ from . import product_category
 from . import ir_attachment
 from . import res_partner
 from . import connector_odoo_unlink
+from . import payment_transaction
+from . import sale_order
