@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/yibudak",
     "category": "Extensions",
-    "depends": ["product", "product_variant_configurator"],
+    "depends": ["product", "product_variant_configurator", "sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/product_attribute_view.xml",
