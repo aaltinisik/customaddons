@@ -99,6 +99,7 @@ class SaleOrder(models.Model):
         [
             # satış
             ("01_draft", "Draft"),
+            ("011_email_error", "Email Error"),
             ("02_sent", "Quotation"),
             ("03_sale", "Confirmed Sale Order"),
             ("04_molding_waiting", "Tool Shop Queue"),
