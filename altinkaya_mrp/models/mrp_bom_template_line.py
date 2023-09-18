@@ -140,7 +140,8 @@ class MrpBomTemplateLine(models.Model):
             attr_val = attr_val_list[0]
             return match_products(
                 products.filtered(
-                    lambda p: attr_val in p.product_template_variant_value_ids
+                    lambda p: attr_val
+                    in p.product_template_variant_value_ids.product_attribute_value_id
                 ),
                 attr_val_list[1:],
             )
@@ -150,7 +151,7 @@ class MrpBomTemplateLine(models.Model):
         # Phase 1: match inherited attributes
         common_attrs = product.product_template_variant_value_ids.filtered(
             lambda a: a.attribute_id in self.inherited_attribute_ids
-        )
+        ).product_attribute_value_id
         if not common_attrs:
             return False
         matched_products = match_products(target_products, common_attrs)
@@ -161,15 +162,13 @@ class MrpBomTemplateLine(models.Model):
         if self.attribute_value_ids:
             matched_products = matched_products.filtered(
                 lambda p: self.target_attribute_value_ids
-                in p.product_template_variant_value_ids.mapped(
-                    "product_attribute_value_id"
-                )
+                in p.product_template_variant_value_ids.product_attribute_value_id
             )
         else:
             line_attribute_ids = self.mapped(
                 "product_tmpl_id.attribute_line_ids.attribute_id"
             )
-            additional_attr_vals = product.product_template_variant_value_ids.filtered(
+            additional_attr_vals = product.product_template_variant_value_ids.product_attribute_value_id.filtered(
                 lambda a: a.attribute_id in line_attribute_ids and a not in common_attrs
             )
             matched_products = match_products(matched_products, additional_attr_vals)
