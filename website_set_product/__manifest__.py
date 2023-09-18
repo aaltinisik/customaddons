@@ -12,7 +12,8 @@
     "category": "Extensions",
     "depends": ["website", "website_sale"],
     "data": [
-        "templates/set_product_alert.xml"
+        "templates/set_product_alert.xml",
+        "templates/set_cart_lines.xml",
     ],
     "installable": True,
 }
