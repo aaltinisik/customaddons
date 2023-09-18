@@ -316,6 +316,11 @@ class SaleOrderLine(models.Model):
     show_custom_products = fields.Boolean("Show Custom Products")
     set_product = fields.Boolean("Set product?", compute="_compute_set_product")
     date_order = fields.Datetime(related="order_id.date_order")
+    set_parent_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Parent Product",
+        readonly=True,
+    )
 
     def copy_line_to_active_order(self):
         sale = self.env["sale.order"].browse(
