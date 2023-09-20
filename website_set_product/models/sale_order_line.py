@@ -76,7 +76,9 @@ class SaleOrderLine(models.Model):
                     ).display_name
                     vals = sol._convert_to_write(sol._cache)
                     existing_sol = sol.order_id.order_line.filtered(
-                        lambda l: l.product_id == sol.product_id and l.id
+                        lambda l: l.id
+                        and l.product_id == sol.product_id
+                        and l.set_parent_product_id.id == parent_id
                     )
                     if existing_sol:
                         existing_sol.write(
