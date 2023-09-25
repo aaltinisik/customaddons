@@ -33,7 +33,7 @@
                                   t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'rounded o_image_64_max'}"
                             />
                         </td>
-                        <td class='td-product_name' colspan="6">
+                        <td class='td-product_name' colspan="5">
                             <div>
                                 <a t-att-href="parent.website_url">
                                     <t t-out="0"/>
