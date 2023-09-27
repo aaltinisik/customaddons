@@ -4,6 +4,8 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import requests
 import re
+import logging
+_logger = logging.getLogger(__name__)
 
 http_regex = re.compile(
     r'^(?:http|ftp)s?://'  # http:// or https://
@@ -59,11 +61,21 @@ class ShortURLYourls(models.Model):
             "title": "Odoo URL Shortener",
             'format': 'json',
         }
-        try:
-            response = requests.get(service_url, params=vals, timeout=5)
-            response.raise_for_status()
-            response = response.json()
-        except requests.exceptions.HTTPError:
+
+        retries = 0 # Will attempt to get a response from the server 3 times, if fails then returns False
+        is_shortened = False
+        response = False
+        while not is_shortened and retries < 3:
+            try:
+                retries += 1
+                response = requests.get(service_url, params=vals, timeout=5)
+                response.raise_for_status()
+                response = response.json()
+                is_shortened = True
+            except Exception as exc:
+                _logger.error(exc)
+                continue
+        if not response:
             return False
         if response.get('status') == 'success':
             short_url = response.get('shorturl')
