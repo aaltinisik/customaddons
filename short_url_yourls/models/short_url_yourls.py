@@ -5,20 +5,23 @@ from odoo.exceptions import ValidationError
 import requests
 import re
 import logging
+
 _logger = logging.getLogger(__name__)
 
 http_regex = re.compile(
-    r'^(?:http|ftp)s?://'  # http:// or https://
-    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
-    r'localhost|'  # localhost...
-    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
-    r'(?::\d+)?'  # optional port
-    r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    r"^(?:http|ftp)s?://"  # http:// or https://
+    r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"  # domain...
+    r"localhost|"  # localhost...
+    r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"  # ...or ip
+    r"(?::\d+)?"  # optional port
+    r"(?:/?|[/?]\S+)$",
+    re.IGNORECASE,
+)
 
 
 class ShortURLYourls(models.Model):
-    _name = 'short.url.yourls'
-    _description = 'YOURLS.org URL Shortener Service'
+    _name = "short.url.yourls"
+    _description = "YOURLS.org URL Shortener Service"
 
     def _compute_total_shortened_urls(self):
         """
@@ -28,21 +31,31 @@ class ShortURLYourls(models.Model):
         for record in self:
             record.total_shortened_urls = len(record.shortened_urls)
 
-    name = fields.Char(string='Name')
-    hostname = fields.Char(string='URL', required=True, help="Example: https://6sn.de")
-    username = fields.Char(string='Username')
-    password = fields.Char(string='Password')
-    shortened_urls = fields.One2many(string='Shortened URLs', comodel_name='short.url.yourls.line',
-                                     inverse_name='shorter_id', readonly=True)
-    total_shortened_urls = fields.Integer(string='Total Shortened URLs', compute='_compute_total_shortened_urls')
+    name = fields.Char(string="Name")
+    hostname = fields.Char(string="URL", required=True, help="Example: https://6sn.de")
+    username = fields.Char(string="Username")
+    password = fields.Char(string="Password")
+    shortened_urls = fields.One2many(
+        string="Shortened URLs",
+        comodel_name="short.url.yourls.line",
+        inverse_name="shorter_id",
+        readonly=True,
+    )
+    total_shortened_urls = fields.Integer(
+        string="Total Shortened URLs", compute="_compute_total_shortened_urls"
+    )
 
     @api.model
     def create(self, vals):
         res = super(ShortURLYourls, self).create(vals)
         if re.match(http_regex, res.hostname) is None:
-            raise ValidationError(_('Hostname must be a valid URL. Example: https://6sn.de or http://6sn.de'))
+            raise ValidationError(
+                _(
+                    "Hostname must be a valid URL. Example: https://6sn.de or http://6sn.de"
+                )
+            )
         if not res.name:
-            res.name = res.hostname.split('://')[-1]
+            res.name = res.hostname.split("://")[-1]
         return res
 
     def shorten_url(self, url):
@@ -51,18 +64,18 @@ class ShortURLYourls(models.Model):
         :param url: URL to shorten
         :return: Shortened URL
         """
-        line_obj = self.env['short.url.yourls.line']
+        line_obj = self.env["short.url.yourls.line"]
         service_url = "%s/yourls-api.php" % self.hostname
         vals = {
-            'username': self.username,
-            'password': self.password,
-            'action': 'shorturl',
-            'url': url,
+            "username": self.username,
+            "password": self.password,
+            "action": "shorturl",
+            "url": url,
             "title": "Odoo URL Shortener",
-            'format': 'json',
+            "format": "json",
         }
 
-        retries = 0 # Will attempt to get a response from the server 3 times, if fails then returns False
+        retries = 0  # Will attempt to get a response from the server 3 times, if fails then returns False
         is_shortened = False
         response = False
         while not is_shortened and retries < 3:
@@ -77,13 +90,15 @@ class ShortURLYourls(models.Model):
                 continue
         if not response:
             return False
-        if response.get('status') == 'success':
-            short_url = response.get('shorturl')
-            line_obj.create({
-                'short_url': short_url,
-                'long_url': url,
-                'shorter_id': self.id,
-            })
+        if response.get("status") == "success":
+            short_url = response.get("shorturl")
+            line_obj.create(
+                {
+                    "short_url": short_url,
+                    "long_url": url,
+                    "shorter_id": self.id,
+                }
+            )
             # self.write({'shortened_urls': [(4, new_id)]})
             return short_url
 
@@ -91,9 +106,11 @@ class ShortURLYourls(models.Model):
 
 
 class ShortURLYourlsLine(models.Model):
-    _name = 'short.url.yourls.line'
-    _description = 'YOURLS shortened URLs'
+    _name = "short.url.yourls.line"
+    _description = "YOURLS shortened URLs"
 
-    short_url = fields.Char(string='Short URL', readonly=True)
-    long_url = fields.Char(string='Long URL', readonly=True)
-    shorter_id = fields.Many2one('short.url.yourls', string="YOURLS Provider", readonly=True)
+    short_url = fields.Char(string="Short URL", readonly=True)
+    long_url = fields.Char(string="Long URL", readonly=True)
+    shorter_id = fields.Many2one(
+        "short.url.yourls", string="YOURLS Provider", readonly=True
+    )
