@@ -7,18 +7,34 @@
                 <script src="/website_product_category/static/src/js/readmore.js"></script>
                 <link rel="stylesheet" href="/website_product_category/static/src/css/readmore.css"/>
                 <div class="fold-wrapper-wrapper my-2">
-                    <div t-attf-id="folded_category_description" t-attf-class="fold-wrapper-description" t-field="category.description"/>
+                    <div t-attf-id="folded_category_description" t-attf-class="fold-wrapper-description">
+                        <t t-out="category.description" />
+                    </div>
                 </div>
                 <script>
-                    new Readmore('#folded_category_description', {
+                    const read_more_el = new Readmore('#folded_category_description', {
                     speed: 500,
                     collapsedHeight: 400,
                     beforeToggle: function(trigger, element, expanded) {
                         $(".fold-wrapper-wrapper").toggleClass("fullview");
                     },
+                    afterToggle: function(trigger, element, expanded) {
+                          element.style.height = 'auto';
+                          const expandedHeight = parseInt(element.getBoundingClientRect().height, 10);
+                          const cssMaxHeight = parseInt(window.getComputedStyle(element).maxHeight, 10);
+                          const defaultHeight = parseInt(element.readmore.defaultHeight, 10);
+
+                          // Store our measurements.
+                          element.readmore.expandedHeight = expandedHeight;
+                          element.readmore.maxHeight = cssMaxHeight;
+                          element.readmore.collapsedHeight = cssMaxHeight || element.readmore.collapsedHeight || defaultHeight;
+
+                          element.style.maxHeight = 'none';
+                    },
                     moreLink: '<div class="fold-wrapper-last-toggle justify-content-center" style="display: flex;"><a href="#" class="btn btn-outline-primary rounded-circle"><i class="mx-2 fa fa-angle-double-down"></i></a></div>',
                     lessLink: '<div class="fold-wrapper-last-toggle justify-content-center" style="display: flex;"><a href="#" class="btn btn-outline-primary rounded-circle"><i class="mx-2 fa fa-angle-double-up"></i></a></div>'
                     });
+
                 </script>
             </t>
 
