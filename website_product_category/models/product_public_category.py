@@ -6,7 +6,11 @@ from odoo import models, fields
 class ProductPublicCategory(models.Model):
     _inherit = "product.public.category"
 
-    description = fields.Html(string="Description", compute="_compute_description")
+    description = fields.Html(
+        string="Description",
+        sanitize_attributes=False,
+        compute="_compute_description",
+    )
     description_page_id = fields.Many2one(
         comodel_name="website.page",
         string="Description Page",
