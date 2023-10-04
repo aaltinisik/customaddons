@@ -15,11 +15,10 @@
         "views/product_public_category_view.xml",
         "templates/product_category_description.xml",
     ],
-    # "assets": {
-    #     "web.assets_frontend": [
-    #         "website_product_category/static/src/js/readmore.js",
-    #         "website_product_category/static/src/css/readmore.css",
-    #     ],
-    # },
+    "assets": {
+        "web.assets_frontend": [
+            "website_product_category/static/src/css/readmore.css",
+        ],
+    },
     "installable": True,
 }
