@@ -13,6 +13,7 @@
     "data": [
         "data/data.xml",
         "templates/cart_total_currency.xml",
+        "templates/sale_confirmation_amount.xml",
     ],
     "assets": {
         "web.assets_frontend": [

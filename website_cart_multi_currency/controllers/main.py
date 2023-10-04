@@ -11,7 +11,7 @@ class WebsiteSaleDeliveryInherit(WebsiteSaleDelivery):
         """
         res = super()._update_website_sale_delivery_return(order, **post)
         Monetary = request.env["ir.qweb.field.monetary"]
-        if order.currency_id != order.company_id.currency_id:
+        if order.currency_id != order.company_currency_id:
             res.update(
                 {
                     "new_amount_total_company_currency": Monetary.value_to_html(
