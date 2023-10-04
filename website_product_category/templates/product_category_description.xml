@@ -5,7 +5,6 @@
         <xpath expr="//div[hasclass('products_header')]" position="before">
             <t t-if="category and category.description">
                 <script src="/website_product_category/static/src/js/readmore.js"></script>
-                <link rel="stylesheet" href="/website_product_category/static/src/css/readmore.css"/>
                 <div class="fold-wrapper-wrapper my-2">
                     <div t-attf-id="folded_category_description" t-attf-class="fold-wrapper-description">
                         <t t-out="category.description" />
