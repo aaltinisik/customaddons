@@ -260,6 +260,7 @@ class Readmore {
         if (typeof this.options.blockProcessed === 'function') {
           this.options.blockProcessed(element, false);
         }
+        element.parentNode.classList.add('fullview');
         return;
       }
 
