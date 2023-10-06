@@ -438,6 +438,8 @@ var Readmore = /*#__PURE__*/function () {
         if (typeof _this2.options.blockProcessed === 'function') {
           _this2.options.blockProcessed(element, false);
         }
+        // Add "fullview" class to element's parent
+        element.parentNode.classList.add('fullview');
         return;
       }
       element.setAttribute('data-readmore', '');
