@@ -41,8 +41,8 @@ class AccountInvoiceReport(models.Model):
                SUM(ail.price_subtotal_signed * invoice_type.sign * ai.usd_rate) AS price_total_usd,
                SUM(
                    CASE 
-                       WHEN aa.code LIKE '191.0%' AND ai.type = 'in_invoice' THEN -ait.amount_total_currency 
-                       WHEN aa.code LIKE '391.0%' AND ai.type = 'out_invoice' THEN ait.amount_total_currency 
+                       WHEN aa.code LIKE '191.0%' THEN -ait.amount_total_currency 
+                       WHEN aa.code LIKE '391.0%'  THEN ait.amount_total_currency 
                        ELSE 0
                    END
                ) / NULLIF(COUNT(*) OVER (PARTITION BY ai.id), 0) AS total_tax,
