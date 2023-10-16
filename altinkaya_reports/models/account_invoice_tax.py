@@ -39,9 +39,7 @@ class AccountInvoiceTax(models.Model):
                     END
             FROM account_invoice ai
             WHERE ait.invoice_id = ai.id
-                AND ait.id IN % s;
-        """ % (
-            tuple(self.ids),
-        )
-        self.env.cr.execute(query)
+                AND ait.id IN %s;
+        """
+        self.env.cr.execute(query, [tuple(self.ids)])
         self.env.cr.commit()
