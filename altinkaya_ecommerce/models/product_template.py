@@ -21,7 +21,8 @@ class ProductTemplate(models.Model):
     public_description = fields.Html(
         "Description for e-Commerce",
         sanitize_attributes=False,
-        translate=html_translate,
+        translate=True,
+        sanitize=False,
         copy=False,
     )
 
