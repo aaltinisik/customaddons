@@ -28,15 +28,17 @@ class AccountInvoiceLine(models.Model):
             currency_rate = ail.invoice_id.custom_rate
             kdv_amount = 0.0
             for tax in ail.invoice_line_tax_ids:
-                if tax.account_id.code.startswith("191.0"):
+                tax_code = tax.account_id.code
+                if tax_code and tax_code.startswith("191.0"):
                     kdv_amount -= ail.price_subtotal * tax.amount / 100
-                elif tax.account_id.code.startswith("391.0"):
+                elif tax_code and tax_code.startswith("391.0"):
                     kdv_amount += ail.price_subtotal * tax.amount / 100
             # Convert to company currency
             if ail.currency_id != ail.company_currency_id and currency_rate > 0.00001:
                 kdv_amount = kdv_amount / currency_rate
 
             ail.kdv_amount = kdv_amount
+
 
 """
 
