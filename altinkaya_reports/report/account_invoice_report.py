@@ -39,25 +39,12 @@ class AccountInvoiceReport(models.Model):
                partner.source_id,partner.campaign_id,
                to_char(ai.date_invoice, 'MM') AS month_nr,
                SUM(ail.price_subtotal_signed * invoice_type.sign * ai.usd_rate) AS price_total_usd,
-               SUM(
-                   CASE 
-                       WHEN aa.code LIKE '191.0%' THEN -ait.amount_total_currency 
-                       WHEN aa.code LIKE '391.0%'  THEN ait.amount_total_currency 
-                       ELSE 0
-                   END
-               ) / NULLIF(COUNT(*) OVER (PARTITION BY ai.id), 0) AS total_tax,
+               ail.kdv_amount as total_tax,
                sum(abs(ail.price_subtotal_signed) * ai.usd_rate) /
                 CASE
                     WHEN sum(ail.quantity / COALESCE(u.factor, 1::numeric) * COALESCE(u2.factor, 1::numeric)) <> 0::numeric THEN sum(ail.quantity / COALESCE(u.factor, 1::numeric) * COALESCE(u2.factor, 1::numeric))
                     ELSE 1::numeric
                 END AS price_average_usd"""
-
-    def _from(self):
-        return super(AccountInvoiceReport, self)._from() + \
-                  """
-                  LEFT JOIN account_invoice_tax ait ON ai.id = ait.invoice_id
-                  LEFT JOIN account_account aa ON ait.account_id = aa.id
-                  """
 
     def _group_by(self):
         return super(AccountInvoiceReport, self)._group_by() + ", coalesce(partner.state_id, partner_ai.state_id),partner.source_id,partner.campaign_id,month_nr"

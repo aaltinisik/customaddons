@@ -1,3 +1,3 @@
-from . import account_invoice_tax
+from . import account_invoice_line
 from . import res_users
 from . import partner
