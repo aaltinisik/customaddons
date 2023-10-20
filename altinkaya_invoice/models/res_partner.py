@@ -4,11 +4,10 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    def _search_due_working(self, operator, value):
-        operand = ">" if operator == "=" else "<="
+    def _search_due_days(self, operator, value):
         partners = self.search(
             [
-                ("property_payment_term_id.line_ids.days", operand, 0),
+                ("property_payment_term_id.line_ids.days", operator, value),
             ],
         )
         return [("id", "in", partners.ids)]
@@ -28,20 +27,21 @@ class ResPartner(models.Model):
         "res.partner", string="Accounting Contact", required=False
     )
     devir_yapildi = fields.Boolean("Devir Yapıldı", default=False)
-    vadeli_calisiyor = fields.Boolean(
-        "Vadeli Çalışıyor",
-        compute="_compute_due_working",
+    due_days = fields.Integer(
+        "Due Days",
+        compute="_compute_due_days",
         store=False,
-        default=False,
-        search="_search_due_working",
+        default=0,
+        search="_search_due_days",
     )
 
     @api.model
-    def _compute_due_working(self):
+    def _compute_due_days(self):
         for record in self:
-            record.vadeli_calisiyor = (
-                0 not in record.property_payment_term_id.line_ids.mapped("days")
-            )
+            if record.property_payment_term_id:
+                record.due_days = max(
+                    record.property_payment_term_id.line_ids.mapped("days") or [0],
+                )
 
     @api.model
     def create(self, vals):
