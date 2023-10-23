@@ -129,7 +129,7 @@
             </form>
             <sheet position="before">
                 <!-- Si está creando un cheque a mano le damos este mensaje -->
-                <p class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible':[('id','!=',False)]}">Recuerde que los cheques se crean con los pagos.<br/><b>Solamente</b> debe crear cheques manualmente para realizar algún <b>ajuste</b> o para la <b>carga incial</b> de los mismos.<br/>Podrá cargar las operaciones correspondientes una vez que haya guardado el cheque.</p>
+                <p class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible':[('id','!=',False)]}">Çeklerin ödemelerle oluşturulduğunu unutmayın.<br/>Yalnızca herhangi bir ayarlama veya çeklerin ilk yüklemesi için manuel olarak çek oluşturmanız gerekir.<br/>Çeki kaydettikten sonra ilgili işlemleri yükleyebileceksiniz.</p>
                 <p class="alert alert-info oe_edit_only" role="alert" style="margin-bottom:0px;" attrs="{'invisible':[('id','=', False)]}"><b>IMPORTANTE:</b> las operaciones de cheques se crean automáticamente con los pagos, transferencias o los botones disponibles sobre el cheque.<br/><b>SOLO</b> debe crear o modificar operaciones para <b>carga de cheques inciales</b> o ajustes sobre <b>circuitos no convencionales.</b></p>
             </sheet>
             <field name="operation_ids" position="attributes">
