@@ -246,6 +246,7 @@ class AccountCheck(models.Model):
         required=True,
     )
     payment_date = fields.Date(
+        string="Due Date",
         readonly=True,
         states={'draft': [('readonly', False)]},
         index=True,

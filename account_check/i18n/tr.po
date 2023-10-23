@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 12:22+0000\n"
-"PO-Revision-Date: 2023-10-20 12:22+0000\n"
+"POT-Creation-Date: 2023-10-23 12:32+0000\n"
+"PO-Revision-Date: 2023-10-23 12:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,8 +38,8 @@ msgstr "* Güncel çeklerde, ödeme ile oluşan kayıt doğrudan banka hesabınd
 
 #. module: account_check
 #: model_terms:ir.ui.view,arch_db:account_check.view_account_check_create_form
-msgid "<b>IMPORTANTE:</b> las operaciones de cheques se crean automáticamente con los pagos, transferencias o los botones disponibles sobre el cheque.<br/><b>SOLO</b> debe crear o modificar operaciones para <b>carga de cheques inciales</b> o ajustes sobre <b>circuitos no convencionales.</b>"
-msgstr "<b>ÖNEMLİ:</b> Çek işlemleri, çek üzerinde bulunan ödemeler, transferler veya butonlar ile otomatik olarak oluşturulur.<br/>Sadece geleneksel olmayan devreler üzerinde ilk kontrol yüklemesi veya ayarlamalar için işlemler oluşturmalı veya değiştirmelisiniz."
+msgid "<b>ÖNEMLİ:</b> Çek işlemleri, çek üzerinde bulunan ödemeler, transferler veya butonlar ile otomatik olarak oluşturulur.<br/>Sadece geleneksel olmayan devreler üzerinde ilk kontrol yüklemesi veya ayarlamalar için işlemler oluşturmalı veya değiştirmelisiniz.\""
+msgstr ""
 
 #. module: account_check
 #: model:ir.model,name:account_check.model_account_chart_template
@@ -70,7 +70,7 @@ msgstr "%s işlemi çeklerde desteklenmemektedir."
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__message_needaction
 msgid "Action Needed"
-msgstr "İşlem Gerekiyor"
+msgstr "Eylem Gerekiyor"
 
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check_action_wizard__action_type
@@ -159,13 +159,13 @@ msgid "Check"
 msgstr "Çek"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:478
+#: code:addons/account_check/models/account_check.py:479
 #, python-format
 msgid "Check \"%s\" debit"
 msgstr "Çek \"%s\" borç"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:672
+#: code:addons/account_check/models/account_check.py:673
 #, python-format
 msgid "Check \"%s\" rejection"
 msgstr "Çek \"%s\" borç"
@@ -187,6 +187,11 @@ msgid "Check Deposit Type"
 msgstr "Çek Yatırım Türü"
 
 #. module: account_check
+#: model:ir.model.fields,field_description:account_check.field_account_payment__check_payment_date
+msgid "Check Due Date"
+msgstr ""
+
+#. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_payment__check_issue_date
 msgid "Check Issue Date"
 msgstr "Çek İbraz Tarihi"
@@ -202,7 +207,7 @@ msgid "Check Number"
 msgstr "Çek Numarası"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:338
+#: code:addons/account_check/models/account_check.py:339
 #, python-format
 msgid "Check Number (%s) must be unique per Checkbook!\n"
 "* Check ids: %s"
@@ -210,7 +215,7 @@ msgstr "Çek numarası (%s), her bir çek defteri için eşsiz olmalıdır!\n"
 "* Çekler: %s"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:354
+#: code:addons/account_check/models/account_check.py:355
 #, python-format
 msgid "Check Number (%s) must be unique per Owner and Bank!\n"
 "* Check ids: %s"
@@ -228,12 +233,7 @@ msgid "Check Owner Vat"
 msgstr "Çek Sahibi Vergi No"
 
 #. module: account_check
-#: model:ir.model.fields,field_description:account_check.field_account_payment__check_payment_date
-msgid "Check Payment Date"
-msgstr "Çek Ödeme Tarihi"
-
-#. module: account_check
-#: code:addons/account_check/models/account_check.py:298
+#: code:addons/account_check/models/account_check.py:299
 #: code:addons/account_check/models/account_payment.py:225
 #, python-format
 msgid "Check Payment Date must be greater than Issue Date"
@@ -245,7 +245,7 @@ msgid "Check Type"
 msgstr "Çek Türü"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:310
+#: code:addons/account_check/models/account_check.py:311
 #, python-format
 msgid "Check number (%s) can't be greater than %s on checkbook %s (%s)"
 msgstr "Çek numarası (%s) defterin son numarasından (%s) büyük olamaz. Çek defteri: %s (%s)."
@@ -401,7 +401,7 @@ msgid "Debit Account"
 msgstr "Borç Hesabı"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:775
+#: code:addons/account_check/models/account_check.py:776
 #, python-format
 msgid "Debit note for operation %s not implemented!"
 msgstr "İşlem (%s) için borç belgesi uygulanmamış!"
@@ -461,7 +461,7 @@ msgstr "Teslim Edilen"
 #. module: account_check
 #: model:account.payment.method,name:account_check.account_payment_method_delivered_third_check
 msgid "Delivered Third Check"
-msgstr "Teslim Edilen Üçüncü Taraf Çek"
+msgstr ""
 
 #. module: account_check
 #: selection:account.check,type:0
@@ -507,7 +507,12 @@ msgid "Draft"
 msgstr "Taslak"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:553
+#: model:ir.model.fields,field_description:account_check.field_account_check__payment_date
+msgid "Due Date"
+msgstr "Vade Tarihi"
+
+#. module: account_check
+#: code:addons/account_check/models/account_check.py:554
 #, python-format
 msgid "Error not specified"
 msgstr "Hata belirlenmedi"
@@ -591,7 +596,7 @@ msgstr "Üçüncü taraf çekler için geçici çek hesabı, örn: \"Geçici Hes
 #: model:ir.model.fields,field_description:account_check.field_account_checkbook__id
 #: model:ir.model.fields,field_description:account_check.field_print_prenumbered_checks__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_check
 #: model:ir.model.fields,help:account_check.field_account_check__message_unread
@@ -606,10 +611,10 @@ msgstr "İşaretliyse, yeni mesajlar dikkatinize sunulacak."
 #. module: account_check
 #: model:ir.model.fields,help:account_check.field_account_check__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "İşaretliyse, bazı mesajlar gönderi hatası içermektedir."
+msgstr "İşaretliyse,bazı mesajlar gönderi hatası içermektedir."
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:644
+#: code:addons/account_check/models/account_check.py:645
 #, python-format
 msgid "If you create a check with different currency thant the company currency, you must provide \"Amount\" and \"Amount Company Currency\""
 msgstr "Eğer şirket para birimi dışında farklı bir para birimi ile çek oluşturuyorsanız, 'Amount' (Tutar) ve 'Amount Company Currency' (Şirket Para Birimi Tutarı) sağlamalısınız."
@@ -772,7 +777,7 @@ msgstr "Mesajlar"
 #: model:ir.model.fields,field_description:account_check.field_account_check__name
 #: model:ir.model.fields,field_description:account_check.field_account_checkbook__name
 msgid "Name"
-msgstr "Adı"
+msgstr "İsim"
 
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__activity_date_deadline
@@ -797,7 +802,7 @@ msgstr "Sonraki ÇeK Numarası"
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_checkbook__next_number
 msgid "Next Number"
-msgstr "Sonraki Numara"
+msgstr "Sonraki Sayı"
 
 #. module: account_check
 #: code:addons/account_check/models/res_company.py:44
@@ -812,7 +817,7 @@ msgid "No number will be assigne while creating payment, number will beassigned 
 msgstr "Numara ödeme oluştururken değil çeki yazdırırken atanacak."
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:650
+#: code:addons/account_check/models/account_check.py:651
 #, python-format
 msgid "No puede crear un cheque sin importe"
 msgstr "Tutarsız bir çek oluşturamazsınız"
@@ -825,7 +830,7 @@ msgstr "Numara"
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__message_needaction_counter
 msgid "Number of Actions"
-msgstr "İşlem Sayısı"
+msgstr "Eylemlerin Sayısı"
 
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__message_has_error_counter
@@ -835,7 +840,7 @@ msgstr "Hata Sayısı"
 #. module: account_check
 #: model:ir.model.fields,help:account_check.field_account_check__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "İşlem gerektiren mesaj sayısı"
+msgstr "Eylem gerektiren mesaj sayısı"
 
 #. module: account_check
 #: model:ir.model.fields,help:account_check.field_account_check__message_has_error_counter
@@ -859,13 +864,18 @@ msgid "Only if this check is post dated"
 msgstr "Sadece bu çek ileri tarihli ise"
 
 #. module: account_check
+#: model_terms:ir.ui.view,arch_db:account_check.view_account_check_form
+msgid "Operasyonlar"
+msgstr ""
+
+#. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__operation_ids
 #: model:ir.model.fields,field_description:account_check.field_account_check_operation__operation
 msgid "Operation"
-msgstr "İşlem"
+msgstr "Operasyon"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:450
+#: code:addons/account_check/models/account_check.py:451
 #, python-format
 msgid "Operation %s not implemented for checks!"
 msgstr "%s operasyonu çekler için uygulanmadı!"
@@ -874,11 +884,6 @@ msgstr "%s operasyonu çekler için uygulanmadı!"
 #: model:ir.model.fields,field_description:account_check.field_account_check_operation__notes
 msgid "Operation Note"
 msgstr "Operasyon Notu"
-
-#. module: account_check
-#: model_terms:ir.ui.view,arch_db:account_check.view_account_check_form
-msgid "Operations"
-msgstr "Operasyonlar"
 
 #. module: account_check
 #: model_terms:ir.ui.view,arch_db:account_check.view_account_check_form
@@ -916,7 +921,6 @@ msgid "Partner"
 msgstr "İş Ortağı"
 
 #. module: account_check
-#: model:ir.model.fields,field_description:account_check.field_account_check__payment_date
 #: model_terms:ir.ui.view,arch_db:account_check.view_checks_search
 msgid "Payment Date"
 msgstr "Ödeme Tarihi"
@@ -974,17 +978,12 @@ msgstr "Alınan"
 #. module: account_check
 #: model:account.payment.method,name:account_check.account_payment_method_received_third_check
 msgid "Received Third Check"
-msgstr "Üçüncü taraf çek alındı"
+msgstr ""
 
 #. module: account_check
 #: selection:account.check,state:0
 msgid "Reclaimed"
-msgstr "Geri Kazanılmış"
-
-#. module: account_check
-#: model_terms:ir.ui.view,arch_db:account_check.view_account_check_create_form
-msgid "Recuerde que los cheques se crean con los pagos.<br/><b>Solamente</b> debe crear cheques manualmente para realizar algún <b>ajuste</b> o para la <b>carga incial</b> de los mismos.<br/>Podrá cargar las operaciones correspondientes una vez que haya guardado el cheque."
-msgstr "Çeklerin ödemelerle oluşturulduğunu unutmayın.<br/>Yalnızca herhangi bir ayarlama veya çeklerin ilk yüklemesi için manuel olarak çek oluşturmanız gerekir.<br/>Çeki kaydettikten sonra ilgili işlemleri yükleyebileceksiniz."
+msgstr "Geri Alındı"
 
 #. module: account_check
 #: selection:account.check,state:0
@@ -1108,19 +1107,19 @@ msgid "Supplier Return/Rejection"
 msgstr "Tedarikçi İadesi/Reddi"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:596
+#: code:addons/account_check/models/account_check.py:597
 #, python-format
 msgid "The %s (id %s) operation has no partner linked.You will need to do it manually."
 msgstr "%s işlemine (id %s) bağlı cari yok. Manuel olarak yapılmalı."
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:466
+#: code:addons/account_check/models/account_check.py:467
 #, python-format
 msgid "The Check must be in draft state for unlink !"
 msgstr "Bağlantıyı kaldırmak için çekin taslak durumunda olması zorunludur."
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:383
+#: code:addons/account_check/models/account_check.py:384
 #, python-format
 msgid "The date of a new check operation can not be minor than last operation date.\n"
 "* Check Id: %s\n"
@@ -1136,7 +1135,7 @@ msgstr "Yeni bir çek işleminin tarihi, son işlem tarihinden küçük olamaz.\
 "* Son Operasyon Tarihi: %s"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:667
+#: code:addons/account_check/models/account_check.py:668
 #, python-format
 msgid "The deposit operation is not linked to a payment.If you want to reject you need to do it manually."
 msgstr "Para yatırma işlemi bir ödemeye bağlı değildir, reddetmek istiyorsanız bunu manuel olarak yapmanız gerekir."
@@ -1167,7 +1166,7 @@ msgstr "Eldeki Üçüncü Taraf Çekler"
 #: model:ir.actions.act_window,name:account_check.action_third_check
 #: model:ir.ui.menu,name:account_check.menu_third_check
 msgid "Third Checks"
-msgstr "Üçüncü Taraf Çekler"
+msgstr "İş Ortağı Çekleri"
 
 #. module: account_check
 #: code:addons/account_check/models/account_payment.py:476
@@ -1183,7 +1182,6 @@ msgstr "Bu işlem çekler için uygulanmaz:\n"
 "* İş Ortağı Tipi: %s\n"
 "* Ödeme Yöntemi: %s\n"
 "* Hedef yevmiyesi"
-""
 
 #. module: account_check
 #: model:ir.model.fields,help:account_check.field_account_payment__check_deposit_type
@@ -1260,12 +1258,11 @@ msgid "Used"
 msgstr "Kullanılmış"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:516
+#: code:addons/account_check/models/account_check.py:517
 #, python-format
 msgid "We have found more or less than two journal items to reconcile with check debit.\n"
 "*Journal items: %s"
-msgstr "Çek borcu ile mutabakat sağlamak için ikiden fazla veya daha az yevmiye kalemi bulduk."
-"* Yevmiye kalemleri: %s"
+msgstr "Çek borcu ile mutabakat sağlamak için ikiden fazla veya daha az yevmiye kalemi bulduk.* Yevmiye kalemleri: %s"
 
 #. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_check__website_message_ids
@@ -1306,7 +1303,7 @@ msgid "You can drop a checkbook if it has been used on checks!"
 msgstr "Eğer üzerinde çekler kullanılmışsa bir çek defterini silemezsiniz!"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:453
+#: code:addons/account_check/models/account_check.py:454
 #, python-format
 msgid "You can not \"%s\" a check from state \"%s\"!\n"
 "Check nbr (id): %s (%s)"
@@ -1314,11 +1311,12 @@ msgstr "%s işlemini, çek %s durumundayken yapamazsınız!\n"
 "Çek numarası (id): %s (%s)"
 
 #. module: account_check
-#: code:addons/account_check/models/account_check.py:368
+#: code:addons/account_check/models/account_check.py:369
 #, python-format
 msgid "You can not cancel this operation because this is not the last operation over the check.\n"
 "Check (id): %s (%s)"
-msgstr "Bu işlemi iptal edemezsiniz çünkü bu çek üzerindeki son işlem değil.\nÇek (id): %s (%s)"
+msgstr "Bu işlemi iptal edemezsiniz çünkü bu çek üzerindeki son işlem değil.\n"
+"Çek (id): %s (%s)"
 
 #. module: account_check
 #: code:addons/account_check/models/account_check.py:85
@@ -1338,3 +1336,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_check.print_pre_numbered_checks_view
 msgid "or"
 msgstr "ya da"
+
+#. module: account_check
+#: model_terms:ir.ui.view,arch_db:account_check.view_account_check_create_form
+msgid "Çeklerin ödemelerle oluşturulduğunu unutmayın.<br/>Yalnızca herhangi bir ayarlama veya çeklerin ilk yüklemesi için manuel olarak çek oluşturmanız gerekir.<br/>Çeki kaydettikten sonra ilgili işlemleri yükleyebileceksiniz."
+msgstr ""

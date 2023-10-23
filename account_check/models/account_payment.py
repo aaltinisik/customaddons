@@ -74,7 +74,7 @@ class AccountPayment(models.Model):
         default=fields.Date.context_today,
     )
     check_payment_date = fields.Date(
-        'Check Payment Date',
+        'Check Due Date',
         readonly=True,
         help="Only if this check is post dated",
         states={'draft': [('readonly', False)]},
