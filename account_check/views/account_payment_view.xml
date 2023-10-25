@@ -35,7 +35,7 @@
 	                <!-- creamos un campo copy por compatibilidad con mig de v8 donde se podia mas de un cheque por payment, igualmente se podria unir todo en chekc_ids pero era medio complicada la consulta -->
 	                <field name="check_ids" attrs="{'invisible': ['|',  '|', ('check_ids', '=', []), ('check_id', '!=', False), ('payment_method_code', 'not in', ['received_third_check', 'issue_check'])]}">
 	                    <tree edit="false" create="false">
-	                        <field name="name"/>
+	                        <field name="number"/>
 	                        <field name="payment_date"/>
 	                        <field name="amount" sum="Total"/>
 	                        <field name="state" invisible="1"/>
@@ -49,7 +49,7 @@
 	                    domain="[('journal_id', '=', journal_id), ('state', '=', 'holding'), ('type', '=', 'third_check')]"
 	                    attrs="{'invisible': ['|', ('payment_method_code', '!=', 'delivered_third_check'), ('payment_type', 'not in', ['transfer', 'outbound'])], 'required': [('state','=','draft'),('payment_method_code', '=', 'delivered_third_check'), ('payment_type', 'in', ['transfer', 'outbound']),  ('state', '!=', 'cancelled')]}">
 	                    <tree edit="false">
-	                        <field name="name"/>
+	                        <field name="number"/>
 	                        <field name="payment_date"/>
 	                        <field name="amount" sum="Total"/>
 	                        <field name="state" invisible="1"/>
@@ -60,7 +60,6 @@
 	            <group name="check_data" states='draft'>
 	                <field name="checkbook_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('payment_method_code', 'not in', ['issue_check'])], 'required': [('state','=','draft'),('payment_method_code', 'in', ['issue_check'])]}" domain="[('journal_id', '=', journal_id), ('state', '=', 'active')]"/>
 	                <field name="check_number" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'required': [('state','=','draft'),'|', ('payment_method_code', '=', 'received_third_check'), '&amp;', ('payment_method_code', '=', 'issue_check'), ('checkbook_numerate_on_printing', '=', False)]}"/>
-	                <field name="check_name" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'required': [('state','=','draft'),'|', ('payment_method_code', '=', 'received_third_check'), '&amp;', ('payment_method_code', '=', 'issue_check'), ('checkbook_numerate_on_printing', '=', False)]}"/>
 	                <field name="check_issue_date" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'required': [('state','=','draft'),('payment_method_code', 'in', ['received_third_check', 'issue_check'])]}"/>
 	                <field name="check_payment_date" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'required': [('state','=','draft'),('check_subtype', '=', 'deferred')]}"/>
 	                <field name="check_bank_id" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check'])],  'required': [('state','=','draft'),('payment_method_code', 'in', ['received_third_check'])], 'required': [('state','=','draft'),('payment_method_code', 'in', ['received_third_check'])]}"/>
@@ -68,9 +67,9 @@
 	                <field name="check_owner_name" attrs="{'invisible': [('payment_method_code', 'not in', ['received_third_check'])],  'required': [('state','=','draft'),('payment_method_code', 'in', ['received_third_check'])]}"/>
 	            </group>
             </xpath>
-            <xpath expr="//div[@name='amount_div']/field[@name='amount']" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state','!=','draft'),('payment_method_code', '=', 'delivered_third_check')]}</attribute>
-            </xpath>
+<!--            <xpath expr="//div[@name='amount_div']/field[@name='amount']" position="attributes">-->
+<!--                <attribute name="attrs">{'readonly': ['|',('state','!=','draft'),('payment_method_code', '=', 'delivered_third_check')]}</attribute>-->
+<!--            </xpath>-->
             <field name="currency_id" position="attributes">
                 <attribute name="attrs">{'readonly': ['|',('state','!=','draft'),('payment_method_code', '=', 'delivered_third_check')]}</attribute>
             </field>
@@ -103,7 +102,7 @@
                 <field name="check_ids"/>
             </field>
             <xpath expr="//filter[@name='state_sent']" position="before">
-                <filter string="Checks To Print and Numerate" domain="[('payment_method_id.code', '=', 'issue_check'), ('state','=','draft'), ('check_name', '=', False)]" name="checks_to_numerate"/>
+                <filter string="Checks To Print and Numerate" domain="[('payment_method_id.code', '=', 'issue_check'), ('state','=','draft'), ('check_number', '=', False)]" name="checks_to_numerate"/>
             </xpath>
         </field>
     </record>

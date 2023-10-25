@@ -9,16 +9,17 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def register_payment(
-            self, payment_line,
-            writeoff_acc_id=False, writeoff_journal_id=False):
+        self, payment_line, writeoff_acc_id=False, writeoff_journal_id=False
+    ):
         """
-        Con esto arreglamos que los pagos puedan pagar contra una cuenta
-        no conciliable, arreglamos porque odoo manda a conciliar por mas
-        que no haya facturas y da error, entonces si no hay facturas
-        que no intente conciliar nada (lo usamos en sipreco esto por ej)
+        With this we arrange that payments can be paid against a non-reconcilable account.
+        account, we fix this because odoo sends to reconcile even if there are no invoices
+        there are no invoices and it gives an error, so if there are no invoices
         """
         if not self:
             return True
         return super(AccountInvoice, self).register_payment(
-            payment_line, writeoff_acc_id=writeoff_acc_id,
-            writeoff_journal_id=writeoff_journal_id)
+            payment_line,
+            writeoff_acc_id=writeoff_acc_id,
+            writeoff_journal_id=writeoff_journal_id,
+        )

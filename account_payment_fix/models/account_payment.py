@@ -144,16 +144,16 @@ class AccountPayment(models.Model):
     # @api.onchange('partner_type')
     def _onchange_partner_type(self):
         """
-        Agregasmos dominio en vista ya que se pierde si se vuelve a entrar
-        Anulamos funcion original porque no haria falta
+        We add domain in vista since it is lost if it is re-entered.
+        We cancel the original function because it would not be necessary.
         """
         return True
 
     @api.onchange('journal_id')
     def _onchange_journal(self):
         """
-        Sobre escribimos y desactivamos la parte del dominio de la funcion
-        original ya que se pierde si se vuelve a entrar
+        We overwrite and deactivate the domain part of the original function
+        since it will be lost if it is re-entered.
         """
         if self.journal_id:
             self.currency_id = (
