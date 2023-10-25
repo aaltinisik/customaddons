@@ -196,11 +196,6 @@ msgid "Check Issue Date"
 msgstr ""
 
 #. module: account_check
-#: model:ir.model.fields,field_description:account_check.field_account_payment__check_name
-msgid "Check Name"
-msgstr ""
-
-#. module: account_check
 #: model:ir.model.fields,field_description:account_check.field_account_payment__check_number
 msgid "Check Number"
 msgstr ""

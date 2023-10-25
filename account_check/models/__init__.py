@@ -6,6 +6,7 @@
 from . import account_journal
 from . import account_invoice
 from . import account_checkbook
+from . import account_check_operation
 from . import account_check
 from . import account_payment
 from . import res_company
