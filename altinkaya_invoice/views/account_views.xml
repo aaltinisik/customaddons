@@ -2,20 +2,20 @@
 <odoo>
     <data>
 
-        <record id="view_account_payment_form_altinkaya" model="ir.ui.view">
-            <field name="name">account.payment.form</field>
-            <field name="model">account.payment</field>
-            <field name="inherit_id" ref="account.view_account_payment_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='communication']" position="after">
-                    <field name="x_cek_no" readonly="1"/>
-                    <field name="x_cek_banka" readonly="1"/>
-                    <field name="date_due" readonly="1"/>
-                    <field name="x_cek_vergi" readonly="1"/>
-                </xpath>
-            </field>
+<!--        <record id="view_account_payment_form_altinkaya" model="ir.ui.view">-->
+<!--            <field name="name">account.payment.form</field>-->
+<!--            <field name="model">account.payment</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_payment_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='communication']" position="after">-->
+<!--                    <field name="x_cek_no" readonly="1"/>-->
+<!--                    <field name="x_cek_banka" readonly="1"/>-->
+<!--                    <field name="date_due" readonly="1"/>-->
+<!--                    <field name="x_cek_vergi" readonly="1"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
 
-    </record>
+<!--    </record>-->
 	
 	
 	<record id="invoice_altinkaya_inherit_supplier_from" model="ir.ui.view">
