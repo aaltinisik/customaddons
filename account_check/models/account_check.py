@@ -589,6 +589,7 @@ class AccountCheck(models.Model):
             currency_id = False
             amount_currency = False
         debit_line_vals = {
+            'date_maturity': self.payment_date,
             'name': name,
             'debit': debit,
             'credit': credit,
