@@ -611,3 +611,13 @@ class AccountPayment(models.Model):
                 x.check_deposit_type == 'detailed'):
             self._split_aml_line_per_check(transfer_debit_aml.move_id)
         return transfer_debit_aml
+
+    def _get_shared_move_line_vals(self, debit, credit, amount_currency, move_id, invoice_id=False):
+        """
+        This method adds maturity date to move lines if our payment is check based.
+        """
+        res = super(AccountPayment, self)._get_shared_move_line_vals(debit, credit, amount_currency, move_id, invoice_id=invoice_id)
+        check_payment_date2 = fields.first(self.check_ids).payment_date
+        if self.check_type and (self.check_payment_date or check_payment_date2):
+            res['date_maturity'] = self.check_payment_date or check_payment_date2
+        return res
