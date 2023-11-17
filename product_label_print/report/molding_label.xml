@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="product_molding_label">
+            <t t-foreach="docs" t-as="o">
+                <t t-translation="off">
+^XSETCUT,DOUBLECUT,0
+^Q15,3
+^W45
+^H6
+^P1
+^S4
+^AD
+^C1
+^R0
+~Q+0
+^O0
+^D0
+^E12
+~R255
+^L
+Dy2-me-dd
+Th:m:s
+BE,119,9,4,10,80,0,1,<t t-esc="o.barcode" />
+AT,14,108,29,29,0,0E,0,0,[<t t-esc="o.default_code"/>]
+AB,15,146,1,1,0,0E,<t t-esc="o.name"/>
+Y11,13, cicek7052
+AB,308,109,1,1,0,0E,<t esc="o.product_tmpl_id.responsible_employee_id.name"/>
+E
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
