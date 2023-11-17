@@ -2,7 +2,7 @@
 
 {
     'name': 'Product Label Print',
-    'version': '8.0',
+    'version': '12.0.1.0.0',
     'website': 'https://www.odoo.com',
     'category': 'Stock',
     'summary': 'Product Label Print',
@@ -17,6 +17,7 @@
         'views/product_view.xml',
         'views/printer.xml',
         'report/label_reports.xml',
+        'report/molding_label.xml',
         'report/reports.xml',
     ],
     'installable' : True,
