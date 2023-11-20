@@ -105,27 +105,16 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <t t-if="o.x_cek_no">
-                                    <span t-field="x.cek_banka">Bankasına ait
-                                        <span t-field="o.cek_no"/>
-                                        seri numaralı
-                                        <strong t-field="o.date_due"/>
-                                        vadeli çek alınmıştır
-                                    </span>
-                                </t>
-                                <t t-if="o.payment_method_code == 'received_third_check'">
+
+                                <t t-if="o.payment_method_code == 'received_third_check' and o.check_id">
                                     <span>
-                                        <span t-field="o.check_bank"/>
+                                        <span t-field="o.check_id.bank_id.name"/>
                                         Bankasına ait
-                                        <span t-field="o.check_name"/>
+                                        <span t-field="o.check_id.number"/>
                                         seri numaralı
-                                        <strong t-field="o.check_payment_date"/>
+                                        <strong t-field="o.check_id.payment_date"/>
                                         vadeli çek alınmıştır.
                                     </span>
-                                    <br/>
-                                    <t t-if="o.check_owner_vat">Asıl Borçlu Vergi No:
-                                        <span t-field="o.check_owner_vat"></span>
-                                    </t>
 
                                 </t>
 

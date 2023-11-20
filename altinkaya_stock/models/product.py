@@ -51,6 +51,11 @@ class ProductTemplate(models.Model):
 class Product(models.Model):
     _inherit = "product.product"
 
+    responsible_employee_id = fields.Many2one(
+        comodel_name="hr.employee",
+        string="Responsible Employee"
+    )
+
     domain_attribute_value_ids = fields.Many2many('product.attribute.value',
                                                   compute='_compute_domain_attribute_value_ids')
 

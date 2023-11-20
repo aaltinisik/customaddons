@@ -84,7 +84,7 @@ class AccountJournal(models.Model):
                 ('journal_id', '=', self.id),
                 ('payment_method_id.code', '=', 'issue_check'),
                 ('state', '=', 'draft'),
-                ('check_name', '=', False),
+                ('check_number', '=', False),
             ])
         return dict(
             super(AccountJournal, self).get_journal_dashboard_datas(),

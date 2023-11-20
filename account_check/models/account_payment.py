@@ -54,12 +54,7 @@ class AccountPayment(models.Model):
 
 # check fields, just to make it easy to load checks without need to create
 # them by a m2o record
-    check_name = fields.Char(
-        'Check Name',
-        readonly=True,
-        copy=False,
-        states={'draft': [('readonly', False)]},
-    )
+
     check_number = fields.Integer(
         'Check Number',
         readonly=True,
@@ -74,7 +69,7 @@ class AccountPayment(models.Model):
         default=fields.Date.context_today,
     )
     check_payment_date = fields.Date(
-        'Check Payment Date',
+        'Check Due Date',
         readonly=True,
         help="Only if this check is post dated",
         states={'draft': [('readonly', False)]},
@@ -146,9 +141,9 @@ class AccountPayment(models.Model):
             ['issue_check', 'received_third_check', 'delivered_third_check'])
         for rec in check_payments:
             if rec.check_ids:
-                checks_desc = ', '.join(rec.check_ids.mapped('name'))
+                checks_desc = ', '.join(str(x) for x in rec.check_ids.mapped('number'))
             else:
-                checks_desc = rec.check_name
+                checks_desc = str(rec.check_number)
             name = "%s: %s" % (rec.payment_method_id.display_name, checks_desc)
             rec.payment_method_description = name
         return super(
@@ -194,26 +189,18 @@ class AccountPayment(models.Model):
             return ('%%0%sd' % padding % number)
 
         for rec in self:
-            if rec.payment_method_code in ['received_third_check']:
-                if not rec.check_number:
-                    check_name = False
-                else:
-                    check_name = _get_name_from_number(rec.check_number)
-                rec.check_name = check_name
-            elif rec.payment_method_code in ['issue_check']:
+            if rec.payment_method_code in ['issue_check']:
                 sequence = rec.checkbook_id.sequence_id
-                if not rec.check_number:
-                    check_name = False
-                elif sequence:
+                if sequence:
                     if rec.check_number != sequence.number_next_actual:
                         # write with sudo for access rights over sequence
                         sequence.sudo().write(
                             {'number_next_actual': rec.check_number})
-                    check_name = rec.checkbook_id.sequence_id.next_by_id()
+                    check_number = rec.checkbook_id.sequence_id.next_by_id()
                 else:
                     # in sipreco, for eg, no sequence on checkbooks
-                    check_name = _get_name_from_number(rec.check_number)
-                rec.check_name = check_name
+                    check_number = _get_name_from_number(rec.check_number)
+                rec.check_number = str(check_number)
 
     @api.onchange('check_issue_date', 'check_payment_date')
     def onchange_date(self):
@@ -300,7 +287,6 @@ class AccountPayment(models.Model):
             'owner_name': self.check_owner_name,
             'owner_vat': self.check_owner_vat,
             'number': self.check_number,
-            'name': self.check_name,
             'checkbook_id': self.checkbook_id.id,
             'issue_date': self.check_issue_date,
             'type': self.check_type,
@@ -341,7 +327,7 @@ class AccountPayment(models.Model):
                 'third_check', operation, self.check_bank_id)
             vals['date_maturity'] = self.check_payment_date
             vals['account_id'] = check.get_third_check_account().id
-            vals['name'] = _('Receive check %s') % check.name
+            vals['name'] = _('Receive check %s') % check.number
         elif (
                 rec.payment_method_code == 'delivered_third_check' and
                 rec.payment_type == 'transfer'):
@@ -418,7 +404,7 @@ class AccountPayment(models.Model):
                 'delivered', rec, rec.partner_id, date=rec.payment_date)
             vals['account_id'] = rec.check_ids.get_third_check_account().id
             vals['name'] = _('Deliver checks %s') % ', '.join(
-                rec.check_ids.mapped('name'))
+                rec.check_ids.mapped('number'))
         elif (
                 rec.payment_method_code == 'issue_check' and
                 rec.payment_type == 'outbound'
@@ -446,7 +432,7 @@ class AccountPayment(models.Model):
             check = self.create_check(
                 'issue_check', operation, self.check_bank_id)
             vals['date_maturity'] = self.check_payment_date
-            vals['name'] = _('Hand check %s') % check.name
+            vals['name'] = _('Hand check %s') % str(check.number)
         elif (
                 rec.payment_method_code == 'issue_check' and
                 rec.payment_type == 'transfer' and
@@ -488,7 +474,7 @@ class AccountPayment(models.Model):
                 raise UserError(_(
                     'The total of the payment does not match the total of the selected checks. '
                     'Please try deleting or re-adding a check.'))
-            if rec.payment_method_code == 'issue_check' and (not rec.check_number or not rec.check_name):
+            if rec.payment_method_code == 'issue_check' and (not rec.check_number):
                 raise UserError(_('Please be sure that check number or name is filled!'))
                 
         res = super(AccountPayment, self).post()
@@ -529,7 +515,7 @@ class AccountPayment(models.Model):
 
         # si numerar al imprimir entonces llamamos al wizard
         if self[0].checkbook_id.numerate_on_printing:
-            if all([not x.check_name for x in self]):
+            if all([not x.check_number for x in self]):
                 next_check_number = self[0].checkbook_id.next_number
                 return {
                     'name': _('Print Pre-numbered Checks'),
@@ -544,7 +530,7 @@ class AccountPayment(models.Model):
                     }
                 }
             # si ya están enumerados mandamos a imprimir directamente
-            elif all([x.check_name for x in self]):
+            elif all([x.check_number for x in self]):
                 return self.do_print_checks()
             else:
                 raise UserError(_(
@@ -625,3 +611,13 @@ class AccountPayment(models.Model):
                 x.check_deposit_type == 'detailed'):
             self._split_aml_line_per_check(transfer_debit_aml.move_id)
         return transfer_debit_aml
+
+    def _get_shared_move_line_vals(self, debit, credit, amount_currency, move_id, invoice_id=False):
+        """
+        This method adds maturity date to move lines if our payment is check based.
+        """
+        res = super(AccountPayment, self)._get_shared_move_line_vals(debit, credit, amount_currency, move_id, invoice_id=invoice_id)
+        check_payment_date2 = fields.first(self.check_ids).payment_date
+        if self.check_type and (self.check_payment_date or check_payment_date2):
+            res['date_maturity'] = self.check_payment_date or check_payment_date2
+        return res

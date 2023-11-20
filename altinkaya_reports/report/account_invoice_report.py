@@ -23,6 +23,7 @@ class AccountInvoiceReport(models.Model):
 
     state_id = fields.Many2one('res.country.state', string='State', readonly=True)
     price_total_usd = fields.Float(string='Untaxed Total USD', readonly=True)
+    total_tax = fields.Float(string='Tax Total', readonly=True)
     price_average_usd = fields.Float(string='Average Price USD', readonly=True, group_operator="avg")
     source_id = fields.Many2one('utm.source', string='Marketing Source', readonly=True)
     campaign_id = fields.Many2one('utm.campaign', string='Marketing Campaign', readonly=True)
@@ -30,7 +31,7 @@ class AccountInvoiceReport(models.Model):
 
     def _select(self):
         return super(AccountInvoiceReport, self)._select() + \
-               ", sub.state_id, sub.price_total_usd as price_total_usd, sub.price_average_usd as price_average_usd, sub.source_id as source_id, sub.campaign_id as campaign_id, sub.month_nr as month_nr"
+               ", sub.state_id, sub.total_tax as total_tax, sub.price_total_usd as price_total_usd, sub.price_average_usd as price_average_usd, sub.source_id as source_id, sub.campaign_id as campaign_id, sub.month_nr as month_nr"
 
     def _sub_select(self):
         return super(AccountInvoiceReport, self)._sub_select() + \
@@ -38,6 +39,7 @@ class AccountInvoiceReport(models.Model):
                partner.source_id,partner.campaign_id,
                to_char(ai.date_invoice, 'MM') AS month_nr,
                SUM(ail.price_subtotal_signed * invoice_type.sign * ai.usd_rate) AS price_total_usd,
+               ail.kdv_amount as total_tax,
                sum(abs(ail.price_subtotal_signed) * ai.usd_rate) /
                 CASE
                     WHEN sum(ail.quantity / COALESCE(u.factor, 1::numeric) * COALESCE(u2.factor, 1::numeric)) <> 0::numeric THEN sum(ail.quantity / COALESCE(u.factor, 1::numeric) * COALESCE(u2.factor, 1::numeric))

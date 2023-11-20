@@ -21,7 +21,8 @@ class ProductTemplate(models.Model):
     public_description = fields.Html(
         "Description for e-Commerce",
         sanitize_attributes=False,
-        translate=html_translate,
+        translate=True,
+        sanitize=False,
         copy=False,
     )
 
@@ -83,7 +84,9 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         sales_quant = {
             p.id: p.sales_count
-            for p in self.product_variant_ids.filtered(lambda p: p.is_published)
+            for p in self.product_variant_ids.filtered(
+                lambda p: p.is_published and not p.v_cari_urun
+            )
         }
         if sales_quant:
             default_variant = max(sales_quant, key=sales_quant.get)
@@ -94,7 +97,9 @@ class ProductTemplate(models.Model):
                 self.default_variant_id.display_name,
             )
         else:
-            self.default_variant_id = fields.first(self.product_variant_ids)
+            self.default_variant_id = fields.first(
+                self.product_variant_ids.filtered(lambda p: not p.v_cari_urun)
+            )
             _logger.info(
                 "No variants found. Default variant of %s is set to %s",
                 self.name,

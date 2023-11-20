@@ -22,8 +22,8 @@
                       <attribute name="invisible">0</attribute>
                       <attribute name="placeholder">Product Template</attribute>
                   </xpath>
-                  <xpath expr="//field[@name='product_tmpl_id']" position="before">
-                      <br/>
+                  <xpath expr="//field[@name='uom_po_id']" position="after">
+                      <field name="responsible_employee_id"/>
                   </xpath>
                   <button name="action_view_stock_move_lines" position="before">
                        <button string="Yapılacak Hareketler"

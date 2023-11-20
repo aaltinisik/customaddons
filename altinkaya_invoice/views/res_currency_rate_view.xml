@@ -9,7 +9,6 @@
                 <data>
                     <xpath expr="//field[@name='rate']" position="before">
                         <field name="rate_inverse"/>
-                        <field name="rate_inverse_second"/>
                     </xpath>
                 </data>
             </field>
