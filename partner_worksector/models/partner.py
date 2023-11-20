@@ -22,9 +22,9 @@ class ResPartner(models.Model):
         for partner in self:
             lst = []
             if partner.main_worksector_id:
-                lst.append(partner.main_worksector_id.product_categ_ids)
+                lst.extend(partner.main_worksector_id.product_categ_ids.ids)
             for line in partner.worksector_ids:
-                lst += [x.id for x in line.product_categ_ids]
+                lst.extend(line.product_categ_ids.ids)
             partner.target_product_categ_ids = self.env['product.category'].browse(set(lst))
 
     main_worksector_id = fields.Many2one('partner.worksector', string="Main Worksector",ondelete='restrict')
