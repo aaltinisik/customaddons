@@ -81,8 +81,8 @@ class ResCurrency(models.Model):
                        FROM res_currency c
                        WHERE c.id IN %s"""
 
-            if self.env.context.get("rate_type"):
-                rate_type = self.env.context.get("rate_type")
+            if self._context.get("rate_type"):
+                rate_type = self._context.get("rate_type")
             else:
                 rate_type = rec.main_rate_field or "rate"
 

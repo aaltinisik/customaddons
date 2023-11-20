@@ -8,3 +8,5 @@ from . import account_payment
 from . import res_currency_rate
 from . import res_currency
 from . import sale_order
+from . import account_move
+from . import account_invoice
