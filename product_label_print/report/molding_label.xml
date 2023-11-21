@@ -4,13 +4,15 @@
         <template id="product_molding_label">
             <t t-foreach="docs" t-as="o">
                 <t t-translation="off">
+                    <t t-set="first_line" t-value="o.name[:40]" />
+                    <t t-set="second_line" t-value="o.name[40:] if len(o.name) > 40 else ''" />
 ^XSETCUT,DOUBLECUT,0
-^Q15,3
-^W45
-^H6
+^Q20,3
+^W55
+^H10
 ^P1
 ^S4
-^AD
+^AT
 ^C1
 ^R0
 ~Q+0
@@ -21,11 +23,16 @@
 ^L
 Dy2-me-dd
 Th:m:s
-BE,119,9,4,10,80,0,1,<t t-esc="o.barcode" />
-AT,14,108,29,29,0,0E,0,0,[<t t-esc="o.default_code"/>]
-AB,15,146,1,1,0,0E,<t t-esc="o.name"/>
-Y11,13, cicek7052
-AB,308,109,1,1,0,0E,<t esc="o.product_tmpl_id.responsible_employee_id.name"/>
+Y23,15,cicek_7052
+Dy2-me-dd
+Th:m:s
+BE,143,0,4,10,100,0,1,<t t-esc="o.barcode" />
+AT,32,128,42,42,0,0BE,B,0,[<t t-esc="o.default_code"/>]
+AC,33,173,1,1,0,0E,<t t-esc="first_line"/>
+AC,363,136,1,1,0,0E,<t esc="o.product_tmpl_id.responsible_employee_id.name"/>
+<t t-if="second_line">
+AC,35,202,1,1,0,0E,<t t-esc="second_line"/>
+</t>
 E
                 </t>
             </t>
