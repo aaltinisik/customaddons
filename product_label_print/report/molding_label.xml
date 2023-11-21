@@ -4,8 +4,8 @@
         <template id="product_molding_label">
             <t t-foreach="docs" t-as="o">
                 <t t-translation="off">
-                    <t t-set="first_line" t-value="o.name[:40]" />
-                    <t t-set="second_line" t-value="o.name[40:] if len(o.name) > 40 else ''" />
+                    <t t-set="first_line" t-value="o.display_name.replace('[%s] ' % o.default_code, '')[:40] if o.display_name and o.default_code else o.product_tmpl_id.name[:40]" />
+                    <t t-set="second_line" t-value="o.name[40:] if first_line and len(first_line) == 40 else ''" />
 ^XSETCUT,DOUBLECUT,0
 ^Q20,3
 ^W55
@@ -29,7 +29,7 @@ Th:m:s
 BE,143,0,4,10,100,0,1,<t t-esc="o.barcode" />
 AT,32,128,42,42,0,0BE,B,0,[<t t-esc="o.default_code"/>]
 AC,33,173,1,1,0,0E,<t t-esc="first_line"/>
-AC,363,136,1,1,0,0E,<t esc="o.product_tmpl_id.responsible_employee_id.name"/>
+AC,363,136,1,1,0,0E,<t esc="o.responsible_employee_id.name"/>
 <t t-if="second_line">
 AC,35,202,1,1,0,0E,<t t-esc="second_line"/>
 </t>

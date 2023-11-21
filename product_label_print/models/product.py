@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 from datetime import date
 
 APPLICABLE_MODELS = [
@@ -17,21 +18,22 @@ class ProductProductLabel(models.TransientModel):
 
     @api.model
     def _selection_model(self):
-
         def _translate(src):
-            """ Custom translate function since we need to get
-                model._description translation but the default gettext _ alias
-                only search for `code` and `sql_constraint` translations
+            """Custom translate function since we need to get
+            model._description translation but the default gettext _ alias
+            only search for `code` and `sql_constraint` translations
             """
-            return self.env['ir.translation'].sudo()._get_source(
-                None, ('model', 'model_terms'), self.env.lang, src
+            return (
+                self.env["ir.translation"]
+                .sudo()
+                ._get_source(None, ("model", "model_terms"), self.env.lang, src)
             )
 
         return [
             (x, _translate(self.env[x]._description))
-            for x in APPLICABLE_MODELS if x in self.env
+            for x in APPLICABLE_MODELS
+            if x in self.env
         ]
-
 
     name = fields.Char(string="Name", size=120)
     nameL1 = fields.Char(string="NameL1", size=30)
@@ -49,10 +51,7 @@ class ProductProductLabel(models.TransientModel):
     lot_ids = fields.Many2many("stock.production.lot", string="Lot")
     uom_name = fields.Char(string="UOM Name", size=10)
     batch_code = fields.Char(string="Batch Code", compute="gen_batch_code", store=False)
-    model_ref_id = fields.Reference(
-        selection='_selection_model',
-        string='Reference'
-    )
+    model_ref_id = fields.Reference(selection="_selection_model", string="Reference")
 
 
 class LabelTwoinrow(models.TransientModel):
@@ -79,3 +78,16 @@ class ProductProduct(models.Model):
         )
         action.update({"context": {"default_restrict_single": True}})
         return action
+
+    @api.multi
+    def action_print_molding_label(self):
+        molding_label = self.env.ref("product_label_print.label_product_product_kalip")
+        printer_id = molding_label.printing_printer_id
+        if not printer_id:
+            raise UserError(_("Please define printer for this label"))
+        for product in self:
+            printer_id.print_document(
+                "product_label_print.label_product_product_kalip",
+                molding_label.render_qweb_text([product.id]),
+                doc_form="txt",
+            )
