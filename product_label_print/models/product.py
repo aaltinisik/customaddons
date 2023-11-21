@@ -88,6 +88,6 @@ class ProductProduct(models.Model):
         for product in self:
             printer_id.print_document(
                 "product_label_print.label_product_product_kalip",
-                molding_label.render_qweb_text([product.id]),
+                molding_label.render_qweb_text([product.id])[0],
                 doc_form="txt",
             )
