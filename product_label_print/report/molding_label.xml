@@ -29,7 +29,7 @@ Th:m:s
 BE,143,0,4,10,100,0,1,<t t-esc="o.barcode" />
 AT,32,128,42,42,0,0BE,B,0,[<t t-esc="o.default_code"/>]
 AC,33,173,1,1,0,0E,<t t-esc="first_line"/>
-AC,363,136,1,1,0,0E,<t esc="o.responsible_employee_id.name"/>
+AC,363,136,1,1,0,0E,<t t-esc="o.responsible_employee_id.name"/>
 <t t-if="second_line">
 AC,35,202,1,1,0,0E,<t t-esc="second_line"/>
 </t>
