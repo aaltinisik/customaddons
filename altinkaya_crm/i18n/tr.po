@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_crm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-01 11:35+0000\n"
+"PO-Revision-Date: 2023-12-01 11:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Aday/Fırsat"
+
+#. module: altinkaya_crm
+#: model_terms:ir.ui.view,arch_db:altinkaya_crm.crm_lead_filter_inherit_altinkaya
+msgid "My Team Activities"
+msgstr "Takım Aktiviteleri"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_crm_lead__my_team_activity
+msgid "My Team Activity"
+msgstr "Takım Aktiviteleri"
+
