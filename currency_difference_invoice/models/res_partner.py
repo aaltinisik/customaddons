@@ -130,9 +130,8 @@ class ResPartner(models.Model):
             else:
                 inv_type = "out_invoice"
             if difference_amls:
-                inv_lines_to_create = []
-
                 # Get taxes
+                created_inv_lines = self.env["account.invoice.line"]
                 kdv_rates = [20, 10, 18, 8]
                 taxes_dict = {}
                 for kdv_rate in kdv_rates:
@@ -153,8 +152,14 @@ class ResPartner(models.Model):
 
                 comment_einvoice = "Aşağıdaki faturaların kur farkıdır:\n"
                 for diff_aml in difference_amls:
+                    inv_lines_to_create = []
+                    base_ail_dict = {
+                        "difference_base_aml_id": diff_aml.id,
+                        "name": _("Currency Difference"),
+                        "uom_id": 1,
+                        "account_id": self.env.user.company_id.currency_diff_inv_account_id.id,
+                    }
                     amount_untaxed = diff_aml.debit or diff_aml.credit
-                    inv_line_name = "Kur Farkı"
                     inv_ids = diff_aml.full_reconcile_id.reconciled_line_ids.filtered(
                         lambda r: r.invoice_id
                     ).mapped("invoice_id")
@@ -167,6 +172,7 @@ class ResPartner(models.Model):
                         )
 
                         # Calculate tax distribution
+                        total_amount = amount_untaxed
                         for rate in kdv_rates:
                             total_tax_amount = sum(
                                 inv_ids.mapped("tax_line_ids")
@@ -182,12 +188,33 @@ class ResPartner(models.Model):
                             if tax_rate > 0:
                                 tax_id = taxes_dict[rate]
                                 amount_untaxed = round(
-                                    amount_untaxed
+                                    total_amount
                                     * tax_rate
                                     / (1 + tax_id.amount / 100.0),
                                     2,
                                 )
                                 tax_ids = [(6, False, [tax_id.id])]
+                            # else:
+                            #     tax_ids = [(6, False, [taxes_dict[20].id])]
+                            #     amount_untaxed = amount_untaxed / (
+                            #         1 + taxes_dict[20].amount / 100.0
+                            #     )
+
+                                if inv_type == "out_refund" and diff_aml.debit > 0:
+                                    amount_untaxed = -amount_untaxed
+
+                                if inv_type == "out_invoice" and diff_aml.credit > 0:
+                                    amount_untaxed = -amount_untaxed
+
+                                inv_lines_to_create.append(
+                                    dict(
+                                        **base_ail_dict,
+                                        **{
+                                            "price_unit": amount_untaxed,
+                                            "invoice_line_tax_ids": tax_ids,
+                                        }
+                                    )
+                                )
                     else:
                         # If there is no invoice, then it is a difference between
                         # the exchange rate of the invoice and the payment
@@ -198,28 +225,28 @@ class ResPartner(models.Model):
                         )
                         tax_ids = [(6, False, [taxes_dict[20].id])]
 
-                    if inv_type == "out_refund" and diff_aml.debit > 0:
-                        amount_untaxed = -amount_untaxed
+                        if inv_type == "out_refund" and diff_aml.debit > 0:
+                            amount_untaxed = -amount_untaxed
 
-                    if inv_type == "out_invoice" and diff_aml.credit > 0:
-                        amount_untaxed = -amount_untaxed
+                        if inv_type == "out_invoice" and diff_aml.credit > 0:
+                            amount_untaxed = -amount_untaxed
 
-                    inv_lines_to_create.append(
-                        {
-                            "difference_base_aml_id": diff_aml.id,
-                            "name": inv_line_name,
-                            "uom_id": 1,
-                            "account_id": self.env.user.company_id.currency_diff_inv_account_id.id,
-                            "price_unit": amount_untaxed,
-                            "invoice_line_tax_ids": tax_ids,
-                        }
-                    )
+                        inv_lines_to_create.append(
+                            dict(
+                                **base_ail_dict,
+                                **{
+                                    "price_unit": amount_untaxed,
+                                    "invoice_line_tax_ids": tax_ids,
+                                }
+                            )
+                        )
 
                     diff_aml.write({"difference_checked": True})
 
-                    created_inv_lines = self.env["account.invoice.line"].create(
+                    created_inv_lines |= self.env["account.invoice.line"].create(
                         inv_lines_to_create
                     )
+
                 dif_inv = inv_obj.create(
                     {
                         "partner_id": self.id,
@@ -240,6 +267,7 @@ class ResPartner(models.Model):
                 return dif_inv
 
         return False
+
 
     def action_generate_currency_diff_invoice(self):
         view = self.env.ref(
