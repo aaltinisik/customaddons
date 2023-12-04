@@ -226,6 +226,45 @@ class SaleOrder(models.Model):
         digits=[16, 4],
     )
 
+    currency_id_usd = fields.Many2one(
+        comodel_name="res.currency",
+        string="USD Currency",
+        default=lambda self: self.env.ref("base.USD"),
+    )
+
+    amount_total_usd = fields.Monetary(
+        string="Total (USD)",
+        currency_field="currency_id_usd",
+        compute="_compute_amount_total_usd",
+        store=True,
+    )
+
+    @api.multi
+    @api.depends("currency_id", "amount_total", "confirmation_date")
+    def _compute_amount_total_usd(self):
+        """
+        This function computes the total amount in USD
+        :return:
+        """
+        for sale in self:
+            if sale.currency_id == sale.currency_id_usd:
+                sale.amount_total_usd = sale.amount_total
+            else:
+                if not (
+                    sale.confirmation_date and sale.currency_id and sale.amount_total
+                ):
+                    sale.amount_total_usd = 0.0
+                    continue
+                date = sale.confirmation_date
+                currency = sale.currency_id
+                amount = sale.amount_total
+                sale.amount_total_usd = currency._convert(
+                    amount,
+                    sale.currency_id_usd,
+                    sale.company_id,
+                    date,
+                )
+
     @api.multi
     def action_quotation_send(self):
         res = super(SaleOrder, self).action_quotation_send()
