@@ -17,7 +17,7 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_address_phone']" position="after">
-                <field name="linkedin" />
+                <field name="linkedin" widget="url"/>
             </xpath>
         </field>
     </record>
