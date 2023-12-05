@@ -240,30 +240,59 @@ class SaleOrder(models.Model):
     )
 
     @api.multi
-    @api.depends("currency_id", "amount_total", "confirmation_date")
+    @api.depends("currency_id", "amount_total", "date_order")
     def _compute_amount_total_usd(self):
         """
         This function computes the total amount in USD
         :return:
         """
-        for sale in self:
-            if sale.currency_id == sale.currency_id_usd:
-                sale.amount_total_usd = sale.amount_total
+        # This means that the record is not created yet and it's single.
+        if not self.ids:
+            self.amount_total_usd = 0.0
+            return
+        cr = self._cr
+        query = """
+-- -- EUR_ID = 1
+-- -- USD_ID = 2
+        SELECT sale_order.id,
+               CASE
+                   WHEN pl.currency_id = 2 THEN sale_order.amount_total
+                   ELSE
+                       CASE
+                           WHEN sale_order.amount_total IS NOT NULL THEN
+                               CASE
+                                   WHEN pl.currency_id = 1 THEN
+                                       (
+                                           SELECT sale_order.amount_total / rateEUR.rate * rateUSD.rate
+                                           FROM res_currency_rate rateEUR, res_currency_rate rateUSD
+                                           WHERE rateEUR.currency_id = 1
+                                           AND rateUSD.currency_id = 2
+                                           AND rateEUR.name = sale_order.date_order::date
+                                           AND rateUSD.name = sale_order.date_order::date
+                                       )
+                                   ELSE
+                                       (
+                                           SELECT sale_order.amount_total * rateUSD.rate
+                                           FROM res_currency_rate rateUSD
+                                           WHERE rateUSD.currency_id = 2
+                                           AND rateUSD.name = sale_order.date_order::date
+                                       )
+                               END
+                           ELSE 0.0
+                       END
+               END AS amount_total_usd
+        FROM sale_order
+        INNER JOIN product_pricelist pl ON sale_order.pricelist_id = pl.id
+        WHERE sale_order.id in %(ids)s;
+
+        """
+        cr.execute(query, {"ids": tuple(self.ids)})
+        result = dict(cr.fetchall())
+        for order in self.filtered("id"):
+            if result.get(order.id):
+                order.amount_total_usd = result[order.id]
             else:
-                if not (
-                    sale.confirmation_date and sale.currency_id and sale.amount_total
-                ):
-                    sale.amount_total_usd = 0.0
-                    continue
-                date = sale.confirmation_date
-                currency = sale.currency_id
-                amount = sale.amount_total
-                sale.amount_total_usd = currency._convert(
-                    amount,
-                    sale.currency_id_usd,
-                    sale.company_id,
-                    date,
-                )
+                order.amount_total_usd = 0.0
 
     @api.multi
     def action_quotation_send(self):
