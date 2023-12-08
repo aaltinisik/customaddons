@@ -173,7 +173,7 @@ class SaleOrder(models.Model):
             if ongoing_productions:
                 sale.order_state = _match_production_with_route(ongoing_productions)
             # PICKING
-            elif sale.picking_ids:
+            elif sale.picking_ids.filtered(lambda p: p.state != "cancel"):
                 outgoing_pickings = sale.picking_ids.filtered(
                     lambda p: p.picking_type_code == "outgoing" and p.state == "done"
                 )
@@ -225,6 +225,74 @@ class SaleOrder(models.Model):
         default=1.0,
         digits=[16, 4],
     )
+
+    currency_id_usd = fields.Many2one(
+        comodel_name="res.currency",
+        string="USD Currency",
+        default=lambda self: self.env.ref("base.USD"),
+    )
+
+    amount_total_usd = fields.Monetary(
+        string="Total (USD)",
+        currency_field="currency_id_usd",
+        compute="_compute_amount_total_usd",
+        store=True,
+    )
+
+    @api.multi
+    @api.depends("currency_id", "amount_total", "date_order")
+    def _compute_amount_total_usd(self):
+        """
+        This function computes the total amount in USD
+        :return:
+        """
+        # This means that the record is not created yet and it's single.
+        if not self.ids:
+            self.amount_total_usd = 0.0
+            return
+        cr = self._cr
+        query = """
+-- -- EUR_ID = 1
+-- -- USD_ID = 2
+        SELECT sale_order.id,
+               CASE
+                   WHEN pl.currency_id = 2 THEN sale_order.amount_total
+                   ELSE
+                       CASE
+                           WHEN sale_order.amount_total IS NOT NULL THEN
+                               CASE
+                                   WHEN pl.currency_id = 1 THEN
+                                       (
+                                           SELECT sale_order.amount_total / rateEUR.rate * rateUSD.rate
+                                           FROM res_currency_rate rateEUR, res_currency_rate rateUSD
+                                           WHERE rateEUR.currency_id = 1
+                                           AND rateUSD.currency_id = 2
+                                           AND rateEUR.name = sale_order.date_order::date
+                                           AND rateUSD.name = sale_order.date_order::date
+                                       )
+                                   ELSE
+                                       (
+                                           SELECT sale_order.amount_total * rateUSD.rate
+                                           FROM res_currency_rate rateUSD
+                                           WHERE rateUSD.currency_id = 2
+                                           AND rateUSD.name = sale_order.date_order::date
+                                       )
+                               END
+                           ELSE 0.0
+                       END
+               END AS amount_total_usd
+        FROM sale_order
+        INNER JOIN product_pricelist pl ON sale_order.pricelist_id = pl.id
+        WHERE sale_order.id in %(ids)s;
+
+        """
+        cr.execute(query, {"ids": tuple(self.ids)})
+        result = dict(cr.fetchall())
+        for order in self.filtered("id"):
+            if result.get(order.id):
+                order.amount_total_usd = result[order.id]
+            else:
+                order.amount_total_usd = 0.0
 
     @api.multi
     def action_quotation_send(self):
