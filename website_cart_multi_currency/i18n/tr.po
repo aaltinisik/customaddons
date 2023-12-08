@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 22:34+0000\n"
-"PO-Revision-Date: 2023-10-04 22:34+0000\n"
+"POT-Creation-Date: 2023-10-20 09:19+0000\n"
+"PO-Revision-Date: 2023-10-20 09:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,24 +18,32 @@ msgstr ""
 #. module: website_cart_multi_currency
 #: model_terms:ir.ui.view,arch_db:website_cart_multi_currency.cart_total_currency
 msgid "<strong>Currency Rate:</strong>"
-msgstr ""
+msgstr "<strong>Kur Oranı:</strong>"
 
 #. module: website_cart_multi_currency
 #: model_terms:ir.ui.view,arch_db:website_cart_multi_currency.cart_total_currency
 msgid "<strong>Total Payment:</strong>"
+msgstr "<strong>Toplam Ödeme:</strong>"
+
+#. module: website_cart_multi_currency
+#: model:ir.model.fields,field_description:website_cart_multi_currency.field_sale_order__active_job_ids
+msgid "Active Job"
 msgstr ""
 
 #. module: website_cart_multi_currency
+#: model:ir.model.fields,field_description:website_cart_multi_currency.field_odoo_sale_order__company_currency_id
 #: model:ir.model.fields,field_description:website_cart_multi_currency.field_sale_order__company_currency_id
 msgid "Currency"
 msgstr ""
 
 #. module: website_cart_multi_currency
+#: model:ir.model.fields,field_description:website_cart_multi_currency.field_odoo_sale_order__currency_rate
 #: model:ir.model.fields,field_description:website_cart_multi_currency.field_sale_order__currency_rate
 msgid "Currency Rate"
 msgstr "Para Birimi Çevrim Oranı"
 
 #. module: website_cart_multi_currency
+#: model:ir.model.fields,field_description:website_cart_multi_currency.field_odoo_sale_order__inverse_currency_rate
 #: model:ir.model.fields,field_description:website_cart_multi_currency.field_sale_order__inverse_currency_rate
 msgid "Inverse Currency Rate"
 msgstr ""
@@ -46,6 +54,7 @@ msgid "Sales Order"
 msgstr "Satış Siparişi"
 
 #. module: website_cart_multi_currency
+#: model:ir.model.fields,field_description:website_cart_multi_currency.field_odoo_sale_order__amount_total_company_currency
 #: model:ir.model.fields,field_description:website_cart_multi_currency.field_sale_order__amount_total_company_currency
 msgid "Total"
 msgstr ""
