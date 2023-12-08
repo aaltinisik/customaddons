@@ -24,14 +24,16 @@
     <template id="portal_record_sidebar_change_brand_link"
               inherit_id="portal.portal_record_sidebar">
         <xpath expr="//div//div//div[hasclass('card-footer')]" position="replace">
-            <div class="btn-toolbar list-group-item">
-                <a t-att-href="sale_order.survey_url"
-                   target="_blank"
-                   class="btn btn-info btn-block">
-                    <i class="fa fa-star"/>
-                    Rate your experience
-                </a>
-            </div>
+            <t t-if="sale_order">
+                <div class="btn-toolbar list-group-item">
+                    <a t-att-href="sale_order.survey_url"
+                       target="_blank"
+                       class="btn btn-info btn-block">
+                        <i class="fa fa-star"/>
+                        Rate your experience
+                    </a>
+                </div>
+            </t>
             <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
                 Powered by
                 <a target="_blank"
