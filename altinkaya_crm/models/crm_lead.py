@@ -4,6 +4,8 @@ from odoo import models, fields, api
 class CRMLead(models.Model):
     _inherit = "crm.lead"
 
+    linkedin = fields.Char(string="LinkedIn")
+
     @api.model
     def _search_my_team_activity(self, operator, operand):
         if operator == "=":
@@ -31,3 +33,6 @@ class CRMLead(models.Model):
                 lead.my_team_activity = True
             else:
                 lead.my_team_activity = False
+
+
+

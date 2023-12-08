@@ -25,7 +25,8 @@ class MrpBoM(models.Model):
     _inherit = "mrp.bom"
 
     bom_template_line_ids = fields.One2many(
-        "mrp.bom.template.line", "bom_id", "BoM Template Lines"
+        "mrp.bom.template.line", "bom_id", "BoM Template Lines",
+        copy=True
     )
 
     wc_parameter_ids = fields.One2many(
