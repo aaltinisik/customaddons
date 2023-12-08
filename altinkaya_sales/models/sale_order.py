@@ -173,7 +173,7 @@ class SaleOrder(models.Model):
             if ongoing_productions:
                 sale.order_state = _match_production_with_route(ongoing_productions)
             # PICKING
-            elif sale.picking_ids:
+            elif sale.picking_ids.filtered(lambda p: p.state != "cancel"):
                 outgoing_pickings = sale.picking_ids.filtered(
                     lambda p: p.picking_type_code == "outgoing" and p.state == "done"
                 )
