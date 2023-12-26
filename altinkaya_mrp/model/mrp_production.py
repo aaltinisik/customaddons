@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
-from odoo import models, fields, api
 
-
-# TODO: @dogan bence bu verilerin workcentera tasinmasi gerek uzerinde olmasi gerekli.
-class x_makine(models.Model):
+class XMakine(models.Model):
+    # TODO: @dogan bence bu verilerin workcentera tasinmasi gerek uzerinde olmasi gerekli.
     _name = "x.makine"
     _description = "X Makine"
     _order = "name"
@@ -207,6 +206,71 @@ class MrpProduction(models.Model):
     def action_set_production_started(self):
         for production in self:
             production.write({"state": "planned", "date_start2": fields.Datetime.now()})
+
+    @api.multi
+    def _update_raw_move(self, bom_line, line_data):
+        """Inherited to work with split procurements.
+        If we found multiple moves that combined MTM and MTS,
+        we need to change logic of this method.
+
+        ADET ARTARSA:
+        1) MTS miktarını maksimuma çıkar, MTO'yu arttır
+
+        ADET AZALIRSA:
+        1) Eğer MTS hepsini karşılıyorsa MTO'yu iptal et, MTS'yi güncelle.
+        2) Eğer MTS hepsini karşılamıyorsa, MTS'yi sabit tut, MTO'yu güncelle.
+        """
+        new_qty = line_data["qty"]
+        self.ensure_one()
+        move = self.move_raw_ids.filtered(
+            lambda x: x.bom_line_id.id == bom_line.id
+            and x.state not in ("done", "cancel")
+        )
+        if len(move) == 2:
+            mts_move = move.filtered(lambda x: x.procure_method == "make_to_stock")
+            mto_move = move.filtered(lambda x: x.procure_method == "make_to_order")
+            # Handle the case where there is no split procurement but we have 2 moves
+            if not mts_move or not mto_move:
+                return super(MrpProduction, self)._update_raw_move(bom_line, line_data)
+            old_qty = sum(move.mapped("product_uom_qty"))
+            if new_qty > old_qty:
+                # Firstly, try to maximize MTS Move Qty
+                mts_move.write(
+                    {
+                        "product_uom_qty": mts_move.reserved_availability
+                        + mts_move.availability
+                    }
+                )
+                mto_move.write({"product_uom_qty": new_qty - mts_move.product_uom_qty})
+            else:
+                if mts_move.product_uom_qty >= new_qty:
+                    # Update the MTS Move
+                    mts_move.write({"product_uom_qty": new_qty})
+                    mto_move.write(
+                        {
+                            "product_uom_qty": 0,
+                            "quantity_done": 0,
+                            # "raw_material_production_id": False,
+                        }
+                    )
+                    # mto_move._action_cancel()
+                else:
+                    # Update the MTO Move
+                    mto_move.write(
+                        {"product_uom_qty": new_qty - mts_move.product_uom_qty}
+                    )
+                    # Update the MTS Move
+                    mts_move.write(
+                        {"product_uom_qty": new_qty - mto_move.product_uom_qty}
+                    )
+            move._recompute_state()
+            move._action_assign()
+            # There is no module that uses this method but Odoo's
+            # MRP itself and it doesn't use return value of this method.
+            # But we return it as the same anyway.
+            return mts_move, old_qty, new_qty
+        else:
+            return super(MrpProduction, self)._update_raw_move(bom_line, line_data)
 
     # TDE Stay Unported
 
