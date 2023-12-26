@@ -76,7 +76,6 @@ class ResCurrencyRateProviderTCMB(models.Model):
             except Exception:
                 _logger.error(_('No currency rate on %s' % (date_from.strftime("%Y-%m-%d"))))
         else:
-            latest_data = None
             for single_date in daterange(date_from, date_to):
                 year = str(single_date.year)
                 month = '{:02d}'.format(single_date.month)
@@ -86,14 +85,9 @@ class ResCurrencyRateProviderTCMB(models.Model):
                     rate_date = (single_date + timedelta(days=1)).strftime('%Y-%m-%d')
                     currency_data = self.get_tcmb_currency_data(url, currencies)
                     result[rate_date] = currency_data  # bir gun oncesinin kurunu al
-                    latest_data = currency_data
                     self._action_log_update(rate_date)
                 except Exception:
                     _logger.error(_('No currency rate on %s' % (single_date.strftime("%Y-%m-%d"))))
-                    rate_date = (single_date + timedelta(days=1)).strftime('%Y-%m-%d')
-                    if latest_data:
-                        result[rate_date] = latest_data  # bir gun oncesinin kurunu al
-                    self._action_log_update(rate_date)
                     continue
 
         content = result
