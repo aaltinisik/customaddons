@@ -691,9 +691,11 @@ class AccountCheck(models.Model):
                 if op.origin._name == "account.payment":
                     move_lines = op.origin.move_line_ids
                     # partner_id = op.origin.partner_id
-                else:  # Account.move
+                elif op.origin._name == "account.move":
                     # partner_id = op.origin.partner_id
                     move_lines = op.origin.line_ids
+                else:
+                    continue
 
                 # if partner_id.partner_currency_id == rec.company_currency_id:
                 #     continue
