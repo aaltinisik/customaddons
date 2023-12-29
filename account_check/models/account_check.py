@@ -5,6 +5,7 @@
 ##############################################################################
 from odoo import fields, models, _, api
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_is_zero
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -673,3 +674,51 @@ class AccountCheck(models.Model):
             "line_ids": [(0, False, debit_line_vals), (0, False, credit_line_vals)],
         }
         return move_vals
+
+    @api.multi
+    def _recompute_operations_amount_currency(self):
+        """
+        Recompute the amount in currency of the company of the check due
+        """
+        for rec in self:
+            due_date = rec.payment_date
+            today = fields.Date.today()
+            if today > due_date:
+                last_valid_date = due_date
+            else:
+                last_valid_date = today
+            for op in rec.operation_ids.sudo().filtered(lambda o: o.origin):
+                if op.origin._name == "account.payment":
+                    move_lines = op.origin.move_line_ids
+                    # partner_id = op.origin.partner_id
+                else:  # Account.move
+                    # partner_id = op.origin.partner_id
+                    move_lines = op.origin.line_ids
+
+                # if partner_id.partner_currency_id == rec.company_currency_id:
+                #     continue
+
+                # If operation is reconciled, we don't recompute
+                # if move_lines.filtered(lambda m: m.full_reconcile_id):
+                #     continue
+
+                for ml in move_lines.filtered(
+                    lambda m: m.account_id.currency_id
+                    and m.account_id.currency_id != rec.company_currency_id
+                    and not m.full_reconcile_id
+                ):
+                    amount = ml.debit or ml.credit
+                    sign = 1 if ml.debit else -1
+                    amount_currency = rec.company_currency_id._convert(
+                        amount,
+                        ml.account_id.currency_id,
+                        rec.company_id,
+                        last_valid_date,
+                    )
+                    # We need to use Administrator account because of
+                    # odoo-server/addons/account/models/account_move.py:1342
+                    ml.sudo(2).write(
+                        {
+                            "amount_currency": sign * amount_currency,
+                        }
+                    )
