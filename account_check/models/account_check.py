@@ -225,7 +225,7 @@ class AccountCheck(models.Model):
                     raise ValidationError(_(
                         'Check Number (%s) must be unique per Checkbook!\n'
                         '* Check ids: %s') % (
-                        rec.name, same_checks.ids))
+                        rec.number, same_checks.ids))
             elif self.type == 'third_check':
                 # agregamos condicion de company ya que un cheque de terceros
                 # se puede pasar entre distintas cias
@@ -241,7 +241,7 @@ class AccountCheck(models.Model):
                     raise ValidationError(_(
                         'Check Number (%s) must be unique per Owner and Bank!'
                         '\n* Check ids: %s') % (
-                        rec.name, same_checks.ids))
+                        rec.number, same_checks.ids))
         return True
 
     @api.multi
@@ -255,7 +255,7 @@ class AccountCheck(models.Model):
                 raise ValidationError(_(
                     'You can not cancel this operation because this is not '
                     'the last operation over the check.\nCheck (id): %s (%s)'
-                ) % (rec.name, rec.id))
+                ) % (rec.number, rec.id))
             rec.operation_ids[-1].origin = False
             rec.operation_ids[-1].unlink()
 
