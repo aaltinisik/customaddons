@@ -208,6 +208,9 @@ class Partner(models.Model):
                 for x in statement_data3
                 if datetime.strptime(x["date"], "%d.%m.%Y") < user_start_date_date
             ]
+            if not old_lines:
+                filtered_lines[curr_count] = statement_data3
+                break
             new_lines = [n for n in statement_data3 if n not in old_lines]
             last_line = old_lines[-1]
             last_line["seq"] = 1
