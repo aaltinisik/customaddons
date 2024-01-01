@@ -21,7 +21,7 @@
 
 import time
 from datetime import date, datetime
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 from odoo import models, fields, api
 from odoo.tools.translate import _
 
@@ -37,6 +37,7 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data(self, data=None):
+        self = self.with_context(lang=self.commercial_partner_id.lang)
         statement_data2 = {}
         ctx = self._context.copy()
         currency_count = 0
@@ -44,16 +45,12 @@ class Partner(models.Model):
         balance, seq = 0.0, 0
         currency_balance = 0.0
         Currency = self.env["res.currency"]
-        end_date = ctx.get("date_end") or date(date.today().year, 12, 31)
-
-        if date.today().month < 5:
-            start_date = ctx.get("date_start") or date(date.today().year - 1, 1, 1)
-        else:
-            start_date = ctx.get("date_start") or date(date.today().year - 1, 1, 1)
-
+        end_date = ctx.get("date_end") or '%s-12-31' % date.today().year
+        user_start_date = ctx.get("date_start") or '%s-01-01' % date.today().year
+        start_date = "2022-01-01"
         move_type = ("payable", "receivable")
 
-        query = """SELECT L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
+        query = """SELECT L.full_reconcile_id, L.DATE, A.CODE, A.CURRENCY_ID as ACCOUNT_CURRENCY,
     	AJ.NAME AS JOURNAL,	AM.NAME,INV.NUMBER, INV.SUPPLIER_INVOICE_NuMBER,L.MOVE_ID,L.DATE_MATURITY AS DUE_DATE,
     
     	CASE
@@ -95,7 +92,7 @@ class Partner(models.Model):
         AND L.PARTNER_ID = {2}
         AND AT.TYPE IN {3}
         GROUP BY AJ.NAME, A.CODE, A.CURRENCY_ID, L.MOVE_ID,	AM.NAME,	AM.STATE,	L.DATE,	L.DATE_MATURITY,	L.CURRENCY_ID,	L.COMPANY_CURRENCY_ID,
-        INV.NUMBER,INV.SUPPLIER_INVOICE_NUMBER,	AJ.ID,	L.ACCOUNT_ID
+        INV.NUMBER,INV.SUPPLIER_INVOICE_NUMBER,	AJ.ID,	L.ACCOUNT_ID, L.FULL_RECONCILE_ID
         ORDER BY ACCOUNT_CURRENCY, L.DATE""".format(
             str(start_date),
             str(end_date),
@@ -116,10 +113,9 @@ class Partner(models.Model):
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
         if len(data) == 0:
-            raise ValidationError(_("No records found for your selection!"))
+            raise UserError(_("No records found for your selection!"))
         onhand_currency_id = data[0]["account_currency"]
         for sl in data:
-
             if onhand_currency_id != sl["account_currency"]:
                 currency_count += 1
                 onhand_currency_id = sl["account_currency"]
@@ -146,9 +142,11 @@ class Partner(models.Model):
             debit = 0.0
             credit = 0.0
 
-            journal = self.env["account.journal"].browse(
-                sl["journal_id"]).with_context(
-                lang=self.commercial_partner_id.lang)
+            journal = (
+                self.env["account.journal"]
+                .browse(sl["journal_id"])
+                .with_context(lang=self.commercial_partner_id.lang)
+            )
 
             if sl["innumber"]:
                 description = journal.name + " " + sl["innumber"]
@@ -194,10 +192,34 @@ class Partner(models.Model):
                     "dc": balance > 0.01 and "B" or "A",
                     "total": balance or 0.0,
                     "currency_symbol": company_currency_id["symbol"],
+                    "full_reconcile_id": sl["full_reconcile_id"],
                 }
             )
             statement_data2[currency_count] = statement_data
-        return statement_data2
+        # user_date'den öncekileri topla, sonrası için sequence'ları tekrar say.
+        user_start_date_date = datetime.strptime(user_start_date, "%Y-%M-%d")
+        filtered_lines = {}
+        for curr_count, statement_data3 in statement_data2.items():
+            old_lines = [
+                x
+                for x in statement_data3
+                if datetime.strptime(x["date"], "%d.%m.%Y") < user_start_date_date
+            ]
+            new_lines = [n for n in statement_data3 if n not in old_lines]
+            last_line = old_lines[-1]
+            last_line["seq"] = 1
+            last_line["date"] = ""
+            last_line["due_date"] = ""
+            last_line["description"] = _("Previous Balance")
+            last_line["currency_rate"] = 0
+            last_line["amount_currency"] = 0
+            last_line["amount"] = 0
+            new_idx = 2
+            for new in new_lines:
+                new["seq"] = new_idx
+                new_idx += 1
+            filtered_lines[curr_count] = [last_line] + new_lines
+        return filtered_lines
 
     def email_statement(
         self,
