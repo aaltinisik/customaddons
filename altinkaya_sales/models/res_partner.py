@@ -5,6 +5,9 @@ Created on Jan 16, 2019
 """
 
 from odoo import models, fields, api
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -29,8 +32,8 @@ class ResPartner(models.Model):
         It takes too long to search for all partners and then filter them.
         So we are searching for sale orders with the given pricelist.
         """
-        so_list = self.env['sale.order'].search([('pricelist_id', operator, value)])
-        return [('id', 'in', so_list.mapped('partner_id').ids)]
+        so_list = self.env["sale.order"].search([("pricelist_id", operator, value)])
+        return [("id", "in", so_list.mapped("partner_id").ids)]
 
     property_product_pricelist = fields.Many2one(
         search="_search_property_product_pricelist",
@@ -76,6 +79,27 @@ class ResPartner(models.Model):
         "res.country", string="Country", ondelete="restrict", required=True
     )
 
+    email_valid = fields.Boolean(
+        "Email Valid",
+        default=False,
+        store=True,
+        compute="_compute_email_valid",
+    )
+
+    @api.multi
+    @api.depends("email")
+    def _compute_email_valid(self):
+        for rec in self:
+            try:
+                if rec.email:
+                    is_valid = bool(rec.email_check(rec.email))
+                else:
+                    is_valid = False
+            except:
+                is_valid = False
+            _logger.info("Email %s is valid: %s" % (rec.email, is_valid))
+            rec.email_valid = is_valid
+
     def action_view_v_cari_urun(self):
         action = self.env.ref("stock.stock_product_normal_action").read()[0]
         action["domain"] = [
@@ -91,3 +115,13 @@ class ResPartner(models.Model):
                     ("v_cari_urun", "=", rec.id),
                 ]
             )
+
+    # def _get_contact_name(self, partner, name):
+    #     """
+    #     Overriden to shorten contact name if the name is equal to the company name.
+    #     """
+    #     company_name = partner.commercial_company_name or partner.parent_id.name
+    #     if name == company_name:
+    #         return partner.name
+    #     else:
+    #         return "%s, %s" % (company_name, name)

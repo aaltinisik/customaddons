@@ -138,6 +138,15 @@
                             </div>
 
                         </div>
+
+                        <div t-if="o.payment_method_code == 'received_third_check' and o.check_id" class="row">
+                            <div class="col-12">
+                                <p>Vade gününde çekiniz tahsil edildiğinde çek tutarı bir önceki gün Merkez Bankası Efektif satış kuru ile hesaplanıp döviz bakiyenizden düşülecektir.
+                                </p>
+                            </div>
+
+                        </div>
+
                         <div class="row">
                             <div class="col-12">
                                 <t t-if="o.communication">

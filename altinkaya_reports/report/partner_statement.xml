@@ -214,7 +214,7 @@
             <t t-foreach="x" t-as="s">
                 <tr>
                     <td class="text-center" style="min-width:15px;">
-                        <span t-esc="s['seq']"/>
+                        <span t-esc="s['seq']" t-attf-style="font-weight:#{'bold' if s['full_reconcile_id'] else 'normal'};"/>
                     </td>
                     <td>
                         <span t-esc="s['date']"/>
@@ -317,7 +317,7 @@
             <t t-foreach="x" t-as="s">
                 <tr>
                     <td class="text-center" style="min-width:15px">
-                        <span t-esc="s['seq']"/>
+                        <span t-esc="s['seq']" t-attf-style="font-weight:#{'bold' if s['full_reconcile_id'] else 'normal'};"/>
                     </td>
                     <td>
                         <span t-esc="s['date']"/>

@@ -575,7 +575,7 @@ class AccountPayment(models.Model):
         currency = aml.currency_id
         currency_sign = amount_field == 'debit' and 1.0 or -1.0
         aml.write({
-            'name': new_name % checks[0].name,
+            'name': new_name % checks[0].number,
             amount_field: checks[0].amount_company_currency,
             'amount_currency': currency and currency_sign * checks[0].amount,
         })
@@ -583,7 +583,7 @@ class AccountPayment(models.Model):
         checks -= checks[0]
         for check in checks:
             res |= aml.copy({
-                'name': new_name % check.name,
+                'name': new_name % check.number,
                 amount_field: check.amount_company_currency,
                 'payment_id': self.id,
                 'amount_currency': currency and currency_sign * check.amount,
