@@ -46,7 +46,10 @@ class Partner(models.Model):
         currency_balance = 0.0
         Currency = self.env["res.currency"]
         end_date = ctx.get("date_end") or '%s-12-31' % date.today().year
-        user_start_date = ctx.get("date_start") or '%s-01-01' % date.today().year
+        if date.today().month < 3:
+            user_start_date = ctx.get("date_start") or '%s-01-01' % (int(date.today().year) - 1)
+        else:
+            user_start_date = ctx.get("date_start") or '%s-01-01' % int(date.today().year)
         start_date = "2022-01-01"
         move_type = ("payable", "receivable")
 
@@ -113,7 +116,7 @@ class Partner(models.Model):
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
         if len(data) == 0:
-            raise UserError(_("No records found for your selection!"))
+            return {}
         onhand_currency_id = data[0]["account_currency"]
         for sl in data:
             if onhand_currency_id != sl["account_currency"]:
