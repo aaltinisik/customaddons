@@ -217,6 +217,8 @@ class Partner(models.Model):
             last_line["currency_rate"] = 0
             last_line["amount_currency"] = 0
             last_line["amount"] = 0
+            last_line["debit"] = 0
+            last_line["credit"] = 0
             new_idx = 2
             for new in new_lines:
                 new["seq"] = new_idx
