@@ -46,10 +46,14 @@ class Partner(models.Model):
         currency_balance = 0.0
         Currency = self.env["res.currency"]
         end_date = ctx.get("date_end") or '%s-12-31' % date.today().year
-        if date.today().month < 3:
-            user_start_date = ctx.get("date_start") or '%s-01-01' % (int(date.today().year) - 1)
+
+        if ctx.get("date_start"):
+            user_start_date = ctx.get("date_start")
         else:
-            user_start_date = ctx.get("date_start") or '%s-01-01' % int(date.today().year)
+            if date.today().month < 3:
+                user_start_date = '%s-01-01' % (int(date.today().year) - 1)
+            else:
+                user_start_date = '%s-01-01' % int(date.today().year)
         start_date = "2022-01-01"
         move_type = ("payable", "receivable")
 
@@ -200,7 +204,7 @@ class Partner(models.Model):
             )
             statement_data2[currency_count] = statement_data
         # user_date'den öncekileri topla, sonrası için sequence'ları tekrar say.
-        user_start_date_date = datetime.strptime(user_start_date, "%Y-%M-%d")
+        user_start_date_date = datetime.strptime(user_start_date, "%Y-%m-%d")
         filtered_lines = {}
         for curr_count, statement_data3 in statement_data2.items():
             old_lines = [
