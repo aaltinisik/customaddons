@@ -79,26 +79,26 @@ class ResPartner(models.Model):
         "res.country", string="Country", ondelete="restrict", required=True
     )
 
-    email_valid = fields.Boolean(
-        "Email Valid",
+    email_invalid = fields.Boolean(
+        "Email Invalid",
         default=False,
-        # store=True,
-        compute="_compute_email_valid",
+        store=True,
+        compute="_compute_email_invalid",
     )
 
     @api.multi
     @api.depends("email")
-    def _compute_email_valid(self):
+    def _compute_email_invalid(self):
         for rec in self:
             try:
                 if rec.email:
-                    is_valid = bool(rec.email_check(rec.email))
+                    is_invalid = not bool(rec.email_check(rec.email))
                 else:
-                    is_valid = False
+                    is_invalid = False
             except:
-                is_valid = False
-            _logger.info("Email %s is valid: %s" % (rec.email, is_valid))
-            rec.email_valid = is_valid
+                is_invalid = True
+            _logger.info("Email %s is invalid: %s" % (rec.email, is_invalid))
+            rec.email_invalid = is_invalid
 
     def action_view_v_cari_urun(self):
         action = self.env.ref("stock.stock_product_normal_action").read()[0]
