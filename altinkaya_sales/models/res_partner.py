@@ -82,7 +82,7 @@ class ResPartner(models.Model):
     email_valid = fields.Boolean(
         "Email Valid",
         default=False,
-        store=True,
+        # store=True,
         compute="_compute_email_valid",
     )
 
