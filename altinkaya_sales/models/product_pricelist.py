@@ -125,7 +125,7 @@ class ProductPricelist(models.Model):
         results = {}
         for product, qty, partner in products_qty_partner:
             results[product.id] = 0.0
-            is_purchase_product = False
+            use_purchase_price = False
             suitable_rule = False
             price_type = self.env["product.price.type"]
             # Final unit price is computed according to `qty` in the `qty_uom_id` UoM.
@@ -201,12 +201,13 @@ class ProductPricelist(models.Model):
                     len(product.seller_ids) > 0
                     and product.purchase_ok
                     and self.list_type_use == "purchase"
+                    and rule.base == "-2"  # Supplier Prices on the product form
                 ):
                     supplier_price = fields.first(
                         product.seller_ids.filtered(lambda s: s.name.id == partner.id)
                     )
                     price = supplier_price.price if supplier_price else 0.0
-                    is_purchase_product = True
+                    use_purchase_price = True
                 else:
                     # if base option is public price take sale price else cost price of product
                     # price_compute returns the price in the context UoM, i.e. qty_uom_id
@@ -248,9 +249,9 @@ class ProductPricelist(models.Model):
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
-            compare_field = (
+            base_currency = (
                 supplier_price.currency_id
-                if is_purchase_product
+                if use_purchase_price
                 else price_type.currency
             )
 
@@ -261,15 +262,15 @@ class ProductPricelist(models.Model):
                 and self._context.get("sale_id")
             ):
                 order = self.env["sale.order"].browse(self._context.get("sale_id"))
-                compare_field = order.currency_id
+                base_currency = order.currency_id
 
             if (
                 suitable_rule
-                and suitable_rule.currency_id != compare_field
+                and suitable_rule.currency_id != base_currency
                 and suitable_rule.compute_price != "fixed"
                 and suitable_rule.base != "-1"
             ):
-                price = product.currency_id._convert(
+                price = base_currency._convert(
                     price,
                     suitable_rule.currency_id,
                     self.env.user.company_id,
@@ -286,7 +287,11 @@ class ProductPriclelistItem(models.Model):
     _inherit = "product.pricelist.item"
 
     def _compute_base(self):
-        res = [("-1", _("Other Pricelist")), ("list_price", _("List Price"))]
+        res = [
+            ("-2", _("Supplier Prices on the product form")),
+            ("-1", _("Other Pricelist")),
+            ("list_price", _("List Price")),
+        ]
 
         price_types = self.env["product.price.type"].search([("active", "=", True)])
         for price_type in price_types:
