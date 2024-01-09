@@ -13,6 +13,7 @@
     'data': [
         'views/purchase_order_views.xml',
         'views/res_partner_views.xml',
+        'views/procurement_group_views.xml',
     ],
     'installable': True,
     'auto_install': False,
