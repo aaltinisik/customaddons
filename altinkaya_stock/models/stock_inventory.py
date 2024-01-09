@@ -39,4 +39,4 @@ class StockInventoryLine(models.Model):
         if self.inventory_id.filter == "negative_qty":
             return True
         else:
-            return super(StockInventory, self)._check_product_id()
+            return super(StockInventoryLine, self)._check_product_id()
