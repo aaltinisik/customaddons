@@ -16,6 +16,13 @@ class PurchaseOrder(models.Model):
                                            'sent': [('readonly', True)]},
                                    help="Pricelist for current purchase order.")
 
+    @api.model
+    def create(self, vals):
+        res = super(PurchaseOrder, self).create(vals)
+        if res.partner_id and res.partner_id.property_purchase_pricelist:
+            res.pricelist_id = res.partner_id.property_purchase_pricelist
+        return res
+
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         for order in self:
