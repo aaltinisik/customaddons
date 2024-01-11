@@ -92,7 +92,7 @@ class ResCurrencyRateProviderTCMB(models.Model):
                 rate_date = single_date.strftime("%d/%m/%Y")
                 try:
                     currency_data = connector._get_rate(currencies, rate_date)
-                    result[single_date] = currency_data  # bir gun oncesinin kurunu al
+                    result[single_date] = currency_data
                     self._action_log_update(rate_date)
                 except Exception:
                     _logger.error(

@@ -18,7 +18,9 @@ class ResPartner(models.Model):
             if not partner.vat or partner.vat == "False":
                 return False
             if partner.parent_id:
-                return False
+                return
+            if partner.country_id.code != 'TR' and self._context.get("connector_request"):
+                return
             colliding_partner = self.search([('vat', '=', partner.vat),('id', '!=', partner.id),('is_company', '=', 1)],limit=1)
             colliding_partner = self.browse(colliding_partner.id)
             if colliding_partner and colliding_partner.company_id.id == partner.company_id.id:
