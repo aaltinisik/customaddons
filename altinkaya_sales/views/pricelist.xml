@@ -55,6 +55,11 @@
 				<xpath expr="//field[@name='base_pricelist_id']" position="attributes">
 					<attribute name="invisible">0</attribute>
 				</xpath>
+
+				<xpath expr="//field[@name='price_round']" position="after">
+					<field name="free_shipping_limit" />
+				</xpath>
+
 			</field>
 	</record>
 

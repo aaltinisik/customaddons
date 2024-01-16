@@ -255,14 +255,29 @@ class ProductPricelist(models.Model):
                 else price_type.currency
             )
 
-            # If we are calculating the price for carrier line, we need to use the currency of the sale order
-            if (
-                price_type
-                and price_type.field == "v_fiyat_dolar"
-                and self._context.get("sale_id")
-            ):
+            if self._context.get("sale_id"):
                 order = self.env["sale.order"].browse(self._context.get("sale_id"))
+            else:
+                order = self.env["sale.order"]
+
+            # Since the shipping price is dynamic, the base field must be v_fiyat_nakliye to apply a rule.
+            if price_type and price_type.field == "v_fiyat_nakliye" and order:
+                # If we are calculating the price for carrier line, we need to use the currency of the sale order
                 base_currency = order.currency_id
+
+                # If order's total price is greater than free shipping limit, then shipping is free
+                if (
+                    suitable_rule.free_shipping_limit
+                    and sum(
+                        [
+                            l.price_subtotal
+                            for l in order.order_line
+                            if not l.is_delivery
+                        ]
+                    )
+                    >= suitable_rule.free_shipping_limit
+                ):
+                    price = 0.0
 
             if (
                 suitable_rule
@@ -301,3 +316,7 @@ class ProductPriclelistItem(models.Model):
 
     base = fields.Selection(selection=lambda self: self._compute_base())
     x_guncelleme = fields.Char("Guncelleme Kodu", size=64)
+    free_shipping_limit = fields.Float(
+        "Free Shipping Limit",
+        help="Free shipping limit",
+    )
