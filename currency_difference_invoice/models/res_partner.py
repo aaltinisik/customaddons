@@ -360,14 +360,17 @@ class ResPartner(models.Model):
             [("name", "=", move_date)], ["currency_id", "rate"]
         )
         if not rates:
-            raise UserError(_("No exchange rate information found for the selected day!"))
+            raise UserError(
+                _("No exchange rate information found for the selected day!")
+            )
         rate_dict = {x["currency_id"][0]: x["rate"] for x in rates}
         diff_journal = self.env["account.journal"].search(
             [("code", "=", "KRDGR")], limit=1
         )
 
         move_vals = {
-            "name": _("%s Currency Valuation" % move_date.strftime("%d.%m.%Y")),
+            "name": "%s %s"
+            % (move_date.strftime("%d.%m.%Y"), _("Currency Valuation")),
             "journal_id": diff_journal.id,
             "date": move_date,
             "state": "draft",
@@ -396,7 +399,9 @@ class ResPartner(models.Model):
             )
 
         if not difference_aml_list:
-            raise UserError(_("No records found to calculate exchange rate difference!"))
+            raise UserError(
+                _("No records found to calculate exchange rate difference!")
+            )
 
         total_debit = sum(x["debit"] for x in difference_aml_list)
         total_credit = sum(x["credit"] for x in difference_aml_list)
