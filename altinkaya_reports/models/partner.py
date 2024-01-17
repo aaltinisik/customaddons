@@ -37,7 +37,7 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data(self, data=None):
-        self = self.with_context(lang=self.commercial_partner_id.lang)
+        # self = self.with_context(lang=self.commercial_partner_id.lang)
         statement_data2 = {}
         ctx = self._context.copy()
         currency_count = 0
@@ -106,6 +106,9 @@ class Partner(models.Model):
             str(self.commercial_partner_id.id),
             str(move_type),
         )
+        skip_journal_codes = ["ADVR", "KRFRK"]
+        if ctx.get("lang") != "tr_TR":
+            skip_journal_codes.append("KRDGR")
 
         currency_difference_accounts = (
             self.env["account.account"]
@@ -114,7 +117,7 @@ class Partner(models.Model):
         )
         currency_difference_to_invoice_journal = (
             self.env["account.journal"]
-            .search([("code", "in", ["ADVR", "KRFRK"])])
+            .search([("code", "in", skip_journal_codes)])
             .mapped("id")
         )
         self.env.cr.execute(query)
