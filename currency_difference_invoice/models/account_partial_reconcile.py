@@ -42,7 +42,11 @@ class AccountPartialReconcile(models.Model):
             'partner_id': aml_to_fix[0].partner_id.id,
         })
         # create the counterpart on exchange gain/loss account
-        exchange_journal = move.company_id.currency_exchange_journal_id
+        if aml_to_fix[0].partner_id.country_id.id == 224:  # Turkey
+            exchange_journal = move.company_id.currency_exchange_journal_id
+        else:
+            exchange_journal = move.env["account.journal"].search([('code', '=', 'KRDGR')], limit=1)
+            move.journal_id = exchange_journal
         aml_model.with_context(check_move_validity=False).create({
             'name': _('Currency exchange rate difference'),
             'debit': total > 0 and total or 0.0,
