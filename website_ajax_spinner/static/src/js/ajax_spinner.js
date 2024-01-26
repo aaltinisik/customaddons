@@ -8,8 +8,8 @@ odoo.define('your_module_name.loading_spinner', function (require) {
 
     var rpc = require('web.rpc');
     var AjaxService = require('web.AjaxService');
-    var $spinner = $('#spinner');
-    $spinner.hide();
+    var $loading_toast = $('.o_loading_toast');
+    $loading_toast.hide();
 
     var rpcCounter = 0;
 
@@ -19,8 +19,8 @@ odoo.define('your_module_name.loading_spinner', function (require) {
     rpc.query = function (options, kwargs) {
         rpcCounter++;
 
-        if ($spinner.css('display') !== 'block') {
-            $spinner.show();
+        if ($loading_toast.css('display') !== 'block') {
+            $loading_toast.show();
         }
 
         var promise = originalRpc.apply(this, arguments);
@@ -30,7 +30,7 @@ odoo.define('your_module_name.loading_spinner', function (require) {
 
             if (rpcCounter === 0) {
                 setTimeout(function () {
-                    $spinner.hide();
+                    $loading_toast.hide();
                 }, 300);
             }
         });
@@ -41,8 +41,8 @@ odoo.define('your_module_name.loading_spinner', function (require) {
     AjaxService.prototype.rpc = function (route, args) {
         rpcCounter++;
 
-        if ($spinner.css('display') !== 'block') {
-            $spinner.show();
+        if ($loading_toast.css('display') !== 'block') {
+            $loading_toast.show();
         }
 
         var promise = originalAjaxRpc.apply(this, arguments);
@@ -52,7 +52,7 @@ odoo.define('your_module_name.loading_spinner', function (require) {
 
             if (rpcCounter === 0) {
                 setTimeout(function () {
-                    $spinner.hide();
+                    $loading_toast.hide();
                 }, 300);
             }
         });
