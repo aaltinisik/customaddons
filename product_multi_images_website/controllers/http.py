@@ -12,6 +12,7 @@ def from_binary_field_inherit(cls, record, field_name):
     we're using base_multi_image.image model.
 
     Note: This is a workaround for Odoo 16.0, it could break some features.
+    MONKEY PATCHING REQUIRED
     """
     data_b64 = ""
     if record._name == "product.product":
