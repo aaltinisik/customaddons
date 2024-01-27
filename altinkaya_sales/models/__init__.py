@@ -7,3 +7,4 @@ from . import res_company
 from . import res_partner
 from . import res_user
 from . import portal
+from . import res_partner_segment

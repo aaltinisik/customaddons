@@ -9,6 +9,11 @@
             <field eval="12445" name="priority" />
             <field name="arch" type="xml">
 
+            <xpath expr="//page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']"
+                   position="inside">
+                <field name="segment_id"/>
+            </xpath>
+
 				<xpath expr="//button[@name='open_route_map']" position="replace">
 					<button type="object"
 							name="action_view_v_cari_urun"

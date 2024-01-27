@@ -69,14 +69,20 @@ class ResPartner(models.Model):
     v_cari_urun_count = fields.Integer(
         "Carinin Urunleri", compute="_compute_v_cari_urun_count"
     )
-    # altinkaya
 
-    # x_vergidairesi = fields.Char('Vergi Dairesi', size=64)
     x_vergino = fields.Char("Vergi No", size=64)
 
     # country_id is required in res.partner
     country_id = fields.Many2one(
-        "res.country", string="Country", ondelete="restrict", required=True
+        "res.country",
+        string="Country",
+        ondelete="restrict",
+        required=True,
+    )
+
+    segment_id = fields.Many2one(
+        "res.partner.segment",
+        string="Segment",
     )
 
     email_invalid = fields.Boolean(

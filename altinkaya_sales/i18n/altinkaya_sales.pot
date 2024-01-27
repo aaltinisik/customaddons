@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-14 17:09+0000\n"
-"PO-Revision-Date: 2023-08-14 17:09+0000\n"
+"POT-Creation-Date: 2024-01-27 09:51+0000\n"
+"PO-Revision-Date: 2024-01-27 09:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid "\n"
 "    <p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
 "       &nbsp;&nbsp;<strong style=\"font-weight:bolder;\">REFERENCES</strong><br>\n"
 "       &nbsp;&nbsp;Order number: <strong style=\"font-weight:bolder;\">${object.name}</strong><br>\n"
-"       &nbsp;&nbsp;Order total: <strong style=\"font-weight:bolder;\">${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br>\n"
+"       &nbsp;&nbsp;Order total: <strong style=\"font-weight:bolder;\">${ \"{0:,.4f}\".format(object.amount_total).replace(\".\",\"%\").replace(\",\",\" \").replace(\"%\",\",\")} ${object.pricelist_id.currency_id.name}</strong><br>\n"
 "       &nbsp;&nbsp;Order date: ${object.date_order}<br>\n"
 "       % if object.origin:\n"
 "       &nbsp;&nbsp;Order reference: ${object.origin}<br>\n"
@@ -42,8 +42,8 @@ msgid "\n"
 "\n"
 " % if object.state in ('draft', 'sent'):\n"
 "    <br>\n"
-"        <a style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);margin-left: 120px;\" href=\"https://www.altinkaya.com.tr/payment/paymentform.php${object.altinkaya_payment_url}\">\n"
-"            <img src=\"https://www.altinkaya.com.tr/payment/images/pay_now.gif\" style=\"border-style:none;vertical-align:middle;\">\n"
+"        <a style=\"background-color:transparent;text-decoration-thickness:auto;color:rgb(124, 123, 173);margin-left: 120px;\" href=\"${object.get_portal_url()}\">\n"
+"            <img src=\"https://pay.altinkaya.com.tr/pay/images/pay_now.gif\" style=\"border-style:none;vertical-align:middle;\">\n"
 "        </a><br><p style=\"margin:0px 0 1rem 0;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\">It is also possible to make your payment by clicking \"Pay Now\" button above. <br>Our web page will open and you will be able to make your payment securely and easily.</p>\n"
 "    <br>\n"
 "    % endif       \n"
@@ -290,6 +290,12 @@ msgid "<i class=\"fa fa-spinner\"/>\n"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model_terms:ir.ui.view,arch_db:altinkaya_sales.portal_record_sidebar_change_brand_link
+msgid "<i class=\"fa fa-star\"/>\n"
+"                        Rate your experience"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.sale_order_portal_content_configurations_inherit
 msgid "<i class=\"fa fa-truck\"/>\n"
 "                            Where is my cargo?"
@@ -332,6 +338,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__active
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__active
 msgid "Active"
 msgstr ""
 
@@ -435,6 +442,11 @@ msgid "Carinin Urunleri"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__code
+msgid "Code"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_res_company
 msgid "Companies"
 msgstr ""
@@ -467,11 +479,13 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_uid
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_date
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__create_date
 msgid "Created on"
 msgstr ""
 
@@ -501,7 +515,13 @@ msgid "Delivered"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__description
+msgid "Description"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__display_name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -525,6 +545,12 @@ msgstr ""
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
 msgid "Draft"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__email_invalid
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__email_invalid
+msgid "Email Invalid"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -575,6 +601,16 @@ msgid "Fiyat Güncel"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_product_pricelist_item__free_shipping_limit
+msgid "Free Shipping Limit"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,help:altinkaya_sales.field_product_pricelist_item__free_shipping_limit
+msgid "Free shipping limit"
+msgstr ""
+
+#. module: altinkaya_sales
 #: selection:sale.order,order_state:0
 msgid "Graphic Print"
 msgstr ""
@@ -607,6 +643,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__id
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__id
 msgid "ID"
 msgstr ""
 
@@ -674,16 +711,19 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_uid
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_date
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -698,7 +738,7 @@ msgid "Lathe Shop"
 msgstr ""
 
 #. module: altinkaya_sales
-#: code:addons/altinkaya_sales/models/product_pricelist.py:219
+#: code:addons/altinkaya_sales/models/product_pricelist.py:308
 #, python-format
 msgid "List Price"
 msgstr ""
@@ -742,6 +782,7 @@ msgstr ""
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__name
 msgid "Name"
 msgstr ""
 
@@ -783,7 +824,7 @@ msgid "Order State"
 msgstr ""
 
 #. module: altinkaya_sales
-#: code:addons/altinkaya_sales/models/product_pricelist.py:218
+#: code:addons/altinkaya_sales/models/product_pricelist.py:307
 #, python-format
 msgid "Other Pricelist"
 msgstr ""
@@ -794,8 +835,23 @@ msgid "Packaged"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_parent_product_id
+msgid "Parent Product"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_cari_urun
 msgid "Partner Product"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model,name:altinkaya_sales.model_res_partner_segment
+msgid "Partner Segment"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__partner_ids
+msgid "Partners"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -943,6 +999,18 @@ msgid "Satınalma Fiyatı"
 msgstr ""
 
 #. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__segment_id
+#: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__segment_id
+msgid "Segment"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.actions.act_window,name:altinkaya_sales.res_partner_segment_act_window
+#: model:ir.ui.menu,name:altinkaya_sales.res_partner_segment_menu
+msgid "Segments"
+msgstr ""
+
+#. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__set_product
 msgid "Set product?"
 msgstr ""
@@ -956,6 +1024,12 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__show_custom_products
 msgid "Show Custom Products"
+msgstr ""
+
+#. module: altinkaya_sales
+#: code:addons/altinkaya_sales/models/product_pricelist.py:306
+#, python-format
+msgid "Supplier Prices on the product form"
 msgstr ""
 
 #. module: altinkaya_sales
@@ -987,6 +1061,16 @@ msgstr ""
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
 msgid "Tool Shop Queue"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__amount_total_usd
+msgid "Total (USD)"
+msgstr ""
+
+#. module: altinkaya_sales
+#: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__currency_id_usd
+msgid "USD Currency"
 msgstr ""
 
 #. module: altinkaya_sales
