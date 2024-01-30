@@ -62,7 +62,7 @@ class AccountInvoiceReport(models.Model):
     def _from(self):
         return super(AccountInvoiceReport, self)._from() + \
                """
-               JOIN sale_order_line_invoice_rel solir ON (ail.id = solir.invoice_line_id)
-               JOIN sale_order_line sol ON (solir.order_line_id = sol.id)
+               LEFT JOIN sale_order_line_invoice_rel solir ON (ail.id = solir.invoice_line_id)
+               LEFT JOIN sale_order_line sol ON (solir.order_line_id = sol.id)
                LEFT JOIN sale_order so ON (sol.order_id = so.id)
                """
