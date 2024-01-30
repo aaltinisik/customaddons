@@ -15,8 +15,8 @@
                         <field name="description"/>
                     </group>
                     <notebook>
-                        <page name="Partners" id="partners">
-                            <field name="partner_ids" widget="one2many_list"/>
+                        <page name="partners" string="Partners">
+                            <field name="partner_ids" widget="one2many_list" readonly="1"/>
                         </page>
                     </notebook>
                 </sheet>

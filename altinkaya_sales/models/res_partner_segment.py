@@ -8,9 +8,9 @@ class ResPartnerSegment(models.Model):
     _description = "Partner Segment"
 
     active = fields.Boolean(default=True)
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(string="Name", required=True, translate=True)
     code = fields.Char(string="Code", required=True)
-    description = fields.Text(string="Description")
+    description = fields.Text(string="Description", translate=True)
     partner_ids = fields.One2many(
         comodel_name="res.partner",
         inverse_name="segment_id",
