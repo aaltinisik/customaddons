@@ -357,13 +357,13 @@ class ResPartner(models.Model):
         )
         result = self.env.cr.dictfetchall()
         rates = self.env["res.currency.rate"].search_read(
-            [("name", "=", move_date)], ["currency_id", "rate"]
+            [("name", "=", move_date)], ["currency_id", "tcmb_forex_buying"]
         )
         if not rates:
             raise UserError(
                 _("No exchange rate information found for the selected day!")
             )
-        rate_dict = {x["currency_id"][0]: x["rate"] for x in rates}
+        rate_dict = {x["currency_id"][0]: x["tcmb_forex_buying"] for x in rates}
         diff_journal = self.env["account.journal"].search(
             [("code", "=", "KRDGR")], limit=1
         )
