@@ -31,5 +31,3 @@ class SaleOrder(models.Model):
                 rec.my_team = True
             else:
                 rec.my_team = False
-
-
