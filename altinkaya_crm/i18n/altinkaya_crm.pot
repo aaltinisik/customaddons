@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_crm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-08 09:09+0000\n"
+"PO-Revision-Date: 2023-12-08 09:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:15
+#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:15
+#, python-format
+msgid "Company Tax No"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:20
+#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:20
+#, python-format
+msgid "Incorrect VAT"
+msgstr ""
+
+#. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:18
+#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:18
+#, python-format
+msgid "Individual Tax No"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_crm_lead__linkedin
+msgid "LinkedIn"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_sale_order__my_team
+#: model_terms:ir.ui.view,arch_db:altinkaya_crm.sale_order_search_inherit_sale_altinkaya
+msgid "My Team"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model_terms:ir.ui.view,arch_db:altinkaya_crm.crm_lead_filter_inherit_altinkaya
+msgid "My Team Activities"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_crm_lead__my_team_activity
+msgid "My Team Activity"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_sale_order
+msgid "Sale Order"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model_terms:ir.ui.view,arch_db:altinkaya_crm.res_partner_view_form_inherit_altinkaya
+msgid "VAT Status"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_res_partner__vat_status
+#: model:ir.model.fields,field_description:altinkaya_crm.field_res_users__vat_status
+msgid "Vat Status"
+msgstr ""
