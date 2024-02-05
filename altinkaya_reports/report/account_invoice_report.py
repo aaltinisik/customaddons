@@ -36,16 +36,18 @@ class AccountInvoiceReport(models.Model):
     sale_campaign_id = fields.Many2one('utm.campaign', string='S. Marketing Campaign', readonly=True)
     sale_medium_id = fields.Many2one('utm.medium', string='S. Marketing Medium', readonly=True)
     month_nr = fields.Char('Ay No', readonly=True)
+    product_tmpl_id = fields.Many2one('product.template', string='Product Template', readonly=True)
 
     def _select(self):
         return super(AccountInvoiceReport, self)._select() + \
-               ", sub.state_id, sub.total_tax as total_tax, sub.price_total_usd as price_total_usd, sub.price_average_usd as price_average_usd, sub.partner_source_id as partner_source_id, sub.partner_campaign_id as partner_campaign_id, sub.partner_medium_id as partner_medium_id, sub.month_nr as month_nr, sub.sale_source_id as sale_source_id, sub.sale_campaign_id as sale_campaign_id, sub.sale_medium_id as sale_medium_id, sub.partner_create_date as partner_create_date"
+               ", sub.state_id, sub.total_tax as total_tax, sub.price_total_usd as price_total_usd, sub.price_average_usd as price_average_usd, sub.partner_source_id as partner_source_id, sub.partner_campaign_id as partner_campaign_id, sub.partner_medium_id as partner_medium_id, sub.month_nr as month_nr, sub.sale_source_id as sale_source_id, sub.sale_campaign_id as sale_campaign_id, sub.sale_medium_id as sale_medium_id, sub.partner_create_date as partner_create_date, product_tmpl_id as product_tmpl_id"
 
     def _sub_select(self):
         return super(AccountInvoiceReport, self)._sub_select() + \
                """, coalesce(partner.state_id, partner_ai.state_id) AS state_id,
                partner.source_id as partner_source_id,partner.campaign_id as partner_campaign_id, partner.medium_id as partner_medium_id,
                partner.create_date as partner_create_date,
+               pt.id as product_tmpl_id,
                 so.source_id as sale_source_id,so.campaign_id as sale_campaign_id, so.medium_id as sale_medium_id,
                to_char(ai.date_invoice, 'MM') AS month_nr,
                SUM(ail.price_subtotal_signed * invoice_type.sign * ai.usd_rate) AS price_total_usd,
@@ -57,7 +59,7 @@ class AccountInvoiceReport(models.Model):
                 END AS price_average_usd"""
 
     def _group_by(self):
-        return super(AccountInvoiceReport, self)._group_by() + ", coalesce(partner.state_id, partner_ai.state_id),so.source_id, so.medium_id, partner.create_date, so.campaign_id,partner.source_id,partner.campaign_id,partner.medium_id,month_nr"
+        return super(AccountInvoiceReport, self)._group_by() + ", coalesce(partner.state_id, partner_ai.state_id),so.source_id, so.medium_id, partner.create_date, so.campaign_id,partner.source_id,partner.campaign_id,partner.medium_id,month_nr, pt.id"
 
     def _from(self):
         return super(AccountInvoiceReport, self)._from() + \
