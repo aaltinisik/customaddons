@@ -411,7 +411,7 @@ class ResPartner(models.Model):
             "name": _("Currency Diff. Counterpart"),
             # 426: 646 Kambiyo Karları Hesabı
             # 429: 656 Kambiyo Zararları Hesabı
-            "account_id": 429 if counterpart_amount > 0 else 426,
+            "account_id": 426 if counterpart_amount > 0 else 429,
             "debit": abs(counterpart_amount) if counterpart_amount < 0 else 0,
             "credit": counterpart_amount if counterpart_amount > 0 else 0,
             "currency_id": self.env.user.company_id.currency_id.id,
