@@ -21,6 +21,8 @@ class ProductPublicCategory(models.Model):
         Returns:
             bool: Returns True after successfully creating the redirection.
         """
+        if not hasattr(self, "_compute_seo_name"):
+            return True
         for record in self:
             create_dict = record._convert_to_write(record.read()[0])
             dummy_categ = record.new(
