@@ -46,6 +46,11 @@ class ProductPricelist(models.Model):
         help="Pricelist type used in sales or purchases",
     )
 
+    allow_check_stock = fields.Boolean(
+        string="Check Stock",
+        help="Check stock availability for products in this pricelist",
+    )
+
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
         """Low-level method - Mono pricelist, multi products
