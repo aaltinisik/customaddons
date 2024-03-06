@@ -210,6 +210,40 @@ class Product(models.Model):
                             'reserved_quantity': raw_reserved_qty
                         })
 
+    @api.multi
+    def _compute_set_quantities(self):
+        # Explode set content and find unreserved quantity
+        for product in self:
+            bom_id = self.env["mrp.bom"].sudo()._bom_find(product=product)
+            if bom_id and bom_id.type == "phantom":
+                boms, lines = bom_id.explode(
+                    product, quantity=1, picking_type=bom_id.picking_type_id
+                )
+                exploded_set_qty = 0
+                for line in lines:
+                    unreserved_qty = line[1]["target_product"].qty_available_not_res
+                    factor = line[1]["qty"]
+                    if unreserved_qty > 0 and factor > 0:
+                        set_qty = unreserved_qty / factor
+                    else:
+                        set_qty = 0
+                    exploded_set_qty = min(set_qty, exploded_set_qty) if exploded_set_qty else set_qty
+                return exploded_set_qty
+            else:
+                return product.qty_available_not_res
+
+    @api.one
+    def get_quantity_website(self):
+        self.ensure_one()
+        data = {}
+        if self.product_tmpl_id.set_product:
+            data['qty_unreserved_sincan'] = self.with_context({'location': 21})._compute_set_quantities()
+            data['qty_unreserved_merkez'] = self.with_context({'location': 12})._compute_set_quantities()
+        else:
+            data['qty_unreserved_sincan'] = self.qty_unreserved_sincan
+            data['qty_unreserved_merkez'] = self.qty_unreserved_merkez
+        return data
+
 
 class mrpProduction(models.Model):
     _inherit = "mrp.production"
