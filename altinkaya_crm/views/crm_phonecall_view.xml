@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="crm_phonecall_form_inherit_altinkaya">
+        <field name="name">altinkaya.crm.phonecall.form.inherit</field>
+        <field name="model">crm.phonecall</field>
+        <field name="inherit_id" ref="crm_phone.crm_phonecall_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="activity_type_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_phonecall_tree_inherit_altinkaya">
+        <field name="name">altinkaya.crm.phonecall.tree.inherit</field>
+        <field name="model">crm.phonecall</field>
+        <field name="inherit_id" ref="crm_phone.crm_phonecall_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable"></attribute>
+            </xpath>
+
+            <field name="opportunity_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="team_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="team_id" position="after">
+                <field name="activity_type_id" />
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
