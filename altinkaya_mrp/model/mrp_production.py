@@ -283,12 +283,13 @@ class MrpProduction(models.Model):
         3: Very Urgent
         :return:
         """
-        # We don't need filtered method here but it's better to use it to remember
-        # the domain in case of future changes.
-        for production in self.filtered(
-            lambda p: p.state in ("confirmed", "planned", "progress")
-            and not p.procurement_group_id.sale_id
-        ):
+        ongoing_productions = self.search(
+            [
+                ("state", "in", ("confirmed", "planned", "progress")),
+                ("procurement_group_id.sale_id", "=", False),
+            ]
+        )
+        for production in ongoing_productions:
             stock_rules = self.env["stock.warehouse.orderpoint"].search(
                 [("product_id", "=", production.product_id.id)]
             )
