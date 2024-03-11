@@ -5,7 +5,8 @@ from odoo import models, fields, api
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
-    property_purchase_pricelist = fields.Many2one('product.pricelist',
-                                                  'Purchase Pricelist')
+    property_purchase_pricelist = fields.Many2one(
+        "product.pricelist", "Purchase Pricelist"
+    )
