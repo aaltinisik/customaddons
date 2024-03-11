@@ -1,0 +1,88 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* altinkaya_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 11:09+0000\n"
+"PO-Revision-Date: 2024-03-11 11:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: altinkaya_purchase
+#: model:ir.model,name:altinkaya_purchase.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model.fields,field_description:altinkaya_purchase.field_purchase_order__pricelist_id
+msgid "Pricelist"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model.fields,help:altinkaya_purchase.field_purchase_order__pricelist_id
+msgid "Pricelist for current purchase order."
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model,name:altinkaya_purchase.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model,name:altinkaya_purchase.model_product_template
+msgid "Product Template"
+msgstr "Modello prodotto"
+
+#. module: altinkaya_purchase
+#: model:ir.model,name:altinkaya_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model,name:altinkaya_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model.fields,field_description:altinkaya_purchase.field_res_partner__property_purchase_pricelist
+#: model:ir.model.fields,field_description:altinkaya_purchase.field_res_users__property_purchase_pricelist
+msgid "Purchase Pricelist"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model_terms:ir.ui.view,arch_db:altinkaya_purchase.altinkaya_purchase_procurement_group_form_view
+msgid "Purchases"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.actions.act_window,name:altinkaya_purchase.do_view_purchases
+msgid "Purchases for Groups"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model_terms:ir.ui.view,arch_db:altinkaya_purchase.purchase_order_form_altinkaya
+msgid "Recalculate prices"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model_terms:ir.ui.view,arch_db:altinkaya_purchase.purchase_order_form_altinkaya
+msgid "Recompute Descriptions"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model:ir.model.fields,field_description:altinkaya_purchase.field_product_product__variant_seller_ids_2
+msgid "Variant Seller Ids 2"
+msgstr ""
+
+#. module: altinkaya_purchase
+#: model_terms:ir.ui.view,arch_db:altinkaya_purchase.altinkaya_purchase_product_product_form_view
+msgid "Vendors"
+msgstr ""
+

@@ -10,6 +10,9 @@
                     <button name="recalculate_prices" class="ml-2 btn btn-default"
                             string="Recalculate prices" Help="Apply the current pricelist"
                             type="object" attrs="{'invisible':[('state','not in', ['draft', 'sent'])]}"/>
+                    <button name="recompute_descriptions" class="ml-2 btn btn-default"
+                            string="Recompute Descriptions" Help="Recompute product descriptions based on the supplier"
+                            type="object" attrs="{'invisible':[('state','not in', ['draft', 'sent'])]}"/>
                 </button>
                 <field name="origin" position="after">
                     <field name="pricelist_id" groups="purchase.group_purchase_user"

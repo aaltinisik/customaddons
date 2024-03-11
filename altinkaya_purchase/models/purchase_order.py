@@ -40,8 +40,21 @@ class PurchaseOrder(models.Model):
             line.write(
                 {
                     "taxes_id": line2.taxes_id,
-                    "name": line2.name,
                     "price_unit": line2.price_unit,
+                }
+            )
+        return True
+
+    @api.multi
+    def recompute_descriptions(self):
+        for line in self.mapped("order_line"):
+            dict = line._convert_to_write(line.read()[0])
+            line2 = self.env["purchase.order.line"].new(dict)
+            # we make this to isolate changed values:
+            line2.with_context(lang=line.order_id.partner_id.lang).onchange_product_id()
+            line.write(
+                {
+                    "name": line2.name,
                 }
             )
         return True
