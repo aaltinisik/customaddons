@@ -405,18 +405,30 @@ class ResPartner(models.Model):
 
         total_debit = sum(x["debit"] for x in difference_aml_list)
         total_credit = sum(x["credit"] for x in difference_aml_list)
-        counterpart_amount = round(total_debit - total_credit, 2)
 
-        counterpart_aml = {
-            "name": _("Currency Diff. Counterpart"),
-            # 426: 646 Kambiyo Karları Hesabı
-            # 429: 656 Kambiyo Zararları Hesabı
-            "account_id": 426 if counterpart_amount > 0 else 429,
-            "debit": abs(counterpart_amount) if counterpart_amount < 0 else 0,
-            "credit": counterpart_amount if counterpart_amount > 0 else 0,
-            "currency_id": self.env.user.company_id.currency_id.id,
-        }
-        difference_aml_list.append(counterpart_aml)
+        # 426: 646 Kambiyo Karları Hesabı
+        # 429: 656 Kambiyo Zararları Hesabı
+
+        if total_debit > 0:
+            debit_counterpart_aml = {
+                "name": _("Currency Diff. Counterpart"),
+                "account_id": 426,
+                "debit": 0,
+                "credit": total_debit,
+                "currency_id": self.env.user.company_id.currency_id.id,
+            }
+            difference_aml_list.append(debit_counterpart_aml)
+
+        if total_credit > 0:
+            credit_counterpart_aml = {
+                "name": _("Currency Diff. Counterpart"),
+                "account_id": 429,
+                "debit": total_credit,
+                "credit": 0,
+                "currency_id": self.env.user.company_id.currency_id.id,
+            }
+            difference_aml_list.append(credit_counterpart_aml)
+
         move_vals["line_ids"] = [(0, 0, x) for x in difference_aml_list]
         move = self.env["account.move"].create(move_vals)
         move.post()

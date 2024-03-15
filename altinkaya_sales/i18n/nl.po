@@ -340,7 +340,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__active
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__active
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.portal_record_sidebar_change_brand_link
@@ -464,7 +464,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_template_old_price_form_attr_price
@@ -491,19 +491,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__country_id
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__country_id
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_uid
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__create_date
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__credit_insurance
@@ -521,12 +521,12 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__currency
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__sale_currency_rate
 msgid "Currency Rate"
-msgstr ""
+msgstr "Wisselkoers"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_category__custom_products
@@ -556,13 +556,13 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__description
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__display_name
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Schermnaam"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_fiyat_dolar
@@ -762,19 +762,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type____last_update
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_uid
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__write_date
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
@@ -833,7 +833,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_price_type__name
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner_segment__name
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: altinkaya_sales
 #: code:addons/altinkaya_sales/models/product_template.py:98
@@ -865,7 +865,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order_line__date_order
 msgid "Order Date"
-msgstr ""
+msgstr "Orderdatum"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_sale_order__order_state
@@ -930,7 +930,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_partner__property_product_pricelist
 #: model:ir.model.fields,field_description:altinkaya_sales.field_res_users__property_product_pricelist
 msgid "Pricelist"
-msgstr ""
+msgstr "Prijslijst"
 
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_product_pricelist_item
@@ -975,7 +975,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Productsjabloon"
 
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_product_template_attribute_line
@@ -995,7 +995,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
 msgid "Products"
-msgstr ""
+msgstr "Producten"
 
 #. module: altinkaya_sales
 #: selection:sale.order,order_state:0
@@ -1025,7 +1025,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Verkooporder"
 
 #. module: altinkaya_sales
 #: selection:product.pricelist,list_type_use:0
@@ -1035,7 +1035,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model:ir.model,name:altinkaya_sales.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Verkooporderregel"
 
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.product_product__form_old_prices
@@ -1208,7 +1208,7 @@ msgstr ""
 #. module: altinkaya_sales
 #: model_terms:ir.ui.view,arch_db:altinkaya_sales.res_partner_view_form_altinkaya
 msgid "Warning on the Sales Order"
-msgstr ""
+msgstr "Waarschuwing bij een verkooporder"
 
 #. module: altinkaya_sales
 #: model:ir.model.fields,field_description:altinkaya_sales.field_product_product__v_iscilik_fiyat
