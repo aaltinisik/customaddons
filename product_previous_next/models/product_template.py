@@ -18,11 +18,6 @@ class ProductTemplate(models.Model):
         compute="_compute_next_previous_product",
     )
 
-    """
-    In website_sale module "featured" sort is reversed. So don't worry about the
-    computation with wrong domains.
-    """
-
     def _base_order_domain(self, website_id):
         return [
             ("sale_ok", "=", True),
@@ -37,17 +32,15 @@ class ProductTemplate(models.Model):
         website_id = self.env["website"].get_current_website()
         domain = self._base_order_domain(website_id)
 
-        # Todo: fix this. It's not working.
-        # if not self.env.user.has_group("base.group_user"):
-        #     domain.append(("sub_component", "=", False))
-
-        ordered_ids = (
-            self.env["product.template"]
-            .search(
-                domain,
-                order="is_published desc, website_sequence asc, id desc",
+        ordered_ids = list(
+            reversed(
+                self.env["product.template"]
+                .search(
+                    domain,
+                    order="is_published desc, website_sequence asc, name asc, id desc",
+                )
+                .ids
             )
-            .ids
         )
 
         # Find the previous and next product ids in the ordered list
