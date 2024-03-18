@@ -10,10 +10,16 @@ class SaleOrder(models.Model):
         related="transaction_ids.acquirer_id",
         store=True,
     )
+    payment_currency_id = fields.Many2one(
+        "res.currency",
+        related="transaction_ids.currency_id",
+        store=True,
+    )
     payment_amount = fields.Monetary(
         string="Amount Payment",
         readonly=True,
         store=True,
+        currency_field="payment_currency_id",
         compute="_compute_payment_state",
     )
     payment_ids = fields.Many2many(
@@ -46,14 +52,6 @@ class SaleOrder(models.Model):
     @api.depends("transaction_ids")
     def _compute_payment_state(self):
         for order in self:
-            # yigit: since we don't use payment.transaction in invoice, we can't use this code
-            # amount = 0
-            # transactions = order.sudo().transaction_ids.filtered(
-            #     lambda a: a.state == "done"
-            # )
-            # for invoice in order.invoice_ids:
-            #     amount += invoice.amount_total - invoice.residual
-            #     transactions = transactions - invoice.transaction_ids
             payment_amount = sum(
                 order.sudo()
                 .transaction_ids.filtered(lambda a: a.state == "done")

@@ -33,7 +33,8 @@
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <label for="payment_amount" string="Payment" />
                 <div class="o_row">
-                    <field name="payment_amount" />
+                    <field name="payment_currency_id" invisible="1"/>
+                    <field name="payment_amount"/>
                     <field name="acquirer_id" />
                 </div>
                 <field name="payment_status" />

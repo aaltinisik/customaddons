@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-01 14:25+0000\n"
-"PO-Revision-Date: 2021-12-01 14:25+0000\n"
+"POT-Creation-Date: 2024-03-18 09:27+0000\n"
+"PO-Revision-Date: 2024-03-18 09:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,13 +33,13 @@ msgstr "Ödeme Kaydet ve Siparişi Onayla"
 
 #. module: sale_confirm_payment
 #: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
-msgid "Add Payment, Confirm Sale and Print Receipt"
-msgstr "Ödeme Kaydet, Siparişi Onayla ve Makbuz Bas"
+msgid "Add Payment and Print Receipt"
+msgstr "Ödeme Kaydet ve Makbuz Bas"
 
 #. module: sale_confirm_payment
 #: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
-msgid "Add Payment and Print Receipt"
-msgstr "Ödeme Kaydet ve Makbuz Bas"
+msgid "Add Payment, Confirm Sale and Print Receipt"
+msgstr "Ödeme Kaydet, Siparişi Onayla ve Makbuz Bas"
 
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__amount
@@ -50,11 +50,6 @@ msgstr "Tutar"
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_order__payment_amount
 msgid "Amount Payment"
 msgstr "Ödeme Tutarı"
-
-#. module: sale_confirm_payment
-#: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_order__payment_ids
-msgid "Payments"
-msgstr "Ödemeler"
 
 #. module: sale_confirm_payment
 #: selection:sale.order,payment_status:0
@@ -75,17 +70,18 @@ msgstr "Oluşturan"
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__create_date
 msgid "Created on"
-msgstr "Oluşturuldu"
+msgstr "Oluşturulma"
 
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__currency_id
+#: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_order__payment_currency_id
 msgid "Currency"
 msgstr "Para Birimi"
 
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__display_name
 msgid "Display Name"
-msgstr "Görünüm"
+msgstr "Görünüm Adı"
 
 #. module: sale_confirm_payment
 #: selection:sale.order,payment_status:0
@@ -95,7 +91,7 @@ msgstr "Tamamlandı"
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: sale_confirm_payment
 #: selection:sale.order,payment_status:0
@@ -105,17 +101,22 @@ msgstr "Başlatıldı"
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment____last_update
 msgid "Last Modified on"
-msgstr "Son düzenleme"
+msgstr "Son Güncelleme"
 
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
 #. module: sale_confirm_payment
 #: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__write_date
 msgid "Last Updated on"
-msgstr "Son güncellenme"
+msgstr "Son Güncelleme"
+
+#. module: sale_confirm_payment
+#: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_confirm_payment__order_id
+msgid "Order"
+msgstr "Sipariş"
 
 #. module: sale_confirm_payment
 #: selection:sale.order,payment_status:0
@@ -138,8 +139,18 @@ msgid "Payment Status"
 msgstr "Ödeme Durumu"
 
 #. module: sale_confirm_payment
-#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:22
-#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:71
+#: model:ir.model,name:sale_confirm_payment.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Ödeme İşlemi"
+
+#. module: sale_confirm_payment
+#: model:ir.model.fields,field_description:sale_confirm_payment.field_sale_order__payment_ids
+msgid "Payments"
+msgstr "Ödemeler"
+
+#. module: sale_confirm_payment
+#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:23
+#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:68
 #, python-format
 msgid "Please select a sale order"
 msgstr "Lütfen bir satış siparişi seçiniz."
@@ -155,7 +166,7 @@ msgid "Sale Order"
 msgstr "Satış Siparişi"
 
 #. module: sale_confirm_payment
-#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:41
+#: code:addons/sale_confirm_payment/wizard/sale_confirm_payment.py:39
 #, python-format
 msgid "Then amount must be positive"
 msgstr "Tutar mutlaka pozitif olmalıdır."
@@ -172,8 +183,8 @@ msgstr "Yapılmadı"
 
 #. module: sale_confirm_payment
 #: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
-msgid "_Cancel"
-msgstr "_İptal"
+msgid "Cancel"
+msgstr "İptal"
 
 #. module: sale_confirm_payment
 #: model_terms:ir.ui.view,arch_db:sale_confirm_payment.view_sale_confirm_payment_form
