@@ -272,24 +272,31 @@ class MrpProduction(models.Model):
         else:
             return super(MrpProduction, self)._update_raw_move(bom_line, line_data)
 
-    # TDE Stay Unported
-
-
-#     @api.model
-#     def auto_print_mrp_orders(self):
-#         productions = self.search([('routing_id', '=', 'Pr
-#         fofil Kesim'),
-#                                 ('state', 'in', ['confirmed', 'ready', 'in_production', 'done']),
-#                                 ('mo_printed', '=', False)],
-#                                   limit=20)
-#         report = self.pool.get('report')
-#         produce_object = self.pool.get('mrp.produce.more')
-#         cr, uid, context = self._cr, self._uid,self._context,
-#
-#         for production in productions:
-#
-#             report.print_document(cr, uid, [production.id], 'altinkaya.report_mrporder_altinkayaE', html=None,
-#                                   data=None,
-#                                   context=context)
-# #            produce_object.produce_mrp_order(cr, uid, [production.id], context=context)
-#             production.write({'mo_printed': True})
+    @api.multi
+    def _rearrange_procurement_priorities(self):
+        """
+        Rearrange the priorities of the productions which are created from procurement
+        rules.
+        0: Not urgent
+        1: Normal
+        2: Urgent
+        3: Very Urgent
+        :return:
+        """
+        ongoing_productions = self.search(
+            [
+                ("state", "in", ("confirmed", "planned", "progress")),
+                ("procurement_group_id.sale_id", "=", False),
+            ]
+        )
+        for production in ongoing_productions:
+            stock_rules = self.env["stock.warehouse.orderpoint"].search(
+                [("product_id", "=", production.product_id.id)]
+            )
+            if stock_rules:
+                total_minimum_qty = sum(stock_rules.mapped("product_min_qty"))
+                total_available_qty = sum(stock_rules.mapped("product_location_qty"))
+                # set urgent if available qty is less than 25% of minimum required qty
+                if total_available_qty < (total_minimum_qty * 0.25):
+                    production.priority = "2"
+        return True

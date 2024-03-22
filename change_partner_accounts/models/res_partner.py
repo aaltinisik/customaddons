@@ -371,10 +371,10 @@ class ResPartner(models.Model):
         if self.parent_id:
             return self.parent_id.change_accounts_to_try()
         receivable_try = self.env["account.account"].search(
-            [("code", "=", "120")], limit=1
+            [("code", "=", "120.TRY")], limit=1
         )
         payable_try = self.env["account.account"].search(
-            [("code", "=", "320")], limit=1
+            [("code", "=", "320.TRY")], limit=1
         )
         old_receivable = self.property_account_receivable_id
         old_payable = self.property_account_payable_id

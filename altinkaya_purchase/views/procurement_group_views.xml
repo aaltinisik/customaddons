@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="do_view_purchases" model="ir.actions.act_window">
+        <field name="name">Purchases for Groups</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('group_id','=',active_id)]</field>
+    </record>
+
+    <record id="altinkaya_purchase_procurement_group_form_view" model="ir.ui.view">
+        <field name="name">altinkaya.purchase.procurement.group.form.inherit</field>
+        <field name="model">procurement.group</field>
+        <field name="inherit_id" ref="stock.procurement_group_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="%(do_view_purchases)d" string="Purchases"
+                                type="action" class="oe_stat_button" icon="fa-envelope"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

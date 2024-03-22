@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 08:50+0000\n"
-"PO-Revision-Date: 2023-12-08 08:50+0000\n"
+"POT-Creation-Date: 2024-03-22 12:07+0000\n"
+"PO-Revision-Date: 2024-03-22 12:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: altinkaya_crm
-#: code:addons/altinkaya_crm/models/res_partner.py:15
-#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:15
+#: model:ir.model.fields,field_description:altinkaya_crm.field_crm_phonecall__activity_type_id
+msgid "Activity Type"
+msgstr "Aktivite Tipi"
+
+#. module: altinkaya_crm
+#: selection:crm.phonecall,state:0
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:19
 #, python-format
 msgid "Company Tax No"
 msgstr "Vergi No"
@@ -28,15 +37,28 @@ msgid "Contact"
 msgstr "İletişim"
 
 #. module: altinkaya_crm
-#: code:addons/altinkaya_crm/models/res_partner.py:20
-#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:20
+#: model:ir.model,name:altinkaya_crm.model_res_country
+msgid "Country"
+msgstr "Ülke"
+
+#. module: altinkaya_crm
+#: selection:crm.phonecall,state:0
+msgid "Failed"
+msgstr "Başarısız"
+
+#. module: altinkaya_crm
+#: selection:crm.phonecall,state:0
+msgid "Held"
+msgstr "Yapıldı"
+
+#. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:24
 #, python-format
 msgid "Incorrect VAT"
 msgstr "Yanlış VAT"
 
 #. module: altinkaya_crm
-#: code:addons/altinkaya_crm/models/res_partner.py:18
-#: code:addons/customaddons/altinkaya_crm/models/res_partner.py:18
+#: code:addons/altinkaya_crm/models/res_partner.py:22
 #, python-format
 msgid "Individual Tax No"
 msgstr "TC No"
@@ -68,9 +90,67 @@ msgid "My Team Activity"
 msgstr "Takım Aktiviteleri"
 
 #. module: altinkaya_crm
+#: code:addons/altinkaya_crm/models/res_partner.py:54
+#, python-format
+msgid "Please define a sales team for this country."
+msgstr "Müşterinin ülkesi için bir satış ekibi ayarlayın."
+
+#. module: altinkaya_crm
 #: model:ir.model,name:altinkaya_crm.model_sale_order
 msgid "Sale Order"
 msgstr "Satış Siparişi"
+
+#. module: altinkaya_crm
+#: model_terms:ir.ui.view,arch_db:altinkaya_crm.res_country_view_form_inherit_altinkaya
+msgid "Sales"
+msgstr "Satış"
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_crm_team
+msgid "Sales Channels"
+msgstr "Satış Ekipleri"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_res_country__sale_person_ids
+msgid "Sales Persons"
+msgstr "Satış Elemanları"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,help:altinkaya_crm.field_res_country__sale_person_ids
+msgid "Sales Persons for this country"
+msgstr ""
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_res_country__sale_team_id
+msgid "Sales Team"
+msgstr "Satış Ekibi"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,help:altinkaya_crm.field_res_country__sale_team_id
+msgid "Sales Team for this country"
+msgstr "Bu ülke için satış ekibi"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,field_description:altinkaya_crm.field_crm_phonecall__state
+msgid "Status"
+msgstr "Durumu"
+
+#. module: altinkaya_crm
+#: selection:crm.phonecall,state:0
+msgid "Success"
+msgstr "Başarılı"
+
+#. module: altinkaya_crm
+#: model:ir.model.fields,help:altinkaya_crm.field_crm_phonecall__state
+msgid "The status is set to Confirmed, when a case is created.\n"
+"When the call is over, the status is set to Held.\n"
+"If the call is not applicable anymore, the status can be set to Cancelled."
+msgstr ""
+
+#. module: altinkaya_crm
+#: selection:crm.phonecall,state:0
+msgid "To Do"
+msgstr "Yapılacak"
 
 #. module: altinkaya_crm
 #: model_terms:ir.ui.view,arch_db:altinkaya_crm.res_partner_view_form_inherit_altinkaya
@@ -82,4 +162,9 @@ msgstr "Vergi No Tipi"
 #: model:ir.model.fields,field_description:altinkaya_crm.field_res_users__vat_status
 msgid "Vat Status"
 msgstr "Vergi No Tipi"
+
+#. module: altinkaya_crm
+#: model:ir.model,name:altinkaya_crm.model_crm_phonecall
+msgid "crm.phonecall"
+msgstr ""
 

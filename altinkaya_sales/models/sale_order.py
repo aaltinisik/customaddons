@@ -152,7 +152,8 @@ class SaleOrder(models.Model):
         deadline = datetime.now() - timedelta(days=360)
         for sale in self:
             # SALE
-            if sale.confirmation_date and sale.confirmation_date < deadline:
+            if sale.confirmation_date and sale.confirmation_date < deadline and sale.state in ["sent", "sale"]:
+                sale.state = "done"
                 sale.order_state = "25_completed"
                 continue
             elif sale.state == "draft":
@@ -192,6 +193,7 @@ class SaleOrder(models.Model):
                         for p in invoiced_pickings
                     ):
                         sale.order_state = "24_delivered"
+                        sale.state = "done"
                     else:
                         sale.order_state = "23_on_transit"
 

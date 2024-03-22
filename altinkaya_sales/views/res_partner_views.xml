@@ -9,6 +9,18 @@
             <field eval="12445" name="priority" />
             <field name="arch" type="xml">
 
+				<xpath expr="//page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']"
+					   position="inside">
+					<field name="segment_id"/>
+				</xpath>
+
+				<xpath expr="//group[@name='banks']" position="after">
+					<group string="Credit Insurance" name="credit_insurance" attrs="{'invisible': [('country_id', '=', 224)]}">
+						<field name="credit_insurance"/>
+						<field name="credit_insurance_validity"/>
+					</group>
+				</xpath>
+
 				<xpath expr="//button[@name='open_route_map']" position="replace">
 					<button type="object"
 							name="action_view_v_cari_urun"

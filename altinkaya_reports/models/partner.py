@@ -37,7 +37,7 @@ class Partner(models.Model):
 
     @api.multi
     def _get_statement_data(self, data=None):
-        self = self.with_context(lang=self.commercial_partner_id.lang)
+        # self = self.with_context(lang=self.commercial_partner_id.lang)
         statement_data2 = {}
         ctx = self._context.copy()
         currency_count = 0
@@ -46,7 +46,14 @@ class Partner(models.Model):
         currency_balance = 0.0
         Currency = self.env["res.currency"]
         end_date = ctx.get("date_end") or '%s-12-31' % date.today().year
-        user_start_date = ctx.get("date_start") or '%s-01-01' % date.today().year
+
+        if ctx.get("date_start"):
+            user_start_date = ctx.get("date_start")
+        else:
+            if date.today().month < 3:
+                user_start_date = '%s-01-01' % (int(date.today().year) - 1)
+            else:
+                user_start_date = '%s-01-01' % int(date.today().year)
         start_date = "2022-01-01"
         move_type = ("payable", "receivable")
 
@@ -99,6 +106,9 @@ class Partner(models.Model):
             str(self.commercial_partner_id.id),
             str(move_type),
         )
+        skip_journal_codes = ["ADVR", "KRFRK"]
+        if ctx.get("lang") != "tr_TR":
+            skip_journal_codes.append("KRDGR")
 
         currency_difference_accounts = (
             self.env["account.account"]
@@ -107,13 +117,13 @@ class Partner(models.Model):
         )
         currency_difference_to_invoice_journal = (
             self.env["account.journal"]
-            .search([("code", "in", ["ADVR", "KRFRK"])])
+            .search([("code", "in", skip_journal_codes)])
             .mapped("id")
         )
         self.env.cr.execute(query)
         data = self.env.cr.dictfetchall()
         if len(data) == 0:
-            raise UserError(_("No records found for your selection!"))
+            return {}
         onhand_currency_id = data[0]["account_currency"]
         for sl in data:
             if onhand_currency_id != sl["account_currency"]:
@@ -197,7 +207,7 @@ class Partner(models.Model):
             )
             statement_data2[currency_count] = statement_data
         # user_date'den öncekileri topla, sonrası için sequence'ları tekrar say.
-        user_start_date_date = datetime.strptime(user_start_date, "%Y-%M-%d")
+        user_start_date_date = datetime.strptime(user_start_date, "%Y-%m-%d")
         filtered_lines = {}
         for curr_count, statement_data3 in statement_data2.items():
             old_lines = [
@@ -205,6 +215,9 @@ class Partner(models.Model):
                 for x in statement_data3
                 if datetime.strptime(x["date"], "%d.%m.%Y") < user_start_date_date
             ]
+            if not old_lines:
+                filtered_lines[curr_count] = statement_data3
+                continue
             new_lines = [n for n in statement_data3 if n not in old_lines]
             last_line = old_lines[-1]
             last_line["seq"] = 1
@@ -214,6 +227,8 @@ class Partner(models.Model):
             last_line["currency_rate"] = 0
             last_line["amount_currency"] = 0
             last_line["amount"] = 0
+            last_line["debit"] = 0
+            last_line["credit"] = 0
             new_idx = 2
             for new in new_lines:
                 new["seq"] = new_idx

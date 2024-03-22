@@ -154,15 +154,14 @@ class ProductProduct(models.Model):
     @api.multi
     def _compute_nakliye_fiyati(self):
         for rec in self:
+            rec.v_fiyat_nakliye = 0.0
             if self._context.get("sale_id"):
                 order = self.env["sale.order"].browse(self._context.get("sale_id"))
                 carrier_line = fields.first(
-                    order.order_line.filtered(lambda l: l.is_delivery)
+                    order.order_line.filtered(lambda ol: ol.is_delivery)
                 )
                 if carrier_line:
                     rec.v_fiyat_nakliye = carrier_line.price_unit
-            else:
-                rec.v_fiyat_nakliye = 0.0
         return True
 
     @api.depends("product_tmpl_id")

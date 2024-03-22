@@ -36,8 +36,8 @@
                                         Yenimahalle/ANKARA
                                     </span>
                                     <br/>
-                                    <span style="font-size:10pt">İvedik V.D. 0610422947 www.altinkaya.com.tr
-                                        satis@altinkaya.com.tr
+                                    <span style="font-size:10pt">İvedik V.D. 0610422947 www.altinkaya.com
+                                        satis@altinkaya.com
                                     </span>
                                     <br/>
                                 </div>
@@ -139,7 +139,7 @@
 
                         </div>
 
-                        <div t-if="o.payment_method_code == 'received_third_check' and o.check_id" class="row">
+                        <div t-if="o.payment_method_code == 'received_third_check' and o.check_id and o.partner_id.commercial_partner_id.property_account_receivable_id.code != '120.TRY'" class="row">
                             <div class="col-12">
                                 <p>Vade gününde çekiniz tahsil edildiğinde çek tutarı bir önceki gün Merkez Bankası Efektif satış kuru ile hesaplanıp döviz bakiyenizden düşülecektir.
                                 </p>

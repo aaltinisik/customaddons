@@ -377,6 +377,8 @@
                         * Özel üretimler ve işçilikli ürünler için adetlerde +-%5 değişiklik olabilir.
                         <br/>
                         * Lütfen onaylamadan önce ürün modeli,rengi,adedi ve teslimat bilgilerini kontrol ediniz.
+                        <br/>
+                        * Havale/EFT açıklamasında <strong t-esc="doc.name"/> sipariş numaranızı belirtirseniz sistemimiz siparişi otomatik onaylar.
                     </p>
 <!--                    <t t-if="doc.currency_id.name in ['USD','EUR']">-->
 <!--                        <t t-if="doc.currency_id.name == 'USD'">-->
@@ -393,73 +395,70 @@
                     <div class="row">
                         <table class="table table-borderless"
                                style="page-break-inside:avoid;">
-                            <t t-if="1==1">
-                                <tr>
-                                    <th class="text-left" rowspan="3"
-                                        style="padding: 0;width: 20%;border-right: 2px solid black;">
-                                        <img width="75px" height="75px"
-                                                     style="margin-left: auto;
-                                                        margin-right: auto;
-                                                        display: block;"
-                                                     t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
-                                        <p style="font-weight: normal;
-                                                font-size: 12px;
-                                                margin-bottom: 0;
-                                                text-align: center;">
-                                                    Bizi değerlendirin
-                                                </p>
-                                    </th>
-                                    <th class="text-left" style="padding: 0;padding-left:12px;">
-                                        <span>
-                                            Banka Adı
-                                        </span>
-                                    </th>
-
-                                    <th class="text-left" style="padding: 0;">
-                                        <span>
-                                            Şb.Kd.
-                                        </span>
-                                    </th>
-                                    <th class="text-left" style="padding: 0;">
-                                        <span>
-                                            Hs.No.
-                                        </span>
-                                    </th>
-                                    <th class="text-left" style="padding: 0;">
-                                        <span>
-                                            IBAN
-                                        </span>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0;padding-left:12px;">
-                                        İş Bankası
-                                    </td>
-                                    <td style="padding: 0;">
-                                        4384
-                                    </td>
-                                    <td style="padding: 0;">
-                                        0012114
-                                    </td>
-                                    <td style="padding: 0;">
-                                        TR26 0006 4000 0014 3840 0121 14 (TL)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 0;padding-left:12px;">
-                                        Garanti Bankası
-                                    </td>
-                                    <td style="padding: 0;">
-                                        682
-                                    </td>
-                                    <td style="padding: 0;">
-                                        6294510
-                                    </td>
-                                    <td style="padding: 0;">
-                                        TR40 0006 2000 6820 0006 2945 10 (TL)
-                                    </td>
-                                </tr>
-                            </t>
+                            <tr>
+                                <th class="text-left" rowspan="3"
+                                    style="padding: 0;width: 20%;border-right: 2px solid black;">
+                                    <img width="75px" height="75px"
+                                         style="margin-left: auto;
+                                                       margin-right: auto;
+                                                       display: block;"
+                                         t-attf-src="data:image/png;base64,#{doc.survey_url_qr}"/>
+                                    <p style="font-weight: normal;
+                                               font-size: 12px;
+                                               margin-bottom: 0;
+                                               text-align: center;">
+                                        Bizi değerlendirin
+                                    </p>
+                                </th>
+                                <th class="text-left" style="padding: 0;padding-left:12px;">
+                                    <span>
+                                        Banka Adı
+                                    </span>
+                                </th>
+                                <th class="text-left" style="padding: 0;">
+                                    <span>
+                                        Şb.Kd.
+                                    </span>
+                                </th>
+                                <th class="text-left" style="padding: 0;">
+                                    <span>
+                                        Hs.No.
+                                    </span>
+                                </th>
+                                <th class="text-left" style="padding: 0;">
+                                    <span>
+                                        IBAN
+                                    </span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;padding-left:12px;">
+                                    İş Bankası
+                                </td>
+                                <td style="padding: 0;">
+                                    4384
+                                </td>
+                                <td style="padding: 0;">
+                                    0012114
+                                </td>
+                                <td style="padding: 0;">
+                                    TR26 0006 4000 0014 3840 0121 14 (TL)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;padding-left:12px;">
+                                    Garanti Bankası
+                                </td>
+                                <td style="padding: 0;">
+                                    682
+                                </td>
+                                <td style="padding: 0;">
+                                    6294510
+                                </td>
+                                <td style="padding: 0;">
+                                    TR40 0006 2000 6820 0006 2945 10 (TL)
+                                </td>
+                            </tr>
 <!--                            <t t-if="doc.currency_id.name in ['USD','EUR']">-->
 <!--                                <tr>-->
 <!--                                    <th class="text-left" rowspan="2"-->

@@ -34,7 +34,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <button name="open_sales_order" string="Sales Order" icon="fa-dollar"
-                            type="object" class="oe_highlight"
+                            type="object"
                             attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="replace">

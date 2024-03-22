@@ -27,6 +27,7 @@
             res_model="partner.statement.wizard"
             src_model="res.partner"
             view_mode="form"
+            context="{'lang': 'tr_TR'}"
             target="new"
             key2="client_print_multi"
             id="action_view_partner_statement_wizard"/>

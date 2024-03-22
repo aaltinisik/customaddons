@@ -1,4 +1,5 @@
 from odoo import models, api, _
+from odoo.exceptions import UserError
 
 
 class ChangePartnerAccountsTRY(models.TransientModel):
@@ -19,7 +20,7 @@ class ChangePartnerAccountsTRY(models.TransientModel):
             except:
                 errors.append(record.display_name)
         if len(errors) > 0:
-            raise Warning(_("Action is completed but there is an error happened for these partners\n %s" %
+            raise UserError(_("Action is completed but there is an error happened for these partners\n %s" %
                                 "\n".join(x for x in errors)))
         else:
             return {'type': 'ir.actions.act_window_close'}

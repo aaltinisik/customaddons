@@ -33,6 +33,3 @@ class CRMLead(models.Model):
                 lead.my_team_activity = True
             else:
                 lead.my_team_activity = False
-
-
-
