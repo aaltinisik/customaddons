@@ -34,12 +34,12 @@ msgstr ""
 #. module: altinkaya_crm
 #: model:ir.model,name:altinkaya_crm.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Επαφή"
 
 #. module: altinkaya_crm
 #: model:ir.model,name:altinkaya_crm.model_res_country
 msgid "Country"
-msgstr ""
+msgstr "Χώρα"
 
 #. module: altinkaya_crm
 #: selection:crm.phonecall,state:0
@@ -98,17 +98,17 @@ msgstr ""
 #. module: altinkaya_crm
 #: model:ir.model,name:altinkaya_crm.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Παραγγελία"
 
 #. module: altinkaya_crm
 #: model_terms:ir.ui.view,arch_db:altinkaya_crm.res_country_view_form_inherit_altinkaya
 msgid "Sales"
-msgstr ""
+msgstr "Πωλήσεις"
 
 #. module: altinkaya_crm
 #: model:ir.model,name:altinkaya_crm.model_crm_team
 msgid "Sales Channels"
-msgstr ""
+msgstr "Κανάλια Πωλήσεων"
 
 #. module: altinkaya_crm
 #: model:ir.model.fields,field_description:altinkaya_crm.field_res_country__sale_person_ids
@@ -123,7 +123,7 @@ msgstr ""
 #. module: altinkaya_crm
 #: model:ir.model.fields,field_description:altinkaya_crm.field_res_country__sale_team_id
 msgid "Sales Team"
-msgstr ""
+msgstr "Ομάδα Πώλησης"
 
 #. module: altinkaya_crm
 #: model:ir.model.fields,help:altinkaya_crm.field_res_country__sale_team_id
@@ -133,7 +133,7 @@ msgstr ""
 #. module: altinkaya_crm
 #: model:ir.model.fields,field_description:altinkaya_crm.field_crm_phonecall__state
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #. module: altinkaya_crm
 #: selection:crm.phonecall,state:0

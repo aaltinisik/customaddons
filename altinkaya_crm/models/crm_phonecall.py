@@ -11,3 +11,6 @@ class CRMPhonecall(models.Model):
         string="Activity Type",
         required=True,
     )
+    state = fields.Selection(
+        selection_add=[("success", "Success"), ("failed", "Failed")]
+    )

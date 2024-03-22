@@ -8,6 +8,12 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="activity_type_id" />
             </xpath>
+
+            <!-- Hide "Schedule New Call" button to avoid confusing -->
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
         </field>
     </record>
 
