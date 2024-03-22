@@ -59,7 +59,7 @@
         % endif
         % if object.company_id.website:
             <div>
-                Web :<a href="${object.company_id.website}">${object.company_id.website}</a><br/>E-posta :<a href="mailto:satis@altinkaya.com.tr?subject=Siparis%20${object.name}">satis@altinkaya.com.tr</a>
+                Web :<a href="${object.company_id.website}">${object.company_id.website}</a><br/>E-posta :<a href="mailto:satis@altinkaya.com?subject=Siparis%20${object.name}">satis@altinkaya.com.tr</a>
             </div>
         %endif
         <p></p>
