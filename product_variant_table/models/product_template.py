@@ -33,7 +33,7 @@ class ProductTemplate(models.Model):
         variant_count = self._get_common_attr_count(sale_variants)
 
         for variant in sale_variants:
-            ptav = variant.product_template_variant_value_ids.filtered(
+            ptav = variant.product_template_attribute_value_ids.filtered(
                 lambda x: x.attribute_id.visibility == "visible"
             )
 
@@ -80,7 +80,7 @@ class ProductTemplate(models.Model):
         """
         attr_counts = []
         for variant in variants:
-            ptav = variant.product_template_variant_value_ids.filtered(
+            ptav = variant.product_template_attribute_value_ids.filtered(
                 lambda x: x.attribute_id.visibility == "visible"
             )
             attr_counts.append(len(ptav))

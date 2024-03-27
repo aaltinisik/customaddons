@@ -68,7 +68,7 @@ class WebsiteSnippetFilter(models.Model):
                         if not any(
                             comb == "hidden"
                             for comb in variant.mapped(
-                                "product_template_variant_value_ids.attribute_id.visibility"
+                                "product_template_attribute_value_ids.attribute_id.visibility"
                             )
                         )
                     ),

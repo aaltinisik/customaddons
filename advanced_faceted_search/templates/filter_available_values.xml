@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="filter_available_values" inherit_id="website_sale.products_attributes"
+        <template id="filter_available_values" inherit_id="website_sale.products_attributes"
               name="Filter out the available attributes">
 
         <!-- Hide filters when there is no category -->
@@ -29,9 +29,10 @@
         </xpath>
 
         <!-- Color filter -->
-        <xpath expr="//div[hasclass('mb-3')]/t" position="attributes">
-            <attribute name="t-foreach">available_values</attribute>
-        </xpath>
+        <!-- TODO: this expression causes an error -->
+<!--        <xpath expr="//div[hasclass('mb-3')]/t" position="attributes">-->
+<!--            <attribute name="t-foreach">available_values</attribute>-->
+<!--        </xpath>-->
 
     </template>
 </odoo>

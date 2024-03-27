@@ -3,10 +3,11 @@
     <template id="website_spinner" inherit_id="website.layout">
         <xpath expr="//div[@id='wrapwrap']" position="before">
             <t t-if="website">
-                <div class="overlay" style="display:none;" id="spinner">
-                  <svg class="spinner" viewBox="0 0 50 50">
+                <div class="o_loading_toast" style="display:none;">
+                  <svg class="o_spinner" viewBox="0 0 50 50">
                     <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
                   </svg>
+                  <p class="o_loading_toast_text">Loading...</p>
                 </div>
             </t>
         </xpath>

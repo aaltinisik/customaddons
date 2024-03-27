@@ -4,3 +4,4 @@ from . import base_multi_image_image
 from . import product_template
 from . import product_product
 from . import image
+from . import ir_binary
