@@ -75,6 +75,10 @@ class ShortURLYourls(models.Model):
             "format": "json",
         }
 
+        exist_shortened_url = line_obj.search([("long_url", "=", url)], limit=1)
+        if exist_shortened_url:
+            return exist_shortened_url.short_url
+
         retries = 0  # Will attempt to get a response from the server 3 times, if fails then returns False
         is_shortened = False
         response = False
