@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+	
+	<record id="res_partner_view_form_altinkaya" model="ir.ui.view">
+            <field name="name">altinkaya_telfax.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field eval="12445" name="priority" />
+            <field name="arch" type="xml">
+
+				<xpath expr="//page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']"
+					   position="inside">
+					<field name="segment_id"/>
+				</xpath>
+
+				<xpath expr="//group[@name='banks']" position="after">
+					<group string="Credit Insurance" name="credit_insurance" attrs="{'invisible': [('country_id', '=', 224)]}">
+						<field name="credit_insurance"/>
+						<field name="credit_insurance_validity"/>
+					</group>
+				</xpath>
+
+				<xpath expr="//button[@name='open_route_map']" position="replace">
+					<button type="object"
+							name="action_view_v_cari_urun"
+							class="oe_stat_button"
+							icon="fa-code-fork"
+							attrs="{'invisible': [('v_cari_urun_count', '=', 0)]}">
+						<field name="v_cari_urun_count" widget="statinfo" string="Products"/>
+					</button>
+				</xpath>
+
+				<xpath expr="/form/sheet/group/group//field[@name='mobile']" position="after">
+            		<field name="z_contact_name"/>
+            	</xpath>
+                <xpath expr="//field[@name='industry_id']" position="after">
+                    <field name="z_tel_kampanya"/>
+                    <field name="z_kamp_2016A"/>
+                    <field name="z_kamp_2017A"/>
+                    <field name="z_kat_postala"/>
+                    <field name="z_kat_postalandi"/>
+                    <field name="z_kat_email"/>
+                </xpath>
+                <!-- should place well onur -->
+
+				<xpath expr="//field[@name='ref']" position="replace">
+					<field name="ref"/>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@name='internal_notes']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@name='accounting']" position="after">
+						<page name="internal_notes" string="Notes" modifiers="{}">
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Sales Order" colspan="4" modifiers="{}"/>
+								<field name="sale_warn" nolabel="1" modifiers="{}"/>
+								<field name="sale_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('sale_warn', '!=', False), ('sale_warn','!=','no-message')],'readonly':[('sale_warn','=','no-message')]}" modifiers="{'required':[['sale_warn','!=',false],['sale_warn','!=','no-message']],'readonly':[['sale_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Purchase Order" colspan="4" modifiers="{}"/>
+								<field name="purchase_warn" nolabel="1" modifiers="{}"/>
+								<field name="purchase_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('purchase_warn', '!=', False), ('purchase_warn','!=','no-message')],'readonly':[('purchase_warn','=','no-message')]}" modifiers="{'required':[['purchase_warn','!=',false],['purchase_warn','!=','no-message']],'readonly':[['purchase_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Invoice" colspan="4" modifiers="{}"/>
+								<field name="invoice_warn" nolabel="1" modifiers="{}"/>
+								<field name="invoice_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('invoice_warn', '!=', False), ('invoice_warn','!=','no-message')],'readonly':[('invoice_warn','=','no-message')]}" modifiers="{'required':[['invoice_warn','!=',false],['invoice_warn','!=','no-message']],'readonly':[['invoice_warn','=','no-message']]}"/>
+							</group>
+							<group colspan="2" col="2" modifiers="{}">
+								<separator string="Warning on the Picking" colspan="4" modifiers="{}"/>
+								<field name="picking_warn" nolabel="1" modifiers="{}"/>
+								<field name="picking_warn_msg" colspan="3" nolabel="1" attrs="{'required':[('picking_warn', '!=', False), ('picking_warn','!=','no-message')],'readonly':[('picking_warn','=','no-message')]}" modifiers="{'required':[['picking_warn','!=',false],['picking_warn','!=','no-message']],'readonly':[['picking_warn','=','no-message']]}"/>
+							</group>
+						</page>
+				</xpath>
+				<xpath expr="/form/sheet//field[@name='category_id']" position="replace"/>
+				<xpath expr="/form/sheet//field[@name='name']" position="after">
+					 <h3>
+                     	<field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
+                     </h3>
+				</xpath>
+				<xpath expr="/form/sheet/group/group" position="inside">
+					<field name="comment"/>
+				
+				</xpath> 
+				
+           </field>
+      </record>
+      	
+      
+      
+	<record id="res_partner_view_tree_altinkaya" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_partner_tree" />
+			<field name="name">res.partner.inherit_altinkaya1</field>
+			<field name="model">res.partner</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<xpath expr="///field[@name='display_name']" position="after">
+					<field name="state_id" />
+					<field name="country_id"/>
+				</xpath>
+                <xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+	
+	
+	<record model="ir.ui.view" id="res_partner_search_view_altinkaya">
+            <field name="name">res.partner.search.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="vat" filter_domain="[('vat','like',self)]" />
+                </field>
+            </field>
+        </record>
+	
+	
+	<record id="res_users_form_inherit_default_procurement_wh" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_users_form" />
+			<field name="name">res.users.form.inherit.default_procurement_wh</field>
+			<field name="model">res.users</field>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tz']" position="after">
+                     <field name="default_procurement_wh_id"/>
+				</xpath>
+			</field>
+		</record>
+		
+	<record id="view_company_form_hash_code" model="ir.ui.view">
+            <field name="name">res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+            	<field name="hash_code"/>
+            </xpath>
+            </field>
+            </record>
+	
+	
+	
+	
+	
+	
+	
+	</data>
+
+
+
+</odoo>

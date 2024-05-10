@@ -1,0 +1,209 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_tr_address
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 12:33+0000\n"
+"PO-Revision-Date: 2020-06-08 12:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "<b>Company Address:</b>"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "City"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_district
+msgid "Click to add a District in your Districts list."
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_neighbour
+msgid "Click to add a Neighbourhoud in your Neighbourhoud list."
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.actions.act_window,help:l10n_tr_address.action_region
+msgid "Click to add a Region in your Regions list."
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Country"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__create_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__create_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__display_name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_address_district
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__district_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__district_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "District"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_district
+#: model:ir.ui.menu,name:l10n_tr_address.district_menu
+msgid "Districts"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_wizard_import_script_view
+#: model:ir.ui.menu,name:l10n_tr_address.menu_wizard_import_script
+msgid "Import Address Script"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.wizard_import_script_form_view
+msgid "Import Excel"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_wizard_import_script
+msgid "Import Script"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region____last_update
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__write_uid
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__write_date
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__name
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Neighbour"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model,name:l10n_tr_address.model_address_neighbour
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__neighbour_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__neighbour_id
+msgid "Neighbourhood"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_neighbour
+#: model:ir.ui.menu,name:l10n_tr_address.neighbour_menu
+msgid "Neighbours"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__code
+msgid "Postal Code"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__region_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__name
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_partner__region_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_res_users__region_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Region"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.actions.act_window,name:l10n_tr_address.action_region
+#: model:ir.model,name:l10n_tr_address.model_address_region
+#: model:ir.ui.menu,name:l10n_tr_address.region_menu
+msgid "Regions"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_district__state_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_neighbour__state_id
+#: model:ir.model.fields,field_description:l10n_tr_address.field_address_region__state_id
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "State"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Street 2..."
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "Street..."
+msgstr ""
+
+#. module: l10n_tr_address
+#: model:ir.model.fields,field_description:l10n_tr_address.field_wizard_import_script__xls_file
+msgid "Upload XLS File"
+msgstr ""
+
+#. module: l10n_tr_address
+#: model_terms:ir.ui.view,arch_db:l10n_tr_address.view_partner_form_neigbourhood
+msgid "ZIP"
+msgstr ""
+

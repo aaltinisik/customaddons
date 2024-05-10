@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="partner_statement" model="xlsx.template">
+        <field name="res_model">report.partner.statement</field>
+        <field name="fname">partner_statement.xlsx</field>
+        <field name="name">Cari Ekstre</field>
+        <field name="description">Müşterilerin ekstresini excel olarak basan şablon.</field>
+        <field name="input_instruction">
+                        {
+                '__EXPORT__': {
+                    'Ekstre': {  # sheet can be name (string) or index (integer)
+                        '_HEAD_': {
+                            'B2': 'partner_id.name${value or ""}#{align=left;vert-align=center;style=text}',
+                            'H2': 'partner_id.tax_office_name${value or ""}#{align=full_center;style=text}',
+                            'F2': 'partner_id.vat${value or ""}#{align=full_center;style=text}',
+                            'H3': 'date_now${value.strftime("%d.%m.%Y") or ""}#{align=full_center;style=text}',
+                            'B3': '${object.partner_id.phone or object.partner_id.mobile or ""}#{align=left;vert-align=center;style=text}',
+                            'H6': '${"%s" % (object.results[-1].total or "0,00")}#{align=right;style=text}',
+                            'I6': '${object.results[-1].dc or ""}#{align=full_center;style=text}',
+                        },
+                        'results': {  # prefix with _CONT_ to continue rows from previous row field
+                            'A5': 'sequence${value or ""}#{border=thin_border;align=center;style=text}',
+                            'B5': 'number${value or ""}#{border=thin_border;align=left;style=text}',
+                            'C5': 'date${value or ""}#{border=thin_border;align=left;style=text}',
+                            'D5': 'due_date${value or ""}#{border=thin_border;align=left;style=text}',
+                            'E5': 'description${value or ""}#{border=thin_border;align=left;style=text}',
+                            'F5': '${object.debit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'G5': '${object.credit or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'H5': '${object.balance or "0,00"}#{border=thin_border;align=right;style=text}',
+                            'I5': 'dc${value or ""}#{border=thin_border;align=center;style=text}',
+                        },
+                    },
+                },
+            }
+        </field>
+    </record>
+
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('partner_statement')]"/>
+    </function>
+</odoo>

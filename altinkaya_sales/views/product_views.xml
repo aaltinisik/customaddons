@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <menuitem
+            name="Product Categories"
+            action="product.product_category_action_form"
+			id="menu_product_category_on_sale"
+            parent="sale.product_menu_catalog"
+			sequence="16" />
+
+
+	<data>
+
+        <record id="product_template_old_price_form_attr_price" model="ir.ui.view">
+            <field name="name">product.template.altinkaya_form_attr_price</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+           <xpath expr="//field[@name='value_ids']" position="after">
+                <field name="use_in_pricing"  />
+                <field name="attr_base_price"> </field>
+                <field name="attr_val_price_coef"> </field>
+             </xpath>
+
+			<xpath expr="//button[@name='action_update_quantity_on_hand']" position="after">
+				<button name="compute_set_product_price" string="Compute Set Price" type="object"
+						group="__export__.res_groups_95_4c14ca81"
+						confirm="This method will recalculate the prices of all variants within the current product template. Do you want to continue?"/>
+<!--						attrs="{'invisible': [('set_product', '!=', True)]}"-->
+
+			</xpath>
+            </field>
+        </record>
+
+<!--         <template id="assets_backend" name="help.online.assets" inherit_id="web.assets_backend"> -->
+<!--             <xpath expr="." position="inside"> -->
+<!--                 <link rel="stylesheet" href="/alinkaya_oldprice/static/src/css/alinkaya_oldprice.css" type="text/css"/> -->
+
+<!--             </xpath> -->
+<!--         </template> -->
+
+        <record id="product_product__form_old_prices" model="ir.ui.view">
+            <field name="name">product.product.form.old_prices</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page[@name='general_information']" position="after">
+            	<page name="Prices" string="Prices">
+            		<group col="1">
+
+            			<group name="old_price" string="Old Prices">
+							<field name="v_tl_fiyat"></field>
+							<field name="v_guncel_fiyat"></field>
+							<field name="v_fiyat_euro"></field>
+							<field name="v_iscilik_fiyat"></field>
+							<field name="v_min_iscilik_fiy"></field>
+							<field name="list_price" string="Sales Price" /> <!-- widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}" -->
+			                <field name="v_fiyat_2017"/>
+			                <field name="v_2017_iscilik"/>
+			                <field name="v_min_2017_iscilik"/>
+			                <field name="v_fiyat_2016b"/>
+			                <field name="v_2016b_iscilik"/>
+			                <field name="v_min_2016b_iscilik"/>
+			                <field name="v_fiyat_2016a"/>
+			                <field name="v_2016a_iscilik"/>
+			                <field name="v_min_2016a_iscilik"/>
+			                <field name="v_fiyat_2015a"/>
+			                <field name="v_2015a_iscilik"/>
+			                <field name="v_min_2015a_iscilik"/>
+			                <field name="v_fiyat_2014"/>
+			                <field name="v_2014_iscilik"/>
+			                <field name="v_min_2014_iscilik"/>
+							<field name="v_fiyat_onceki" />
+							<field name="v_fiyat_onceki_iscilik" />
+							<field name="purchase_price"/>
+		               </group>
+            		
+            		</group>
+            		
+            	
+            	</page>
+            
+            
+            </xpath>
+
+			<xpath expr="//field[@name='valuation']" position="before">
+				<field name="attr_price"/>
+				<field name="v_fiyat_dolar"></field>
+				<field name="v_cari_urun"></field>
+            </xpath>
+
+			<xpath expr="//group[@name='old_price']" position="inside">
+    			<xpath expr="//field[@name='lst_price']" position="move"/>
+			</xpath>
+
+			<xpath expr="//group[@name='properties']" position="before">
+				<group name="fields">
+				</group>
+			</xpath>
+
+			<xpath expr="//group[@name='fields']" position="inside">
+    			<xpath expr="//group[2]/label[1]" position="move"/>
+				<xpath expr="//group[2]/div[1]" position="move"/>
+			</xpath>
+
+			<xpath expr="//group[@name='fields']" position="inside">
+				<xpath expr="//field[@name='hs_code_id']" position="move"/>
+			</xpath>
+
+
+           <!-- <xpath expr="//field[@name='description']" position="after">
+                <group name="Old_price" string="Old Prices">
+                <field name="v_fiyat_2017"/>
+                <field name="v_2017_iscilik"/>
+                <field name="v_min_2017_iscilik"/>
+                <field name="v_fiyat_2016b"/>
+                <field name="v_2016b_iscilik"/>
+                <field name="v_min_2016b_iscilik"/>
+                <field name="v_fiyat_2016a"/>
+                <field name="v_2016a_iscilik"/>
+                <field name="v_min_2016a_iscilik"/>
+                <field name="v_fiyat_2015a"/>
+                <field name="v_2015a_iscilik"/>
+                <field name="v_min_2015a_iscilik"/>
+                <field name="v_fiyat_2014"/>
+                <field name="v_2014_iscilik"/>
+                <field name="v_min_2014_iscilik"/>
+                </group>
+             </xpath>
+             <xpath expr="//field[@name='lst_price']" position="after">
+					<field name="v_tl_fiyat"></field>
+					<field name="v_guncel_fiyat"></field>
+                    <field name="v_fiyat_dolar"></field>
+					<field name="v_fiyat_euro"></field>
+					<field name="v_iscilik_fiyat"></field>
+					<field name="v_min_iscilik_fiy"></field>
+					<field name="v_cari_urun"></field>
+				</xpath>-->
+              
+            </field>
+        </record>
+
+		<record id="product_category_custom_products" model="ir.ui.view">
+			<field name="name">product.category.custom_products</field>
+			<field name="model">product.category</field>
+			<field name="inherit_id" ref="product.product_category_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='parent_id']" position="after">
+					<field name="custom_products"/>
+					
+				</xpath>
+			</field>
+		</record>
+		<!--Hide Multiple Fields From Product Variants List View-->
+		<record id="product_product_tree_hide_fields" model="ir.ui.view">
+			<field name="name">product.product.tree.hide.fields</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_product_tree_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//tree/field[@name='standard_price']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='virtual_available']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='incoming_qty']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='outgoing_qty']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="crm_lead_filter_inherit_altinkaya">
+        <field name="name">crm.lead.activities.filter.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='open_opportunities']" position="after">
+                <separator/>
+                <filter string="My Team Activities" name="activities_my_team"
+                        domain="[('my_team_activity', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="crm_crm_lead_view_form_inherit_altinkaya">
+        <field name="name">crm.crm.lead.view.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="linkedin" widget="url"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
